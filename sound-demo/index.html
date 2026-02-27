@@ -166,6 +166,38 @@ h1{font-size:20px;margin-bottom:10px}
   <div class="playing" id="p12">▶ Đang phát...</div>
 </div>
 
+<div class="category">🎵 Nhạc nền (Background Loops - 5 tracks)</div>
+
+<div class="sound-card" onclick="playSound(27)">
+  <div class="name">27. Ambient Drone</div>
+  <div class="desc-small">Sine waves at 110Hz, 220Hz, 330Hz - Nền trầm ấm, chill</div>
+  <div class="playing" id="p27">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(28)">
+  <div class="name">28. Space Pad</div>
+  <div class="desc-small">Slow evolving sawtooth chords - Không gian, bí ẩn</div>
+  <div class="playing" id="p28">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(29)">
+  <div class="name">29. Cyberpunk Bass</div>
+  <div class="desc-small">Pulsing square wave 100bpm - Nền cyberpunk, hiện đại</div>
+  <div class="playing" id="p29">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(30)">
+  <div class="name">30. Ethereal Voices</div>
+  <div class="desc-small">FM synthesis bell-like tones - Thiêng liêng, floaty</div>
+  <div class="playing" id="p30">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(31)">
+  <div class="name">31. Tension Builder</div>
+  <div class="desc-small">Dissonant intervals rising - Căng thẳng, drama</div>
+  <div class="playing" id="p31">▶ Đang phát...</div>
+</div>
+
 <div class="category">✨ Hiệu ứng khác (Misc)</div>
 
 <div class="sound-card" onclick="playSound(13)">
@@ -688,7 +720,132 @@ function windReverse(){
   setTimeout(()=>showPlaying(0), 2000);
 }
 
+// Background Music Loops
+let currentLoop = null;
+
+function stopCurrentLoop(){
+  if(currentLoop){
+    try{ currentLoop.stop(); }catch(e){}
+    try{ currentLoop.disconnect(); }catch(e){}
+    currentLoop = null;
+  }
+}
+
+function bgmAmbient(){
+  stopCurrentLoop();
+  const ctx = getCtx();
+  const t = ctx.currentTime;
+  const freqs = [110, 220, 330]; // A2, A3, E4
+  freqs.forEach((f, i) => {
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.value = f;
+    g.gain.setValueAtTime(0.05 + i*0.02, t);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(t + 8);
+  });
+  // LFO modulation
+  const lfo = ctx.createOscillator();
+  const lfoG = ctx.createGain();
+  lfo.frequency.value = 0.1;
+  lfoG.gain.value = 5;
+  lfo.connect(lfoG);
+  // Apply to all
+  setTimeout(()=>showPlaying(0), 8000);
+  currentLoop = {stop: ()=>{}};
+}
+
+function bgmSpacePad(){
+  stopCurrentLoop();
+  const ctx = getCtx();
+  const chords = [[65.41, 98.00, 130.81], [73.42, 110.00, 146.83]]; // C2-G2-C3, D2-A2-D3
+  let chordIdx = 0;
+  const playChord = () => {
+    const t = ctx.currentTime;
+    chords[chordIdx].forEach(f => {
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sawtooth';
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0.05, t);
+      g.gain.linearRampToValueAtTime(0.08, t + 2);
+      g.gain.linearRampToValueAtTime(0.01, t + 4);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(t); o.stop(t + 4);
+    });
+    chordIdx = (chordIdx + 1) % chords.length;
+  };
+  playChord();
+  const interval = setInterval(playChord, 4000);
+  currentLoop = {stop: ()=>{ clearInterval(interval); }};
+  setTimeout(()=>showPlaying(0), 8000);
+}
+
+function bgmCyberpunk(){
+  stopCurrentLoop();
+  const ctx = getCtx();
+  let step = 0;
+  const bassLine = [55, 55, 65, 73]; // A1, A1, C2, D2
+  const interval = setInterval(() => {
+    const t = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'square';
+    o.frequency.value = bassLine[step % 4];
+    g.gain.setValueAtTime(0.15, t);
+    g.gain.exponentialRampToValueAtTime(0.01, t + 0.3);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(t); o.stop(t + 0.3);
+    step++;
+  }, 600); // 100bpm roughly
+  currentLoop = {stop: ()=>{ clearInterval(interval); }};
+  setTimeout(()=>showPlaying(0), 6000);
+}
+
+function bgmEthereal(){
+  stopCurrentLoop();
+  const ctx = getCtx();
+  const notes = [523.25, 659.25, 783.99, 1046.5]; // C6-E6-G6-C7
+  notes.forEach((f, i) => {
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'triangle';
+    o.frequency.value = f;
+    g.gain.setValueAtTime(0, ctx.currentTime + i*0.8);
+    g.gain.linearRampToValueAtTime(0.08, ctx.currentTime + i*0.8 + 0.1);
+    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i*0.8 + 1.5);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(ctx.currentTime + i*0.8);
+    o.stop(ctx.currentTime + i*0.8 + 1.5);
+  });
+  setTimeout(()=>showPlaying(0), 4000);
+  currentLoop = {stop: ()=>{}};
+}
+
+function bgmTension(){
+  stopCurrentLoop();
+  const ctx = getCtx();
+  let base = 110;
+  const interval = setInterval(() => {
+    base *= 1.059; // half step up
+    if(base > 220) base = 110;
+    const t = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sawtooth';
+    o.frequency.value = base;
+    g.gain.setValueAtTime(0.08, t);
+    g.gain.linearRampToValueAtTime(0.01, t + 1);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(t); o.stop(t + 1);
+  }, 1000);
+  currentLoop = {stop: ()=>{ clearInterval(interval); }};
+  setTimeout(()=>showPlaying(0), 8000);
+}
+
 function playSound(id){
+  stopCurrentLoop();
   showPlaying(id);
   switch(id){
     case 1: whoosh(); break;
@@ -717,6 +874,11 @@ function playSound(id){
     case 24: windRumble(); break;
     case 25: windStutter(); break;
     case 26: windReverse(); break;
+    case 27: bgmAmbient(); break;
+    case 28: bgmSpacePad(); break;
+    case 29: bgmCyberpunk(); break;
+    case 30: bgmEthereal(); break;
+    case 31: bgmTension(); break;
   }
 }
 </script>

@@ -267,24 +267,24 @@
             function sfxFly(){ beep(520, 0.05, "triangle", 0.03); }
             function sfxBoom(dmg=0){
                 if(dmg > 90){
-                    // Big Explosion rumble - uy lực nhất
+                    // MEGA Explosion - x3 volume, longer decay
                     const ctx = getCtx();
-                    const bufferSize = ctx.sampleRate * 0.8;
+                    const bufferSize = ctx.sampleRate * 1.2;
                     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
                     const data = buffer.getChannelData(0);
                     let lastOut = 0;
                     for(let i=0; i<bufferSize; i++){
                         const white = Math.random()*2-1;
-                        data[i] = (lastOut = (0.02 * white) + (0.98 * lastOut)) * 4;
+                        data[i] = (lastOut = (0.02 * white) + (0.98 * lastOut)) * 6;
                     }
                     const src = ctx.createBufferSource();
                     src.buffer = buffer;
                     const filter = ctx.createBiquadFilter();
                     filter.type = 'lowpass';
-                    filter.frequency.value = 300;
+                    filter.frequency.value = 250;
                     const g = ctx.createGain();
-                    g.gain.setValueAtTime(0.6, ctx.currentTime);
-                    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+                    g.gain.setValueAtTime(1.8, ctx.currentTime);
+                    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.2);
                     src.connect(filter);
                     filter.connect(g);
                     g.connect(ctx.destination);
@@ -526,55 +526,87 @@
             let turnLock = false;
             let windVal = 0;
             
-            // Whoosh sound for flying projectile
-            let whooshNode = null;
-            let whooshGain = null;
-            let whooshStartTime = 0;
+            // Wind Sweep Up with Dynamic Doppler
+            let windNode = null;
+            let windGain = null;
+            let windFilter = null;
+            let windStartTime = 0;
+            let initialVy = 0;
+            let maxHeight = 0;
             
-            function startWhoosh(){
+            function startWind(){
                 const ctx = getCtx();
-                // Create noise buffer for whoosh
-                const bufferSize = ctx.sampleRate * 2; // 2 seconds buffer
+                const bufferSize = ctx.sampleRate * 3; // 3s buffer
                 const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
                 const data = buffer.getChannelData(0);
-                for(let i=0; i<bufferSize; i++) data[i] = (Math.random()*2-1);
+                for(let i=0; i<bufferSize; i++) data[i] = Math.random()*2-1;
                 
-                whooshNode = ctx.createBufferSource();
-                whooshNode.buffer = buffer;
-                whooshNode.loop = true;
+                windNode = ctx.createBufferSource();
+                windNode.buffer = buffer;
+                windNode.loop = true;
                 
-                const filter = ctx.createBiquadFilter();
-                filter.type = 'bandpass';
-                filter.frequency.value = 400;
-                filter.Q.value = 1;
+                windFilter = ctx.createBiquadFilter();
+                windFilter.type = 'lowpass';
+                windFilter.frequency.value = 100; // Start low
                 
-                whooshGain = ctx.createGain();
-                whooshGain.gain.value = 0.05; // Start quiet
+                windGain = ctx.createGain();
+                windGain.gain.value = 0.1; // Will be updated by projectile
                 
-                whooshNode.connect(filter);
-                filter.connect(whooshGain);
-                whooshGain.connect(ctx.destination);
-                whooshNode.start();
-                whooshStartTime = Date.now();
-            }
-            
-            function updateWhoosh(){
-                if(!whooshGain) return;
-                const elapsed = (Date.now() - whooshStartTime) / 1000;
-                // Volume increases over time, max 2x after 2.5s
-                const gainMultiplier = Math.min(1 + (elapsed / 2.5), 2);
-                whooshGain.gain.value = 0.05 * gainMultiplier;
-            }
-            
-            function stopWhoosh(){
-                if(whooshNode){
-                    whooshNode.stop();
-                    whooshNode.disconnect();
-                    whooshNode = null;
+                windNode.connect(windFilter);
+                windFilter.connect(windGain);
+                windGain.connect(ctx.destination);
+                windNode.start();
+                windStartTime = Date.now();
+                
+                // Store initial vertical speed for trajectory calculation
+                if(proj) {
+                    initialVy = Math.abs(proj.vy);
+                    maxHeight = proj.y; // Track max height
                 }
-                if(whooshGain){
-                    whooshGain.disconnect();
-                    whooshGain = null;
+            }
+            
+            function updateWind(){
+                if(!windGain || !proj) return;
+                
+                // Dynamic gain based on projectile velocity and height
+                const vy = proj.vy;
+                const speed = Math.sqrt(proj.vx*proj.vx + vy*vy);
+                const groundY = groundY(proj.x);
+                const heightAboveGround = groundY - proj.y;
+                
+                // Gain: high when fast, low when slow (apex), scales with max expected height
+                const expectedMaxHeight = (initialVy * initialVy) / (2 * g); // Physics: v^2/2g
+                const currentRatio = Math.min(heightAboveGround / Math.max(expectedMaxHeight, 50), 1);
+                
+                // Doppler-like: gain peaks at start and end, dips at apex
+                const apexFactor = 1 - Math.abs(currentRatio - 0.5) * 2; // 0 at apex, 1 at start/end
+                const speedFactor = Math.min(speed / 400, 1); // Higher speed = louder
+                
+                // Base gain + dynamic + contrast (short flight = quieter)
+                const flightDuration = (Date.now() - windStartTime) / 1000;
+                const shortFlightFactor = Math.min(flightDuration / 1.5, 1); // Full volume after 1.5s
+                
+                const targetGain = 0.05 + (apexFactor * 0.15 + speedFactor * 0.1) * shortFlightFactor;
+                windGain.gain.setValueAtTime(targetGain, getCtx().currentTime);
+                
+                // Filter sweep: sweeps UP (Wind Sweep Up) during ascent, down during descent
+                const filterFreq = 100 + (currentRatio * 800) + (speedFactor * 500);
+                windFilter.frequency.setValueAtTime(filterFreq, getCtx().currentTime);
+            }
+            
+            function stopWind(){
+                if(windNode){
+                    windNode.stop();
+                    windNode.disconnect();
+                    windNode = null;
+                }
+                if(windFilter){
+                    windFilter.disconnect();
+                    windFilter = null;
+                }
+                if(windGain){
+                    windGain.disconnect();
+                    windGain = null;
                 }
             }
 
@@ -605,7 +637,7 @@
                     owner: (from === player) ? 'player' : 'bot',
                     startTime: Date.now()
                 };
-                startWhoosh();
+                startWind();
             }
 
             function dist2(ax, ay, bx, by) {
@@ -681,13 +713,13 @@
                     proj.y += proj.vy * dt;
                     
                     // Update whoosh sound volume while flying
-                    updateWhoosh();
+                    updateWind();
 
                     // out of bounds
                     if (proj.x < -50 || proj.x > W + 50 || proj.y > H + 80) {
                         proj.alive = false;
                         proj = null;
-                        stopWhoosh();
+                        stopWind();
                         endShot(null);
                     } else {
                         // hit ground
@@ -700,7 +732,7 @@
                             proj.alive = false;
                             proj = null;
                             const maxDmg = explode(hitX, hitY, impactSpeed);
-                            stopWhoosh();
+                            stopWind();
                             sfxBoom(maxDmg);
                             if(maxDmg >= 60){
                                 shakeT = 0.32;
@@ -721,7 +753,7 @@
                                     proj.alive = false;
                                     proj = null;
                                     const maxDmg = explode(hitX, hitY, impactSpeed);
-                                    stopWhoosh();
+                                    stopWind();
                                     sfxBoom(maxDmg);
                                     if(maxDmg >= 60){
                                         shakeT = 0.32;
