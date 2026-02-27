@@ -23,6 +23,13 @@
 ![Gameplay Preview](gunny/screenshots/gameplay.jpg)
 ![Mobile Interface](gunny/screenshots/mobile.jpg)
 
+### Sound FX Demo
+- Trang demo 6+ loại âm thanh procedural được tạo bằng WebAudio API
+- Nghe thử và so sánh các hiệu ứng âm thanh khác nhau
+- Không cần file mp3 - tạo realtime bằng code
+
+**Truy cập**: [https://nhoxtheanh.duckdns.org/sound-demo/](https://nhoxtheanh.duckdns.org/sound-demo/)
+
 ## Quy trình làm việc
 
 ```
@@ -39,7 +46,7 @@ User request → Alex AI Agent update → Auto commit → Push to GitHub → Aut
 Alex là một AI assistant chạy trên VPS, được thiết kế để:
 - Tự động hóa các tác vụ phát triển web
 - Quản lý và triển khai code
-- Hỗ trợ người dùng 24/7 với các yêu cầu kỹ thuật
+- Hỗ trợ ngướ dùng 24/7 với các yêu cầu kỹ thuật
 
 ---
 

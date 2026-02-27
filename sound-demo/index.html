@@ -3,27 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sound FX Demo - Chọn âm thanh đạn bay</title>
+<title>Sound FX Demo - Thư viện âm thanh WebAudio</title>
 <style>
 :root{--bg:#07070a;--text:#fff;--accent:#ff2d2d;--muted:#a9b2d4;}
 body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;padding:20px;max-width:800px;margin:0 auto}
 h1{font-size:20px;margin-bottom:10px}
-.desc{color:var(--muted);font-size:14px;margin-bottom:30px;line-height:1.5}
-.sound-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px;margin:15px 0;cursor:pointer;transition:all .2s}
+.desc{color:var(--muted);font-size:14px;margin-bottom:20px;line-height:1.5}
+.category{color:var(--accent);font-size:16px;font-weight:700;margin-top:30px;margin-bottom:15px;border-bottom:1px solid rgba(255,45,45,.3);padding-bottom:8px}
+.sound-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;margin:12px 0;cursor:pointer;transition:all .2s}
 .sound-card:hover{border-color:var(--accent);transform:translateY(-2px)}
 .sound-card.active{border-color:var(--accent);background:rgba(255,45,45,.1)}
-.name{font-weight:700;margin-bottom:5px}
-.desc-small{color:var(--muted);font-size:13px}
-.playing{color:var(--accent);font-size:12px;margin-top:10px;display:none}
+.name{font-weight:700;margin-bottom:4px;font-size:15px}
+.desc-small{color:var(--muted);font-size:12px}
+.playing{color:var(--accent);font-size:11px;margin-top:8px;display:none}
 .back{margin-top:30px;display:inline-block;color:var(--accent);text-decoration:none;font-weight:700}
 </style>
 </head>
 <body>
-<h1>🔊 Sound FX Demo - Âm thanh đạn bay</h1>
+<h1>🔊 Sound FX Demo - Thư viện âm thanh WebAudio</h1>
 <div class="desc">
-  Click vào từng mục để nghe thử. Các âm thanh được tạo hoàn toàn bằng WebAudio API (không cần file mp3).<br>
-  Chọn âm thanh bạn thích nhất để thay thế cho tiếng "whoosh" hiện tại trong game.
+  Click để nghe thử. Tất cả âm thanh được tạo realtime bằng WebAudio API (không cần file mp3).<br>
+  Sử dụng OscillatorNode, Noise buffers, Filters và Envelopes.
 </div>
+
+<div class="category">🏹 Âm thanh đạn bay (Projectile)</div>
 
 <div class="sound-card" onclick="playSound(1)">
   <div class="name">1. Whoosh xé gió</div>
@@ -33,19 +36,19 @@ h1{font-size:20px;margin-bottom:10px}
 
 <div class="sound-card" onclick="playSound(2)">
   <div class="name">2. Hum rè trầm</div>
-  <div class="desc-small">Low freq sine + vibrato - Tiếng rè nặng, chậm rãi</div>
+  <div class="desc-small">Low freq sine + vibrato 8Hz - Tiếng rè nặng, chậm rãi</div>
   <div class="playing" id="p2">▶ Đang phát...</div>
 </div>
 
 <div class="sound-card" onclick="playSound(3)">
   <div class="name">3. Whistle cao</div>
-  <div class="desc-small">High freq sine, pitch glide - Huýt sáo như đạn hoạt hình</div>
+  <div class="desc-small">High freq sine 800→1200Hz glide - Huýt sáo hoạt hình</div>
   <div class="playing" id="p3">▶ Đang phát...</div>
 </div>
 
 <div class="sound-card" onclick="playSound(4)">
   <div class="name">4. Buzz vo vo</div>
-  <div class="desc-small">Sawtooth wave + lowpass - Tiếng vo vo liên tục</div>
+  <div class="desc-small">Sawtooth 100Hz + lowpass - Tiếng vo vo liên tục</div>
   <div class="playing" id="p4">▶ Đang phát...</div>
 </div>
 
@@ -57,8 +60,74 @@ h1{font-size:20px;margin-bottom:10px}
 
 <div class="sound-card" onclick="playSound(6)">
   <div class="name">6. Doppler effect</div>
-  <div class="desc-small">Pitch glide up then down - Hiệu ứng chuyên nghiệp (xa→gần→xa)</div>
+  <div class="desc-small">Triangle pitch 300→600→300 - Hiệu ứng xa→gần→xa</div>
   <div class="playing" id="p6">▶ Đang phát...</div>
+</div>
+
+<div class="category">💥 Âm thanh nổ (Explosion)</div>
+
+<div class="sound-card" onclick="playSound(7)">
+  <div class="name">7. Explosion bass</div>
+  <div class="desc-small">Low freq sine drop + noise burst - Nổ trầm mạnh</div>
+  <div class="playing" id="p7">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(8)">
+  <div class="name">8. Explosion crack</div>
+  <div class="desc-small">High freq noise + crackle - Nổ giòn, tiếng vỡ</div>
+  <div class="playing" id="p8">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(9)">
+  <div class="name">9. Explosion rumble</div>
+  <div class="desc-small">Brown noise + lowpass filter - Nổ âm ỳ, rung</div>
+  <div class="playing" id="p9">▶ Đang phát...</div>
+</div>
+
+<div class="category">🔫 Âm thanh bắn (Gunshot)</div>
+
+<div class="sound-card" onclick="playSound(10)">
+  <div class="name">10. Laser pew</div>
+  <div class="desc-small">Sawtooth freq drop 2000→200Hz - Tiếng laser sci-fi</div>
+  <div class="playing" id="p10">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(11)">
+  <div class="name">11. Shotgun blast</div>
+  <div class="desc-small">Noise burst short + reverb - Tiếng shotgun giòn</div>
+  <div class="playing" id="p11">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(12)">
+  <div class="name">12. Silenced shot</div>
+  <div class="desc-small">Filtered noise + short decay - Súng có giảm thanh</div>
+  <div class="playing" id="p12">▶ Đang phát...</div>
+</div>
+
+<div class="category">✨ Hiệu ứng khác (Misc)</div>
+
+<div class="sound-card" onclick="playSound(13)">
+  <div class="name">13. Powerup chime</div>
+  <div class="desc-small">Sine arpeggio C-E-G-C - Tiếng nhặt item, level up</div>
+  <div class="playing" id="p13">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(14)">
+  <div class="name">14. Error buzz</div>
+  <div class="desc-small">Square wave 200Hz stutter - Tiếng báo lỗi, không thực hiện được</div>
+  <div class="playing" id="p14">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(15)">
+  <div class="name">15. Coin ding</div>
+  <div class="desc-small">High sine E6→B6 - Tiếng nhận tiền, chime ngắn</div>
+  <div class="playing" id="p15">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(16)">
+  <div class="name">16. Heartbeat</div>
+  <div class="desc-small">Low sine pulse 60bpm - Tiếng nhịp tim, căng thẳng</div>
+  <div class="playing" id="p16">▶ Đang phát...</div>
 </div>
 
 <a href="/" class="back">← Quay lại Tools Hub</a>
@@ -78,152 +147,245 @@ function showPlaying(id){
   document.querySelectorAll('.sound-card')[id-1].classList.add('active');
 }
 
-// 1. Whoosh xé gió - Noise + Bandpass sweep
 function whoosh(){
   const ctx = getCtx();
   const bufferSize = ctx.sampleRate * 0.5;
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
   const data = buffer.getChannelData(0);
   for(let i=0; i<bufferSize; i++) data[i] = (Math.random()*2-1);
-  
-  const src = ctx.createBufferSource();
-  src.buffer = buffer;
-  
+  const src = ctx.createBufferSource(); src.buffer = buffer;
   const filter = ctx.createBiquadFilter();
   filter.type = 'bandpass';
   filter.frequency.setValueAtTime(200, ctx.currentTime);
   filter.frequency.exponentialRampToValueAtTime(2000, ctx.currentTime + 0.3);
   filter.Q.value = 5;
-  
   const g = ctx.createGain();
   g.gain.setValueAtTime(0.3, ctx.currentTime);
   g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-  
-  src.connect(filter);
-  filter.connect(g);
-  g.connect(ctx.destination);
+  src.connect(filter); filter.connect(g); g.connect(ctx.destination);
   src.start();
   setTimeout(()=>showPlaying(0), 500);
 }
 
-// 2. Hum rè trầm - Low sine + vibrato
 function hum(){
   const ctx = getCtx();
-  const o = ctx.createOscillator();
-  const g = ctx.createGain();
-  o.type = 'sine';
-  o.frequency.setValueAtTime(80, ctx.currentTime);
-  
-  // Vibrato
-  const lfo = ctx.createOscillator();
-  const lfoGain = ctx.createGain();
-  lfo.frequency.value = 8;
-  lfoGain.gain.value = 5;
-  lfo.connect(lfoGain);
-  lfoGain.connect(o.frequency);
-  lfo.start();
-  
+  const o = ctx.createOscillator(); const g = ctx.createGain();
+  o.type = 'sine'; o.frequency.setValueAtTime(80, ctx.currentTime);
+  const lfo = ctx.createOscillator(); const lfoGain = ctx.createGain();
+  lfo.frequency.value = 8; lfoGain.gain.value = 5;
+  lfo.connect(lfoGain); lfoGain.connect(o.frequency); lfo.start();
   g.gain.setValueAtTime(0.3, ctx.currentTime);
   g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
-  
-  o.connect(g);
-  g.connect(ctx.destination);
-  o.start();
-  o.stop(ctx.currentTime + 0.6);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime + 0.6);
   setTimeout(()=>showPlaying(0), 600);
 }
 
-// 3. Whistle cao - High sine pitch glide
 function whistle(){
   const ctx = getCtx();
-  const o = ctx.createOscillator();
-  const g = ctx.createGain();
+  const o = ctx.createOscillator(); const g = ctx.createGain();
   o.type = 'sine';
   o.frequency.setValueAtTime(800, ctx.currentTime);
   o.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.3);
-  
   g.gain.setValueAtTime(0.25, ctx.currentTime);
   g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-  
-  o.connect(g);
-  g.connect(ctx.destination);
-  o.start();
-  o.stop(ctx.currentTime + 0.4);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime + 0.4);
   setTimeout(()=>showPlaying(0), 400);
 }
 
-// 4. Buzz vo vo - Sawtooth + lowpass
 function buzz(){
   const ctx = getCtx();
-  const o = ctx.createOscillator();
-  const filter = ctx.createBiquadFilter();
-  const g = ctx.createGain();
-  
-  o.type = 'sawtooth';
-  o.frequency.setValueAtTime(100, ctx.currentTime);
-  
-  filter.type = 'lowpass';
-  filter.frequency.setValueAtTime(400, ctx.currentTime);
+  const o = ctx.createOscillator(); const filter = ctx.createBiquadFilter(); const g = ctx.createGain();
+  o.type = 'sawtooth'; o.frequency.setValueAtTime(100, ctx.currentTime);
+  filter.type = 'lowpass'; filter.frequency.setValueAtTime(400, ctx.currentTime);
   filter.frequency.linearRampToValueAtTime(200, ctx.currentTime + 0.5);
-  
   g.gain.setValueAtTime(0.2, ctx.currentTime);
   g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-  
-  o.connect(filter);
-  filter.connect(g);
-  g.connect(ctx.destination);
-  o.start();
-  o.stop(ctx.currentTime + 0.5);
+  o.connect(filter); filter.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime + 0.5);
   setTimeout(()=>showPlaying(0), 500);
 }
 
-// 5. Swoosh lao nhanh - Noise + exp decay
 function swoosh(){
   const ctx = getCtx();
   const bufferSize = ctx.sampleRate * 0.4;
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
   const data = buffer.getChannelData(0);
-  for(let i=0; i<bufferSize; i++){
-    data[i] = (Math.random()*2-1) * Math.pow(1 - i/bufferSize, 3);
-  }
-  
-  const src = ctx.createBufferSource();
-  src.buffer = buffer;
-  
-  const filter = ctx.createBiquadFilter();
-  filter.type = 'lowpass';
-  filter.frequency.value = 1500;
-  
-  const g = ctx.createGain();
-  g.gain.value = 0.4;
-  
-  src.connect(filter);
-  filter.connect(g);
-  g.connect(ctx.destination);
+  for(let i=0; i<bufferSize; i++) data[i] = (Math.random()*2-1) * Math.pow(1 - i/bufferSize, 3);
+  const src = ctx.createBufferSource(); src.buffer = buffer;
+  const filter = ctx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = 1500;
+  const g = ctx.createGain(); g.gain.value = 0.4;
+  src.connect(filter); filter.connect(g); g.connect(ctx.destination);
   src.start();
   setTimeout(()=>showPlaying(0), 400);
 }
 
-// 6. Doppler effect - Pitch glide up then down
 function doppler(){
   const ctx = getCtx();
-  const o = ctx.createOscillator();
-  const g = ctx.createGain();
-  
+  const o = ctx.createOscillator(); const g = ctx.createGain();
   o.type = 'triangle';
   o.frequency.setValueAtTime(300, ctx.currentTime);
   o.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.25);
   o.frequency.linearRampToValueAtTime(300, ctx.currentTime + 0.5);
-  
   g.gain.setValueAtTime(0.3, ctx.currentTime);
   g.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.25);
   g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
-  
-  o.connect(g);
-  g.connect(ctx.destination);
-  o.start();
-  o.stop(ctx.currentTime + 0.6);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime + 0.6);
   setTimeout(()=>showPlaying(0), 600);
+}
+
+function explosionBass(){
+  const ctx = getCtx();
+  const o = ctx.createOscillator(); const g = ctx.createGain();
+  o.type = 'sine'; o.frequency.setValueAtTime(150, ctx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.3);
+  g.gain.setValueAtTime(0.5, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+  o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.5);
+  // Add noise
+  const bufferSize = ctx.sampleRate * 0.3;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++) data[i] = (Math.random()*2-1);
+  const src = ctx.createBufferSource(); src.buffer = buffer;
+  const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 600;
+  const g2 = ctx.createGain(); g2.gain.setValueAtTime(0.3, ctx.currentTime); g2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+  src.connect(f); f.connect(g2); g2.connect(ctx.destination); src.start();
+  setTimeout(()=>showPlaying(0), 500);
+}
+
+function explosionCrack(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 0.15;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++) data[i] = (Math.random()*2-1) * (1 - i/bufferSize);
+  const src = ctx.createBufferSource(); src.buffer = buffer;
+  const f = ctx.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = 2000;
+  const g = ctx.createGain(); g.gain.setValueAtTime(0.4, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+  src.connect(f); f.connect(g); g.connect(ctx.destination); src.start();
+  setTimeout(()=>showPlaying(0), 150);
+}
+
+function explosionRumble(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 0.6;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++){
+    const white = Math.random()*2-1;
+    data[i] = (lastOut = (0.02 * white) + (0.98 * lastOut)) * 3;
+  }
+  const src = ctx.createBufferSource(); src.buffer = buffer;
+  const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 400;
+  const g = ctx.createGain(); g.gain.setValueAtTime(0.4, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+  src.connect(f); f.connect(g); g.connect(ctx.destination); src.start();
+  setTimeout(()=>showPlaying(0), 600);
+}
+var lastOut = 0;
+
+function laserPew(){
+  const ctx = getCtx();
+  const o = ctx.createOscillator(); const g = ctx.createGain();
+  o.type = 'sawtooth';
+  o.frequency.setValueAtTime(2000, ctx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.2);
+  g.gain.setValueAtTime(0.2, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime + 0.2);
+  setTimeout(()=>showPlaying(0), 200);
+}
+
+function shotgun(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 0.1;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++) data[i] = (Math.random()*2-1);
+  const src = ctx.createBufferSource(); src.buffer = buffer;
+  const f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 800; f.Q.value = 0.5;
+  const g = ctx.createGain(); g.gain.setValueAtTime(0.5, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+  src.connect(f); f.connect(g); g.connect(ctx.destination); src.start();
+  setTimeout(()=>showPlaying(0), 100);
+}
+
+function silenced(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 0.08;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++) data[i] = (Math.random()*2-1);
+  const src = ctx.createBufferSource(); src.buffer = buffer;
+  const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 300;
+  const g = ctx.createGain(); g.gain.setValueAtTime(0.25, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+  src.connect(f); f.connect(g); g.connect(ctx.destination); src.start();
+  setTimeout(()=>showPlaying(0), 80);
+}
+
+function powerup(){
+  const ctx = getCtx();
+  const notes = [523.25, 659.25, 783.99, 1046.5]; // C-E-G-C
+  let time = 0;
+  notes.forEach((freq, i) => {
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(0, ctx.currentTime + time);
+    g.gain.linearRampToValueAtTime(0.2, ctx.currentTime + time + 0.05);
+    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + time + 0.3);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(ctx.currentTime + time); o.stop(ctx.currentTime + time + 0.3);
+    time += 0.08;
+  });
+  setTimeout(()=>showPlaying(0), 600);
+}
+
+function errorBuzz(){
+  const ctx = getCtx();
+  for(let i=0; i<3; i++){
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.type = 'square'; o.frequency.value = 200;
+    g.gain.setValueAtTime(0.15, ctx.currentTime + i*0.08);
+    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i*0.08 + 0.06);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(ctx.currentTime + i*0.08); o.stop(ctx.currentTime + i*0.08 + 0.06);
+  }
+  setTimeout(()=>showPlaying(0), 300);
+}
+
+function coinDing(){
+  const ctx = getCtx();
+  const o = ctx.createOscillator(); const g = ctx.createGain();
+  o.type = 'sine';
+  o.frequency.setValueAtTime(1318.5, ctx.currentTime); // E6
+  o.frequency.setValueAtTime(1975.5, ctx.currentTime + 0.05); // B6
+  g.gain.setValueAtTime(0.2, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime + 0.15);
+  setTimeout(()=>showPlaying(0), 150);
+}
+
+function heartbeat(){
+  const ctx = getCtx();
+  for(let i=0; i<4; i++){
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = 60;
+    g.gain.setValueAtTime(0.3, ctx.currentTime + i*0.5);
+    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i*0.5 + 0.15);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(ctx.currentTime + i*0.5); o.stop(ctx.currentTime + i*0.5 + 0.15);
+    // Second quieter beat
+    const o2 = ctx.createOscillator(); const g2 = ctx.createGain();
+    o2.type = 'sine'; o2.frequency.value = 60;
+    g2.gain.setValueAtTime(0.15, ctx.currentTime + i*0.5 + 0.2);
+    g2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i*0.5 + 0.3);
+    o2.connect(g2); g2.connect(ctx.destination);
+    o2.start(ctx.currentTime + i*0.5 + 0.2); o2.stop(ctx.currentTime + i*0.5 + 0.3);
+  }
+  setTimeout(()=>showPlaying(0), 2000);
 }
 
 function playSound(id){
@@ -235,6 +397,16 @@ function playSound(id){
     case 4: buzz(); break;
     case 5: swoosh(); break;
     case 6: doppler(); break;
+    case 7: explosionBass(); break;
+    case 8: explosionCrack(); break;
+    case 9: explosionRumble(); break;
+    case 10: laserPew(); break;
+    case 11: shotgun(); break;
+    case 12: silenced(); break;
+    case 13: powerup(); break;
+    case 14: errorBuzz(); break;
+    case 15: coinDing(); break;
+    case 16: heartbeat(); break;
   }
 }
 </script>

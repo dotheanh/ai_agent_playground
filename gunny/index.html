@@ -266,12 +266,60 @@
             function sfxShoot(){ beep(820, 0.06, "square", 0.08); beep(320, 0.08, "sawtooth", 0.04); }
             function sfxFly(){ beep(520, 0.05, "triangle", 0.03); }
             function sfxBoom(dmg=0){
-                if(dmg > 100){
-                    noiseBurst(0.32, 0.30); beep(70, 0.18, "sine", 0.14);
+                if(dmg > 75){
+                    // Swoosh lao nhanh for high damage
+                    const ctx = getCtx();
+                    const bufferSize = ctx.sampleRate * 0.4;
+                    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for(let i=0; i<bufferSize; i++){
+                        data[i] = (Math.random()*2-1) * Math.pow(1 - i/bufferSize, 3);
+                    }
+                    const src = ctx.createBufferSource();
+                    src.buffer = buffer;
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.value = 1500;
+                    const g = ctx.createGain();
+                    g.gain.value = 0.4;
+                    src.connect(filter);
+                    filter.connect(g);
+                    g.connect(ctx.destination);
+                    src.start();
                 } else if(dmg >= 50){
-                    noiseBurst(0.26, 0.24); beep(85, 0.16, "sine", 0.11);
+                    // Whistle cao for medium damage
+                    const ctx = getCtx();
+                    const o = ctx.createOscillator();
+                    const g = ctx.createGain();
+                    o.type = 'sine';
+                    o.frequency.setValueAtTime(800, ctx.currentTime);
+                    o.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.3);
+                    g.gain.setValueAtTime(0.25, ctx.currentTime);
+                    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                    o.connect(g);
+                    g.connect(ctx.destination);
+                    o.start();
+                    o.stop(ctx.currentTime + 0.4);
                 } else {
-                    noiseBurst(0.20, 0.18); beep(95, 0.12, "sine", 0.08);
+                    // Hum rè trầm for low damage
+                    const ctx = getCtx();
+                    const o = ctx.createOscillator();
+                    const g = ctx.createGain();
+                    o.type = 'sine';
+                    o.frequency.setValueAtTime(80, ctx.currentTime);
+                    const lfo = ctx.createOscillator();
+                    const lfoGain = ctx.createGain();
+                    lfo.frequency.value = 8;
+                    lfoGain.gain.value = 5;
+                    lfo.connect(lfoGain);
+                    lfoGain.connect(o.frequency);
+                    lfo.start();
+                    g.gain.setValueAtTime(0.3, ctx.currentTime);
+                    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+                    o.connect(g);
+                    g.connect(ctx.destination);
+                    o.start();
+                    o.stop(ctx.currentTime + 0.6);
                 }
             }
 
@@ -391,6 +439,58 @@
             let turn = 'player';
             let turnLock = false;
             let windVal = 0;
+            
+            // Whoosh sound for flying projectile
+            let whooshNode = null;
+            let whooshGain = null;
+            let whooshStartTime = 0;
+            
+            function startWhoosh(){
+                const ctx = getCtx();
+                // Create noise buffer for whoosh
+                const bufferSize = ctx.sampleRate * 2; // 2 seconds buffer
+                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for(let i=0; i<bufferSize; i++) data[i] = (Math.random()*2-1);
+                
+                whooshNode = ctx.createBufferSource();
+                whooshNode.buffer = buffer;
+                whooshNode.loop = true;
+                
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 400;
+                filter.Q.value = 1;
+                
+                whooshGain = ctx.createGain();
+                whooshGain.gain.value = 0.05; // Start quiet
+                
+                whooshNode.connect(filter);
+                filter.connect(whooshGain);
+                whooshGain.connect(ctx.destination);
+                whooshNode.start();
+                whooshStartTime = Date.now();
+            }
+            
+            function updateWhoosh(){
+                if(!whooshGain) return;
+                const elapsed = (Date.now() - whooshStartTime) / 1000;
+                // Volume increases over time, max 2x after 2.5s
+                const gainMultiplier = Math.min(1 + (elapsed / 2.5), 2);
+                whooshGain.gain.value = 0.05 * gainMultiplier;
+            }
+            
+            function stopWhoosh(){
+                if(whooshNode){
+                    whooshNode.stop();
+                    whooshNode.disconnect();
+                    whooshNode = null;
+                }
+                if(whooshGain){
+                    whooshGain.disconnect();
+                    whooshGain = null;
+                }
+            }
 
             function setLog(t) {
                 logEl.textContent = t;
@@ -419,6 +519,7 @@
                     owner: (from === player) ? 'player' : 'bot',
                     startTime: Date.now()
                 };
+                startWhoosh();
             }
 
             function dist2(ax, ay, bx, by) {
@@ -493,13 +594,14 @@
                     proj.x += proj.vx * dt;
                     proj.y += proj.vy * dt;
                     
-                    // whoosh sound while flying (every ~10 frames)
-                    if(Math.random() < 0.08) sfxFly();
+                    // Update whoosh sound volume while flying
+                    updateWhoosh();
 
                     // out of bounds
                     if (proj.x < -50 || proj.x > W + 50 || proj.y > H + 80) {
                         proj.alive = false;
                         proj = null;
+                        stopWhoosh();
                         endShot(null);
                     } else {
                         // hit ground
@@ -512,6 +614,7 @@
                             proj.alive = false;
                             proj = null;
                             const maxDmg = explode(hitX, hitY, impactSpeed);
+                            stopWhoosh();
                             sfxBoom(maxDmg);
                             if(maxDmg >= 60){
                                 shakeT = 0.32;
@@ -532,6 +635,7 @@
                                     proj.alive = false;
                                     proj = null;
                                     const maxDmg = explode(hitX, hitY, impactSpeed);
+                                    stopWhoosh();
                                     sfxBoom(maxDmg);
                                     if(maxDmg >= 60){
                                         shakeT = 0.32;
