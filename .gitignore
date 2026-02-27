@@ -1,0 +1,11 @@
+.cache/
+.config/
+.npm/
+.ssh/
+*.tgz
+*.log
+.snap/
+.root/
+.bash*
+.profile
+.DS_Store
