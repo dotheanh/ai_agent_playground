@@ -362,30 +362,39 @@
                 }
             }
             
-            // Birds - fly across screen every 10s
+            // Birds - fly across screen every 10s with sine wave trajectory
             let birds = [];
             let lastBirdSpawn = 0;
+            let birdSpawnDelay = 1000 + Math.random() * 4000; // Initial delay 1-5s
             function spawnBird(){
                 const dir = Math.random() > 0.5 ? 1 : -1;
+                const startY = 60 + Math.random() * 100;
                 birds.push({
-                    x: dir === 1 ? -30 : W + 30,
-                    y: 40 + Math.random() * 120,
+                    x: dir === 1 ? -40 : W + 40,
+                    y: startY,
+                    baseY: startY,
                     dir: dir,
                     speed: 1.5 + Math.random() * 1.5,
                     wingPhase: Math.random() * Math.PI * 2,
+                    flyPhase: Math.random() * Math.PI * 2,
                     color: `hsl(${30 + Math.random() * 30}, 70%, ${40 + Math.random() * 20}%)`
                 });
             }
             function updateBirds(){
-                if(Date.now() - lastBirdSpawn > 10000){
+                const now = Date.now();
+                if(now - lastBirdSpawn > birdSpawnDelay){
                     spawnBird();
-                    lastBirdSpawn = Date.now();
+                    lastBirdSpawn = now;
+                    birdSpawnDelay = 10000; // Next birds every 10s
                 }
                 for(let i = birds.length - 1; i >= 0; i--){
                     let b = birds[i];
                     b.x += b.speed * b.dir;
+                    b.flyPhase += 0.05;
+                    // Sine wave trajectory - up and down
+                    b.y = b.baseY + Math.sin(b.flyPhase) * 30;
                     b.wingPhase += 0.3;
-                    if((b.dir === 1 && b.x > W + 50) || (b.dir === -1 && b.x < -50)){
+                    if((b.dir === 1 && b.x > W + 60) || (b.dir === -1 && b.x < -60)){
                         birds.splice(i, 1);
                     }
                 }
@@ -395,18 +404,38 @@
                     ctx.save();
                     ctx.translate(b.x, b.y);
                     if(b.dir === -1) ctx.scale(-1, 1);
+                    // Body - 2x bigger (was 10,6 now 20,12)
                     ctx.fillStyle = b.color;
                     ctx.beginPath();
-                    ctx.ellipse(0, 0, 10, 6, 0, 0, Math.PI * 2);
+                    ctx.ellipse(0, 0, 20, 12, 0, 0, Math.PI * 2);
                     ctx.fill();
+                    // Head - 2x bigger (was 8,-4,5 now 16,-8,10)
                     ctx.beginPath();
-                    ctx.arc(8, -4, 5, 0, Math.PI * 2);
+                    ctx.arc(16, -8, 10, 0, Math.PI * 2);
                     ctx.fill();
+                    // Eye
                     ctx.fillStyle = '#000';
                     ctx.beginPath();
-                    ctx.arc(9, -5, 1.5, 0, Math.PI * 2);
+                    ctx.arc(18, -10, 3, 0, Math.PI * 2);
                     ctx.fill();
+                    // Beak
                     ctx.fillStyle = '#fa0';
+                    ctx.beginPath();
+                    ctx.moveTo(24, -8);
+                    ctx.lineTo(34, -4);
+                    ctx.lineTo(24, 0);
+                    ctx.fill();
+                    // Wings - animated, 2x bigger
+                    const wingY = Math.sin(b.wingPhase) * 12;
+                    ctx.fillStyle = `hsl(${35 + Math.random() * 20}, 80%, 50%)`;
+                    ctx.beginPath();
+                    ctx.moveTo(-4, -4);
+                    ctx.quadraticCurveTo(-16, -16 + wingY, -30, -4 + wingY * 0.5);
+                    ctx.quadraticCurveTo(-16, 4, -4, 4);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
                     ctx.beginPath();
                     ctx.moveTo(12, -4);
                     ctx.lineTo(17, -2);
@@ -759,8 +788,7 @@
                     // Check hit bird first
                     if(checkProjHitBird()){
                         proj = null;
-                        return;
-                    }
+                    } else {
                     
                     // wind as horizontal acceleration
                     // wind as horizontal acceleration
