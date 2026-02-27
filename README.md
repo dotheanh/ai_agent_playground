@@ -23,7 +23,7 @@
 
 **Video Demo**:
 
-https://github.com/user-attachments/assets/demo.mp4
+https://nhoxtheanh.duckdns.org/gunny/demo.mp4
 
 ![Gameplay Preview](gunny/screenshots/gameplay.jpg)
 ![Mobile Interface](gunny/screenshots/mobile.jpg)
