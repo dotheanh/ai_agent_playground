@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     speed: 1.5 + Math.random() * 1.5,
                     wingPhase: Math.random() * Math.PI * 2,
                     flyPhase: Math.random() * Math.PI * 2,
-                    color: `hsl(${30 + Math.random() * 30}, 70%, ${40 + Math.random() * 20}%)`
+                    color: `hsl(${15 + Math.random() * 25}, 85%, ${55 + Math.random() * 15}%)`
                 });
             }
             function updateBirds(){
@@ -613,6 +613,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(buff && buff.type === BUFF_TYPES.DAMAGE_X2_5){
                     totalDmg *= buff.value;
                 }
+                
+                // DOUBLE_SHOT: 2nd shot deals +50% damage
+                if(buff && buff.type === BUFF_TYPES.DOUBLE_SHOT && doubleShotPending){
+                    totalDmg *= 1.5;
+                }
 
                 let maxDmg = 0;
                 const targets = [player, bot];
@@ -665,6 +670,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 BIG_RADIUS: 'big'
             };
             
+            // Center buff messages
+            let buffMessages = [];
+            function showBuffMessage(text){
+                buffMessages.push({text, t: 0, y: H * 0.4});
+            }
+            
             // Hit birds fall and fade
             let fallingBirds = [];
             
@@ -716,7 +727,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 if(target === 'player'){
                     playerBuff = buffData;
-                    setLog(`🎯 Trúng chim! Item: ${getBuffName(buff)}`);
+                    const msg = `🎯 Item: ${getBuffName(buff)}`;
+                    setLog(msg);
+                    showBuffMessage(msg);
                 } else {
                     botBuff = buffData;
                 }
@@ -1286,14 +1299,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // projectile
                 if (proj) {
-                    ctx.fillStyle = 'rgba(255,255,255,.85)';
+                    // Check buffs for visual effects
+                    const currentBuff = proj.owner === 'player' ? playerBuff : botBuff;
+                    let bulletR = proj.r;
+                    let bulletColor = 'rgba(255,255,255,.85)';
+                    let trailColor = 'rgba(255,255,255,.18)';
+                    let hasGlow = false;
+                    
+                    if(currentBuff){
+                        if(currentBuff.type === BUFF_TYPES.BIG_RADIUS){
+                            bulletR *= 2;
+                        }
+                        if(currentBuff.type === BUFF_TYPES.DAMAGE_X2_5 || 
+                           (currentBuff.type === BUFF_TYPES.DOUBLE_SHOT && doubleShotPending)){
+                            bulletColor = 'rgba(255,140,0,.95)'; // Orange
+                            trailColor = 'rgba(255,100,0,.4)';
+                            hasGlow = true;
+                        }
+                    }
+                    
+                    // Glow effect for buffed bullets
+                    if(hasGlow){
+                        ctx.shadowBlur = 15;
+                        ctx.shadowColor = 'rgba(255,100,0,0.8)';
+                    }
+                    
+                    ctx.fillStyle = bulletColor;
                     ctx.beginPath();
-                    ctx.arc(proj.x, proj.y, proj.r, 0, Math.PI * 2);
+                    ctx.arc(proj.x, proj.y, bulletR, 0, Math.PI * 2);
                     ctx.fill();
+                    
+                    ctx.shadowBlur = 0; // Reset shadow
 
                     // trail
-                    ctx.strokeStyle = 'rgba(255,255,255,.18)';
-                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = trailColor;
+                    ctx.lineWidth = hasGlow ? 4 : 2;
                     ctx.beginPath();
                     ctx.moveTo(proj.x, proj.y);
                     ctx.lineTo(proj.x - proj.vx * 0.03, proj.y - proj.vy * 0.03);
@@ -1329,6 +1369,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.fillText(text, d.x, d.y);
                 }
                 ctx.textAlign = 'start';
+
+                // Draw buff messages (center, 2s fade)
+                for(let i = buffMessages.length - 1; i >= 0; i--){
+                    const m = buffMessages[i];
+                    m.t += dt;
+                    const a = Math.max(0, 1 - m.t / 2);
+                    if(a <= 0){
+                        buffMessages.splice(i, 1);
+                        continue;
+                    }
+                    ctx.save();
+                    ctx.textAlign = 'center';
+                    ctx.font = 'bold 24px system-ui';
+                    ctx.fillStyle = `rgba(255,200,80,${a})`;
+                    ctx.strokeStyle = `rgba(0,0,0,${0.5*a})`;
+                    ctx.lineWidth = 4;
+                    ctx.strokeText(m.text, W/2, m.y);
+                    ctx.fillText(m.text, W/2, m.y);
+                    ctx.restore();
+                }
 
                 if(shakeT > 0) ctx.restore();
 
@@ -1380,6 +1440,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 setLog('Lượt của bạn. Chỉnh góc/lực rồi bắn.');
                 initClouds();
                 lastBirdSpawn = Date.now();
+                // Clear all buffs on reset
+                playerBuff = null;
+                botBuff = null;
             }
 
             // UI bindings + keyboard
