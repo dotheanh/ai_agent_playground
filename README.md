@@ -20,8 +20,8 @@
 - Hỗ trợ nhiều phiên bản (Latest, v1, v2, v3)
 - Damage mô phỏng theo động lực học rơi
 
-![Gameplay Preview](/gunny/screenshot_1.jpg)
-![Mobile Interface](/gunny/screenshot_2.jpg)
+![Gameplay Preview](gunny/screenshots/gameplay.jpg)
+![Mobile Interface](gunny/screenshots/mobile.jpg)
 
 ## Quy trình làm việc
 
