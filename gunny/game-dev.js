@@ -153,6 +153,27 @@
                     o.stop(ctx.currentTime + 0.1);
                 }
 
+                // Powerup chime for hitting birds
+                function sfxPowerup() {
+                    const ctx = getCtx();
+                    // Play a magical ascending arpeggio
+                    const notes = [523.25, 659.25, 783.99, 1046.5]; // C6, E6, G6, C7
+                    notes.forEach((freq, i) => {
+                        const o = ctx.createOscillator();
+                        const g = ctx.createGain();
+                        o.type = 'sine';
+                        o.frequency.value = freq;
+                        const t = ctx.currentTime + i * 0.08;
+                        g.gain.setValueAtTime(0, t);
+                        g.gain.linearRampToValueAtTime(0.15, t + 0.02);
+                        g.gain.exponentialRampToValueAtTime(0.01, t + 0.3);
+                        o.connect(g);
+                        g.connect(ctx.destination);
+                        o.start(t);
+                        o.stop(t + 0.3);
+                    });
+                }
+
                 // Heartbeat for low HP
                 let heartbeatInterval = null;
 
@@ -706,6 +727,7 @@
                             // Explode projectile
                             proj.alive = false;
                             stopWind();
+                            sfxPowerup(); // Play powerup sound
                             // Give buff to shooter
                             giveBuff(turn === 'player' ? 'player' : 'bot');
                             endShot('bird');
@@ -1550,4 +1572,5 @@
                     // init
                     resetAll();
                     step();
-                })();
+                }
+            })();
