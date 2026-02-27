@@ -435,25 +435,16 @@
                 bgOn = false;
                 bgNode = null;
             }
-            // start BG on first user interaction
+            // Background music setup
             let bgMusicStarted = false;
             const bgMusic = new Audio('background.mp3');
             bgMusic.loop = true;
             bgMusic.volume = 0.25;
-            // Background music setup
-            const bgMusic = new Audio('background.mp3');
-            bgMusic.loop = true;
-            bgMusic.volume = 0.25;
-            let musicStarted = false;
             
             window.addEventListener("pointerdown", () => {
                 startBg();
-                if(!musicStarted){
-                    bgMusic.play().catch(()=>{});
-                    musicStarted = true;
-                }
                 if(!bgMusicStarted){
-                    bgMusic.play().catch(e=>{});
+                    bgMusic.play().catch(()=>{});
                     bgMusicStarted = true;
                 }
             }, {once:true});
