@@ -1,5 +1,6 @@
 [
   {"label":"Latest","href":"/gunny/","ts":"latest"},
+  {"label":"Version 3","href":"/gunny/v3/","ts":"2026-02-27"},
   {"label":"Version 2","href":"/gunny/v2/","ts":"2026-02-27"},
   {"label":"Version 1","href":"/gunny/v1/","ts":"2026-02-27"}
 ]
