@@ -440,18 +440,8 @@
             const bgMusic = new Audio('background.mp3');
             bgMusic.loop = true;
             bgMusic.volume = 0.25;
-            // Background music setup
-            const bgMusic = new Audio('background.mp3');
-            bgMusic.loop = true;
-            bgMusic.volume = 0.25;
-            let musicStarted = false;
-            
             window.addEventListener("pointerdown", () => {
                 startBg();
-                if(!musicStarted){
-                    bgMusic.play().catch(()=>{});
-                    musicStarted = true;
-                }
                 if(!bgMusicStarted){
                     bgMusic.play().catch(e=>{});
                     bgMusicStarted = true;
