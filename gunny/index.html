@@ -1023,6 +1023,7 @@
                 const a = parseFloat(ang.value);
                 if(a >= 75) setLog('💡 Góc ' + a.toFixed(0) + '° siêu cao! Đạn rơi mạnh = sát thương cực đại!');
                 else if(a >= 60) setLog('💡 Góc ' + a.toFixed(0) + '° cao. Sát thương sẽ rất lớn khi đạn rơi!');
+                else setLog('💡 Bắn với góc cao để tối đa sát thương!');
             });
             pow.addEventListener('input', syncLabels);
             wind.addEventListener('input', syncLabels);
