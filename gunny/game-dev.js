@@ -598,6 +598,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const buff = turn === 'player' ? playerBuff : botBuff;
                 if(buff && buff.type === BUFF_TYPES.BIG_RADIUS){
                     R *= buff.value;
+                    // Clear after use
+                    if(turn === 'player') playerBuff = null;
+                    else botBuff = null;
                 }
                 const baseDmg = 38;
 
@@ -612,6 +615,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Apply buff x2.5 damage
                 if(buff && buff.type === BUFF_TYPES.DAMAGE_X2_5){
                     totalDmg *= buff.value;
+                    // Clear after use
+                    if(turn === 'player') playerBuff = null;
+                    else botBuff = null;
                 }
                 
                 // DOUBLE_SHOT: 2nd shot deals +50% damage
@@ -732,6 +738,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     showBuffMessage(msg);
                 } else {
                     botBuff = buffData;
+                    const msg = `🤖 Bot nhận: ${getBuffName(buff)}`;
+                    setLog(msg);
+                    showBuffMessage(msg);
                 }
             }
             
@@ -911,9 +920,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
                 
-                // Clear all buffs after turn
-                if(turn === 'player') playerBuff = null;
-                else botBuff = null;
+                // Clear buffs that were used (DOUBLE_SHOT, EXTRA_TURNS)
+                // Keep DAMAGE_X2_5 and BIG_RADIUS for next shot
+                if(currentBuff){
+                    if(currentBuff.type === BUFF_TYPES.DOUBLE_SHOT || 
+                       currentBuff.type === BUFF_TYPES.EXTRA_TURNS){
+                        if(turn === 'player') playerBuff = null;
+                        else botBuff = null;
+                    }
+                    // DAMAGE_X2_5 and BIG_RADIUS will be cleared after used in explode()
+                }
 
                 // adjust wind slightly each turn
                 windVal = clamp(windVal + randn() * 2.2, -3.0, 3.0);
@@ -1012,6 +1028,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Pick THE BEST shot (index 0) - for near-perfect accuracy
                 const pick = candidates[0];
+                
+                // Check buff for bot
+                if(botBuff){
+                    const msg = `🤖 Bot dùng: ${getBuffName(botBuff.type)}`;
+                    setLog(msg);
+                    showBuffMessage(msg);
+                }
 
                 // Apply minimal error (~98% accuracy): only ±2% error
                 const accuracyError = 0.02; // 2% error for ~98% accuracy (almost perfect)
