@@ -16,8 +16,12 @@
 
 ### Gunny-like Demo (100% Vibe Coding)
 - Game bắn súng theo góc/lực với vật lý gió
-- Hỗ trợ nhiều phiên bản (Latest, v1, v2)
+- Giao diện tối ưu cho cả desktop và mobile (touch-friendly, responsive)
+- Hỗ trợ nhiều phiên bản (Latest, v1, v2, v3)
 - Damage mô phỏng theo động lực học rơi
+
+![Gameplay Preview](/gunny/screenshot_1.jpg)
+![Mobile Interface](/gunny/screenshot_2.jpg)
 
 ## Quy trình làm việc
 
