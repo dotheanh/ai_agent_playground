@@ -212,9 +212,6 @@
                 </a>
             </div>
 
-            <div class="small" style="margin-top:10px">Phiên bản:</div>
-            <div id="version-menu"></div>
-            <script src="/gunny/shared/version-menu.js" defer></script>
         </div>
     </div>
 
@@ -606,24 +603,24 @@
                 const expectedMaxHeight = (initialVy * initialVy) / (2 * g);
                 const hasApexed = proj.y > maxHeightTracked + 10; // Past apex
                 
-                // BASE GAIN - Strong Doppler: high at start, near 0 at apex, high at end
+                // BASE GAIN - Strong Doppler: high at start, 0 at apex, high at end (50% volume)
                 let baseGain;
                 if(!hasApexed) {
-                    // Going UP: gain from 0.25 down to 0.02
+                    // Going UP: gain from 0.125 down to 0
                     const progress = Math.min((H - proj.y) / Math.max(expectedMaxHeight, 100), 1);
-                    baseGain = 0.25 * (1 - Math.pow(progress, 2)); // Quadratic falloff
+                    baseGain = 0.125 * (1 - Math.pow(progress, 3)); // Cubic falloff to 0
                 } else {
-                    // Going DOWN: gain from 0.02 up to 0.25
+                    // Going DOWN: gain from 0 up to 0.125
                     const fallProgress = Math.min((proj.y - maxHeightTracked) / Math.max(expectedMaxHeight, 100), 1);
-                    baseGain = 0.02 + (0.23 * Math.pow(fallProgress, 0.5)); // Square root rise
+                    baseGain = 0.125 * Math.pow(fallProgress, 0.5); // Square root rise from 0
                 }
                 
-                // Speed bonus
-                const speedBonus = Math.min(speed / 300, 1) * 0.15;
+                // Speed bonus (50% reduced)
+                const speedBonus = Math.min(speed / 300, 1) * 0.075;
                 
-                // Height bonus (higher = louder potential)
+                // Height bonus (50% reduced)
                 const heightRatio = Math.min(heightAboveGround / 300, 1);
-                const heightBonus = heightRatio * 0.1;
+                const heightBonus = heightRatio * 0.05;
                 
                 // Duration fade-in
                 const flightDuration = (Date.now() - windStartTime) / 1000;
