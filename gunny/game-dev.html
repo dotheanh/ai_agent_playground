@@ -764,11 +764,19 @@
                 return (Math.random() + Math.random() + Math.random() + Math.random() - 2) / 2;
             }
 
+            // Double shot storage
+            let lastShotParams = null;
+            let doubleShotPending = false;
+
             function startShot(from, angleDeg, power, dir) {
                 const angRad = angleDeg * Math.PI / 180;
-                const speed = power * 6.2; // px/s
+                const speed = power * 6.2;
                 const vx = Math.cos(angRad) * speed * dir;
                 const vy = -Math.sin(angRad) * speed;
+                
+                // Save for potential double shot
+                lastShotParams = {from, angleDeg, power, dir};
+                
                 proj = {
                     x: from.x,
                     y: from.y - from.r - 2,
@@ -789,10 +797,12 @@
             }
 
             function explode(atx, aty, impactSpeed = 0) {
-                // Damage based on impact speed (more realistic than airtime):
-                // Falling longer from higher arc => higher speed => more damage.
-                // Tuned so a max lob can reach ~x3 damage.
-                const R = 42;
+                // Radius with buff
+                let R = 42;
+                const buff = turn === 'player' ? playerBuff : botBuff;
+                if(buff && buff.type === BUFF_TYPES.BIG_RADIUS){
+                    R *= buff.value;
+                }
                 const baseDmg = 38;
 
                 // Map VERTICAL impact speed (px/s) to multiplier ~[1..4]
@@ -801,7 +811,12 @@
                 let mult = 1 + (v / 147); // ~2x at 147px/s (x1.5 more sensitive)
                 mult = clamp(mult, 1, 4);
 
-                const totalDmg = baseDmg * mult;
+                let totalDmg = baseDmg * mult;
+                
+                // Apply buff x2.5 damage
+                if(buff && buff.type === BUFF_TYPES.DAMAGE_X2_5){
+                    totalDmg *= buff.value;
+                }
 
                 let maxDmg = 0;
                 const targets = [player, bot];
@@ -843,12 +858,129 @@
             const dmgTexts = [];
             let shakeT = 0;
             let shakeAmp = 0;
+            
+            // Buff system for hitting birds
+            let playerBuff = null; // {type, turnsLeft, value}
+            let botBuff = null;
+            const BUFF_TYPES = {
+                DAMAGE_X2_5: 'dmg2.5',
+                DOUBLE_SHOT: 'double',
+                EXTRA_TURNS: 'extra',
+                BIG_RADIUS: 'big'
+            };
+            
+            // Hit birds fall and fade
+            let fallingBirds = [];
+            
+            function checkProjHitBird(){
+                if(!proj || !proj.alive) return false;
+                for(let i = birds.length - 1; i >= 0; i--){
+                    let b = birds[i];
+                    const dx = proj.x - b.x;
+                    const dy = proj.y - b.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 20){ // Hit radius
+                        // Bird falls
+                        fallingBirds.push({
+                            x: b.x, y: b.y, vx: proj.vx * 0.3, vy: -50, 
+                            color: b.color, wingPhase: b.wingPhase, alpha: 1
+                        });
+                        birds.splice(i, 1);
+                        // Explode projectile
+                        proj.alive = false;
+                        stopWind();
+                        // Give buff to shooter
+                        giveBuff(turn === 'player' ? 'player' : 'bot');
+                        endShot('bird');
+                        return true;
+                    }
+                }
+                return false;
+            }
+            
+            function giveBuff(target){
+                const buffs = Object.values(BUFF_TYPES);
+                const buff = buffs[Math.floor(Math.random() * buffs.length)];
+                const buffData = {type: buff, turnsLeft: 1};
+                switch(buff){
+                    case BUFF_TYPES.DAMAGE_X2_5:
+                        buffData.value = 2.5;
+                        break;
+                    case BUFF_TYPES.DOUBLE_SHOT:
+                        buffData.value = 2;
+                        break;
+                    case BUFF_TYPES.EXTRA_TURNS:
+                        buffData.value = 2;
+                        break;
+                    case BUFF_TYPES.BIG_RADIUS:
+                        buffData.value = 3;
+                        break;
+                }
+                if(target === 'player'){
+                    playerBuff = buffData;
+                    setLog(`🎯 Trúng chim! Item: ${getBuffName(buff)}`);
+                } else {
+                    botBuff = buffData;
+                }
+            }
+            
+            function getBuffName(buff){
+                switch(buff){
+                    case BUFF_TYPES.DAMAGE_X2_5: return 'Sát thương x2.5';
+                    case BUFF_TYPES.DOUBLE_SHOT: return 'Bắn 2 phát';
+                    case BUFF_TYPES.EXTRA_TURNS: return 'Thêm 2 lượt';
+                    case BUFF_TYPES.BIG_RADIUS: return 'Đạn to x3';
+                }
+            }
+            
+            function updateFallingBirds(){
+                for(let i = fallingBirds.length - 1; i >= 0; i--){
+                    let b = fallingBirds[i];
+                    b.x += b.vx * dt;
+                    b.y += b.vy * dt;
+                    b.vy += g * dt;
+                    b.alpha -= 0.02;
+                    b.wingPhase += 0.5;
+                    if(b.alpha <= 0 || b.y > H){
+                        fallingBirds.splice(i, 1);
+                    }
+                }
+            }
+            
+            function drawFallingBirds(){
+                for(let b of fallingBirds){
+                    ctx.save();
+                    ctx.globalAlpha = b.alpha;
+                    ctx.translate(b.x, b.y);
+                    ctx.rotate(b.vy * 0.01);
+                    ctx.fillStyle = b.color;
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, 10, 6, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    const wingY = Math.sin(b.wingPhase) * 5;
+                    ctx.fillStyle = '#fa0';
+                    ctx.beginPath();
+                    ctx.moveTo(-2, -2);
+                    ctx.quadraticCurveTo(-8, -8 + wingY, -15, -2 + wingY * 0.5);
+                    ctx.quadraticCurveTo(-8, 2, -2, 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
 
             function step() {
                 updateClouds();
                 updateBirds();
+                updateFallingBirds();
                 // update projectile
                 if (proj && proj.alive) {
+                    // Check hit bird first
+                    if(checkProjHitBird()){
+                        proj = null;
+                        return;
+                    }
+                    
+                    // wind as horizontal acceleration
                     // wind as horizontal acceleration
                     const ax = windVal * windAccelScale;
                     proj.vx += ax * dt;
@@ -937,6 +1069,46 @@
                     shootBtn.disabled = true;
                     return;
                 }
+                
+                // Check for double shot buff
+                const currentBuff = turn === 'player' ? playerBuff : botBuff;
+                if(currentBuff && currentBuff.type === BUFF_TYPES.DOUBLE_SHOT && !doubleShotPending && lastShotParams){
+                    doubleShotPending = true;
+                    // Fire second shot with same params
+                    setTimeout(() => {
+                        const p = lastShotParams;
+                        startShot(p.from, p.angleDeg, p.power, p.dir);
+                        if(turn === 'player') setLog('🎯 Bắn phát thứ 2!');
+                    }, 300);
+                    return;
+                }
+                
+                doubleShotPending = false;
+                lastShotParams = null;
+                
+                // Check for extra turns buff
+                if(currentBuff && currentBuff.type === BUFF_TYPES.EXTRA_TURNS && currentBuff.turnsLeft > 0){
+                    currentBuff.turnsLeft--;
+                    if(currentBuff.turnsLeft >= 0){
+                        if(turn === 'player'){
+                            setLog(`🎯 Lượt thêm! Còn ${currentBuff.turnsLeft + 1} lượt.`);
+                            player.stamina = player.maxStamina;
+                        } else {
+                            bot.stamina = bot.maxStamina;
+                            setTimeout(botTurn, 650);
+                        }
+                        // Clear buff after used
+                        if(currentBuff.turnsLeft < 0){
+                            if(turn === 'player') playerBuff = null;
+                            else botBuff = null;
+                        }
+                        return;
+                    }
+                }
+                
+                // Clear all buffs after turn
+                if(turn === 'player') playerBuff = null;
+                else botBuff = null;
 
                 // adjust wind slightly each turn
                 windVal = clamp(windVal + randn() * 2.2, -3.0, 3.0);
@@ -1288,6 +1460,7 @@
                 // Clouds (background)
                 drawClouds();
                 drawBirds();
+                drawFallingBirds();
                 
                 // Heartbeat when HP < 50
                 if(player.hp < 50 && player.hp > 0 && !turnLock) startHeartbeat();
