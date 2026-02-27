@@ -1,5 +1,6 @@
         (() => {
-                // --- SFX (procedural WebAudio) ---
+    console.log('Game JS loaded');
+    // --- SFX (procedural WebAudio) ---
                 let audioCtx = null;
 
                 function getCtx() {
@@ -261,7 +262,9 @@
                 }, { once: true });
 
                 const canvas = document.getElementById('c');
-                const ctx = canvas.getContext('2d');
+    console.log('Canvas element:', canvas);
+    const ctx = canvas.getContext('2d');
+    console.log('Canvas context:', ctx);
 
                 const hpP = document.getElementById('hpP');
                 const hpB = document.getElementById('hpB');
@@ -1296,6 +1299,7 @@
                     }
 
                     function draw() {
+    console.log('Drawing frame');
                         ctx.clearRect(0, 0, W, H);
 
                         // Clouds (background)
