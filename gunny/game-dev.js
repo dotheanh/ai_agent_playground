@@ -1,5 +1,5 @@
-        (() => {
-    console.log('Game JS loaded');
+        document.addEventListener('DOMContentLoaded', () => {
+    console.log('Game JS loaded - DOM ready');
     // --- SFX (procedural WebAudio) ---
                 let audioCtx = null;
 
@@ -1577,4 +1577,4 @@
                     resetAll();
                     step();
                 }
-            })();
+            });
