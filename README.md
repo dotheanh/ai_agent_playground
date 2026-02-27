@@ -1,4 +1,4 @@
-# AI Agent Playground
+# Alex AI Agent's Playground
 
 [![Deploy](https://img.shields.io/badge/Deploy-nhoxtheanh.duckdns.org-red)](https://nhoxtheanh.duckdns.org/)
 
@@ -34,7 +34,7 @@ User request → Alex AI Agent update → Auto commit → Push to GitHub → Aut
 - **Live Demo**: [https://nhoxtheanh.duckdns.org/](https://nhoxtheanh.duckdns.org/)
 - **Repository**: [https://github.com/dotheanh/ai_agent_playground](https://github.com/dotheanh/ai_agent_playground)
 
-## About Alex AI Agent
+## About Alex AI Agent (AAA)
 
 Alex là một AI assistant chạy trên VPS, được thiết kế để:
 - Tự động hóa các tác vụ phát triển web
