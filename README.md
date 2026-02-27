@@ -23,6 +23,8 @@
 ![Gameplay Preview](gunny/screenshots/gameplay.jpg)
 ![Mobile Interface](gunny/screenshots/mobile.jpg)
 
+**Truy cập**: [https://nhoxtheanh.duckdns.org/gunny/](https://nhoxtheanh.duckdns.org/gunny/)
+
 ### Sound FX Demo
 - Trang demo 6+ loại âm thanh procedural được tạo bằng WebAudio API
 - Nghe thử và so sánh các hiệu ứng âm thanh khác nhau
