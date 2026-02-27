@@ -526,17 +526,20 @@
             let turnLock = false;
             let windVal = 0;
             
-            // Wind Sweep Up with Dynamic Doppler
+            // Wind Sweep Up with Dynamic Doppler and Stereo Panning
             let windNode = null;
             let windGain = null;
             let windFilter = null;
+            let windPanner = null;
             let windStartTime = 0;
             let initialVy = 0;
-            let maxHeight = 0;
+            let maxHeightTracked = 0;
+            let startX = 0;
+            let endX = 0;
             
             function startWind(){
                 const ctx = getCtx();
-                const bufferSize = ctx.sampleRate * 3; // 3s buffer
+                const bufferSize = ctx.sampleRate * 3;
                 const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
                 const data = buffer.getChannelData(0);
                 for(let i=0; i<bufferSize; i++) data[i] = Math.random()*2-1;
@@ -547,51 +550,86 @@
                 
                 windFilter = ctx.createBiquadFilter();
                 windFilter.type = 'lowpass';
-                windFilter.frequency.value = 100; // Start low
+                windFilter.frequency.value = 100;
                 
                 windGain = ctx.createGain();
-                windGain.gain.value = 0.1; // Will be updated by projectile
+                windGain.gain.value = 0;
+                
+                // Stereo panner
+                windPanner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+                if(windPanner) windPanner.pan.value = 0;
                 
                 windNode.connect(windFilter);
                 windFilter.connect(windGain);
-                windGain.connect(ctx.destination);
+                if(windPanner) {
+                    windGain.connect(windPanner);
+                    windPanner.connect(ctx.destination);
+                } else {
+                    windGain.connect(ctx.destination);
+                }
                 windNode.start();
                 windStartTime = Date.now();
                 
-                // Store initial vertical speed for trajectory calculation
                 if(proj) {
                     initialVy = Math.abs(proj.vy);
-                    maxHeight = proj.y; // Track max height
+                    maxHeightTracked = proj.y;
+                    startX = proj.x;
+                    // Predict approximate landing X
+                    const flightTime = (2 * initialVy) / g;
+                    endX = proj.x + proj.vx * flightTime;
                 }
             }
             
             function updateWind(){
                 if(!windGain || !proj) return;
                 
-                // Dynamic gain based on projectile velocity and height
+                const ctx = getCtx();
                 const vy = proj.vy;
                 const speed = Math.sqrt(proj.vx*proj.vx + vy*vy);
-                // Use canvas height as reference for simplicity
                 const heightAboveGround = H - proj.y;
                 
-                // Gain: high when fast, low when slow (apex), scales with max expected height
-                const expectedMaxHeight = (initialVy * initialVy) / (2 * g); // Physics: v^2/2g
-                const currentRatio = Math.min(heightAboveGround / Math.max(expectedMaxHeight, 50), 1);
+                // Track max height
+                if(proj.y < maxHeightTracked) maxHeightTracked = proj.y;
                 
-                // Doppler-like: gain peaks at start and end, dips at apex
-                const apexFactor = 1 - Math.abs(currentRatio - 0.5) * 2; // 0 at apex, 1 at start/end
-                const speedFactor = Math.min(speed / 400, 1); // Higher speed = louder
+                // Calculate apex progress: 0=start, 0.5=apex, 1=end
+                const expectedMaxHeight = (initialVy * initialVy) / (2 * g);
+                const hasApexed = proj.y > maxHeightTracked + 10; // Past apex
                 
-                // Base gain + dynamic + contrast (short flight = quieter)
+                // BASE GAIN - Strong Doppler: high at start, near 0 at apex, high at end
+                let baseGain;
+                if(!hasApexed) {
+                    // Going UP: gain from 0.25 down to 0.02
+                    const progress = Math.min((H - proj.y) / Math.max(expectedMaxHeight, 100), 1);
+                    baseGain = 0.25 * (1 - Math.pow(progress, 2)); // Quadratic falloff
+                } else {
+                    // Going DOWN: gain from 0.02 up to 0.25
+                    const fallProgress = Math.min((proj.y - maxHeightTracked) / Math.max(expectedMaxHeight, 100), 1);
+                    baseGain = 0.02 + (0.23 * Math.pow(fallProgress, 0.5)); // Square root rise
+                }
+                
+                // Speed bonus
+                const speedBonus = Math.min(speed / 300, 1) * 0.15;
+                
+                // Height bonus (higher = louder potential)
+                const heightRatio = Math.min(heightAboveGround / 300, 1);
+                const heightBonus = heightRatio * 0.1;
+                
+                // Duration fade-in
                 const flightDuration = (Date.now() - windStartTime) / 1000;
-                const shortFlightFactor = Math.min(flightDuration / 1.5, 1); // Full volume after 1.5s
+                const fadeIn = Math.min(flightDuration / 0.5, 1);
                 
-                const targetGain = 0.05 + (apexFactor * 0.15 + speedFactor * 0.1) * shortFlightFactor;
-                windGain.gain.setValueAtTime(targetGain, getCtx().currentTime);
+                const targetGain = (baseGain + speedBonus + heightBonus) * fadeIn;
+                windGain.gain.setValueAtTime(Math.max(targetGain, 0.001), ctx.currentTime);
                 
-                // Filter sweep: sweeps UP (Wind Sweep Up) during ascent, down during descent
-                const filterFreq = 100 + (currentRatio * 800) + (speedFactor * 500);
-                windFilter.frequency.setValueAtTime(filterFreq, getCtx().currentTime);
+                // Filter sweep
+                const filterFreq = 100 + (heightRatio * 1000) + (Math.min(speed/200, 1) * 800);
+                windFilter.frequency.setValueAtTime(filterFreq, ctx.currentTime);
+                
+                // STEREO PANNING - Follow projectile across screen
+                if(windPanner) {
+                    const pan = ((proj.x / W) * 2) - 1; // -1 (left) to 1 (right)
+                    windPanner.pan.setValueAtTime(Math.max(-1, Math.min(1, pan)), ctx.currentTime);
+                }
             }
             
             function stopWind(){
