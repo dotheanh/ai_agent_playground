@@ -773,11 +773,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Check hit bird first
                     if(checkProjHitBird()){
                         proj = null;
-                        return;
-                    }
-                    
-                    // wind as horizontal acceleration
-                    // wind as horizontal acceleration
+                        // Bird hit handled, continue game loop
+                    } else {
                     const ax = windVal * windAccelScale;
                     proj.vx += ax * dt;
                     proj.vy += g * dt;
@@ -838,6 +835,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
                 }
+            }
 
                 // effects
                 for (let i = flashes.length - 1; i >= 0; i--) {
