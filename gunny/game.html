@@ -1,222 +1,4 @@
-<!doctype html>
-<html lang="vi">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Gunny-like Demo (100% Vibe Coding)</title>
-    <style>
-         :root {
-            --bg: #07070a;
-            --panel: #0f0f14;
-            --text: #ffffff;
-            --muted: #c9c9cf;
-            --accent: #ff2d2d;
-            --good: #ffffff;
-            --bad: #ff2d2d;
-        }
-        
-        * {
-            box-sizing: border-box
-        }
-        
-        body {
-            margin: 0;
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-            background: radial-gradient(900px 600px at 15% 15%, rgba(255, 45, 45, .18), transparent 60%), var(--bg);
-            color: var(--text)
-        }
-        
-        .wrap {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 16px;
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 14px;
-        }
-        
-        @media (max-width: 980px) {
-            .wrap {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        canvas {
-            width: 100%;
-            height: auto;
-            background: var(--sky, linear-gradient(#060607, #14060a 60%, #0b0b0d));
-            border: 1px solid rgba(255, 255, 255, .08);
-            border-radius: 14px;
-        }
-        
-        .panel {
-            background: rgba(0, 0, 0, .18);
-            border: 1px solid rgba(255, 255, 255, .08);
-            border-radius: 14px;
-            padding: 14px;
-        }
-        
-        h1 {
-            font-size: 16px;
-            margin: 0 0 6px
-        }
-        
-        .sub {
-            font-size: 12px;
-            color: var(--muted);
-            line-height: 1.4
-        }
-        
-        label {
-            display: block;
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 10px
-        }
-        
-        input[type=range] {
-            width: 100%
-        }
-        
-        .row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-top: 10px
-        }
-        
-        button {
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, .14);
-            background: rgba(255, 45, 45, .18);
-            color: var(--text);
-            padding: 10px 12px;
-            border-radius: 12px;
-            font-weight: 700
-        }
-        
-        button:hover {
-            background: rgba(255, 45, 45, .28)
-        }
-        
-        button:disabled {
-            opacity: .5;
-            cursor: not-allowed
-        }
-        
-        .pill {
-            display: inline-flex;
-            gap: 6px;
-            align-items: center;
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, .06);
-            border: 1px solid rgba(255, 255, 255, .1);
-            font-size: 12px;
-            color: var(--muted);
-            text-decoration: none
-        }
-
-        .versions{
-            margin-top:8px;
-            max-height:92px;
-            overflow:auto;
-            display:flex;
-            gap:8px;
-            flex-wrap:wrap;
-            padding:6px;
-            border-radius:12px;
-            border:1px solid rgba(255,45,45,.18);
-            background: rgba(0,0,0,.18);
-        }.dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%
-        }
-        
-        .dot.good {
-            background: var(--good)
-        }
-        
-        .dot.bad {
-            background: var(--bad)
-        }
-        
-        .log {
-            margin-top: 10px;
-            font-size: 12px;
-            color: rgba(255,255,255,.92);
-            background: rgba(0, 0, 0, .22);
-            border: 1px dashed rgba(255, 45, 45, .22);
-            border-radius: 12px;
-            padding: 10px;
-            min-height: 76px;
-            white-space: pre-line
-        }
-        
-        .small {
-            font-size: 11px;
-            color: var(--muted)
-        }
-    
-
-        input[type=range]{width:100%; accent-color: var(--accent);}
-        input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,45,45,.18);} 
-        input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;margin-top:-6px;width:18px;height:18px;border-radius:50%;background:rgba(255,45,45,.95);border:2px solid rgba(255,255,255,.75);} 
-        input[type=range]::-moz-range-track{height:6px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,45,45,.18);} 
-        input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:rgba(255,45,45,.95);border:2px solid rgba(255,255,255,.75);}
-</style>
-</head>
-
-<body>
-    <div class="wrap">
-        <div>
-            <canvas id="c" width="900" height="520"></canvas>
-        </div>
-        <div class="panel">
-            <h1>Gunny-like Demo (100% Vibe Coding)</h1>
-            <div class="sub">1 người vs 1 bot · có gió · map đồi đơn giản · 1 vũ khí. Điều khiển: chỉnh góc/lực → bắn. Sát thương mô phỏng theo động lực học rơi. Thiết kế responsive.</div>
-
-            <div class="row">
-                <span class="pill"><span class="dot good"></span> Bạn: <b id="hpP">100</b> HP</span>
-                <span class="pill"><span class="dot bad"></span> Bot: <b id="hpB">100</b> HP</span>
-            </div>
-
-            <label>Góc bắn (<span id="angV">45</span>°)</label>
-            <input id="ang" type="range" min="0" max="90" value="45" />
-
-            <label>Lực bắn (<span id="powV">65</span>)</label>
-            <input id="pow" type="range" min="10" max="100" value="65" />
-
-            <label>Gió (m/s) (<span id="windV">0.0</span>)</label>
-            <input id="wind" type="range" min="-30" max="30" value="0" />
-            <div class="small">Gió tác động ngang lên đạn, thay đổi mỗi lượt.</div>
-
-            <div class="row">
-                <button id="moveL" style="min-width:56px;font-size:18px">←</button>
-                <button id="shoot" style="flex:1">BẮN</button>
-                <button id="moveR" style="min-width:56px;font-size:18px">→</button>
-                <button id="reset">Reset</button>
-            </div>
-
-            <div class="log" id="log">Lượt của bạn. Chỉnh góc/lực rồi bắn.</div>
-
-            <div class="row" style="margin-top:10px">
-                <a class="pill" href="https://github.com/dotheanh/ai_agent_playground" target="_blank" style="display:flex;align-items:center;gap:6px">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="opacity:.9">
-                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                    </svg>
-                    GitHub
-                </a>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        (() => {
+document.addEventListener('DOMContentLoaded', () => {
             // --- SFX (procedural WebAudio) ---
             let audioCtx = null;
             function getCtx(){
@@ -545,6 +327,162 @@
             let startX = 0;
             let endX = 0;
             
+            // Clouds - decorative background
+            let clouds = [];
+            function initClouds(){
+                clouds = [];
+                for(let i=0; i<5; i++){
+                    clouds.push({
+                        x: Math.random() * W,
+                        y: 30 + Math.random() * 100,
+                        w: 60 + Math.random() * 80,
+                        h: 25 + Math.random() * 20,
+                        speed: 0.2 + Math.random() * 0.3
+                    });
+                }
+            }
+            function updateClouds(){
+                for(let c of clouds){
+                    c.x += c.speed;
+                    if(c.x > W + c.w) c.x = -c.w;
+                }
+            }
+            function drawClouds(){
+                ctx.fillStyle = 'rgba(255,255,255,0.08)';
+                for(let c of clouds){
+                    ctx.beginPath();
+                    ctx.ellipse(c.x, c.y, c.w/2, c.h/2, 0, 0, Math.PI*2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.ellipse(c.x + c.w*0.25, c.y - c.h*0.2, c.w*0.4, c.h*0.6, 0, 0, Math.PI*2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.ellipse(c.x - c.w*0.25, c.y - c.h*0.1, c.w*0.35, c.h*0.5, 0, 0, Math.PI*2);
+                    ctx.fill();
+                }
+            }
+            
+            // Birds - fly across screen every 10s with sine wave trajectory
+            let birds = [];
+            let lastBirdSpawn = 0;
+            let birdSpawnDelay = 1000 + Math.random() * 4000; // Initial delay 1-5s
+            function spawnBird(){
+                const dir = Math.random() > 0.5 ? 1 : -1;
+                const startY = 60 + Math.random() * 100;
+                birds.push({
+                    x: dir === 1 ? -40 : W + 40,
+                    y: startY,
+                    baseY: startY,
+                    dir: dir,
+                    speed: 1.5 + Math.random() * 1.5,
+                    wingPhase: Math.random() * Math.PI * 2,
+                    flyPhase: Math.random() * Math.PI * 2,
+                    color: `hsl(${15 + Math.random() * 25}, 85%, ${55 + Math.random() * 15}%)`
+                });
+            }
+            function updateBirds(){
+                const now = Date.now();
+                if(now - lastBirdSpawn > birdSpawnDelay){
+                    spawnBird();
+                    lastBirdSpawn = now;
+                    birdSpawnDelay = 10000; // Next birds every 10s
+                }
+                for(let i = birds.length - 1; i >= 0; i--){
+                    let b = birds[i];
+                    b.x += b.speed * b.dir;
+                    b.flyPhase += 0.05;
+                    // Sine wave trajectory - up and down
+                    b.y = b.baseY + Math.sin(b.flyPhase) * 30;
+                    b.wingPhase += 0.3;
+                    if((b.dir === 1 && b.x > W + 60) || (b.dir === -1 && b.x < -60)){
+                        birds.splice(i, 1);
+                    }
+                }
+            }
+            function drawBirds(){
+                for(let b of birds){
+                    ctx.save();
+                    ctx.translate(b.x, b.y);
+                    if(b.dir === -1) ctx.scale(-1, 1);
+                    
+                    // Fire glow effect
+                    ctx.shadowBlur = 20;
+                    ctx.shadowColor = 'rgba(255,80,0,0.8)';
+                    
+                    // Tail fire (phoenix tail)
+                    const tailWiggle = Math.sin(b.wingPhase * 2) * 5;
+                    const grd = ctx.createLinearGradient(-40, 0, 0, 0);
+                    grd.addColorStop(0, 'rgba(255,50,0,0)');
+                    grd.addColorStop(0.5, 'rgba(255,100,0,0.6)');
+                    grd.addColorStop(1, 'rgba(255,200,0,0.9)');
+                    ctx.fillStyle = grd;
+                    ctx.beginPath();
+                    ctx.moveTo(-10, 0);
+                    ctx.lineTo(-50 + tailWiggle, -15);
+                    ctx.lineTo(-45 + tailWiggle, 0);
+                    ctx.lineTo(-50 + tailWiggle, 15);
+                    ctx.fill();
+                    
+                    // Body gradient (phoenix body)
+                    const bodyGrd = ctx.createRadialGradient(0, 0, 0, 0, 0, 25);
+                    bodyGrd.addColorStop(0, '#ffdd00');
+                    bodyGrd.addColorStop(0.5, '#ff6600');
+                    bodyGrd.addColorStop(1, '#cc2200');
+                    ctx.fillStyle = bodyGrd;
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, 22, 14, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Head (phoenix head)
+                    const headGrd = ctx.createRadialGradient(16, -8, 0, 16, -8, 12);
+                    headGrd.addColorStop(0, '#ffee88');
+                    headGrd.addColorStop(1, '#ff4400');
+                    ctx.fillStyle = headGrd;
+                    ctx.beginPath();
+                    ctx.arc(16, -8, 11, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Eye (glowing)
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#ffff00';
+                    ctx.fillStyle = '#ffff00';
+                    ctx.beginPath();
+                    ctx.arc(19, -10, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                    
+                    // Beak (golden)
+                    ctx.fillStyle = '#ffcc00';
+                    ctx.beginPath();
+                    ctx.moveTo(26, -8);
+                    ctx.lineTo(38, -4);
+                    ctx.lineTo(26, 0);
+                    ctx.fill();
+                    
+                    // Wings (phoenix wings with fire gradient)
+                    const wingY = Math.sin(b.wingPhase) * 15;
+                    const wingGrd = ctx.createLinearGradient(-5, -20, -5, 20);
+                    wingGrd.addColorStop(0, '#ff2200');
+                    wingGrd.addColorStop(0.5, '#ff8800');
+                    wingGrd.addColorStop(1, '#ffcc00');
+                    ctx.fillStyle = wingGrd;
+                    ctx.beginPath();
+                    ctx.moveTo(-5, -6);
+                    ctx.quadraticCurveTo(-20, -25 + wingY, -40, -8 + wingY * 0.5);
+                    ctx.quadraticCurveTo(-25, 0, -40, 8 + wingY * 0.5);
+                    ctx.quadraticCurveTo(-20, 25 + wingY, -5, 6);
+                    ctx.fill();
+                    
+                    // Wing fire particles
+                    ctx.fillStyle = `rgba(255, ${100 + Math.random() * 100}, 0, ${0.6 + Math.random() * 0.4})`;
+                    ctx.beginPath();
+                    ctx.arc(-25 + Math.random() * 10, wingY * 0.3, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.restore();
+                }
+            }
+            
             function startWind(){
                 const ctx = getCtx();
                 const bufferSize = ctx.sampleRate * 3;
@@ -668,11 +606,19 @@
                 return (Math.random() + Math.random() + Math.random() + Math.random() - 2) / 2;
             }
 
+            // Double shot storage
+            let lastShotParams = null;
+            let doubleShotPending = false;
+
             function startShot(from, angleDeg, power, dir) {
                 const angRad = angleDeg * Math.PI / 180;
-                const speed = power * 6.2; // px/s
+                const speed = power * 6.2;
                 const vx = Math.cos(angRad) * speed * dir;
                 const vy = -Math.sin(angRad) * speed;
+                
+                // Save for potential double shot
+                lastShotParams = {from, angleDeg, power, dir};
+                
                 proj = {
                     x: from.x,
                     y: from.y - from.r - 2,
@@ -693,10 +639,15 @@
             }
 
             function explode(atx, aty, impactSpeed = 0) {
-                // Damage based on impact speed (more realistic than airtime):
-                // Falling longer from higher arc => higher speed => more damage.
-                // Tuned so a max lob can reach ~x3 damage.
-                const R = 42;
+                // Radius with buff
+                let R = 42;
+                const buff = turn === 'player' ? playerBuff : botBuff;
+                if(buff && buff.type === BUFF_TYPES.BIG_RADIUS){
+                    R *= buff.value;
+                    // Clear after use
+                    if(turn === 'player') playerBuff = null;
+                    else botBuff = null;
+                }
                 const baseDmg = 38;
 
                 // Map VERTICAL impact speed (px/s) to multiplier ~[1..4]
@@ -705,7 +656,20 @@
                 let mult = 1 + (v / 147); // ~2x at 147px/s (x1.5 more sensitive)
                 mult = clamp(mult, 1, 4);
 
-                const totalDmg = baseDmg * mult;
+                let totalDmg = baseDmg * mult;
+                
+                // Apply buff x2.5 damage
+                if(buff && buff.type === BUFF_TYPES.DAMAGE_X2_5){
+                    totalDmg *= buff.value;
+                    // Clear after use
+                    if(turn === 'player') playerBuff = null;
+                    else botBuff = null;
+                }
+                
+                // DOUBLE_SHOT: 2nd shot deals +50% damage
+                if(buff && buff.type === BUFF_TYPES.DOUBLE_SHOT && doubleShotPending){
+                    totalDmg *= 1.5;
+                }
 
                 let maxDmg = 0;
                 const targets = [player, bot];
@@ -747,11 +711,140 @@
             const dmgTexts = [];
             let shakeT = 0;
             let shakeAmp = 0;
+            
+            // Buff system for hitting birds
+            let playerBuff = null; // {type, turnsLeft, value}
+            let botBuff = null;
+            const BUFF_TYPES = {
+                DAMAGE_X2_5: 'dmg2.5',
+                DOUBLE_SHOT: 'double',
+                EXTRA_TURNS: 'extra',
+                BIG_RADIUS: 'big'
+            };
+            
+            // Center buff messages
+            let buffMessages = [];
+            function showBuffMessage(text){
+                buffMessages.push({text, t: 0, y: H * 0.4});
+            }
+            
+            // Hit birds fall and fade
+            let fallingBirds = [];
+            
+            function checkProjHitBird(){
+                if(!proj || !proj.alive) return false;
+                for(let i = birds.length - 1; i >= 0; i--){
+                    let b = birds[i];
+                    const dx = proj.x - b.x;
+                    const dy = proj.y - b.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 20){ // Hit radius
+                        // Visual explosion at hit point
+                        flashes.push({x: proj.x, y: proj.y, t: 0});
+                        // Bird falls
+                        fallingBirds.push({
+                            x: b.x, y: b.y, vx: proj.vx * 0.3, vy: -50, 
+                            color: b.color, wingPhase: b.wingPhase, alpha: 1
+                        });
+                        birds.splice(i, 1);
+                        // Explode projectile
+                        proj.alive = false;
+                        stopWind();
+                        // Give buff to shooter
+                        giveBuff(turn === 'player' ? 'player' : 'bot');
+                        endShot('bird');
+                        return true;
+                    }
+                }
+                return false;
+            }
+            
+            function giveBuff(target){
+                const buffs = Object.values(BUFF_TYPES);
+                const buff = buffs[Math.floor(Math.random() * buffs.length)];
+                const buffData = {type: buff, turnsLeft: 1};
+                switch(buff){
+                    case BUFF_TYPES.DAMAGE_X2_5:
+                        buffData.value = 2.5;
+                        break;
+                    case BUFF_TYPES.DOUBLE_SHOT:
+                        buffData.value = 2;
+                        break;
+                    case BUFF_TYPES.EXTRA_TURNS:
+                        buffData.value = 2;
+                        break;
+                    case BUFF_TYPES.BIG_RADIUS:
+                        buffData.value = 3;
+                        break;
+                }
+                if(target === 'player'){
+                    playerBuff = buffData;
+                    const msg = `🎯 Item: ${getBuffName(buff)}`;
+                    setLog(msg);
+                    showBuffMessage(msg);
+                } else {
+                    botBuff = buffData;
+                    const msg = `🤖 Bot nhận: ${getBuffName(buff)}`;
+                    setLog(msg);
+                    showBuffMessage(msg);
+                }
+            }
+            
+            function getBuffName(buff){
+                switch(buff){
+                    case BUFF_TYPES.DAMAGE_X2_5: return 'Sát thương x2.5';
+                    case BUFF_TYPES.DOUBLE_SHOT: return 'Bắn 2 phát';
+                    case BUFF_TYPES.EXTRA_TURNS: return 'Thêm 2 lượt';
+                    case BUFF_TYPES.BIG_RADIUS: return 'Đạn to x3';
+                }
+            }
+            
+            function updateFallingBirds(){
+                for(let i = fallingBirds.length - 1; i >= 0; i--){
+                    let b = fallingBirds[i];
+                    b.x += b.vx * dt;
+                    b.y += b.vy * dt;
+                    b.vy += g * dt;
+                    b.alpha -= 0.02;
+                    b.wingPhase += 0.5;
+                    if(b.alpha <= 0 || b.y > H){
+                        fallingBirds.splice(i, 1);
+                    }
+                }
+            }
+            
+            function drawFallingBirds(){
+                for(let b of fallingBirds){
+                    ctx.save();
+                    ctx.globalAlpha = b.alpha;
+                    ctx.translate(b.x, b.y);
+                    ctx.rotate(b.vy * 0.01);
+                    ctx.fillStyle = b.color;
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, 10, 6, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    const wingY = Math.sin(b.wingPhase) * 5;
+                    ctx.fillStyle = '#fa0';
+                    ctx.beginPath();
+                    ctx.moveTo(-2, -2);
+                    ctx.quadraticCurveTo(-8, -8 + wingY, -15, -2 + wingY * 0.5);
+                    ctx.quadraticCurveTo(-8, 2, -2, 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
 
             function step() {
+                updateClouds();
+                updateBirds();
+                updateFallingBirds();
                 // update projectile
                 if (proj && proj.alive) {
-                    // wind as horizontal acceleration
+                    // Check hit bird first
+                    if(checkProjHitBird()){
+                        proj = null;
+                        // Bird hit handled, continue game loop
+                    } else {
                     const ax = windVal * windAccelScale;
                     proj.vx += ax * dt;
                     proj.vy += g * dt;
@@ -812,6 +905,7 @@
                         }
                     }
                 }
+            }
 
                 // effects
                 for (let i = flashes.length - 1; i >= 0; i--) {
@@ -838,6 +932,49 @@
                 if (turnLock) {
                     shootBtn.disabled = true;
                     return;
+                }
+                
+                // Check for double shot buff
+                const currentBuff = turn === 'player' ? playerBuff : botBuff;
+                if(currentBuff && currentBuff.type === BUFF_TYPES.DOUBLE_SHOT && !doubleShotPending && lastShotParams){
+                    doubleShotPending = true;
+                    // Fire second shot with same params
+                    setTimeout(() => {
+                        const p = lastShotParams;
+                        startShot(p.from, p.angleDeg, p.power, p.dir);
+                        if(turn === 'player') setLog('🎯 Bắn phát thứ 2!');
+                    }, 300);
+                    return;
+                }
+                
+                doubleShotPending = false;
+                lastShotParams = null;
+                
+                // Check for extra turns buff
+                if(currentBuff && currentBuff.type === BUFF_TYPES.EXTRA_TURNS && currentBuff.value > 0){
+                    currentBuff.value--;
+                    if(currentBuff.value >= 0){
+                        if(turn === 'player'){
+                            setLog(`🎯 Lượt thêm! Còn ${currentBuff.value + 1} lượt.`);
+                            player.stamina = player.maxStamina;
+                            shootBtn.disabled = false;
+                        } else {
+                            bot.stamina = bot.maxStamina;
+                            setTimeout(botTurn, 800);
+                        }
+                        return;
+                    }
+                }
+                
+                // Clear buffs that were used (DOUBLE_SHOT, EXTRA_TURNS)
+                // Keep DAMAGE_X2_5 and BIG_RADIUS for next shot
+                if(currentBuff){
+                    if(currentBuff.type === BUFF_TYPES.DOUBLE_SHOT || 
+                       currentBuff.type === BUFF_TYPES.EXTRA_TURNS){
+                        if(turn === 'player') playerBuff = null;
+                        else botBuff = null;
+                    }
+                    // DAMAGE_X2_5 and BIG_RADIUS will be cleared after used in explode()
                 }
 
                 // adjust wind slightly each turn
@@ -937,6 +1074,13 @@
 
                 // Pick THE BEST shot (index 0) - for near-perfect accuracy
                 const pick = candidates[0];
+                
+                // Check buff for bot
+                if(botBuff){
+                    const msg = `🤖 Bot dùng: ${getBuffName(botBuff.type)}`;
+                    setLog(msg);
+                    showBuffMessage(msg);
+                }
 
                 // Apply minimal error (~98% accuracy): only ±2% error
                 const accuracyError = 0.02; // 2% error for ~98% accuracy (almost perfect)
@@ -1005,24 +1149,54 @@
             }
 
             function drawPlayer(ent, color) {
-                // body
+                // Chibi character lying down (Gunny style)
+                const x = ent.x, y = ent.y, r = ent.r;
+                const facing = ent.facing;
+                
+                // Body (ellipse lying down)
                 ctx.fillStyle = color;
                 ctx.beginPath();
-                ctx.arc(ent.x, ent.y, ent.r, 0, Math.PI * 2);
+                ctx.ellipse(x, y, r * 1.3, r * 0.6, 0, 0, Math.PI * 2);
                 ctx.fill();
-                // cannon
-                ctx.strokeStyle = 'rgba(255,255,255,.35)';
-                ctx.lineWidth = 3;
+                
+                // Head (circle on one side)
                 ctx.beginPath();
-                ctx.moveTo(ent.x, ent.y);
-                ctx.lineTo(ent.x + ent.facing * (ent.r + 12), ent.y - 10);
+                ctx.arc(x + facing * r * 0.8, y - r * 0.3, r * 0.5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Eyes
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                ctx.beginPath();
+                ctx.arc(x + facing * r * 0.9, y - r * 0.35, r * 0.12, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Legs (small ellipses)
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.ellipse(x - facing * r * 1.1, y + r * 0.2, r * 0.4, r * 0.25, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Arms holding cannon
+                ctx.strokeStyle = color;
+                ctx.lineWidth = r * 0.25;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(x + facing * r * 0.3, y);
+                ctx.lineTo(x + facing * (r + 8), y - 8);
                 ctx.stroke();
-
-                // hp bar
-                const w = 60,
-                    h = 7;
+                
+                // Cannon
+                ctx.strokeStyle = 'rgba(80,80,80,0.9)';
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(x + facing * r * 0.5, y - r * 0.2);
+                ctx.lineTo(x + facing * (r + 16), y - 12);
+                ctx.stroke();
+                
+                // HP bar
+                const w = 60, h = 7;
                 const x0 = ent.x - w / 2;
-                const y0 = ent.y - ent.r - 16;
+                const y0 = ent.y - ent.r - 22;
                 ctx.fillStyle = 'rgba(0,0,0,.35)';
                 ctx.fillRect(x0, y0, w, h);
                 ctx.fillStyle = 'rgba(255,45,45,.75)';
@@ -1157,6 +1331,11 @@
             function draw() {
                 ctx.clearRect(0, 0, W, H);
                 
+                // Clouds (background)
+                drawClouds();
+                drawBirds();
+                drawFallingBirds();
+                
                 // Heartbeat when HP < 50
                 if(player.hp < 50 && player.hp > 0 && !turnLock) startHeartbeat();
                 else stopHeartbeat();
@@ -1189,18 +1368,58 @@
 
                 // projectile
                 if (proj) {
-                    ctx.fillStyle = 'rgba(255,255,255,.85)';
+                    // Check buffs for visual effects
+                    const currentBuff = proj.owner === 'player' ? playerBuff : botBuff;
+                    let bulletR = proj.r;
+                    let bulletColor = 'rgba(255,255,255,.85)';
+                    let trailColor = 'rgba(255,255,255,.18)';
+                    let hasGlow = false;
+                    
+                    if(currentBuff){
+                        if(currentBuff.type === BUFF_TYPES.BIG_RADIUS){
+                            bulletR *= 2;
+                        }
+                        if(currentBuff.type === BUFF_TYPES.DAMAGE_X2_5 || 
+                           (currentBuff.type === BUFF_TYPES.DOUBLE_SHOT && doubleShotPending)){
+                            bulletColor = 'rgba(255,140,0,.95)'; // Orange
+                            trailColor = 'rgba(255,100,0,.4)';
+                            hasGlow = true;
+                        }
+                    }
+                    
+                    // Glow effect for buffed bullets
+                    if(hasGlow){
+                        ctx.shadowBlur = 15;
+                        ctx.shadowColor = 'rgba(255,100,0,0.8)';
+                    }
+                    
+                    ctx.fillStyle = bulletColor;
                     ctx.beginPath();
-                    ctx.arc(proj.x, proj.y, proj.r, 0, Math.PI * 2);
+                    ctx.arc(proj.x, proj.y, bulletR, 0, Math.PI * 2);
                     ctx.fill();
+                    
+                    ctx.shadowBlur = 0; // Reset shadow
 
-                    // trail
-                    ctx.strokeStyle = 'rgba(255,255,255,.18)';
-                    ctx.lineWidth = 2;
+                    // trail - bigger and brighter for buffed bullets
+                    const trailLength = hasGlow ? 0.08 : 0.03;
+                    const trailWidth = hasGlow ? 6 : 2;
+                    ctx.strokeStyle = trailColor;
+                    ctx.lineWidth = trailWidth;
+                    ctx.lineCap = 'round';
                     ctx.beginPath();
                     ctx.moveTo(proj.x, proj.y);
-                    ctx.lineTo(proj.x - proj.vx * 0.03, proj.y - proj.vy * 0.03);
+                    ctx.lineTo(proj.x - proj.vx * trailLength, proj.y - proj.vy * trailLength);
                     ctx.stroke();
+                    
+                    // Extra trail segments for buffed bullets
+                    if(hasGlow){
+                        ctx.strokeStyle = 'rgba(255,200,0,0.3)';
+                        ctx.lineWidth = 10;
+                        ctx.beginPath();
+                        ctx.moveTo(proj.x, proj.y);
+                        ctx.lineTo(proj.x - proj.vx * 0.04, proj.y - proj.vy * 0.04);
+                        ctx.stroke();
+                    }
                 }
 
                 // explosions
@@ -1232,6 +1451,26 @@
                     ctx.fillText(text, d.x, d.y);
                 }
                 ctx.textAlign = 'start';
+
+                // Draw buff messages (center, 2s fade)
+                for(let i = buffMessages.length - 1; i >= 0; i--){
+                    const m = buffMessages[i];
+                    m.t += dt;
+                    const a = Math.max(0, 1 - m.t / 2);
+                    if(a <= 0){
+                        buffMessages.splice(i, 1);
+                        continue;
+                    }
+                    ctx.save();
+                    ctx.textAlign = 'center';
+                    ctx.font = 'bold 24px system-ui';
+                    ctx.fillStyle = `rgba(255,200,80,${a})`;
+                    ctx.strokeStyle = `rgba(0,0,0,${0.5*a})`;
+                    ctx.lineWidth = 4;
+                    ctx.strokeText(m.text, W/2, m.y);
+                    ctx.fillText(m.text, W/2, m.y);
+                    ctx.restore();
+                }
 
                 if(shakeT > 0) ctx.restore();
 
@@ -1281,6 +1520,11 @@
                 windV.textContent = '0.0';
 
                 setLog('Lượt của bạn. Chỉnh góc/lực rồi bắn.');
+                initClouds();
+                lastBirdSpawn = Date.now();
+                // Clear all buffs on reset
+                playerBuff = null;
+                botBuff = null;
             }
 
             // UI bindings + keyboard
@@ -1424,8 +1668,4 @@
             // init
             resetAll();
             step();
-        })();
-    </script>
-</body>
-
-</html>
+        });

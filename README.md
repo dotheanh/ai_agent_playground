@@ -15,10 +15,15 @@
 ## Các dự án hiện tại
 
 ### Gunny-like Demo (100% Vibe Coding)
-- Game bắn súng theo góc/lực với vật lý gió
-- Giao diện tối ưu cho cả desktop và mobile (touch-friendly, responsive)
-- Hỗ trợ nhiều phiên bản (Latest, v1, v2, v3)
-- Damage mô phỏng theo động lực học rơi
+- Game bắn súng theo góc/lực/gió với địa hình đồi ngẫu nhiên
+- Sát thương mô phỏng theo động lực học rơi
+- Buff Phượng Hoàng: bắn chim để nhận buff (x2.5 dmg, đạn to x3, bắn 2 phát, thêm lượt)
+- Responsive UI cho cả desktop và mobile
+- Hỗ trợ nhiều phiên bản (Latest, v1, v2, v3, v4, v5)
+
+**Video Demo**:
+
+https://github.com/user-attachments/assets/demo.mp4
 
 ![Gameplay Preview](gunny/screenshots/gameplay.jpg)
 ![Mobile Interface](gunny/screenshots/mobile.jpg)
