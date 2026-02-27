@@ -1080,7 +1080,7 @@
                 ctx.clearRect(0, 0, W, H);
                 
                 // Heartbeat when HP < 50
-                if(player.hp < 50) startHeartbeat();
+                if(player.hp < 50 && player.hp > 0 && !turnLock) startHeartbeat();
                 else stopHeartbeat();
 
                 // screen shake

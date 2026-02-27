@@ -64,6 +64,68 @@ h1{font-size:20px;margin-bottom:10px}
   <div class="playing" id="p6">▶ Đang phát...</div>
 </div>
 
+<div class="category">💨 Tiếng gió 2 giây (Wind Variations - 10 kiểu)</div>
+
+<div class="sound-card" onclick="playSound(17)">
+  <div class="name">17. Gió sweep lên (Wind Sweep Up)</div>
+  <div class="desc-small">White noise + lowpass 100→3000Hz - Gió mạnh dần 2s</div>
+  <div class="playing" id="p17">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(18)">
+  <div class="name">18. Gió sweep xuống (Wind Sweep Down)</div>
+  <div class="desc-small">White noise + lowpass 3000→100Hz - Gió yếu dần 2s</div>
+  <div class="playing" id="p18">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(19)">
+  <div class="name">19. Gió nâu (Brown Wind)</div>
+  <div class="desc-small">Brown noise + slow filter - Gió trầm ấm 2s</div>
+  <div class="playing" id="p19">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(20)">
+  <div class="name">20. Gió hồng (Pink Wind)</div>
+  <div class="desc-small">Pink noise approximation - Gió tự nhiên 2s</div>
+  <div class="playing" id="p20">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(21)">
+  <div class="name">21. Gió xoáy (Swirling Wind)</div>
+  <div class="desc-small">Filter freq sine modulation 2Hz - Gió xoay tròn 2s</div>
+  <div class="playing" id="p21">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(22)">
+  <div class="name">22. Gió giật (Gusty Wind)</div>
+  <div class="desc-small">3 bursts cách nhau - Gió thổi giật 2s</div>
+  <div class="playing" id="p22">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(23)">
+  <div class="name">23. Gió hú cao (Howling Wind)</div>
+  <div class="desc-small">Bandpass 2000Hz high Q - Tiếng hú gió 2s</div>
+  <div class="playing" id="p23">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(24)">
+  <div class="name">24. Gió ù (Rumbling Wind)</div>
+  <div class="desc-small">Brown noise fixed lowpass 200Hz - Gió trầm ù 2s</div>
+  <div class="playing" id="p24">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(25)">
+  <div class="name">25. Gió ngắt quãng (Stutter Wind)</div>
+  <div class="desc-small">Noise gate 10Hz - Gió ngắt liên tục 2s</div>
+  <div class="playing" id="p25">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(26)">
+  <div class="name">26. Gió ngược (Reverse Whoosh)</div>
+  <div class="desc-small">Noise fade in - Gió hút ngược 2s</div>
+  <div class="playing" id="p26">▶ Đang phát...</div>
+</div>
+
 <div class="category">💥 Âm thanh nổ (Explosion)</div>
 
 <div class="sound-card" onclick="playSound(7)">
@@ -388,6 +450,244 @@ function heartbeat(){
   setTimeout(()=>showPlaying(0), 2000);
 }
 
+// Wind variations (2 seconds each)
+function windSweepUp(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++) data[i] = Math.random()*2-1;
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.setValueAtTime(100, ctx.currentTime);
+  filter.frequency.exponentialRampToValueAtTime(3000, ctx.currentTime + 2);
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 2);
+  src.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  src.start();
+  setTimeout(()=>showPlaying(0), 2000);
+}
+
+function windSweepDown(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++) data[i] = Math.random()*2-1;
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.setValueAtTime(3000, ctx.currentTime);
+  filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 2);
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 2);
+  src.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  src.start();
+  setTimeout(()=>showPlaying(0), 2000);
+}
+
+function windBrown(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  let lastOut = 0;
+  for(let i=0; i<bufferSize; i++){
+    const white = Math.random()*2-1;
+    data[i] = (lastOut = (0.02 * white) + (0.98 * lastOut)) * 3;
+  }
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 600;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 2);
+  src.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  src.start();
+  setTimeout(()=>showPlaying(0), 2000);
+}
+
+function windPink(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  let lastOut = 0;
+  for(let i=0; i<bufferSize; i++){
+    const white = Math.random()*2-1;
+    data[i] = (lastOut = (0.1 * white) + (0.9 * lastOut));
+  }
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 2);
+  src.connect(g);
+  g.connect(ctx.destination);
+  src.start();
+  setTimeout(()=>showPlaying(0), 2000);
+}
+
+function windSwirl(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++) data[i] = Math.random()*2-1;
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.value = 800;
+  filter.Q.value = 10;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 2);
+  src.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  src.start();
+  // Modulate filter
+  const lfo = ctx.createOscillator();
+  const lfoGain = ctx.createGain();
+  lfo.frequency.value = 2;
+  lfoGain.gain.value = 400;
+  lfo.connect(lfoGain);
+  lfoGain.connect(filter.frequency);
+  lfo.start();
+  lfo.stop(ctx.currentTime + 2);
+  setTimeout(()=>showPlaying(0), 2000);
+}
+
+function windGusty(){
+  const ctx = getCtx();
+  for(let burst=0; burst<3; burst++){
+    const bufferSize = ctx.sampleRate * 0.4;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for(let i=0; i<bufferSize; i++) data[i] = Math.random()*2-1;
+    const src = ctx.createBufferSource();
+    src.buffer = buffer;
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 1500;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, ctx.currentTime + burst*0.6);
+    g.gain.linearRampToValueAtTime(0.3, ctx.currentTime + burst*0.6 + 0.1);
+    g.gain.linearRampToValueAtTime(0.01, ctx.currentTime + burst*0.6 + 0.4);
+    src.connect(filter);
+    filter.connect(g);
+    g.connect(ctx.destination);
+    src.start(ctx.currentTime + burst*0.6);
+  }
+  setTimeout(()=>showPlaying(0), 2000);
+}
+
+function windHowl(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++) data[i] = Math.random()*2-1;
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.value = 2000;
+  filter.Q.value = 15;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.2, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 2);
+  src.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  src.start();
+  setTimeout(()=>showPlaying(0), 2000);
+}
+
+function windRumble(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  let lastOut = 0;
+  for(let i=0; i<bufferSize; i++){
+    const white = Math.random()*2-1;
+    data[i] = (lastOut = (0.02 * white) + (0.98 * lastOut)) * 2;
+  }
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 200;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.4, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 2);
+  src.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  src.start();
+  setTimeout(()=>showPlaying(0), 2000);
+}
+
+function windStutter(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++){
+    data[i] = Math.random()*2-1 * (Math.sin(i*0.1) > 0 ? 1 : 0);
+  }
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 1000;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 2);
+  src.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  src.start();
+  setTimeout(()=>showPlaying(0), 2000);
+}
+
+function windReverse(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++) data[i] = Math.random()*2-1;
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  src.playbackRate.value = -1;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 1500;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.01, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 2);
+  src.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  src.start(0, 2);
+  setTimeout(()=>showPlaying(0), 2000);
+}
+
 function playSound(id){
   showPlaying(id);
   switch(id){
@@ -407,6 +707,16 @@ function playSound(id){
     case 14: errorBuzz(); break;
     case 15: coinDing(); break;
     case 16: heartbeat(); break;
+    case 17: windSweepUp(); break;
+    case 18: windSweepDown(); break;
+    case 19: windBrown(); break;
+    case 20: windPink(); break;
+    case 21: windSwirl(); break;
+    case 22: windGusty(); break;
+    case 23: windHowl(); break;
+    case 24: windRumble(); break;
+    case 25: windStutter(); break;
+    case 26: windReverse(); break;
   }
 }
 </script>
