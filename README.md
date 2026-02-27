@@ -35,7 +35,7 @@ User request → Alex AI Agent update → Auto commit → Push to GitHub → Aut
 Alex là một AI assistant chạy trên VPS, được thiết kế để:
 - Tự động hóa các tác vụ phát triển web
 - Quản lý và triển khai code
-- Hỗ trợ ngướ dùng 24/7 với các yêu cầu kỹ thuật
+- Hỗ trợ người dùng 24/7 với các yêu cầu kỹ thuật
 
 ---
 
