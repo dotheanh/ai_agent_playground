@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sound FX Demo - Chọn âm thanh đạn bay</title>
+<style>
+:root{--bg:#07070a;--text:#fff;--accent:#ff2d2d;--muted:#a9b2d4;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;padding:20px;max-width:800px;margin:0 auto}
+h1{font-size:20px;margin-bottom:10px}
+.desc{color:var(--muted);font-size:14px;margin-bottom:30px;line-height:1.5}
+.sound-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px;margin:15px 0;cursor:pointer;transition:all .2s}
+.sound-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.sound-card.active{border-color:var(--accent);background:rgba(255,45,45,.1)}
+.name{font-weight:700;margin-bottom:5px}
+.desc-small{color:var(--muted);font-size:13px}
+.playing{color:var(--accent);font-size:12px;margin-top:10px;display:none}
+.back{margin-top:30px;display:inline-block;color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+<h1>🔊 Sound FX Demo - Âm thanh đạn bay</h1>
+<div class="desc">
+  Click vào từng mục để nghe thử. Các âm thanh được tạo hoàn toàn bằng WebAudio API (không cần file mp3).<br>
+  Chọn âm thanh bạn thích nhất để thay thế cho tiếng "whoosh" hiện tại trong game.
+</div>
+
+<div class="sound-card" onclick="playSound(1)">
+  <div class="name">1. Whoosh xé gió</div>
+  <div class="desc-small">Noise + Bandpass filter sweep - Tiếng gió mạnh xé ngang</div>
+  <div class="playing" id="p1">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(2)">
+  <div class="name">2. Hum rè trầm</div>
+  <div class="desc-small">Low freq sine + vibrato - Tiếng rè nặng, chậm rãi</div>
+  <div class="playing" id="p2">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(3)">
+  <div class="name">3. Whistle cao</div>
+  <div class="desc-small">High freq sine, pitch glide - Huýt sáo như đạn hoạt hình</div>
+  <div class="playing" id="p3">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(4)">
+  <div class="name">4. Buzz vo vo</div>
+  <div class="desc-small">Sawtooth wave + lowpass - Tiếng vo vo liên tục</div>
+  <div class="playing" id="p4">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(5)">
+  <div class="name">5. Swoosh lao nhanh</div>
+  <div class="desc-small">Noise + exponential decay - Tiếng lao vun vút</div>
+  <div class="playing" id="p5">▶ Đang phát...</div>
+</div>
+
+<div class="sound-card" onclick="playSound(6)">
+  <div class="name">6. Doppler effect</div>
+  <div class="desc-small">Pitch glide up then down - Hiệu ứng chuyên nghiệp (xa→gần→xa)</div>
+  <div class="playing" id="p6">▶ Đang phát...</div>
+</div>
+
+<a href="/" class="back">← Quay lại Tools Hub</a>
+
+<script>
+let audioCtx = null;
+function getCtx(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function showPlaying(id){
+  document.querySelectorAll('.playing').forEach(e=>e.style.display='none');
+  document.querySelectorAll('.sound-card').forEach(e=>e.classList.remove('active'));
+  document.getElementById('p'+id).style.display='block';
+  document.querySelectorAll('.sound-card')[id-1].classList.add('active');
+}
+
+// 1. Whoosh xé gió - Noise + Bandpass sweep
+function whoosh(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 0.5;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++) data[i] = (Math.random()*2-1);
+  
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.setValueAtTime(200, ctx.currentTime);
+  filter.frequency.exponentialRampToValueAtTime(2000, ctx.currentTime + 0.3);
+  filter.Q.value = 5;
+  
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+  
+  src.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  src.start();
+  setTimeout(()=>showPlaying(0), 500);
+}
+
+// 2. Hum rè trầm - Low sine + vibrato
+function hum(){
+  const ctx = getCtx();
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type = 'sine';
+  o.frequency.setValueAtTime(80, ctx.currentTime);
+  
+  // Vibrato
+  const lfo = ctx.createOscillator();
+  const lfoGain = ctx.createGain();
+  lfo.frequency.value = 8;
+  lfoGain.gain.value = 5;
+  lfo.connect(lfoGain);
+  lfoGain.connect(o.frequency);
+  lfo.start();
+  
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+  
+  o.connect(g);
+  g.connect(ctx.destination);
+  o.start();
+  o.stop(ctx.currentTime + 0.6);
+  setTimeout(()=>showPlaying(0), 600);
+}
+
+// 3. Whistle cao - High sine pitch glide
+function whistle(){
+  const ctx = getCtx();
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type = 'sine';
+  o.frequency.setValueAtTime(800, ctx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.3);
+  
+  g.gain.setValueAtTime(0.25, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+  
+  o.connect(g);
+  g.connect(ctx.destination);
+  o.start();
+  o.stop(ctx.currentTime + 0.4);
+  setTimeout(()=>showPlaying(0), 400);
+}
+
+// 4. Buzz vo vo - Sawtooth + lowpass
+function buzz(){
+  const ctx = getCtx();
+  const o = ctx.createOscillator();
+  const filter = ctx.createBiquadFilter();
+  const g = ctx.createGain();
+  
+  o.type = 'sawtooth';
+  o.frequency.setValueAtTime(100, ctx.currentTime);
+  
+  filter.type = 'lowpass';
+  filter.frequency.setValueAtTime(400, ctx.currentTime);
+  filter.frequency.linearRampToValueAtTime(200, ctx.currentTime + 0.5);
+  
+  g.gain.setValueAtTime(0.2, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+  
+  o.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  o.start();
+  o.stop(ctx.currentTime + 0.5);
+  setTimeout(()=>showPlaying(0), 500);
+}
+
+// 5. Swoosh lao nhanh - Noise + exp decay
+function swoosh(){
+  const ctx = getCtx();
+  const bufferSize = ctx.sampleRate * 0.4;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0; i<bufferSize; i++){
+    data[i] = (Math.random()*2-1) * Math.pow(1 - i/bufferSize, 3);
+  }
+  
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 1500;
+  
+  const g = ctx.createGain();
+  g.gain.value = 0.4;
+  
+  src.connect(filter);
+  filter.connect(g);
+  g.connect(ctx.destination);
+  src.start();
+  setTimeout(()=>showPlaying(0), 400);
+}
+
+// 6. Doppler effect - Pitch glide up then down
+function doppler(){
+  const ctx = getCtx();
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  
+  o.type = 'triangle';
+  o.frequency.setValueAtTime(300, ctx.currentTime);
+  o.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.25);
+  o.frequency.linearRampToValueAtTime(300, ctx.currentTime + 0.5);
+  
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.25);
+  g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+  
+  o.connect(g);
+  g.connect(ctx.destination);
+  o.start();
+  o.stop(ctx.currentTime + 0.6);
+  setTimeout(()=>showPlaying(0), 600);
+}
+
+function playSound(id){
+  showPlaying(id);
+  switch(id){
+    case 1: whoosh(); break;
+    case 2: hum(); break;
+    case 3: whistle(); break;
+    case 4: buzz(); break;
+    case 5: swoosh(); break;
+    case 6: doppler(); break;
+  }
+}
+</script>
+</body>
+</html>
