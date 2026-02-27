@@ -571,8 +571,8 @@
                 // Dynamic gain based on projectile velocity and height
                 const vy = proj.vy;
                 const speed = Math.sqrt(proj.vx*proj.vx + vy*vy);
-                const groundY = groundY(proj.x);
-                const heightAboveGround = groundY - proj.y;
+                // Use canvas height as reference for simplicity
+                const heightAboveGround = H - proj.y;
                 
                 // Gain: high when fast, low when slow (apex), scales with max expected height
                 const expectedMaxHeight = (initialVy * initialVy) / (2 * g); // Physics: v^2/2g
