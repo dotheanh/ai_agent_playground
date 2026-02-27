@@ -404,35 +404,81 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.save();
                     ctx.translate(b.x, b.y);
                     if(b.dir === -1) ctx.scale(-1, 1);
-                    // Body - 2x bigger
-                    ctx.fillStyle = b.color;
+                    
+                    // Fire glow effect
+                    ctx.shadowBlur = 20;
+                    ctx.shadowColor = 'rgba(255,80,0,0.8)';
+                    
+                    // Tail fire (phoenix tail)
+                    const tailWiggle = Math.sin(b.wingPhase * 2) * 5;
+                    const grd = ctx.createLinearGradient(-40, 0, 0, 0);
+                    grd.addColorStop(0, 'rgba(255,50,0,0)');
+                    grd.addColorStop(0.5, 'rgba(255,100,0,0.6)');
+                    grd.addColorStop(1, 'rgba(255,200,0,0.9)');
+                    ctx.fillStyle = grd;
                     ctx.beginPath();
-                    ctx.ellipse(0, 0, 20, 12, 0, 0, Math.PI * 2);
+                    ctx.moveTo(-10, 0);
+                    ctx.lineTo(-50 + tailWiggle, -15);
+                    ctx.lineTo(-45 + tailWiggle, 0);
+                    ctx.lineTo(-50 + tailWiggle, 15);
                     ctx.fill();
-                    // Head - 2x bigger
+                    
+                    // Body gradient (phoenix body)
+                    const bodyGrd = ctx.createRadialGradient(0, 0, 0, 0, 0, 25);
+                    bodyGrd.addColorStop(0, '#ffdd00');
+                    bodyGrd.addColorStop(0.5, '#ff6600');
+                    bodyGrd.addColorStop(1, '#cc2200');
+                    ctx.fillStyle = bodyGrd;
                     ctx.beginPath();
-                    ctx.arc(16, -8, 10, 0, Math.PI * 2);
+                    ctx.ellipse(0, 0, 22, 14, 0, 0, Math.PI * 2);
                     ctx.fill();
-                    // Eye
-                    ctx.fillStyle = '#000';
+                    
+                    // Head (phoenix head)
+                    const headGrd = ctx.createRadialGradient(16, -8, 0, 16, -8, 12);
+                    headGrd.addColorStop(0, '#ffee88');
+                    headGrd.addColorStop(1, '#ff4400');
+                    ctx.fillStyle = headGrd;
                     ctx.beginPath();
-                    ctx.arc(18, -10, 3, 0, Math.PI * 2);
+                    ctx.arc(16, -8, 11, 0, Math.PI * 2);
                     ctx.fill();
-                    // Beak
-                    ctx.fillStyle = '#fa0';
+                    
+                    // Eye (glowing)
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#ffff00';
+                    ctx.fillStyle = '#ffff00';
                     ctx.beginPath();
-                    ctx.moveTo(24, -8);
-                    ctx.lineTo(34, -4);
-                    ctx.lineTo(24, 0);
+                    ctx.arc(19, -10, 4, 0, Math.PI * 2);
                     ctx.fill();
-                    // Wings - animated, 2x bigger
-                    const wingY = Math.sin(b.wingPhase) * 12;
-                    ctx.fillStyle = `hsl(${35 + Math.random() * 20}, 80%, 50%)`;
+                    ctx.shadowBlur = 0;
+                    
+                    // Beak (golden)
+                    ctx.fillStyle = '#ffcc00';
                     ctx.beginPath();
-                    ctx.moveTo(-4, -4);
-                    ctx.quadraticCurveTo(-16, -16 + wingY, -30, -4 + wingY * 0.5);
-                    ctx.quadraticCurveTo(-16, 4, -4, 4);
+                    ctx.moveTo(26, -8);
+                    ctx.lineTo(38, -4);
+                    ctx.lineTo(26, 0);
                     ctx.fill();
+                    
+                    // Wings (phoenix wings with fire gradient)
+                    const wingY = Math.sin(b.wingPhase) * 15;
+                    const wingGrd = ctx.createLinearGradient(-5, -20, -5, 20);
+                    wingGrd.addColorStop(0, '#ff2200');
+                    wingGrd.addColorStop(0.5, '#ff8800');
+                    wingGrd.addColorStop(1, '#ffcc00');
+                    ctx.fillStyle = wingGrd;
+                    ctx.beginPath();
+                    ctx.moveTo(-5, -6);
+                    ctx.quadraticCurveTo(-20, -25 + wingY, -40, -8 + wingY * 0.5);
+                    ctx.quadraticCurveTo(-25, 0, -40, 8 + wingY * 0.5);
+                    ctx.quadraticCurveTo(-20, 25 + wingY, -5, 6);
+                    ctx.fill();
+                    
+                    // Wing fire particles
+                    ctx.fillStyle = `rgba(255, ${100 + Math.random() * 100}, 0, ${0.6 + Math.random() * 0.4})`;
+                    ctx.beginPath();
+                    ctx.arc(-25 + Math.random() * 10, wingY * 0.3, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    
                     ctx.restore();
                 }
             }
@@ -1354,13 +1400,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     ctx.shadowBlur = 0; // Reset shadow
 
-                    // trail
+                    // trail - bigger and brighter for buffed bullets
+                    const trailLength = hasGlow ? 0.08 : 0.03;
+                    const trailWidth = hasGlow ? 6 : 2;
                     ctx.strokeStyle = trailColor;
-                    ctx.lineWidth = hasGlow ? 4 : 2;
+                    ctx.lineWidth = trailWidth;
+                    ctx.lineCap = 'round';
                     ctx.beginPath();
                     ctx.moveTo(proj.x, proj.y);
-                    ctx.lineTo(proj.x - proj.vx * 0.03, proj.y - proj.vy * 0.03);
+                    ctx.lineTo(proj.x - proj.vx * trailLength, proj.y - proj.vy * trailLength);
                     ctx.stroke();
+                    
+                    // Extra trail segments for buffed bullets
+                    if(hasGlow){
+                        ctx.strokeStyle = 'rgba(255,200,0,0.3)';
+                        ctx.lineWidth = 10;
+                        ctx.beginPath();
+                        ctx.moveTo(proj.x, proj.y);
+                        ctx.lineTo(proj.x - proj.vx * 0.04, proj.y - proj.vy * 0.04);
+                        ctx.stroke();
+                    }
                 }
 
                 // explosions
