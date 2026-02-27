@@ -118,21 +118,19 @@
             color: var(--muted);
             text-decoration: none
         }
-        
-        .versions {
-            margin-top: 8px;
-            max-height: 92px;
-            overflow: auto;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            padding: 6px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 45, 45, .18);
-            background: rgba(0, 0, 0, .18);
-        }
-        
-        .dot {
+
+        .versions{
+            margin-top:8px;
+            max-height:92px;
+            overflow:auto;
+            display:flex;
+            gap:8px;
+            flex-wrap:wrap;
+            padding:6px;
+            border-radius:12px;
+            border:1px solid rgba(255,45,45,.18);
+            background: rgba(0,0,0,.18);
+        }.dot {
             width: 8px;
             height: 8px;
             border-radius: 50%
@@ -149,7 +147,7 @@
         .log {
             margin-top: 10px;
             font-size: 12px;
-            color: rgba(255, 255, 255, .92);
+            color: rgba(255,255,255,.92);
             background: rgba(0, 0, 0, .22);
             border: 1px dashed rgba(255, 45, 45, .22);
             border-radius: 12px;
@@ -162,45 +160,14 @@
             font-size: 11px;
             color: var(--muted)
         }
-        
-        input[type=range] {
-            width: 100%;
-            accent-color: var(--accent);
-        }
-        
-        input[type=range]::-webkit-slider-runnable-track {
-            height: 6px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, .12);
-            border: 1px solid rgba(255, 45, 45, .18);
-        }
-        
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            margin-top: -6px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: rgba(255, 45, 45, .95);
-            border: 2px solid rgba(255, 255, 255, .75);
-        }
-        
-        input[type=range]::-moz-range-track {
-            height: 6px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, .12);
-            border: 1px solid rgba(255, 45, 45, .18);
-        }
-        
-        input[type=range]::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: rgba(255, 45, 45, .95);
-            border: 2px solid rgba(255, 255, 255, .75);
-        }
-    </style>
+    
+
+        input[type=range]{width:100%; accent-color: var(--accent);}
+        input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,45,45,.18);} 
+        input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;margin-top:-6px;width:18px;height:18px;border-radius:50%;background:rgba(255,45,45,.95);border:2px solid rgba(255,255,255,.75);} 
+        input[type=range]::-moz-range-track{height:6px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,45,45,.18);} 
+        input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:rgba(255,45,45,.95);border:2px solid rgba(255,255,255,.75);}
+</style>
 </head>
 
 <body>
@@ -210,7 +177,7 @@
         </div>
         <div class="panel">
             <h1>Gunny-like Demo (100% Vibe Coding)</h1>
-            <div class="sub">1 người vs 1 bot · có gió · map đồi đơn giản · 1 vũ khí. Điều khiển: chỉnh góc/lực → bắn. Sát thương mô phỏng theo động lực học rơi. Thiết kế responsive.</div>
+            <div class="sub">1 người vs 1 bot · có gió · map đồi đơn giản · 1 vũ khí. Điều khiển: chỉnh góc/lực → bắn. Bot sẽ tự bắn lượt sau. Sát thương mô phỏng theo động lực học rơi (gia tốc trọng trường).</div>
 
             <div class="row">
                 <span class="pill"><span class="dot good"></span> Bạn: <b id="hpP">100</b> HP</span>
@@ -225,7 +192,7 @@
 
             <label>Gió (m/s) (<span id="windV">0.0</span>)</label>
             <input id="wind" type="range" min="-30" max="30" value="0" />
-            <div class="small">Gió tác động ngang lên đạn, thay đổi mỗi lượt.</div>
+            <div class="small">Gió ảnh hưởng ngang lên đạn. Mỗi lượt gió sẽ thay đổi nhẹ.</div>
 
             <div class="row">
                 <button id="moveL" style="min-width:56px;font-size:18px">←</button>
@@ -240,9 +207,14 @@
                 <a class="pill" href="https://github.com/dotheanh/ai_agent_playground" target="_blank" style="display:flex;align-items:center;gap:6px">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="opacity:.9">
                         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                    </svg> GitHub
+                    </svg>
+                    GitHub
                 </a>
             </div>
+
+            <div class="small" style="margin-top:10px">Phiên bản:</div>
+            <div id="version-menu"></div>
+            <script src="/gunny/shared/version-menu.js" defer></script>
         </div>
     </div>
 
@@ -250,16 +222,14 @@
         (() => {
             // --- SFX (procedural WebAudio) ---
             let audioCtx = null;
-
-            function getCtx() {
-                if (!audioCtx) {
-                    audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+            function getCtx(){
+                if(!audioCtx){
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 }
-                if (audioCtx.state === "suspended") audioCtx.resume();
+                if(audioCtx.state === "suspended") audioCtx.resume();
                 return audioCtx;
             }
-
-            function beep(freq = 440, dur = 0.08, type = "sine", gain = 0.12) {
+            function beep(freq=440, dur=0.08, type="sine", gain=0.12){
                 const ctx = getCtx();
                 const o = ctx.createOscillator();
                 const g = ctx.createGain();
@@ -270,18 +240,17 @@
                 g.connect(ctx.destination);
                 const t = ctx.currentTime;
                 g.gain.setValueAtTime(0, t);
-                g.gain.linearRampToValueAtTime(gain, t + 0.005);
-                g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+                g.gain.linearRampToValueAtTime(gain, t+0.005);
+                g.gain.exponentialRampToValueAtTime(0.0001, t+dur);
                 o.start(t);
-                o.stop(t + dur);
+                o.stop(t+dur);
             }
-
-            function noiseBurst(dur = 0.18, gain = 0.18) {
+            function noiseBurst(dur=0.18, gain=0.18){
                 const ctx = getCtx();
                 const bufferSize = Math.floor(ctx.sampleRate * dur);
                 const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
                 const data = buffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 2);
+                for(let i=0;i<bufferSize;i++) data[i] = (Math.random()*2-1) * Math.pow(1 - i/bufferSize, 2);
                 const src = ctx.createBufferSource();
                 src.buffer = buffer;
                 const filter = ctx.createBiquadFilter();
@@ -294,168 +263,23 @@
                 g.connect(ctx.destination);
                 src.start();
             }
-
-            function sfxShoot() {
-                beep(820, 0.06, "square", 0.08);
-                beep(320, 0.08, "sawtooth", 0.04);
-            }
-
-            function sfxFly() {
-                beep(520, 0.05, "triangle", 0.03);
-            }
-
-            function sfxBoom(dmg = 0) {
-                if (dmg > 90) {
-                    // MEGA Explosion - x3 volume, longer decay
-                    const ctx = getCtx();
-                    const bufferSize = ctx.sampleRate * 1.2;
-                    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-                    const data = buffer.getChannelData(0);
-                    let lastOut = 0;
-                    for (let i = 0; i < bufferSize; i++) {
-                        const white = Math.random() * 2 - 1;
-                        data[i] = (lastOut = (0.02 * white) + (0.98 * lastOut)) * 6;
-                    }
-                    const src = ctx.createBufferSource();
-                    src.buffer = buffer;
-                    const filter = ctx.createBiquadFilter();
-                    filter.type = 'lowpass';
-                    filter.frequency.value = 250;
-                    const g = ctx.createGain();
-                    g.gain.setValueAtTime(1.8, ctx.currentTime);
-                    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.2);
-                    src.connect(filter);
-                    filter.connect(g);
-                    g.connect(ctx.destination);
-                    src.start();
-                } else if (dmg >= 70) {
-                    // Swoosh lao nhanh
-                    const ctx = getCtx();
-                    const bufferSize = ctx.sampleRate * 0.4;
-                    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-                    const data = buffer.getChannelData(0);
-                    for (let i = 0; i < bufferSize; i++) {
-                        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 3);
-                    }
-                    const src = ctx.createBufferSource();
-                    src.buffer = buffer;
-                    const filter = ctx.createBiquadFilter();
-                    filter.type = 'lowpass';
-                    filter.frequency.value = 1500;
-                    const g = ctx.createGain();
-                    g.gain.value = 0.4;
-                    src.connect(filter);
-                    filter.connect(g);
-                    g.connect(ctx.destination);
-                    src.start();
-                } else if (dmg >= 50) {
-                    // Shotgun blast
-                    const ctx = getCtx();
-                    const bufferSize = ctx.sampleRate * 0.1;
-                    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-                    const data = buffer.getChannelData(0);
-                    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-                    const src = ctx.createBufferSource();
-                    src.buffer = buffer;
-                    const filter = ctx.createBiquadFilter();
-                    filter.type = 'bandpass';
-                    filter.frequency.value = 800;
-                    filter.Q.value = 0.5;
-                    const g = ctx.createGain();
-                    g.gain.setValueAtTime(0.5, ctx.currentTime);
-                    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
-                    src.connect(filter);
-                    filter.connect(g);
-                    g.connect(ctx.destination);
-                    src.start();
+            function sfxShoot(){ beep(820, 0.06, "square", 0.08); beep(320, 0.08, "sawtooth", 0.04); }
+            function sfxFly(){ beep(520, 0.05, "triangle", 0.03); }
+            function sfxBoom(dmg=0){
+                if(dmg > 100){
+                    noiseBurst(0.32, 0.30); beep(70, 0.18, "sine", 0.14);
+                } else if(dmg >= 50){
+                    noiseBurst(0.26, 0.24); beep(85, 0.16, "sine", 0.11);
                 } else {
-                    // Silenced shot for low damage
-                    const ctx = getCtx();
-                    const bufferSize = ctx.sampleRate * 0.08;
-                    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-                    const data = buffer.getChannelData(0);
-                    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-                    const src = ctx.createBufferSource();
-                    src.buffer = buffer;
-                    const filter = ctx.createBiquadFilter();
-                    filter.type = 'lowpass';
-                    filter.frequency.value = 300;
-                    const g = ctx.createGain();
-                    g.gain.setValueAtTime(0.25, ctx.currentTime);
-                    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
-                    src.connect(filter);
-                    filter.connect(g);
-                    g.connect(ctx.destination);
-                    src.start();
-                }
-            }
-
-            // Coin ding for footsteps
-            function sfxStep() {
-                const ctx = getCtx();
-                const o = ctx.createOscillator();
-                const g = ctx.createGain();
-                o.type = 'sine';
-                o.frequency.setValueAtTime(1318.5, ctx.currentTime); // E6
-                o.frequency.setValueAtTime(1975.5, ctx.currentTime + 0.03); // B6
-                g.gain.setValueAtTime(0.15, ctx.currentTime);
-                g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
-                o.connect(g);
-                g.connect(ctx.destination);
-                o.start();
-                o.stop(ctx.currentTime + 0.1);
-            }
-
-            // Heartbeat for low HP
-            let heartbeatInterval = null;
-
-            function startHeartbeat() {
-                if (heartbeatInterval) return;
-                const beat = () => {
-                    const ctx = getCtx();
-                    if (!ctx) return;
-                    // Main beat
-                    const o = ctx.createOscillator();
-                    const g = ctx.createGain();
-                    o.type = 'sine';
-                    o.frequency.value = 60;
-                    g.gain.setValueAtTime(0.2, ctx.currentTime);
-                    g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
-                    o.connect(g);
-                    g.connect(ctx.destination);
-                    o.start();
-                    o.stop(ctx.currentTime + 0.15);
-                    // Second quieter beat
-                    setTimeout(() => {
-                        const o2 = ctx.createOscillator();
-                        const g2 = ctx.createGain();
-                        o2.type = 'sine';
-                        o2.frequency.value = 60;
-                        g2.gain.setValueAtTime(0.1, ctx.currentTime);
-                        g2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
-                        o2.connect(g2);
-                        g2.connect(ctx.destination);
-                        o2.start();
-                        o2.stop(ctx.currentTime + 0.1);
-                    }, 200);
-                };
-                beat();
-                heartbeatInterval = setInterval(beat, 800); // 75bpm
-            }
-
-            function stopHeartbeat() {
-                if (heartbeatInterval) {
-                    clearInterval(heartbeatInterval);
-                    heartbeatInterval = null;
+                    noiseBurst(0.20, 0.18); beep(95, 0.12, "sine", 0.08);
                 }
             }
 
             // optional background hum (very subtle)
             let bgOn = false;
             let bgNode = null;
-
-            function startBg() {
-                if (bgOn) return;
+            function startBg(){
+                if(bgOn) return;
                 const ctx = getCtx();
                 const o = ctx.createOscillator();
                 const g = ctx.createGain();
@@ -465,36 +289,20 @@
                 o.connect(g);
                 g.connect(ctx.destination);
                 o.start();
-                g.gain.linearRampToValueAtTime(0.02, ctx.currentTime + 0.4);
+                g.gain.linearRampToValueAtTime(0.02, ctx.currentTime+0.4);
                 bgOn = true;
-                bgNode = {
-                    o,
-                    g
-                };
+                bgNode = {o,g};
             }
-
-            function stopBg() {
-                if (!bgOn || !bgNode) return;
+            function stopBg(){
+                if(!bgOn || !bgNode) return;
                 const ctx = getCtx();
-                bgNode.g.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.25);
-                bgNode.o.stop(ctx.currentTime + 0.26);
+                bgNode.g.gain.linearRampToValueAtTime(0.0001, ctx.currentTime+0.25);
+                bgNode.o.stop(ctx.currentTime+0.26);
                 bgOn = false;
                 bgNode = null;
             }
             // start BG on first user interaction
-            let bgMusicStarted = false;
-            const bgMusic = new Audio('background.mp3');
-            bgMusic.loop = true;
-            bgMusic.volume = 0.25;
-            window.addEventListener("pointerdown", () => {
-                startBg();
-                if (!bgMusicStarted) {
-                    bgMusic.play().catch(e => {});
-                    bgMusicStarted = true;
-                }
-            }, {
-                once: true
-            });
+            window.addEventListener("pointerdown", () => startBg(), {once:true});
 
             const canvas = document.getElementById('c');
             const ctx = canvas.getContext('2d');
@@ -561,8 +369,8 @@
                 hp: 200,
                 maxHp: 200,
                 facing: 1,
-                stamina: 150,
-                maxStamina: 150
+                stamina: 100,
+                maxStamina: 100
             };
             const bot = {
                 x: W - 120,
@@ -570,8 +378,8 @@
                 hp: 200,
                 maxHp: 200,
                 facing: -1,
-                stamina: 150,
-                maxStamina: 150
+                stamina: 100,
+                maxStamina: 100
             };
 
             function placeOnGround(ent) {
@@ -583,129 +391,6 @@
             let turn = 'player';
             let turnLock = false;
             let windVal = 0;
-
-            // Wind Sweep Up with Dynamic Doppler and Stereo Panning
-            let windNode = null;
-            let windGain = null;
-            let windFilter = null;
-            let windPanner = null;
-            let windStartTime = 0;
-            let initialVy = 0;
-            let maxHeightTracked = 0;
-            let startX = 0;
-            let endX = 0;
-
-            function startWind() {
-                const ctx = getCtx();
-                const bufferSize = ctx.sampleRate * 3;
-                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-                const data = buffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-
-                windNode = ctx.createBufferSource();
-                windNode.buffer = buffer;
-                windNode.loop = true;
-
-                windFilter = ctx.createBiquadFilter();
-                windFilter.type = 'lowpass';
-                windFilter.frequency.value = 100;
-
-                windGain = ctx.createGain();
-                windGain.gain.value = 0;
-
-                // Stereo panner
-                windPanner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
-                if (windPanner) windPanner.pan.value = 0;
-
-                windNode.connect(windFilter);
-                windFilter.connect(windGain);
-                if (windPanner) {
-                    windGain.connect(windPanner);
-                    windPanner.connect(ctx.destination);
-                } else {
-                    windGain.connect(ctx.destination);
-                }
-                windNode.start();
-                windStartTime = Date.now();
-
-                if (proj) {
-                    initialVy = Math.abs(proj.vy);
-                    maxHeightTracked = proj.y;
-                    startX = proj.x;
-                    // Predict approximate landing X
-                    const flightTime = (2 * initialVy) / g;
-                    endX = proj.x + proj.vx * flightTime;
-                }
-            }
-
-            function updateWind() {
-                if (!windGain || !proj) return;
-
-                const ctx = getCtx();
-                const vy = proj.vy;
-                const speed = Math.sqrt(proj.vx * proj.vx + vy * vy);
-                const heightAboveGround = H - proj.y;
-
-                // Track max height
-                if (proj.y < maxHeightTracked) maxHeightTracked = proj.y;
-
-                // Calculate apex progress: 0=start, 0.5=apex, 1=end
-                const expectedMaxHeight = (initialVy * initialVy) / (2 * g);
-                const hasApexed = proj.y > maxHeightTracked + 10; // Past apex
-
-                // BASE GAIN - Strong Doppler: high at start, 0 at apex, high at end (50% quieter)
-                let baseGain;
-                if (!hasApexed) {
-                    // Going UP: gain from 0.125 down to 0
-                    const progress = Math.min((H - proj.y) / Math.max(expectedMaxHeight, 100), 1);
-                    baseGain = 0.125 * (1 - Math.pow(progress, 2)); // Quadratic falloff to 0
-                } else {
-                    // Going DOWN: gain from 0 up to 0.125
-                    const fallProgress = Math.min((proj.y - maxHeightTracked) / Math.max(expectedMaxHeight, 100), 1);
-                    baseGain = 0.125 * Math.pow(fallProgress, 0.5); // Square root rise from 0
-                }
-
-                // Speed bonus (50% quieter)
-                const speedBonus = Math.min(speed / 300, 1) * 0.075;
-
-                // Height bonus (50% quieter)
-                const heightRatio = Math.min(heightAboveGround / 300, 1);
-                const heightBonus = heightRatio * 0.05;
-
-                // Duration fade-in
-                const flightDuration = (Date.now() - windStartTime) / 1000;
-                const fadeIn = Math.min(flightDuration / 0.5, 1);
-
-                const targetGain = (baseGain + speedBonus + heightBonus) * fadeIn;
-                // At apex, allow complete silence (0 gain)
-                windGain.gain.setValueAtTime(Math.max(targetGain, 0), ctx.currentTime);
-
-                // Filter sweep
-                const filterFreq = 100 + (heightRatio * 1000) + (Math.min(speed / 200, 1) * 800);
-                windFilter.frequency.setValueAtTime(filterFreq, ctx.currentTime);
-
-                // STEREO PANNING - Follow projectile across screen
-                if (windPanner) {
-                    const pan = ((proj.x / W) * 2) - 1; // -1 (left) to 1 (right)
-                    windPanner.pan.setValueAtTime(Math.max(-1, Math.min(1, pan)), ctx.currentTime);
-                }
-            }
-
-            function stopWind() {
-                if (windNode) {
-                    windNode.stop();
-                    windNode.disconnect();
-                    windNode = null;
-                }
-                if (windFilter) {
-                    windFilter.disconnect();
-                    windFilter = null;
-                }
-                if (windGain) {
-                    windGain.disconnect();
-                    windGain = null;
-                }
-            }
 
             function setLog(t) {
                 logEl.textContent = t;
@@ -734,7 +419,6 @@
                     owner: (from === player) ? 'player' : 'bot',
                     startTime: Date.now()
                 };
-                startWind();
             }
 
             function dist2(ax, ay, bx, by) {
@@ -765,14 +449,8 @@
                     if (d < R) {
                         const dmg = Math.round(totalDmg * (1 - d / R));
                         t.hp = clamp(t.hp - dmg, 0, 999);
-                        dmgTexts.push({
-                            x: t.x,
-                            y: t.y - t.r - 18,
-                            v: dmg,
-                            t: 0,
-                            tier: (dmg > 100 ? 3 : (dmg >= 80 ? 2 : (dmg >= 60 ? 1 : 0)))
-                        });
-                        if (dmg > maxDmg) maxDmg = dmg;
+                        dmgTexts.push({ x: t.x, y: t.y - t.r - 18, v: dmg, t: 0, tier: (dmg>100?3:(dmg>=80?2:(dmg>=60?1:0))) });
+                        if(dmg > maxDmg) maxDmg = dmg;
                     }
                 });
                 hpP.textContent = player.hp;
@@ -815,14 +493,10 @@
                     proj.x += proj.vx * dt;
                     proj.y += proj.vy * dt;
 
-                    // Update whoosh sound volume while flying
-                    updateWind();
-
                     // out of bounds
                     if (proj.x < -50 || proj.x > W + 50 || proj.y > H + 80) {
                         proj.alive = false;
                         proj = null;
-                        stopWind();
                         endShot(null);
                     } else {
                         // hit ground
@@ -835,9 +509,8 @@
                             proj.alive = false;
                             proj = null;
                             const maxDmg = explode(hitX, hitY, impactSpeed);
-                            stopWind();
                             sfxBoom(maxDmg);
-                            if (maxDmg >= 60) {
+                            if(maxDmg >= 60){
                                 shakeT = 0.32;
                                 shakeAmp = (maxDmg > 100) ? 16 : (maxDmg >= 80 ? 10 : 6);
                             }
@@ -856,9 +529,8 @@
                                     proj.alive = false;
                                     proj = null;
                                     const maxDmg = explode(hitX, hitY, impactSpeed);
-                                    stopWind();
                                     sfxBoom(maxDmg);
-                                    if (maxDmg >= 60) {
+                                    if(maxDmg >= 60){
                                         shakeT = 0.32;
                                         shakeAmp = (maxDmg > 100) ? 16 : (maxDmg >= 80 ? 10 : 6);
                                     }
@@ -882,9 +554,9 @@
                     if (dmgTexts[i].t > 0.9) dmgTexts.splice(i, 1);
                 }
 
-                if (shakeT > 0) {
+                if(shakeT > 0){
                     shakeT -= dt;
-                    if (shakeT < 0) shakeT = 0;
+                    if(shakeT < 0) shakeT = 0;
                 }
 
                 draw();
@@ -1005,7 +677,7 @@
                 let p2 = clamp(pick.p + errP, 10, 100);
 
                 startShot(bot, a2, p2, dir);
-                sfxShoot();
+                    sfxShoot();
                 setLog(`Bot bắn: góc ${a2.toFixed(0)}°, lực ${p2.toFixed(0)} (gió ${windVal.toFixed(1)})`);
             }
 
@@ -1214,16 +886,12 @@
             function draw() {
                 ctx.clearRect(0, 0, W, H);
 
-                // Heartbeat when HP < 50
-                if (player.hp < 50 && player.hp > 0 && !turnLock) startHeartbeat();
-                else stopHeartbeat();
-
                 // screen shake
-                if (shakeT > 0) {
+                if(shakeT > 0){
                     const k = shakeT / 0.32;
                     const amp = shakeAmp * k;
                     ctx.save();
-                    ctx.translate((Math.random() * 2 - 1) * amp, (Math.random() * 2 - 1) * amp);
+                    ctx.translate((Math.random()*2-1)*amp, (Math.random()*2-1)*amp);
                 }
 
                 // sky stars
@@ -1278,9 +946,9 @@
                 for (const d of dmgTexts) {
                     const a = 1 - (d.t / 0.9);
                     let col = '255,230,170';
-                    if (d.tier === 3) col = '255,45,45';
-                    else if (d.tier === 2) col = '255,160,60';
-                    else if (d.tier === 1) col = '255,235,120';
+                    if(d.tier === 3) col = '255,45,45';
+                    else if(d.tier === 2) col = '255,160,60';
+                    else if(d.tier === 1) col = '255,235,120';
                     ctx.fillStyle = `rgba(${col},${a})`;
                     ctx.strokeStyle = `rgba(0,0,0,${0.35*a})`;
                     ctx.lineWidth = 3;
@@ -1290,7 +958,7 @@
                 }
                 ctx.textAlign = 'start';
 
-                if (shakeT > 0) ctx.restore();
+                if(shakeT > 0) ctx.restore();
 
                 // HUD turn
                 ctx.fillStyle = 'rgba(0,0,0,.28)';
@@ -1304,7 +972,7 @@
                 ctx.fillText(`Lượt: ${turn === 'player' ? 'Bạn' : 'Bot'}`, 24, 78);
             }
 
-            function randomSky() {
+            function randomSky(){
                 // cohesive red/black sky themes
                 const skies = [
                     'linear-gradient(#060607, #14060a 60%, #0b0b0d)',
@@ -1313,7 +981,7 @@
                     'linear-gradient(#09090c, #1b050a 58%, #0b0b0d)',
                     'radial-gradient(800px 520px at 25% 20%, rgba(255,45,45,.22), transparent 62%), linear-gradient(#060607, #12060a 60%, #0b0b0d)'
                 ];
-                document.documentElement.style.setProperty('--sky', skies[(Math.random() * skies.length) | 0]);
+                document.documentElement.style.setProperty('--sky', skies[(Math.random()*skies.length)|0]);
             }
 
             function resetAll() {
@@ -1347,13 +1015,7 @@
                 windVal = clamp(parseInt(wind.value, 10) / 10, -3.0, 3.0);
                 windV.textContent = windVal.toFixed(1);
             }
-            ang.addEventListener('input', () => {
-                syncLabels();
-                const a = parseFloat(ang.value);
-                if (a >= 75) setLog('💡 Góc ' + a.toFixed(0) + '° siêu cao! Đạn rơi mạnh = sát thương cực đại!');
-                else if (a >= 60) setLog('💡 Góc ' + a.toFixed(0) + '° cao. Sát thương sẽ rất lớn khi đạn rơi!');
-                else setLog('💡 Bắn với góc cao để tối đa sát thương!');
-            });
+            ang.addEventListener('input', syncLabels);
             pow.addEventListener('input', syncLabels);
             wind.addEventListener('input', syncLabels);
             syncLabels();
@@ -1363,16 +1025,16 @@
             // - UP/DOWN: adjust angle
             // - Shift + UP/DOWN: adjust power
             // - Space: shoot
-
+            
             let moveInterval = null;
             const MOVE_COST = 8; // stamina per step
             const MOVE_STEP = 6; // pixels per move
             const MOVE_DELAY = 80; // ms between moves when holding
-
+            
             function canMove() {
                 return !turnLock && turn === 'player' && !proj && player.stamina > 0;
             }
-
+            
             function doMove(dx) {
                 if (!canMove()) return false;
                 if (player.stamina < MOVE_COST) {
@@ -1382,10 +1044,9 @@
                 player.stamina -= MOVE_COST;
                 player.x = clamp(player.x + dx, 40, W - 40);
                 placeOnGround(player);
-                sfxStep(); // Footstep sound
                 return true;
             }
-
+            
             function startMoving(dx) {
                 if (moveInterval) return;
                 if (!canMove() || player.stamina < MOVE_COST) {
@@ -1402,7 +1063,7 @@
                     doMove(dx);
                 }, MOVE_DELAY);
             }
-
+            
             function stopMoving() {
                 if (moveInterval) {
                     clearInterval(moveInterval);
@@ -1439,7 +1100,7 @@
                     return;
                 }
             });
-
+            
             window.addEventListener('keyup', (e) => {
                 if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
                     stopMoving();
@@ -1451,12 +1112,12 @@
                 const a = parseFloat(ang.value);
                 const p = parseFloat(pow.value);
                 startShot(player, a, p, +1);
-                sfxShoot();
+                    sfxShoot();
                 setLog(`Bạn bắn: góc ${a.toFixed(0)}°, lực ${p.toFixed(0)} (gió ${windVal.toFixed(1)})`);
             });
 
             resetBtn.addEventListener('click', resetAll);
-
+            
             // Hold-to-move for buttons (mouse + touch)
             function setupHoldBtn(btn, dx) {
                 const start = (e) => {
@@ -1470,13 +1131,11 @@
                 btn.addEventListener('mousedown', start);
                 btn.addEventListener('mouseup', stop);
                 btn.addEventListener('mouseleave', stop);
-                btn.addEventListener('touchstart', start, {
-                    passive: false
-                });
+                btn.addEventListener('touchstart', start, {passive: false});
                 btn.addEventListener('touchend', stop);
                 btn.addEventListener('touchcancel', stop);
             }
-
+            
             setupHoldBtn(moveLBtn, -MOVE_STEP);
             setupHoldBtn(moveRBtn, MOVE_STEP);
 
