@@ -676,6 +676,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const dy = proj.y - b.y;
                     const dist = Math.sqrt(dx*dx + dy*dy);
                     if(dist < 20){ // Hit radius
+                        // Visual explosion at hit point
+                        flashes.push({x: proj.x, y: proj.y, t: 0});
                         // Bird falls
                         fallingBirds.push({
                             x: b.x, y: b.y, vx: proj.vx * 0.3, vy: -50, 
