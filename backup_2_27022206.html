@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gunny-like Demo (1vBot)</title>
+    <style>
+         :root {
+            --bg: #0b1220;
+            --panel: #0f1a33;
+            --text: #e9eefc;
+            --muted: #a9b2d4;
+            --accent: #7c5cff;
+            --good: #2dd4bf;
+            --bad: #fb7185;
+        }
+        
+        * {
+            box-sizing: border-box
+        }
+        
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+            background: radial-gradient(900px 600px at 15% 15%, rgba(124, 92, 255, .25), transparent 60%), var(--bg);
+            color: var(--text)
+        }
+        
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 14px;
+        }
+        
+        @media (max-width: 980px) {
+            .wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        canvas {
+            width: 100%;
+            height: auto;
+            background: linear-gradient(#071026, #081538 60%, #091b2a);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 14px;
+        }
+        
+        .panel {
+            background: rgba(0, 0, 0, .18);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 14px;
+            padding: 14px;
+        }
+        
+        h1 {
+            font-size: 16px;
+            margin: 0 0 6px
+        }
+        
+        .sub {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.4
+        }
+        
+        label {
+            display: block;
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 10px
+        }
+        
+        input[type=range] {
+            width: 100%
+        }
+        
+        .row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 10px
+        }
+        
+        button {
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, .14);
+            background: rgba(124, 92, 255, .18);
+            color: var(--text);
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-weight: 700
+        }
+        
+        button:hover {
+            background: rgba(124, 92, 255, .26)
+        }
+        
+        button:disabled {
+            opacity: .5;
+            cursor: not-allowed
+        }
+        
+        .pill {
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+            font-size: 12px;
+            color: var(--muted)
+        }
+        
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%
+        }
+        
+        .dot.good {
+            background: var(--good)
+        }
+        
+        .dot.bad {
+            background: var(--bad)
+        }
+        
+        .log {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #cfe0ff;
+            background: rgba(0, 0, 0, .2);
+            border: 1px dashed rgba(255, 255, 255, .14);
+            border-radius: 12px;
+            padding: 10px;
+            min-height: 76px;
+            white-space: pre-line
+        }
+        
+        .small {
+            font-size: 11px;
+            color: var(--muted)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div>
+            <canvas id="c" width="900" height="520"></canvas>
+        </div>
+        <div class="panel">
+            <h1>Gunny-like Demo</h1>
+            <div class="sub">1 người vs 1 bot · có gió · map đồi đơn giản · 1 vũ khí. Điều khiển: chỉnh góc/lực → bắn. Bot sẽ tự bắn lượt sau. Ghi chú: dame tính theo “tốc độ rơi/va chạm” (đạn rơi từ cao xuống càng nhanh thì càng đau, mô phỏng gia tốc trọng trường).</div>
+
+            <div class="row">
+                <span class="pill"><span class="dot good"></span> Bạn: <b id="hpP">100</b> HP</span>
+                <span class="pill"><span class="dot bad"></span> Bot: <b id="hpB">100</b> HP</span>
+            </div>
+
+            <label>Góc bắn (<span id="angV">45</span>°)</label>
+            <input id="ang" type="range" min="0" max="90" value="45" />
+
+            <label>Lực bắn (<span id="powV">65</span>)</label>
+            <input id="pow" type="range" min="10" max="100" value="65" />
+
+            <label>Gió (m/s) (<span id="windV">0.0</span>)</label>
+            <input id="wind" type="range" min="-30" max="30" value="0" />
+            <div class="small">Gió ảnh hưởng ngang lên đạn. Mỗi lượt gió sẽ thay đổi nhẹ.</div>
+
+            <div class="row">
+                <button id="moveL" style="min-width:56px;font-size:18px">←</button>
+                <button id="shoot" style="flex:1">BẮN</button>
+                <button id="moveR" style="min-width:56px;font-size:18px">→</button>
+                <button id="reset">Reset</button>
+            </div>
+
+            <div class="log" id="log">Lượt của bạn. Chỉnh góc/lực rồi bắn.</div>
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            const canvas = document.getElementById('c');
+            const ctx = canvas.getContext('2d');
+
+            const hpP = document.getElementById('hpP');
+            const hpB = document.getElementById('hpB');
+            const logEl = document.getElementById('log');
+
+            const ang = document.getElementById('ang');
+            const pow = document.getElementById('pow');
+            const wind = document.getElementById('wind');
+            const angV = document.getElementById('angV');
+            const powV = document.getElementById('powV');
+            const windV = document.getElementById('windV');
+
+            const shootBtn = document.getElementById('shoot');
+            const resetBtn = document.getElementById('reset');
+            const moveLBtn = document.getElementById('moveL');
+            const moveRBtn = document.getElementById('moveR');
+
+            const W = canvas.width,
+                H = canvas.height;
+
+            // Physics
+            const g = 260; // gravity px/s^2
+            const windAccelScale = 9; // wind -> horizontal accel px/s^2
+            const dt = 1 / 60;
+
+            // Terrain
+            let terrain = [];
+
+            function buildTerrain() {
+                // simple hills: random sum of sines
+                terrain = new Array(W);
+                const base = H * (0.68 + Math.random() * 0.08);
+                const a1 = 35 + Math.random() * 28;
+                const a2 = 18 + Math.random() * 22;
+                const a3 = 10 + Math.random() * 16;
+                const f1 = 1.6 + Math.random() * 1.4;
+                const f2 = 3.2 + Math.random() * 2.2;
+                const f3 = 6.0 + Math.random() * 2.8;
+                const p1 = Math.random() * Math.PI * 2;
+                const p2 = Math.random() * Math.PI * 2;
+                const p3 = Math.random() * Math.PI * 2;
+                for (let x = 0; x < W; x++) {
+                    const t = x / W * Math.PI * 2;
+                    const y = base +
+                        a1 * Math.sin(t * f1 + p1) +
+                        a2 * Math.sin(t * f2 + p2) +
+                        a3 * Math.sin(t * f3 + p3);
+                    terrain[x] = Math.min(H - 40, Math.max(H * 0.45, y));
+                }
+            }
+
+            function groundY(x) {
+                x = Math.max(0, Math.min(W - 1, Math.floor(x)));
+                return terrain[x];
+            }
+
+            // Players
+            const player = {
+                x: 120,
+                r: 14,
+                hp: 200,
+                maxHp: 200,
+                facing: 1
+            };
+            const bot = {
+                x: W - 120,
+                r: 14,
+                hp: 200,
+                maxHp: 200,
+                facing: -1
+            };
+
+            function placeOnGround(ent) {
+                ent.y = groundY(ent.x) - ent.r - 2;
+            }
+
+            // Projectile
+            let proj = null;
+            let turn = 'player';
+            let turnLock = false;
+            let windVal = 0;
+
+            function setLog(t) {
+                logEl.textContent = t;
+            }
+
+            function clamp(v, a, b) {
+                return Math.max(a, Math.min(b, v));
+            }
+
+            function randn() {
+                return (Math.random() + Math.random() + Math.random() + Math.random() - 2) / 2;
+            }
+
+            function startShot(from, angleDeg, power, dir) {
+                const angRad = angleDeg * Math.PI / 180;
+                const speed = power * 6.2; // px/s
+                const vx = Math.cos(angRad) * speed * dir;
+                const vy = -Math.sin(angRad) * speed;
+                proj = {
+                    x: from.x,
+                    y: from.y - from.r - 2,
+                    vx,
+                    vy,
+                    r: 4,
+                    alive: true,
+                    owner: (from === player) ? 'player' : 'bot',
+                    startTime: Date.now()
+                };
+            }
+
+            function dist2(ax, ay, bx, by) {
+                const dx = ax - bx,
+                    dy = ay - by;
+                return dx * dx + dy * dy;
+            }
+
+            function explode(atx, aty, impactSpeed = 0) {
+                // Damage based on impact speed (more realistic than airtime):
+                // Falling longer from higher arc => higher speed => more damage.
+                // Tuned so a max lob can reach ~x3 damage.
+                const R = 42;
+                const baseDmg = 38;
+
+                // Map speed (px/s) to multiplier ~[1..4]
+                // Tune: higher falling speed => higher damage, capped at x4
+                const v = Math.max(0, impactSpeed);
+                let mult = 1 + (v / 300); // ~2x at 300px/s
+                mult = clamp(mult, 1, 4);
+
+                const totalDmg = baseDmg * mult;
+
+                const targets = [player, bot];
+                targets.forEach(t => {
+                    const d = Math.sqrt(dist2(atx, aty, t.x, t.y));
+                    if (d < R) {
+                        const dmg = Math.round(totalDmg * (1 - d / R));
+                        t.hp = clamp(t.hp - dmg, 0, 999);
+                        dmgTexts.push({ x: t.x, y: t.y - t.r - 18, v: dmg, t: 0 });
+                    }
+                });
+                hpP.textContent = player.hp;
+                hpB.textContent = bot.hp;
+
+                // decide winner
+                if (player.hp <= 0 && bot.hp <= 0) {
+                    setLog('Cả hai cùng ngã. Hoà. Reset để chơi lại.');
+                    turnLock = true;
+                } else if (player.hp <= 0) {
+                    setLog('Bạn thua rồi. Reset để chơi lại.');
+                    turnLock = true;
+                } else if (bot.hp <= 0) {
+                    setLog('Bạn thắng! Reset để chơi lại.');
+                    turnLock = true;
+                }
+
+                // visual flash
+                flashes.push({
+                    x: atx,
+                    y: aty,
+                    t: 0
+                });
+            }
+
+            // simple effects
+            const flashes = [];
+            const dmgTexts = [];
+
+            function step() {
+                // update projectile
+                if (proj && proj.alive) {
+                    // wind as horizontal acceleration
+                    const ax = windVal * windAccelScale;
+                    proj.vx += ax * dt;
+                    proj.vy += g * dt;
+                    proj.x += proj.vx * dt;
+                    proj.y += proj.vy * dt;
+
+                    // out of bounds
+                    if (proj.x < -50 || proj.x > W + 50 || proj.y > H + 80) {
+                        proj.alive = false;
+                        proj = null;
+                        endShot(null);
+                    } else {
+                        // hit ground
+                        const gy = groundY(proj.x);
+                        if (proj.y + proj.r >= gy) {
+                            const hitX = proj.x;
+                            const hitY = gy;
+                            const impactSpeed = Math.hypot(proj.vx, proj.vy);
+                            proj.alive = false;
+                            proj = null;
+                            explode(hitX, hitY, impactSpeed);
+                            endShot('ground');
+                        } else {
+                            // hit player/bot
+                            const targets = [player, bot];
+                            for (const t of targets) {
+                                if (t.hp <= 0) continue;
+                                const rr = (t.r + proj.r);
+                                if (dist2(proj.x, proj.y, t.x, t.y) <= rr * rr) {
+                                    const hitX = proj.x;
+                                    const hitY = proj.y;
+                                    const impactSpeed = Math.hypot(proj.vx, proj.vy);
+                                    proj.alive = false;
+                                    proj = null;
+                                    explode(hitX, hitY, impactSpeed);
+                                    endShot('body');
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // effects
+                for (let i = flashes.length - 1; i >= 0; i--) {
+                    flashes[i].t += dt;
+                    if (flashes[i].t > 0.35) flashes.splice(i, 1);
+                }
+
+                for (let i = dmgTexts.length - 1; i >= 0; i--) {
+                    dmgTexts[i].t += dt;
+                    dmgTexts[i].y -= 18 * dt;
+                    if (dmgTexts[i].t > 0.9) dmgTexts.splice(i, 1);
+                }
+
+                draw();
+                requestAnimationFrame(step);
+            }
+
+            function endShot(reason) {
+                if (turnLock) {
+                    shootBtn.disabled = true;
+                    return;
+                }
+
+                // adjust wind slightly each turn
+                windVal = clamp(windVal + randn() * 2.2, -3.0, 3.0);
+                wind.value = Math.round(windVal * 10);
+                windV.textContent = windVal.toFixed(1);
+
+                if (turn === 'player') {
+                    turn = 'bot';
+                    shootBtn.disabled = true;
+                    setLog('Lượt của bot...');
+                    setTimeout(botTurn, 650);
+                } else {
+                    turn = 'player';
+                    shootBtn.disabled = false;
+                    setLog('Lượt của bạn. Chỉnh góc/lực rồi bắn.');
+                }
+            }
+
+            function botTurn() {
+                if (turnLock) return;
+
+                const target = player;
+                const from = bot;
+                const dir = -1;
+
+                // High-resolution search with wind compensation for ~70% accuracy
+                let candidates = [];
+
+                // Try different strategies: direct, lob (high arc), medium
+                const strategies = [{
+                        aMin: 22,
+                        aMax: 48,
+                        aStep: 1.0,
+                        pMin: 55,
+                        pMax: 95,
+                        pStep: 1.8
+                    }, // Direct
+                    {
+                        aMin: 58,
+                        aMax: 82,
+                        aStep: 0.8,
+                        pMin: 70,
+                        pMax: 100,
+                        pStep: 2.0
+                    }, // High lob (over terrain)
+                    {
+                        aMin: 35,
+                        aMax: 60,
+                        aStep: 1.2,
+                        pMin: 45,
+                        pMax: 85,
+                        pStep: 2.0
+                    } // Medium arc
+                ];
+
+                for (const strat of strategies) {
+                    for (let a = strat.aMin; a <= strat.aMax; a += strat.aStep) {
+                        for (let p = strat.pMin; p <= strat.pMax; p += strat.pStep) {
+                            const sim = simulateShot(from, a, p, dir, 3.2);
+                            if (!sim || sim.out) continue;
+
+                            // Target center
+                            const tx = target.x;
+                            const ty = target.y;
+                            const dx = sim.x - tx;
+                            const dy = sim.y - ty;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+
+                            // Heavy penalty for hitting ground before reaching near target
+                            const earlyPenalty = (sim.ground && sim.x < target.x - 80) ? 200 : 0;
+                            // Small bonus for being close to target height
+                            const heightBonus = Math.abs(sim.y - ty) < 30 ? -10 : 0;
+
+                            const score = dist + earlyPenalty + heightBonus;
+                            candidates.push({
+                                a,
+                                p,
+                                score,
+                                dist
+                            });
+                        }
+                    }
+                }
+
+                if (candidates.length === 0) {
+                    startShot(bot, 55, 80, dir);
+                    setLog('Bot bắn (fallback)');
+                    return;
+                }
+
+                // Sort by score (best shots first)
+                candidates.sort((a, b) => a.score - b.score);
+
+                // Pick THE BEST shot (index 0) - for near-perfect accuracy
+                const pick = candidates[0];
+
+                // Apply minimal error (~98% accuracy): only ±2% error
+                const accuracyError = 0.02; // 2% error for ~98% accuracy (almost perfect)
+                const errA = (Math.random() - 0.5) * 2 * accuracyError * pick.a;
+                const errP = (Math.random() - 0.5) * 2 * accuracyError * pick.p;
+
+                // Additional check: re-simulate to ensure it clears terrain
+                let a2 = clamp(pick.a + errA, 10, 85);
+                let p2 = clamp(pick.p + errP, 10, 100);
+
+                startShot(bot, a2, p2, dir);
+                setLog(`Bot bắn: góc ${a2.toFixed(0)}°, lực ${p2.toFixed(0)} (gió ${windVal.toFixed(1)})`);
+            }
+
+            function simulateShot(from, angleDeg, power, dir, maxT = 1.4) {
+                const angRad = angleDeg * Math.PI / 180;
+                const speed = power * 6.2;
+                // Start from center of character (matching startShot)
+                let x = from.x;
+                let y = from.y - from.r - 2;
+                let vx = Math.cos(angRad) * speed * dir;
+                let vy = -Math.sin(angRad) * speed;
+                let t = 0;
+                const step = 1 / 60;
+                while (t < maxT) {
+                    const ax = windVal * windAccelScale;
+                    vx += ax * step;
+                    vy += g * step;
+                    x += vx * step;
+                    y += vy * step;
+                    if (x < -50 || x > W + 50 || y > H + 80) return {
+                        x,
+                        y,
+                        out: true
+                    };
+                    const gy = groundY(x);
+                    if (y >= gy) return {
+                        x,
+                        y: gy,
+                        ground: true
+                    };
+                    t += step;
+                }
+                return {
+                    x,
+                    y,
+                    timeout: true
+                };
+            }
+
+            function drawTerrain() {
+                ctx.beginPath();
+                ctx.moveTo(0, H);
+                for (let x = 0; x < W; x++) ctx.lineTo(x, terrain[x]);
+                ctx.lineTo(W, H);
+                ctx.closePath();
+                // fill
+                const grad = ctx.createLinearGradient(0, H * 0.5, 0, H);
+                grad.addColorStop(0, 'rgba(45,212,191,.12)');
+                grad.addColorStop(1, 'rgba(16,185,129,.06)');
+                ctx.fillStyle = grad;
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(255,255,255,.08)';
+                ctx.stroke();
+            }
+
+            function drawPlayer(ent, color) {
+                // body
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(ent.x, ent.y, ent.r, 0, Math.PI * 2);
+                ctx.fill();
+                // cannon
+                ctx.strokeStyle = 'rgba(255,255,255,.35)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(ent.x, ent.y);
+                ctx.lineTo(ent.x + ent.facing * (ent.r + 12), ent.y - 10);
+                ctx.stroke();
+
+                // hp bar
+                const w = 60,
+                    h = 7;
+                const x0 = ent.x - w / 2;
+                const y0 = ent.y - ent.r - 16;
+                ctx.fillStyle = 'rgba(0,0,0,.35)';
+                ctx.fillRect(x0, y0, w, h);
+                ctx.fillStyle = 'rgba(45,212,191,.7)';
+                const pct = clamp(ent.hp / ent.maxHp, 0, 1);
+                ctx.fillRect(x0, y0, w * pct, h);
+                ctx.strokeStyle = 'rgba(255,255,255,.18)';
+                ctx.strokeRect(x0, y0, w, h);
+            }
+
+            function drawWind() {
+                ctx.save();
+                ctx.translate(W / 2, 36);
+                ctx.fillStyle = 'rgba(0,0,0,.35)';
+                ctx.strokeStyle = 'rgba(255,255,255,.12)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.roundRect(-140, -16, 280, 32, 14);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = 'rgba(233,238,252,.9)';
+                ctx.font = '12px system-ui';
+                const s = `Gió: ${windVal.toFixed(1)} (m/s giả lập)`;
+                ctx.fillText(s, -ctx.measureText(s).width / 2, 5);
+
+                // arrow
+                const len = clamp(Math.abs(windVal) * 40, 0, 120);
+                const dir = Math.sign(windVal);
+                ctx.strokeStyle = dir === 0 ? 'rgba(255,255,255,.15)' : 'rgba(124,92,255,.75)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(0, 14);
+                ctx.lineTo(dir * len, 14);
+                ctx.stroke();
+                if (dir !== 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(dir * len, 14);
+                    ctx.lineTo(dir * len - dir * 10, 8);
+                    ctx.lineTo(dir * len - dir * 10, 20);
+                    ctx.closePath();
+                    ctx.fillStyle = 'rgba(124,92,255,.75)';
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            // polyfill roundRect for older browsers
+            if (!CanvasRenderingContext2D.prototype.roundRect) {
+                CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+                    r = Math.min(r, w / 2, h / 2);
+                    this.beginPath();
+                    this.moveTo(x + r, y);
+                    this.arcTo(x + w, y, x + w, y + h, r);
+                    this.arcTo(x + w, y + h, x, y + h, r);
+                    this.arcTo(x, y + h, x, y, r);
+                    this.arcTo(x, y, x + w, y, r);
+                    this.closePath();
+                    return this;
+                }
+            }
+
+            function drawAimPreview() {
+                // show predicted arc for player's current settings when it's player's turn and not firing
+                if (turnLock || turn !== 'player' || proj) return;
+
+                const angleDeg = parseFloat(ang.value);
+                const power = parseFloat(pow.value);
+                const dir = +1;
+                const angRad = angleDeg * Math.PI / 180;
+                const speed = power * 6.2;
+
+                // Start from center of character
+                let x = player.x;
+                let y = player.y - player.r - 2;
+                let vx = Math.cos(angRad) * speed * dir;
+                let vy = -Math.sin(angRad) * speed;
+
+                ctx.save();
+                ctx.strokeStyle = 'rgba(233, 238, 252, 0.25)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([6, 6]);
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+
+                // simulate until impact/out (cap steps)
+                const step = 1 / 60;
+                let didImpact = false;
+                for (let i = 0; i < 220; i++) {
+                    const ax = windVal * windAccelScale;
+                    vx += ax * step;
+                    vy += g * step;
+                    x += vx * step;
+                    y += vy * step;
+
+                    if (x < 0 || x >= W || y > H) break;
+                    const gy = groundY(x);
+                    if (y >= gy) {
+                        // impact point
+                        ctx.lineTo(x, gy);
+                        didImpact = true;
+                        // keep arc visible, then mark point
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+                        ctx.fillStyle = 'rgba(124,92,255,0.55)';
+                        ctx.beginPath();
+                        ctx.arc(x, gy, 5, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.restore();
+                        return;
+                    }
+                    ctx.lineTo(x, y);
+                }
+
+                // if no impact yet, still draw the partial arc
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+
+                // sky stars
+                ctx.fillStyle = 'rgba(255,255,255,.16)';
+                for (let i = 0; i < 40; i++) {
+                    const x = (i * 97) % W;
+                    const y = (i * 53) % Math.floor(H * 0.45);
+                    ctx.fillRect(x, y, 1, 1);
+                }
+
+                drawWind();
+                drawTerrain();
+
+                // aiming preview (player)
+                drawAimPreview();
+
+                // players
+                drawPlayer(player, 'rgba(45,212,191,.85)');
+                drawPlayer(bot, 'rgba(251,113,133,.85)');
+
+                // projectile
+                if (proj) {
+                    ctx.fillStyle = 'rgba(255,255,255,.85)';
+                    ctx.beginPath();
+                    ctx.arc(proj.x, proj.y, proj.r, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // trail
+                    ctx.strokeStyle = 'rgba(255,255,255,.18)';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(proj.x, proj.y);
+                    ctx.lineTo(proj.x - proj.vx * 0.03, proj.y - proj.vy * 0.03);
+                    ctx.stroke();
+                }
+
+                // explosions
+                for (const f of flashes) {
+                    const p = f.t / 0.35;
+                    const r = 10 + p * 55;
+                    ctx.fillStyle = `rgba(255,200,120,${0.22*(1-p)})`;
+                    ctx.beginPath();
+                    ctx.arc(f.x, f.y, r, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = `rgba(255,255,255,${0.25*(1-p)})`;
+                    ctx.stroke();
+                }
+
+                // floating damage texts
+                ctx.font = 'bold 14px system-ui';
+                ctx.textAlign = 'center';
+                for (const d of dmgTexts) {
+                    const a = 1 - (d.t / 0.9);
+                    ctx.fillStyle = `rgba(255,230,170,${a})`;
+                    ctx.strokeStyle = `rgba(0,0,0,${0.35*a})`;
+                    ctx.lineWidth = 3;
+                    const text = `-${d.v}`;
+                    ctx.strokeText(text, d.x, d.y);
+                    ctx.fillText(text, d.x, d.y);
+                }
+                ctx.textAlign = 'start';
+
+                // HUD turn
+                ctx.fillStyle = 'rgba(0,0,0,.28)';
+                ctx.strokeStyle = 'rgba(255,255,255,.12)';
+                ctx.lineWidth = 1;
+                ctx.roundRect(12, 56, 210, 36, 12);
+                ctx.fill();
+                ctx.stroke();
+                ctx.fillStyle = 'rgba(233,238,252,.9)';
+                ctx.font = '12px system-ui';
+                ctx.fillText(`Lượt: ${turn === 'player' ? 'Bạn' : 'Bot'}`, 24, 78);
+            }
+
+            function resetAll() {
+                buildTerrain();
+                placeOnGround(player);
+                placeOnGround(bot);
+                player.hp = player.maxHp;
+                bot.hp = bot.maxHp;
+                hpP.textContent = player.hp;
+                hpB.textContent = bot.hp;
+
+                proj = null;
+                turn = 'player';
+                turnLock = false;
+                shootBtn.disabled = false;
+
+                windVal = 0;
+                wind.value = 0;
+                windV.textContent = '0.0';
+
+                setLog('Lượt của bạn. Chỉnh góc/lực rồi bắn.');
+            }
+
+            // UI bindings + keyboard
+            function syncLabels() {
+                angV.textContent = ang.value;
+                powV.textContent = pow.value;
+                windVal = clamp(parseInt(wind.value, 10) / 10, -3.0, 3.0);
+                windV.textContent = windVal.toFixed(1);
+            }
+            ang.addEventListener('input', syncLabels);
+            pow.addEventListener('input', syncLabels);
+            wind.addEventListener('input', syncLabels);
+            syncLabels();
+
+            // Keyboard:
+            // - LEFT/RIGHT: move player along terrain
+            // - UP/DOWN: adjust angle
+            // - Shift + UP/DOWN: adjust power
+            // - Space: shoot
+            function movePlayer(dx) {
+                if (turnLock || turn !== 'player' || proj) return;
+                player.x = clamp(player.x + dx, 40, W - 40);
+                placeOnGround(player);
+            }
+
+            window.addEventListener('keydown', (e) => {
+                if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+
+                if (e.key === 'ArrowLeft') {
+                    movePlayer(-6);
+                    e.preventDefault();
+                    return;
+                }
+                if (e.key === 'ArrowRight') {
+                    movePlayer(6);
+                    e.preventDefault();
+                    return;
+                }
+                if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                    const isPower = e.shiftKey;
+                    const el = isPower ? pow : ang;
+                    const step = isPower ? 2 : 1;
+                    const v = parseInt(el.value, 10) + (e.key === 'ArrowUp' ? step : -step);
+                    el.value = String(clamp(v, parseInt(el.min, 10), parseInt(el.max, 10)));
+                    syncLabels();
+                    e.preventDefault();
+                    return;
+                }
+                if (e.key === ' ') {
+                    if (!shootBtn.disabled) shootBtn.click();
+                    e.preventDefault();
+                    return;
+                }
+            });
+
+            shootBtn.addEventListener('click', () => {
+                if (turnLock || turn !== 'player' || proj) return;
+                const a = parseFloat(ang.value);
+                const p = parseFloat(pow.value);
+                startShot(player, a, p, +1);
+                setLog(`Bạn bắn: góc ${a.toFixed(0)}°, lực ${p.toFixed(0)} (gió ${windVal.toFixed(1)})`);
+            });
+
+            resetBtn.addEventListener('click', resetAll);
+            moveLBtn.addEventListener('click', () => movePlayer(-6));
+            moveRBtn.addEventListener('click', () => movePlayer(6));
+
+            // init
+            resetAll();
+            step();
+        })();
+    </script>
+</body>
+
+</html>

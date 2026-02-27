@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alex — vui vui</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#121a33;
+      --text:#e9ecf5;
+      --muted:#9aa3c7;
+      --accent:#7c5cff;
+      --ok:#2dd4bf;
+      --warn:#fb7185;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(900px 600px at 15% 10%, rgba(124,92,255,.35), transparent 60%),
+                  radial-gradient(900px 600px at 85% 90%, rgba(45,212,191,.25), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .card{
+      width:min(860px,100%);
+      background: linear-gradient(180deg, rgba(18,26,51,.95), rgba(18,26,51,.85));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      overflow:hidden;
+    }
+    header{
+      padding:20px 22px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .title{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: var(--ok);
+      box-shadow: 0 0 0 4px rgba(45,212,191,.15);
+    }
+    h1{font-size:16px;margin:0}
+    .sub{font-size:13px;color:var(--muted)}
+    main{padding:20px 22px; display:grid; grid-template-columns: 1.2fr .8fr; gap:18px;}
+    @media (max-width: 780px){ main{grid-template-columns:1fr;} }
+
+    .panel{border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:16px; background: rgba(0,0,0,.12)}
+    .panel h2{margin:0 0 10px 0; font-size:14px}
+    .panel p{margin:0 0 12px 0; color:var(--muted); font-size:13px; line-height:1.45}
+
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    button{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(124,92,255,.12);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+      font-size:13px;
+      transition: transform .05s ease, background .15s ease;
+    }
+    button:hover{ background: rgba(124,92,255,.2); }
+    button:active{ transform: translateY(1px); }
+
+    .meter{display:flex; gap:10px; align-items:center}
+    .bar{flex:1; height:10px; background: rgba(255,255,255,.08); border-radius:999px; overflow:hidden}
+    .fill{height:100%; width:35%; background: linear-gradient(90deg, var(--accent), var(--ok)); border-radius:999px}
+
+    .quote{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px;
+      color:#cbd5ff;
+      background: rgba(0,0,0,.25);
+      border: 1px dashed rgba(255,255,255,.16);
+      border-radius: 12px;
+      padding: 12px;
+      line-height: 1.5;
+    }
+
+    .spark{
+      display:grid;
+      grid-template-columns: repeat(24, 1fr);
+      gap:4px;
+      align-items:end;
+      height:70px;
+      margin-top:10px;
+    }
+    .spark div{
+      background: rgba(45,212,191,.25);
+      border:1px solid rgba(45,212,191,.15);
+      border-radius: 6px;
+    }
+
+    footer{
+      padding:14px 22px;
+      border-top:1px solid rgba(255,255,255,.08);
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+    a{color:#cbd5ff; text-decoration:none}
+    a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div class="title">
+        <div class="dot" id="dot"></div>
+        <div>
+          <h1>Alex — trang vui vui</h1>
+          <div class="sub">Một cái dashboard giả vờ nghiêm túc, để bạn bấm chơi.</div>
+        </div>
+      </div>
+      <div class="sub" id="clock">--:--:--</div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Mini console</h2>
+        <p>Bấm vài nút để xem nó phản ứng. Không làm gì nguy hiểm đâu.</p>
+        <div class="row">
+          <button id="btnMood">Đổi mood</button>
+          <button id="btnConfess">Nói 1 câu thật lòng</button>
+          <button id="btnNoise">Tạo tiếng "beep"</button>
+        </div>
+        <div style="height:12px"></div>
+        <div class="meter">
+          <div style="width:160px" class="sub">Độ tỉnh táo</div>
+          <div class="bar"><div class="fill" id="fill"></div></div>
+          <div class="sub" id="pct">35%</div>
+        </div>
+        <div class="spark" id="spark"></div>
+      </section>
+
+      <aside class="panel">
+        <h2>Góc nhỏ</h2>
+        <p>Một đoạn text kiểu “status”.</p>
+        <div class="quote" id="quote">
+          &gt; Nếu hôm nay rối quá thì cứ viết một dòng thôi.
+          <br />
+          &gt; Một dòng cũng là nhật ký.
+        </div>
+        <div style="height:12px"></div>
+        <div class="sub">
+          File: <code>fun.html</code> · Bạn có thể mở bằng browser.
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div>Made locally · Không network · Không cookie</div>
+      <div><a href="#" id="reset">reset</a></div>
+    </footer>
+  </div>
+
+  <script>
+    const clock = document.getElementById('clock');
+    const dot = document.getElementById('dot');
+    const quote = document.getElementById('quote');
+    const fill = document.getElementById('fill');
+    const pct = document.getElementById('pct');
+    const spark = document.getElementById('spark');
+
+    const quotes = [
+      "> Nếu hôm nay rối quá thì cứ viết một dòng thôi.\n> Một dòng cũng là nhật ký.",
+      "> Mệt thì mệt, nhưng vẫn đi tiếp.\n> Thế thôi.",
+      "> Không cần hoàn hảo.\n> Chỉ cần thật.",
+      "> Đừng để cái đầu chạy trước cái tim.\n> Thở đã."
+    ];
+
+    let mood = 0; // 0 ok, 1 warn
+    let level = 35;
+
+    function tick(){
+      const d = new Date();
+      clock.textContent = d.toLocaleTimeString('vi-VN');
+    }
+    setInterval(tick, 500);
+    tick();
+
+    function setMood(){
+      mood = (mood + 1) % 2;
+      dot.style.background = mood === 0 ? 'var(--ok)' : 'var(--warn)';
+      dot.style.boxShadow = mood === 0 ? '0 0 0 4px rgba(45,212,191,.15)' : '0 0 0 4px rgba(251,113,133,.15)';
+    }
+
+    function setLevel(v){
+      level = Math.max(0, Math.min(100, v));
+      fill.style.width = level + '%';
+      pct.textContent = level + '%';
+      // spark
+      spark.innerHTML = '';
+      for(let i=0;i<24;i++){
+        const h = Math.max(8, Math.round((Math.random() * level + 10)));
+        const bar = document.createElement('div');
+        bar.style.height = (h/2) + 'px';
+        bar.style.background = `rgba(45,212,191,${0.15 + (level/140)})`;
+        spark.appendChild(bar);
+      }
+    }
+    setLevel(level);
+
+    document.getElementById('btnMood').addEventListener('click', () => {
+      setMood();
+      setLevel(level + (mood === 0 ? 8 : -12));
+    });
+
+    document.getElementById('btnConfess').addEventListener('click', () => {
+      const q = quotes[Math.floor(Math.random()*quotes.length)];
+      quote.textContent = q;
+      setLevel(level + 5);
+    });
+
+    document.getElementById('btnNoise').addEventListener('click', async () => {
+      // tiny beep via WebAudio
+      try{
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = 'square';
+        o.frequency.value = 660;
+        g.gain.value = 0.04;
+        o.connect(g); g.connect(ctx.destination);
+        o.start();
+        setTimeout(() => { o.stop(); ctx.close(); }, 90);
+      }catch(e){
+        alert('Browser chặn audio rồi 😅');
+      }
+    });
+
+    document.getElementById('reset').addEventListener('click', (e) => {
+      e.preventDefault();
+      mood = 0;
+      dot.style.background = 'var(--ok)';
+      dot.style.boxShadow = '0 0 0 4px rgba(45,212,191,.15)';
+      quote.textContent = quotes[0];
+      setLevel(35);
+    });
+  </script>
+</body>
+</html>
