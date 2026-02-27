@@ -492,6 +492,9 @@
                     proj.vy += g * dt;
                     proj.x += proj.vx * dt;
                     proj.y += proj.vy * dt;
+                    
+                    // whoosh sound while flying (every ~10 frames)
+                    if(Math.random() < 0.08) sfxFly();
 
                     // out of bounds
                     if (proj.x < -50 || proj.x > W + 50 || proj.y > H + 80) {
@@ -1015,7 +1018,12 @@
                 windVal = clamp(parseInt(wind.value, 10) / 10, -3.0, 3.0);
                 windV.textContent = windVal.toFixed(1);
             }
-            ang.addEventListener('input', syncLabels);
+            ang.addEventListener('input', () => {
+                syncLabels();
+                const a = parseFloat(ang.value);
+                if(a >= 75) setLog('💡 Góc ' + a.toFixed(0) + '° siêu cao! Đạn rơi mạnh = sát thương cực đại!');
+                else if(a >= 60) setLog('💡 Góc ' + a.toFixed(0) + '° cao. Sát thương sẽ rất lớn khi đạn rơi!');
+            });
             pow.addEventListener('input', syncLabels);
             wind.addEventListener('input', syncLabels);
             syncLabels();
