@@ -851,6 +851,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const flashes = [];
             const dmgTexts = [];
             const healTexts = [];
+            const phoenixBuffs = [];
             let shakeT = 0;
             let shakeAmp = 0;
             
@@ -934,11 +935,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function giveBuff(target){
                 // Check if target has burn debuff - cannot receive buffs while burned
-                if(target === 'player' && botBurnDebuff && botBurnDebuff.active){
+                // Note: playerBurnDebuff affects player, botBurnDebuff affects bot
+                if(target === 'player' && playerBurnDebuff && playerBurnDebuff.active){
                     showBuffMessage('🔥 Bạn bị Thiêu đốt! Không thể nhận buff!');
                     return;
                 }
-                if(target === 'bot' && playerBurnDebuff && playerBurnDebuff.active){
+                if(target === 'bot' && botBurnDebuff && botBurnDebuff.active){
                     showBuffMessage('🤖 Bot bị Thiêu đốt! Không thể nhận buff!');
                     return;
                 }
@@ -1139,10 +1141,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function startTurnTimer(who){
+                // Delay 1 second before starting countdown
+                turnTimerActive = false;
                 turnTimeLeft = CFG.gameSettings.turnSeconds;
                 lastTickSec = CFG.gameSettings.turnSeconds;
-                turnTimerActive = true;
-                sfxTurnWhistle();
+                setTimeout(() => {
+                    if(turn === who) { // Only start if still that player's turn
+                        turnTimerActive = true;
+                        sfxTurnWhistle();
+                    }
+                }, 1000);
             }
             function stopTurnTimer(){
                 turnTimerActive = false;
