@@ -1,5 +1,6 @@
 {
   "turnSeconds": 15,
+  "turnGapMs": 1000,
   "maxHp": 500,
   "baseDamage": 38,
   "explosionRadius": 42,

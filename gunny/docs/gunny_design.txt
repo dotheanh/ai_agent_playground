@@ -37,6 +37,7 @@ Mục tiêu
 - Có SFX tiktak mỗi giây.
 - 5 giây cuối âm dồn dập hơn để tạo áp lực.
 - Hết thời gian: tự động kết thúc lượt (player/bot).
+- Khi kết thúc lượt, có gap time trước khi sang lượt tiếp theo (config: turnGapMs).
 
 2.1 Responsive UI
 - Canvas + panel điều khiển tối ưu cho desktop & mobile.

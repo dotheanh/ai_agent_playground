@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Higher pitch + shorter when urgent
                 const f1 = urgent ? 1200 : 800;
                 const f2 = urgent ? 900 : 520;
-                beep(f1, urgent ? 0.03 : 0.045, "square", urgent ? 0.10 : 0.07);
-                beep(f2, urgent ? 0.02 : 0.03, "sine", urgent ? 0.06 : 0.04);
+                beep(f1, urgent ? 0.03 : 0.045, "square", urgent ? 0.15 : 0.105);
+                beep(f2, urgent ? 0.02 : 0.03, "sine", urgent ? 0.09 : 0.06);
             }
             
             // Doppler hit SFX (like sound-demo)
@@ -1056,7 +1056,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             shootBtn.disabled = false;
                         } else {
                             bot.stamina = bot.maxStamina;
-                            setTimeout(botTurn, 800);
+                            setTimeout(botTurn, CFG.turnGapMs);
                         }
                         return;
                     }
@@ -1084,7 +1084,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     bot.stamina = bot.maxStamina;
                     setLog('Lượt của bot...');
                     startTurnTimer('bot');
-                    setTimeout(botTurn, 650);
+                    setTimeout(botTurn, CFG.turnGapMs);
                 } else {
                     turn = 'player';
                     shootBtn.disabled = false;
@@ -1566,7 +1566,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.fillStyle = col;
                     ctx.shadowBlur = 10;
                     ctx.shadowColor = col;
-                    ctx.fillText(`⏳ ${sec}`, 16, 78);
+                    ctx.fillText(`⏳ ${sec}`, 16, -22);
                     ctx.restore();
                 }
 
