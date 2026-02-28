@@ -1,0 +1,12 @@
+{
+  "turnSeconds": 15,
+  "maxHp": 500,
+  "baseDamage": 38,
+  "explosionRadius": 42,
+  "buffs": {
+    "DAMAGE_X2_5": 2.5,
+    "BIG_RADIUS": 3,
+    "DOUBLE_SHOT_DAMAGE_MULT": 1.5,
+    "EXTRA_TURNS": 2
+  }
+}
