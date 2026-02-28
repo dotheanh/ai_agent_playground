@@ -724,16 +724,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 let maxDmg = 0;
+                let totalDealt = 0;
                 const targets = [player, bot];
                 targets.forEach(t => {
                     const d = Math.sqrt(dist2(atx, aty, t.x, t.y));
                     if (d < R) {
-                        const dmg = Math.round(totalDmg * (1 - d / R));
+                        let dmg = Math.round(totalDmg * (1 - d / R));
+                        
+                        // ARMOR buff: reduce damage received by 30%
+                        const targetBuff = (t === player) ? playerBuff : botBuff;
+                        if(targetBuff && targetBuff.type === BUFF_TYPES.ARMOR){
+                            dmg = Math.round(dmg * 0.7); // 30% reduction
+                        }
+                        
                         t.hp = clamp(t.hp - dmg, 0, 999);
                         dmgTexts.push({ x: t.x, y: t.y - t.r - 18, v: dmg, t: 0, tier: (dmg>100?3:(dmg>=80?2:(dmg>=60?1:0))) });
+                        totalDealt += dmg;
                         if(dmg > maxDmg) maxDmg = dmg;
                     }
                 });
+                
+                // LIFESTEAL: heal shooter for total damage dealt
+                if(buff && buff.type === BUFF_TYPES.LIFESTEAL && totalDealt > 0){
+                    const shooter = turn === 'player' ? player : bot;
+                    const healAmount = totalDealt;
+                    shooter.hp = clamp(shooter.hp + healAmount, 0, shooter.maxHp);
+                    healTexts.push({ 
+                        x: shooter.x, 
+                        y: shooter.y - shooter.r - 35, 
+                        v: healAmount, 
+                        t: 0 
+                    });
+                    // Clear after use
+                    if(turn === 'player') playerBuff = null;
+                    else botBuff = null;
+                }
+                
                 hpP.textContent = player.hp;
                 hpB.textContent = bot.hp;
 
@@ -758,9 +784,150 @@ document.addEventListener('DOMContentLoaded', () => {
                 return maxDmg;
             }
 
-            // simple effects
+            // Buff icon drawing above characters
+            function drawBuffIcons(ent, buff) {
+                if (!buff) return;
+                
+                const icons = [];
+                // Collect all active buffs
+                if (buff.type === BUFF_TYPES.EXTRA_TURNS && buff.value > 0) {
+                    icons.push({type: 'extra', color: '#ffdd00'});
+                }
+                if (buff.type === BUFF_TYPES.DAMAGE_X2_5) {
+                    icons.push({type: 'damage', color: '#ff8800'});
+                }
+                if (buff.type === BUFF_TYPES.BIG_RADIUS) {
+                    icons.push({type: 'big', color: '#cccccc'});
+                }
+                if (buff.type === BUFF_TYPES.LIFESTEAL) {
+                    icons.push({type: 'lifesteal', color: '#44ff44'});
+                }
+                if (buff.type === BUFF_TYPES.ARMOR) {
+                    icons.push({type: 'armor', color: '#4488ff'});
+                }
+                if (buff.type === BUFF_TYPES.DOUBLE_SHOT) {
+                    icons.push({type: 'double', color: '#ff8800'});
+                }
+                
+                if (icons.length === 0) return;
+                
+                const iconSize = 14;
+                const spacing = 4;
+                const totalWidth = icons.length * iconSize + (icons.length - 1) * spacing;
+                let startX = ent.x - totalWidth / 2;
+                const startY = ent.y - ent.r - 38;
+                
+                const time = Date.now() / 1000;
+                
+                icons.forEach((icon, idx) => {
+                    const x = startX + idx * (iconSize + spacing) + iconSize / 2;
+                    const y = startY;
+                    
+                    ctx.save();
+                    ctx.translate(x, y);
+                    
+                    // Glow effect
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = icon.color;
+                    
+                    switch(icon.type) {
+                        case 'extra': // Lightning bolt
+                            ctx.fillStyle = icon.color;
+                            ctx.beginPath();
+                            ctx.moveTo(-2, -6);
+                            ctx.lineTo(4, -2);
+                            ctx.lineTo(0, 0);
+                            ctx.lineTo(4, 6);
+                            ctx.lineTo(-4, 0);
+                            ctx.lineTo(0, -2);
+                            ctx.closePath();
+                            ctx.fill();
+                            // Pulse animation
+                            ctx.shadowBlur = 12 + Math.sin(time * 8) * 4;
+                            break;
+                            
+                        case 'damage': // Bullet with orange glow
+                            ctx.fillStyle = icon.color;
+                            ctx.beginPath();
+                            ctx.ellipse(0, 0, 4, 7, 0, 0, Math.PI * 2);
+                            ctx.fill();
+                            // Glow rings
+                            ctx.strokeStyle = `rgba(255, 136, 0, ${0.5 + Math.sin(time * 6) * 0.3})`;
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.arc(0, 0, 6 + Math.sin(time * 4) * 2, 0, Math.PI * 2);
+                            ctx.stroke();
+                            break;
+                            
+                        case 'big': // Big bullet with sparkle
+                            const scale = 1 + Math.sin(time * 4) * 0.2; // Pulse scale
+                            ctx.scale(scale, scale);
+                            ctx.fillStyle = '#ffffff';
+                            ctx.beginPath();
+                            ctx.ellipse(0, 0, 5, 9, 0, 0, Math.PI * 2);
+                            ctx.fill();
+                            // Sparkle effect
+                            ctx.strokeStyle = `rgba(200, 200, 200, ${0.6 + Math.sin(time * 8) * 0.4})`;
+                            ctx.lineWidth = 2;
+                            for(let i=0; i<4; i++) {
+                                const angle = (time * 2 + i * Math.PI / 2);
+                                const r1 = 8;
+                                const r2 = 12 + Math.sin(time * 6) * 3;
+                                ctx.beginPath();
+                                ctx.moveTo(Math.cos(angle) * r1, Math.sin(angle) * r1);
+                                ctx.lineTo(Math.cos(angle) * r2, Math.sin(angle) * r2);
+                                ctx.stroke();
+                            }
+                            break;
+                            
+                        case 'lifesteal': // Cross/plus sign
+                            ctx.fillStyle = icon.color;
+                            const pulse = 1 + Math.sin(time * 5) * 0.15;
+                            ctx.scale(pulse, pulse);
+                            // Vertical bar
+                            ctx.fillRect(-2, -6, 4, 12);
+                            // Horizontal bar
+                            ctx.fillRect(-6, -2, 12, 4);
+                            // Glow pulse
+                            ctx.shadowBlur = 10 + Math.sin(time * 6) * 5;
+                            ctx.shadowColor = '#44ff44';
+                            break;
+                            
+                        case 'armor': // Shield
+                            ctx.fillStyle = icon.color;
+                            // Shield shape
+                            ctx.beginPath();
+                            ctx.moveTo(0, -7);
+                            ctx.bezierCurveTo(5, -5, 6, 0, 6, 3);
+                            ctx.bezierCurveTo(6, 7, 0, 9, 0, 9);
+                            ctx.bezierCurveTo(0, 9, -6, 7, -6, 3);
+                            ctx.bezierCurveTo(-6, 0, -5, -5, 0, -7);
+                            ctx.closePath();
+                            ctx.fill();
+                            // Shine effect
+                            ctx.fillStyle = `rgba(255, 255, 255, ${0.4 + Math.sin(time * 4) * 0.3})`;
+                            ctx.beginPath();
+                            ctx.ellipse(-2, -2, 2, 3, -0.3, 0, Math.PI * 2);
+                            ctx.fill();
+                            break;
+                            
+                        case 'double': // Two bullets
+                            ctx.fillStyle = icon.color;
+                            ctx.beginPath();
+                            ctx.ellipse(-3, 0, 2.5, 5, -0.2, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.beginPath();
+                            ctx.ellipse(3, -2, 2.5, 5, 0.2, 0, Math.PI * 2);
+                            ctx.fill();
+                            break;
+                    }
+                    
+                    ctx.restore();
+                });
+            }
             const flashes = [];
             const dmgTexts = [];
+            const healTexts = []; // +HP heal effects
             let shakeT = 0;
             let shakeAmp = 0;
             
@@ -771,7 +938,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 DAMAGE_X2_5: 'dmg2.5',
                 DOUBLE_SHOT: 'double',
                 EXTRA_TURNS: 'extra',
-                BIG_RADIUS: 'big'
+                BIG_RADIUS: 'big',
+                LIFESTEAL: 'lifesteal',
+                ARMOR: 'armor'
             };
             
             // Center buff messages
@@ -829,6 +998,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     case BUFF_TYPES.BIG_RADIUS:
                         buffData.value = CFG.buffs.BIG_RADIUS;
                         break;
+                    case BUFF_TYPES.LIFESTEAL:
+                        buffData.value = 1; // 100% lifesteal
+                        break;
+                    case BUFF_TYPES.ARMOR:
+                        buffData.value = 0.7; // 30% damage reduction
+                        buffData.turnsLeft = 999; // Last until end of match
+                        break;
                 }
                 if(target === 'player'){
                     playerBuff = buffData;
@@ -849,6 +1025,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     case BUFF_TYPES.DOUBLE_SHOT: return 'Bắn 2 phát';
                     case BUFF_TYPES.EXTRA_TURNS: return 'Thêm 2 lượt';
                     case BUFF_TYPES.BIG_RADIUS: return 'Đạn to x3';
+                    case BUFF_TYPES.LIFESTEAL: return 'Hút máu';
+                    case BUFF_TYPES.ARMOR: return 'Hộ giáp';
                 }
             }
             
@@ -970,6 +1148,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     dmgTexts[i].t += dt;
                     dmgTexts[i].y -= 18 * dt;
                     if (dmgTexts[i].t > 0.9) dmgTexts.splice(i, 1);
+                }
+                
+                // Update heal texts
+                for (let i = healTexts.length - 1; i >= 0; i--) {
+                    healTexts[i].t += dt;
+                    healTexts[i].y -= 18 * dt;
+                    if (healTexts[i].t > 0.9) healTexts.splice(i, 1);
                 }
 
                 if(shakeT > 0){
@@ -1297,6 +1482,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.strokeStyle = 'rgba(255,255,255,.12)';
                     ctx.strokeRect(x0, stY, w, stH);
                 }
+                
+                // Draw buff icons above HP bar
+                const buff = (ent === player) ? playerBuff : botBuff;
+                drawBuffIcons(ent, buff);
             }
 
             function drawWind() {
@@ -1459,12 +1648,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         if(currentBuff.type === BUFF_TYPES.BIG_RADIUS){
                             bulletR *= 2;
                         }
+                        // ARMOR: bullet stays white (normal)
+                        // Other buffs: colored bullets
                         if(currentBuff.type === BUFF_TYPES.DAMAGE_X2_5 || 
                            (currentBuff.type === BUFF_TYPES.DOUBLE_SHOT && doubleShotPending)){
                             bulletColor = 'rgba(255,140,0,.95)'; // Orange
                             trailColor = 'rgba(255,100,0,.4)';
                             hasGlow = true;
                         }
+                        if(currentBuff.type === BUFF_TYPES.LIFESTEAL){
+                            bulletColor = 'rgba(68,255,68,.95)'; // Green
+                            trailColor = 'rgba(68,255,68,.4)';
+                            hasGlow = true;
+                        }
+                        // ARMOR: keep white (no color change)
                     }
                     
                     // Glow effect for buffed bullets
@@ -1529,6 +1726,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     const text = `-${d.v}`;
                     ctx.strokeText(text, d.x, d.y);
                     ctx.fillText(text, d.x, d.y);
+                }
+                
+                // floating heal texts (+HP in green)
+                for (const h of healTexts) {
+                    const a = 1 - (h.t / 0.9);
+                    ctx.fillStyle = `rgba(68,255,68,${a})`;
+                    ctx.strokeStyle = `rgba(0,0,0,${0.5*a})`;
+                    ctx.lineWidth = 3;
+                    const text = `+${h.v}`;
+                    ctx.strokeText(text, h.x, h.y);
+                    ctx.fillText(text, h.x, h.y);
                 }
                 ctx.textAlign = 'start';
 

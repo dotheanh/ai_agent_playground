@@ -96,12 +96,15 @@ Buff nhận được khi bắn trúng phượng hoàng:
 - LIFESTEAL (tỉ lệ config: buffChances.LIFESTEAL):
   - Lượt bắn tiếp theo hút máu = tổng sát thương gây ra.
   - Hồi máu ngay lập tức sau khi nổ (trước khi kết thúc turn).
+  - Hiển thị +HP màu xanh lá trên đầu nhân vật khi hồi máu.
   - Đạn màu xanh lá + glow xanh lá.
+  - Icon buff: Chữ thập (+) màu xanh lá có hiệu ứng pulse.
   - Dùng xong auto clear.
 
 - ARMOR (tỉ lệ config: buffChances.ARMOR):
   - Giảm 30% sát thương nhận (hoặc theo config ARMOR_DAMAGE_REDUCTION).
-  - Đạn màu xanh dương + glow xanh dương.
+  - Đạn vẫn màu trắng như bình thường (không đổi màu).
+  - Icon buff: Khiên màu xanh dương có hiệu ứng shine.
   - **Không tự clear** - tồn tại cho tới cuối trận hoặc khi reset.
 
 - DOUBLE_SHOT (tỉ lệ config: buffChances.DOUBLE_SHOT):
@@ -151,6 +154,22 @@ Khi `isDev = true` trong code:
   - Buffed bullet đổi màu cam + glow.
   - BIG_RADIUS làm đạn to hơn.
   - DOUBLE_SHOT phát thứ 2 có hiệu ứng cường hóa.
+
+5.5 Buff Icons (trên đầu nhân vật)
+----------------------------------
+Khi nhân vật có buff/debuff, hiển thị icon tương ứng trên đầu (trên thanh HP):
+
+- EXTRA_TURNS: Tia chớp vàng (⚡) có hiệu ứng pulse.
+- DAMAGE_X2_5: Viên đạn cam có glow ring động.
+- BIG_RADIUS: Viên đạn to x3 màu trắng xám, có hiệu ứng lấp lánh sparkle + phóng to/thu nhỏ liên tục.
+- LIFESTEAL: Chữ thập (+) màu xanh lá có hiệu ứng pulse.
+- ARMOR: Khiên màu xanh dương có hiệu ứng shine reflection.
+- DOUBLE_SHOT: Hai viên đạn cam chồng lệch nhau.
+
+Quy tắc hiển thị:
+- Icon tồn tại cho đến khi buff hết hiệu lực.
+- Có thể hiển thị nhiều icon cùng lúc nếu có nhiều buff (hiện tại mỗi lần chỉ nhận 1 buff từ chim).
+- Icon có hiệu ứng animation (glow, pulse, sparkle) để thu hút attention.
 
 6) Files / triển khai
 ---------------------

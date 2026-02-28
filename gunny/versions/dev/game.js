@@ -801,6 +801,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const lsRatio = (CFG && CFG.lifestealRatio) || 1;
                     const healAmount = Math.round(totalDealt * lsRatio);
                     shooter.hp = clamp(shooter.hp + healAmount, 0, shooter.maxHp);
+                    // Add heal text effect (green +HP above shooter)
+                    healTexts.push({ x: shooter.x, y: shooter.y - shooter.r - 25, v: healAmount, t: 0 });
                     setLog(`${turn === 'player' ? 'Bạn' : 'Bot'} hồi ${healAmount} HP từ hút máu!`);
                     // Clear after use
                     if(turn === 'player') playerBuff = null;
@@ -834,6 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // simple effects
             const flashes = [];
             const dmgTexts = [];
+            const healTexts = [];
             let shakeT = 0;
             let shakeAmp = 0;
             
@@ -1407,6 +1410,133 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.strokeStyle = 'rgba(255,255,255,.12)';
                     ctx.strokeRect(x0, stY, w, stH);
                 }
+                
+                // Draw buff icons above HP bar
+                const buff = (ent === player) ? playerBuff : botBuff;
+                drawBuffIcons(ent, buff);
+            }
+
+            // Draw buff icons above a character
+            function drawBuffIcons(ent, buff) {
+                if (!buff) return;
+                
+                const icons = [];
+                if (buff.type === BUFF_TYPES.EXTRA_TURNS && buff.value > 0) {
+                    icons.push({type: 'extra', color: '#ffdd00'});
+                }
+                if (buff.type === BUFF_TYPES.DAMAGE_X2_5) {
+                    icons.push({type: 'damage', color: '#ff8800'});
+                }
+                if (buff.type === BUFF_TYPES.BIG_RADIUS) {
+                    icons.push({type: 'big', color: '#cccccc'});
+                }
+                if (buff.type === BUFF_TYPES.LIFESTEAL) {
+                    icons.push({type: 'lifesteal', color: '#44ff44'});
+                }
+                if (buff.type === BUFF_TYPES.ARMOR) {
+                    icons.push({type: 'armor', color: '#4488ff'});
+                }
+                if (buff.type === BUFF_TYPES.DOUBLE_SHOT) {
+                    icons.push({type: 'double', color: '#ff8800'});
+                }
+                
+                if (icons.length === 0) return;
+                
+                const iconSize = 14;
+                const spacing = 4;
+                const totalWidth = icons.length * iconSize + (icons.length - 1) * spacing;
+                let startX = ent.x - totalWidth / 2;
+                const startY = ent.y - ent.r - 38;
+                const time = Date.now() / 1000;
+                
+                icons.forEach((icon, idx) => {
+                    const x = startX + idx * (iconSize + spacing) + iconSize / 2;
+                    const y = startY;
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = icon.color;
+                    
+                    switch(icon.type) {
+                        case 'extra': // Lightning bolt
+                            ctx.fillStyle = icon.color;
+                            ctx.beginPath();
+                            ctx.moveTo(-2, -6);
+                            ctx.lineTo(4, -2);
+                            ctx.lineTo(0, 0);
+                            ctx.lineTo(4, 6);
+                            ctx.lineTo(-4, 0);
+                            ctx.lineTo(0, -2);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.shadowBlur = 12 + Math.sin(time * 8) * 4;
+                            break;
+                        case 'damage': // Bullet orange
+                            ctx.fillStyle = icon.color;
+                            ctx.beginPath();
+                            ctx.ellipse(0, 0, 4, 7, 0, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.strokeStyle = `rgba(255, 136, 0, ${0.5 + Math.sin(time * 6) * 0.3})`;
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.arc(0, 0, 6 + Math.sin(time * 4) * 2, 0, Math.PI * 2);
+                            ctx.stroke();
+                            break;
+                        case 'big': // Big bullet with sparkle
+                            const scale = 1 + Math.sin(time * 4) * 0.2;
+                            ctx.scale(scale, scale);
+                            ctx.fillStyle = '#ffffff';
+                            ctx.beginPath();
+                            ctx.ellipse(0, 0, 5, 9, 0, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.strokeStyle = `rgba(200, 200, 200, ${0.6 + Math.sin(time * 8) * 0.4})`;
+                            ctx.lineWidth = 2;
+                            for(let i=0; i<4; i++) {
+                                const angle = (time * 2 + i * Math.PI / 2);
+                                const r1 = 8;
+                                const r2 = 12 + Math.sin(time * 6) * 3;
+                                ctx.beginPath();
+                                ctx.moveTo(Math.cos(angle) * r1, Math.sin(angle) * r1);
+                                ctx.lineTo(Math.cos(angle) * r2, Math.sin(angle) * r2);
+                                ctx.stroke();
+                            }
+                            break;
+                        case 'lifesteal': // Cross
+                            ctx.fillStyle = icon.color;
+                            const pulse = 1 + Math.sin(time * 5) * 0.15;
+                            ctx.scale(pulse, pulse);
+                            ctx.fillRect(-2, -6, 4, 12);
+                            ctx.fillRect(-6, -2, 12, 4);
+                            ctx.shadowBlur = 10 + Math.sin(time * 6) * 5;
+                            ctx.shadowColor = '#44ff44';
+                            break;
+                        case 'armor': // Shield
+                            ctx.fillStyle = icon.color;
+                            ctx.beginPath();
+                            ctx.moveTo(0, -7);
+                            ctx.bezierCurveTo(5, -5, 6, 0, 6, 3);
+                            ctx.bezierCurveTo(6, 7, 0, 9, 0, 9);
+                            ctx.bezierCurveTo(0, 9, -6, 7, -6, 3);
+                            ctx.bezierCurveTo(-6, 0, -5, -5, 0, -7);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.fillStyle = `rgba(255, 255, 255, ${0.4 + Math.sin(time * 4) * 0.3})`;
+                            ctx.beginPath();
+                            ctx.ellipse(-2, -2, 2, 3, -0.3, 0, Math.PI * 2);
+                            ctx.fill();
+                            break;
+                        case 'double': // Two bullets
+                            ctx.fillStyle = icon.color;
+                            ctx.beginPath();
+                            ctx.ellipse(-3, 0, 2.5, 5, -0.2, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.beginPath();
+                            ctx.ellipse(3, -2, 2.5, 5, 0.2, 0, Math.PI * 2);
+                            ctx.fill();
+                            break;
+                    }
+                    ctx.restore();
+                });
             }
 
             function drawWind() {
@@ -1587,11 +1717,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             hasGlow = true;
                             glowColor = 'rgba(0,255,100,0.8)';
                         }
-                        if(currentBuff.type === BUFF_TYPES.ARMOR){
-                            bulletColor = 'rgba(100,150,255,.95)'; // Blue
-                            trailColor = 'rgba(50,100,255,.4)';
-                            hasGlow = true;
-                            glowColor = 'rgba(100,150,255,0.8)';
+                        if (currentBuff.type === BUFF_TYPES.ARMOR) {
+                            // Armor: bullet stays white (normal), no glow
+                            hasGlow = false;
                         }
                     }
                     
@@ -1666,6 +1794,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.strokeText(text, d.x, d.y);
                     ctx.fillText(text, d.x, d.y);
                 }
+                
+                // floating heal texts (green +HP)
+                for (let i = healTexts.length - 1; i >= 0; i--) {
+                    const h = healTexts[i];
+                    h.t += dt;
+                    const a = 1 - (h.t / 0.9);
+                    if (a <= 0) {
+                        healTexts.splice(i, 1);
+                        continue;
+                    }
+                    ctx.fillStyle = `rgba(50,255,100,${a})`;
+                    ctx.strokeStyle = `rgba(0,0,0,${0.35*a})`;
+                    ctx.lineWidth = 3;
+                    const text = `+${h.v}`;
+                    ctx.strokeText(text, h.x, h.y - h.t * 20);
+                    ctx.fillText(text, h.x, h.y - h.t * 20);
+                }
+                
                 ctx.textAlign = 'start';
 
                 // Turn countdown display (left, under turn label)
