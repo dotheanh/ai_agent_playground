@@ -294,16 +294,36 @@ document.addEventListener('DOMContentLoaded', () => {
             // Dev cheat panel
             // Load config
             let CFG = {
-                turnSeconds: 15,
-                maxHp: 500,
-                baseDamage: 38,
-                explosionRadius: 42,
-                buffs: { DAMAGE_X2_5: 2.5, BIG_RADIUS: 3, DOUBLE_SHOT_DAMAGE_MULT: 1.5, EXTRA_TURNS: 2 }
+                gameSettings: {
+                    turnSeconds: 15,
+                    turnGapMs: 1000,
+                    maxHp: 500,
+                    baseDamage: 38,
+                    explosionRadius: 42,
+                    phoenixSize: 1
+                },
+                buffs: { 
+                    DAMAGE_X2_5: 2.5, 
+                    BIG_RADIUS: 3, 
+                    DOUBLE_SHOT_DAMAGE_MULT: 1.5, 
+                    EXTRA_TURNS: 2,
+                    ARMOR_DAMAGE_REDUCTION: 0.3,
+                    LIFE_STEAL_RATIO: 1
+                },
+                buffChances: {
+                    DAMAGE_X2_5: 0.22,
+                    BIG_RADIUS: 0.18,
+                    DOUBLE_SHOT: 0.18,
+                    EXTRA_TURNS: 0.16,
+                    LIFESTEAL: 0.13,
+                    ARMOR: 0.13,
+                    BURN: 0.14
+                }
             };
             fetch('/gunny/versions/dev/config.json').then(r=>r.json()).then(j=>{CFG=j; applyConfig();}).catch(()=>{});
             function applyConfig(){
-                player.maxHp = CFG.maxHp;
-                bot.maxHp = CFG.maxHp;
+                player.maxHp = CFG.gameSettings.maxHp;
+                bot.maxHp = CFG.gameSettings.maxHp;
                 player.hp = player.maxHp;
                 bot.hp = bot.maxHp;
                 hpP.textContent = player.hp;
@@ -471,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             function drawBirds(){
-                const phoenixScale = (CFG && CFG.phoenixSize) || 1;
+                const phoenixScale = (CFG && CFG.gameSettings && CFG.gameSettings.phoenixSize) || 1;
                 for(let b of birds){
                     ctx.save();
                     ctx.translate(b.x, b.y);
@@ -713,7 +733,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function explode(atx, aty, impactSpeed = 0) {
                 // Radius with buff
-                let R = CFG.explosionRadius;
+                let R = CFG.gameSettings.explosionRadius;
                 const buff = turn === 'player' ? playerBuff : botBuff;
                 if(buff && buff.type === BUFF_TYPES.BIG_RADIUS){
                     R *= buff.value;
@@ -721,7 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(turn === 'player') playerBuff = null;
                     else botBuff = null;
                 }
-                const baseDmg = CFG.baseDamage;
+                const baseDmg = CFG.gameSettings.baseDamage;
 
                 // Map VERTICAL impact speed (px/s) to multiplier ~[1..4]
                 // High arc => large downward speed => much higher damage.
@@ -792,7 +812,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // LIFESTEAL: heal shooter immediately after dealing damage (before turn ends)
                 if(hasLifesteal && totalDealt > 0){
-                    const lsRatio = (CFG && CFG.lifestealRatio) || 1;
+                    const lsRatio = (CFG && CFG.buffs && CFG.buffs.LIFE_STEAL_RATIO) || 1;
                     const healAmount = Math.round(totalDealt * lsRatio);
                     shooter.hp = clamp(shooter.hp + healAmount, 0, shooter.maxHp);
                     // Add heal text effect (green +HP above shooter)
@@ -862,7 +882,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             function checkProjHitBird(){
                 if(!proj || !proj.alive) return false;
-                const phoenixScale = (CFG && CFG.phoenixSize) || 1;
+                const phoenixScale = (CFG && CFG.gameSettings && CFG.gameSettings.phoenixSize) || 1;
                 const hitRadius = 20 * phoenixScale;
                 for(let i = birds.length - 1; i >= 0; i--){
                     let b = birds[i];
@@ -1119,8 +1139,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function startTurnTimer(who){
-                turnTimeLeft = CFG.turnSeconds;
-                lastTickSec = CFG.turnSeconds;
+                turnTimeLeft = CFG.gameSettings.turnSeconds;
+                lastTickSec = CFG.gameSettings.turnSeconds;
                 turnTimerActive = true;
                 sfxTurnWhistle();
             }
@@ -1135,7 +1155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 // BURN DEBUFF: At start of each turn, take burnDamagePercent% max HP damage
-                const burnPercent = (CFG && CFG.burnDamagePercent) ? CFG.burnDamagePercent / 100 : 0.1;
+                const burnPercent = (CFG && CFG.buffs && CFG.buffs.BURN_DAMAGE_PERCENT) ? CFG.buffs.BURN_DAMAGE_PERCENT / 100 : 0.1;
                 
                 if(turn === 'player' && botBurnDebuff && botBurnDebuff.active){
                     const burnDmg = Math.round(bot.maxHp * burnPercent);
@@ -1193,7 +1213,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             shootBtn.disabled = false;
                         } else {
                             bot.stamina = bot.maxStamina;
-                            setTimeout(botTurn, CFG.turnGapMs);
+                            setTimeout(botTurn, CFG.gameSettings.turnGapMs);
                         }
                         return;
                     }
@@ -1221,7 +1241,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     bot.stamina = bot.maxStamina;
                     setLog('Lượt của bot...');
                     startTurnTimer('bot');
-                    setTimeout(botTurn, CFG.turnGapMs);
+                    setTimeout(botTurn, CFG.gameSettings.turnGapMs);
                 } else {
                     // end bot turn -> gap -> start player turn
                     shootBtn.disabled = true;
@@ -1231,7 +1251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         player.stamina = player.maxStamina;
                         setLog('Lượt của bạn. Chỉnh góc/lực rồi bắn.');
                         startTurnTimer('player');
-                    }, CFG.turnGapMs);
+                    }, CFG.gameSettings.turnGapMs);
                 }
             }
 

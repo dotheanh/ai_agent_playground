@@ -474,59 +474,42 @@
         buffChances: '🎲 Buff Drop Chances'
     };
 
-    // Field labels mapping
-    const fieldLabels = {
-        // gameSettings
-        turnSeconds: 'Turn Seconds',
-        turnGapMs: 'Turn Gap (ms)',
-        maxHp: 'Max HP',
-        baseDamage: 'Base Damage',
-        explosionRadius: 'Explosion Radius',
-        phoenixSize: 'Phoenix Size',
-        // buffs
-        DAMAGE_X2_5: 'Damage x2.5 Multiplier',
-        BIG_RADIUS: 'Big Radius Multiplier',
-        DOUBLE_SHOT_DAMAGE_MULT: 'Double Shot Damage Mult',
-        EXTRA_TURNS: 'Extra Turns Count',
-        ARMOR_DAMAGE_REDUCTION: 'Armor Damage Reduction',
-        LIFE_STEAL_RATIO: 'Life Steal Ratio',
-        // buffChances
-        DAMAGE_X2_5: 'Damage x2.5 Chance',
-        BIG_RADIUS: 'Big Radius Chance',
-        DOUBLE_SHOT: 'Double Shot Chance',
-        EXTRA_TURNS: 'Extra Turns Chance',
-        LIFESTEAL: 'Lifesteal Chance',
-        ARMOR: 'Armor Chance',
-        BURN: 'Burn Chance'
+    // Section-specific field config
+    const fieldConfig = {
+        gameSettings: {
+            turnSeconds: { label: 'Turn Seconds', min: 5, max: 60 },
+            turnGapMs: { label: 'Turn Gap (ms)', min: 100, max: 5000 },
+            maxHp: { label: 'Max HP', min: 100, max: 2000 },
+            baseDamage: { label: 'Base Damage', min: 10, max: 200 },
+            explosionRadius: { label: 'Explosion Radius', min: 10, max: 100 },
+            phoenixSize: { label: 'Phoenix Size', min: 0.5, max: 3, step: 0.1 }
+        },
+        buffs: {
+            DAMAGE_X2_5: { label: 'Damage x2.5 Multiplier', min: 1, max: 5, step: 0.1 },
+            BIG_RADIUS: { label: 'Big Radius Multiplier', min: 1, max: 10, step: 0.5 },
+            DOUBLE_SHOT_DAMAGE_MULT: { label: 'Double Shot Damage Mult', min: 1, max: 3, step: 0.1 },
+            EXTRA_TURNS: { label: 'Extra Turns Count', min: 1, max: 5 },
+            ARMOR_DAMAGE_REDUCTION: { label: 'Armor Damage Reduction (0-1)', min: 0, max: 1, step: 0.05 },
+            LIFE_STEAL_RATIO: { label: 'Life Steal Ratio', min: 0, max: 2, step: 0.1 }
+        },
+        buffChances: {
+            DAMAGE_X2_5: { label: 'Damage x2.5 Chance (%)', min: 0, max: 100 },
+            BIG_RADIUS: { label: 'Big Radius Chance (%)', min: 0, max: 100 },
+            DOUBLE_SHOT: { label: 'Double Shot Chance (%)', min: 0, max: 100 },
+            EXTRA_TURNS: { label: 'Extra Turns Chance (%)', min: 0, max: 100 },
+            LIFESTEAL: { label: 'Lifesteal Chance (%)', min: 0, max: 100 },
+            ARMOR: { label: 'Armor Chance (%)', min: 0, max: 100 },
+            BURN: { label: 'Burn Chance (%)', min: 0, max: 100 }
+        }
     };
 
-    // Field ranges
-    const fieldRanges = {
-        turnSeconds: { min: 5, max: 60 },
-        turnGapMs: { min: 100, max: 5000 },
-        maxHp: { min: 100, max: 2000 },
-        baseDamage: { min: 10, max: 200 },
-        explosionRadius: { min: 10, max: 100 },
-        phoenixSize: { min: 0.5, max: 3, step: 0.1 },
-        // buffs
-        DAMAGE_X2_5: { min: 1, max: 5, step: 0.1 },
-        BIG_RADIUS: { min: 1, max: 10, step: 0.5 },
-        DOUBLE_SHOT_DAMAGE_MULT: { min: 1, max: 3, step: 0.1 },
-        EXTRA_TURNS: { min: 1, max: 5 },
-        ARMOR_DAMAGE_REDUCTION: { min: 0, max: 1, step: 0.05 },
-        LIFE_STEAL_RATIO: { min: 0, max: 2, step: 0.1 },
-        // buffChances (as percentages for display)
-        DAMAGE_X2_5: { min: 0, max: 100 },
-        BIG_RADIUS: { min: 0, max: 100 },
-        DOUBLE_SHOT: { min: 0, max: 100 },
-        EXTRA_TURNS: { min: 0, max: 100 },
-        LIFESTEAL: { min: 0, max: 100 },
-        ARMOR: { min: 0, max: 100 },
-        BURN: { min: 0, max: 100 }
-    };
+    function getFieldConfig(section, key) {
+        return (fieldConfig[section] && fieldConfig[section][key]) || {};
+    }
 
-    function formatLabel(key) {
-        if (fieldLabels[key]) return fieldLabels[key];
+    function formatLabel(section, key) {
+        const cfg = getFieldConfig(section, key);
+        if (cfg.label) return cfg.label;
         // Auto-format: snake_case to Title Case
         return key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     }
@@ -537,11 +520,16 @@
     }
 
     function getStep(section, key, value) {
-        if (section === 'buffChances') return 0.01; // 1% in decimal
-        const range = fieldRanges[key];
-        if (range && range.step) return range.step;
+        if (section === 'buffChances') return 1; // 1% step for display
+        const cfg = getFieldConfig(section, key);
+        if (cfg.step) return cfg.step;
         if (Number.isInteger(value)) return 1;
         return 0.1;
+    }
+
+    function getRange(section, key) {
+        const cfg = getFieldConfig(section, key);
+        return { min: cfg.min, max: cfg.max };
     }
 
     function formatValueForDisplay(section, key, value) {
@@ -575,11 +563,11 @@
             
             Object.keys(sectionData).forEach(fieldKey => {
                 const value = sectionData[fieldKey];
-                const label = formatLabel(fieldKey);
+                const label = formatLabel(sectionKey, fieldKey);
                 const type = getInputType(sectionKey, fieldKey, value);
                 const step = getStep(sectionKey, fieldKey, value);
                 const displayValue = formatValueForDisplay(sectionKey, fieldKey, value);
-                const range = fieldRanges[fieldKey] || {};
+                const range = getRange(sectionKey, fieldKey);
                 
                 const $group = $('<div class="form-group"></div>');
                 $group.append(`<label>${label}</label>`);
@@ -616,7 +604,7 @@
     }
 
     // Load config and generate form
-    $.getJSON(CONFIG_URL)
+    $.getJSON(CONFIG_URL + '?v=' + Date.now())
         .done(function(config) {
             defaultConfig = JSON.parse(JSON.stringify(config)); // Deep copy
             currentConfig = config;
