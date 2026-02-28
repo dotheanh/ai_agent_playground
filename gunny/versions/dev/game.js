@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Higher pitch + shorter when urgent
                 const f1 = urgent ? 1200 : 800;
                 const f2 = urgent ? 900 : 520;
-                beep(f1, urgent ? 0.03 : 0.045, "square", urgent ? 0.05 : 0.035);
-                beep(f2, urgent ? 0.02 : 0.03, "sine", urgent ? 0.03 : 0.02);
+                beep(f1, urgent ? 0.03 : 0.045, "square", urgent ? 0.10 : 0.07);
+                beep(f2, urgent ? 0.02 : 0.03, "sine", urgent ? 0.06 : 0.04);
             }
             
             // Doppler hit SFX (like sound-demo)
@@ -71,6 +71,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 g.connect(ctx.destination);
                 o.start(t);
                 o.stop(t + 0.65);
+            }
+
+            // Turn start whistle (to, rõ)
+            function sfxTurnWhistle(){
+                const ctx = getCtx();
+                const o = ctx.createOscillator();
+                const g = ctx.createGain();
+                o.type = 'sine';
+                const t = ctx.currentTime;
+                g.gain.setValueAtTime(0, t);
+                g.gain.linearRampToValueAtTime(0.25, t + 0.02);
+                g.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+                o.frequency.setValueAtTime(900, t);
+                o.frequency.exponentialRampToValueAtTime(1800, t + 0.15);
+                o.frequency.exponentialRampToValueAtTime(1100, t + 0.6);
+                o.connect(g); g.connect(ctx.destination);
+                o.start(t); o.stop(t + 0.65);
             }
             function sfxFly(){ beep(520, 0.05, "triangle", 0.03); }
             function sfxBoom(dmg=0){
@@ -1001,6 +1018,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 turnTimeLeft = CFG.turnSeconds;
                 lastTickSec = CFG.turnSeconds;
                 turnTimerActive = true;
+                sfxTurnWhistle();
             }
             function stopTurnTimer(){
                 turnTimerActive = false;
@@ -1548,7 +1566,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.fillStyle = col;
                     ctx.shadowBlur = 10;
                     ctx.shadowColor = col;
-                    ctx.fillText(`⏳ ${sec}s`, 16, 64);
+                    ctx.fillText(`⏳ ${sec}`, 16, 78);
                     ctx.restore();
                 }
 
@@ -1578,7 +1596,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fillStyle = 'rgba(0,0,0,.28)';
                 ctx.strokeStyle = 'rgba(255,255,255,.12)';
                 ctx.lineWidth = 1;
-                ctx.roundRect(12, 56, 210, 36, 12);
+                ctx.roundRect(12, 56, 130, 36, 12);
                 ctx.fill();
                 ctx.stroke();
                 ctx.fillStyle = 'rgba(233,238,252,.9)';
