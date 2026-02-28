@@ -8,6 +8,15 @@
     "DAMAGE_X2_5": 2.5,
     "BIG_RADIUS": 3,
     "DOUBLE_SHOT_DAMAGE_MULT": 1.5,
-    "EXTRA_TURNS": 2
+    "EXTRA_TURNS": 2,
+    "ARMOR_DAMAGE_REDUCTION": 0.3
+  },
+  "buffChances": {
+    "DAMAGE_X2_5": 0.22,
+    "BIG_RADIUS": 0.18,
+    "DOUBLE_SHOT": 0.18,
+    "EXTRA_TURNS": 0.16,
+    "LIFESTEAL": 0.13,
+    "ARMOR": 0.13
   }
 }

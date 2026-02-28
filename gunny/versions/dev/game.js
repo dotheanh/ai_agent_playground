@@ -741,16 +741,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 let maxDmg = 0;
+                let totalDealt = 0;
                 const targets = [player, bot];
+                const shooter = turn === 'player' ? player : bot;
+                const hasLifesteal = buff && buff.type === BUFF_TYPES.LIFESTEAL;
+                
                 targets.forEach(t => {
                     const d = Math.sqrt(dist2(atx, aty, t.x, t.y));
                     if (d < R) {
-                        const dmg = Math.round(totalDmg * (1 - d / R));
+                        let dmg = Math.round(totalDmg * (1 - d / R));
+                        
+                        // ARMOR buff: reduce incoming damage by 30% (persists until end of match)
+                        const targetBuff = t === player ? playerBuff : botBuff;
+                        if(targetBuff && targetBuff.type === BUFF_TYPES.ARMOR){
+                            const reduction = targetBuff.value || 0.3;
+                            dmg = Math.round(dmg * (1 - reduction));
+                        }
+                        
                         t.hp = clamp(t.hp - dmg, 0, 999);
                         dmgTexts.push({ x: t.x, y: t.y - t.r - 18, v: dmg, t: 0, tier: (dmg>100?3:(dmg>=80?2:(dmg>=60?1:0))) });
                         if(dmg > maxDmg) maxDmg = dmg;
+                        totalDealt += dmg;
                     }
                 });
+                
+                // LIFESTEAL: heal shooter immediately after dealing damage (before turn ends)
+                if(hasLifesteal && totalDealt > 0){
+                    shooter.hp = clamp(shooter.hp + totalDealt, 0, shooter.maxHp);
+                    setLog(`${turn === 'player' ? 'Bạn' : 'Bot'} hồi ${totalDealt} HP từ hút máu!`);
+                    // Clear after use
+                    if(turn === 'player') playerBuff = null;
+                    else botBuff = null;
+                }
+                
                 hpP.textContent = player.hp;
                 hpB.textContent = bot.hp;
 
@@ -788,7 +811,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 DAMAGE_X2_5: 'dmg2.5',
                 DOUBLE_SHOT: 'double',
                 EXTRA_TURNS: 'extra',
-                BIG_RADIUS: 'big'
+                BIG_RADIUS: 'big',
+                LIFESTEAL: 'lifesteal',
+                ARMOR: 'armor'
             };
             
             // Center buff messages
@@ -829,9 +854,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 return false;
             }
             
+            function pickBuffByChance(){
+                const chances = CFG.buffChances || {};
+                const entries = Object.keys(BUFF_TYPES).map(k => ({
+                    type: BUFF_TYPES[k],
+                    key: k,
+                    w: chances[k] ?? 0
+                })).filter(e => e.w > 0);
+                if(entries.length === 0){
+                    // fallback uniform
+                    const buffs = Object.values(BUFF_TYPES);
+                    return buffs[Math.floor(Math.random() * buffs.length)];
+                }
+                const sum = entries.reduce((a,e)=>a+e.w,0);
+                let r = Math.random() * sum;
+                for(const e of entries){
+                    r -= e.w;
+                    if(r <= 0) return e.type;
+                }
+                return entries[entries.length-1].type;
+            }
+
             function giveBuff(target){
-                const buffs = Object.values(BUFF_TYPES);
-                const buff = buffs[Math.floor(Math.random() * buffs.length)];
+                const buff = pickBuffByChance();
                 const buffData = {type: buff, turnsLeft: 1};
                 switch(buff){
                     case BUFF_TYPES.DAMAGE_X2_5:
@@ -845,6 +890,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         break;
                     case BUFF_TYPES.BIG_RADIUS:
                         buffData.value = CFG.buffs.BIG_RADIUS;
+                        break;
+                    case BUFF_TYPES.LIFESTEAL:
+                        buffData.value = 1;
+                        break;
+                    case BUFF_TYPES.ARMOR:
+                        buffData.value = CFG.buffs.ARMOR_DAMAGE_REDUCTION || 0.3;
                         break;
                 }
                 if(target === 'player'){
@@ -866,6 +917,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     case BUFF_TYPES.DOUBLE_SHOT: return 'Bắn 2 phát';
                     case BUFF_TYPES.EXTRA_TURNS: return 'Thêm 2 lượt';
                     case BUFF_TYPES.BIG_RADIUS: return 'Đạn to x3';
+                    case BUFF_TYPES.LIFESTEAL: return 'Hút máu';
+                    case BUFF_TYPES.ARMOR: return 'Hộ giáp';
                 }
             }
             
@@ -1476,23 +1529,41 @@ document.addEventListener('DOMContentLoaded', () => {
                     let bulletColor = 'rgba(255,255,255,.85)';
                     let trailColor = 'rgba(255,255,255,.18)';
                     let hasGlow = false;
+                    let glowColor = 'rgba(255,100,0,0.8)';
                     
                     if(currentBuff){
                         if(currentBuff.type === BUFF_TYPES.BIG_RADIUS){
                             bulletR *= 2;
+                            bulletColor = 'rgba(220,220,220,.95)'; // Greyish white
+                            trailColor = 'rgba(200,200,200,.5)';
+                            hasGlow = true;
+                            glowColor = 'rgba(255,255,255,0.9)'; // White glow
                         }
                         if(currentBuff.type === BUFF_TYPES.DAMAGE_X2_5 || 
                            (currentBuff.type === BUFF_TYPES.DOUBLE_SHOT && doubleShotPending)){
                             bulletColor = 'rgba(255,140,0,.95)'; // Orange
                             trailColor = 'rgba(255,100,0,.4)';
                             hasGlow = true;
+                            glowColor = 'rgba(255,100,0,0.8)';
+                        }
+                        if(currentBuff.type === BUFF_TYPES.LIFESTEAL){
+                            bulletColor = 'rgba(50,255,50,.95)'; // Green
+                            trailColor = 'rgba(0,255,0,.4)';
+                            hasGlow = true;
+                            glowColor = 'rgba(0,255,100,0.8)';
+                        }
+                        if(currentBuff.type === BUFF_TYPES.ARMOR){
+                            bulletColor = 'rgba(100,150,255,.95)'; // Blue
+                            trailColor = 'rgba(50,100,255,.4)';
+                            hasGlow = true;
+                            glowColor = 'rgba(100,150,255,0.8)';
                         }
                     }
                     
                     // Glow effect for buffed bullets
                     if(hasGlow){
                         ctx.shadowBlur = 15;
-                        ctx.shadowColor = 'rgba(255,100,0,0.8)';
+                        ctx.shadowColor = glowColor;
                     }
                     
                     ctx.fillStyle = bulletColor;
@@ -1515,12 +1586,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Extra trail segments for buffed bullets
                     if(hasGlow){
-                        ctx.strokeStyle = 'rgba(255,200,0,0.3)';
+                        ctx.strokeStyle = trailColor.replace('0.4', '0.2').replace('0.5', '0.2');
                         ctx.lineWidth = 10;
                         ctx.beginPath();
                         ctx.moveTo(proj.x, proj.y);
                         ctx.lineTo(proj.x - proj.vx * 0.04, proj.y - proj.vy * 0.04);
                         ctx.stroke();
+                    }
+                    
+                    // Sparkle effect for BIG_RADIUS (white/grey)
+                    if(currentBuff && currentBuff.type === BUFF_TYPES.BIG_RADIUS){
+                        ctx.fillStyle = `rgba(255,255,255,${0.6 + Math.random()*0.4})`;
+                        ctx.beginPath();
+                        ctx.arc(proj.x + (Math.random()*10-5), proj.y + (Math.random()*10-5), 2, 0, Math.PI*2);
+                        ctx.fill();
                     }
                 }
 
