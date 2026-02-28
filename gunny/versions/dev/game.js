@@ -776,6 +776,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targets = [player, bot];
                 const shooter = turn === 'player' ? player : bot;
                 const hasLifesteal = buff && buff.type === BUFF_TYPES.LIFESTEAL;
+                const hasBurn = buff && buff.type === BUFF_TYPES.BURN;
                 
                 targets.forEach(t => {
                     const d = Math.sqrt(dist2(atx, aty, t.x, t.y));
@@ -793,8 +794,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         dmgTexts.push({ x: t.x, y: t.y - t.r - 18, v: dmg, t: 0, tier: (dmg>100?3:(dmg>=80?2:(dmg>=60?1:0))) });
                         if(dmg > maxDmg) maxDmg = dmg;
                         totalDealt += dmg;
+                        
+                        // BURN buff: apply burn debuff to hit enemy, clear their buffs
+                        if(hasBurn && t !== shooter){
+                            if(t === player){
+                                playerBurnDebuff = {active: true};
+                                playerBuff = null; // Clear all buffs
+                                showBuffMessage('🔥 Bạn bị Thiêu đốt!');
+                            } else {
+                                botBurnDebuff = {active: true};
+                                botBuff = null; // Clear all buffs
+                                showBuffMessage('🔥 Bot bị Thiêu đốt!');
+                            }
+                            setLog(`${turn === 'player' ? 'Bot' : 'Bạn'} bị Thiêu đốt! Mất tất cả buff và mỗi lượt -10% HP!`);
+                        }
                     }
                 });
+                
+                // Clear BUFF_TYPES.BURN after use
+                if(hasBurn){
+                    if(turn === 'player') playerBuff = null;
+                    else botBuff = null;
+                }
                 
                 // LIFESTEAL: heal shooter immediately after dealing damage (before turn ends)
                 if(hasLifesteal && totalDealt > 0){
@@ -843,13 +864,18 @@ document.addEventListener('DOMContentLoaded', () => {
             // Buff system for hitting birds
             let playerBuff = null; // {type, turnsLeft, value}
             let botBuff = null;
+            // Track burn debuff separately (can have buff + be burned at same time)
+            let playerBurnDebuff = null; // {turns: Infinity, active: true}
+            let botBurnDebuff = null;
+            
             const BUFF_TYPES = {
                 DAMAGE_X2_5: 'dmg2.5',
                 DOUBLE_SHOT: 'double',
                 EXTRA_TURNS: 'extra',
                 BIG_RADIUS: 'big',
                 LIFESTEAL: 'lifesteal',
-                ARMOR: 'armor'
+                ARMOR: 'armor',
+                BURN: 'burn' // Buff: next shot applies burn debuff to enemy
             };
             
             // Center buff messages
@@ -914,6 +940,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function giveBuff(target){
+                // Check if target has burn debuff - cannot receive buffs while burned
+                if(target === 'player' && botBurnDebuff && botBurnDebuff.active){
+                    showBuffMessage('🔥 Bạn bị Thiêu đốt! Không thể nhận buff!');
+                    return;
+                }
+                if(target === 'bot' && playerBurnDebuff && playerBurnDebuff.active){
+                    showBuffMessage('🤖 Bot bị Thiêu đốt! Không thể nhận buff!');
+                    return;
+                }
+                
                 const buff = pickBuffByChance();
                 const buffData = {type: buff, turnsLeft: 1};
                 switch(buff){
@@ -934,6 +970,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         break;
                     case BUFF_TYPES.ARMOR:
                         buffData.value = CFG.buffs.ARMOR_DAMAGE_REDUCTION || 0.3;
+                        break;
+                    case BUFF_TYPES.BURN:
+                        buffData.value = 1; // Next shot applies burn debuff
                         break;
                 }
                 if(target === 'player'){
@@ -957,6 +996,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     case BUFF_TYPES.BIG_RADIUS: return 'Đạn to x3';
                     case BUFF_TYPES.LIFESTEAL: return 'Hút máu';
                     case BUFF_TYPES.ARMOR: return 'Hộ giáp';
+                    case BUFF_TYPES.BURN: return 'Thiêu đốt';
                 }
             }
             
@@ -1118,6 +1158,38 @@ document.addEventListener('DOMContentLoaded', () => {
             function endShot(reason) {
                 if (turnLock) {
                     shootBtn.disabled = true;
+                    return;
+                }
+                
+                // BURN DEBUFF: At start of each turn, take 10% max HP damage
+                // Check if the player whose turn just ended has burn debuff
+                if(turn === 'player' && botBurnDebuff && botBurnDebuff.active){
+                    const burnDmg = Math.round(bot.maxHp * 0.1);
+                    bot.hp = clamp(bot.hp - burnDmg, 0, 999);
+                    dmgTexts.push({ x: bot.x, y: bot.y - bot.r - 18, v: burnDmg, t: 0, tier: 1 });
+                    hpB.textContent = bot.hp;
+                    setLog(`🔥 Bot bị Thiêu đốt -${burnDmg} HP!`);
+                }
+                if(turn === 'bot' && playerBurnDebuff && playerBurnDebuff.active){
+                    const burnDmg = Math.round(player.maxHp * 0.1);
+                    player.hp = clamp(player.hp - burnDmg, 0, 999);
+                    dmgTexts.push({ x: player.x, y: player.y - player.r - 18, v: burnDmg, t: 0, tier: 1 });
+                    hpP.textContent = player.hp;
+                    setLog(`🔥 Bạn bị Thiêu đốt -${burnDmg} HP!`);
+                }
+                
+                // Check win condition after burn damage
+                if (player.hp <= 0 && bot.hp <= 0) {
+                    setLog('Cả hai cùng ngã. Hoà. Reset để chơi lại.');
+                    turnLock = true;
+                    return;
+                } else if (player.hp <= 0) {
+                    setLog('Bạn thua rồi. Reset để chơi lại.');
+                    turnLock = true;
+                    return;
+                } else if (bot.hp <= 0) {
+                    setLog('Bạn thắng! Reset để chơi lại.');
+                    turnLock = true;
                     return;
                 }
                 
@@ -1413,30 +1485,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Draw buff icons above HP bar
                 const buff = (ent === player) ? playerBuff : botBuff;
-                drawBuffIcons(ent, buff);
+                const burnDebuff = (ent === player) ? playerBurnDebuff : botBurnDebuff;
+                drawBuffIcons(ent, buff, burnDebuff);
             }
 
             // Draw buff icons above a character
-            function drawBuffIcons(ent, buff) {
-                if (!buff) return;
-                
+            function drawBuffIcons(ent, buff, burnDebuff) {
                 const icons = [];
-                if (buff.type === BUFF_TYPES.EXTRA_TURNS && buff.value > 0) {
+                
+                // BURN DEBUFF: Show fire icon (highest priority, on the left)
+                if (burnDebuff && burnDebuff.active) {
+                    icons.push({type: 'burn_debuff', color: '#ff2200'});
+                }
+                
+                // BURN BUFF: Show burning bullet icon
+                if (buff && buff.type === BUFF_TYPES.BURN) {
+                    icons.push({type: 'burn_buff', color: '#ff4400'});
+                }
+                
+                if (buff && buff.type === BUFF_TYPES.EXTRA_TURNS && buff.value > 0) {
                     icons.push({type: 'extra', color: '#ffdd00'});
                 }
-                if (buff.type === BUFF_TYPES.DAMAGE_X2_5) {
+                if (buff && buff.type === BUFF_TYPES.DAMAGE_X2_5) {
                     icons.push({type: 'damage', color: '#ff8800'});
                 }
-                if (buff.type === BUFF_TYPES.BIG_RADIUS) {
+                if (buff && buff.type === BUFF_TYPES.BIG_RADIUS) {
                     icons.push({type: 'big', color: '#cccccc'});
                 }
-                if (buff.type === BUFF_TYPES.LIFESTEAL) {
+                if (buff && buff.type === BUFF_TYPES.LIFESTEAL) {
                     icons.push({type: 'lifesteal', color: '#44ff44'});
                 }
-                if (buff.type === BUFF_TYPES.ARMOR) {
+                if (buff && buff.type === BUFF_TYPES.ARMOR) {
                     icons.push({type: 'armor', color: '#4488ff'});
                 }
-                if (buff.type === BUFF_TYPES.DOUBLE_SHOT) {
+                if (buff && buff.type === BUFF_TYPES.DOUBLE_SHOT) {
                     icons.push({type: 'double', color: '#ff8800'});
                 }
                 
@@ -1523,6 +1605,51 @@ document.addEventListener('DOMContentLoaded', () => {
                             ctx.fillStyle = `rgba(255, 255, 255, ${0.4 + Math.sin(time * 4) * 0.3})`;
                             ctx.beginPath();
                             ctx.ellipse(-2, -2, 2, 3, -0.3, 0, Math.PI * 2);
+                            ctx.fill();
+                            break;
+                        case 'burn_buff': // Burning bullet (buff)
+                            ctx.fillStyle = '#ff4400';
+                            ctx.beginPath();
+                            ctx.ellipse(0, 0, 4, 7, 0, 0, Math.PI * 2);
+                            ctx.fill();
+                            // Flame effect
+                            ctx.fillStyle = `rgba(255, ${Math.floor(100 + Math.random()*100)}, 0, 0.9)`;
+                            for(let i=0; i<5; i++){
+                                const angle = -Math.PI/2 + (Math.random()-0.5);
+                                const h = 4 + Math.random()*6;
+                                ctx.beginPath();
+                                ctx.moveTo(Math.cos(angle)*2, Math.sin(angle)*2);
+                                ctx.lineTo(Math.cos(angle-0.3)*h, Math.sin(angle-0.3)*h - 3);
+                                ctx.lineTo(Math.cos(angle+0.3)*h, Math.sin(angle+0.3)*h - 3);
+                                ctx.fill();
+                            }
+                            ctx.shadowBlur = 15 + Math.sin(time*10)*5;
+                            ctx.shadowColor = '#ff2200';
+                            break;
+                        case 'burn_debuff': // Fire flame (debuff)
+                            ctx.shadowBlur = 15;
+                            ctx.shadowColor = '#ff2200';
+                            // Main flame
+                            ctx.fillStyle = `rgba(255, ${Math.floor(80 + Math.sin(time*8)*40)}, 0, 0.95)`;
+                            ctx.beginPath();
+                            ctx.moveTo(0, 5);
+                            ctx.quadraticCurveTo(-4, 0, -3, -5);
+                            ctx.quadraticCurveTo(-2, -10, 0, -12);
+                            ctx.quadraticCurveTo(2, -10, 3, -5);
+                            ctx.quadraticCurveTo(4, 0, 0, 5);
+                            ctx.fill();
+                            // Inner flame
+                            ctx.fillStyle = `rgba(255, 200, 0, ${0.8 + Math.sin(time*12)*0.2})`;
+                            ctx.beginPath();
+                            ctx.moveTo(0, 3);
+                            ctx.quadraticCurveTo(-2, -2, -1, -6);
+                            ctx.quadraticCurveTo(0, -8, 1, -6);
+                            ctx.quadraticCurveTo(2, -2, 0, 3);
+                            ctx.fill();
+                            // Flicker effect
+                            ctx.fillStyle = `rgba(255, 100, 0, ${0.6 + Math.random()*0.4})`;
+                            ctx.beginPath();
+                            ctx.arc(0, -8 + Math.sin(time*15)*2, 2, 0, Math.PI*2);
                             ctx.fill();
                             break;
                         case 'double': // Two bullets
@@ -1721,11 +1848,19 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Armor: bullet stays white (normal), no glow
                             hasGlow = false;
                         }
+                        if(currentBuff.type === BUFF_TYPES.BURN){
+                            // BURN: Fiery red bullet with intense flame effect
+                            bulletColor = 'rgba(255,50,0,.95)'; // Fiery red
+                            trailColor = 'rgba(255,80,0,.6)';
+                            hasGlow = true;
+                            glowColor = 'rgba(255,60,0,1)';
+                            bulletR *= 1.5; // Larger bullet
+                        }
                     }
                     
                     // Glow effect for buffed bullets
                     if(hasGlow){
-                        ctx.shadowBlur = 15;
+                        ctx.shadowBlur = currentBuff && currentBuff.type === BUFF_TYPES.BURN ? 25 : 15;
                         ctx.shadowColor = glowColor;
                     }
                     
@@ -1733,6 +1868,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.beginPath();
                     ctx.arc(proj.x, proj.y, bulletR, 0, Math.PI * 2);
                     ctx.fill();
+                    
+                    // BURN: Add flame particles
+                    if(currentBuff && currentBuff.type === BUFF_TYPES.BURN){
+                        ctx.fillStyle = `rgba(255, ${Math.floor(50 + Math.random()*100)}, 0, ${0.7 + Math.random()*0.3})`;
+                        for(let i=0; i<3; i++){
+                            const angle = Math.random() * Math.PI * 2;
+                            const dist = Math.random() * 8;
+                            ctx.beginPath();
+                            ctx.arc(proj.x + Math.cos(angle)*dist, proj.y + Math.sin(angle)*dist, 2+Math.random()*3, 0, Math.PI*2);
+                            ctx.fill();
+                        }
+                        // Outer flame aura
+                        ctx.strokeStyle = `rgba(255, 100, 0, ${0.3 + Math.random()*0.3})`;
+                        ctx.lineWidth = 3;
+                        ctx.beginPath();
+                        ctx.arc(proj.x, proj.y, bulletR + 4 + Math.random()*4, 0, Math.PI*2);
+                        ctx.stroke();
+                    }
                     
                     ctx.shadowBlur = 0; // Reset shadow
 
@@ -1907,6 +2060,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Clear all buffs on reset
                 playerBuff = null;
                 botBuff = null;
+                // Clear burn debuffs
+                playerBurnDebuff = null;
+                botBurnDebuff = null;
                 // Reset turn timer
                 startTurnTimer('player');
             }

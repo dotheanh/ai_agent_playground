@@ -107,6 +107,18 @@ Buff nhận được khi bắn trúng phượng hoàng:
   - Icon buff: Khiên màu xanh dương có hiệu ứng shine.
   - **Không tự clear** - tồn tại cho tới cuối trận hoặc khi reset.
 
+- BURN (tỉ lệ config: buffChances.BURN):
+  - Lượt bắn tiếp theo đạn có hiệu ứng lửa đỏ rực (nổi bật nhất).
+  - Bắn trúng đối thủ: gây sát thương bình thường + debuff Thiêu đốt.
+  - Debuff Thiêu đốt:
+    - Tồn tại cho đến cuối trận (hoặc reset).
+    - Mỗi lượt bị trừ 10% HP tối đa.
+    - Xóa hết buff hiện có trên ngưỡi bị đốt.
+    - Không thể nhận buff mới từ phượng hoàng (bị hủy ngay lập tức).
+  - Icon buff (ngườii có BURN): Viên đạn bốc lửa.
+  - Icon debuff (ngườii bị Thiêu đốt): Ngọn lửa cháy liên tục.
+  - Clear sau khi bắn trúng đối thủ.
+
 - DOUBLE_SHOT (tỉ lệ config: buffChances.DOUBLE_SHOT):
   - Bắn 2 phát liên tiếp cùng quỹ đạo.
   - Phát thứ 2 +50% damage.
@@ -165,6 +177,8 @@ Khi nhân vật có buff/debuff, hiển thị icon tương ứng trên đầu (t
 - LIFESTEAL: Chữ thập (+) màu xanh lá có hiệu ứng pulse.
 - ARMOR: Khiên màu xanh dương có hiệu ứng shine reflection.
 - DOUBLE_SHOT: Hai viên đạn cam chồng lệch nhau.
+- BURN (buff): Viên đạn bốc lửa màu đỏ cam với hiệu ứng ngọn lửa tỏa ra.
+- BURN (debuff): Ngọn lửa lớn màu đỏ rực cháy liên tục (ưu tiên hiển thị bên trái).
 
 Quy tắc hiển thị:
 - Icon tồn tại cho đến khi buff hết hiệu lực.
