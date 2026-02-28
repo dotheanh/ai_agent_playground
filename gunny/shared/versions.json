@@ -1,7 +1,7 @@
 [
   {"label":"Latest","href":"/gunny/","ts":"latest"},
   {"label":"Developing","href":"/gunny/developing.html","ts":"dev"},
-  {"label":"Version 6","href":"/gunny/versions/v6/","ts":"2026-02-28"},
+  {"label":"Version 6","href":"/gunny/v6/","ts":"2026-02-28"},
   {"label":"Version 5","href":"/gunny/v5/","ts":"2026-02-27"},
   {"label":"Version 4","href":"/gunny/v4/","ts":"2026-02-27"},
   {"label":"Version 3","href":"/gunny/v3/","ts":"2026-02-27"},
