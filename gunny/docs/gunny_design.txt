@@ -32,6 +32,12 @@ Mục tiêu
 
 2) UI/UX
 --------
+2.0 Turn countdown
+- Mỗi turn tối đa 15s.
+- Có SFX tiktak mỗi giây.
+- 5 giây cuối âm dồn dập hơn để tạo áp lực.
+- Hết thời gian: tự động kết thúc lượt (player/bot).
+
 2.1 Responsive UI
 - Canvas + panel điều khiển tối ưu cho desktop & mobile.
 - Có log trạng thái (setLog).
@@ -65,6 +71,7 @@ Mục tiêu
 
 4.2 Bắn trúng chim
 - Khi đạn trúng chim:
+  - Có SFX "Doppler effect" (giống sound-demo) khi trúng phượng hoàng.
   - Đạn dừng và “nổ tại chỗ” (visual flash).
   - Chim rơi/văng và fade out.
   - Turn kết thúc tại đây.

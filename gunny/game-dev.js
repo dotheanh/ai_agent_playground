@@ -43,6 +43,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 src.start();
             }
             function sfxShoot(){ beep(820, 0.06, "square", 0.08); beep(320, 0.08, "sawtooth", 0.04); }
+            
+            // Tick-tock countdown SFX
+            function sfxTick(urgent=false){
+                // Higher pitch + shorter when urgent
+                const f1 = urgent ? 1200 : 800;
+                const f2 = urgent ? 900 : 520;
+                beep(f1, urgent ? 0.03 : 0.045, "square", urgent ? 0.05 : 0.035);
+                beep(f2, urgent ? 0.02 : 0.03, "sine", urgent ? 0.03 : 0.02);
+            }
+            
+            // Doppler hit SFX (like sound-demo)
+            function sfxDopplerHit(){
+                const ctx = getCtx();
+                const o = ctx.createOscillator();
+                const g = ctx.createGain();
+                o.type = 'sine';
+                const t = ctx.currentTime;
+                g.gain.setValueAtTime(0, t);
+                g.gain.linearRampToValueAtTime(0.18, t + 0.02);
+                g.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+                // Frequency sweep down-up to mimic doppler pass
+                o.frequency.setValueAtTime(1400, t);
+                o.frequency.exponentialRampToValueAtTime(500, t + 0.18);
+                o.frequency.exponentialRampToValueAtTime(900, t + 0.6);
+                o.connect(g);
+                g.connect(ctx.destination);
+                o.start(t);
+                o.stop(t + 0.65);
+            }
             function sfxFly(){ beep(520, 0.05, "triangle", 0.03); }
             function sfxBoom(dmg=0){
                 if(dmg > 90){
@@ -243,6 +272,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const windV = document.getElementById('windV');
 
             const shootBtn = document.getElementById('shoot');
+            
+            // Turn countdown (15s)
+            let turnTimeLeft = 15;
+            let lastTickSec = 15;
+            let turnTimerActive = false;
             const resetBtn = document.getElementById('reset');
             const moveLBtn = document.getElementById('moveL');
             const moveRBtn = document.getElementById('moveR');
@@ -741,6 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(dist < 20){ // Hit radius
                         // Visual explosion at hit point
                         flashes.push({x: proj.x, y: proj.y, t: 0});
+                        sfxDopplerHit();
                         // Bird falls
                         fallingBirds.push({
                             x: b.x, y: b.y, vx: proj.vx * 0.3, vy: -50, 
@@ -924,8 +959,33 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(shakeT < 0) shakeT = 0;
                 }
 
+                // Turn countdown update
+                if(!turnLock && turnTimerActive && !proj){
+                    // decrement once per frame
+                    turnTimeLeft -= dt;
+                    const sec = Math.max(0, Math.ceil(turnTimeLeft));
+                    if(sec !== lastTickSec){
+                        const urgent = sec <= 5;
+                        sfxTick(urgent);
+                        lastTickSec = sec;
+                    }
+                    if(turnTimeLeft <= 0){
+                        // Auto-end turn if time runs out
+                        endShot('timeout');
+                    }
+                }
+
                 draw();
                 requestAnimationFrame(step);
+            }
+
+            function startTurnTimer(who){
+                turnTimeLeft = 15;
+                lastTickSec = 15;
+                turnTimerActive = true;
+            }
+            function stopTurnTimer(){
+                turnTimerActive = false;
             }
 
             function endShot(reason) {
@@ -987,12 +1047,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     shootBtn.disabled = true;
                     bot.stamina = bot.maxStamina;
                     setLog('Lượt của bot...');
+                    startTurnTimer('bot');
                     setTimeout(botTurn, 650);
                 } else {
                     turn = 'player';
                     shootBtn.disabled = false;
                     player.stamina = player.maxStamina;
                     setLog('Lượt của bạn. Chỉnh góc/lực rồi bắn.');
+                    startTurnTimer('player');
                 }
             }
 
@@ -1525,6 +1587,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Clear all buffs on reset
                 playerBuff = null;
                 botBuff = null;
+                // Reset turn timer
+                startTurnTimer('player');
             }
 
             // UI bindings + keyboard
