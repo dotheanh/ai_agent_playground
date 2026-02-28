@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // Background music setup
             let bgMusicStarted = false;
-            const bgMusic = new Audio('background.mp3');
+            const bgMusic = new Audio('/gunny/background.mp3');
             bgMusic.loop = true;
             bgMusic.volume = 0.25;
             
