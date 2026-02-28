@@ -1120,8 +1120,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(shakeT < 0) shakeT = 0;
                 }
 
-                // Turn countdown update
-                if(!turnLock && turnTimerActive && !proj){
+                // Turn countdown update - only for player turn
+                if(!turnLock && turnTimerActive && !proj && turn === 'player'){
                     // decrement once per frame
                     turnTimeLeft -= dt;
                     const sec = Math.max(0, Math.ceil(turnTimeLeft));
@@ -1132,6 +1132,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     if(turnTimeLeft <= 0){
                         // Auto-end turn if time runs out
+                        turnTimerActive = false; // Prevent double trigger
                         endShot('timeout');
                     }
                 }
@@ -1141,16 +1142,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function startTurnTimer(who){
-                // Delay 1 second before starting countdown
-                turnTimerActive = false;
+                // Start countdown immediately when turn begins
                 turnTimeLeft = CFG.gameSettings.turnSeconds;
                 lastTickSec = CFG.gameSettings.turnSeconds;
-                setTimeout(() => {
-                    if(turn === who) { // Only start if still that player's turn
-                        turnTimerActive = true;
-                        sfxTurnWhistle();
-                    }
-                }, 1000);
+                turnTimerActive = true;
+                sfxTurnWhistle();
             }
             function stopTurnTimer(){
                 turnTimerActive = false;
@@ -1242,6 +1238,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 windVal = clamp(windVal + randn() * 2.2, -3.0, 3.0);
                 wind.value = Math.round(windVal * 10);
                 windV.textContent = windVal.toFixed(1);
+
+                // Stop current turn timer before gap time
+                stopTurnTimer();
+                turnTimerActive = false;
 
                 if (turn === 'player') {
                     turn = 'bot';
