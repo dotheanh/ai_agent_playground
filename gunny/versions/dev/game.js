@@ -2216,6 +2216,135 @@ document.addEventListener('DOMContentLoaded', () => {
             setupHoldBtn(moveLBtn, -MOVE_STEP);
             setupHoldBtn(moveRBtn, MOVE_STEP);
 
+            // Modal handlers
+            const buffModal = document.getElementById('buffModal');
+            const buffLink = document.getElementById('buffLink');
+            const closeBuffModal = document.getElementById('closeBuffModal');
+            
+            if(buffLink){
+                buffLink.addEventListener('click', () => {
+                    buffModal.classList.add('active');
+                });
+            }
+            
+            if(closeBuffModal){
+                closeBuffModal.addEventListener('click', () => {
+                    buffModal.classList.remove('active');
+                });
+            }
+            
+            if(buffModal){
+                buffModal.addEventListener('click', (e) => {
+                    if(e.target === buffModal){
+                        buffModal.classList.remove('active');
+                    }
+                });
+            }
+
+            // Config Modal and Form
+            const configModal = document.getElementById('configModal');
+            const cheatBtn = document.getElementById('cheatBtn');
+            const closeConfigModal = document.getElementById('closeConfigModal');
+            const configForm = document.getElementById('configForm');
+            const resetConfigBtn = document.getElementById('resetConfig');
+            
+            // Show cheat button after 3 seconds (dev mode)
+            setTimeout(() => {
+                if(cheatBtn) cheatBtn.style.display = 'inline-flex';
+            }, 3000);
+            
+            if(cheatBtn){
+                cheatBtn.addEventListener('click', () => {
+                    // Load current values into form
+                    if(CFG){
+                        Object.keys(CFG).forEach(key => {
+                            if(typeof CFG[key] === 'object'){
+                                Object.keys(CFG[key]).forEach(subKey => {
+                                    const input = configForm.querySelector(`[name="${key}.${subKey}"]`);
+                                    if(input){
+                                        let val = CFG[key][subKey];
+                                        if(key === 'buffChances') val = Math.round(val * 100);
+                                        if(key === 'buffs' && (subKey === 'ARMOR_DAMAGE_REDUCTION' || subKey === 'LIFESTEAL_RATIO')){
+                                            val = subKey === 'ARMOR_DAMAGE_REDUCTION' ? Math.round(val * 100) : Math.round(val * 100);
+                                        }
+                                        if(subKey === 'BURN_DAMAGE_PERCENT') val = Math.round(val * 100);
+                                        input.value = val;
+                                    }
+                                });
+                            } else {
+                                const input = configForm.querySelector(`[name="${key}"]`);
+                                if(input) input.value = CFG[key];
+                            }
+                        });
+                    }
+                    configModal.classList.add('active');
+                });
+            }
+            
+            if(closeConfigModal){
+                closeConfigModal.addEventListener('click', () => {
+                    configModal.classList.remove('active');
+                });
+            }
+            
+            if(configModal){
+                configModal.addEventListener('click', (e) => {
+                    if(e.target === configModal){
+                        configModal.classList.remove('active');
+                    }
+                });
+            }
+            
+            if(configForm){
+                configForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(configForm);
+                    const newConfig = {
+                        turnSeconds: 15,
+                        maxHp: 500,
+                        baseDamage: 38,
+                        explosionRadius: 42,
+                        buffs: {},
+                        buffChances: {}
+                    };
+                    
+                    formData.forEach((value, key) => {
+                        if(key.includes('.')){
+                            const [section, subKey] = key.split('.');
+                            if(!newConfig[section]) newConfig[section] = {};
+                            let numVal = parseFloat(value);
+                            if(section === 'buffChances') numVal = numVal / 100;
+                            if(section === 'buffs' && (subKey === 'ARMOR_DAMAGE_REDUCTION' || subKey === 'LIFESTEAL_RATIO' || subKey === 'BURN_DAMAGE_PERCENT')){
+                                numVal = numVal / 100;
+                            }
+                            newConfig[section][subKey] = numVal;
+                        } else {
+                            newConfig[key] = parseFloat(value);
+                        }
+                    });
+                    
+                    // Update CFG
+                    CFG = newConfig;
+                    applyConfig();
+                    configModal.classList.remove('active');
+                    setLog('💾 Config đã được cập nhật!');
+                });
+            }
+            
+            if(resetConfigBtn){
+                resetConfigBtn.addEventListener('click', () => {
+                    fetch('/gunny/config/config.json')
+                        .then(r => r.json())
+                        .then(defaultConfig => {
+                            CFG = defaultConfig;
+                            applyConfig();
+                            configModal.classList.remove('active');
+                            setLog('🔄 Config đã reset về mặc định!');
+                        })
+                        .catch(() => setLog('❌ Không thể load config mặc định'));
+                });
+            }
+
             // init
             resetAll();
             step();

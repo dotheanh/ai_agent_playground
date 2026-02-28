@@ -119,6 +119,155 @@
             text-decoration: none
         }
 
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background: var(--panel);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 24px;
+            position: relative;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+        .modal-close:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Buff list in modal */
+        .buff-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .buff-item {
+            display: flex;
+            gap: 12px;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .buff-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+        .buff-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 13px;
+            color: var(--text);
+        }
+        .buff-info p {
+            margin: 0;
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+        
+        /* Form styles */
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 4px;
+            margin-top: 0;
+        }
+        .form-group input[type="number"],
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 6px 10px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 13px;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .form-section {
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .form-section-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        /* Clickable buff text */
+        .buff-link {
+            color: var(--accent);
+            text-decoration: underline;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .buff-link:hover {
+            opacity: 0.8;
+        }
+
         .versions{
             margin-top:8px;
             max-height:92px;
@@ -177,7 +326,7 @@
         </div>
         <div class="panel">
             <h1>Gunny-like Demo (100% Vibe Coding)</h1>
-            <div class="sub">PVE - Chỉnh góc/lực/gió → bắn - Địa hình đồi ngẫu nhiên - Sát thương mô phỏng theo động lực học rơi - Buff Phượng Hoàng - Responsive UI.</div>
+            <div class="sub">PVE - Chỉnh góc/lực/gió → bắn - Địa hình đồi ngẫu nhiên - Sát thương mô phỏng theo động lực học rơi - <span class="buff-link" id="buffLink">Buff Phượng Hoàng</span> - Responsive UI.</div>
 
             <div class="row">
                 <span class="pill"><span class="dot good"></span> Bạn: <b id="hpP">100</b> HP</span>
@@ -210,21 +359,199 @@
                     </svg>
                     GitHub
                 </a>
-                <button id="cheatBtn" class="pill" style="display:none;background:rgba(255,200,0,.15);border-color:rgba(255,200,0,.35);color:#ffcc00"
->⚙️ Cheat</button>
-            </div>
-
-            <!-- Cheat Panel -->
-            <div id="cheatPanel" style="display:none;margin-top:12px;padding:12px;background:rgba(0,0,0,.3);border-radius:10px;border:1px solid rgba(255,255,255,.1)">
-                <div style="font-size:11px;color:#aaa;margin-bottom:8px">Config Editor (Dev Mode)</div>
-                <textarea id="configEditor" style="width:100%;height:160px;background:#0a0a0f;color:#0f0;border:1px solid #333;border-radius:6px;padding:8px;font-family:monospace;font-size:11px;resize:vertical"></textarea>
-                <div class="row" style="margin-top:8px;justify-content:flex-end">
-                    <button id="saveConfig" style="background:rgba(0,200,0,.2);border-color:rgba(0,200,0,.4);padding:6px 12px;font-size:12px">💾 Lưu Config</button>
-                </div>
+                <button id="cheatBtn" class="pill" style="display:none;background:rgba(255,200,0,.15);border-color:rgba(255,200,0,.35);color:#ffcc00">
+                    ⚙️ Cheat
+                </button>
             </div>
 
         </div>
     </div>
+
+<!-- Buff Description Modal -->
+<div class="modal-overlay" id="buffModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">🎮 Hệ thống Buff & Debuff</h2>
+            <button class="modal-close" id="closeBuffModal">×</button>
+        </div>
+        <div class="buff-list">
+            <div class="buff-item">
+                <div class="buff-icon">⚡</div>
+                <div class="buff-info">
+                    <h4>Thêm lượt (EXTRA_TURNS)</h4>
+                    <p>Thêm 2 lượt bắn liên tiếp. Icon: Tia chớp vàng.</p>
+                </div>
+            </div>
+            <div class="buff-item">
+                <div class="buff-icon">🎯</div>
+                <div class="buff-info">
+                    <h4>Sát thương x2.5 (DAMAGE_X2_5)</h4>
+                    <p>Lượt bắn tiếp theo gây sát thương x2.5. Icon: Viên đạn cam.</p>
+                </div>
+            </div>
+            <div class="buff-item">
+                <div class="buff-icon">💥</div>
+                <div class="buff-info">
+                    <h4>Đạn to x3 (BIG_RADIUS)</h4>
+                    <p>Lượt bắn tiếp theo bán kính nổ x3. Icon: Viên đạn to trắng xám.</p>
+                </div>
+            </div>
+            <div class="buff-item">
+                <div class="buff-icon">✅</div>
+                <div class="buff-info">
+                    <h4>Hút máu (LIFESTEAL)</h4>
+                    <p>Hồi máu bằng tổng sát thương gây ra. Icon: Chữ thập (+) xanh lá.</p>
+                </div>
+            </div>
+            <div class="buff-item">
+                <div class="buff-icon">🛡️</div>
+                <div class="buff-info">
+                    <h4>Hộ giáp (ARMOR)</h4>
+                    <p>Giảm 30% sát thương nhận (tồn tại đến cuối trận). Icon: Khiên xanh dương.</p>
+                </div>
+            </div>
+            <div class="buff-item">
+                <div class="buff-icon">🔫</div>
+                <div class="buff-info">
+                    <h4>Bắn 2 phát (DOUBLE_SHOT)</h4>
+                    <p>Bắn 2 phát liên tiếp, phát thứ 2 +50% damage.</p>
+                </div>
+            </div>
+            <div class="buff-item">
+                <div class="buff-icon">🔥</div>
+                <div class="buff-info">
+                    <h4>Thiêu đốt (BURN) - Buff</h4>
+                    <p>Lượt bắn tiếp theo đạn lửa đỏ rực. Trúng đối thủ sẽ gây debuff Thiêu đốt.</p>
+                </div>
+            </div>
+            <div class="buff-item">
+                <div class="buff-icon" style="background:rgba(255,50,0,0.3)">🔥</div>
+                <div class="buff-info">
+                    <h4>Thiêu đốt (BURN) - Debuff</h4>
+                    <p>Mỗi lượt -10% HP, xóa hết buff, không thể nhận buff mới. Icon: Ngọn lửa cháy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Config Cheat Modal -->
+<div class="modal-overlay" id="configModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">⚙️ Cheat Config</h2>
+            <button class="modal-close" id="closeConfigModal">×</button>
+        </div>
+        <form id="configForm">
+            <div class="form-section">
+                <div class="form-section-title">Game Settings</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Turn Seconds</label>
+                        <input type="number" name="turnSeconds" min="5" max="60" value="15">
+                    </div>
+                    <div class="form-group">
+                        <label>Max HP</label>
+                        <input type="number" name="maxHp" min="100" max="2000" value="500">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Base Damage</label>
+                        <input type="number" name="baseDamage" min="10" max="200" value="38">
+                    </div>
+                    <div class="form-group">
+                        <label>Explosion Radius</label>
+                        <input type="number" name="explosionRadius" min="10" max="100" value="42">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Burn Damage (%)</label>
+                        <input type="number" name="buffs.BURN_DAMAGE_PERCENT" min="1" max="50" value="10">
+                    </div>
+                    <div class="form-group">
+                        <label>Armor Reduction (%)</label>
+                        <input type="number" name="buffs.ARMOR_DAMAGE_REDUCTION" min="0" max="100" value="30">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="form-section-title">Buff Multipliers</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Damage x2.5 Multiplier</label>
+                        <input type="number" name="buffs.DAMAGE_X2_5" min="1" max="5" step="0.1" value="2.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Big Radius Multiplier</label>
+                        <input type="number" name="buffs.BIG_RADIUS" min="1" max="10" step="0.5" value="3">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Double Shot Multiplier</label>
+                        <input type="number" name="buffs.DOUBLE_SHOT_DAMAGE_MULT" min="1" max="3" step="0.1" value="1.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Extra Turns</label>
+                        <input type="number" name="buffs.EXTRA_TURNS" min="1" max="5" value="2">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="form-section-title">Buff Drop Chances (%)</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Damage x2.5</label>
+                        <input type="number" name="buffChances.DAMAGE_X2_5" min="0" max="100" value="18">
+                    </div>
+                    <div class="form-group">
+                        <label>Big Radius</label>
+                        <input type="number" name="buffChances.BIG_RADIUS" min="0" max="100" value="15">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Double Shot</label>
+                        <input type="number" name="buffChances.DOUBLE_SHOT" min="0" max="100" value="15">
+                    </div>
+                    <div class="form-group">
+                        <label>Extra Turns</label>
+                        <input type="number" name="buffChances.EXTRA_TURNS" min="0" max="100" value="14">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Lifesteal</label>
+                        <input type="number" name="buffChances.LIFESTEAL" min="0" max="100" value="12">
+                    </div>
+                    <div class="form-group">
+                        <label>Armor</label>
+                        <input type="number" name="buffChances.ARMOR" min="0" max="100" value="12">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Burn</label>
+                        <input type="number" name="buffChances.BURN" min="0" max="100" value="14">
+                    </div>
+                    <div class="form-group">
+                        <label>Lifesteal Ratio (%)</label>
+                        <input type="number" name="buffs.LIFESTEAL_RATIO" min="0" max="200" value="100">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" style="margin-top:20px">
+                <button type="submit" style="flex:1">💾 Lưu Config</button>
+                <button type="button" id="resetConfig" style="flex:1;margin-left:8px">🔄 Reset Default</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script src="/gunny/versions/dev/game.js"></script>
 </body>
