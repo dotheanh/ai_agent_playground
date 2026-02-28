@@ -1,17 +1,19 @@
 {
-  "turnSeconds": 15,
-  "turnGapMs": 1000,
-  "maxHp": 500,
-  "baseDamage": 38,
-  "explosionRadius": 42,
-  "phoenixSize": 1,
-  "lifestealRatio": 1,
+  "gameSettings": {
+    "turnSeconds": 15,
+    "turnGapMs": 1000,
+    "maxHp": 500,
+    "baseDamage": 38,
+    "explosionRadius": 42,
+    "phoenixSize": 1
+  },
   "buffs": {
     "DAMAGE_X2_5": 2.5,
     "BIG_RADIUS": 3,
     "DOUBLE_SHOT_DAMAGE_MULT": 1.5,
     "EXTRA_TURNS": 2,
-    "ARMOR_DAMAGE_REDUCTION": 0.3
+    "ARMOR_DAMAGE_REDUCTION": 0.3,
+    "LIFE_STEAL_RATIO": 1
   },
   "buffChances": {
     "DAMAGE_X2_5": 0.22,
@@ -19,6 +21,7 @@
     "DOUBLE_SHOT": 0.18,
     "EXTRA_TURNS": 0.16,
     "LIFESTEAL": 0.13,
-    "ARMOR": 0.13
+    "ARMOR": 0.13,
+    "BURN": 0.14
   }
 }
