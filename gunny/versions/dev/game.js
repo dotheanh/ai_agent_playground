@@ -287,8 +287,37 @@ document.addEventListener('DOMContentLoaded', () => {
             const angV = document.getElementById('angV');
             const powV = document.getElementById('powV');
             const windV = document.getElementById('windV');
-
             const shootBtn = document.getElementById('shoot');
+
+            const isDev = true; // Dev mode flag - set to false for production
+            
+            // Dev cheat panel
+            const cheatBtn = document.getElementById('cheatBtn');
+            const cheatPanel = document.getElementById('cheatPanel');
+            const configEditor = document.getElementById('configEditor');
+            const saveConfigBtn = document.getElementById('saveConfig');
+            
+            if(isDev && cheatBtn){
+                cheatBtn.style.display = 'inline-block';
+                cheatBtn.onclick = () => {
+                    const showing = cheatPanel.style.display !== 'none';
+                    cheatPanel.style.display = showing ? 'none' : 'block';
+                    if(!showing){
+                        configEditor.value = JSON.stringify(CFG, null, 2);
+                    }
+                };
+                
+                saveConfigBtn.onclick = () => {
+                    try{
+                        const newCfg = JSON.parse(configEditor.value);
+                        CFG = {...CFG, ...newCfg};
+                        applyConfig();
+                        setLog('✅ Config đã cập nhật!');
+                    }catch(e){
+                        setLog('❌ Lỗi JSON: ' + e.message);
+                    }
+                };
+            }
             
             // Load config
             let CFG = {
@@ -469,9 +498,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             function drawBirds(){
+                const phoenixScale = (CFG && CFG.phoenixSize) || 1;
                 for(let b of birds){
                     ctx.save();
                     ctx.translate(b.x, b.y);
+                    ctx.scale(phoenixScale, phoenixScale);
                     if(b.dir === -1) ctx.scale(-1, 1);
                     
                     // Fire glow effect
@@ -767,8 +798,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // LIFESTEAL: heal shooter immediately after dealing damage (before turn ends)
                 if(hasLifesteal && totalDealt > 0){
-                    shooter.hp = clamp(shooter.hp + totalDealt, 0, shooter.maxHp);
-                    setLog(`${turn === 'player' ? 'Bạn' : 'Bot'} hồi ${totalDealt} HP từ hút máu!`);
+                    const lsRatio = (CFG && CFG.lifestealRatio) || 1;
+                    const healAmount = Math.round(totalDealt * lsRatio);
+                    shooter.hp = clamp(shooter.hp + healAmount, 0, shooter.maxHp);
+                    setLog(`${turn === 'player' ? 'Bạn' : 'Bot'} hồi ${healAmount} HP từ hút máu!`);
                     // Clear after use
                     if(turn === 'player') playerBuff = null;
                     else botBuff = null;
@@ -827,12 +860,14 @@ document.addEventListener('DOMContentLoaded', () => {
             
             function checkProjHitBird(){
                 if(!proj || !proj.alive) return false;
+                const phoenixScale = (CFG && CFG.phoenixSize) || 1;
+                const hitRadius = 20 * phoenixScale;
                 for(let i = birds.length - 1; i >= 0; i--){
                     let b = birds[i];
                     const dx = proj.x - b.x;
                     const dy = proj.y - b.y;
                     const dist = Math.sqrt(dx*dx + dy*dy);
-                    if(dist < 20){ // Hit radius
+                    if(dist < hitRadius){ // Hit radius scales with phoenixSize
                         // Visual explosion at hit point
                         flashes.push({x: proj.x, y: proj.y, t: 0});
                         sfxDopplerHit();

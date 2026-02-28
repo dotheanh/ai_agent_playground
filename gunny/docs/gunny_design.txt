@@ -114,21 +114,36 @@ Buff nhận được khi bắn trúng phượng hoàng:
   - Thêm 2 lượt bắn liên tiếp.
   - Clear sau khi dùng hết lượt thêm.
 
-5.2 Config buff chances
-Trong config.json có thể điều chỉnh tỉ lệ xuất hiện của từng buff:
+5.2 Config buff chances và các tham số khác
+Trong config.json có thể điều chỉnh:
+- Tỉ lệ xuất hiện của từng buff (`buffChances`)
+- Kích thước Phượng Hoàng (`phoenixSize`, mặc định = 1, hitbox và visual scale theo)
+- Hệ số hút máu Lifesteal (`lifestealRatio`, mặc định = 1 = 100% sát thương)
+
+Ví dụ:
 ```json
-"buffChances": {
-  "DAMAGE_X2_5": 0.22,
-  "BIG_RADIUS": 0.18,
-  "DOUBLE_SHOT": 0.18,
-  "EXTRA_TURNS": 0.16,
-  "LIFESTEAL": 0.13,
-  "ARMOR": 0.13
+{
+  "phoenixSize": 1.5,
+  "lifestealRatio": 0.8,
+  "buffChances": {
+    "DAMAGE_X2_5": 0.22,
+    "BIG_RADIUS": 0.18,
+    "DOUBLE_SHOT": 0.18,
+    "EXTRA_TURNS": 0.16,
+    "LIFESTEAL": 0.13,
+    "ARMOR": 0.13
+  }
 }
 ```
 Tổng các tỉ lệ không cần = 1, code sẽ normalize tự động.
 
-5.3 Ghi chú logic
+5.3 Dev Mode (isDev)
+Khi `isDev = true` trong code:
+- Hiện nút "⚙️ Cheat" bên cạnh nút GitHub
+- Bấm Cheat mở panel edit config.json trực tiếp
+- Bấm "💾 Lưu Config" áp dụng ngay lập tức không cần restart
+
+5.4 Ghi chú logic
 - Buff áp dụng cho người nhận (player hoặc bot).
 - DAMAGE_X2_5 và BIG_RADIUS áp dụng ở lượt bắn tiếp theo, sau khi dùng sẽ bị clear.
 - DOUBLE_SHOT & EXTRA_TURNS được xử lý trong endShot (được clear khi đã dùng xong).

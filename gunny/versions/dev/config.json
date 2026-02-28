@@ -4,6 +4,8 @@
   "maxHp": 500,
   "baseDamage": 38,
   "explosionRadius": 42,
+  "phoenixSize": 1,
+  "lifestealRatio": 1,
   "buffs": {
     "DAMAGE_X2_5": 2.5,
     "BIG_RADIUS": 3,
