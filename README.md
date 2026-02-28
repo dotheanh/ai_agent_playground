@@ -30,6 +30,8 @@ https://nhoxtheanh.duckdns.org/gunny/demo.mp4
 
 **Truy cập**: [https://nhoxtheanh.duckdns.org/gunny/](https://nhoxtheanh.duckdns.org/gunny/)
 
+**📋 Design Document**: [gunny/docs/gunny_design.txt](gunny/docs/gunny_design.txt) - Tài liệu thiết kế chi tiết hệ thống game, buff, SFX...
+
 ### Sound FX Demo
 - Trang demo 6+ loại âm thanh procedural được tạo bằng WebAudio API
 - Nghe thử và so sánh các hiệu ứng âm thanh khác nhau

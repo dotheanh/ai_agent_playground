@@ -112,11 +112,13 @@ Buff nhận được khi bắn trúng phượng hoàng:
   - Bắn trúng đối thủ: gây sát thương bình thường + debuff Thiêu đốt.
   - Debuff Thiêu đốt:
     - Tồn tại cho đến cuối trận (hoặc reset).
-    - Mỗi lượt bị trừ 10% HP tối đa.
+    - Mỗi lượt bị trừ BURN_DAMAGE_RATIO * max HP (config 0.1 = 10%).
+    - Burn damage xảy ra sau gap time, trước khi được action.
+    - Nếu burn chết thì không được action nữa.
     - Xóa hết buff hiện có trên ngưỡi bị đốt.
     - Không thể nhận buff mới từ phượng hoàng (bị hủy ngay lập tức).
   - Icon buff (ngườii có BURN): Viên đạn bốc lửa.
-  - Icon debuff (ngườii bị Thiêu đốt): Ngọn lửa cháy liên tục.
+  - Icon debuff (ngườii bị Thiêu đốt): Ngọn lửa lớn màu đỏ rực cháy liên tục.
   - Clear sau khi bắn trúng đối thủ.
 
 - DOUBLE_SHOT (tỉ lệ config: buffChances.DOUBLE_SHOT):
@@ -133,7 +135,8 @@ Buff nhận được khi bắn trúng phượng hoàng:
 Trong config.json có thể điều chỉnh:
 - Tỉ lệ xuất hiện của từng buff (`buffChances`)
 - Kích thước Phượng Hoàng (`phoenixSize`, mặc định = 1, hitbox và visual scale theo)
-- Hệ số hút máu Lifesteal (`lifestealRatio`, mặc định = 1 = 100% sát thương)
+- Hệ số hút máu Lifesteal (`LIFE_STEAL_RATIO`, mặc định = 1 = 100% sát thương)
+- Tỉ lệ sát thương thiêu đốt (`BURN_DAMAGE_RATIO`, mặc định = 0.1 = 10% max HP)
 
 Ví dụ:
 ```json
@@ -146,7 +149,8 @@ Ví dụ:
     "DOUBLE_SHOT": 0.18,
     "EXTRA_TURNS": 0.16,
     "LIFESTEAL": 0.13,
-    "ARMOR": 0.13
+    "ARMOR": 0.13,
+    "BURN": 0.14
   }
 }
 ```
@@ -155,7 +159,8 @@ Tổng các tỉ lệ không cần = 1, code sẽ normalize tự động.
 5.3 Dev Mode (isDev)
 Khi `isDev = true` trong code:
 - Hiện nút "⚙️ Cheat" bên cạnh nút GitHub
-- Bấm Cheat mở panel edit config.json trực tiếp
+- Bấm Cheat mở modal edit config.json trực tiếp
+- Config chia 3 section: gameSettings, buffs, buffChances
 - Bấm "💾 Lưu Config" áp dụng ngay lập tức không cần restart
 
 5.4 Ghi chú logic
