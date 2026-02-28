@@ -1566,7 +1566,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.fillStyle = col;
                     ctx.shadowBlur = 10;
                     ctx.shadowColor = col;
-                    ctx.fillText(`⏳ ${sec}`, 16, -22);
+                    ctx.fillText(`⏳ ${sec}`, 16, 44);
                     ctx.restore();
                 }
 
