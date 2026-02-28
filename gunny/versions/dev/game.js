@@ -1160,14 +1160,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(turn === 'player' && botBurnDebuff && botBurnDebuff.active){
                     const burnDmg = Math.round(bot.maxHp * burnPercent);
                     bot.hp = clamp(bot.hp - burnDmg, 0, 999);
-                    dmgTexts.push({ x: bot.x, y: bot.y - bot.r - 18, v: burnDmg, t: 0, tier: 1 });
+                    dmgTexts.push({ x: bot.x, y: bot.y - bot.r - 18, v: burnDmg, t: 0, tier: 1, isBurn: true });
                     hpB.textContent = bot.hp;
                     setLog(`🔥 Bot bị Thiêu đốt -${burnDmg} HP!`);
                 }
                 if(turn === 'bot' && playerBurnDebuff && playerBurnDebuff.active){
                     const burnDmg = Math.round(player.maxHp * burnPercent);
                     player.hp = clamp(player.hp - burnDmg, 0, 999);
-                    dmgTexts.push({ x: player.x, y: player.y - player.r - 18, v: burnDmg, t: 0, tier: 1 });
+                    dmgTexts.push({ x: player.x, y: player.y - player.r - 18, v: burnDmg, t: 0, tier: 1, isBurn: true });
                     hpP.textContent = player.hp;
                     setLog(`🔥 Bạn bị Thiêu đốt -${burnDmg} HP!`);
                 }
@@ -1239,17 +1239,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     turn = 'bot';
                     shootBtn.disabled = true;
                     bot.stamina = bot.maxStamina;
-                    setLog('Lượt của bot...');
-                    startTurnTimer('bot');
-                    setTimeout(botTurn, CFG.gameSettings.turnGapMs);
+                    setLog(`⏳ Chờ ${(CFG.gameSettings.turnGapMs/1000).toFixed(1)}s...`);
+                    setTimeout(() => {
+                        setLog('🤖 Lượt của bot...');
+                        startTurnTimer('bot');
+                        botTurn();
+                    }, CFG.gameSettings.turnGapMs);
                 } else {
                     // end bot turn -> gap -> start player turn
                     shootBtn.disabled = true;
+                    setLog(`⏳ Chờ ${(CFG.gameSettings.turnGapMs/1000).toFixed(1)}s...`);
                     setTimeout(() => {
                         turn = 'player';
                         shootBtn.disabled = false;
                         player.stamina = player.maxStamina;
-                        setLog('Lượt của bạn. Chỉnh góc/lực rồi bắn.');
+                        setLog('🎯 Lượt của bạn. Chỉnh góc/lực rồi bắn.');
                         startTurnTimer('player');
                     }, CFG.gameSettings.turnGapMs);
                 }
@@ -1941,7 +1945,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 for (const d of dmgTexts) {
                     const a = 1 - (d.t / 0.9);
                     let col = '255,230,170';
-                    if(d.tier === 3) col = '255,45,45';
+                    if(d.isBurn) col = '255,140,0'; // Orange for burn damage
+                    else if(d.tier === 3) col = '255,45,45';
                     else if(d.tier === 2) col = '255,160,60';
                     else if(d.tier === 1) col = '255,235,120';
                     ctx.fillStyle = `rgba(${col},${a})`;
@@ -2038,29 +2043,52 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function resetAll() {
+                // Stop all audio/sfx
+                if(audioCtx) {
+                    audioCtx.close();
+                    audioCtx = null;
+                }
+                // Stop projectile and related sounds
+                proj = null;
+                explosion = null;
+                turnLock = false;
+                
                 randomSky();
                 buildTerrain();
                 placeOnGround(player);
                 placeOnGround(bot);
-                player.hp = player.maxHp;
-                bot.hp = bot.maxHp;
+                player.hp = CFG.gameSettings.maxHp;
+                bot.hp = CFG.gameSettings.maxHp;
+                player.maxHp = CFG.gameSettings.maxHp;
+                bot.maxHp = CFG.gameSettings.maxHp;
                 player.stamina = player.maxStamina;
                 bot.stamina = bot.maxStamina;
                 hpP.textContent = player.hp;
                 hpB.textContent = bot.hp;
 
-                proj = null;
                 turn = 'player';
-                turnLock = false;
                 shootBtn.disabled = false;
 
                 windVal = 0;
                 wind.value = 0;
                 windV.textContent = '0.0';
+                
+                // Clear all projectiles and effects
+                dmgTexts.length = 0;
+                healTexts.length = 0;
+                flashes.length = 0;
+                birds.length = 0;
+                phoenixBuffs.length = 0;
+                fallingBirds.length = 0;
+                
+                // Clear buff-related states
+                doubleShotPending = false;
+                lastShotParams = null;
+                lastBirdSpawn = Date.now();
 
                 setLog('Lượt của bạn. Chỉnh góc/lực rồi bắn.');
                 initClouds();
-                lastBirdSpawn = Date.now();
+                
                 // Clear all buffs on reset
                 playerBuff = null;
                 botBuff = null;
@@ -2068,6 +2096,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 playerBurnDebuff = null;
                 botBurnDebuff = null;
                 // Reset turn timer
+                turnTimeLeft = 0;
+                lastTickSec = 0;
+                turnTimerActive = false;
                 startTurnTimer('player');
             }
 
