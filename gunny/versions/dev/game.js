@@ -2295,10 +2295,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     if(input){
                                         let val = CFG[key][subKey];
                                         if(key === 'buffChances') val = Math.round(val * 100);
-                                        if(key === 'buffs' && (subKey === 'ARMOR_DAMAGE_REDUCTION' || subKey === 'LIFESTEAL_RATIO')){
-                                            val = subKey === 'ARMOR_DAMAGE_REDUCTION' ? Math.round(val * 100) : Math.round(val * 100);
-                                        }
-                                        if(subKey === 'BURN_DAMAGE_PERCENT') val = Math.round(val * 100);
+                                        // Buffs section values are displayed as-is (decimal)
                                         input.value = val;
                                     }
                                 });
@@ -2345,9 +2342,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             if(!newConfig[section]) newConfig[section] = {};
                             let numVal = parseFloat(value);
                             if(section === 'buffChances') numVal = numVal / 100;
-                            if(section === 'buffs' && (subKey === 'ARMOR_DAMAGE_REDUCTION' || subKey === 'LIFESTEAL_RATIO' || subKey === 'BURN_DAMAGE_PERCENT')){
-                                numVal = numVal / 100;
-                            }
+                            // Buffs section values are saved as-is (decimal)
                             newConfig[section][subKey] = numVal;
                         } else {
                             newConfig[key] = parseFloat(value);

@@ -13,7 +13,8 @@
     "DOUBLE_SHOT_DAMAGE_MULT": 1.5,
     "EXTRA_TURNS": 2,
     "ARMOR_DAMAGE_REDUCTION": 0.3,
-    "LIFE_STEAL_RATIO": 1
+    "LIFE_STEAL_RATIO": 1,
+    "BURN_DAMAGE_PERCENT": 0.1
   },
   "buffChances": {
     "DAMAGE_X2_5": 0.22,
