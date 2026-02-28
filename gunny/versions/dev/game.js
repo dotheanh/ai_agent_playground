@@ -1158,25 +1158,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 
-                // BURN DEBUFF: At start of each turn, take burnDamagePercent% max HP damage
-                const burnPercent = (CFG && CFG.buffs && CFG.buffs.BURN_DAMAGE_PERCENT) ? CFG.buffs.BURN_DAMAGE_PERCENT / 100 : 0.1;
-                
-                if(turn === 'player' && botBurnDebuff && botBurnDebuff.active){
-                    const burnDmg = Math.round(bot.maxHp * burnPercent);
-                    bot.hp = clamp(bot.hp - burnDmg, 0, 999);
-                    dmgTexts.push({ x: bot.x, y: bot.y - bot.r - 18, v: burnDmg, t: 0, tier: 1, isBurn: true });
-                    hpB.textContent = bot.hp;
-                    setLog(`🔥 Bot bị Thiêu đốt -${burnDmg} HP!`);
-                }
-                if(turn === 'bot' && playerBurnDebuff && playerBurnDebuff.active){
-                    const burnDmg = Math.round(player.maxHp * burnPercent);
-                    player.hp = clamp(player.hp - burnDmg, 0, 999);
-                    dmgTexts.push({ x: player.x, y: player.y - player.r - 18, v: burnDmg, t: 0, tier: 1, isBurn: true });
-                    hpP.textContent = player.hp;
-                    setLog(`🔥 Bạn bị Thiêu đốt -${burnDmg} HP!`);
-                }
-                
-                // Check win condition after burn damage
+                // Check win condition after damage
                 if (player.hp <= 0 && bot.hp <= 0) {
                     setLog('Cả hai cùng ngã. Hoà. Reset để chơi lại.');
                     turnLock = true;
@@ -1249,6 +1231,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     bot.stamina = bot.maxStamina;
                     setLog(`⏳ Chờ ${(CFG.gameSettings.turnGapMs/1000).toFixed(1)}s...`);
                     setTimeout(() => {
+                        // Process burn damage for bot before they can act
+                        processBurnDamage('bot');
+                        if(bot.hp <= 0) {
+                            setLog('🔥 Bot chết vì Thiêu đốt! Bạn thắng!');
+                            turnLock = true;
+                            return;
+                        }
                         setLog('🤖 Lượt của bot...');
                         startTurnTimer('bot');
                         botTurn();
@@ -1259,11 +1248,38 @@ document.addEventListener('DOMContentLoaded', () => {
                     setLog(`⏳ Chờ ${(CFG.gameSettings.turnGapMs/1000).toFixed(1)}s...`);
                     setTimeout(() => {
                         turn = 'player';
+                        // Process burn damage for player before they can act
+                        processBurnDamage('player');
+                        if(player.hp <= 0) {
+                            setLog('🔥 Bạn chết vì Thiêu đốt! Game Over!');
+                            turnLock = true;
+                            return;
+                        }
                         shootBtn.disabled = false;
                         player.stamina = player.maxStamina;
                         setLog('🎯 Lượt của bạn. Chỉnh góc/lực rồi bắn.');
                         startTurnTimer('player');
                     }, CFG.gameSettings.turnGapMs);
+                }
+            }
+
+            // Process burn damage at start of turn (after gap time, before player can act)
+            function processBurnDamage(who) {
+                const burnRatio = (CFG && CFG.buffs && CFG.buffs.BURN_DAMAGE_RATIO) ? CFG.buffs.BURN_DAMAGE_RATIO : 0.1;
+                
+                if(who === 'player' && playerBurnDebuff && playerBurnDebuff.active){
+                    const burnDmg = Math.round(player.maxHp * burnRatio);
+                    player.hp = clamp(player.hp - burnDmg, 0, 999);
+                    dmgTexts.push({ x: player.x, y: player.y - player.r - 18, v: burnDmg, t: 0, tier: 1, isBurn: true });
+                    hpP.textContent = player.hp;
+                    setLog(`🔥 Bạn bị Thiêu đốt -${burnDmg} HP!`);
+                }
+                if(who === 'bot' && botBurnDebuff && botBurnDebuff.active){
+                    const burnDmg = Math.round(bot.maxHp * burnRatio);
+                    bot.hp = clamp(bot.hp - burnDmg, 0, 999);
+                    dmgTexts.push({ x: bot.x, y: bot.y - bot.r - 18, v: burnDmg, t: 0, tier: 1, isBurn: true });
+                    hpB.textContent = bot.hp;
+                    setLog(`🔥 Bot bị Thiêu đốt -${burnDmg} HP!`);
                 }
             }
 
