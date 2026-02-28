@@ -292,33 +292,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const isDev = true; // Dev mode flag - set to false for production
             
             // Dev cheat panel
-            const cheatBtn = document.getElementById('cheatBtn');
-            const cheatPanel = document.getElementById('cheatPanel');
-            const configEditor = document.getElementById('configEditor');
-            const saveConfigBtn = document.getElementById('saveConfig');
-            
-            if(isDev && cheatBtn){
-                cheatBtn.style.display = 'inline-block';
-                cheatBtn.onclick = () => {
-                    const showing = cheatPanel.style.display !== 'none';
-                    cheatPanel.style.display = showing ? 'none' : 'block';
-                    if(!showing){
-                        configEditor.value = JSON.stringify(CFG, null, 2);
-                    }
-                };
-                
-                saveConfigBtn.onclick = () => {
-                    try{
-                        const newCfg = JSON.parse(configEditor.value);
-                        CFG = {...CFG, ...newCfg};
-                        applyConfig();
-                        setLog('✅ Config đã cập nhật!');
-                    }catch(e){
-                        setLog('❌ Lỗi JSON: ' + e.message);
-                    }
-                };
-            }
-            
             // Load config
             let CFG = {
                 turnSeconds: 15,
