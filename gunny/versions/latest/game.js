@@ -1086,11 +1086,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     startTurnTimer('bot');
                     setTimeout(botTurn, CFG.turnGapMs);
                 } else {
-                    turn = 'player';
-                    shootBtn.disabled = false;
-                    player.stamina = player.maxStamina;
-                    setLog('Lượt của bạn. Chỉnh góc/lực rồi bắn.');
-                    startTurnTimer('player');
+                    // end bot turn -> gap -> start player turn
+                    shootBtn.disabled = true;
+                    setTimeout(() => {
+                        turn = 'player';
+                        shootBtn.disabled = false;
+                        player.stamina = player.maxStamina;
+                        setLog('Lượt của bạn. Chỉnh góc/lực rồi bắn.');
+                        startTurnTimer('player');
+                    }, CFG.turnGapMs);
                 }
             }
 
