@@ -273,9 +273,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const shootBtn = document.getElementById('shoot');
             
-            // Turn countdown (15s)
-            let turnTimeLeft = 15;
-            let lastTickSec = 15;
+            // Load config
+            let CFG = {
+                turnSeconds: 15,
+                maxHp: 500,
+                baseDamage: 38,
+                explosionRadius: 42,
+                buffs: { DAMAGE_X2_5: 2.5, BIG_RADIUS: 3, DOUBLE_SHOT_DAMAGE_MULT: 1.5, EXTRA_TURNS: 2 }
+            };
+            fetch('/gunny/config/config.json').then(r=>r.json()).then(j=>{CFG=j; applyConfig();}).catch(()=>{});
+            function applyConfig(){
+                player.maxHp = CFG.maxHp;
+                bot.maxHp = CFG.maxHp;
+                player.hp = player.maxHp;
+                bot.hp = bot.maxHp;
+                hpP.textContent = player.hp;
+                hpB.textContent = bot.hp;
+            }
+
+            // Turn countdown
+            let turnTimeLeft = 0;
+            let lastTickSec = 0;
             let turnTimerActive = false;
             const resetBtn = document.getElementById('reset');
             const moveLBtn = document.getElementById('moveL');
@@ -324,8 +342,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const player = {
                 x: 120,
                 r: 14,
-                hp: 200,
-                maxHp: 200,
+                hp: 500,
+                maxHp: 500,
                 facing: 1,
                 stamina: 150,
                 maxStamina: 150
@@ -333,8 +351,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const bot = {
                 x: W - 120,
                 r: 14,
-                hp: 200,
-                maxHp: 200,
+                hp: 500,
+                maxHp: 500,
                 facing: -1,
                 stamina: 150,
                 maxStamina: 150
@@ -674,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function explode(atx, aty, impactSpeed = 0) {
                 // Radius with buff
-                let R = 42;
+                let R = CFG.explosionRadius;
                 const buff = turn === 'player' ? playerBuff : botBuff;
                 if(buff && buff.type === BUFF_TYPES.BIG_RADIUS){
                     R *= buff.value;
@@ -682,7 +700,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(turn === 'player') playerBuff = null;
                     else botBuff = null;
                 }
-                const baseDmg = 38;
+                const baseDmg = CFG.baseDamage;
 
                 // Map VERTICAL impact speed (px/s) to multiplier ~[1..4]
                 // High arc => large downward speed => much higher damage.
@@ -702,7 +720,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // DOUBLE_SHOT: 2nd shot deals +50% damage
                 if(buff && buff.type === BUFF_TYPES.DOUBLE_SHOT && doubleShotPending){
-                    totalDmg *= 1.5;
+                    totalDmg *= CFG.buffs.DOUBLE_SHOT_DAMAGE_MULT;
                 }
 
                 let maxDmg = 0;
@@ -800,16 +818,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const buffData = {type: buff, turnsLeft: 1};
                 switch(buff){
                     case BUFF_TYPES.DAMAGE_X2_5:
-                        buffData.value = 2.5;
+                        buffData.value = CFG.buffs.DAMAGE_X2_5;
                         break;
                     case BUFF_TYPES.DOUBLE_SHOT:
                         buffData.value = 2;
                         break;
                     case BUFF_TYPES.EXTRA_TURNS:
-                        buffData.value = 2;
+                        buffData.value = CFG.buffs.EXTRA_TURNS;
                         break;
                     case BUFF_TYPES.BIG_RADIUS:
-                        buffData.value = 3;
+                        buffData.value = CFG.buffs.BIG_RADIUS;
                         break;
                 }
                 if(target === 'player'){
@@ -980,8 +998,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function startTurnTimer(who){
-                turnTimeLeft = 15;
-                lastTickSec = 15;
+                turnTimeLeft = CFG.turnSeconds;
+                lastTickSec = CFG.turnSeconds;
                 turnTimerActive = true;
             }
             function stopTurnTimer(){
@@ -1294,7 +1312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 ctx.fillStyle = 'rgba(233,238,252,.9)';
                 ctx.font = '12px system-ui';
-                const s = `Gió: ${windVal.toFixed(1)} (m/s giả lập)`;
+                const s = `Gió: ${windVal.toFixed(1)} (m/s)`;
                 ctx.fillText(s, -ctx.measureText(s).width / 2, 5);
 
                 // arrow
@@ -1513,6 +1531,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.fillText(text, d.x, d.y);
                 }
                 ctx.textAlign = 'start';
+
+                // Turn countdown display (left, under turn label)
+                if(!turnLock){
+                    const sec = Math.max(0, Math.ceil(turnTimeLeft));
+                    // Hard colors per second: more red over time, last 5s orange-red
+                    let col = '#ffffff';
+                    if(sec <= 5) col = '#ff3300';
+                    else if(sec <= 7) col = '#ff6666';
+                    else if(sec <= 10) col = '#ff9999';
+                    else if(sec <= 12) col = '#ffcccc';
+                    // Shadow glow
+                    ctx.save();
+                    ctx.font = 'bold 18px system-ui';
+                    ctx.textAlign = 'left';
+                    ctx.fillStyle = col;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = col;
+                    ctx.fillText(`⏳ ${sec}s`, 16, 64);
+                    ctx.restore();
+                }
 
                 // Draw buff messages (center, 2s fade)
                 for(let i = buffMessages.length - 1; i >= 0; i--){
