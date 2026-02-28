@@ -1,0 +1,102 @@
+GUNNY DESIGN DOC (Living Document)
+================================
+
+Mục tiêu
+- Game bắn theo góc/lực có gió, mô phỏng vật lý đạn đạo kiểu Gunny.
+- UI responsive, chơi được trên mobile.
+- Có bot (PVE).
+- Có hệ thống phiên bản (Latest/Developing/Version 1..n).
+- Có SFX procedural + nhạc nền.
+- Có mini-event “Phượng Hoàng” (chim bay ngang qua) + hệ thống buff.
+
+1) Gameplay cốt lõi
+-------------------
+1.1 PVE: Player vs Bot
+- 1 người chơi đối đầu 1 bot.
+- Turn-based: Player bắn xong -> Bot bắn -> lặp.
+- Có reset ván.
+
+1.2 Điều khiển
+- Chỉnh góc (angle) và lực (power) để bắn.
+- Có gió (wind) ảnh hưởng quỹ đạo theo gia tốc ngang.
+- Có di chuyển trái/phải (tiêu hao stamina) để canh vị trí.
+
+1.3 Vật lý & sát thương
+- Đạn chịu trọng lực (gravity) và gió.
+- Va chạm:
+  - Chạm đất -> nổ.
+  - Chạm nhân vật -> nổ.
+  - Ra ngoài màn hình -> kết thúc phát bắn.
+- Damage mô phỏng theo động lực học rơi: tốc độ va chạm dọc (vy) càng lớn -> damage multiplier càng cao.
+- Nổ gây damage theo khoảng cách tới tâm nổ (radial falloff).
+
+2) UI/UX
+--------
+2.1 Responsive UI
+- Canvas + panel điều khiển tối ưu cho desktop & mobile.
+- Có log trạng thái (setLog).
+
+2.2 Version menu
+- Có menu “Chọn phiên bản” để chuyển nhanh giữa Latest/Developing/Version n.
+
+2.3 Hiển thị thông báo buff
+- Khi nhặt buff (bắn trúng chim), ngoài setLog còn có thông báo giữa canvas (hiện 2s rồi fade out).
+
+3) Audio
+--------
+3.1 SFX procedural (WebAudio)
+- SFX bắn.
+- SFX đạn bay (gió/wind sweep + Doppler):
+  - Volume giảm gần 0 ở đỉnh quỹ đạo.
+  - Stereo panning theo vị trí đạn trái/phải.
+- SFX nổ:
+  - Nếu dmg > 90: “mega explosion” tăng volume mạnh hơn.
+
+3.2 Nhạc nền
+- Phát nhạc nền MP3 loop trong background (tải từ /gunny/background.mp3).
+
+4) Phoenix (Bird) Event
+-----------------------
+4.1 Chim bay ngang
+- Chim bay ngang qua màn hình theo interval.
+- Kích thước chim đã được tăng (to hơn).
+- Quỹ đạo chim có thể bay uốn lượn (sine wave).
+- Visual chim được nâng cấp thành phong cách “phượng hoàng lửa”.
+
+4.2 Bắn trúng chim
+- Khi đạn trúng chim:
+  - Đạn dừng và “nổ tại chỗ” (visual flash).
+  - Chim rơi/văng và fade out.
+  - Turn kết thúc tại đây.
+  - Người bắn nhận 1 buff ngẫu nhiên.
+
+5) Buff system
+--------------
+Buff nhận được khi bắn trúng phượng hoàng (random):
+- DAMAGE_X2_5: Lượt bắn tiếp theo sát thương x2.5.
+- BIG_RADIUS: Lượt bắn tiếp theo bán kính nổ x3.
+- DOUBLE_SHOT: Bắn 2 phát liên tiếp cùng quỹ đạo;
+  - Phát thứ 2 +50% damage.
+- EXTRA_TURNS: Thêm 2 lượt bắn liên tiếp.
+
+Ghi chú logic:
+- Buff áp dụng cho người nhận (player hoặc bot).
+- DAMAGE_X2_5 và BIG_RADIUS áp dụng ở lượt bắn tiếp theo, sau khi dùng sẽ bị clear.
+- DOUBLE_SHOT & EXTRA_TURNS được xử lý trong endShot (được clear khi đã dùng xong).
+- Visual projectile:
+  - Buffed bullet đổi màu cam + glow.
+  - BIG_RADIUS làm đạn to hơn.
+  - DOUBLE_SHOT phát thứ 2 có hiệu ứng cường hóa.
+
+6) Files / triển khai
+---------------------
+- game-dev.html: trang game Developing.
+- game-dev.js: logic game Developing.
+- index.html (Latest): wrapper iframe + version menu.
+- game.html: game HTML (được iframe load bởi Latest).
+- shared/versions.json + version-menu.js: menu phiên bản.
+
+Changelog rules
+---------------
+- Từ nay mỗi feature mới phải cập nhật vào file này.
+
