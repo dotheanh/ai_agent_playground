@@ -2243,7 +2243,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Config Modal and Form
             const configModal = document.getElementById('configModal');
-            const cheatBtn = document.getElementById('cheatBtn');
             const closeConfigModal = document.getElementById('closeConfigModal');
             const configForm = document.getElementById('configForm');
             const resetConfigBtn = document.getElementById('resetConfig');
