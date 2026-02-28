@@ -1161,17 +1161,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 
-                // BURN DEBUFF: At start of each turn, take 10% max HP damage
-                // Check if the player whose turn just ended has burn debuff
+                // BURN DEBUFF: At start of each turn, take burnDamagePercent% max HP damage
+                const burnPercent = (CFG && CFG.burnDamagePercent) ? CFG.burnDamagePercent / 100 : 0.1;
+                
                 if(turn === 'player' && botBurnDebuff && botBurnDebuff.active){
-                    const burnDmg = Math.round(bot.maxHp * 0.1);
+                    const burnDmg = Math.round(bot.maxHp * burnPercent);
                     bot.hp = clamp(bot.hp - burnDmg, 0, 999);
                     dmgTexts.push({ x: bot.x, y: bot.y - bot.r - 18, v: burnDmg, t: 0, tier: 1 });
                     hpB.textContent = bot.hp;
                     setLog(`🔥 Bot bị Thiêu đốt -${burnDmg} HP!`);
                 }
                 if(turn === 'bot' && playerBurnDebuff && playerBurnDebuff.active){
-                    const burnDmg = Math.round(player.maxHp * 0.1);
+                    const burnDmg = Math.round(player.maxHp * burnPercent);
                     player.hp = clamp(player.hp - burnDmg, 0, 999);
                     dmgTexts.push({ x: player.x, y: player.y - player.r - 18, v: burnDmg, t: 0, tier: 1 });
                     hpP.textContent = player.hp;
@@ -1540,7 +1541,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.shadowColor = icon.color;
                     
                     switch(icon.type) {
-                        case 'extra': // Lightning bolt
+                        case 'extra': // Lightning bolt - flipped horizontally
+                            ctx.save();
+                            ctx.scale(-1, 1); // Flip X
                             ctx.fillStyle = icon.color;
                             ctx.beginPath();
                             ctx.moveTo(-2, -6);
@@ -1551,6 +1554,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ctx.lineTo(0, -2);
                             ctx.closePath();
                             ctx.fill();
+                            ctx.restore();
                             ctx.shadowBlur = 12 + Math.sin(time * 8) * 4;
                             break;
                         case 'damage': // Bullet orange
@@ -1564,13 +1568,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             ctx.arc(0, 0, 6 + Math.sin(time * 4) * 2, 0, Math.PI * 2);
                             ctx.stroke();
                             break;
-                        case 'big': // Big bullet with sparkle
+                        case 'big': // Big bullet with sparkle + circle center
                             const scale = 1 + Math.sin(time * 4) * 0.2;
                             ctx.scale(scale, scale);
+                            // Main bullet body (ellipse)
                             ctx.fillStyle = '#ffffff';
                             ctx.beginPath();
                             ctx.ellipse(0, 0, 5, 9, 0, 0, Math.PI * 2);
                             ctx.fill();
+                            // Circle center
+                            ctx.fillStyle = '#cccccc';
+                            ctx.beginPath();
+                            ctx.arc(0, 0, 3, 0, Math.PI * 2);
+                            ctx.fill();
+                            // Sparkle rays
                             ctx.strokeStyle = `rgba(200, 200, 200, ${0.6 + Math.sin(time * 8) * 0.4})`;
                             ctx.lineWidth = 2;
                             for(let i=0; i<4; i++) {

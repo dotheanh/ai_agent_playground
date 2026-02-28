@@ -1974,6 +1974,127 @@ document.addEventListener('DOMContentLoaded', () => {
             
             setupHoldBtn(moveLBtn, -MOVE_STEP);
             setupHoldBtn(moveRBtn, MOVE_STEP);
+            
+            // Modal handling
+            const buffModal = document.getElementById('buffModal');
+            const configModal = document.getElementById('configModal');
+            const buffLink = document.getElementById('buffLink');
+            const closeBuffModal = document.getElementById('closeBuffModal');
+            const closeConfigModal = document.getElementById('closeConfigModal');
+            const configForm = document.getElementById('configForm');
+            const resetConfigBtn = document.getElementById('resetConfig');
+            
+            // Open buff modal when clicking buff link
+            if(buffLink){
+                buffLink.addEventListener('click', () => {
+                    buffModal.classList.add('active');
+                });
+            }
+            
+            // Close buff modal
+            if(closeBuffModal){
+                closeBuffModal.addEventListener('click', () => {
+                    buffModal.classList.remove('active');
+                });
+            }
+            
+            // Close buff modal when clicking outside
+            if(buffModal){
+                buffModal.addEventListener('click', (e) => {
+                    if(e.target === buffModal){
+                        buffModal.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Close config modal
+            if(closeConfigModal){
+                closeConfigModal.addEventListener('click', () => {
+                    configModal.classList.remove('active');
+                });
+            }
+            
+            // Close config modal when clicking outside
+            if(configModal){
+                configModal.addEventListener('click', (e) => {
+                    if(e.target === configModal){
+                        configModal.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Form to JSON conversion
+            function formToJSON(form){
+                const formData = new FormData(form);
+                const result = {
+                    buffs: {},
+                    buffChances: {}
+                };
+                
+                for(const [key, value] of formData.entries()){
+                    const numValue = parseFloat(value);
+                    
+                    if(key.startsWith('buffs.')){
+                        const buffKey = key.replace('buffs.', '');
+                        result.buffs[buffKey] = numValue;
+                    } else if(key.startsWith('buffChances.')){
+                        const chanceKey = key.replace('buffChances.', '');
+                        result.buffChances[chanceKey] = numValue;
+                    } else {
+                        result[key] = numValue;
+                    }
+                }
+                
+                return result;
+            }
+            
+            // Save config from form
+            if(configForm){
+                configForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const newConfig = formToJSON(configForm);
+                    CFG = {...CFG, ...newConfig};
+                    applyConfig();
+                    setLog('✅ Config đã được cập nhật!');
+                    configModal.classList.remove('active');
+                });
+            }
+            
+            // Reset config to default
+            if(resetConfigBtn){
+                resetConfigBtn.addEventListener('click', () => {
+                    fetch('/gunny/config/config.json')
+                        .then(r => r.json())
+                        .then(j => {
+                            CFG = j;
+                            applyConfig();
+                            // Reset form values
+                            if(configForm){
+                                Object.keys(j).forEach(key => {
+                                    if(key === 'buffs' || key === 'buffChances'){
+                                        Object.keys(j[key]).forEach(subKey => {
+                                            const input = configForm.querySelector(`[name="${key}.${subKey}"]`);
+                                            if(input) input.value = j[key][subKey];
+                                        });
+                                    } else {
+                                        const input = configForm.querySelector(`[name="${key}"]`);
+                                        if(input) input.value = j[key];
+                                    }
+                                });
+                            }
+                            setLog('🔄 Config đã reset về mặc định!');
+                        })
+                        .catch(() => setLog('❌ Không thể load config mặc định'));
+                });
+            }
+            
+            // Cheat button to open config modal (Dev mode)
+            const cheatBtn = document.getElementById('cheatBtn');
+            if(cheatBtn){
+                cheatBtn.addEventListener('click', () => {
+                    configModal.classList.add('active');
+                });
+            }
 
             // init
             resetAll();
