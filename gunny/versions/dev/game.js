@@ -344,8 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Physics
             const g = 260; // gravity px/s^2
             const windAccelScale = 9; // wind -> horizontal accel px/s^2
-            const FIXED_DT = 1 / 60; // Fixed physics time step
-            let lastTime = performance.now();
+            const dt = 1 / 60;
 
             // Terrain
             let terrain = [];
@@ -1032,10 +1031,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function step() {
-                const now = performance.now();
-                const dt = Math.min((now - lastTime) / 1000, 0.033); // cap at ~30fps to prevent huge jumps
-                lastTime = now;
-
                 updateClouds();
                 updateBirds();
                 updateFallingBirds();
@@ -1441,224 +1436,49 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function drawPlayer(ent, color) {
-                // Check if dead (ghost mode)
-                const isDead = ent.hp <= 0;
-                
+                // Chibi character lying down (Gunny style)
                 const x = ent.x, y = ent.y, r = ent.r;
                 const facing = ent.facing;
-
-                // Ghost effect: translucent + float animation + tombstone
-                if (isDead) {
-                    const time = Date.now();
-                    const floatOffset = Math.sin(time / 400) * 5;
-                    const wobble = Math.sin(time / 200) * 2;
-                    
-                    ctx.save();
-                    ctx.globalAlpha = 0.7;
-                    
-                    // Ghost glow
-                    ctx.shadowBlur = 20;
-                    ctx.shadowColor = 'rgba(200,220,255,0.5)';
-                    
-                    // Draw ghost body (classic ghost shape with wavy bottom)
-                    const ghostY = y - r - floatOffset;
-                    ctx.fillStyle = 'rgba(230,240,255,0.8)';
-                    ctx.beginPath();
-                    // Top of ghost (head)
-                    ctx.arc(x, ghostY - r * 0.3, r * 0.9, Math.PI, 0);
-                    // Right side
-                    ctx.lineTo(x + r * 0.9, ghostY + r * 0.8);
-                    // Wavy bottom
-                    for (let i = 0; i < 4; i++) {
-                        const waveX = x + r * 0.9 - (i + 1) * (r * 1.8 / 4);
-                        const waveY = ghostY + r * 0.8 + Math.sin(time / 300 + i) * 4;
-                        ctx.lineTo(waveX, waveY);
-                    }
-                    // Left side
-                    ctx.lineTo(x - r * 0.9, ghostY - r * 0.3);
-                    ctx.closePath();
-                    ctx.fill();
-                    
-                    // Ghost face (cute but ghostly)
-                    ctx.fillStyle = 'rgba(30,30,50,0.9)';
-                    // Left eye
-                    ctx.beginPath();
-                    ctx.ellipse(x - r * 0.25 + wobble * 0.5, ghostY - r * 0.35, r * 0.12, r * 0.18, 0, 0, Math.PI * 2);
-                    ctx.fill();
-                    // Right eye
-                    ctx.beginPath();
-                    ctx.ellipse(x + r * 0.25 + wobble * 0.5, ghostY - r * 0.35, r * 0.12, r * 0.18, 0, 0, Math.PI * 2);
-                    ctx.fill();
-                    // Mouth (small o)
-                    ctx.beginPath();
-                    ctx.ellipse(x + wobble * 0.5, ghostY - r * 0.1, r * 0.08, r * 0.1, 0, 0, Math.PI * 2);
-                    ctx.fill();
-                    
-                    // Ghost hands (small floating)
-                    ctx.fillStyle = 'rgba(230,240,255,0.6)';
-                    const handY = ghostY + r * 0.2 + Math.sin(time / 250) * 3;
-                    ctx.beginPath();
-                    ctx.arc(x - r * 0.7, handY, r * 0.25, 0, Math.PI * 2);
-                    ctx.arc(x + r * 0.7, handY, r * 0.25, 0, Math.PI * 2);
-                    ctx.fill();
-                    
-                    ctx.shadowBlur = 0;
-                    ctx.restore();
-                    
-                    // Tombstone below (on ground, not floating)
-                    drawTombstone(x, y + r + 5, facing);
-                    
-                    // Draw HP bar above ghost
-                    const w = 60, h = 7;
-                    const x0 = x - w / 2;
-                    const y0 = ghostY - r * 1.5;
-                    ctx.fillStyle = 'rgba(0,0,0,.5)';
-                    ctx.fillRect(x0, y0, w, h);
-                    ctx.fillStyle = 'rgba(150,150,150,.8)';
-                    ctx.fillRect(x0, y0, w, h); // Grey for dead
-                    ctx.strokeStyle = 'rgba(100,100,100,.5)';
-                    ctx.strokeRect(x0, y0, w, h);
-                    
-                    // "RIP" text floating
-                    ctx.save();
-                    ctx.globalAlpha = 0.5 + Math.sin(time / 500) * 0.2;
-                    ctx.fillStyle = 'rgba(200,200,200,0.8)';
-                    ctx.font = 'bold 10px system-ui';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('RIP', x, y0 - 5);
-                    ctx.restore();
-                    
-                    return;
-                }
                 
-                // === LIVING CHARACTER (enhanced with clothes and face) ===
-                
-                // Pants (darker color at bottom)
-                const pantsColor = color.replace('0.90', '0.70').replace('0.85', '0.65');
-                ctx.fillStyle = pantsColor;
-                // Left leg
-                ctx.beginPath();
-                ctx.ellipse(x - facing * r * 0.9, y + r * 0.15, r * 0.35, r * 0.45, facing * 0.2, 0, Math.PI * 2);
-                ctx.fill();
-                // Right leg
-                ctx.beginPath();
-                ctx.ellipse(x - facing * r * 0.4, y + r * 0.25, r * 0.35, r * 0.4, -facing * 0.1, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Body/Shirt (main ellipse)
+                // Body (ellipse lying down)
                 ctx.fillStyle = color;
                 ctx.beginPath();
-                ctx.ellipse(x, y - r * 0.1, r * 1.2, r * 0.65, 0, 0, Math.PI * 2);
+                ctx.ellipse(x, y, r * 1.3, r * 0.6, 0, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Shirt details - collar
-                ctx.fillStyle = 'rgba(255,255,255,0.3)';
+                // Head (circle on one side)
                 ctx.beginPath();
-                ctx.moveTo(x + facing * r * 0.3, y - r * 0.4);
-                ctx.lineTo(x + facing * r * 0.5, y - r * 0.2);
-                ctx.lineTo(x + facing * r * 0.2, y - r * 0.1);
+                ctx.arc(x + facing * r * 0.8, y - r * 0.3, r * 0.5, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Shirt stripe/detail
-                ctx.fillStyle = 'rgba(255,255,255,0.15)';
-                ctx.fillRect(x - r * 0.8, y - r * 0.3, r * 1.6, r * 0.15);
-                
-                // Head (slightly larger)
-                ctx.fillStyle = color.replace('0.90', '0.95').replace('0.85', '0.90');
+                // Eyes
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
                 ctx.beginPath();
-                ctx.arc(x + facing * r * 0.75, y - r * 0.45, r * 0.55, 0, Math.PI * 2);
+                ctx.arc(x + facing * r * 0.9, y - r * 0.35, r * 0.12, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Hair/Helmet (top of head)
-                ctx.fillStyle = color.replace('0.90', '0.80').replace('0.85', '0.75');
+                // Legs (small ellipses)
+                ctx.fillStyle = color;
                 ctx.beginPath();
-                ctx.arc(x + facing * r * 0.75, y - r * 0.55, r * 0.5, Math.PI, 0);
+                ctx.ellipse(x - facing * r * 1.1, y + r * 0.2, r * 0.4, r * 0.25, 0, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Face details
-                const faceX = x + facing * r * 0.9;
-                const faceY = y - r * 0.45;
-                
-                // Eyes (white sclera + black pupil)
-                ctx.fillStyle = 'rgba(255,255,255,0.9)';
-                ctx.beginPath();
-                ctx.arc(faceX + facing * r * 0.12, faceY - r * 0.08, r * 0.18, 0, Math.PI * 2);
-                ctx.fill();
-                
-                ctx.fillStyle = 'rgba(20,20,20,0.9)';
-                ctx.beginPath();
-                ctx.arc(faceX + facing * r * 0.15, faceY - r * 0.08, r * 0.1, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Eyebrow
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = 'rgba(40,40,40,0.8)';
-                ctx.beginPath();
-                ctx.moveTo(faceX + facing * r * 0.05, faceY - r * 0.22);
-                ctx.lineTo(faceX + facing * r * 0.25, faceY - r * 0.18);
-                ctx.stroke();
-                
-                // Nose (small)
-                ctx.fillStyle = 'rgba(0,0,0,0.2)';
-                ctx.beginPath();
-                ctx.arc(faceX + facing * r * 0.18, faceY + r * 0.05, r * 0.06, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Mouth (small smile)
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = 'rgba(40,40,40,0.7)';
-                ctx.beginPath();
-                ctx.arc(faceX + facing * r * 0.12, faceY + r * 0.15, r * 0.1, 0.2, Math.PI - 0.2);
-                ctx.stroke();
-                
-                // Blush/cheeks
-                ctx.fillStyle = 'rgba(255,150,150,0.3)';
-                ctx.beginPath();
-                ctx.arc(faceX - facing * r * 0.05, faceY + r * 0.05, r * 0.12, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Arms - throwing motion (enhanced)
-                const armColor = color.replace('0.90', '0.85').replace('0.85', '0.80');
-                ctx.strokeStyle = armColor;
+                // Arms holding cannon
+                ctx.strokeStyle = color;
                 ctx.lineWidth = r * 0.25;
                 ctx.lineCap = 'round';
-                
-                // Back arm (left arm, behind body)
                 ctx.beginPath();
-                ctx.moveTo(x - facing * r * 0.3, y - r * 0.1);
-                ctx.quadraticCurveTo(
-                    x - facing * (r * 0.6), y - r * 0.4,
-                    x - facing * (r * 0.4), y - r * 0.6
-                );
+                ctx.moveTo(x + facing * r * 0.3, y);
+                ctx.lineTo(x + facing * (r + 8), y - 8);
                 ctx.stroke();
                 
-                // Throwing arm (right arm, forward - in throwing position)
+                // Cannon
+                ctx.strokeStyle = 'rgba(80,80,80,0.9)';
+                ctx.lineWidth = 4;
                 ctx.beginPath();
-                ctx.moveTo(x + facing * r * 0.3, y - r * 0.1);
-                // Arm raised in throwing motion
-                ctx.quadraticCurveTo(
-                    x + facing * (r * 0.8), y - r * 0.5,
-                    x + facing * (r + 4), y - r * 0.7
-                );
+                ctx.moveTo(x + facing * r * 0.5, y - r * 0.2);
+                ctx.lineTo(x + facing * (r + 16), y - 12);
                 ctx.stroke();
-                
-                // Hand holding projectile
-                ctx.fillStyle = armColor;
-                ctx.beginPath();
-                ctx.arc(x + facing * (r + 5), y - r * 0.7, r * 0.2, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Projectile in hand (ready to throw)
-                ctx.fillStyle = 'rgba(255,180,80,0.9)';
-                ctx.beginPath();
-                ctx.arc(x + facing * (r + 7), y - r * 0.75, r * 0.22, 0, Math.PI * 2);
-                ctx.fill();
-                // Projectile highlight
-                ctx.fillStyle = 'rgba(255,220,150,0.8)';
-                ctx.beginPath();
-                ctx.arc(x + facing * (r + 6.5), y - r * 0.8, r * 0.08, 0, Math.PI * 2);
-                ctx.fill();
-
                 
                 // HP bar
                 const w = 60, h = 7;
@@ -1689,61 +1509,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const buff = (ent === player) ? playerBuff : botBuff;
                 const burnDebuff = (ent === player) ? playerBurnDebuff : botBurnDebuff;
                 drawBuffIcons(ent, buff, burnDebuff);
-            }
-            
-            // Tombstone icon for dead characters
-            function drawTombstone(x, y, facing) {
-                ctx.save();
-                ctx.translate(x, y);
-                
-                // Shadow under tombstone
-                ctx.fillStyle = 'rgba(0,0,0,0.3)';
-                ctx.beginPath();
-                ctx.ellipse(0, 8, 18, 6, 0, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Stone base (3D effect)
-                ctx.fillStyle = 'rgba(100,100,105,0.95)';
-                ctx.beginPath();
-                ctx.roundRect(-14, -18, 28, 22, 5);
-                ctx.fill();
-                
-                // Stone highlight (3D top)
-                ctx.fillStyle = 'rgba(130,130,135,0.9)';
-                ctx.beginPath();
-                ctx.roundRect(-14, -18, 28, 12, 5);
-                ctx.fill();
-                
-                // Stone cracks/detail
-                ctx.strokeStyle = 'rgba(60,60,65,0.6)';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(-8, -8);
-                ctx.lineTo(-4, -4);
-                ctx.moveTo(6, -12);
-                ctx.lineTo(8, -8);
-                ctx.stroke();
-                
-                // Cross
-                ctx.fillStyle = 'rgba(220,220,225,0.9)';
-                ctx.beginPath();
-                ctx.roundRect(-3, -16, 6, 14, 1);
-                ctx.roundRect(-7, -12, 14, 4, 1);
-                ctx.fill();
-                
-                // Skull (simplified, on tombstone)
-                ctx.fillStyle = 'rgba(200,200,205,0.85)';
-                ctx.beginPath();
-                ctx.arc(0, -3, 4, 0, Math.PI * 2);
-                ctx.fill();
-                // Eye sockets
-                ctx.fillStyle = 'rgba(40,40,45,0.9)';
-                ctx.beginPath();
-                ctx.arc(-1.5, -4, 1.2, 0, Math.PI * 2);
-                ctx.arc(1.5, -4, 1.2, 0, Math.PI * 2);
-                ctx.fill();
-                
-                ctx.restore();
             }
 
             // Draw buff icons above a character
