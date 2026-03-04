@@ -344,7 +344,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Physics
             const g = 260; // gravity px/s^2
             const windAccelScale = 9; // wind -> horizontal accel px/s^2
-            const dt = 1 / 60;
+
+            // Time-based animation (for variable refresh rate support)
+            let lastTime = performance.now();
+            let dt = 1 / 60; // Will be updated each frame
 
             // Terrain
             let terrain = [];
@@ -434,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             function updateClouds(){
                 for(let c of clouds){
-                    c.x += c.speed;
+                    c.x += c.speed * dt * 60; // Scale to 60fps baseline
                     if(c.x > W + c.w) c.x = -c.w;
                 }
             }
@@ -480,11 +483,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 for(let i = birds.length - 1; i >= 0; i--){
                     let b = birds[i];
-                    b.x += b.speed * b.dir;
-                    b.flyPhase += 0.05;
+                    b.x += b.speed * b.dir * dt * 60; // Scale to 60fps baseline
+                    b.flyPhase += 0.05 * dt * 60;
                     // Sine wave trajectory - up and down
                     b.y = b.baseY + Math.sin(b.flyPhase) * 30;
-                    b.wingPhase += 0.3;
+                    b.wingPhase += 0.3 * dt * 60;
                     if((b.dir === 1 && b.x > W + 60) || (b.dir === -1 && b.x < -60)){
                         birds.splice(i, 1);
                     }
@@ -1001,8 +1004,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     b.x += b.vx * dt;
                     b.y += b.vy * dt;
                     b.vy += g * dt;
-                    b.alpha -= 0.02;
-                    b.wingPhase += 0.5;
+                    b.alpha -= 0.02 * dt * 60; // Scale to 60fps baseline
+                    b.wingPhase += 0.5 * dt * 60;
                     if(b.alpha <= 0 || b.y > H){
                         fallingBirds.splice(i, 1);
                     }
@@ -1030,7 +1033,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            function step() {
+            function step(currentTime) {
+                // Calculate delta time in seconds
+                const deltaTime = (currentTime - lastTime) / 1000;
+                lastTime = currentTime;
+
+                // Clamp deltaTime to avoid physics explosion after tab switch
+                dt = Math.min(deltaTime, 0.1);
+
                 updateClouds();
                 updateBirds();
                 updateFallingBirds();
@@ -2389,5 +2399,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // init
             resetAll();
-            step();
+            step(performance.now());
         });
