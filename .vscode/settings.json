@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false,
+  "editor.defaultFormatter": null,
+  "editor.detectIndentation": false,
+  "files.associations": {
+    "*.js": "javascript",
+    "*.html": "html"
+  }
+}

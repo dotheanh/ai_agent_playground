@@ -388,7 +388,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 maxHp: 500,
                 facing: 1,
                 stamina: 150,
-                maxStamina: 150
+                maxStamina: 150,
+                isThrowing: false,
+                throwFrame: 0,
+                isDead: false
             };
             const bot = {
                 x: W - 120,
@@ -397,7 +400,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 maxHp: 500,
                 facing: -1,
                 stamina: 150,
-                maxStamina: 150
+                maxStamina: 150,
+                isThrowing: false,
+                throwFrame: 0,
+                isDead: false
             };
 
             function placeOnGround(ent) {
@@ -711,10 +717,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const speed = power * 6.2;
                 const vx = Math.cos(angRad) * speed * dir;
                 const vy = -Math.sin(angRad) * speed;
-                
+
                 // Save for potential double shot
                 lastShotParams = {from, angleDeg, power, dir};
-                
+
+                // Trigger throwing animation
+                from.isThrowing = true;
+                from.throwFrame = 0;
+
                 proj = {
                     x: from.x,
                     y: from.y - from.r - 2,
@@ -1044,6 +1054,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateClouds();
                 updateBirds();
                 updateFallingBirds();
+
+                // Update throwing animation
+                if (player.isThrowing) {
+                    player.throwFrame += dt * 60;
+                    if (player.throwFrame >= 10) {
+                        player.isThrowing = false;
+                        player.throwFrame = 0;
+                    }
+                }
+                if (bot.isThrowing) {
+                    bot.throwFrame += dt * 60;
+                    if (bot.throwFrame >= 10) {
+                        bot.isThrowing = false;
+                        bot.throwFrame = 0;
+                    }
+                }
+
                 // update projectile
                 if (proj && proj.alive) {
                     // Check hit bird first
@@ -1446,54 +1473,180 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function drawPlayer(ent, color) {
-                // Chibi character lying down (Gunny style)
                 const x = ent.x, y = ent.y, r = ent.r;
                 const facing = ent.facing;
-                
-                // Body (ellipse lying down)
-                ctx.fillStyle = color;
+
+                // Check if dead - draw tombstone first (behind), then ghost (front)
+                if (ent.hp <= 0) {
+                    ent.isDead = true;
+                    drawTombstone(x, y + r - 2);
+                    drawGhost(x, y, r, facing, ent === player);
+                    return;
+                } else {
+                    ent.isDead = false;
+                }
+
+                // Determine clothes color - chibi style
+                const clothesColor = (ent === player) ? '#3a7ca5' : '#d64545';
+                const skinColor = (ent === player) ? '#ffe4c4' : '#f5d0b5';
+
+                // Throwing animation
+                const t = ent.isThrowing ? Math.sin(ent.throwFrame / 10 * Math.PI) : 0;
+                let bombX = 0, bombY = 0;
+
+                if (ent.isThrowing) {
+                    bombX = x + facing * (r + 15);
+                    bombY = y - r * 0.8 - t * 15;
+                }
+
+                // LEGS (behind body)
+                ctx.fillStyle = '#2a2a3a';
                 ctx.beginPath();
-                ctx.ellipse(x, y, r * 1.3, r * 0.6, 0, 0, Math.PI * 2);
+                ctx.ellipse(x - facing * r * 1.0, y + r * 0.35, r * 0.35, r * 0.22, 0, 0, Math.PI * 2);
                 ctx.fill();
-                
-                // Head (circle on one side)
+
+                // BODY
+                ctx.fillStyle = clothesColor;
                 ctx.beginPath();
-                ctx.arc(x + facing * r * 0.8, y - r * 0.3, r * 0.5, 0, Math.PI * 2);
+                ctx.ellipse(x, y, r * 1.2, r * 0.55, 0, 0, Math.PI * 2);
                 ctx.fill();
-                
-                // Eyes
-                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+
+                // Body highlight
+                ctx.fillStyle = (ent === player) ? '#5a9cc5' : '#e65555';
+                ctx.beginPath();
+                ctx.ellipse(x, y - r * 0.1, r * 0.8, r * 0.3, 0, 0, Math.PI);
+                ctx.fill();
+
+                // HEAD
+                ctx.fillStyle = skinColor;
+                ctx.beginPath();
+                ctx.arc(x + facing * r * 0.7, y - r * 0.35, r * 0.6, 0, Math.PI * 2);
+                ctx.fill();
+
+                // HAIR (male style - on top of head)
+                const hairColor = (ent === player) ? '#4a3728' : '#2d1f1a';
+                ctx.fillStyle = hairColor;
+                // Hair on TOP of head (upper half ellipse)
+                ctx.beginPath();
+                ctx.ellipse(x + facing * r * 0.7, y - r * 0.7, r * 0.65, r * 0.4, 0, Math.PI, Math.PI * 2);
+                ctx.fill();
+
+                // FACE DETAILS
+                // Large eyes (white)
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.ellipse(x + facing * r * 0.85, y - r * 0.35, r * 0.22, r * 0.2, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Pupil
+                ctx.fillStyle = '#1a1a2e';
                 ctx.beginPath();
                 ctx.arc(x + facing * r * 0.9, y - r * 0.35, r * 0.12, 0, Math.PI * 2);
                 ctx.fill();
-                
-                // Legs (small ellipses)
-                ctx.fillStyle = color;
+
+                // Eye highlight
+                ctx.fillStyle = '#ffffff';
                 ctx.beginPath();
-                ctx.ellipse(x - facing * r * 1.1, y + r * 0.2, r * 0.4, r * 0.25, 0, 0, Math.PI * 2);
+                ctx.arc(x + facing * r * 0.92, y - r * 0.4, r * 0.05, 0, Math.PI * 2);
                 ctx.fill();
-                
-                // Arms holding cannon
-                ctx.strokeStyle = color;
-                ctx.lineWidth = r * 0.25;
+
+                // Blush
+                ctx.fillStyle = 'rgba(255, 150, 150, 0.4)';
+                ctx.beginPath();
+                ctx.ellipse(x + facing * r * 1.15, y - r * 0.22, r * 0.12, r * 0.08, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Nose
+                ctx.fillStyle = 'rgba(200, 150, 130, 0.6)';
+                ctx.beginPath();
+                ctx.arc(x + facing * r * 1.0, y - r * 0.28, r * 0.04, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Mouth
+                ctx.strokeStyle = '#c4886a';
+                ctx.lineWidth = 1.5;
                 ctx.lineCap = 'round';
                 ctx.beginPath();
-                ctx.moveTo(x + facing * r * 0.3, y);
-                ctx.lineTo(x + facing * (r + 8), y - 8);
+                ctx.arc(x + facing * r * 0.95, y - r * 0.15, r * 0.1, 0.2 * Math.PI, 0.8 * Math.PI);
                 ctx.stroke();
-                
-                // Cannon
-                ctx.strokeStyle = 'rgba(80,80,80,0.9)';
-                ctx.lineWidth = 4;
+
+                // ARMS
+                const armWidth = r * 0.25;
+
+                // Back arm
+                ctx.strokeStyle = skinColor;
+                ctx.lineWidth = armWidth;
+                ctx.lineCap = 'round';
                 ctx.beginPath();
-                ctx.moveTo(x + facing * r * 0.5, y - r * 0.2);
-                ctx.lineTo(x + facing * (r + 16), y - 12);
+                ctx.moveTo(x - facing * r * 0.5, y + r * 0.1);
+                ctx.lineTo(x - facing * r * 0.9, y + r * 0.2);
                 ctx.stroke();
-                
-                // HP bar
+
+                // Front arm - 3 states
+                ctx.strokeStyle = skinColor;
+                ctx.lineWidth = armWidth;
+
+                let frontArmStartX, frontArmStartY, frontArmEndX, frontArmEndY;
+
+                if (!ent.isThrowing) {
+                    // IDLE: tay trước mặt
+                    frontArmStartX = x + facing * r * 0.3;
+                    frontArmStartY = y + r * 0.1;
+                    frontArmEndX = x + facing * r * 0.9;
+                    frontArmEndY = y + r * 0.05;
+                } else if (t < 0.5) {
+                    // RAISING: tay lên thẳng đứng
+                    const raiseT = t * 2;
+                    frontArmStartX = x + facing * r * 0.3;
+                    frontArmStartY = y + r * 0.1;
+                    frontArmEndX = x + facing * r * 0.3 + facing * r * 0.5 * raiseT;
+                    frontArmEndY = y + r * 0.1 - r * 0.9 * raiseT;
+                } else {
+                    // THROWING: tay vung về trước
+                    const throwT = (t - 0.5) * 2;
+                    frontArmStartX = x + facing * r * 0.3;
+                    frontArmStartY = y + r * 0.1 - r * 0.9;
+                    frontArmEndX = x + facing * r * 0.8 + facing * r * 0.6 * throwT;
+                    frontArmEndY = y + r * 0.05 + r * 0.4 * throwT;
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(frontArmStartX, frontArmStartY);
+                ctx.lineTo(frontArmEndX, frontArmEndY);
+                ctx.stroke();
+
+                // Hand
+                ctx.fillStyle = skinColor;
+                ctx.beginPath();
+                ctx.arc(frontArmEndX, frontArmEndY, armWidth * 0.8, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Bomb
+                if (ent.isThrowing && t > 0.3) {
+                    ctx.fillStyle = '#2d2d2d';
+                    ctx.beginPath();
+                    ctx.arc(bombX, bombY, r * 0.4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#555555';
+                    ctx.beginPath();
+                    ctx.arc(bombX - r * 0.12, bombY - r * 0.12, r * 0.15, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = '#b8956e';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(bombX, bombY - r * 0.4);
+                    ctx.quadraticCurveTo(bombX + r * 0.3, bombY - r * 0.6, bombX + r * 0.2, bombY - r * 0.7);
+                    ctx.stroke();
+                    ctx.fillStyle = '#ffcc00';
+                    ctx.beginPath();
+                    ctx.arc(bombX + r * 0.2, bombY - r * 0.7, r * 0.1, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // HP BAR
                 const w = 60, h = 7;
                 const x0 = ent.x - w / 2;
-                const y0 = ent.y - ent.r - 22;
+                const y0 = ent.y - ent.r - 32;
                 ctx.fillStyle = 'rgba(0,0,0,.35)';
                 ctx.fillRect(x0, y0, w, h);
                 ctx.fillStyle = 'rgba(255,45,45,.75)';
@@ -1502,7 +1655,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.strokeStyle = 'rgba(255,255,255,.18)';
                 ctx.strokeRect(x0, y0, w, h);
 
-                // stamina bar (below hp)
+                // Stamina bar
                 if (ent.stamina !== undefined) {
                     const stY = y0 + h + 3;
                     const stH = 4;
@@ -1514,11 +1667,210 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.strokeStyle = 'rgba(255,255,255,.12)';
                     ctx.strokeRect(x0, stY, w, stH);
                 }
-                
-                // Draw buff icons above HP bar
+
                 const buff = (ent === player) ? playerBuff : botBuff;
                 const burnDebuff = (ent === player) ? playerBurnDebuff : botBurnDebuff;
                 drawBuffIcons(ent, buff, burnDebuff);
+            }
+
+            // ===== GHOST EFFECT FOR DEAD CHARACTER =====
+            function drawGhost(x, y, r, facing, isPlayer) {
+
+    const time = Date.now() * 0.001;
+    const floatOffset = Math.sin(time * 2) * r * 0.25;
+
+    const baseY = y + floatOffset;
+
+    ctx.save();
+    ctx.globalAlpha = 0.8;
+
+    const ghostColor = isPlayer
+        ? 'rgba(210,225,255,0.85)'
+        : 'rgba(255,210,220,0.85)';
+
+    // ===== SOFT GLOW =====
+    const glow = ctx.createRadialGradient(
+        x, baseY - r * 1.8, 0,
+        x, baseY - r * 1.8, r * 3
+    );
+
+    glow.addColorStop(0, isPlayer
+        ? 'rgba(180,200,255,0.45)'
+        : 'rgba(255,180,200,0.45)'
+    );
+
+    glow.addColorStop(1, 'rgba(255,255,255,0)');
+
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(x, baseY - r * 1.8, r * 3, 0, Math.PI * 2);
+    ctx.fill();
+
+
+    // ===== BODY =====
+    ctx.fillStyle = ghostColor;
+    ctx.beginPath();
+
+    const headY = baseY - r * 2;
+
+    // head
+    ctx.arc(x, headY, r * 0.75, Math.PI, 0);
+
+    // right side
+    ctx.quadraticCurveTo(
+        x + r * 0.9,
+        baseY - r * 1.5,
+        x + r * 0.7,
+        baseY - r * 0.9
+    );
+
+
+    // ===== WAVY CLOTH TAIL =====
+    const waveCount = 4;
+    const width = r * 1.4;
+
+    for (let i = 0; i <= waveCount * 20; i++) {
+
+        const t = i / (waveCount * 20);
+
+        const tx = x + width / 2 - width * t;
+
+        const wave =
+            Math.sin(t * Math.PI * waveCount + time * 3)
+            * r * 0.18;
+
+        const ty = baseY - r * 0.9 + wave;
+
+        ctx.lineTo(tx, ty);
+    }
+
+
+    // left side
+    ctx.quadraticCurveTo(
+        x - r * 0.9,
+        baseY - r * 1.5,
+        x - r * 0.75,
+        headY
+    );
+
+    ctx.closePath();
+    ctx.fill();
+
+
+    // ===== EYES =====
+    ctx.fillStyle = 'rgba(30,30,60,0.9)';
+
+    const eyeOffset = r * 0.25;
+
+    ctx.beginPath();
+    ctx.ellipse(
+        x - eyeOffset,
+        headY,
+        r * 0.12,
+        r * 0.16,
+        0, 0, Math.PI * 2
+    );
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.ellipse(
+        x + eyeOffset,
+        headY,
+        r * 0.12,
+        r * 0.16,
+        0, 0, Math.PI * 2
+    );
+    ctx.fill();
+
+
+    // ===== ARMS =====
+    ctx.strokeStyle = ghostColor;
+    ctx.lineWidth = r * 0.22;
+    ctx.lineCap = "round";
+
+    const armSwing = Math.sin(time * 3) * r * 0.2;
+
+    ctx.beginPath();
+    ctx.moveTo(x - r * 0.35, baseY - r * 1.6);
+    ctx.lineTo(x - r * 0.9, baseY - r * 1.9 + armSwing);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(x + r * 0.35, baseY - r * 1.6);
+    ctx.lineTo(x + r * 0.9, baseY - r * 1.9 - armSwing);
+    ctx.stroke();
+
+
+    // ===== HALO =====
+    ctx.strokeStyle = 'rgba(255,255,220,0.95)';
+    ctx.lineWidth = 2.5;
+
+    ctx.beginPath();
+    ctx.ellipse(
+        x,
+        headY - r * 0.9,
+        r * 0.55,
+        r * 0.14,
+        0,
+        0,
+        Math.PI * 2
+    );
+    ctx.stroke();
+
+
+    ctx.restore();
+}
+
+            // ===== TOMBSTONE =====
+            function drawTombstone(x, y) {
+                const stoneW = 16;
+                const stoneH = 24;
+
+                ctx.fillStyle = '#5a5a6a';
+                ctx.beginPath();
+                ctx.moveTo(x - stoneW/2, y);
+                ctx.lineTo(x - stoneW/2, y - stoneH + 6);
+                ctx.quadraticCurveTo(x - stoneW/2, y - stoneH, x, y - stoneH);
+                ctx.quadraticCurveTo(x + stoneW/2, y - stoneH, x + stoneW/2, y - stoneH + 6);
+                ctx.lineTo(x + stoneW/2, y);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.fillStyle = '#4a4a5a';
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x - stoneW/2 + 2, y - stoneH + 8);
+                ctx.lineTo(x - stoneW/2 + 2, y);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.fillStyle = '#7a7a8a';
+                ctx.beginPath();
+                ctx.moveTo(x - stoneW/2 + 2, y - stoneH + 8);
+                ctx.lineTo(x - stoneW/2 + 2, y - stoneH + 4);
+                ctx.quadraticCurveTo(x - stoneW/2 + 2, y - stoneH + 2, x, y - stoneH + 2);
+                ctx.quadraticCurveTo(x + stoneW/2 - 2, y - stoneH + 2, x + stoneW/2 - 2, y - stoneH + 8);
+                ctx.lineTo(x + stoneW/2 - 2, y);
+                ctx.lineTo(x, y);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.fillStyle = '#3a3a4a';
+                ctx.fillRect(x - 1.5, y - stoneH + 8, 3, 12);
+                ctx.fillRect(x - 5, y - stoneH + 11, 10, 3);
+
+                ctx.fillStyle = '#3a5a3a';
+                for (let i = 0; i < 3; i++) {
+                    const gx = x - stoneW/2 + 4 + i * 4;
+                    ctx.beginPath();
+                    ctx.moveTo(gx, y);
+                    ctx.lineTo(gx - 2, y - 5 - Math.random() * 3);
+                    ctx.lineTo(gx, y - 2);
+                    ctx.lineTo(gx + 2, y - 6 - Math.random() * 3);
+                    ctx.lineTo(gx + 2, y);
+                    ctx.closePath();
+                    ctx.fill();
+                }
             }
 
             // Draw buff icons above a character
@@ -2097,6 +2449,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 bot.maxHp = CFG.gameSettings.maxHp;
                 player.stamina = player.maxStamina;
                 bot.stamina = bot.maxStamina;
+                player.isDead = false;
+                bot.isDead = false;
+                player.isThrowing = false;
+                bot.isThrowing = false;
+                player.throwFrame = 0;
+                bot.throwFrame = 0;
                 hpP.textContent = player.hp;
                 hpB.textContent = bot.hp;
 
