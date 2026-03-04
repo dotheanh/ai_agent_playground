@@ -27,7 +27,8 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body
-        className={`${dmSans.variable} ${spaceGrotesk.variable} font-sans antialiased`}
+        className={`${dmSans.variable} ${spaceGrotesk.variable} font-sans antialiased min-h-screen bg-black`}
+        style={{ margin: 0, padding: 0, width: '100%' }}
       >
         {children}
       </body>

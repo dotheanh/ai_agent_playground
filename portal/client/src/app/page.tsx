@@ -1,536 +1,1191 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-// Icons as SVG components
-const IconRocket = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+// Icons
+const IconBrain = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
   </svg>
 );
 
-const IconShield = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+const IconRobot = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
   </svg>
 );
 
-const IconChart = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+const IconCode = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
   </svg>
 );
 
-const IconCloud = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+const IconSparkles = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
   </svg>
 );
 
-const IconCheck = () => (
-  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+const IconCheck = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
   </svg>
 );
 
-const IconMenu = () => (
-  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+const IconArrowRight = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
   </svg>
 );
 
-const IconClose = () => (
-  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+const IconCloud = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
   </svg>
 );
 
-// Feature data
-const features = [
-  {
-    icon: <IconRocket />,
-    title: 'Tốc độ vượt trội',
-    description: 'Hiệu suất cực nhanh với công nghệ tối ưu hiện đại, mang lại trải nghiệm mượt mà.'
-  },
-  {
-    icon: <IconShield />,
-    title: 'Bảo mật cao cấp',
-    description: 'Mã hóa dữ liệu đầu cuối và bảo vệ toàn diện với các tiêu chuẩn bảo mật quốc tế.'
-  },
-  {
-    icon: <IconChart />,
-    title: 'Phân tích thông minh',
-    description: 'Công cụ analytics mạnh mẽ giúp bạn hiểu rõ hành vi người dùng và tối ưu hóa.'
-  },
-  {
-    icon: <IconCloud />,
-    title: 'Cloud Native',
-    description: 'Hạ tầng cloud đám mây linh hoạt, dễ dàng mở rộng theo nhu cầu phát triển.'
-  }
+const IconDatabase = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+  </svg>
+);
+
+const IconShield = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+  </svg>
+);
+
+const IconLightning = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+  </svg>
+);
+
+const IconCpu = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+  </svg>
+);
+
+const IconPlay = ({ className }: { className?: string }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M8 5v14l11-7z" />
+  </svg>
+);
+
+const IconStar = ({ className }: { className?: string }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+  </svg>
+);
+
+const aiFeatures = [
+  { icon: IconBrain, title: 'Neural Networks', desc: 'Mạng nơ-ron nhân tạo mô phỏng hoạt động của não bộ' },
+  { icon: IconCloud, title: 'Cloud Computing', desc: 'Xử lý dữ liệu lớn trên hạ tầng đám mây' },
+  { icon: IconDatabase, title: 'Big Data', desc: 'Phân tích hàng tỷ dữ liệu trong thời gian thực' },
+  { icon: IconShield, title: 'Cyber Security', desc: 'Bảo mật và phát hiện xâm nhập tự động' },
 ];
 
-export default function Home() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+const agentFeatures = [
+  { title: 'Planning', desc: 'Tự động lập kế hoạch và chia nhỏ mục tiêu thành các bước khả thi' },
+  { title: 'Execution', desc: 'Thực thi tác vụ một cách autonomous mà không cần giám sát liên tục' },
+  { title: 'Learning', desc: 'Học hỏi từ kết quả và cải thiện hiệu suất theo thời gian' },
+  { title: 'Collaboration', desc: 'Phối hợp với các agent khác và con người một cách hiệu quả' },
+];
+
+const claudeFeatures = [
+  { title: 'Context Awareness', desc: 'Hiểu sâu kiến trúc project và ngữ cảnh code' },
+  { title: 'Smart Autocomplete', desc: 'Gợi ý code thông minh dựa trên patterns và best practices' },
+  { title: 'Refactoring', desc: 'Tự động refactor code để cải thiện performance và readability' },
+  { title: 'Debugging', desc: 'Phát hiện và sửa lỗi nhanh chóng với AI-powered analysis' },
+  { title: 'Terminal Integration', desc: 'Chạy commands trực tiếp mà không cần rời khỏi editor' },
+  { title: 'Multi-file Edits', desc: 'Đồng thời edit nhiều files với changes tracking' },
+];
+
+// Animated background orbs component
+const BackgroundOrbs = ({ scrollY }: { scrollY: number }) => (
+  <>
+    <div style={{
+      position: 'fixed',
+      width: 800,
+      height: 800,
+      borderRadius: '50%',
+      filter: 'blur(150px)',
+      opacity: 0.2,
+      background: 'radial-gradient(circle, #3B82F6 0%, transparent 70%)',
+      top: '5%',
+      left: '10%',
+      transform: `translateY(${scrollY * 0.3}px)`,
+      transition: 'transform 0.1s ease-out',
+      zIndex: 0,
+    }} />
+    <div style={{
+      position: 'fixed',
+      width: 600,
+      height: 600,
+      borderRadius: '50%',
+      filter: 'blur(120px)',
+      opacity: 0.15,
+      background: 'radial-gradient(circle, #8B5CF6 0%, transparent 70%)',
+      top: '30%',
+      right: '10%',
+      transform: `translateY(${-scrollY * 0.2}px)`,
+      transition: 'transform 0.1s ease-out',
+      zIndex: 0,
+    }} />
+    <div style={{
+      position: 'fixed',
+      width: 500,
+      height: 500,
+      borderRadius: '50%',
+      filter: 'blur(100px)',
+      opacity: 0.1,
+      background: 'radial-gradient(circle, #06B6D4 0%, transparent 70%)',
+      top: '60%',
+      left: '30%',
+      transform: `translateY(${-scrollY * 0.15}px)`,
+      transition: 'transform 0.1s ease-out',
+      zIndex: 0,
+    }} />
+    <div style={{
+      position: 'fixed',
+      width: 400,
+      height: 400,
+      borderRadius: '50%',
+      filter: 'blur(80px)',
+      opacity: 0.15,
+      background: 'radial-gradient(circle, #F97316 0%, transparent 70%)',
+      bottom: '10%',
+      right: '20%',
+      transform: `translateY(${scrollY * 0.1}px)`,
+      transition: 'transform 0.1s ease-out',
+      zIndex: 0,
+    }} />
+  </>
+);
+
+// Floating particles
+const FloatingParticles = () => {
+  const particles = Array.from({ length: 30 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    delay: Math.random() * 10,
+    duration: 15 + Math.random() * 15,
+    size: 2 + Math.random() * 4,
+  }));
+
+  return (
+    <>
+      {particles.map((p) => (
+        <div
+          key={p.id}
+          style={{
+            position: 'fixed',
+            left: `${p.left}%`,
+            width: p.size,
+            height: p.size,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.3)',
+            animation: `floatParticle ${p.duration}s linear infinite`,
+            animationDelay: `${p.delay}s`,
+            zIndex: 1,
+            pointerEvents: 'none',
+          }}
+        />
+      ))}
+      <style>{`
+        @keyframes floatParticle {
+          0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+          10% { opacity: 0.8; }
+          90% { opacity: 0.8; }
+          100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0) translateX(0); }
+          33% { transform: translateY(-30px) translateX(15px); }
+          66% { transform: translateY(-20px) translateX(-15px); }
+        }
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInScale {
+          from { opacity: 0; transform: scale(0.9); }
+          to { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
+    </>
+  );
+};
+
+// Scroll animation hook
+const useScrollAnimation = (threshold: number = 0) => {
+  const [visible, setVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrollY(window.scrollY);
+      const element = document.getElementById('main-content');
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        setVisible(rect.top < window.innerHeight * 0.85);
+      }
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormStatus('loading');
+  return { visible, scrollY };
+};
 
-    try {
-      const res = await fetch('http://localhost:3001/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+export default function Home() {
+  const [scrollY, setScrollY] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+    const handleScroll = () => setScrollY(window.scrollY);
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth - 0.5) * 2,
+        y: (e.clientY / window.innerHeight - 0.5) * 2,
       });
-
-      if (res.ok) {
-        setFormStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setFormStatus('error');
-      }
-    } catch {
-      setFormStatus('error');
-    }
-  };
-
-  const handleNewsletter = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setNewsletterStatus('loading');
-
-    try {
-      const res = await fetch('http://localhost:3001/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: newsletterEmail }),
-      });
-
-      if (res.ok) {
-        setNewsletterStatus('success');
-        setNewsletterEmail('');
-      } else {
-        setNewsletterStatus('error');
-      }
-    } catch {
-      setNewsletterStatus('error');
-    }
-  };
+    };
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   return (
-    <main className="min-h-screen gradient-mesh">
+    <div id="main-content" style={{ width: '100%', maxWidth: '100%', margin: 0, padding: 0, background: '#0a0a0a', overflow: 'hidden' }}>
+      {/* Animated Background */}
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #020617, #0f172a, #581c87)' }} />
+        <BackgroundOrbs scrollY={scrollY} />
+        {/* Grid overlay */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          opacity: 0.03,
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundSize: '80px 80px',
+          transform: `perspective(1000px) rotateX(60deg) scale(2.5) translateY(${scrollY * 0.15}px)`,
+        }} />
+      </div>
+
+      <FloatingParticles />
+
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass py-3' : 'py-5'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <a href="#" className="text-2xl font-bold font-heading text-gradient">
-            Portal
-          </a>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-gray-700 hover:text-primary transition-colors font-medium">Tính năng</a>
-            <a href="#about" className="text-gray-700 hover:text-primary transition-colors font-medium">Về chúng tôi</a>
-            <a href="#contact" className="text-gray-700 hover:text-primary transition-colors font-medium">Liên hệ</a>
-            <button className="btn-primary">Bắt đầu ngay</button>
+      <nav style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        padding: '20px 0',
+        background: scrollY > 100 ? 'rgba(0,0,0,0.9)' : 'transparent',
+        backdropFilter: scrollY > 100 ? 'blur(20px)' : 'none',
+        borderBottom: scrollY > 100 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+        transition: 'all 0.3s',
+      }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{
+              width: 48,
+              height: 48,
+              borderRadius: 12,
+              background: 'linear-gradient(to bottom right, #3B82F6, #8B5CF6, #06B6D4)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              animation: 'pulse 3s ease-in-out infinite',
+            }}>
+              <IconSparkles className="text-white w-6 h-6" />
+            </div>
+            <span style={{ fontSize: 24, fontWeight: 700, color: 'white' }}>AI Universe</span>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 text-gray-700"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <IconClose /> : <IconMenu />}
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 40 }}>
+            {['AI', 'Agents', 'Claude Code', 'Future'].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase().replace(' ', '')}`}
+                style={{
+                  color: '#9ca3af',
+                  textDecoration: 'none',
+                  fontSize: 14,
+                  fontWeight: 500,
+                  transition: 'color 0.3s',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'white'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
+              >
+                {item}
+              </a>
+            ))}
+            <button style={{
+              padding: '12px 24px',
+              background: 'linear-gradient(to right, #3B82F6, #8B5CF6)',
+              borderRadius: 12,
+              color: 'white',
+              fontWeight: 600,
+              fontSize: 14,
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'transform 0.3s, box-shadow 0.3s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 10px 40px rgba(59, 130, 246, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+            >
+              Bắt đầu ngay
+            </button>
+          </div>
         </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden glass absolute top-full left-0 right-0 p-6 flex flex-col gap-4">
-            <a href="#features" className="text-gray-700 hover:text-primary transition-colors font-medium" onClick={() => setMobileMenuOpen(false)}>Tính năng</a>
-            <a href="#about" className="text-gray-700 hover:text-primary transition-colors font-medium" onClick={() => setMobileMenuOpen(false)}>Về chúng tôi</a>
-            <a href="#contact" className="text-gray-700 hover:text-primary transition-colors font-medium" onClick={() => setMobileMenuOpen(false)}>Liên hệ</a>
-            <button className="btn-primary w-full">Bắt đầu ngay</button>
-          </div>
-        )}
       </nav>
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
-        {/* Floating Elements */}
-        <div className="absolute top-32 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-32 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float-delayed" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-3xl animate-spin-slow" />
+      {/* SECTION 1: HERO */}
+      <section style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        zIndex: 20,
+        padding: '120px 32px 80px',
+      }}>
+        <div style={{
+          maxWidth: 1200,
+          width: '100%',
+          textAlign: 'center',
+          transform: `translateY(${scrollY * 0.1}px)`,
+          transition: 'transform 0.1s ease-out',
+        }}>
+          {/* Hero glow */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            width: 1000,
+            height: 1000,
+            borderRadius: '50%',
+            filter: 'blur(150px)',
+            opacity: 0.3,
+            background: 'linear-gradient(to right, rgba(59,130,246,0.3), rgba(139,92,246,0.3), rgba(6,182,212,0.3))',
+            transform: 'translate(-50%, -50%)',
+            animation: 'spin 30s linear infinite',
+          }} />
 
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-          {/* Hero Content */}
-          <div className="text-center lg:text-left animate-slide-up">
-            <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6">
-              <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-gray-600">Công nghệ của tương lai</span>
+          <div style={{
+            position: 'relative',
+            zIndex: 1,
+            opacity: loaded ? 1 : 0,
+            transform: loaded ? 'translateY(0)' : 'translateY(30px)',
+            transition: 'all 1s ease-out',
+          }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 12,
+              padding: '12px 24px',
+              borderRadius: 9999,
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              marginBottom: 48,
+              animation: 'fadeInUp 1s ease-out 0.2s both',
+            }}>
+              <span style={{
+                width: 12,
+                height: 12,
+                borderRadius: '50%',
+                background: '#4ade80',
+                animation: 'pulse 2s ease-in-out infinite',
+              }} />
+              <span style={{ color: '#d1d5db', fontSize: 14 }}>The Future of Technology</span>
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-bold font-heading leading-tight mb-6">
-              Khám phá sức mạnh của{' '}
-              <span className="text-gradient">Portal</span>
+            <h1 style={{
+              fontSize: 'clamp(48px, 10vw, 96px)',
+              fontWeight: 700,
+              color: 'white',
+              marginBottom: 32,
+              lineHeight: 1.1,
+              animation: 'fadeInUp 1s ease-out 0.4s both',
+            }}>
+              <span style={{
+                background: 'linear-gradient(to right, #60a5fa, #a78bfa, #22d3ee)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundSize: '200% 200%',
+                animation: 'gradientShift 5s ease infinite',
+              }}>Artificial</span>
+              <br />
+              <span>Intelligence</span>
             </h1>
 
-            <p className="text-xl text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
-              Nền tảng đột phá giúp doanh nghiệp chuyển đổi số hiệu quả. Nhanh hơn, an toàn hơn, thông minh hơn.
+            <p style={{
+              fontSize: 'clamp(18px, 3vw, 24px)',
+              color: '#9ca3af',
+              maxWidth: 800,
+              margin: '0 auto 64px',
+              lineHeight: 1.6,
+              animation: 'fadeInUp 1s ease-out 0.6s both',
+            }}>
+              Khám phá sức mạnh vô tận của AI, Agent thông minh và công cụ lập trình tiên tiến nhất.
+              <br />
+              <span style={{ color: '#6b7280' }}>Tương lai đã ở đây - bạn sẵn sàng chưa?</span>
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="btn-primary flex items-center justify-center gap-2">
-                <IconRocket />
-                Dùng thử miễn phí
+            <div style={{
+              display: 'flex',
+              gap: 24,
+              justifyContent: 'center',
+              marginBottom: 80,
+              flexWrap: 'wrap',
+              animation: 'fadeInUp 1s ease-out 0.8s both',
+            }}>
+              <button style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 16,
+                padding: '20px 40px',
+                background: 'linear-gradient(to right, #3B82F6, #8B5CF6, #06B6D4)',
+                borderRadius: 16,
+                color: 'white',
+                fontWeight: 700,
+                fontSize: 18,
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.25)',
+                transition: 'all 0.3s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05) translateY(-5px)';
+                e.currentTarget.style.boxShadow = '0 30px 60px -12px rgba(59, 130, 246, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(59, 130, 246, 0.25)';
+              }}
+              >
+                <IconBrain className="w-6 h-6" />
+                Khám phá AI
+                <IconArrowRight className="w-5 h-5" />
               </button>
-              <button className="glass hover-lift px-8 py-4 rounded-xl font-semibold text-gray-700 transition-all cursor-pointer">
-                Xem demo
+              <button style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
+                padding: '20px 40px',
+                borderRadius: 16,
+                color: 'white',
+                fontWeight: 700,
+                fontSize: 18,
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.2)',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+                e.currentTarget.style.transform = 'scale(1.05)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+              >
+                <IconPlay className="w-5 h-5" />
+                Xem Demo
               </button>
             </div>
 
-            {/* Stats */}
-            <div className="flex gap-8 justify-center lg:justify-start mt-12">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary font-heading">99.9%</div>
-                <div className="text-gray-500">Uptime</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary font-heading">50K+</div>
-                <div className="text-gray-500">Người dùng</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary font-heading">150+</div>
-                <div className="text-gray-500">Quốc gia</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Hero Visual */}
-          <div className="relative animate-scale-in">
-            <div className="glass rounded-3xl p-8 hover-lift cursor-pointer">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-3 h-3 bg-red-500 rounded-full" />
-                <div className="w-3 h-3 bg-yellow-500 rounded-full" />
-                <div className="w-3 h-3 bg-green-500 rounded-full" />
-              </div>
-              <div className="space-y-4">
-                <div className="h-4 bg-primary/20 rounded w-3/4" />
-                <div className="h-4 bg-secondary/20 rounded w-1/2" />
-                <div className="h-4 bg-accent/20 rounded w-2/3" />
-                <div className="grid grid-cols-3 gap-3 mt-6">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="glass-dark h-24 rounded-xl flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full gradient-primary animate-pulse-glow" />
-                    </div>
-                  ))}
+            {/* Stats with parallax */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: 24,
+              maxWidth: 800,
+              margin: '0 auto',
+              transform: `translateY(${scrollY * -0.05}px)`,
+            }}>
+              {[
+                { value: '500M+', label: 'AI Users Worldwide' },
+                { value: '$1.8T', label: 'Market Value 2024' },
+                { value: '10B+', label: 'Daily API Calls' },
+                { value: '99.9%', label: 'Accuracy Rate' },
+              ].map((stat, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: 24,
+                    borderRadius: 16,
+                    background: 'rgba(255,255,255,0.05)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    textAlign: 'center',
+                    transition: 'all 0.3s',
+                    animation: `fadeInUp 1s ease-out ${1 + i * 0.1}s both`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+                    e.currentTarget.style.transform = 'translateY(-10px)';
+                    e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                  }}
+                >
+                  <div style={{ fontSize: 36, fontWeight: 700, color: 'white', marginBottom: 8 }}>{stat.value}</div>
+                  <div style={{ color: '#6b7280', fontSize: 14 }}>{stat.label}</div>
                 </div>
-              </div>
-            </div>
-
-            {/* Floating Cards */}
-            <div className="absolute -top-4 -right-4 glass p-4 rounded-xl animate-float">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 gradient-accent rounded-full flex items-center justify-center">
-                  <IconCheck />
-                </div>
-                <div>
-                  <div className="font-semibold text-sm">Thành công!</div>
-                  <div className="text-xs text-gray-500">Đăng ký mới</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute -bottom-4 -left-4 glass p-4 rounded-xl animate-float-delayed">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 gradient-primary rounded-full flex items-center justify-center text-white">
-                  <IconChart />
-                </div>
-                <div>
-                  <div className="font-semibold text-sm">+150%</div>
-                  <div className="text-xs text-gray-500">Tăng trưởng</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center pt-2">
-            <div className="w-1 h-3 bg-gray-400 rounded-full animate-pulse" />
+        {/* Scroll indicator */}
+        <div style={{
+          position: 'absolute',
+          bottom: 40,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          animation: 'bounce 2s ease-in-out infinite',
+        }}>
+          <div style={{
+            width: 32,
+            height: 56,
+            border: '2px solid rgba(255,255,255,0.2)',
+            borderRadius: 999,
+            display: 'flex',
+            justifyContent: 'center',
+            paddingTop: 8,
+          }}>
+            <div style={{
+              width: 4,
+              height: 16,
+              borderRadius: 999,
+              background: 'rgba(255,255,255,0.4)',
+              animation: 'pulse 2s ease-in-out infinite',
+            }} />
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 animate-slide-up">
-            <div className="inline-block glass px-4 py-2 rounded-full mb-4">
-              <span className="text-primary font-medium">Tính năng nổi bật</span>
-            </div>
-            <h2 className="text-4xl lg:text-5xl font-bold font-heading mb-4">
-              Tại sao chọn <span className="text-gradient">Portal?</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Chúng tôi cung cấp giải pháp toàn diện với những tính năng vượt trội
-            </p>
+      {/* SECTION 2: WHAT IS AI */}
+      <section id="ai" style={{
+        padding: '160px 32px',
+        position: 'relative',
+        zIndex: 20,
+        transform: `translateY(${scrollY * -0.1}px)`,
+      }}>
+        <div style={{
+          maxWidth: 1280,
+          margin: '0 auto',
+          textAlign: 'center',
+          transition: 'transform 0.1s ease-out',
+        }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 12,
+            padding: '12px 24px',
+            borderRadius: 9999,
+            background: 'rgba(59, 130, 246, 0.1)',
+            border: '1px solid rgba(59, 130, 246, 0.2)',
+            color: '#60a5fa',
+            marginBottom: 32,
+          }}>
+            <span style={{ fontWeight: 700 }}>01</span>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#60a5fa' }} />
+            <span>Foundation</span>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
+          <h2 style={{
+            fontSize: 'clamp(36px, 8vw, 72px)',
+            fontWeight: 700,
+            color: 'white',
+            marginBottom: 32,
+          }}>
+            What is
+            <br />
+            <span style={{
+              background: 'linear-gradient(to right, #60a5fa, #22d3ee)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>Artificial Intelligence?</span>
+          </h2>
+
+          <p style={{
+            fontSize: 20,
+            color: '#9ca3af',
+            maxWidth: 800,
+            margin: '0 auto 80px',
+            lineHeight: 1.6,
+          }}>
+            Trí tuệ nhân tạo là công nghệ mô phỏng khả năng tư duy, học hỏi và ra quyết định của con người.
+            Từ nhận dạng giọng nói đến xe tự hành, AI đang cách mạng hóa mọi ngành công nghiệp.
+          </p>
+
+          {/* Features with mouse tracking */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 32,
+            textAlign: 'left',
+            marginBottom: 80,
+          }}>
+            {aiFeatures.map((feature, i) => (
               <div
-                key={index}
-                className="glass p-8 rounded-2xl hover-lift cursor-pointer animate-slide-up"
-                style={{ animationDelay: `${index * 100}ms` }}
+                key={i}
+                style={{
+                  padding: 32,
+                  borderRadius: 24,
+                  background: 'rgba(255,255,255,0.05)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  transition: 'all 0.4s ease',
+                  cursor: 'pointer',
+                  transform: `translate(${mousePos.x * 10}px, ${mousePos.y * 10}px)`,
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget;
+                  el.style.background = 'rgba(255,255,255,0.1)';
+                  el.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+                  el.style.transform = 'translateY(-10px) scale(1.02)';
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget;
+                  el.style.background = 'rgba(255,255,255,0.05)';
+                  el.style.borderColor = 'rgba(255,255,255,0.1)';
+                  el.style.transform = 'translateY(0) scale(1)';
+                }}
               >
-                <div className="w-14 h-14 gradient-primary rounded-xl flex items-center justify-center text-white mb-6">
-                  {feature.icon}
+                <div style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: 16,
+                  background: 'linear-gradient(to bottom right, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2))',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 24,
+                  transition: 'transform 0.3s',
+                }}>
+                  <feature.icon className="text-blue-400 w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold font-heading mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h4 style={{ fontSize: 20, fontWeight: 700, color: 'white', marginBottom: 12 }}>{feature.title}</h4>
+                <p style={{ color: '#9ca3af', lineHeight: 1.6 }}>{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* More cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, textAlign: 'left' }}>
+            {[
+              { title: 'Machine Learning', desc: 'Thuật toán tự học từ dữ liệu mà không cần lập trình rõ ràng. ML là nền tảng của mọi ứng dụng AI hiện đại.' },
+              { title: 'Deep Learning', desc: 'Mạng nơ-ron nhiều lớp có khả năng học các patterns phức tạp từ lượng dữ liệu khổng lồ.' },
+              { title: 'Natural Language', desc: 'Xử lý và hiểu ngôn ngữ tự nhiên của con người, từ văn bản đến giọng nói.' },
+            ].map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: 40,
+                  borderRadius: 32,
+                  background: 'linear-gradient(to bottom right, rgba(255,255,255,0.05), rgba(255,255,255,0))',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  textAlign: 'center',
+                  transition: 'all 0.4s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-15px) scale(1.02)';
+                  e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+                  e.currentTarget.style.boxShadow = '0 30px 60px -20px rgba(59, 130, 246, 0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <div style={{
+                  width: 56,
+                  height: 56,
+                  borderRadius: 16,
+                  background: 'linear-gradient(to bottom right, #3B82F6, #22d3ee)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto 24px',
+                }}>
+                  <span style={{ color: 'white', fontWeight: 700, fontSize: 24 }}>{i + 1}</span>
+                </div>
+                <h4 style={{ fontSize: 24, fontWeight: 700, color: 'white', marginBottom: 16 }}>{item.title}</h4>
+                <p style={{ color: '#9ca3af', lineHeight: 1.6 }}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-24 relative">
-        <div className="absolute inset-0 bg-primary/5" />
-        <div className="max-w-7xl mx-auto px-6 relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-slide-in-left">
-              <div className="relative">
-                <div className="glass p-8 rounded-3xl">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="gradient-primary p-6 rounded-2xl text-white text-center">
-                      <div className="text-4xl font-bold font-heading">10+</div>
-                      <div className="text-sm opacity-80">Năm kinh nghiệm</div>
-                    </div>
-                    <div className="gradient-accent p-6 rounded-2xl text-white text-center">
-                      <div className="text-4xl font-bold font-heading">200+</div>
-                      <div className="text-sm opacity-80">Dự án</div>
-                    </div>
-                    <div className="glass-dark p-6 rounded-2xl text-center">
-                      <div className="text-4xl font-bold text-primary font-heading">50+</div>
-                      <div className="text-sm text-gray-400">Chuyên gia</div>
-                    </div>
-                    <div className="glass p-6 rounded-2xl text-center">
-                      <div className="text-4xl font-bold text-accent font-heading">24/7</div>
-                      <div className="text-sm text-gray-500">Hỗ trợ</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Decorative elements */}
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-accent/20 rounded-full blur-2xl" />
-                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/20 rounded-full blur-2xl" />
-              </div>
-            </div>
-
-            <div className="animate-slide-in-right">
-              <h2 className="text-4xl lg:text-5xl font-bold font-heading mb-6">
-                Đồng hành cùng{' '}
-                <span className="text-gradient">thành công</span> của bạn
-              </h2>
-              <p className="text-lg text-gray-600 mb-6">
-                Portal được xây dựng với sứ mệnh giúp doanh nghiệp chuyển đổi số một cách hiệu quả nhất. Chúng tôi tự hào là đối tác công nghệ đáng tin cậy của hàng trăm doanh nghiệp hàng đầu.
-              </p>
-
-              <ul className="space-y-4">
-                {[
-                  'Giao diện trực quan, dễ sử dụng',
-                  'Tích hợp đa nền tảng',
-                  'Hỗ trợ kỹ thuật 24/7',
-                  'Cập nhật liên tục với công nghệ mới'
-                ].map((item, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    <div className="w-6 h-6 gradient-primary rounded-full flex items-center justify-center text-white">
-                      <IconCheck />
-                    </div>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {/* SECTION 3: AI AGENTS */}
+      <section id="agents" style={{
+        padding: '160px 32px',
+        position: 'relative',
+        zIndex: 20,
+        background: 'linear-gradient(to bottom, transparent, rgba(88, 28, 135, 0.3), transparent)',
+      }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 12,
+            padding: '12px 24px',
+            borderRadius: 9999,
+            background: 'rgba(139, 92, 246, 0.1)',
+            border: '1px solid rgba(139, 92, 246, 0.2)',
+            color: '#a78bfa',
+            marginBottom: 32,
+          }}>
+            <span style={{ fontWeight: 700 }}>02</span>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#a78bfa' }} />
+            <span>Autonomous Systems</span>
           </div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-primary opacity-5" />
-        <div className="max-w-4xl mx-auto px-6 relative">
-          <div className="glass rounded-3xl p-12 lg:p-16 text-center animate-scale-in">
-            <h2 className="text-4xl lg:text-5xl font-bold font-heading mb-6">
-              Sẵn sàng để bắt đầu?
-            </h2>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Hãy trở thành người đầu tiên trải nghiệm Portal. Đăng ký ngay hôm nay để nhận ưu đãi đặc biệt!
-            </p>
+          <h2 style={{
+            fontSize: 'clamp(36px, 8vw, 72px)',
+            fontWeight: 700,
+            color: 'white',
+            marginBottom: 32,
+          }}>
+            AI
+            <span style={{
+              background: 'linear-gradient(to right, #a78bfa, #f472b6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}> Agents</span>
+          </h2>
 
-            <form onSubmit={handleNewsletter} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-              <input
-                type="email"
-                placeholder="Nhập email của bạn"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                className="flex-1 px-6 py-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                required
-              />
-              <button
-                type="submit"
-                disabled={newsletterStatus === 'loading'}
-                className="btn-accent disabled:opacity-50 disabled:cursor-not-allowed"
+          <p style={{
+            fontSize: 20,
+            color: '#9ca3af',
+            maxWidth: 800,
+            margin: '0 auto 80px',
+            lineHeight: 1.6,
+          }}>
+            Agent AI là hệ thống tự chủ có khả năng lập kế hoạch, thực thi và học hỏi từ kết quả.
+            Chúng không chỉ trả lời câu hỏi mà còn hành động để đạt được mục tiêu.
+          </p>
+
+          {/* Cards */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: 32,
+            marginBottom: 80,
+            textAlign: 'left',
+          }}>
+            {agentFeatures.map((feature, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: 40,
+                  borderRadius: 32,
+                  background: 'rgba(15, 23, 42, 0.6)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  backdropFilter: 'blur(20px)',
+                  transition: 'all 0.4s ease',
+                  animation: `fadeInScale 0.8s ease-out ${i * 0.1}s both`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-15px) rotateX(5deg)';
+                  e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.4)';
+                  e.currentTarget.style.boxShadow = '0 30px 60px -20px rgba(139, 92, 246, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) rotateX(0)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
-                {newsletterStatus === 'loading' ? 'Đang gửi...' : 'Đăng ký ngay'}
-              </button>
-            </form>
-
-            {newsletterStatus === 'success' && (
-              <p className="text-green-600 mt-4 font-medium">Đăng ký thành công! Cảm ơn bạn.</p>
-            )}
-            {newsletterStatus === 'error' && (
-              <p className="text-red-600 mt-4 font-medium">Có lỗi xảy ra. Vui lòng thử lại.</p>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="inline-block glass px-4 py-2 rounded-full mb-4">
-              <span className="text-primary font-medium">Liên hệ</span>
-            </div>
-            <h2 className="text-4xl lg:text-5xl font-bold font-heading mb-4">
-              Kết nối với{' '}
-              <span className="text-gradient">chúng tôi</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Bạn có câu hỏi hoặc cần hỗ trợ? Hãy liên hệ với chúng tôi ngay!
-            </p>
-          </div>
-
-          <div className="max-w-2xl mx-auto">
-            <form onSubmit={handleSubmit} className="glass p-8 lg:p-10 rounded-3xl">
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2">Họ và tên</label>
-                  <input
-                    type="text"
-                    placeholder="Nhập họ và tên của bạn"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-6 py-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                    required
-                  />
+                <div style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: 16,
+                  background: ['linear-gradient(to bottom right, #3B82F6, #22d3ee)', 'linear-gradient(to bottom right, #8B5CF6, #ec4899)', 'linear-gradient(to bottom right, #f97316, #ef4444)', 'linear-gradient(to bottom right, #22c55e, #10b981)'][i],
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 24,
+                  transition: 'transform 0.3s',
+                }}>
+                  <IconRobot className="text-white w-8 h-8" />
                 </div>
-
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2">Email</label>
-                  <input
-                    type="email"
-                    placeholder="Nhập email của bạn"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-6 py-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2">Tin nhắn</label>
-                  <textarea
-                    placeholder="Nhập tin nhắn của bạn"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    rows={5}
-                    className="w-full px-6 py-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={formStatus === 'loading'}
-                  className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {formStatus === 'loading' ? 'Đang gửi...' : 'Gửi tin nhắn'}
-                </button>
+                <h4 style={{ fontSize: 24, fontWeight: 700, color: 'white', marginBottom: 16 }}>{feature.title}</h4>
+                <p style={{ color: '#9ca3af', lineHeight: 1.6 }}>{feature.desc}</p>
               </div>
+            ))}
+          </div>
 
-              {formStatus === 'success' && (
-                <p className="text-green-600 mt-4 font-medium text-center">Tin nhắn đã được gửi thành công!</p>
-              )}
-              {formStatus === 'error' && (
-                <p className="text-red-600 mt-4 font-medium text-center">Có lỗi xảy ra. Vui lòng thử lại.</p>
-              )}
-            </form>
+          {/* Code section */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, textAlign: 'left', alignItems: 'center' }}>
+            <div>
+              <h3 style={{ fontSize: 36, fontWeight: 700, color: 'white', marginBottom: 24 }}>How Agents Work</h3>
+              <p style={{ fontSize: 18, color: '#9ca3af', marginBottom: 32, lineHeight: 1.6 }}>
+                Agent hoạt động theo vòng lặp Observe → Think → Act → Learn.
+                Chúng sử dụng tools để tương tác với thế giới bên ngoài và liên tục cải thiện dựa trên feedback.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {['Autonomous Task Execution', 'Multi-step Planning', 'Tool Use & Integration', 'Self-Correction'].map((item, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                    <div style={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      background: 'rgba(139, 92, 246, 0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                      <IconCheck className="text-purple-400 w-4 h-4" />
+                    </div>
+                    <span style={{ color: 'white' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div style={{
+              padding: 32,
+              borderRadius: 24,
+              background: 'rgba(15, 23, 42, 0.8)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(20px)',
+              textAlign: 'left',
+              transition: 'transform 0.3s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.02)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+                <div style={{ width: 16, height: 16, borderRadius: '50%', background: '#ef4444' }} />
+                <div style={{ width: 16, height: 16, borderRadius: '50%', background: '#eab308' }} />
+                <div style={{ width: 16, height: 16, borderRadius: '50%', background: '#22c55e' }} />
+                <span style={{ marginLeft: 16, color: '#9ca3af', fontSize: 14 }}>agent.ts</span>
+              </div>
+              <pre style={{ fontFamily: 'monospace', fontSize: 14, color: '#d1d5db', overflow: 'auto' }}>
+                <code>{`// AI Agent Architecture
+class AIAgent {
+  private model: LLM;
+  private tools: Tool[];
+
+  async execute(task) {
+    const context = await this.observe(task);
+    const plan = await this.think(context);
+    const result = await this.act(plan);
+    await this.learn(task, result);
+    return result;
+  }
+}`}</code>
+              </pre>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 glass-dark">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <a href="#" className="text-2xl font-bold font-heading text-gradient mb-4 block">
-                Portal
+      {/* SECTION 4: CLAUDE CODE */}
+      <section id="claude" style={{ padding: '160px 32px', position: 'relative', zIndex: 20 }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 12,
+            padding: '12px 24px',
+            borderRadius: 9999,
+            background: 'rgba(251, 191, 36, 0.1)',
+            border: '1px solid rgba(251, 191, 36, 0.2)',
+            color: '#fbbf24',
+            marginBottom: 32,
+          }}>
+            <span style={{ fontWeight: 700 }}>03</span>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#fbbf24' }} />
+            <span>Developer Tool</span>
+          </div>
+
+          <h2 style={{ fontSize: 'clamp(36px, 8vw, 72px)', fontWeight: 700, color: 'white', marginBottom: 32 }}>
+            Claude
+            <br />
+            <span style={{
+              background: 'linear-gradient(to right, #fbbf24, #f97316)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>Code</span>
+          </h2>
+
+          <p style={{ fontSize: 20, color: '#9ca3af', maxWidth: 800, margin: '0 auto 80px', lineHeight: 1.6 }}>
+            Claude Code là AI coding assistant mạnh nhất từ Anthropic. Được thiết kế để hiểu code,
+            viết code, và xử lý các tác vụ phức tạp với độ chính xác cao nhất.
+          </p>
+
+          {/* Features grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, marginBottom: 80, textAlign: 'left' }}>
+            {claudeFeatures.map((feature, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: 40,
+                  borderRadius: 32,
+                  background: 'rgba(15, 23, 42, 0.6)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  backdropFilter: 'blur(20px)',
+                  transition: 'all 0.4s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-15px)';
+                  e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                }}
+              >
+                <div style={{
+                  width: 56,
+                  height: 56,
+                  borderRadius: 16,
+                  background: 'linear-gradient(to bottom right, rgba(251, 191, 36, 0.2), rgba(249, 115, 22, 0.2))',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 24,
+                }}>
+                  <IconCode className="text-amber-400 w-7 h-7" />
+                </div>
+                <h4 style={{ fontSize: 20, fontWeight: 700, color: 'white', marginBottom: 12 }}>{feature.title}</h4>
+                <p style={{ color: '#9ca3af', lineHeight: 1.6 }}>{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Comparison */}
+          <div style={{
+            padding: 40,
+            borderRadius: 32,
+            background: 'rgba(255,255,255,0.05)',
+            border: '1px solid rgba(255,255,255,0.1)',
+          }}>
+            <h3 style={{ fontSize: 24, fontWeight: 700, color: 'white', marginBottom: 32 }}>Claude Code vs Traditional Coding</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
+              <div style={{
+                padding: 24,
+                borderRadius: 16,
+                background: 'rgba(239, 68, 68, 0.1)',
+                border: '1px solid rgba(239, 68, 68, 0.2)',
+                textAlign: 'left',
+              }}>
+                <h4 style={{ color: '#f87171', fontWeight: 700, marginBottom: 16 }}>Traditional</h4>
+                <ul style={{ color: '#9ca3af', listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <li>• Viết boilerplate code thủ công</li>
+                  <li>• Debug mất hàng giờ</li>
+                  <li>• Copy-paste từ StackOverflow</li>
+                  <li>• Refactor manually</li>
+                </ul>
+              </div>
+              <div style={{
+                padding: 24,
+                borderRadius: 16,
+                background: 'rgba(34, 197, 94, 0.1)',
+                border: '1px solid rgba(34, 197, 94, 0.2)',
+                textAlign: 'left',
+              }}>
+                <h4 style={{ color: '#4ade80', fontWeight: 700, marginBottom: 16 }}>With Claude Code</h4>
+                <ul style={{ color: '#d1d5db', listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <li>• AI tự động generate code</li>
+                  <li>• Instant bug detection</li>
+                  <li>• Context-aware suggestions</li>
+                  <li>• One-click refactoring</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5: FUTURE */}
+      <section id="future" style={{ padding: '160px 32px', position: 'relative', zIndex: 20 }}>
+        <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 12,
+            padding: '12px 24px',
+            borderRadius: 9999,
+            background: 'rgba(34, 211, 238, 0.1)',
+            border: '1px solid rgba(34, 211, 238, 0.2)',
+            color: '#22d3ee',
+            marginBottom: 48,
+          }}>
+            <span style={{ fontWeight: 700 }}>04</span>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#22d3ee' }} />
+            <span>The Future</span>
+          </div>
+
+          <h2 style={{ fontSize: 'clamp(36px, 8vw, 72px)', fontWeight: 700, color: 'white', marginBottom: 48 }}>
+            The Future is
+            <br />
+            <span style={{
+              background: 'linear-gradient(to right, #22d3ee, #60a5fa, #a78bfa)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundSize: '200% 200%',
+              animation: 'gradientShift 5s ease infinite',
+            }}>Now</span>
+          </h2>
+
+          <p style={{ fontSize: 20, color: '#9ca3af', marginBottom: 80, lineHeight: 1.6 }}>
+            AI không chỉ là công cụ - nó là đối tác trong hành trình sáng tạo của bạn.
+            Hãy bắt đầu ngay hôm nay và trở thành người tiên phong trong kỷ nguyên mới.
+          </p>
+
+          <div style={{ display: 'flex', gap: 24, justifyContent: 'center', marginBottom: 80, flexWrap: 'wrap' }}>
+            <button style={{
+              padding: '24px 48px',
+              background: 'linear-gradient(to right, #3B82F6, #8B5CF6, #06B6D4)',
+              borderRadius: 16,
+              color: 'white',
+              fontWeight: 700,
+              fontSize: 18,
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.25)',
+              transition: 'all 0.3s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05) translateY(-5px)';
+              e.currentTarget.style.boxShadow = '0 30px 60px -12px rgba(59, 130, 246, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1) translateY(0)';
+              e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(59, 130, 246, 0.25)';
+            }}
+            >
+              Bắt đầu miễn phí
+            </button>
+            <button style={{
+              padding: '24px 48px',
+              borderRadius: 16,
+              color: 'white',
+              fontWeight: 700,
+              fontSize: 18,
+              background: 'transparent',
+              border: '1px solid rgba(255,255,255,0.2)',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+            }}
+            >
+              Liên hệ tư vấn
+            </button>
+          </div>
+
+          <blockquote style={{ fontSize: 'clamp(24px, 4vw, 36px)', color: 'white', fontWeight: 300, lineHeight: 1.6 }}>
+            "AI sẽ không thay thế con người,
+            <br />
+            nhưng những người dùng AI sẽ thay thế những người không dùng AI."
+          </blockquote>
+          <cite style={{ display: 'block', marginTop: 32, color: '#6b7280', fontStyle: 'normal' }}>— Sam Altman, CEO OpenAI</cite>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer style={{
+        padding: '64px 32px',
+        borderTop: '1px solid rgba(255,255,255,0.1)',
+        position: 'relative',
+        zIndex: 20,
+      }}>
+        <div style={{
+          maxWidth: 1280,
+          margin: '0 auto',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 32,
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div style={{
+              width: 48,
+              height: 48,
+              borderRadius: 12,
+              background: 'linear-gradient(to bottom right, #3B82F6, #8B5CF6)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <IconSparkles className="text-white w-6 h-6" />
+            </div>
+            <span style={{ fontSize: 24, fontWeight: 700, color: 'white' }}>AI Universe</span>
+          </div>
+          <div style={{ display: 'flex', gap: 32 }}>
+            {['Privacy', 'Terms', 'Contact'].map((item) => (
+              <a
+                key={item}
+                href="#"
+                style={{
+                  color: '#6b7280',
+                  textDecoration: 'none',
+                  transition: 'color 0.3s',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'white'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#6b7280'}
+              >
+                {item}
               </a>
-              <p className="text-gray-400">
-                Nền tảng công nghệ của tương lai giúp doanh nghiệp phát triển bền vững.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4 text-white">Sản phẩm</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-primary transition-colors">Tính năng</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Bảng giá</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">API</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4 text-white">Công ty</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-primary transition-colors">Về chúng tôi</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Tuyển dụng</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Liên hệ</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4 text-white">Pháp lý</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-primary transition-colors">Điều khoản</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Bảo mật</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Chính sách</a></li>
-              </ul>
-            </div>
+            ))}
           </div>
-
-          <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Portal. Tất cả các quyền được bảo lưu.</p>
-          </div>
+          <p style={{ color: '#6b7280', width: '100%', textAlign: 'center', marginTop: 16 }}>
+            © 2024 AI Universe. All rights reserved.
+          </p>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }
