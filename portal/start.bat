@@ -1,131 +1,60 @@
 @echo off
-chcp 65001 >nul
-title Portal Launcher
+setlocal
 
 set "CLIENT_DIR=%~dp0client"
 set "SERVER_DIR=%~dp0server"
 set "CLIENT_PORT=3000"
 set "SERVER_PORT=3001"
 
-:menu
-cls
-echo.
-echo  ╔═══════════════════════════════════════════════╗
-echo  ║           🚀 PORTAL LAUNCHER                  ║
-echo  ╚═══════════════════════════════════════════════╝
-echo.
-echo  Chon thao tac:
-echo.
-echo  [1] ▶  Start Client + Server
-echo  [2] 🔄 Restart Client
-echo  [3] 🔄 Restart Server
-echo  [4] 🌐 Open Localhost in Browser
-echo  [5] ⏹️  Stop All Services
-echo  [0] ❌ Exit
-echo.
-echo ================================================
-echo.
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+  "$ClientDir='%CLIENT_DIR%'; $ServerDir='%SERVER_DIR%'; $ClientPort='%CLIENT_PORT%'; $ServerPort='%SERVER_PORT%';" ^
+  "function Pause{ Write-Host ''; Read-Host 'Nhan Enter de tiep tuc...' | Out-Null }" ^
+  "function Start-Svc{ param($Name, $Dir, $Cmd) Start-Process cmd -ArgumentList '/k', 'cd /d', $Dir, '&&', $Cmd -WindowStyle Normal }" ^
+  "while($true){" ^
+  "  Clear-Host;" ^
+  "  Write-Host '=== Portal Launcher ===' -ForegroundColor Cyan;" ^
+  "  Write-Host ('Client: ' + $ClientDir + ' (port ' + $ClientPort + ')') -ForegroundColor Gray;" ^
+  "  Write-Host ('Server: ' + $ServerDir + ' (port ' + $ServerPort + ')') -ForegroundColor Gray;" ^
+  "  Write-Host '';" ^
+  "  Write-Host '1) Start Client + Server';" ^
+  "  Write-Host '2) Restart Client';" ^
+  "  Write-Host '3) Restart Server';" ^
+  "  Write-Host '4) Open Localhost in Browser';" ^
+  "  Write-Host '5) Stop All Services';" ^
+  "  Write-Host '0) Thoat';" ^
+  "  $c = Read-Host 'Chon (0-5)';" ^
+  "  switch($c){" ^
+  "    '1'{ " ^
+  "      Write-Host 'Starting Server...' -ForegroundColor Yellow;" ^
+  "      Start-Process cmd -ArgumentList '/k', 'cd /d', $ServerDir, '&&', 'npm run start:dev';" ^
+  "      Start-Sleep 3;" ^
+  "      Write-Host 'Starting Client...' -ForegroundColor Yellow;" ^
+  "      Start-Process cmd -ArgumentList '/k', 'cd /d', $ClientDir, '&&', 'npm run dev';" ^
+  "      Write-Host 'Done! Client: http://localhost:' + $ClientPort ', Server: http://localhost:' + $ServerPort -ForegroundColor Green;" ^
+  "      Pause " ^
+  "    }" ^
+  "    '2'{ " ^
+  "      Write-Host 'Restarting Client...' -ForegroundColor Yellow;" ^
+  "      Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force;" ^
+  "      Start-Sleep 2;" ^
+  "      Start-Process cmd -ArgumentList '/k', 'cd /d', $ClientDir, '&&', 'npm run dev';" ^
+  "      Write-Host 'Client restarted!' -ForegroundColor Green;" ^
+  "      Pause " ^
+  "    }" ^
+  "    '3'{ " ^
+  "      Write-Host 'Restarting Server...' -ForegroundColor Yellow;" ^
+  "      Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force;" ^
+  "      Start-Sleep 2;" ^
+  "      Start-Process cmd -ArgumentList '/k', 'cd /d', $ServerDir, '&&', 'npm run start:dev';" ^
+  "      Write-Host 'Server restarted!' -ForegroundColor Green;" ^
+  "      Pause " ^
+  "    }" ^
+  "    '4'{ Start-Process ('http://localhost:' + $ClientPort); Write-Host 'Browser opened!' -ForegroundColor Green; Pause }" ^
+  "    '5'{ Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force; Write-Host 'All services stopped!' -ForegroundColor Green; Pause }" ^
+  "    '0'{ break }" ^
+  "    default{ Write-Host 'Sai lua chon!' -ForegroundColor Yellow; Start-Sleep 1 }" ^
+  "  }" ^
+  "}"
 
-set /p choice="Nhap lua chon cua ban: "
-
-if "%choice%"=="1" goto start_all
-if "%choice%"=="2" goto restart_client
-if "%choice%"=="3" goto restart_server
-if "%choice%"=="4" goto open_browser
-if "%choice%"=="5" goto stop_all
-if "%choice%"=="0" goto exit
-goto menu
-
-:start_all
-echo.
-echo  ═══════════════════════════════════════════════
-echo  ▶ Dang khoi dong Client va Server...
-echo  ═══════════════════════════════════════════════
-echo.
-
-echo [1/2] Starting Server (port %SERVER_PORT%)...
-start "Portal Server" cmd /k "cd /d "%SERVER_DIR%" && npm run start:dev"
-timeout /t 3 /nobreak >nul
-
-echo [2/2] Starting Client (port %CLIENT_PORT%)...
-start "Portal Client" cmd /k "cd /d "%CLIENT_DIR%" && npm run dev"
-timeout /t 2 /nobreak >nul
-
-echo.
-echo  ✓ Da khoi dong thanh cong!
-echo  ═══════════════════════════════════════════════
-echo.
-echo  🌐 Client: http://localhost:%CLIENT_PORT%
-echo  🔧 Server: http://localhost:%SERVER_PORT%
-echo.
-pause
-goto menu
-
-:restart_client
-echo.
-echo  ═══════════════════════════════════════════════
-echo  🔄 Dang khoi lai Client...
-echo  ═══════════════════════════════════════════════
-echo.
-
-taskkill /F /IM node.exe >nul 2>&1
-timeout /t 2 /nobreak >nul
-
-echo Starting Client on port %CLIENT_PORT%...
-start "Portal Client" cmd /k "cd /d "%CLIENT_DIR%" && npm run dev"
-
-echo.
-echo  ✓ Client da khoi dong lai!
-echo.
-pause
-goto menu
-
-:restart_server
-echo.
-echo  ═══════════════════════════════════════════════
-echo  🔄 Dang khoi lai Server...
-echo  ═══════════════════════════════════════════════
-echo.
-
-taskkill /F /IM node.exe >nul 2>&1
-timeout /t 2 /nobreak >nul
-
-echo Starting Server on port %SERVER_PORT%...
-start "Portal Server" cmd /k "cd /d "%SERVER_DIR%" && npm run start:dev"
-
-echo.
-echo  ✓ Server da khoi dong lai!
-echo.
-pause
-goto menu
-
-:open_browser
-start http://localhost:%CLIENT_PORT%
-echo.
-echo  🌐 Da mo trinh duyet!
-echo.
-pause
-goto menu
-
-:stop_all
-echo.
-echo  ═══════════════════════════════════════════════
-echo  ⏹️  Dang dung tat ca services...
-echo  ═══════════════════════════════════════════════
-echo.
-
-taskkill /F /IM node.exe >nul 2>&1
-
-echo.
-echo  ✓ Da dung tat ca services!
-echo.
-pause
-goto menu
-
-:exit
-cls
-echo.
-echo  👋 Tam biet!
-echo.
-timeout /t 1 /nobreak >nul
-exit
+if errorlevel 1 pause
+endlocal
