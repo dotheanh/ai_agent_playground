@@ -46,16 +46,17 @@ export const heroConfig: HeroConfig = {
   decodeChars: "!@#$%^&*()_+-=[]{}|;:,.<>?",
   subtitle: "EVOLVED",
   ctaPrimary: "Explore AI",
-  ctaPrimaryTarget: "features",
+  ctaPrimaryTarget: "gallery",
   ctaSecondary: "View Gallery",
-  ctaSecondaryTarget: "gallery",
+  ctaSecondaryTarget: "stats",
   cornerLabel: "SYSTEM STATUS",
   cornerDetail: "ONLINE",
   navItems: [
-    { label: "AI Tech", sectionId: "features", icon: "disc" },
     { label: "Vision", sectionId: "gallery", icon: "play" },
+    { label: "Stats", sectionId: "stats", icon: "disc" },
+    { label: "Quiz", sectionId: "quiz", icon: "disc" },
+    { label: "Guestbook", sectionId: "guestbook", icon: "music" },
     { label: "Services", sectionId: "tour", icon: "calendar" },
-    { label: "Connect", sectionId: "contact", icon: "music" },
   ],
 };
 

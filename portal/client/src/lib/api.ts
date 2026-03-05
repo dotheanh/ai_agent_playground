@@ -88,6 +88,20 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ message, history }),
     }),
+
+  // Contact Form
+  submitContact: (name: string, email: string, message: string) =>
+    fetchAPI<{ success: boolean; message: string; data: any }>('/contact', {
+      method: 'POST',
+      body: JSON.stringify({ name, email, message }),
+    }),
+
+  // Newsletter
+  subscribeNewsletter: (email: string) =>
+    fetchAPI<{ success: boolean; message: string }>('/newsletter', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    }),
 };
 
 // ==================== Utility Functions ====================

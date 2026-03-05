@@ -5,8 +5,12 @@ import { siteConfig } from './config';
 import Hero from './sections/Hero';
 import AlbumCube from './sections/AlbumCube';
 import ParallaxGallery from './sections/ParallaxGallery';
+import VisitorStats from './sections/VisitorStats';
+import AIQuiz from './sections/AIQuiz';
+import Guestbook from './sections/Guestbook';
 import TourSchedule from './sections/TourSchedule';
 import Footer from './sections/Footer';
+import AIChat from './sections/AIChat';
 
 function App() {
   // Initialize Lenis smooth scrolling
@@ -36,11 +40,23 @@ function App() {
       {/* Parallax Gallery Section */}
       <ParallaxGallery />
 
+      {/* Visitor Stats - Real-time analytics */}
+      <VisitorStats />
+
+      {/* AI Quiz - Test AI knowledge */}
+      <AIQuiz />
+
+      {/* Guestbook - Leave a message */}
+      <Guestbook />
+
       {/* Tour Schedule Section */}
       <TourSchedule />
 
       {/* Footer Section */}
       <Footer />
+
+      {/* AI Chat - Floating assistant */}
+      <AIChat />
     </main>
   );
 }
