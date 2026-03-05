@@ -4,6 +4,8 @@
 // All animations, layouts, and styles are controlled by the components.
 // =============================================================================
 
+const BASE = import.meta.env.BASE_URL;
+
 // -- Site-wide settings -------------------------------------------------------
 export interface SiteConfig {
   title: string;
@@ -40,7 +42,7 @@ export interface HeroConfig {
 }
 
 export const heroConfig: HeroConfig = {
-  backgroundImage: "/hero-bg.jpg",
+  backgroundImage: `${BASE}hero-bg.jpg`,
   brandName: "AI AGENT",
   decodeText: "INTELLIGENCE",
   decodeChars: "!@#$%^&*()_+-=[]{}|;:,.<>?",
@@ -75,41 +77,41 @@ export interface AlbumCubeConfig {
 }
 
 export const albumCubeConfig: AlbumCubeConfig = {
-  albums: [
-    {
-      id: 1,
-      title: "CLAUDE",
-      subtitle: "CODE",
-      image: "/cube-1.jpg",
-    },
-    {
-      id: 2,
-      title: "AI",
-      subtitle: "AGENTS",
-      image: "/cube-2.jpg",
-    },
-    {
-      id: 3,
-      title: "NEURAL",
-      subtitle: "NETWORKS",
-      image: "/cube-3.jpg",
-    },
-    {
-      id: 4,
-      title: "QUANTUM",
-      subtitle: "CORE",
-      image: "/cube-4.jpg",
-    },
-  ],
-  cubeTextures: [
-    "/cube-1.jpg", // right
-    "/cube-2.jpg", // left
-    "/cube-3.jpg", // top
-    "/cube-4.jpg", // bottom
-    "/cube-5.jpg", // front
-    "/cube-6.jpg", // back
-  ],
-  scrollHint: "Scroll to explore AI capabilities",
+    albums: [
+      {
+        id: 1,
+        title: "CLAUDE",
+        subtitle: "CODE",
+        image: `${BASE}cube-1.jpg`,
+      },
+      {
+        id: 2,
+        title: "AI",
+        subtitle: "AGENTS",
+        image: `${BASE}cube-2.jpg`,
+      },
+      {
+        id: 3,
+        title: "NEURAL",
+        subtitle: "NETWORKS",
+        image: `${BASE}cube-3.jpg`,
+      },
+      {
+        id: 4,
+        title: "QUANTUM",
+        subtitle: "CORE",
+        image: `${BASE}cube-4.jpg`,
+      },
+    ],
+    cubeTextures: [
+      `${BASE}cube-1.jpg`,
+      `${BASE}cube-2.jpg`,
+      `${BASE}cube-3.jpg`,
+      `${BASE}cube-4.jpg`,
+      `${BASE}cube-5.jpg`,
+      `${BASE}cube-6.jpg`,
+    ],
+    scrollHint: "Scroll to explore AI capabilities",
 };
 
 // -- Parallax Gallery Section -------------------------------------------------
@@ -143,6 +145,7 @@ export const parallaxGalleryConfig: ParallaxGalleryConfig = {
   sectionTitle: "THE FUTURE IS NOW",
   galleryLabel: "CAPABILITIES",
   galleryTitle: "POWERED BY ADVANCED AI",
+
   marqueeTexts: [
     "CLAUDE CODE",
     "AI AGENTS",
@@ -153,30 +156,34 @@ export const parallaxGalleryConfig: ParallaxGalleryConfig = {
     "COMPUTER VISION",
     "AUTONOMOUS SYSTEMS",
   ],
+
   endCtaText: "Discover More AI Applications",
+
   parallaxImagesTop: [
-    { id: 1, src: "/gallery-1.jpg", alt: "AI Smart Cities" },
-    { id: 2, src: "/gallery-2.jpg", alt: "Robotics AI" },
-    { id: 3, src: "/gallery-3.jpg", alt: "AI Data Centers" },
-    { id: 4, src: "/gallery-4.jpg", alt: "AI Core Processor" },
-    { id: 5, src: "/gallery-5.jpg", alt: "AI Hologram" },
-    { id: 6, src: "/gallery-6.jpg", alt: "Quantum AI Chip" },
+    { id: 1, src: `${BASE}gallery-1.jpg`, alt: "AI Smart Cities" },
+    { id: 2, src: `${BASE}gallery-2.jpg`, alt: "Robotics AI" },
+    { id: 3, src: `${BASE}gallery-3.jpg`, alt: "AI Data Centers" },
+    { id: 4, src: `${BASE}gallery-4.jpg`, alt: "AI Core Processor" },
+    { id: 5, src: `${BASE}gallery-5.jpg`, alt: "AI Hologram" },
+    { id: 6, src: `${BASE}gallery-6.jpg`, alt: "Quantum AI Chip" },
   ],
+
   parallaxImagesBottom: [
-    { id: 7, src: "/gallery-6.jpg", alt: "Quantum AI Chip" },
-    { id: 8, src: "/gallery-5.jpg", alt: "AI Hologram" },
-    { id: 9, src: "/gallery-4.jpg", alt: "AI Core Processor" },
-    { id: 10, src: "/gallery-3.jpg", alt: "AI Data Centers" },
-    { id: 11, src: "/gallery-2.jpg", alt: "Robotics AI" },
-    { id: 12, src: "/gallery-1.jpg", alt: "AI Smart Cities" },
+    { id: 7, src: `${BASE}gallery-6.jpg`, alt: "Quantum AI Chip" },
+    { id: 8, src: `${BASE}gallery-5.jpg`, alt: "AI Hologram" },
+    { id: 9, src: `${BASE}gallery-4.jpg`, alt: "AI Core Processor" },
+    { id: 10, src: `${BASE}gallery-3.jpg`, alt: "AI Data Centers" },
+    { id: 11, src: `${BASE}gallery-2.jpg`, alt: "Robotics AI" },
+    { id: 12, src: `${BASE}gallery-1.jpg`, alt: "AI Smart Cities" },
   ],
+
   galleryImages: [
-    { id: 1, src: "/gallery-1.jpg", title: "Smart Cities", date: "AI Infrastructure" },
-    { id: 2, src: "/gallery-2.jpg", title: "Robotics", date: "Autonomous Systems" },
-    { id: 3, src: "/gallery-3.jpg", title: "Data Centers", date: "AI Processing" },
-    { id: 4, src: "/gallery-4.jpg", title: "Neural Core", date: "Deep Learning" },
-    { id: 5, src: "/gallery-5.jpg", title: "Virtual Assistants", date: "NLP Systems" },
-    { id: 6, src: "/gallery-6.jpg", title: "Quantum AI", date: "Next-Gen Computing" },
+    { id: 1, src: `${BASE}gallery-1.jpg`, title: "Smart Cities", date: "AI Infrastructure" },
+    { id: 2, src: `${BASE}gallery-2.jpg`, title: "Robotics", date: "Autonomous Systems" },
+    { id: 3, src: `${BASE}gallery-3.jpg`, title: "Data Centers", date: "AI Processing" },
+    { id: 4, src: `${BASE}gallery-4.jpg`, title: "Neural Core", date: "Deep Learning" },
+    { id: 5, src: `${BASE}gallery-5.jpg`, title: "Virtual Assistants", date: "NLP Systems" },
+    { id: 6, src: `${BASE}gallery-6.jpg`, title: "Quantum AI", date: "Next-Gen Computing" },
   ],
 };
 
@@ -213,7 +220,7 @@ export interface TourScheduleConfig {
 export const tourScheduleConfig: TourScheduleConfig = {
   sectionLabel: "AI SOLUTIONS",
   sectionTitle: "CHOOSE YOUR AI PLAN",
-  vinylImage: "/spinner.png",
+  vinylImage: `${BASE}spinner.png`,
   buyButtonText: "Get Started",
   detailsButtonText: "Learn More",
   bottomNote: "All plans include 24/7 support and API access powered by Claude Code",
@@ -232,7 +239,7 @@ export const tourScheduleConfig: TourScheduleConfig = {
       city: "Claude Basic",
       venue: "For developers & small teams starting with AI agents",
       status: "on-sale",
-      image: "/gallery-1.jpg",
+      image: `${BASE}gallery-1.jpg`,
     },
     {
       id: 2,
@@ -241,7 +248,7 @@ export const tourScheduleConfig: TourScheduleConfig = {
       city: "AI Agent Pro",
       venue: "Advanced AI with Claude Code for growing businesses",
       status: "on-sale",
-      image: "/gallery-2.jpg",
+      image: `${BASE}gallery-2.jpg`,
     },
     {
       id: 3,
@@ -250,7 +257,7 @@ export const tourScheduleConfig: TourScheduleConfig = {
       city: "Enterprise AI",
       venue: "Dedicated Claude Code infrastructure & custom agents",
       status: "coming-soon",
-      image: "/gallery-3.jpg",
+      image: `${BASE}gallery-3.jpg`,
     },
     {
       id: 4,
@@ -259,7 +266,7 @@ export const tourScheduleConfig: TourScheduleConfig = {
       city: "Quantum AI",
       venue: "Quantum-enhanced AI with next-gen neural networks",
       status: "coming-soon",
-      image: "/gallery-4.jpg",
+      image: `${BASE}gallery-4.jpg`,
     },
   ],
 };
@@ -306,7 +313,7 @@ export interface FooterConfig {
 }
 
 export const footerConfig: FooterConfig = {
-  portraitImage: "/footer-portrait.jpg",
+  portraitImage: `${BASE}footer-portrait.jpg`,
   portraitAlt: "AI Agent Portrait",
   heroTitle: "CONNECT",
   heroSubtitle: "WITH AI",
@@ -337,9 +344,9 @@ export const footerConfig: FooterConfig = {
     { icon: "music", label: "GitHub", href: "https://github.com" },
   ],
   galleryImages: [
-    { id: 1, src: "/gallery-1.jpg" },
-    { id: 2, src: "/gallery-2.jpg" },
-    { id: 3, src: "/gallery-3.jpg" },
-    { id: 4, src: "/gallery-4.jpg" },
+    { id: 1, src: `${BASE}gallery-1.jpg` },
+    { id: 2, src: `${BASE}gallery-2.jpg` },
+    { id: 3, src: `${BASE}gallery-3.jpg` },
+    { id: 4, src: `${BASE}gallery-4.jpg` },
   ],
 };
