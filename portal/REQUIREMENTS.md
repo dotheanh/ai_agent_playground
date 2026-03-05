@@ -35,6 +35,7 @@ AI Agent Portal là một landing page tương tác giới thiệu về AI Agent
 ### Development
 - **Package Manager**: npm
 - **Scripts**: start.bat (PowerShell launcher)
+- **Dev Tools**: react-grab (UI inspector cho dev mode)
 
 ## Project Structure
 
@@ -74,7 +75,7 @@ portal/
 │   │   ├── contact.controller.ts
 │   │   ├── app.module.ts
 │   │   └── main.ts
-│   └── portal.db             # SQLite database file
+│   └── portal.db              # SQLite database file
 │
 ├── start.bat                  # Launcher script
 └── package.json
@@ -125,6 +126,26 @@ portal/
 - **Typography**: Inter (display), JetBrains Mono (mono)
 - **Animations**: GSAP scroll-triggered, decode text effect, floating particles
 - **Scroll**: Lenis smooth scrolling
+
+## Dev Tools
+
+### React Grab
+
+React Grab là công cụ UI inspector cho React development, giúp chỉnh sửa styling trực tiếp trên trình duyệt.
+
+**Cài đặt:**
+```bash
+npx -y grab@latest init -c client
+```
+
+**Cách sử dụng:**
+1. Chạy dev server: `cd client && npm run dev`
+2. Mở trình duyệt tại http://localhost:3000
+3. Nhấn `G` trên bàn phím để bật/tắt react-grab
+4. Click vào elements để inspect và chỉnh sửa style trực tiếp
+5. Thay đổi sẽ được highlight trong code
+
+**Lưu ý:** React Grab chỉ hoạt động trong dev mode (production build sẽ không load)
 
 ## Running the Project
 

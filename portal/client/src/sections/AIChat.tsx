@@ -126,7 +126,7 @@ const AIChat = () => {
       {isOpen && (
         <div
           ref={containerRef}
-          className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] bg-void-dark border border-crimson/30 rounded-2xl shadow-glow-lg overflow-hidden"
+          className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] bg-void-dark border border-crimson/30 rounded-2xl shadow-glow-lg overflow-hidden flex flex-col"
           style={{ height: isMinimized ? '60px' : '600px' }}
         >
           {/* Header */}
@@ -160,7 +160,7 @@ const AIChat = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ height: '480px' }}>
+          <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4">
             {messages.map((msg, index) => (
               <div
                 key={index}
