@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "autoApprove": true,
+    "allowBash": true,
+    "allowRead": true,
+    "allowWrite": true
+  }
+}
