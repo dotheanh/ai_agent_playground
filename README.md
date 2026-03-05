@@ -39,6 +39,15 @@ https://nhoxtheanh.duckdns.org/gunny/demo.mp4
 
 **Truy cập**: [https://nhoxtheanh.duckdns.org/sound-demo/](https://nhoxtheanh.duckdns.org/sound-demo/)
 
+### AI Agent Landing Page
+- Landing page giới thiệu về AI Agent với hiệu ứng parallax, 3D cube, quiz, guestbook và thống kê visitor real-time
+- Frontend: React 19 + Vite 7 + TypeScript + TailwindCSS + Radix UI + React Three Fiber + GSAP + Lenis
+- Backend: NestJS 7 + TypeScript + SQLite + TypeORM
+- Các tính năng: Hero section, AlbumCube (3D), ParallaxGallery, VisitorStats, AIQuiz, Guestbook, AI Chat widget
+- Lưu trữ dữ liệu persistent với SQLite, hiển thị visitor stats real-time
+
+**Truy cập**: [https://nhoxtheanh.duckdns.org/portal/](https://nhoxtheanh.duckdns.org/portal/)
+
 ## Quy trình làm việc
 
 ```
