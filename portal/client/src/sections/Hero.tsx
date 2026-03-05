@@ -211,7 +211,7 @@ const Hero = () => {
       </nav>
 
       {/* Hero content */}
-      <div className="relative z-10 flex flex-col items-center justify-end h-full pb-20 px-4">
+      <div className="relative z-10 flex flex-col items-center justify-end h-full pb-28 px-4">
         {/* Logo / Brand */}
         <div className="absolute top-8 left-8">
           <div className="flex items-center gap-2">
@@ -225,7 +225,7 @@ const Hero = () => {
         {/* Main title with decode effect */}
         <h1
           ref={titleRef}
-          className="decode-text text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold text-white leading-none tracking-tighter mb-4 will-change-transform"
+          className="decode-text text-[10vw] md:text-[8vw] lg:text-[6vw] font-bold text-white leading-[0.9] tracking-tight mb-6 md:mb-8 will-change-transform text-center px-4"
         >
           <span className={`${isDecoding ? 'text-glow-red' : ''} transition-all duration-300`}>
             {displayText}
@@ -241,16 +241,16 @@ const Hero = () => {
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <button
             onClick={() => scrollToSection(heroConfig.ctaPrimaryTarget)}
-            className="px-8 py-3 bg-crimson text-white font-display text-sm uppercase tracking-wider rounded-full hover:bg-crimson-light transition-all duration-300 hover:shadow-glow-red hover:-translate-y-1"
+            className="px-6 sm:px-8 py-3 bg-crimson text-white font-display text-sm uppercase tracking-wider rounded-full hover:bg-crimson-light transition-all duration-300 hover:shadow-glow-red hover:-translate-y-1 whitespace-nowrap"
           >
             {heroConfig.ctaPrimary}
           </button>
           <button
             onClick={() => scrollToSection(heroConfig.ctaSecondaryTarget)}
-            className="px-8 py-3 border border-white/30 text-white font-display text-sm uppercase tracking-wider rounded-full hover:border-crimson hover:text-crimson transition-colors duration-300"
+            className="px-6 sm:px-8 py-3 border border-white/30 text-white font-display text-sm uppercase tracking-wider rounded-full hover:border-crimson hover:text-crimson transition-colors duration-300 whitespace-nowrap"
           >
             {heroConfig.ctaSecondary}
           </button>

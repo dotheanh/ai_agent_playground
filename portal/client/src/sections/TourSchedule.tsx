@@ -159,10 +159,10 @@ const TourSchedule = () => {
                   onMouseEnter={() => setActiveVenue(index)}
                   onMouseLeave={() => setActiveVenue(0)}
                 >
-                  <div className="flex flex-col md:flex-row md:items-center gap-4">
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
                     {/* Date */}
                     <div className="flex-shrink-0 w-28">
-                      <p className="font-mono-custom text-2xl font-bold text-white">
+                      <p className="font-mono-custom text-xl font-bold text-white leading-tight break-words">
                         {tour.date}
                       </p>
                       <p className="font-mono-custom text-xs text-crimson/50">
@@ -171,14 +171,14 @@ const TourSchedule = () => {
                     </div>
 
                     {/* Venue info */}
-                    <div className="flex-grow">
+                    <div className="flex-grow min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <Sparkles className="w-4 h-4 text-crimson/50" />
-                        <span className="font-display text-lg text-white">
+                        <Sparkles className="w-4 h-4 text-crimson/50 flex-shrink-0" />
+                        <span className="font-display text-lg text-white truncate">
                           {tour.city}
                         </span>
                       </div>
-                      <p className="text-sm text-white/60 ml-6">
+                      <p className="text-sm text-white/60 ml-6 line-clamp-2">
                         {tour.venue}
                       </p>
                     </div>
