@@ -32,10 +32,19 @@ export type {
   FooterConfig,
 } from './sites/portal/config';
 
+import type {
+  SiteConfig,
+  HeroConfig,
+  AlbumCubeConfig,
+  ParallaxGalleryConfig,
+  TourScheduleConfig,
+  FooterConfig,
+} from './sites/portal/config';
+
 // Re-export data from the active site
-export const siteConfig = siteModule.siteConfig;
-export const heroConfig = siteModule.heroConfig;
-export const albumCubeConfig = siteModule.albumCubeConfig;
-export const parallaxGalleryConfig = siteModule.parallaxGalleryConfig;
-export const tourScheduleConfig = siteModule.tourScheduleConfig;
-export const footerConfig = siteModule.footerConfig;
+export const siteConfig = siteModule.siteConfig as SiteConfig;
+export const heroConfig = siteModule.heroConfig as HeroConfig;
+export const albumCubeConfig = siteModule.albumCubeConfig as AlbumCubeConfig;
+export const parallaxGalleryConfig = siteModule.parallaxGalleryConfig as ParallaxGalleryConfig;
+export const tourScheduleConfig = siteModule.tourScheduleConfig as TourScheduleConfig;
+export const footerConfig = siteModule.footerConfig as FooterConfig;
