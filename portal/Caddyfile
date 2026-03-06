@@ -10,6 +10,12 @@ zingplay.duckdns.org {
 		reverse_proxy localhost:3001
 	}
 
+	# ZPS also uses /portal/api/* (from .env.production)
+	handle /portal/api/* {
+		uri strip_prefix /portal
+		reverse_proxy localhost:3001
+	}
+
 	try_files {path} {path}/ /index.html
 }
 
