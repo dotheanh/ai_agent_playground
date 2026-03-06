@@ -12,6 +12,7 @@ function renderCard(card, extraClass = '') {
 function renderGame(state) {
   const g = document.getElementById('game');
   const isPlayerTurn = state.currentPlayer === 0 && !state.gameOver;
+  const timerClass = timeLeft <= 5 ? 'danger' : timeLeft <= 10 ? 'warning' : '';
 
   g.innerHTML = `
     <div class="top-bar">
@@ -37,6 +38,7 @@ function renderGame(state) {
 
     <div class="table-center">
       <div class="table-felt"></div>
+      ${isPlayerTurn ? `<div id="timer-display" class="timer-display ${timerClass}">${timeLeft}</div>` : ''}
       <div class="played-cards">
         ${state.lastPlayedCards.length > 0
           ? state.lastPlayedCards.map(c => renderCard(c)).join('')
@@ -46,7 +48,10 @@ function renderGame(state) {
     </div>
 
     <div class="controls">
-      <button class="btn btn-sort" onclick="onSort()" ${!isPlayerTurn ? '' : ''}>Sắp xếp</button>
+      ${isPlayerTurn ? `<div class="timer-bar"><div id="timer-fill" class="timer-fill ${timerClass}" style="width:${(timeLeft / TURN_TIME) * 100}%"></div></div>` : ''}
+    </div>
+    <div class="controls">
+      <button class="btn btn-sort" onclick="onSort()">Sắp xếp</button>
       <button class="btn btn-pass" onclick="onPass()" ${!isPlayerTurn || state.newRound ? 'disabled' : ''}>Bỏ lượt</button>
       <button class="btn btn-play" onclick="onPlay()" ${!isPlayerTurn ? 'disabled' : ''}>Đánh</button>
     </div>
@@ -58,28 +63,28 @@ function renderGame(state) {
     </div>
   `;
 
-  // Attach click handlers to player cards
-  document.querySelectorAll('#player-hand .card').forEach(el => {
-    el.addEventListener('click', () => {
-      const idx = parseInt(el.dataset.idx);
-      toggleSelect(idx);
-    });
-  });
+  // Attach click + drag handlers to player cards
+  initHandInteractions();
 }
 
 function renderPlayerHand(hand, selectedIndices) {
   const n = hand.length;
   if (n === 0) return '';
   // Calculate card spacing for fan layout
-  const maxWidth = 440;
-  const overlap = Math.min(42, Math.max(22, (maxWidth - 58) / (n - 1 || 1)));
-  const totalWidth = 58 + (n - 1) * overlap;
+  const maxWidth = 460;
+  const cardW = 72;
+  const overlap = Math.min(48, Math.max(26, (maxWidth - cardW) / (n - 1 || 1)));
+  const totalWidth = cardW + (n - 1) * overlap;
   const startX = (maxWidth - totalWidth) / 2;
+
+  // Get combo groups
+  const groupLabels = detectComboGroups(hand);
 
   return hand.map((c, i) => {
     const sel = selectedIndices.has(i) ? 'selected' : '';
+    const grp = groupLabels[i] ? 'group-' + groupLabels[i] : '';
     const x = startX + i * overlap;
-    return `<div class="card ${isRed(c.suit) ? 'red' : 'black'} ${sel}"
+    return `<div class="card ${isRed(c.suit) ? 'red' : 'black'} ${sel} ${grp}"
       data-idx="${i}" data-rank="${c.rank}" data-suit="${c.suit}"
       style="left:${x}px; z-index:${i}"
     ><span class="center-suit">${c.suit}</span></div>`;

@@ -51,3 +51,57 @@ function findStraights(hand, minLen = 3) {
 function sortHand(hand) {
   return [...hand].sort((a, b) => cardValue(a) - cardValue(b));
 }
+
+// ===== COMBO GROUP DETECTION =====
+// Detect groups of adjacent cards that form valid combos
+// Returns array of group labels per card index: ['a','a','a','','b','b','b','b','b', ...]
+const GROUP_LABELS = ['a', 'b', 'c', 'd', 'e'];
+
+function detectComboGroups(hand) {
+  const n = hand.length;
+  if (n === 0) return [];
+
+  const labels = new Array(n).fill('');
+  const used = new Array(n).fill(false);
+  let groupIdx = 0;
+
+  // Pass 1: Find same-rank groups (pairs, triples, four-of-a-kind) among adjacent cards
+  let i = 0;
+  while (i < n) {
+    let j = i;
+    while (j < n - 1 && hand[j + 1].rank === hand[i].rank) j++;
+    const count = j - i + 1;
+    if (count >= 2 && groupIdx < GROUP_LABELS.length) {
+      const label = GROUP_LABELS[groupIdx++];
+      for (let k = i; k <= j; k++) { labels[k] = label; used[k] = true; }
+    }
+    i = j + 1;
+  }
+
+  // Pass 2: Find straights (3+ consecutive ranks) among remaining unused adjacent cards
+  i = 0;
+  while (i < n) {
+    if (used[i]) { i++; continue; }
+    // Start a potential straight from this card
+    let run = [i];
+    let j = i + 1;
+    while (j < n && !used[j]) {
+      const prevRank = RANK_VALUES[hand[j - 1].rank];
+      const currRank = RANK_VALUES[hand[j].rank];
+      // Must be consecutive rank and not a "2"
+      if (currRank === prevRank + 1 && currRank < 12 && prevRank < 12) {
+        run.push(j);
+        j++;
+      } else {
+        break;
+      }
+    }
+    if (run.length >= 3 && groupIdx < GROUP_LABELS.length) {
+      const label = GROUP_LABELS[groupIdx++];
+      for (const idx of run) { labels[idx] = label; used[idx] = true; }
+    }
+    i = (run.length >= 3) ? j : i + 1;
+  }
+
+  return labels;
+}

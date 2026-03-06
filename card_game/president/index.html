@@ -17,8 +17,8 @@
       --red: #ef4444;
       --text: #e2e8f0;
       --text-dim: #64748b;
-      --card-w: 58px;
-      --card-h: 82px;
+      --card-w: 72px;
+      --card-h: 100px;
       --radius: 12px;
     }
     body {
@@ -192,7 +192,7 @@
     /* ===== PLAYER HAND ===== */
     .hand-area {
       padding: 4px 8px 12px;
-      min-height: 120px;
+      min-height: 140px;
       position: relative;
     }
     .hand {
@@ -200,7 +200,7 @@
       justify-content: center;
       align-items: flex-end;
       position: relative;
-      height: 110px;
+      height: 130px;
       overflow: visible;
     }
 
@@ -222,26 +222,24 @@
     }
     /* Real card: rank+suit in top-left and bottom-right */
     .card::before {
-      content: attr(data-rank) attr(data-suit);
+      content: attr(data-rank) "\A" attr(data-suit);
       position: absolute;
-      top: 4px;
-      left: 5px;
-      font-size: 13px;
-      line-height: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      top: 2px;
+      left: 3px;
+      font-size: 20px;
+      line-height: 1.1;
+      white-space: pre;
+      text-align: center;
     }
     .card::after {
-      content: attr(data-rank) attr(data-suit);
+      content: attr(data-rank) "\A" attr(data-suit);
       position: absolute;
-      bottom: 4px;
-      right: 5px;
-      font-size: 13px;
-      line-height: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      bottom: 2px;
+      right: 3px;
+      font-size: 20px;
+      line-height: 1.1;
+      white-space: pre;
+      text-align: center;
       transform: rotate(180deg);
     }
     .card .center-suit {
@@ -251,6 +249,45 @@
     .card.red { color: #dc2626; }
     .card.black { color: #1a1a2e; }
 
+    /* Combo group highlight colors */
+    .card.group-a { box-shadow: 0 -3px 0 0 #fbbf24 inset, 0 2px 8px rgba(0,0,0,0.3); background: linear-gradient(to top, #fffbeb, #fff 30%); }
+    .card.group-b { box-shadow: 0 -3px 0 0 #3b82f6 inset, 0 2px 8px rgba(0,0,0,0.3); background: linear-gradient(to top, #eff6ff, #fff 30%); }
+    .card.group-c { box-shadow: 0 -3px 0 0 #22c55e inset, 0 2px 8px rgba(0,0,0,0.3); background: linear-gradient(to top, #f0fdf4, #fff 30%); }
+    .card.group-d { box-shadow: 0 -3px 0 0 #f472b6 inset, 0 2px 8px rgba(0,0,0,0.3); background: linear-gradient(to top, #fdf2f8, #fff 30%); }
+    .card.group-e { box-shadow: 0 -3px 0 0 #a78bfa inset, 0 2px 8px rgba(0,0,0,0.3); background: linear-gradient(to top, #f5f3ff, #fff 30%); }
+
+    /* Dragging state */
+    .card.dragging {
+      opacity: 0;
+      z-index: 100 !important;
+      transition: none !important;
+    }
+    .dragging-ghost {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      border-radius: 8px;
+      cursor: grabbing !important;
+    }
+    .card.drag-over {
+      border-left: 3px solid var(--accent);
+    }
+
+    /* Timer bar */
+    .timer-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      margin: 0 16px 2px;
+      overflow: hidden;
+    }
+    .timer-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 1s linear;
+      background: var(--green);
+    }
+    .timer-fill.warning { background: var(--gold); }
+    .timer-fill.danger { background: var(--red); }
+
     /* Hand cards - overlapping fan */
     .hand .card {
       position: absolute;
@@ -258,6 +295,9 @@
       transition: transform 0.2s, margin-bottom 0.2s, box-shadow 0.2s;
     }
     .hand .card:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); z-index: 50 !important; }
+    /* Disable hover lift during drag */
+    .hand.dragging-active .card:hover { transform: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: unset !important; }
+    .hand.dragging-active .card { pointer-events: none; }
     .hand .card.selected {
       transform: translateY(-18px);
       box-shadow: 0 8px 25px rgba(0,212,255,0.4);
@@ -266,15 +306,16 @@
     .hand .card.selected:hover { transform: translateY(-22px); }
 
     /* Played cards on table */
+    /* Played cards: smaller */
     .played-cards .card {
-      width: 52px;
-      height: 74px;
+      width: 60px;
+      height: 84px;
       animation: card-play 0.3s ease-out;
       cursor: default;
     }
-    .played-cards .card::before { font-size: 11px; top: 3px; left: 4px; }
-    .played-cards .card::after { font-size: 11px; bottom: 3px; right: 4px; }
-    .played-cards .card .center-suit { font-size: 22px; }
+    .played-cards .card::before { font-size: 14px; top: 2px; left: 3px; }
+    .played-cards .card::after { font-size: 14px; bottom: 2px; right: 3px; }
+    .played-cards .card .center-suit { font-size: 24px; }
 
     /* Card back for opponents */
     .card-back {
@@ -371,6 +412,21 @@
       z-index: 1;
     }
     .turn-indicator.show { opacity: 1; }
+
+    /* Timer display */
+    .timer-display {
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      transform: translateY(-50%);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--green);
+      z-index: 5;
+    }
+    .timer-display.warning { color: var(--gold); }
+    .timer-display.danger { color: var(--red); animation: pulse 0.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
   </style>
 </head>
 <body>
