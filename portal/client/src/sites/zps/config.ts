@@ -184,11 +184,11 @@ export const parallaxGalleryConfig: ParallaxGalleryConfig = {
     { id: 9, src: `${BASE}zps/team-member-9.jpg`, title: "Trân", date: "Zingplay Team" },
     { id: 10, src: `${BASE}zps/team-member-10.jpg`, title: "Rim", date: "Zingplay Team" },
     { id: 11, src: `${BASE}zps/team-member-11.jpg`, title: "Quỳnh", date: "Zingplay Team" },
-    { id: 12, src: `${BASE}zps/team-member-12.jpg`, title: "Ngân", date: "Zingplay Team" },
-    { id: 13, src: `${BASE}zps/team-member-13.jpg`, title: "Bông Hoa Số 13", date: "Zingplay Team" },
-    { id: 14, src: `${BASE}zps/team-member-14.jpg`, title: "Bông Hoa Số 14", date: "Zingplay Team" },
-    { id: 15, src: `${BASE}zps/team-member-15.jpg`, title: "Bông Hoa Số 15", date: "Zingplay Team" },
-    { id: 16, src: `${BASE}zps/team-member-16.jpg`, title: "Bông Hoa Số 16", date: "Zingplay Team" },
+    { id: 12, src: `${BASE}zps/team-member-12.jpg`, title: "Pé Đù", date: "Zingplay Team" },
+    { id: 13, src: `${BASE}zps/team-member-13.jpg`, title: "Cô Giáo Loan", date: "Zingplay Team" },
+    { id: 14, src: `${BASE}zps/team-member-14.jpg`, title: "Chị Linhh", date: "Zingplay Team" },
+    { id: 15, src: `${BASE}zps/team-member-15.jpg`, title: "Quỳnh Như", date: "Zingplay Team" },
+    { id: 16, src: `${BASE}zps/team-member-16.jpg`, title: "Nhã", date: "Zingplay Team" },
   ],
 };
 
