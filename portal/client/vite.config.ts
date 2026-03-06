@@ -17,12 +17,19 @@ export default defineConfig(({ mode }) => {
     zps: 3002,
   }
 
+  // Site-specific base path (where the site is served from)
+  const siteBases: Record<string, string> = {
+    portal: '/portal/',
+    zps: '/',
+  }
+
   const port = sitePorts[siteId] || 3000
+  const base = siteBases[siteId] || '/'
 
   console.log(`[Vite] Building site: ${siteId}, port: ${port}`)
 
   return {
-    base: '/portal/',
+    base,
     plugins: [inspectAttr(), react()],
     resolve: {
       alias: {
