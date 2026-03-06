@@ -1,82 +1,115 @@
 #!/bin/bash
 # =============================================================================
 # Deploy script for multi-site portal
-# Run on server: bash deploy.sh
+# Usage:
+#   bash deploy.sh          # Full deploy (pull + build all + restart)
+#   bash deploy.sh portal   # Build & deploy portal only
+#   bash deploy.sh zps      # Build & deploy zps only
+#   bash deploy.sh client   # Build & deploy both clients (no server)
 # =============================================================================
 
 set -e
 
-# Config
-PROJECT_DIR="/var/www/tools/portal"
+ROOT_DIR="/var/www/tools"
+PROJECT_DIR="$ROOT_DIR/portal"
 CLIENT_DIR="$PROJECT_DIR/client"
 SERVER_DIR="$PROJECT_DIR/server"
-PORTAL_DIST="/var/www/tools/portal/client/dist"
-ZPS_DIST="/var/www/tools/zps/client/dist"
+ZPS_DIST="$ROOT_DIR/zps/client/dist"
+
+SITE="$1"
+
+build_portal() {
+  echo "[*] Building portal site (base: /portal/)..."
+  cd "$CLIENT_DIR"
+  npm run build:portal
+  echo "[+] Portal done -> $CLIENT_DIR/dist/"
+}
+
+build_zps() {
+  echo "[*] Building ZPS site (base: /)..."
+  cd "$CLIENT_DIR"
+
+  # Backup portal dist if exists
+  [ -d dist ] && mv dist dist-portal
+
+  npm run build:zps
+
+  # Move zps dist to target
+  rm -rf "$ZPS_DIST"
+  mkdir -p "$ZPS_DIST"
+  mv dist/* "$ZPS_DIST/"
+  rmdir dist
+
+  # Restore portal dist
+  [ -d dist-portal ] && mv dist-portal dist
+
+  echo "[+] ZPS done -> $ZPS_DIST/"
+}
 
 echo "=========================================="
 echo "  Multi-site Deploy"
 echo "=========================================="
 
-# 1. Pull latest code
-echo ""
-echo "[1/6] Pulling latest code..."
-cd "$PROJECT_DIR/.."
-git pull
-
-# 2. Install dependencies
-echo ""
-echo "[2/6] Installing dependencies..."
-cd "$CLIENT_DIR" && npm ci --silent
-cd "$SERVER_DIR" && npm ci --silent
-
-# 3. Build server
-echo ""
-echo "[3/6] Building server..."
-cd "$SERVER_DIR"
-npm run build
-
-# 4. Build portal site
-echo ""
-echo "[4/6] Building portal site..."
-cd "$CLIENT_DIR"
-npm run build:portal
-# Portal dist stays in place at /var/www/tools/portal/client/dist/
-
-# 5. Build ZPS site
-echo ""
-echo "[5/6] Building ZPS site..."
-# Backup portal dist
-mv dist dist-portal
-
-# Build zps
-npm run build:zps
-
-# Move zps dist to target
-mkdir -p "$ZPS_DIST"
-rm -rf "$ZPS_DIST"
-mv dist "$ZPS_DIST"
-
-# Restore portal dist
-mv dist-portal dist
-
-# 6. Restart services
-echo ""
-echo "[6/6] Restarting services..."
-# Restart API server (adjust command to your setup)
-if command -v pm2 &> /dev/null; then
-    pm2 restart portal-api 2>/dev/null || pm2 start "$SERVER_DIR/dist/main.js" --name portal-api
-elif command -v systemctl &> /dev/null; then
-    sudo systemctl restart portal-api 2>/dev/null || true
+# Pull latest code
+if [ -z "$SITE" ]; then
+  echo ""
+  echo "[1] Pulling latest code..."
+  cd "$ROOT_DIR"
+  git pull
 fi
 
-# Reload Caddy
-if command -v caddy &> /dev/null; then
-    caddy reload --config /etc/caddy/Caddyfile 2>/dev/null || true
+# Install client dependencies
+if [ "$SITE" != "server" ]; then
+  echo ""
+  echo "[2] Installing client dependencies..."
+  cd "$CLIENT_DIR"
+  npm ci --silent
 fi
+
+# Build based on argument
+case "$SITE" in
+  portal)
+    echo ""
+    build_portal
+    ;;
+  zps)
+    echo ""
+    build_zps
+    ;;
+  client)
+    echo ""
+    build_portal
+    echo ""
+    build_zps
+    ;;
+  *)
+    # Full deploy: server + both clients
+    echo ""
+    echo "[3] Building server..."
+    cd "$SERVER_DIR"
+    npm ci --silent
+    npm run build
+
+    echo ""
+    build_portal
+    echo ""
+    build_zps
+
+    # Restart services
+    echo ""
+    echo "[4] Restarting services..."
+    if command -v pm2 &> /dev/null; then
+      pm2 restart portal-api 2>/dev/null || pm2 start "$SERVER_DIR/dist/main.js" --name portal-api
+    fi
+    if command -v caddy &> /dev/null; then
+      caddy reload --config /etc/caddy/Caddyfile 2>/dev/null || true
+    fi
+    ;;
+esac
 
 echo ""
 echo "=========================================="
-echo "  Deploy complete!"
+echo "  Done!"
 echo "  Portal: https://nhoxtheanh.duckdns.org/portal/"
 echo "  ZPS:    https://zingplay.duckdns.org/"
 echo "=========================================="
