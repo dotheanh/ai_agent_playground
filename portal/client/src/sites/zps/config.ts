@@ -349,7 +349,7 @@ export const footerConfig: FooterConfig = {
   newsletterDescription: "Nhận thông tin mới nhất từ Zingplay",
   newsletterButtonText: "Đăng ký",
   subscribeAlertMessage: "Cảm ơn bạn đã đăng ký! 💕",
-  copyrightText: "© 2025 Zingplay. Tất cả các quyền được bảo lưu.",
+  copyrightText: "© 2026 Zingplay. Tất cả các quyền được bảo lưu.",
   bottomLinks: ["Chính Sách Bảo Mật", "Điều Khoản Sử Dụng"],
   socialLinks: [
     { icon: "instagram", label: "Instagram", href: "#" },
