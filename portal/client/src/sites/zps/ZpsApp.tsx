@@ -4,6 +4,8 @@ import { siteConfig } from './config';
 import Hero from './sections/Hero';
 import AlbumCube from './sections/AlbumCube';
 import ParallaxGallery from './sections/ParallaxGallery';
+import VisitorStats from './sections/VisitorStats';
+import Guestbook from './sections/Guestbook';
 import TourSchedule from './sections/TourSchedule';
 import Footer from './sections/Footer';
 import HeartParticles from './components/HeartParticles';
@@ -27,6 +29,8 @@ function ZpsApp() {
       <Hero />
       <AlbumCube />
       <ParallaxGallery />
+      <VisitorStats />
+      <Guestbook />
       <TourSchedule />
       <Footer />
     </main>

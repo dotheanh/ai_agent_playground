@@ -56,7 +56,9 @@ export const heroConfig: HeroConfig = {
   navItems: [
     { label: "Thông Điệp", sectionId: "message", icon: "music" },
     { label: "Thành Viên", sectionId: "gallery", icon: "disc" },
-    { label: "Lờii Chúc", sectionId: "wishes", icon: "play" },
+    { label: "Thống Kê", sectionId: "stats", icon: "play" },
+    { label: "Lời Chúc", sectionId: "wishes", icon: "play" },
+    { label: "Sổ Lưu Niệm", sectionId: "guestbook", icon: "music" },
     { label: "Liên Hệ", sectionId: "contact", icon: "calendar" },
   ],
 };
