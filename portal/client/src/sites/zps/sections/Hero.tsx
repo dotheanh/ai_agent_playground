@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { Play, Music, Disc, Calendar, Heart, Sparkles } from 'lucide-react';
+import { Send, Play, Music, Disc, Calendar, Heart, Sparkles } from 'lucide-react';
 import { heroConfig } from '../config';
 
 const ICON_MAP = {
   disc: Disc,
   play: Play,
+  send: Send,
   calendar: Calendar,
   music: Music,
 };
@@ -160,9 +161,11 @@ const Hero = () => {
         {/* Logo / Brand */}
         <div className="absolute top-8 left-8">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-500 flex items-center justify-center shadow-lg shadow-pink-300/50">
-              <Heart className="w-5 h-5 text-white fill-white" />
-            </div>
+            <img
+              src="/zps/zps_logo.jpg"
+              alt="ZPS Logo"
+              className="w-10 h-10 rounded-full object-cover shadow-lg"
+            />
             <span className="font-display text-xl text-pink-600">{heroConfig.brandName}</span>
           </div>
         </div>

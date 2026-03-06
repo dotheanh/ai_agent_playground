@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Users, Eye, Clock, Activity, Zap } from 'lucide-react';
-import { api, getSessionId, type LiveStats } from '../../lib/api';
+import { api, getSessionId, type LiveStats } from '../lib/api';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,7 +109,7 @@ const VisitorStats = () => {
             Thống Kê <span className="text-pink-500">Real-Time</span>
           </h2>
           <p className="text-pink-600/80 max-w-2xl mx-auto">
-            Theo dõi lượt truy cập và tương tác của khách hàng
+            Theo dõi lượt truy cập và tương tác của mọi người
           </p>
         </div>
 

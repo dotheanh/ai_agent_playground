@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MessageCircle, Send, User, Calendar, Loader2 } from 'lucide-react';
-import { api } from '../../lib/api';
+import { MessageCircle, Send, User, Calendar, Loader2, Heart, Sparkles, Gift } from 'lucide-react';
+import { api } from '../lib/api';
+import { tourScheduleConfig } from '../config';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -94,26 +95,72 @@ const Guestbook = () => {
     });
   };
 
-  return (
-    <section id="guestbook" ref={containerRef} className="py-20 bg-gradient-to-b from-pink-50 via-white to-pink-100 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent" />
+  const TOUR_DATES = tourScheduleConfig.tourDates;
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-pink-100 rounded-full mb-4">
-            <MessageCircle className="w-4 h-4 text-pink-500" />
-            <span className="font-mono text-xs text-pink-600 uppercase tracking-wider">Sổ Lưu Niệm</span>
+  return (
+    <section id="guestbook" ref={containerRef} className="relative w-full min-h-screen bg-gradient-to-br from-pink-200 via-pink-100 to-pink-50 py-20 overflow-hidden">
+      {/* Floating hearts background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <Heart className="absolute top-20 left-[10%] w-12 h-12 text-pink-300/40 fill-pink-300/40 animate-heart-float" />
+        <Heart className="absolute top-40 right-[15%] w-8 h-8 text-pink-400/30 fill-pink-400/30 animate-heart-float" style={{ animationDelay: '0.5s' }} />
+        <Heart className="absolute bottom-40 left-[20%] w-10 h-10 text-pink-300/40 fill-pink-300/40 animate-heart-float" style={{ animationDelay: '1s' }} />
+        <Sparkles className="absolute top-1/3 right-[8%] w-10 h-10 text-pink-400/30 animate-sparkle" />
+        <Heart className="absolute bottom-1/4 right-[25%] w-14 h-14 text-pink-300/30 fill-pink-300/30 animate-heart-float" style={{ animationDelay: '0.8s' }} />
+      </div>
+
+      {/* Content container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+        {/* Section header */}
+        <div className="mb-16 text-center">
+          <div className="flex justify-center gap-2 mb-4">
+            <Heart className="w-6 h-6 text-pink-400 fill-pink-400 animate-pulse-heart" />
+            <Heart className="w-8 h-8 text-pink-500 fill-pink-500 animate-pulse-heart" style={{ animationDelay: '0.2s' }} />
+            <Heart className="w-6 h-6 text-pink-400 fill-pink-400 animate-pulse-heart" style={{ animationDelay: '0.4s' }} />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-pink-900 mb-4">
-            Để Lại <span className="text-pink-500">Lời Chúc</span>
-          </h2>
-          <p className="text-pink-600/80 max-w-2xl mx-auto">
-            Chia sẻ những lời chúc tốt đẹp nhất dành cho các chị em Zingplay nhé!
+          <p className="font-cute text-xs text-pink-500 uppercase tracking-wider mb-2">
+            {tourScheduleConfig.sectionLabel}
           </p>
+          <h2 className="font-display text-5xl md:text-7xl text-pink-500 gradient-text">
+            {tourScheduleConfig.sectionTitle}
+          </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="guestbook-card bg-white/80 backdrop-blur-sm border border-pink-200 rounded-2xl p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left column: Team wishes */}
+          <div className="guestbook-card lg:col-span-1 space-y-4">
+            <h3 className="text-xl text-pink-900 font-semibold mb-4 flex items-center gap-2">
+              <Gift className="w-5 h-5 text-pink-500" />
+              Lời Chúc Từ Team
+            </h3>
+            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+              {TOUR_DATES.map((tour, index) => (
+                <div
+                  key={tour.id}
+                  className="group relative p-4 rounded-2xl bg-white/70 backdrop-blur-sm border-2 border-pink-200 hover:border-pink-400 hover:bg-white/90 transition-all duration-300"
+                >
+                  <div className="flex items-start gap-3">
+                    <img
+                      src={tour.image}
+                      alt={tour.city}
+                      className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
+                    />
+                    <div className="flex-grow min-w-0">
+                      <p className="font-display text-lg text-pink-600 flex items-center gap-1">
+                        <Heart className="w-4 h-4 fill-pink-500 text-pink-500" />
+                        {tour.city}
+                      </p>
+                      <p className="text-sm text-pink-500/70 line-clamp-2">
+                        {tour.venue}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Middle: Write message */}
+          <div className="guestbook-card lg:col-span-1 bg-white/80 backdrop-blur-sm border border-pink-200 rounded-2xl p-6">
             <h3 className="text-xl text-pink-900 font-semibold mb-6 flex items-center gap-2">
               <Send className="w-5 h-5 text-pink-500" />
               Viết lời chúc
@@ -148,7 +195,7 @@ const Guestbook = () => {
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Lời chúc của bạn..."
                   required
-                  rows={4}
+                  rows={5}
                   className="w-full bg-pink-50 border border-pink-200 rounded-xl px-4 py-3 text-pink-900 placeholder:text-pink-400 focus:outline-none focus:border-pink-400 transition-colors resize-none"
                 />
               </div>
@@ -172,7 +219,8 @@ const Guestbook = () => {
             </form>
           </div>
 
-          <div className="guestbook-card bg-white/80 backdrop-blur-sm border border-pink-200 rounded-2xl p-6 max-h-[500px] overflow-y-auto">
+          {/* Right: Messages list */}
+          <div className="guestbook-card lg:col-span-1 bg-white/80 backdrop-blur-sm border border-pink-200 rounded-2xl p-6 max-h-[500px] overflow-y-auto">
             <h3 className="text-xl text-pink-900 font-semibold mb-6 flex items-center gap-2">
               <MessageCircle className="w-5 h-5 text-pink-500" />
               Lời Chúc Gần Đây
@@ -208,7 +256,20 @@ const Guestbook = () => {
             )}
           </div>
         </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-16 text-center">
+          <p className="font-cute text-sm text-pink-500/70 mb-4">
+            {tourScheduleConfig.bottomNote}
+          </p>
+          <button className="btn-cute flex items-center gap-2 mx-auto">
+            <Heart className="w-5 h-5" />
+            {tourScheduleConfig.bottomCtaText}
+          </button>
+        </div>
       </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-400/30 to-transparent" />
     </section>
   );
 };
