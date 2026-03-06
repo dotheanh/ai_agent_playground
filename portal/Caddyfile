@@ -2,21 +2,22 @@
 # Zingplay - serve ZPS tại root (/)
 # ============================================
 zingplay.duckdns.org {
-	root * /var/www/tools/zps/client/dist
-	file_server
-
-	# ZPS API proxy
+	# API proxy (must be separate handles so they run before static files)
 	handle /api/* {
 		reverse_proxy localhost:3001
 	}
 
-	# ZPS also uses /portal/api/* (from .env.production)
 	handle /portal/api/* {
 		uri strip_prefix /portal
 		reverse_proxy localhost:3001
 	}
 
-	try_files {path} {path}/ /index.html
+	# Static files + SPA fallback (catch-all, runs only if no API match)
+	handle {
+		root * /var/www/tools/zps/client/dist
+		try_files {path} {path}/ /index.html
+		file_server
+	}
 }
 
 # ============================================
