@@ -1,0 +1,37 @@
+/* =============================================================================
+   ZPS Theme - Pink & Purple (Women's Day 8/3)
+   ============================================================================= */
+:root {
+  /* Shadcn UI tokens - Pink/Purple tones */
+  --background: 300 10% 2%;
+  --foreground: 0 0% 100%;
+  --card: 300 10% 4%;
+  --card-foreground: 0 0% 100%;
+  --popover: 300 10% 4%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 330 90% 56%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 300 20% 8%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 300 20% 10%;
+  --muted-foreground: 300 30% 70%;
+  --accent: 330 90% 56%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 300 20% 15%;
+  --input: 300 20% 15%;
+  --ring: 330 90% 56%;
+  --radius: 0.5rem;
+
+  /* Custom theme colors - Pink/Purple */
+  --void-black: #0a0510;
+  --deep-black: #050208;
+  --theme-primary: #ec4899;
+  --theme-primary-light: #f472b6;
+  --theme-primary-soft: #f9a8d4;
+  --theme-primary-dark: #db2777;
+  --theme-primary-deep: #9d174d;
+  --theme-primary-rgb: 236, 72, 153;
+  --theme-bg-tint: #1a0a15;
+}
