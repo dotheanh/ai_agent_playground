@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --mode portal",
-    "dev:portal": "vite --mode portal",
-    "dev:zps": "vite --mode zps",
-    "build": "tsc -b && vite build --mode portal",
-    "build:portal": "tsc -b && vite build --mode portal",
-    "build:zps": "tsc -b && vite build --mode zps",
+    "dev": "VITE_SITE_ID=portal vite",
+    "dev:portal": "VITE_SITE_ID=portal vite",
+    "dev:zps": "VITE_SITE_ID=zps vite",
+    "build": "tsc -b && vite build",
+    "build:portal": "VITE_SITE_ID=portal tsc -b && VITE_SITE_ID=portal vite build",
+    "build:zps": "VITE_SITE_ID=zps tsc -b && VITE_SITE_ID=zps vite build",
     "build:all": "npm run build:portal && npm run build:zps",
     "lint": "eslint .",
     "preview": "vite preview"

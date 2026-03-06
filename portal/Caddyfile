@@ -4,6 +4,12 @@
 zingplay.duckdns.org {
 	root * /var/www/tools/zps/client/dist
 	file_server
+
+	# ZPS API proxy
+	handle /api/* {
+		reverse_proxy localhost:3001
+	}
+
 	try_files {path} {path}/ /index.html
 }
 
