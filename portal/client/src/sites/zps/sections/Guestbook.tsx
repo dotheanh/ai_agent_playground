@@ -133,7 +133,7 @@ const Guestbook = () => {
               Lời Chúc Từ Team
             </h3>
             <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
-              {TOUR_DATES.map((tour, index) => (
+              {TOUR_DATES.map((tour) => (
                 <div
                   key={tour.id}
                   className="group relative p-4 rounded-2xl bg-white/70 backdrop-blur-sm border-2 border-pink-200 hover:border-pink-400 hover:bg-white/90 transition-all duration-300"
@@ -234,9 +234,9 @@ const Guestbook = () => {
               <p className="text-pink-400 text-center py-8">Chưa có lời chúc nào. Hãy là người đầu tiên nhé!</p>
             ) : (
               <div className="space-y-4">
-                {entries.map((entry, index) => (
+                {entries.map((entry) => (
                   <div
-                    key={index}
+                    key={entry.name + entry.createdAt}
                     className="p-4 bg-pink-50 rounded-xl border border-pink-100"
                   >
                     <div className="flex items-center gap-2 mb-2">

@@ -7,7 +7,7 @@ import ParallaxGallery from './sections/ParallaxGallery';
 import VisitorStats from './sections/VisitorStats';
 import Guestbook from './sections/Guestbook';
 import HeartParticles from './components/HeartParticles';
-import { Heart, Sparkles } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 function Footer() {
   return (

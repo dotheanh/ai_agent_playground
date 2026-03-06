@@ -23,7 +23,7 @@ export const siteConfig: SiteConfig = {
 export interface HeroNavItem {
   label: string;
   sectionId: string;
-  icon: "disc" | "play" | "calendar" | "music";
+  icon: "disc" | "play" | "calendar" | "music" | "send";
 }
 
 export interface HeroConfig {
