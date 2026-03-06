@@ -1,0 +1,37 @@
+/* =============================================================================
+   Portal Theme - Black & Red
+   ============================================================================= */
+:root {
+  /* Shadcn UI tokens */
+  --background: 0 0% 2%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 4%;
+  --card-foreground: 0 0% 100%;
+  --popover: 0 0% 4%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 0 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 20% 8%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 20% 10%;
+  --muted-foreground: 0 50% 70%;
+  --accent: 0 100% 50%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 20% 15%;
+  --input: 0 20% 15%;
+  --ring: 0 100% 50%;
+  --radius: 0.5rem;
+
+  /* Custom theme colors */
+  --void-black: #0a0a0a;
+  --deep-black: #050505;
+  --theme-primary: #ff0033;
+  --theme-primary-light: #ff1a1a;
+  --theme-primary-soft: #ff4d4d;
+  --theme-primary-dark: #cc0000;
+  --theme-primary-deep: #8b0000;
+  --theme-primary-rgb: 255, 0, 51;
+  --theme-bg-tint: #1a0a0a;
+}

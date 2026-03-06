@@ -38,21 +38,22 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom theme colors - Black & Red
+        // Custom theme colors - Dynamic via CSS variables
         void: {
-          black: '#050505',
-          dark: '#0a0a0a',
+          black: 'var(--deep-black)',
+          dark: 'var(--void-black)',
+        },
+        // Backward-compatible aliases (used in section components)
+        crimson: {
+          DEFAULT: 'var(--theme-primary)',
+          light: 'var(--theme-primary-light)',
+          dark: 'var(--theme-primary-dark)',
+          blood: 'var(--theme-primary-deep)',
         },
         neon: {
-          cyan: '#ff0033',
-          blue: '#ff1a1a',
-          soft: '#ff4d4d',
-        },
-        crimson: {
-          DEFAULT: '#ff0033',
-          light: '#ff1a1a',
-          dark: '#cc0000',
-          blood: '#8b0000',
+          cyan: 'var(--theme-primary)',
+          blue: 'var(--theme-primary-light)',
+          soft: 'var(--theme-primary-soft)',
         },
       },
       fontFamily: {
@@ -68,9 +69,10 @@ module.exports = {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        glow: "0 0 20px rgba(255, 0, 51, 0.3)",
-        'glow-lg': "0 0 40px rgba(255, 0, 51, 0.4)",
-        'glow-red': "0 0 20px rgba(255, 0, 51, 0.3), 0 0 40px rgba(255, 0, 51, 0.2)",
+        glow: "0 0 20px rgba(var(--theme-primary-rgb), 0.3)",
+        'glow-lg': "0 0 40px rgba(var(--theme-primary-rgb), 0.4)",
+        'glow-red': "0 0 20px rgba(var(--theme-primary-rgb), 0.3), 0 0 40px rgba(var(--theme-primary-rgb), 0.2)",
+        'glow-theme': "0 0 20px rgba(var(--theme-primary-rgb), 0.3), 0 0 40px rgba(var(--theme-primary-rgb), 0.2)",
       },
       keyframes: {
         "accordion-down": {
@@ -98,8 +100,8 @@ module.exports = {
           "50%": { transform: "translateY(-10px)" },
         },
         "pulse-glow": {
-          "0%, 100%": { opacity: "1", boxShadow: "0 0 20px rgba(255, 0, 51, 0.3)" },
-          "50%": { opacity: "0.8", boxShadow: "0 0 40px rgba(255, 0, 51, 0.5)" },
+          "0%, 100%": { opacity: "1", boxShadow: "0 0 20px rgba(var(--theme-primary-rgb), 0.3)" },
+          "50%": { opacity: "0.8", boxShadow: "0 0 40px rgba(var(--theme-primary-rgb), 0.5)" },
         },
         "slide-in": {
           "0%": { transform: "translateY(-100%)", opacity: "0" },
