@@ -1,9 +1,10 @@
-// =============================================================================
-// Site Configuration - ZPS Site (Zingplay Women's Day 8/3)
-// Special site for International Women's Day - Celebrating Zingplay Team
-// =============================================================================
+const BASE = import.meta.env.BASE_URL || '/portal/';
 
-const BASE = import.meta.env.BASE_URL;
+// =============================================================================
+// Site Configuration - Zingplay Women's Day 8/3
+// Edit ONLY this file to customize all content across the site.
+// All animations, layouts, and styles are controlled by the components.
+// =============================================================================
 
 // -- Site-wide settings -------------------------------------------------------
 export interface SiteConfig {
@@ -13,8 +14,8 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  title: "Chúc Mừng Ngày Quốc Tế Phụ Nữ 8/3 - Zingplay Team",
-  description: "Tri ân những người phụ nữ tuyệt vời của đội ngũ Zingplay. Chúc các chị em luôn xinh đẹp, hạnh phúc và thành công!",
+  title: "Zingplay - Chúc Mừng Ngày 8/3",
+  description: "Landing page chúc mừng ngày Quốc Tế Phụ Nữ 8/3 dành cho các chị em Zingplay",
   language: "vi",
 };
 
@@ -41,27 +42,26 @@ export interface HeroConfig {
 }
 
 export const heroConfig: HeroConfig = {
-  backgroundImage: `${BASE}zps-hero-bg.jpg`,
-  brandName: "ZPS",
-  decodeText: "ZINGPLAY",
-  decodeChars: "!@#$%^&*()_+-=[]{}|;:,.<>?",
-  subtitle: "8/3",
-  ctaPrimary: "Gửi lời chúc",
-  ctaPrimaryTarget: "guestbook",
-  ctaSecondary: "Xem Album",
+  backgroundImage: `${BASE}zps/hero-bg.jpg`,
+  brandName: "Zingplay",
+  decodeText: "CHÚC MỪNG 8/3",
+  decodeChars: "💖✨🌸💕🎀💗",
+  subtitle: "Gửi đến những bông hoa rực rỡ của team Zingplay - Những ngưồi phụ nữ tuyệt vờii",
+  ctaPrimary: "Xem Thông Điệp",
+  ctaPrimaryTarget: "message",
+  ctaSecondary: "Khám Phá Ngay",
   ctaSecondaryTarget: "gallery",
-  cornerLabel: "NGÀY QUỐC TẾ",
-  cornerDetail: "PHỤ NỮ 8/3",
+  cornerLabel: "Ngày 8/3",
+  cornerDetail: "International Women's Day",
   navItems: [
-    { label: "Album", sectionId: "gallery", icon: "play" },
-    { label: "Thống kê", sectionId: "stats", icon: "disc" },
-    { label: "Quiz", sectionId: "quiz", icon: "disc" },
-    { label: "Lời chúc", sectionId: "guestbook", icon: "music" },
-    { label: "Lịch", sectionId: "tour", icon: "calendar" },
+    { label: "Thông Điệp", sectionId: "message", icon: "music" },
+    { label: "Thành Viên", sectionId: "gallery", icon: "disc" },
+    { label: "Lờii Chúc", sectionId: "wishes", icon: "play" },
+    { label: "Liên Hệ", sectionId: "contact", icon: "calendar" },
   ],
 };
 
-// -- Album Cube Section -------------------------------------------------------
+// -- Album Cube Section - Message Section for Women's Day --------------------
 export interface Album {
   id: number;
   title: string;
@@ -76,44 +76,44 @@ export interface AlbumCubeConfig {
 }
 
 export const albumCubeConfig: AlbumCubeConfig = {
-    albums: [
-      {
-        id: 1,
-        title: "ZING",
-        subtitle: "PLAY",
-        image: `${BASE}zps-cube-1.jpg`,
-      },
-      {
-        id: 2,
-        title: "GAME",
-        subtitle: "MOBILE",
-        image: `${BASE}zps-cube-2.jpg`,
-      },
-      {
-        id: 3,
-        title: "CREATIVE",
-        subtitle: "TEAM",
-        image: `${BASE}zps-cube-3.jpg`,
-      },
-      {
-        id: 4,
-        title: "WOMEN",
-        subtitle: "POWER",
-        image: `${BASE}zps-cube-4.jpg`,
-      },
-    ],
-    cubeTextures: [
-      `${BASE}zps-cube-1.jpg`,
-      `${BASE}zps-cube-2.jpg`,
-      `${BASE}zps-cube-3.jpg`,
-      `${BASE}zps-cube-4.jpg`,
-      `${BASE}zps-cube-5.jpg`,
-      `${BASE}zps-cube-6.jpg`,
-    ],
-    scrollHint: "Khám phá đội ngũ Zingplay",
+  albums: [
+    {
+      id: 1,
+      title: "CÁM ƠN CÁC CHỊ EM",
+      subtitle: "VÌ TẤT CẢ",
+      image: `${BASE}zps/team-member-1.jpg`,
+    },
+    {
+      id: 2,
+      title: "CÁC BẠN THẬT TUYỆT VỜI",
+      subtitle: "AMAZING",
+      image: `${BASE}zps/team-member-5.jpg`,
+    },
+    {
+      id: 3,
+      title: "LUÔN TỎA SÁNG",
+      subtitle: "SHINING",
+      image: `${BASE}zps/team-member-10.jpg`,
+    },
+    {
+      id: 4,
+      title: "NGÀY CỦA CÁC BẠN",
+      subtitle: "YOUR DAY",
+      image: `${BASE}zps/team-member-15.jpg`,
+    },
+  ],
+  cubeTextures: [
+    `${BASE}zps/team-member-1.jpg`,
+    `${BASE}zps/team-member-5.jpg`,
+    `${BASE}zps/team-member-10.jpg`,
+    `${BASE}zps/team-member-15.jpg`,
+    `${BASE}zps/team-member-20.jpg`,
+    `${BASE}zps/hero-bg.jpg`,
+  ],
+  scrollHint: "Cuộn để khám phá thêm 💕",
 };
 
-// -- Parallax Gallery Section -------------------------------------------------
+// -- Parallax Gallery Section - Team Members --------------------------------
 export interface ParallaxImage {
   id: number;
   src: string;
@@ -139,54 +139,63 @@ export interface ParallaxGalleryConfig {
   galleryImages: GalleryImage[];
 }
 
+// Generate team member images - EASY TO REPLACE
+// Just replace the files in /public/ folder with your own photos
+// Naming convention: team-member-1.jpg through team-member-20.jpg
 export const parallaxGalleryConfig: ParallaxGalleryConfig = {
-  sectionLabel: "ZINGPLAY TEAM",
-  sectionTitle: "NHỮNG NGƯỜI PHỤ NỮ TUYỆT VỜI",
-  galleryLabel: "GALLERY",
-  galleryTitle: "ĐỘI NGŨ ZINGPLAY",
-
+  sectionLabel: "Đội Ngũ Zingplay",
+  sectionTitle: "Những Bông Hoa Rực Rỡ",
+  galleryLabel: "Thành Viên",
+  galleryTitle: "20 Cô Gái Tuyệt Vờii",
   marqueeTexts: [
-    "ZINGPLAY",
-    "WOMEN POWER",
-    "SÁNG TẠO",
-    "NĂNG ĐỘNG",
-    "TÀI NĂNG",
-    "QUYẾT TÂM",
-    "HẠNH PHÚC",
-    "THÀNH CÔNG",
+    "💖 HAPPY WOMEN'S DAY 💖",
+    "🌸 CÁC CHỊ EM ZINGPLAY 🌸",
+    "✨ LUÔN TỎA SÁNG ✨",
+    "💕 CÁM ƠN CÁC BẠN 💕",
+    "🎀 NGÀY 8/3 VUI VẺ 🎀",
   ],
-
-  endCtaText: "Khám phá thêm về Zingplay",
-
+  endCtaText: "Xem Tất Cả Thành Viên",
   parallaxImagesTop: [
-    { id: 1, src: `${BASE}zps-gallery-1.jpg`, alt: "Zingplay Team" },
-    { id: 2, src: `${BASE}zps-gallery-2.jpg`, alt: "Creative Women" },
-    { id: 3, src: `${BASE}zps-gallery-3.jpg`, alt: "Gaming Innovation" },
-    { id: 4, src: `${BASE}zps-gallery-4.jpg`, alt: "Mobile Games" },
-    { id: 5, src: `${BASE}zps-gallery-5.jpg`, alt: "Team Spirit" },
-    { id: 6, src: `${BASE}zps-gallery-6.jpg`, alt: "Success" },
+    { id: 1, src: `${BASE}zps/team-member-1.jpg`, alt: "Team Member 1" },
+    { id: 2, src: `${BASE}zps/team-member-2.jpg`, alt: "Team Member 2" },
+    { id: 3, src: `${BASE}zps/team-member-3.jpg`, alt: "Team Member 3" },
+    { id: 4, src: `${BASE}zps/team-member-4.jpg`, alt: "Team Member 4" },
+    { id: 5, src: `${BASE}zps/team-member-5.jpg`, alt: "Team Member 5" },
+    { id: 6, src: `${BASE}zps/team-member-6.jpg`, alt: "Team Member 6" },
   ],
-
   parallaxImagesBottom: [
-    { id: 7, src: `${BASE}zps-gallery-6.jpg`, alt: "Success" },
-    { id: 8, src: `${BASE}zps-gallery-5.jpg`, alt: "Team Spirit" },
-    { id: 9, src: `${BASE}zps-gallery-4.jpg`, alt: "Mobile Games" },
-    { id: 10, src: `${BASE}zps-gallery-3.jpg`, alt: "Gaming Innovation" },
-    { id: 11, src: `${BASE}zps-gallery-2.jpg`, alt: "Creative Women" },
-    { id: 12, src: `${BASE}zps-gallery-1.jpg`, alt: "Zingplay Team" },
+    { id: 7, src: `${BASE}zps/team-member-7.jpg`, alt: "Team Member 7" },
+    { id: 8, src: `${BASE}zps/team-member-8.jpg`, alt: "Team Member 8" },
+    { id: 9, src: `${BASE}zps/team-member-9.jpg`, alt: "Team Member 9" },
+    { id: 10, src: `${BASE}zps/team-member-10.jpg`, alt: "Team Member 10" },
+    { id: 11, src: `${BASE}zps/team-member-11.jpg`, alt: "Team Member 11" },
+    { id: 12, src: `${BASE}zps/team-member-12.jpg`, alt: "Team Member 12" },
   ],
-
   galleryImages: [
-    { id: 1, src: `${BASE}zps-gallery-1.jpg`, title: "Đoàn Kết", date: "Team Unity" },
-    { id: 2, src: `${BASE}zps-gallery-2.jpg`, title: "Sáng Tạo", date: "Creativity" },
-    { id: 3, src: `${BASE}zps-gallery-3.jpg`, title: "Nhiệt Huyết", date: "Passion" },
-    { id: 4, src: `${BASE}zps-gallery-4.jpg`, title: "Chuyên Nghiệp", date: "Professional" },
-    { id: 5, src: `${BASE}zps-gallery-5.jpg`, title: "Hợp Tác", date: "Collaboration" },
-    { id: 6, src: `${BASE}zps-gallery-6.jpg`, title: "Thành Công", date: "Success" },
+    { id: 1, src: `${BASE}zps/team-member-1.jpg`, title: "Bông Hoa Số 1", date: "Zingplay Team" },
+    { id: 2, src: `${BASE}zps/team-member-2.jpg`, title: "Bông Hoa Số 2", date: "Zingplay Team" },
+    { id: 3, src: `${BASE}zps/team-member-3.jpg`, title: "Bông Hoa Số 3", date: "Zingplay Team" },
+    { id: 4, src: `${BASE}zps/team-member-4.jpg`, title: "Bông Hoa Số 4", date: "Zingplay Team" },
+    { id: 5, src: `${BASE}zps/team-member-5.jpg`, title: "Bông Hoa Số 5", date: "Zingplay Team" },
+    { id: 6, src: `${BASE}zps/team-member-6.jpg`, title: "Bông Hoa Số 6", date: "Zingplay Team" },
+    { id: 7, src: `${BASE}zps/team-member-7.jpg`, title: "Bông Hoa Số 7", date: "Zingplay Team" },
+    { id: 8, src: `${BASE}zps/team-member-8.jpg`, title: "Bông Hoa Số 8", date: "Zingplay Team" },
+    { id: 9, src: `${BASE}zps/team-member-9.jpg`, title: "Bông Hoa Số 9", date: "Zingplay Team" },
+    { id: 10, src: `${BASE}zps/team-member-10.jpg`, title: "Bông Hoa Số 10", date: "Zingplay Team" },
+    { id: 11, src: `${BASE}zps/team-member-11.jpg`, title: "Bông Hoa Số 11", date: "Zingplay Team" },
+    { id: 12, src: `${BASE}zps/team-member-12.jpg`, title: "Bông Hoa Số 12", date: "Zingplay Team" },
+    { id: 13, src: `${BASE}zps/team-member-13.jpg`, title: "Bông Hoa Số 13", date: "Zingplay Team" },
+    { id: 14, src: `${BASE}zps/team-member-14.jpg`, title: "Bông Hoa Số 14", date: "Zingplay Team" },
+    { id: 15, src: `${BASE}zps/team-member-15.jpg`, title: "Bông Hoa Số 15", date: "Zingplay Team" },
+    { id: 16, src: `${BASE}zps/team-member-16.jpg`, title: "Bông Hoa Số 16", date: "Zingplay Team" },
+    { id: 17, src: `${BASE}zps/team-member-17.jpg`, title: "Bông Hoa Số 17", date: "Zingplay Team" },
+    { id: 18, src: `${BASE}zps/team-member-18.jpg`, title: "Bông Hoa Số 18", date: "Zingplay Team" },
+    { id: 19, src: `${BASE}zps/team-member-19.jpg`, title: "Bông Hoa Số 19", date: "Zingplay Team" },
+    { id: 20, src: `${BASE}zps/team-member-20.jpg`, title: "Bông Hoa Số 20", date: "Zingplay Team" },
   ],
 };
 
-// -- Tour Schedule Section (Adapted for Event Schedule) ----------------------------------------------------
+// -- Tour Schedule Section - Wishes Section ---------------------------------
 export interface TourDate {
   id: number;
   date: string;
@@ -217,55 +226,64 @@ export interface TourScheduleConfig {
 }
 
 export const tourScheduleConfig: TourScheduleConfig = {
-  sectionLabel: "SỰ KIỆN",
-  sectionTitle: "LỊCH TRÌNH 8/3",
-  vinylImage: `${BASE}zps-spinner.png`,
-  buyButtonText: "Tham gia",
-  detailsButtonText: "Chi tiết",
-  bottomNote: "Chúc tất cả chị em Zingplay luôn vui vẻ, hạnh phúc và thành công!",
-  bottomCtaText: "Liên hệ với chúng tôi",
+  sectionLabel: "Lờii Chúc Từ Team",
+  sectionTitle: "Những Điều Muốn Nói",
+  vinylImage: `${BASE}zps/team-member-1.jpg`,
+  buyButtonText: "Gửi Lờii Chúc",
+  detailsButtonText: "Xem Chi Tiết",
+  bottomNote: "Cả team Zingplay gửi lờii chúc tốt đẹp nhất đến các chị em!",
+  bottomCtaText: "Xem Thêm Lờii Chúc",
   statusLabels: {
-    onSale: "Đã đăng ký",
-    soldOut: "Hết slot",
-    comingSoon: "Sắp diễn ra",
-    default: "Đăng ký",
+    onSale: "Đã Nhận",
+    soldOut: "Yêu Thương",
+    comingSoon: "Sắp Tới",
+    default: "Xem",
   },
   tourDates: [
     {
       id: 1,
-      date: "08/3",
-      time: "09:00",
-      city: "Chúc mừng",
-      venue: "Gửi lời chúc đến tất cả chị em",
+      date: "2025.03.08",
+      time: "00:00",
+      city: "Cảm ơn",
+      venue: "Vì đã luôn nỗ lực và cống hiến hết mình cho công việc",
       status: "on-sale",
-      image: `${BASE}zps-gallery-1.jpg`,
+      image: `${BASE}zps/team-member-1.jpg`,
     },
     {
       id: 2,
-      date: "08/3",
-      time: "14:00",
-      city: "Tri ân",
-      venue: "Cảm ơn sự đóng góp của chị em",
+      date: "2025.03.08",
+      time: "00:00",
+      city: "Chúc các chị em",
+      venue: "Luôn xinh đẹp, tự tin và tỏa sáng mỗi ngày",
       status: "on-sale",
-      image: `${BASE}zps-gallery-2.jpg`,
+      image: `${BASE}zps/team-member-2.jpg`,
     },
     {
       id: 3,
-      date: "Hàng ngày",
-      time: "24/7",
-      city: "Hỗ trợ",
-      venue: "Luôn đồng hành cùng chị em",
-      status: "coming-soon",
-      image: `${BASE}zps-gallery-3.jpg`,
+      date: "2025.03.08",
+      time: "00:00",
+      city: "Mong rằng",
+      venue: "Mọi điều tốt đẹp sẽ đến với các bạn trong năm nay",
+      status: "on-sale",
+      image: `${BASE}zps/team-member-3.jpg`,
     },
     {
       id: 4,
-      date: "2026",
-      time: "Tết",
-      city: "Tưởng nhớ",
-      venue: "Những khoảnh khắc đáng nhớ",
-      status: "coming-soon",
-      image: `${BASE}zps-gallery-4.jpg`,
+      date: "2025.03.08",
+      time: "00:00",
+      city: "Các bạn là",
+      venue: "Nguồn cảm hứng và động lực cho cả team phát triển",
+      status: "on-sale",
+      image: `${BASE}zps/team-member-4.jpg`,
+    },
+    {
+      id: 5,
+      date: "2025.03.08",
+      time: "00:00",
+      city: "Happy Women's Day",
+      venue: "Ngày 8/3 vui vẻ, tràn đầy yêu thương và hạnh phúc!",
+      status: "sold-out",
+      image: `${BASE}zps/team-member-5.jpg`,
     },
   ],
 };
@@ -312,40 +330,56 @@ export interface FooterConfig {
 }
 
 export const footerConfig: FooterConfig = {
-  portraitImage: `${BASE}zps-footer-portrait.jpg`,
-  portraitAlt: "Zingplay Team",
-  heroTitle: "KẾT NỐI",
-  heroSubtitle: "CÙNG ZPS",
-  artistLabel: "TRI ÂN",
-  artistName: "ZINGPLAY",
-  artistSubtitle: "Đội ngũ tuyệt vời",
-  brandName: "ZPS",
-  brandDescription: "Tri ân những người phụ nữ tuyệt vời của đội ngũ Zingplay. Chúc các chị em luôn xinh đẹp, hạnh phúc và thành công trong công việc và cuộc sống!",
-  quickLinksTitle: "Liên kết",
-  quickLinks: ["Zingplay", "Game Mobile", "Tuyển dụng", "Liên hệ", "Fanpage"],
-  contactTitle: "Liên hệ",
+  portraitImage: `${BASE}zps/hero-bg.jpg`,
+  portraitAlt: "Zingplay Women's Day",
+  heroTitle: "CẢM ƠN CÁC CHỊ EM",
+  heroSubtitle: "Vì đã là một phần tuyệt vờii của Zingplay",
+  artistLabel: "Từ Team Zingplay",
+  artistName: "Gửi Đến Các Bạn",
+  artistSubtitle: "Những ngưồi phụ nữ tuyệt vờii",
+  brandName: "Zingplay",
+  brandDescription: "Cảm ơn các chị em đã đồng hành và cống hiến cùng Zingplay. Các bạn là những bông hoa rực rỡ làm cho team trở nên tuyệt vờii hơn mỗi ngày!",
+  quickLinksTitle: "Liên Kết Nhanh",
+  quickLinks: ["Trang Chủ", "Về Chúng Tôi", "Tuyển Dụng", "Liên Hệ"],
+  contactTitle: "Liên Hệ",
   emailLabel: "Email",
-  email: "contact@zingplay.vn",
-  phoneLabel: "Điện thoại",
-  phone: "+84 123 456 789",
-  addressLabel: "Địa chỉ",
-  address: "Hà Nội, Việt Nam",
-  newsletterTitle: "Nhận tin",
-  newsletterDescription: "Đăng ký để nhận tin tức mới nhất từ Zingplay.",
-  newsletterButtonText: "Đăng ký",
-  subscribeAlertMessage: "Cảm ơn bạn đã đăng ký nhận tin từ Zingplay!",
-  copyrightText: "© 2026 Zingplay. Made with love by ZPS Team.",
-  bottomLinks: ["Chính sách", "Điều khoản", "Bảo mật"],
+  email: "hello@zingplay.com",
+  phoneLabel: "Điện Thoại",
+  phone: "+84 xxx xxx xxx",
+  addressLabel: "Địa Chỉ",
+  address: "TP. Hồ Chí Minh, Việt Nam",
+  newsletterTitle: "Đăng Ký Nhận Tin",
+  newsletterDescription: "Nhận thông tin mới nhất từ Zingplay",
+  newsletterButtonText: "Đăng Ký",
+  subscribeAlertMessage: "Cảm ơn bạn đã đăng ký! 💕",
+  copyrightText: "© 2025 Zingplay. Tất cả các quyền được bảo lưu.",
+  bottomLinks: ["Chính Sách Bảo Mật", "Điều Khoản Sử Dụng"],
   socialLinks: [
-    { icon: "twitter", label: "Twitter", href: "https://twitter.com/zingplay" },
-    { icon: "instagram", label: "Instagram", href: "https://instagram.com/zingplay" },
-    { icon: "youtube", label: "YouTube", href: "https://youtube.com/zingplay" },
-    { icon: "music", label: "Facebook", href: "https://facebook.com/zingplay" },
+    { icon: "instagram", label: "Instagram", href: "#" },
+    { icon: "twitter", label: "Twitter", href: "#" },
+    { icon: "youtube", label: "YouTube", href: "#" },
+    { icon: "music", label: "TikTok", href: "#" },
   ],
   galleryImages: [
-    { id: 1, src: `${BASE}zps-gallery-1.jpg` },
-    { id: 2, src: `${BASE}zps-gallery-2.jpg` },
-    { id: 3, src: `${BASE}zps-gallery-3.jpg` },
-    { id: 4, src: `${BASE}zps-gallery-4.jpg` },
+    { id: 1, src: `${BASE}zps/team-member-1.jpg` },
+    { id: 2, src: `${BASE}zps/team-member-2.jpg` },
+    { id: 3, src: `${BASE}zps/team-member-3.jpg` },
+    { id: 4, src: `${BASE}zps/team-member-4.jpg` },
+    { id: 5, src: `${BASE}zps/team-member-5.jpg` },
+    { id: 6, src: `${BASE}zps/team-member-6.jpg` },
+    { id: 7, src: `${BASE}zps/team-member-7.jpg` },
+    { id: 8, src: `${BASE}zps/team-member-8.jpg` },
+    { id: 9, src: `${BASE}zps/team-member-9.jpg` },
+    { id: 10, src: `${BASE}zps/team-member-10.jpg` },
+    { id: 11, src: `${BASE}zps/team-member-11.jpg` },
+    { id: 12, src: `${BASE}zps/team-member-12.jpg` },
+    { id: 13, src: `${BASE}zps/team-member-13.jpg` },
+    { id: 14, src: `${BASE}zps/team-member-14.jpg` },
+    { id: 15, src: `${BASE}zps/team-member-15.jpg` },
+    { id: 16, src: `${BASE}zps/team-member-16.jpg` },
+    { id: 17, src: `${BASE}zps/team-member-17.jpg` },
+    { id: 18, src: `${BASE}zps/team-member-18.jpg` },
+    { id: 19, src: `${BASE}zps/team-member-19.jpg` },
+    { id: 20, src: `${BASE}zps/team-member-20.jpg` },
   ],
 };
