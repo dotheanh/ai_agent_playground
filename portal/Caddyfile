@@ -1,0 +1,39 @@
+# ============================================
+# Zingplay - serve ZPS tại root (/)
+# ============================================
+zingplay.duckdns.org {
+	root * /var/www/tools/zps/client/dist
+	file_server
+	try_files {path} {path}/ /index.html
+}
+
+# ============================================
+# Tools - serve Portal tại /portal/
+# ============================================
+nhoxtheanh.duckdns.org {
+
+	root * /var/www/tools
+	file_server
+
+	@mp4 path *.mp4
+	header @mp4 Content-Type video/mp4
+
+	# Portal API
+	handle /portal/api/* {
+		uri strip_prefix /portal
+		reverse_proxy localhost:3001
+	}
+
+	# Portal React frontend (base: /portal/)
+	handle_path /portal/* {
+		root * /var/www/tools/portal/client/dist
+		try_files {path} {path}/ /index.html
+		file_server
+	}
+
+	# Gunny game
+	handle_path /gunny/* {
+		root * /var/www/tools/gunny
+		file_server
+	}
+}
