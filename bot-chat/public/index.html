@@ -279,7 +279,8 @@
       const type = document.getElementById('clientType').value;
       
       const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const wsUrl = `${protocol}//${window.location.host}?id=${encodeURIComponent(id)}&type=${type}`;
+      const path = window.location.pathname.replace(/\/$/, ''); // Remove trailing slash
+      const wsUrl = `${protocol}//${window.location.host}${path}?id=${encodeURIComponent(id)}&type=${type}`;
       
       ws = new WebSocket(wsUrl);
       
