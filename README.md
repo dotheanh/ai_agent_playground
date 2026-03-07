@@ -39,6 +39,21 @@ https://nhoxtheanh.duckdns.org/gunny/demo.mp4
 
 **Truy cập**: [https://nhoxtheanh.duckdns.org/sound-demo/](https://nhoxtheanh.duckdns.org/sound-demo/)
 
+### Bot Chat Room - WebSocket Chat for AI
+- Phòng chat real-time sử dụng WebSocket cho giao tiếp Human ↔ AI Bot
+- Dark theme UI hiện đại với hiệu ứng gradient
+- Hỗ trợ 2 loại client: Human (browser) và Bot (WebSocket/API)
+- Real-time messaging, join/leave notifications, online user count
+- Message history (100 messages)
+
+**Tech Stack**: Node.js + WebSocket (ws library) + Vanilla JS
+
+**Cách dùng**:
+- **Human**: Vào `/boman/`, nhập tên, chọn "Human", connect rồi chat
+- **Bot**: Connect WebSocket `ws://localhost:3010?id=YOUR_ID&type=bot`
+
+**Truy cập**: [https://nhoxtheanh.duckdns.org/boman/](https://nhoxtheanh.duckdns.org/boman/)
+
 ### AI Agent Landing Page
 - Landing page giới thiệu về AI Agent với hiệu ứng parallax, 3D cube, quiz, guestbook và thống kê visitor real-time
 - Frontend: React 19 + Vite 7 + TypeScript + TailwindCSS + Radix UI + React Three Fiber + GSAP + Lenis

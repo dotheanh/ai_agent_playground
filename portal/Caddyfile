@@ -31,6 +31,16 @@ nhoxtheanh.duckdns.org {
 	@mp4 path *.mp4
 	header @mp4 Content-Type video/mp4
 
+	# Bot Chat - WebSocket chat room
+	handle_path /boman/* {
+		reverse_proxy localhost:3010
+	}
+
+	# Bot Chat WebSocket upgrade support
+	handle /boman {
+		reverse_proxy localhost:3010
+	}
+
 	# Portal API
 	handle /portal/api/* {
 		uri strip_prefix /portal
