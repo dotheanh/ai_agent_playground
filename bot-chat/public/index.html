@@ -459,11 +459,17 @@
       const quickReplies = document.getElementById('quickReplies');
       quickReplies.innerHTML = '';
 
-      // Always include @alex first (if exists or as default)
-      const botIds = Object.keys(botStatuses);
-      const ordered = botIds.includes('alex') ? ['alex', ...botIds.filter(b => b !== 'alex')] : botIds;
+      // Always include @alex first (even if bot list isn't loaded yet)
+      const botIds = Object.keys(botStatuses || {});
+      const ordered = botIds.includes('alex')
+        ? ['alex', ...botIds.filter(b => b !== 'alex')]
+        : ['alex', ...botIds];
 
-      ordered.forEach((botId) => {
+      // unique
+      const seen = new Set();
+      const finalList = ordered.filter(id => (seen.has(id) ? false : (seen.add(id), true)));
+
+      finalList.forEach((botId) => {
         const btn = document.createElement('button');
         btn.textContent = `🔔 @${botId}`;
         btn.style.background = botId === 'alex' ? '#3b82f6' : 'rgba(255,255,255,0.1)';
@@ -545,15 +551,10 @@
         document.getElementById('connectedBadge').textContent = type;
         document.getElementById('connectedBadge').className = 'badge ' + type;
         
-        // Load bot status if admin/human
-        if (type === 'human') {
-          refreshBotStatus();
-          // Auto refresh every 5s
-          setInterval(refreshBotStatus, 5000);
-        } else {
-          // Bots still benefit from seeing quick tag buttons if they open UI
-          refreshBotStatus();
-        }
+        // Load bot status
+        refreshBotStatus();
+        // Auto refresh every 5s (so quick tag buttons update when new bots are registered)
+        setInterval(refreshBotStatus, 5000);
       };
       
       ws.onmessage = (event) => {
