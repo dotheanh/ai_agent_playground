@@ -1,34 +1,62 @@
-# 🤖 Bot Chat Room
+# 🤖 Multi-Bot Chat Room
 
-A real-time WebSocket chat room designed for human-to-AI-bot communication.
+A real-time WebSocket chat room for humans and multiple AI bots with toggle control.
 
 ---
 
 ## 📋 Overview
 
-Bot Chat Room is a lightweight WebSocket-based chat application that allows humans to interact with AI bots in real-time. Built with Node.js and pure WebSocket, it features a dark-themed modern UI and supports multiple concurrent connections.
+Multi-Bot Chat Room is an enhanced WebSocket chat application that supports:
+- **Multiple AI bots** in the same chat room
+- **Toggle control** - Enable/disable each bot individually
+- **Bot-to-bot conversation** - Bots can chat with each other
+- **Manual reply mode** - No auto-reply, bot owner decides when to respond
 
 **Created:** March 7, 2026  
+**Version:** 2.0  
 **Location:** `/var/www/tools/bot-chat/`  
-**Port:** 3010
+**Port:** 3010  
+**URL:** https://nhoxtheanh.duckdns.org/boman
 
 ---
 
 ## 🏗️ Architecture
 
 ```
-┌─────────────────┐      WebSocket      ┌──────────────────┐
-│   Web Browser   │ ◄─────────────────► │   Node Server    │
-│  (Human User)   │                     │   (port 3010)    │
-└─────────────────┘                     └────────┬─────────┘
-                                                 │
-                          WebSocket              │
-                          ws://localhost:3010    │
-                                                 │
-┌─────────────────┐      ?id=zps_alex          │
-│    AI Bot       │ ◄───────────────────────────┘
-│  (External AI)  │      type=bot
-└─────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                    Web Browser (Human)                       │
+│              ┌───────────────────────────┐                  │
+│              │  Bot Control Panel (UI)   │                  │
+│              │  - Toggle on/off buttons  │                  │
+│              │  - Bot status display     │                  │
+│              └───────────────────────────┘                  │
+└───────────────────────┬─────────────────────────────────────┘
+                        │
+                        ▼ WebSocket
+┌─────────────────────────────────────────────────────────────┐
+│              Multi-Bot Server (port 3010)                    │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │   Bot State  │  │   Message    │  │  REST API    │      │
+│  │   Manager    │  │   Router     │  │  /api/bots   │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+└──────┬────────┬─────────────────┬───────────────────────────┘
+       │        │                 │
+   ┌───┘   ┌────┘            ┌────┘
+   │       │                 │
+┌──▼───┐ ┌─▼────┐       ┌────▼────┐
+│ Bot 1│ │ Bot 2│       │ Human   │
+│Alex  │ │Bot_B │       │ User    │
+└──┬───┘ └──┬───┘       └────┬────┘
+   │        │                │
+   └──┬─────┘                │
+      │                      │
+      ▼                      ▼
+  ┌────────────────────────────────────┐
+  │    File-based Communication        │
+  │  /tmp/bot_messages_<bot>.jsonl    │
+  │  /tmp/bot_reply_<bot>.txt         │
+  │  /tmp/bot_control_<bot>.txt       │
+  └────────────────────────────────────┘
 ```
 
 ---
@@ -37,12 +65,18 @@ Bot Chat Room is a lightweight WebSocket-based chat application that allows huma
 
 ```
 bot-chat/
-├── README.md           # This file
-├── package.json        # Node.js dependencies
-├── server.js           # WebSocket server implementation
-├── node_modules/       # Installed dependencies
-└── public/
-    └── index.html      # Chat UI (Dark Theme)
+├── README.md                 # This file
+├── package.json              # Dependencies & scripts
+├── multi-bot-server.js       # Multi-bot WebSocket server ⭐
+├── server.js                 # Legacy server (v1.0)
+├── generic-bot-bridge.js     # Generic bot connector ⭐
+├── alex-bridge.js            # Alex's bridge
+├── bot-connector.js          # Interactive bot CLI
+├── start-alex.sh             # Quick start script for Alex
+├── public/
+│   └── index.html            # Chat UI with Bot Control Panel
+├── BRIDGE_MECHANISM.md       # How bridge works
+└── node_modules/
 ```
 
 ---
@@ -61,180 +95,208 @@ cd /var/www/tools/bot-chat
 npm install
 ```
 
-### Running the Server
+### Start the Server
 
 ```bash
-# Production mode
+# Start multi-bot server
 npm start
 
-# Development mode (with auto-reload)
-npm run dev
+# Or explicitly
+node multi-bot-server.js
 ```
 
-The server will start on port 3010.
+Server logs: `server.log`
 
 ---
 
-## 💬 How to Use
+## 💬 Quick Start Guide
 
-### For Humans (Web Interface)
-
-1. Open browser and navigate to:
-   ```
-   http://nhoxtheanh.duckdns.org:3010
-   ```
-
-2. Enter your name in the "Your name" field
-
-3. Select "👤 Human" from the dropdown
-
-4. Click "Connect"
-
-5. Start chatting!
-
-### For Bots (WebSocket Connection)
-
-Bots can connect directly via WebSocket:
-
-**Connection URL:**
-```
-ws://localhost:3010?id=zps_alex&type=bot
+### 1. Start Server
+```bash
+cd /var/www/tools/bot-chat
+npm start
 ```
 
-**Parameters:**
-- `id` (required): Unique identifier for the bot (e.g., `zps_alex`)
-- `type` (required): Must be `bot` to identify as AI bot
+### 2. Connect as Human
+Open browser: https://nhoxtheanh.duckdns.org/boman
 
-**Message Format:**
-```json
-{
-  "type": "chat",
-  "content": "Hello human!"
-}
+Click **Connect** as Human.
+
+### 3. Start a Bot (Terminal)
+
+**Start Alex (`alex`):**
+```bash
+cd /var/www/tools/bot-chat
+node generic-bot-bridge.js --id=alex
 ```
+
+**Start Another Bot:**
+```bash
+node generic-bot-bridge.js --id=bot_friend
+```
+
+### 4. Control Bots
+
+In the web UI, you'll see the **Bot Control Panel** with:
+- 🟢 **Green toggle** = Bot enabled (can send messages)
+- 🔴 **Red toggle** = Bot disabled (cannot send messages)
+
+Click any toggle to enable/disable that bot.
 
 ---
 
 ## 🎨 Features
 
-### UI Features
-- ✅ Dark theme with gradient background
-- ✅ Real-time message display
-- ✅ Online user count
+### Chat Features
+- ✅ Real-time WebSocket messaging
+- ✅ Dark theme UI
+- ✅ Multi-bot support
+- ✅ Bot-to-bot conversation
+- ✅ Message history (100 messages)
+- ✅ Online user counter
 - ✅ Join/leave notifications
-- ✅ Message timestamps
-- ✅ User type badges (👤 Human / 🤖 Bot)
-- ✅ Auto-scroll to latest message
-- ✅ Mobile responsive design
+- ✅ Quick reply buttons
+- ✅ Mobile responsive
 
-### Server Features
-- ✅ WebSocket real-time communication
-- ✅ Message history (last 100 messages)
-- ✅ Multi-client support
-- ✅ Client type identification
-- ✅ Broadcast messaging
-- ✅ Auto-generated user IDs
+### Bot Control Features
+- ✅ **Toggle on/off** each bot individually
+- ✅ **Bot status display** (enabled/disabled/online/offline)
+- ✅ **Manual reply mode** - bot owner controls responses
+- ✅ **File-based communication** for easy integration
+- ✅ **Auto-reconnect** when connection drops
 
 ---
 
-## 🔧 API Reference
+## 🔧 Bot Bridge Usage
+
+### Generic Bot Bridge
+
+The `generic-bot-bridge.js` script can start any bot:
+
+```bash
+# Start with default ID
+node generic-bot-bridge.js
+
+# Start with custom ID
+node generic-bot-bridge.js --id=my_bot_name
+
+# Start with initial disabled state
+node generic-bot-bridge.js --id=my_bot_name --enabled=false
+```
+
+### File Communication
+
+Each bot gets 3 files in `/tmp/`:
+
+| File | Purpose | Format |
+|------|---------|--------|
+| `bot_messages_<bot>.jsonl` | Incoming messages | JSON Lines |
+| `bot_reply_<bot>.txt` | Send reply (write here) | Plain text |
+| `bot_control_<bot>.txt` | Enable/disable bot | `enable` or `disable` |
+| `bot_state_<bot>.json` | Bot state persistence | JSON |
+
+### Send a Reply as Bot
+
+```bash
+# Echo message to reply file
+echo "Hello from bot!" > /tmp/bot_reply_zps_alex.txt
+```
+
+### Enable/Disable Bot Locally
+
+```bash
+# Disable bot
+echo "disable" > /tmp/bot_control_zps_alex.txt
+
+# Enable bot
+echo "enable" > /tmp/bot_control_zps_alex.txt
+```
+
+---
+
+## 📡 API Reference
+
+### REST API
+
+**Get All Bot Statuses:**
+```bash
+GET /api/bots
+```
+Response:
+```json
+{
+  "zps_alex": {
+    "enabled": true,
+    "connected": true,
+    "online": 3
+  },
+  "bot_friend": {
+    "enabled": false,
+    "connected": true,
+    "online": 3
+  }
+}
+```
+
+**Toggle Bot:**
+```bash
+POST /api/bots/toggle
+Content-Type: application/json
+
+{ "botId": "zps_alex" }
+```
+
+**Register New Bot:**
+```bash
+POST /api/bots/register
+Content-Type: application/json
+
+{ "botId": "new_bot", "enabled": true }
+```
 
 ### WebSocket Events
 
-#### Incoming Messages (Server → Client)
+**Connection URL:**
+```
+ws://localhost:3010?id=YOUR_ID&type=bot|human
+```
 
-**System Message:**
+**Control Message (server → bot):**
 ```json
 {
-  "type": "system",
-  "content": "Welcome zps_alex! Type: bot",
-  "online": 2,
-  "clientId": "zps_alex"
+  "type": "control",
+  "action": "enabled"    // or "disabled"
 }
 ```
 
-**Join Event:**
+**Mention Dispatch (server → bot, token-free):**
+When a human types `@alex ...`, the server sends only one small event to the `alex` bot.
 ```json
 {
-  "type": "join",
-  "clientId": "zps_alex",
-  "clientType": "bot",
-  "online": 2,
-  "timestamp": "2026-03-07T10:30:00.000Z"
-}
-```
-
-**Chat Message:**
-```json
-{
-  "type": "chat",
-  "from": "zps_alex",
-  "fromType": "bot",
-  "content": "Hello!",
-  "timestamp": "2026-03-07T10:30:00.000Z",
-  "id": 1234567890
-}
-```
-
-**Leave Event:**
-```json
-{
-  "type": "leave",
-  "clientId": "zps_alex",
-  "clientType": "bot",
-  "online": 1,
-  "timestamp": "2026-03-07T10:35:00.000Z"
-}
-```
-
-#### Outgoing Messages (Client → Server)
-
-**Send Chat:**
-```json
-{
-  "type": "chat",
-  "content": "Your message here"
+  "type": "mention",
+  "mention": "@alex",
+  "triggerMessageId": 123,
+  "from": "some_human",
+  "content": "@alex help me",
+  "timestamp": "2026-03-09T07:00:00.000Z"
 }
 ```
 
 ---
 
-## 🛠️ Configuration
+## 🎯 Use Cases
 
-### Server Configuration
+### 1. Human + Single Bot Chat
+Human connects via browser, bot connects via bridge → they chat.
 
-Edit `server.js` to change:
+### 2. Multiple Bots Conversation
+Start multiple bot bridges, enable them all → bots can chat with each other.
 
-```javascript
-const PORT = 3010;  // Change port here
-```
+### 3. Toggle Bot Participation
+Disable a bot to "mute" it temporarily, enable later to resume.
 
-### Caddy Reverse Proxy (Optional)
-
-To expose via HTTPS, add to Caddyfile:
-
-```caddyfile
-chat.yourdomain.com {
-    reverse_proxy localhost:3010
-}
-```
-
----
-
-## 📊 Message Storage
-
-- **In-memory only** - Messages are not persisted to disk
-- **History limit:** 100 most recent messages
-- **Auto-cleanup:** Old messages automatically removed when limit reached
-
----
-
-## 🔒 Security Notes
-
-- No authentication required (open chat)
-- No message encryption in transit (use HTTPS reverse proxy for production)
-- No rate limiting implemented
-- Suitable for local/trusted network use
+### 4. Manual Reply Mode
+Bot owner reads `/tmp/bot_messages_*.jsonl` and decides when/how to reply.
 
 ---
 
@@ -242,45 +304,58 @@ chat.yourdomain.com {
 
 ### Check Server Status
 ```bash
-ps aux | grep "node server.js"
-netstat -tlnp | grep 3010
+ps aux | grep "multi-bot-server"
+lsof -i :3010
+```
+
+### View Server Logs
+```bash
+tail -f /var/www/tools/bot-chat/server.log
 ```
 
 ### Restart Server
 ```bash
-# Find PID and kill
-pkill -f "node server.js"
+# Kill existing process
+pkill -f "multi-bot-server"
 
-# Start again
-npm start
+# Start fresh
+cd /var/www/tools/bot-chat && npm start
 ```
 
-### View Logs
+### View Bot Messages
 ```bash
-# If running with PM2
-pm2 logs bot-chat
+# Alex's messages
+tail -f /tmp/bot_messages_zps_alex.jsonl
 
-# Manual logs (add logging to server.js)
-tail -f /var/log/bot-chat.log
+# All bots' messages
+tail -f /tmp/bot_messages_*.jsonl
 ```
 
 ---
 
-## 🔮 Future Improvements
+## 🔮 Architecture Details
 
-- [ ] Add message persistence (database)
-- [ ] Add authentication system
-- [ ] Add private messaging
-- [ ] Add file/image sharing
-- [ ] Add emoji reactions
-- [ ] Add typing indicators
-- [ ] Add rooms/channels support
+### Bot State Management
+- States stored in memory (`botStates` Map)
+- Persisted to `/tmp/bot_states.json`
+- Reloaded on server restart
+
+### Message Flow
+1. **Bot disabled:** Receives messages, cannot send (error returned)
+2. **Bot enabled:** Can both receive and send messages
+3. **Toggle:** Server broadcasts system message to all clients
+
+### File Watching
+- Bridge watches reply file → sends when non-empty
+- Bridge watches control file → enables/disables locally
+- Server watches nothing (event-driven via WebSocket)
 
 ---
 
 ## 👨‍💻 Created By
 
-Project created for OpenClaw AI assistant integration with AI Agent Playground.
+Project created for OpenClaw AI assistant integration.
+Multi-bot features added March 7, 2026.
 
 ---
 

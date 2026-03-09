@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🤖 Bot Chat Room</title>
+  <title>🤖 Multi-Bot Chat Room</title>
   <style>
     * {
       box-sizing: border-box;
@@ -19,7 +19,7 @@
     }
     
     .container {
-      max-width: 900px;
+      max-width: 1100px;
       margin: 0 auto;
       height: 100vh;
       display: flex;
@@ -53,6 +53,115 @@
       background: #ef4444;
     }
     
+    /* Bot Control Panel */
+    .bot-panel {
+      background: rgba(59, 130, 246, 0.1);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 12px 20px;
+    }
+    
+    .bot-panel-title {
+      font-size: 0.9rem;
+      color: #60a5fa;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .bot-list {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .bot-card {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 200px;
+    }
+    
+    .bot-card.disabled {
+      opacity: 0.6;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    
+    .bot-info {
+      flex: 1;
+    }
+    
+    .bot-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .bot-status {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+    
+    .bot-status .connected {
+      color: #10b981;
+    }
+    
+    .bot-status .disconnected {
+      color: #ef4444;
+    }
+    
+    .bot-toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+    
+    .bot-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ef4444;
+      border-radius: 24px;
+      transition: 0.3s;
+    }
+    
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    
+    .bot-toggle input:checked + .toggle-slider {
+      background-color: #10b981;
+    }
+    
+    .bot-toggle input:checked + .toggle-slider:before {
+      transform: translateX(20px);
+    }
+    
+    /* Connect Panel */
     .connect-panel {
       padding: 15px 20px;
       background: rgba(255,255,255,0.03);
@@ -112,6 +221,11 @@
       background: #2563eb;
     }
     
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
     button.disconnect {
       background: #ef4444;
     }
@@ -120,11 +234,18 @@
       background: #dc2626;
     }
     
+    button.refresh {
+      background: #6b7280;
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+    
     select option {
       background: #1a1a2e;
       color: #fff;
     }
     
+    /* Messages */
     .messages {
       flex: 1;
       overflow-y: auto;
@@ -150,6 +271,11 @@
       align-self: flex-start;
       background: rgba(59, 130, 246, 0.2);
       border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    
+    .message.from-bot.disabled {
+      opacity: 0.6;
+      border-color: rgba(239, 68, 68, 0.3);
     }
     
     .message.from-human {
@@ -192,6 +318,16 @@
       opacity: 0.6;
     }
     
+    .disabled-badge {
+      background: #ef4444;
+      color: white;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+    
+    /* Input Area */
     .input-area {
       padding: 15px 20px;
       background: rgba(255,255,255,0.05);
@@ -231,13 +367,43 @@
     .typing-indicator.show {
       display: block;
     }
+    
+    .quick-reply-buttons {
+      display: flex;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(0,0,0,0.2);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      flex-wrap: wrap;
+    }
+    
+    .quick-reply-buttons button {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .quick-reply-buttons button:hover {
+      background: rgba(255,255,255,0.2);
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>🤖 Bot Chat Room</h1>
+      <h1>🤖 Multi-Bot Chat Room</h1>
       <span class="online-count offline" id="onlineCount">● Offline</span>
+    </div>
+    
+    <!-- Bot Control Panel -->
+    <div class="bot-panel" id="botPanel" style="display:none;">
+      <div class="bot-panel-title">
+        🎛️ Bot Control Panel
+        <button class="refresh" onclick="refreshBotStatus()">🔄 Refresh</button>
+      </div>
+      <div class="bot-list" id="botList">
+        <!-- Bot cards will be inserted here -->
+      </div>
     </div>
     
     <div class="connect-panel disconnected" id="connectPanel">
@@ -258,6 +424,11 @@
     
     <div class="typing-indicator" id="typing">Someone is typing...</div>
     
+    <!-- Quick Reply Button -->
+    <div class="quick-reply-buttons" id="quickReplies" style="display:none;">
+      <button onclick="setMessage('@alex ')" style="background: #3b82f6; font-weight: bold;">🔔 @alex (Gọi Alex)</button>
+    </div>
+    
     <div class="input-area" id="inputArea" style="display:none;">
       <input type="text" id="messageInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMessage()">
       <button onclick="sendMessage()">Send</button>
@@ -267,6 +438,8 @@
   <script>
     let ws = null;
     let myId = '';
+    let myType = '';
+    let botStatuses = {};
     
     function generateId() {
       return 'user-' + Math.floor(Math.random() * 10000);
@@ -274,25 +447,93 @@
     
     document.getElementById('clientId').value = generateId();
     
+    async function refreshBotStatus() {
+      try {
+        const res = await fetch('/api/bots');
+        botStatuses = await res.json();
+        renderBotPanel();
+      } catch (e) {
+        console.log('Failed to fetch bot status');
+      }
+    }
+    
+    function renderBotPanel() {
+      const botList = document.getElementById('botList');
+      botList.innerHTML = '';
+      
+      Object.entries(botStatuses).forEach(([botId, status]) => {
+        const card = document.createElement('div');
+        card.className = 'bot-card' + (status.enabled ? '' : ' disabled');
+        card.innerHTML = `
+          <div class="bot-info">
+            <div class="bot-name">
+              🤖 ${botId}
+              ${status.enabled ? '' : '<span class="disabled-badge">OFF</span>'}
+            </div>
+            <div class="bot-status">
+              ${status.connected 
+                ? '<span class="connected">🟢 Online</span>' 
+                : '<span class="disconnected">🔴 Offline</span>'}
+              • ${status.enabled ? 'Enabled' : 'Disabled'}
+            </div>
+          </div>
+          <label class="bot-toggle">
+            <input type="checkbox" ${status.enabled ? 'checked' : ''} 
+                   onchange="toggleBot('${botId}', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        `;
+        botList.appendChild(card);
+      });
+      
+      document.getElementById('botPanel').style.display = Object.keys(botStatuses).length > 0 ? 'block' : 'none';
+    }
+    
+    async function toggleBot(botId, enabled) {
+      try {
+        const res = await fetch('/api/bots/toggle', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ botId })
+        });
+        const result = await res.json();
+        if (result.success) {
+          botStatuses[botId].enabled = result.enabled;
+          renderBotPanel();
+        }
+      } catch (e) {
+        console.error('Failed to toggle bot:', e);
+      }
+    }
+    
     function connect() {
       const id = document.getElementById('clientId').value.trim() || generateId();
       const type = document.getElementById('clientType').value;
       
       const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const path = window.location.pathname.replace(/\/$/, ''); // Remove trailing slash
+      const path = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname + '/';
       const wsUrl = `${protocol}//${window.location.host}${path}?id=${encodeURIComponent(id)}&type=${type}`;
       
       ws = new WebSocket(wsUrl);
       
       ws.onopen = () => {
         myId = id;
+        myType = type;
         document.getElementById('connectPanel').classList.remove('disconnected');
         document.getElementById('connectPanel').classList.add('connected');
         document.getElementById('connectedInfo').classList.add('show');
         document.getElementById('inputArea').style.display = 'flex';
+        document.getElementById('quickReplies').style.display = 'flex';
         document.getElementById('connectedName').textContent = id;
         document.getElementById('connectedBadge').textContent = type;
         document.getElementById('connectedBadge').className = 'badge ' + type;
+        
+        // Load bot status if admin/human
+        if (type === 'human') {
+          refreshBotStatus();
+          // Auto refresh every 5s
+          setInterval(refreshBotStatus, 5000);
+        }
       };
       
       ws.onmessage = (event) => {
@@ -302,16 +543,37 @@
           document.getElementById('onlineCount').textContent = `● Online: ${msg.online}`;
           document.getElementById('onlineCount').classList.remove('offline');
           document.getElementById('onlineCount').classList.add('online-count');
+          
+          if (msg.botStates) {
+            botStatuses = msg.botStates;
+            renderBotPanel();
+          }
+        }
+        
+        if (msg.type === 'history') {
+          // Load previous messages
+          msg.messages.forEach(m => addMessage(m));
+        }
+
+        if (msg.type === 'mention') {
+          // Visible notification for humans; bots can also receive it.
+          addSystemMessage(`🔔 Mention for ${msg.mention} from ${msg.from}: ${msg.content}`);
         }
         
         if (msg.type === 'join' || msg.type === 'leave') {
           document.getElementById('onlineCount').textContent = `● Online: ${msg.online}`;
           addSystemMessage(`${msg.clientId} (${msg.clientType}) ${msg.type === 'join' ? 'joined' : 'left'}`);
+          // Refresh bot list
+          if (myType === 'human') refreshBotStatus();
           return;
         }
         
         if (msg.type === 'chat') {
           addMessage(msg);
+        }
+        
+        if (msg.type === 'control') {
+          addSystemMessage(`🎛️ Bot control: ${msg.action}`);
         }
       };
       
@@ -322,6 +584,8 @@
         document.getElementById('connectPanel').classList.remove('connected');
         document.getElementById('connectedInfo').classList.remove('show');
         document.getElementById('inputArea').style.display = 'none';
+        document.getElementById('quickReplies').style.display = 'none';
+        document.getElementById('botPanel').style.display = 'none';
         addSystemMessage('Disconnected from server');
       };
       
@@ -336,6 +600,11 @@
         ws.close();
         ws = null;
       }
+    }
+    
+    function setMessage(text) {
+      document.getElementById('messageInput').value = text;
+      document.getElementById('messageInput').focus();
     }
     
     function sendMessage() {
@@ -356,13 +625,20 @@
       const container = document.getElementById('messages');
       const div = document.createElement('div');
       const isMe = msg.from === myId;
-      const msgClass = isMe ? 'from-human' : (msg.fromType === 'bot' ? 'from-bot' : 'from-human');
+      let msgClass = isMe ? 'from-human' : (msg.fromType === 'bot' ? 'from-bot' : 'from-human');
+      
+      // Check if bot is disabled
+      const botStatus = botStatuses[msg.from];
+      if (botStatus && !botStatus.enabled) {
+        msgClass += ' disabled';
+      }
       
       div.className = `message ${msgClass}`;
       div.innerHTML = `
         <div class="message-header">
           <strong>${msg.from}</strong>
           <span class="badge ${msg.fromType}">${msg.fromType}</span>
+          ${botStatus && !botStatus.enabled ? '<span class="disabled-badge">OFF</span>' : ''}
           <span class="timestamp">${formatTime(msg.timestamp)}</span>
         </div>
         <div class="message-content">${escapeHtml(msg.content)}</div>
