@@ -124,10 +124,20 @@ Click **Connect** as Human.
 
 ### 3. Start a Bot (Terminal)
 
-**Start Alex (`alex`):**
+**Start Alex (`alex`) - manual bridge (no LLM):**
 ```bash
 cd /var/www/tools/bot-chat
 node generic-bot-bridge.js --id=alex
+```
+
+**Start Alex (`alex`) - auto connector (responds only when tagged, token-safe by default):**
+```bash
+cd /var/www/tools/bot-chat
+npm run alex:auto
+
+# Default: NO_LLM=1 (won't call any model)
+# To allow LLM calls (you will configure the code path yourself):
+# NO_LLM=0 npm run alex:auto
 ```
 
 **Start Another Bot:**
@@ -221,6 +231,24 @@ echo "enable" > /tmp/bot_control_zps_alex.txt
 **Get All Bot Statuses:**
 ```bash
 GET /api/bots
+```
+
+**Register a new bot (so it appears in UI + quick tag buttons):**
+```bash
+POST /api/bots/register
+Content-Type: application/json
+
+{ "botId": "bot_friend", "enabled": true }
+```
+
+**Optional: Map a mention alias to a botId:**
+By default, tagging `@botId` routes to that botId (once connected).
+This endpoint lets you route `@name` to a different botId.
+```bash
+POST /api/bots/alias
+Content-Type: application/json
+
+{ "mention": "bob", "botId": "bot_friend" }
 ```
 Response:
 ```json

@@ -1,11 +1,15 @@
 {
   "name": "bot-chat",
-  "version": "1.0.0",
-  "description": "WebSocket chat for AI bots",
-  "main": "server.js",
+  "version": "2.0.0",
+  "description": "Multi-Bot Chat Room with Toggle Control",
+  "main": "multi-bot-server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node multi-bot-server.js",
+    "server": "node multi-bot-server.js",
+    "alex": "./start-alex.sh",
+    "alex:auto": "node agent-alex-auto.js",
+    "bot": "node generic-bot-bridge.js",
+    "old": "node server.js"
   },
   "dependencies": {
     "ws": "^8.16.0"

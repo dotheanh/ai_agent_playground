@@ -17,6 +17,15 @@ const HISTORY_MAX_MESSAGES = parseInt(process.env.HISTORY_MAX_MESSAGES || '1000'
 const MENTION_NAME = (process.env.MENTION_NAME || 'alex').trim();
 const MENTION_REGEX = new RegExp(`(^|\\s)@${MENTION_NAME}(\\b|$)`, 'i');
 
+// Reply-routing:
+// - Mention dispatch is based on @name in the message.
+// - Bot routing is by botId.
+// Default behavior:
+//   - @alex routes to botId "alex".
+// You can also register alias routing via /api/bots/alias.
+const mentionRouting = new Map(); // mentionName(lower) -> botId
+mentionRouting.set(MENTION_NAME.toLowerCase(), 'alex');
+
 // Bot state management
 const botStates = new Map(); // botId -> { enabled: boolean, connected: boolean, lastPing: number }
 const BOT_STATES_FILE = '/tmp/bot_states.json';
@@ -215,6 +224,31 @@ const httpServer = http.createServer((req, res) => {
     res.end(JSON.stringify({ messages: sliced }));
     return;
   }
+
+  // API: Set mention alias routing
+  // POST /api/bots/alias { "mention": "bob", "botId": "bot_friend" }
+  if (url.pathname === '/api/bots/alias' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        const { mention, botId } = JSON.parse(body);
+        if (!mention || !botId) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'mention and botId are required' }));
+          return;
+        }
+        initBot(botId, true);
+        mentionRouting.set(String(mention).toLowerCase(), String(botId));
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, mention, botId }));
+      } catch (e) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Invalid JSON' }));
+      }
+    });
+    return;
+  }
   
   // Serve static files
   if (url.pathname === '/' || url.pathname === '/index.html') {
@@ -327,14 +361,20 @@ wss.on('connection', (ws, req) => {
         console.log(`[CHAT] ${client.id}: ${msg.content.substring(0, 50)}${msg.content.length > 50 ? '...' : ''}`);
 
         // Mention dispatch (token-free)
-        // If a human (or other bot) tags @alex, notify alex bot (if connected & enabled)
-        if (MENTION_REGEX.test(msg.content) && client.id.toLowerCase() !== MENTION_NAME.toLowerCase()) {
-          const alexState = botStates.get(MENTION_NAME);
-          const alexWs = findBotConnection(MENTION_NAME);
-          if (alexState?.enabled && alexWs && alexWs.readyState === WebSocket.OPEN) {
-            alexWs.send(JSON.stringify({
+        // Find all @mentions and notify the mapped botId(s) if connected & enabled.
+        const mentionMatches = Array.from(message.content.matchAll(/(^|\s)@([a-zA-Z0-9_\-]{2,32})(\b|$)/g));
+        for (const m of mentionMatches) {
+          const mentionName = String(m[2] || '').toLowerCase();
+          const targetBotId = mentionRouting.get(mentionName);
+          if (!targetBotId) continue;
+          if (client.type === 'bot' && client.id === targetBotId) continue;
+
+          const state = botStates.get(targetBotId);
+          const botWs = findBotConnection(targetBotId);
+          if (state?.enabled && botWs && botWs.readyState === WebSocket.OPEN) {
+            botWs.send(JSON.stringify({
               type: 'mention',
-              mention: `@${MENTION_NAME}`,
+              mention: `@${mentionName}`,
               triggerMessageId: message.id,
               from: message.from,
               content: message.content,

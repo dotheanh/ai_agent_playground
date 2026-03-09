@@ -425,9 +425,7 @@
     <div class="typing-indicator" id="typing">Someone is typing...</div>
     
     <!-- Quick Reply Button -->
-    <div class="quick-reply-buttons" id="quickReplies" style="display:none;">
-      <button onclick="setMessage('@alex ')" style="background: #3b82f6; font-weight: bold;">🔔 @alex (Gọi Alex)</button>
-    </div>
+    <div class="quick-reply-buttons" id="quickReplies" style="display:none;"></div>
     
     <div class="input-area" id="inputArea" style="display:none;">
       <input type="text" id="messageInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMessage()">
@@ -457,6 +455,24 @@
       }
     }
     
+    function renderQuickReplies() {
+      const quickReplies = document.getElementById('quickReplies');
+      quickReplies.innerHTML = '';
+
+      // Always include @alex first (if exists or as default)
+      const botIds = Object.keys(botStatuses);
+      const ordered = botIds.includes('alex') ? ['alex', ...botIds.filter(b => b !== 'alex')] : botIds;
+
+      ordered.forEach((botId) => {
+        const btn = document.createElement('button');
+        btn.textContent = `🔔 @${botId}`;
+        btn.style.background = botId === 'alex' ? '#3b82f6' : 'rgba(255,255,255,0.1)';
+        btn.style.fontWeight = botId === 'alex' ? 'bold' : 'normal';
+        btn.onclick = () => setMessage(`@${botId} `);
+        quickReplies.appendChild(btn);
+      });
+    }
+
     function renderBotPanel() {
       const botList = document.getElementById('botList');
       botList.innerHTML = '';
@@ -487,6 +503,7 @@
       });
       
       document.getElementById('botPanel').style.display = Object.keys(botStatuses).length > 0 ? 'block' : 'none';
+      renderQuickReplies();
     }
     
     async function toggleBot(botId, enabled) {
@@ -533,6 +550,9 @@
           refreshBotStatus();
           // Auto refresh every 5s
           setInterval(refreshBotStatus, 5000);
+        } else {
+          // Bots still benefit from seeing quick tag buttons if they open UI
+          refreshBotStatus();
         }
       };
       
