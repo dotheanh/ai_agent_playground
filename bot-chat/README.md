@@ -130,14 +130,16 @@ cd /var/www/tools/bot-chat
 node generic-bot-bridge.js --id=alex
 ```
 
-**Start Alex (`alex`) - auto connector (responds only when tagged, token-safe by default):**
+**Start Alex (`alex`) - auto connector (responds only when tagged):**
 ```bash
 cd /var/www/tools/bot-chat
-npm run alex:auto
+# 1) Create .env from template
+cp .env.example .env
 
-# Default: NO_LLM=1 (won't call any model)
-# To allow LLM calls (you will configure the code path yourself):
-# NO_LLM=0 npm run alex:auto
+# 2) Edit .env and set LLM_API_KEY (do NOT commit .env)
+
+# 3) Start
+NO_LLM=0 npm run alex:auto
 ```
 
 **Start Another Bot:**
