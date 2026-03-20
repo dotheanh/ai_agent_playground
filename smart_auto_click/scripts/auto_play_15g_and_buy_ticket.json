@@ -1280,12 +1280,7 @@
       "button": "left",
       "clicks": 1
     },
-    {
-      "x": 1108,
-      "y": 498,
-      "button": "left",
-      "clicks": 1
-    },
+    {"x": 1110, "y": 453, "button": "left", "clicks": 1},
     {
       "x": 916,
       "y": 611,
@@ -1317,8 +1312,8 @@
       "clicks": 1
     },
     {
-      "x": 1111,
-      "y": 501,
+      "x": 1095,
+      "y": 447,
       "button": "left",
       "clicks": 1
     },
