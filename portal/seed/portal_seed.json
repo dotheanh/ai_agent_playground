@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "exportedAt": "2026-03-20T01:47:15.984593Z",
+    "db": "portal.db"
+  },
+  "tables": {
+    "guestbook_entry": {
+      "columns": [
+        "id",
+        "name",
+        "message",
+        "createdAt"
+      ],
+      "rows": [
+        {
+          "id": 1,
+          "name": "Anh",
+          "message": "Hello ^^",
+          "createdAt": "2026-03-05 16:26:23"
+        },
+        {
+          "id": 2,
+          "name": "Thế Anh",
+          "message": "Nhân ngày 8/3, chúc các chị em ZingPlay luôn xinh đẹp, vui vẻ và tràn đầy năng lượng. Chúc mọi người thật nhiều sức khỏe, thành công trong công việc và luôn hạnh phúc trong cuộc sống. 🌷",
+          "createdAt": "2026-03-06 08:17:08"
+        },
+        {
+          "id": 3,
+          "name": "Tân",
+          "message": "Nhân ngày 8/3, chúc các chị em ZingPlay luôn xinh đẹp, vui vẻ và tràn đầy năng lượng. Chúc mọi người thật nhiều sức khỏe, thành công trong công việc và luôn hạnh phúc trong cuộc sống. 🌷",
+          "createdAt": "2026-03-06 08:20:05"
+        },
+        {
+          "id": 4,
+          "name": "aBeee",
+          "message": "Chúc các chị em 8/3 lúc nào cũng vui vẻ, xinh đẹp và hạnh phúc",
+          "createdAt": "2026-03-06 08:20:40"
+        },
+        {
+          "id": 5,
+          "name": "Em sếp Tùng",
+          "message": "Chúc các chị em ngày 8/3 thật vui vẻ và xinh tươi như ngàn đóa hoa hồng.",
+          "createdAt": "2026-03-06 08:21:07"
+        },
+        {
+          "id": 6,
+          "name": "Thỉ ết ết",
+          "message": "Mong rằng không chỉ 8/3, mà ngày nào chị em nhà ta cũng luôn vui vẻ và yêu đời nhé ạ!",
+          "createdAt": "2026-03-06 08:21:42"
+        },
+        {
+          "id": 7,
+          "name": "Đệ sếp Mibe",
+          "message": "Chúc các chị em team ZPS HCM một ngày 8/3 tràn ngập hoa, quà và những lời yêu thương. Mong mọi người luôn rạng rỡ như những đóa hoa hướng dương, là nguồn năng lượng tích cực và xinh đẹp nhất của team mình. Yêu thương rất nhiều! 💕✨",
+          "createdAt": "2026-03-06 08:22:25"
+        },
+        {
+          "id": 8,
+          "name": "Bạn Tiến giấu tên",
+          "message": "Chúc các chị em ZPS luôn rạng rỡ, mạnh mẽ và được trân trọng xứng đáng — không chỉ ngày 8/3 mà mỗi ngày! 💐",
+          "createdAt": "2026-03-06 08:24:19"
+        },
+        {
+          "id": 9,
+          "name": "Bí mật!",
+          "message": "Mừng ngày tám tháng ba sang,\nChị em rạng rỡ dịu dàng như hoa.\nNụ cười tỏa nắng gần xa,\nAn vui hạnh phúc, cửa nhà bình yên",
+          "createdAt": "2026-03-06 08:26:17"
+        },
+        {
+          "id": 10,
+          "name": "ZPS HCM Team",
+          "message": "Tháng ba về, nắng dịu ngoài ban công\nServer chạy, commit vẫn đang xong\nGiữa deadline và hàng dòng bug nhỏ\nVẫn rạng ngời nụ cười rất thong dong.\n\nCác bạn nữ – coder ,designer hay tester\nAdmin, HR,Artist cũng tuyệt vời\nNgày tám tháng ba xin dành lời chúc\nCode mượt mà như gió thổi ngang trời.\n\nChúc mỗi sáng login tràn năng lượng\nPull request luôn được duyệt rất nhanh\nDeploy xong, production không lỗi\nTeam vỗ tay, dashboard mãi màu xanh.\n\nChúc cuộc sống không toàn bug khó sửa\nTình yêu như hệ thống load thật nhanh\nHạnh phúc đến như push code thành công\nKhông conflict, chỉ toàn màu xanh lành.\n\nNgày của bạn – những bông hoa công nghệ\nGiữa thế giới thuật toán và màn hình\nVẫn tỏa sáng bằng tài năng, nhiệt huyết\nVà nụ cười làm ấm cả codebase mình.\n\nChúc các bạn nữ ZPS-HCM một ngày 8/3 thật rực rỡ! 🌸💻",
+          "createdAt": "2026-03-06 08:26:38"
+        },
+        {
+          "id": 11,
+          "name": "Hehe...",
+          "message": "Mừng ngày phụ nữ tháng ba,\nChị em nhan sắc mặn mà như xuân.\nViệc nhà việc nước chuyên cần,\nĐời luôn tỏa sáng muôn phần yêu thương.",
+          "createdAt": "2026-03-06 08:27:08"
+        },
+        {
+          "id": 12,
+          "name": "^_^",
+          "message": "Tháng ba nắng nhẹ ngoài hiên,\nChị em xinh đẹp dịu hiền như hoa.\nHôm nay tạm gác việc nha,\nCà phê trà sữa hát ca tưng bừng",
+          "createdAt": "2026-03-06 08:31:02"
+        },
+        {
+          "id": 13,
+          "name": "Dượng",
+          "message": "Dượng chúc các chị em 8/3: tim không thiếu yêu thương, ví không thiếu yêu chiều. Sức khỏe bền bỉ, ngủ một giấc là reset mọi phiền. Tâm lý ổn áp, gặp chuyện gì cũng “ừm, chuyện nhỏ”!",
+          "createdAt": "2026-03-06 08:33:39"
+        },
+        {
+          "id": 14,
+          "name": "dượng",
+          "message": "Chúc 16 chị em 8/3 luôn rạng rỡ, nói câu nào cũng đáng yêu câu đó. Yêu ai cũng được trân trọng, thương ai cũng được hồi đáp. Sức khỏe tốt, tinh thần tươi, nội tâm bình yên!",
+          "createdAt": "2026-03-06 08:34:11"
+        },
+        {
+          "id": 15,
+          "name": "Dượng",
+          "message": "chúc 8/3: chị em mình luôn “đẹp – khỏe – vui – có người thương”. Yêu bản thân trước, rồi tình yêu tự tới đúng người. Tâm sinh lý cân bằng, cười tươi là mọi chuyện hanh thông!",
+          "createdAt": "2026-03-06 08:35:21"
+        },
+        {
+          "id": 16,
+          "name": "Chúc mừng ngày 8/3",
+          "message": "Chúc các chị em luôn xinh đẹp và nhiều niềm vui.",
+          "createdAt": "2026-03-06 08:37:03"
+        },
+        {
+          "id": 17,
+          "name": "Sơn Nờ Cê",
+          "message": "Nhân ngày Quốc tế Phụ nữ, chúc các chị luôn rạng rỡ như hoa kim tiền, trẻ trung như gái đôi mươi và đặc biệt là 'ăn hoài không béo, thức khuya không già'. Mong các chị luôn bao dung cho những lần 'ngáo ngơ' của cánh đàn ông tụi em!",
+          "createdAt": "2026-03-06 08:37:58"
+        },
+        {
+          "id": 18,
+          "name": ":*",
+          "message": "Baby girl em là,\nEm là vàng bạc châu báu <3",
+          "createdAt": "2026-03-06 08:39:41"
+        },
+        {
+          "id": 19,
+          "name": "Hieuthuhai",
+          "message": "Chúc các chị em nhà ZPS:\nTâm an vạn sự an \nTâm lành vạn sự lành Tâm thiện sống dài lâuu\nMãi yêuuuu",
+          "createdAt": "2026-03-06 08:40:17"
+        },
+        {
+          "id": 20,
+          "name": "cuongbc",
+          "message": "8/3 Chúc chị em luôn là chị em, càng ngày càng chị em, gặp nhiều thành công trong chị em và tràn đầy chị em.",
+          "createdAt": "2026-03-06 08:41:16"
+        },
+        {
+          "id": 21,
+          "name": "datndmt",
+          "message": "Chúc các chị em 8/3 vui vẻ",
+          "createdAt": "2026-03-06 08:50:57"
+        },
+        {
+          "id": 22,
+          "name": "Khá Bảnh",
+          "message": "À nay là 8/3, Bảnh chúc tất cả các chị em phụ nữ ở đây Chị em nào cũng rực rỡ xinh gái Luôn luôn vui tươi mạnh khỏe nhiều tiền Và luôn hạnh phúc rất chi là hạnh phúc nhá",
+          "createdAt": "2026-03-06 08:55:56"
+        },
+        {
+          "id": 23,
+          "name": "Cái web này",
+          "message": "HAY QUÁ A",
+          "createdAt": "2026-03-06 08:56:50"
+        },
+        {
+          "id": 24,
+          "name": "Web này",
+          "message": "Hay quá ạ",
+          "createdAt": "2026-03-06 08:58:36"
+        },
+        {
+          "id": 25,
+          "name": "Hả?",
+          "message": "8/3 năm 2026 xin được chúc các chị em sẽ ngày giàu, sự nghiệp tiến mau, vận hạn đến sau và được lau vơ dành thêm nhiều nhiều yêu thương nữa ạ (help em không thể nghĩ thêm từ nào vần với \"sáu\" nữa ạ ToT). Năm nay là năm bính ngựa song hỏa nên em xin chúc thêm các chị em mã đáu thành công, luông nhiệt huyết hết mình, cháy bỏng cả nghĩa đen lẫn nghĩa bóng (nhưng đừng cháy quá cánh anh em lại sợ ạ).",
+          "createdAt": "2026-03-06 09:18:45"
+        }
+      ]
+    },
+    "visitor_stats": {
+      "columns": [
+        "id",
+        "pageViews",
+        "uniqueVisitors",
+        "onlineSessions",
+        "lastUpdated"
+      ],
+      "rows": [
+        {
+          "id": 1,
+          "pageViews": 10510,
+          "uniqueVisitors": 1585,
+          "onlineSessions": "{}",
+          "lastUpdated": "2026-03-14 16:23:20"
+        }
+      ]
+    },
+    "newsletter_subscriber": {
+      "columns": [
+        "id",
+        "email",
+        "subscribedAt"
+      ],
+      "rows": []
+    },
+    "contact_submission": {
+      "columns": [
+        "id",
+        "name",
+        "email",
+        "message",
+        "createdAt"
+      ],
+      "rows": []
+    }
+  }
+}

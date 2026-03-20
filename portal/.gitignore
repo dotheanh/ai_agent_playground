@@ -12,6 +12,11 @@ out/
 npm-debug.log*
 yarn-debug.log*
 
+# SQLite / local data
+*.db
+*.sqlite
+*.sqlite3
+
 # OS
 .DS_Store
 Thumbs.db
