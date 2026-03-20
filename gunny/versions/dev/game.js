@@ -282,26 +282,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const logEl = document.getElementById('log');
 
             // Canvas UI state (Gunny-like on-canvas controls)
+            // NOTE: W/H are defined later; so we initialize with placeholders and compute layout after W/H exists.
             const uiState = {
                 showInfo: false,
                 // right-side dpad
                 dpad: {
-                    cx: W - 120,
-                    cy: H - 150,
+                    cx: 0,
+                    cy: 0,
                     size: 46,
                     gap: 8,
                 },
                 // power bar (bottom)
                 powerBar: {
                     x: 110,
-                    y: H - 42,
-                    w: W - 220,
+                    y: 0,
+                    w: 0,
                     h: 16,
                     dragging: false,
                 },
                 // info button (top-right)
                 infoBtn: {
-                    x: W - 48,
+                    x: 0,
                     y: 16,
                     r: 16,
                 },
@@ -309,8 +310,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 popup: {
                     x: 90,
                     y: 70,
-                    w: W - 180,
-                    h: H - 140,
+                    w: 0,
+                    h: 0,
                 },
             };
 
@@ -391,6 +392,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const W = canvas.width,
                 H = canvas.height;
+
+            function layoutCanvasUI(){
+                uiState.dpad.cx = W - 120;
+                uiState.dpad.cy = H - 150;
+
+                uiState.powerBar.y = H - 42;
+                uiState.powerBar.w = W - 220;
+
+                uiState.infoBtn.x = W - 48;
+
+                uiState.popup.w = W - 180;
+                uiState.popup.h = H - 140;
+            }
+            layoutCanvasUI();
 
             // Physics
             const g = 260; // gravity px/s^2
