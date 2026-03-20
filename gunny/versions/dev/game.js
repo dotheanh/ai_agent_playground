@@ -2270,25 +2270,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 // helper draw btn
                 function btn(x,y,w,h,label){
                     ctx.save();
-                    ctx.fillStyle = 'rgba(0,0,0,.32)';
-                    ctx.strokeStyle = 'rgba(255,255,255,.16)';
-                    ctx.lineWidth = 1;
+                    ctx.fillStyle = 'rgba(0,0,0,.45)';  // Darker background
+                    ctx.strokeStyle = 'rgba(255,255,255,.35)';  // Brighter border
+                    ctx.lineWidth = 2;
                     ctx.roundRect(x,y,w,h,14);
                     ctx.fill();
                     ctx.stroke();
 
-                    // subtle inner glow
-                    const grad = ctx.createRadialGradient(x+w/2,y+h/2,6,x+w/2,y+h/2,28);
-                    grad.addColorStop(0,'rgba(255,45,45,.18)');
+                    // stronger inner glow
+                    const grad = ctx.createRadialGradient(x+w/2,y+h/2,4,x+w/2,y+h/2,24);
+                    grad.addColorStop(0,'rgba(255,45,45,.35)');
                     grad.addColorStop(1,'rgba(255,45,45,0)');
                     ctx.fillStyle = grad;
-                    ctx.roundRect(x+1,y+1,w-2,h-2,13);
+                    ctx.roundRect(x+2,y+2,w-4,h-4,12);
                     ctx.fill();
 
-                    ctx.font = 'bold 20px system-ui';
-                    ctx.fillStyle = 'rgba(233,238,252,.92)';
+                    ctx.font = 'bold 22px system-ui';
+                    ctx.fillStyle = '#ffffff';  // Pure white text
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
+                    ctx.shadowColor = 'rgba(255,45,45,.5)';
+                    ctx.shadowBlur = 8;
                     ctx.fillText(label, x+w/2, y+h/2+1);
                     ctx.restore();
                 }
@@ -2306,14 +2308,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // center is shoot
                 ctx.save();
-                ctx.fillStyle = 'rgba(255,45,45,.22)';
-                ctx.strokeStyle = 'rgba(255,255,255,.22)';
-                ctx.lineWidth = 1;
+                ctx.fillStyle = 'rgba(255,45,45,.35)';
+                ctx.strokeStyle = 'rgba(255,255,255,.4)';
+                ctx.lineWidth = 2;
                 ctx.roundRect(center.x, center.y, center.w, center.h, 14);
                 ctx.fill();
                 ctx.stroke();
-                ctx.font = '900 14px system-ui';
-                ctx.fillStyle = 'rgba(255,255,255,.92)';
+                
+                // inner glow for center
+                const centerGrad = ctx.createRadialGradient(center.x+center.w/2,center.y+center.h/2,4,center.x+center.w/2,center.y+center.h/2,20);
+                centerGrad.addColorStop(0,'rgba(255,80,80,.4)');
+                centerGrad.addColorStop(1,'rgba(255,45,45,0)');
+                ctx.fillStyle = centerGrad;
+                ctx.roundRect(center.x+2,center.y+2,center.w-4,center.h-4,12);
+                ctx.fill();
+                
+                ctx.font = '900 13px system-ui';
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = 'rgba(255,45,45,.6)';
+                ctx.shadowBlur = 10;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText('BẮN', center.x + center.w/2, center.y + center.h/2);
@@ -2363,18 +2376,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 // bottom-left angle text like Gunny - positioned higher than power bar
                 const a = Math.round(parseFloat(ang.value));
                 ctx.save();
-                ctx.fillStyle = 'rgba(0,0,0,.28)';
-                ctx.strokeStyle = 'rgba(255,255,255,.12)';
+                ctx.fillStyle = 'rgba(0,0,0,.35)';
+                ctx.strokeStyle = 'rgba(255,255,255,.2)';
                 ctx.lineWidth = 1;
                 // Moved up from H-58 to H-110 to avoid overlap with power bar
                 ctx.roundRect(12, H - 110, 120, 40, 12);
                 ctx.fill();
                 ctx.stroke();
                 ctx.font = 'bold 12px system-ui';
-                ctx.fillStyle = 'rgba(233,238,252,.85)';
+                ctx.fillStyle = 'rgba(255,255,255,.95)';  // Brighter text
                 ctx.textAlign = 'left';
                 ctx.fillText('Góc', 22, H - 86);
-                ctx.font = '900 18px system-ui';
+                ctx.font = '900 20px system-ui';
+                ctx.fillStyle = '#ffffff';  // Pure white for angle value
                 ctx.fillText(`${a}°`, 62, H - 86);
                 ctx.restore();
             }
