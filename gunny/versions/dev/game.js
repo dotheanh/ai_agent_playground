@@ -394,8 +394,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 H = canvas.height;
 
             function layoutCanvasUI(){
-                uiState.dpad.cx = W - 120;
-                uiState.dpad.cy = H - 150;
+                // DPad ở giữa chiều cao, sát bên phải
+                uiState.dpad.cx = W - 70;
+                uiState.dpad.cy = H / 2;
 
                 uiState.powerBar.y = H - 42;
                 uiState.powerBar.w = W - 220;
@@ -2347,72 +2348,121 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // overlay
                 ctx.save();
-                ctx.fillStyle = 'rgba(0,0,0,.72)';
+                ctx.fillStyle = 'rgba(0,0,0,.75)';
                 ctx.fillRect(0,0,W,H);
 
-                // panel
-                ctx.fillStyle = 'rgba(15,15,20,.96)';
-                ctx.strokeStyle = 'rgba(255,255,255,.16)';
+                // panel với shadow
+                ctx.shadowColor = 'rgba(0,0,0,.5)';
+                ctx.shadowBlur = 30;
+                ctx.fillStyle = 'rgba(20,20,28,.98)';
+                ctx.strokeStyle = 'rgba(255,255,255,.12)';
                 ctx.lineWidth = 1;
-                ctx.roundRect(p.x, p.y, p.w, p.h, 18);
+                ctx.roundRect(p.x, p.y, p.w, p.h, 20);
                 ctx.fill();
                 ctx.stroke();
+                ctx.shadowBlur = 0;
 
-                ctx.fillStyle = 'rgba(233,238,252,.95)';
-                ctx.font = '900 18px system-ui';
+                // Title
+                ctx.fillStyle = 'rgba(255,255,255,.98)';
+                ctx.font = '800 20px system-ui';
                 ctx.textAlign = 'left';
                 ctx.textBaseline = 'top';
-                ctx.fillText('Gunny Developing (Canvas UI)', p.x + 18, p.y + 16);
+                ctx.fillText('Gunny Canvas', p.x + 24, p.y + 22);
 
+                // Mô tả chính (giống web)
                 ctx.font = '13px system-ui';
-                ctx.fillStyle = 'rgba(233,238,252,.85)';
+                ctx.fillStyle = 'rgba(233,238,252,.75)';
+                ctx.fillText('PVE - Chỉnh góc/lực/gió → bắn - Địa hình đồi ngẫu nhiên - Sát thương mô phỏng', p.x + 24, p.y + 56);
+                ctx.fillText('theo động lực học rơi - Buff Phượng Hoàng - Responsive UI.', p.x + 24, p.y + 74);
+
+                // Hướng dẫn
+                ctx.font = '12px system-ui';
+                ctx.fillStyle = 'rgba(233,238,252,.65)';
                 const lines = [
-                    '- Mũi tên trái/phải: di chuyển',
-                    '- Mũi tên lên/xuống: chỉnh góc',
-                    '- Kéo thanh lực bên dưới để chỉnh lực (đường bay update realtime)',
-                    '- Nút giữa (BẮN): bắn theo góc/lực hiện tại',
                     '',
-                    'Dev:',
-                    '- Cheat: mở bảng chỉnh config',
+                    '• Mũi tên trái/phải: di chuyển',
+                    '• Mũi tên lên/xuống: chỉnh góc',
+                    '• Kéo thanh lực: chỉnh lực (đường bay update realtime)',
+                    '• Nút giữa (BẮN): bắn theo góc/lực hiện tại',
                 ];
-                let yy = p.y + 52;
+                let yy = p.y + 100;
                 for(const s of lines){
-                    ctx.fillText(s, p.x + 18, yy);
+                    ctx.fillText(s, p.x + 24, yy);
                     yy += 18;
                 }
 
-                // buttons
+                // Buttons style đẹp (pill như web)
                 const btns = [];
-                const bw = 150, bh = 38, gap = 12;
-                const bx = p.x + 18;
-                const by = p.y + p.h - bh - 18;
+                const bh = 36;
+                const gap = 10;
+                const bx = p.x + 24;
+                const by = p.y + p.h - bh - 24;
 
-                btns.push({key:'github', label:'GitHub', x: bx, y: by, w:bw, h:bh});
-                btns.push({key:'cheat', label:'Cheat', x: bx + bw + gap, y: by, w:bw, h:bh});
-                btns.push({key:'close', label:'Đóng', x: p.x + p.w - bw - 18, y: by, w:bw, h:bh});
+                // Layout: GitHub | Buff Phượng Hoàng | Cheat | [space] | Đóng
+                let cx = bx;
+                
+                function addBtn(key, label, w, kind='default'){
+                    btns.push({key, label, x: cx, y: by, w, h:bh, kind});
+                    cx += w + gap;
+                }
 
-                function drawBtn(b, accent=false){
+                addBtn('github', 'GitHub', 90);
+                addBtn('buff', 'Buff Phượng Hoàng', 150, 'accent');
+                addBtn('cheat', 'Cheat', 80, 'warn');
+                // Đóng ở góc phải
+                btns.push({key:'close', label:'Đóng', x: p.x + p.w - 100 - 24, y: by, w: 100, h:bh, kind:'primary'});
+
+                function drawBtn(b){
                     ctx.save();
-                    ctx.fillStyle = accent ? 'rgba(255,45,45,.22)' : 'rgba(255,255,255,.08)';
-                    ctx.strokeStyle = 'rgba(255,255,255,.16)';
+                    
+                    // Style theo loại
+                    let bg, stroke, textCol;
+                    if(b.kind === 'primary'){
+                        bg = 'rgba(255,45,45,.85)';
+                        stroke = 'rgba(255,100,100,.5)';
+                        textCol = 'rgba(255,255,255,.98)';
+                    } else if(b.kind === 'accent'){
+                        bg = 'rgba(255,140,0,.2)';
+                        stroke = 'rgba(255,180,60,.4)';
+                        textCol = 'rgba(255,200,100,.95)';
+                    } else if(b.kind === 'warn'){
+                        bg = 'rgba(255,200,0,.15)';
+                        stroke = 'rgba(255,220,100,.35)';
+                        textCol = 'rgba(255,220,100,.95)';
+                    } else {
+                        bg = 'rgba(255,255,255,.08)';
+                        stroke = 'rgba(255,255,255,.18)';
+                        textCol = 'rgba(255,255,255,.9)';
+                    }
+
+                    // Pill shape
+                    ctx.fillStyle = bg;
+                    ctx.strokeStyle = stroke;
                     ctx.lineWidth = 1;
-                    ctx.roundRect(b.x,b.y,b.w,b.h,14);
+                    
+                    // Shadow
+                    ctx.shadowColor = 'rgba(0,0,0,.3)';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowOffsetY = 2;
+                    
+                    ctx.roundRect(b.x, b.y, b.w, b.h, 999);
                     ctx.fill();
+                    ctx.shadowBlur = 0;
+                    ctx.shadowOffsetY = 0;
                     ctx.stroke();
-                    ctx.font = '900 13px system-ui';
-                    ctx.fillStyle = 'rgba(255,255,255,.92)';
+
+                    // Text
+                    ctx.font = '700 12px system-ui';
+                    ctx.fillStyle = textCol;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText(b.label, b.x + b.w/2, b.y + b.h/2);
                     ctx.restore();
                 }
 
-                drawBtn(btns[0]);
-                drawBtn(btns[1]);
-                drawBtn(btns[2], true);
+                for(const b of btns) drawBtn(b);
 
                 uiState._popupBtns = btns;
-
                 ctx.restore();
             }
 
@@ -2507,12 +2557,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // aiming preview (player)
                 drawAimPreview();
 
-                // --- Canvas UI ---
+                // --- Canvas UI (vẽ trước nhân vật) ---
                 drawPowerBar();
                 drawAngleIndicator();
                 drawDPad();
                 drawInfoButton();
-                drawInfoPopup();
 
                 // players
                 drawPlayer(player, 'rgba(255,255,255,.90)');
@@ -2725,6 +2774,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fillStyle = 'rgba(233,238,252,.9)';
                 ctx.font = '12px system-ui';
                 ctx.fillText(`Lượt: ${turn === 'player' ? 'Bạn' : 'Bot'}`, 24, 78);
+
+                // Popup info vẽ sau cùng để nằm trên tất cả
+                drawInfoPopup();
             }
 
             function randomSky(){
@@ -2903,6 +2955,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     const key = hitTestPopupButtons(x,y);
                     if(key === 'close') uiState.showInfo = false;
                     else if(key === 'github') window.open('https://github.com/dotheanh/ai_agent_playground', '_blank');
+                    else if(key === 'buff') {
+                        // open buff modal
+                        $('#buffModal').addClass('active');
+                    }
                     else if(key === 'cheat') {
                         // open legacy cheat modal
                         $('#configModal').addClass('active');
