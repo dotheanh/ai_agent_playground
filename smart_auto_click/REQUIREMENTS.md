@@ -37,9 +37,9 @@ Chương trình auto click thông minh chạy trên Windows với khả năng re
 - Clone/Duplicate actions
 
 ### 5. Hotkeys
-- **F1**: Start/Stop (click hoặc replay tùy mode)
-- **F2**: Record (chỉ hoạt động ở mode script)
-- **ESC**: Emergency stop (stop tất cả)
+- **F1**: Start/Stop - tự detect mode hiện tại để click hoặc stop tương ứng
+- **F2**: Record - chỉ hoạt động ở mode script; nếu đang ở continuous mode sẽ hiện cảnh báo
+- **ESC**: Emergency stop - stop tất cả (clicking, recording, replaying)
 
 ### 6. GUI Features
 - Mode selector: Continuous / Position-Only / Timeline
@@ -84,15 +84,15 @@ Chương trình auto click thông minh chạy trên Windows với khả năng re
 
 ```
 smart_auto_click/
-├── REQUIREMENTS.md
 ├── main.py              # Entry point + GUI
-├── clicker.py           # Click execution logic + ScriptPlayer
-├── recorder.py          # Recording logic
-├── script_manager.py    # Load/Save/Edit scripts
+├── clicker.py          # Click execution logic + ScriptPlayer
+├── recorder.py         # Recording logic
+├── script_manager.py   # Load/Save/Edit scripts
 ├── hotkey_handler.py    # Global hotkey listener
 ├── config.py            # Configuration constants
+├── build-exe.py         # PyInstaller build script
 ├── Smart Auto Click.bat # Launcher
-├── scripts/              # Saved scripts directory
+├── scripts/             # Saved scripts directory
 └── requirements.txt     # Python dependencies
 ```
 
@@ -153,3 +153,9 @@ python main.py
 ```
 
 Hoặc double-click `Smart Auto Click.bat`
+
+### Build Executable
+```bash
+python build-exe.py
+```
+Output: `dist/SmartAutoClick.exe` + `dist/scripts/`
