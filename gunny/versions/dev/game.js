@@ -515,6 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             function drawClouds(){
+                ctx.save();
                 ctx.fillStyle = 'rgba(255,255,255,0.08)';
                 for(let c of clouds){
                     ctx.beginPath();
@@ -527,6 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.ellipse(c.x - c.w*0.25, c.y - c.h*0.1, c.w*0.35, c.h*0.5, 0, 0, Math.PI*2);
                     ctx.fill();
                 }
+                ctx.restore();
             }
             
             // Birds - fly across screen every 10s with sine wave trajectory
@@ -1524,19 +1526,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function drawTerrain() {
+                ctx.save();
+                // Đảm bảo bắt đầu path mới hoàn toàn
                 ctx.beginPath();
                 ctx.moveTo(0, H);
                 for (let x = 0; x < W; x++) ctx.lineTo(x, terrain[x]);
                 ctx.lineTo(W, H);
                 ctx.closePath();
-                // fill
+                
+                // fill với gradient riêng
                 const grad = ctx.createLinearGradient(0, H * 0.5, 0, H);
                 grad.addColorStop(0, 'rgba(255,45,45,.10)');
                 grad.addColorStop(1, 'rgba(255,255,255,.03)');
                 ctx.fillStyle = grad;
                 ctx.fill();
+                
                 ctx.strokeStyle = 'rgba(255,255,255,.08)';
                 ctx.stroke();
+                ctx.restore();
             }
 
             function drawPlayer(ent, color) {
@@ -2181,19 +2188,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function drawPowerBar(){
                 const pb = uiState.powerBar;
-                // track
                 ctx.save();
                 ctx.globalAlpha = 0.96;
+                
                 // outer frame
                 ctx.fillStyle = 'rgba(0,0,0,.35)';
                 ctx.strokeStyle = 'rgba(255,255,255,.14)';
                 ctx.lineWidth = 1;
+                ctx.beginPath();
                 ctx.roundRect(pb.x-8, pb.y-10, pb.w+16, pb.h+20, 12);
                 ctx.fill();
                 ctx.stroke();
 
                 // inner bg
                 ctx.fillStyle = 'rgba(255,255,255,.08)';
+                ctx.beginPath();
                 ctx.roundRect(pb.x, pb.y, pb.w, pb.h, 999);
                 ctx.fill();
 
@@ -2207,8 +2216,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 grad.addColorStop(0, 'rgba(255,255,255,.25)');
                 grad.addColorStop(0.45, 'rgba(255,160,60,.75)');
                 grad.addColorStop(1, 'rgba(255,45,45,.9)');
-
+                
                 ctx.fillStyle = grad;
+                ctx.beginPath();
                 ctx.roundRect(pb.x, pb.y, Math.max(10, pb.w * t), pb.h, 999);
                 ctx.fill();
 
@@ -2230,6 +2240,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.arc(kx, pb.y + pb.h/2, 11, 0, Math.PI*2);
+                ctx.closePath();
                 ctx.fill();
                 ctx.stroke();
 
@@ -2346,7 +2357,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function drawAimPreview() {
-                // Chỉ vẽ đường line (stroke), KHÔNG fill để tránh gradient bao phủ màn hình
+                // Chỉ vẽ đường line (stroke), KHÔNG fill
                 if (turnLock || turn !== 'player' || proj) return;
 
                 const angleDeg = parseFloat(ang.value);
@@ -2364,6 +2375,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.strokeStyle = 'rgba(233, 238, 252, 0.4)';
                 ctx.lineWidth = 2;
                 ctx.setLineDash([6, 6]);
+                
+                // Bắt đầu path mới hoàn toàn
                 ctx.beginPath();
                 ctx.moveTo(x, y);
 
@@ -2380,14 +2393,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (y >= gy) {
                         ctx.lineTo(x, gy);
                         ctx.stroke();
+                        
+                        // Vẽ điểm rơi nhỏ - dùng path riêng
+                        ctx.save();
                         ctx.setLineDash([]);
-                        // Vẽ điểm rơi nhỏ, không fill lớn
                         ctx.strokeStyle = 'rgba(124,92,255,0.8)';
                         ctx.lineWidth = 2;
                         ctx.beginPath();
                         ctx.arc(x, gy, 5, 0, Math.PI * 2);
+                        ctx.closePath();
                         ctx.stroke();
                         ctx.restore();
+                        
+                        ctx.restore(); // restore chính
                         return;
                     }
                     ctx.lineTo(x, y);
