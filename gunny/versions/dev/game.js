@@ -277,9 +277,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById('c');
             const ctx = canvas.getContext('2d');
 
-            const hpP = document.getElementById('hpP');
-            const hpB = document.getElementById('hpB');
             const logEl = document.getElementById('log');
+            
+            // Game state variables (replacing HTML inputs)
+            const gameState = {
+                angle: 45,
+                power: 65,
+                wind: 0
+            };
 
             // Canvas UI state (Gunny-like on-canvas controls)
             // NOTE: W/H are defined later; so we initialize with placeholders and compute layout after W/H exists.
@@ -315,13 +320,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             };
 
-            function setSliderValue(el, v){
-                const min = parseFloat(el.min ?? '0');
-                const max = parseFloat(el.max ?? '100');
+            function setSliderValue(type, v){
+                const min = type === 'angle' ? 0 : (type === 'power' ? 10 : -30);
+                const max = type === 'angle' ? 90 : (type === 'power' ? 100 : 30);
                 const nv = clamp(v, min, max);
-                el.value = String(nv);
-                // keep labels/windVal in sync
-                syncLabels();
+                if(type === 'angle') gameState.angle = nv;
+                else if(type === 'power') gameState.power = nv;
+                else if(type === 'wind') gameState.wind = nv;
             }
 
             function isInsideRect(px, py, x, y, w, h){
@@ -332,14 +337,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dx = px - x, dy = py - y;
                 return Math.hypot(dx, dy);
             }
-
-            const ang = document.getElementById('ang');
-            const pow = document.getElementById('pow');
-            const wind = document.getElementById('wind');
-            const angV = document.getElementById('angV');
-            const powV = document.getElementById('powV');
-            const windV = document.getElementById('windV');
-            const shootBtn = document.getElementById('shoot');
 
             const isDev = true; // Dev mode flag - set to false for production
             
@@ -378,17 +375,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 bot.maxHp = CFG.gameSettings.maxHp;
                 player.hp = player.maxHp;
                 bot.hp = bot.maxHp;
-                hpP.textContent = player.hp;
-                hpB.textContent = bot.hp;
             }
 
             // Turn countdown
             let turnTimeLeft = 0;
             let lastTickSec = 0;
             let turnTimerActive = false;
-            const resetBtn = document.getElementById('reset');
-            const moveLBtn = document.getElementById('moveL');
-            const moveRBtn = document.getElementById('moveR');
+            
+            // Shooting state (replaces shootBtn.disabled)
+            let canShoot = true;
 
             const W = canvas.width,
                 H = canvas.height;
@@ -766,7 +761,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function setLog(t) {
-                logEl.textContent = t;
+                if(logEl) logEl.textContent = t;
             }
 
             function clamp(v, a, b) {
@@ -904,9 +899,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(turn === 'player') playerBuff = null;
                     else botBuff = null;
                 }
-                
-                hpP.textContent = player.hp;
-                hpB.textContent = bot.hp;
 
                 // decide winner
                 if (player.hp <= 0 && bot.hp <= 0) {
@@ -1260,7 +1252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function endShot(reason) {
                 if (turnLock) {
-                    shootBtn.disabled = true;
+                    canShoot = false;
                     return;
                 }
                 
@@ -1302,7 +1294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if(turn === 'player'){
                             setLog(`🎯 Lượt thêm! Còn ${currentBuff.value + 1} lượt.`);
                             player.stamina = player.maxStamina;
-                            shootBtn.disabled = false;
+                            canShoot = true;
                         } else {
                             bot.stamina = bot.maxStamina;
                             setTimeout(botTurn, CFG.gameSettings.turnGapMs);
@@ -1324,8 +1316,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // adjust wind slightly each turn
                 windVal = clamp(windVal + randn() * 2.2, -3.0, 3.0);
-                wind.value = Math.round(windVal * 10);
-                windV.textContent = windVal.toFixed(1);
+                gameState.wind = windVal;
 
                 // Stop current turn timer before gap time
                 stopTurnTimer();
@@ -1333,7 +1324,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (turn === 'player') {
                     turn = 'bot';
-                    shootBtn.disabled = true;
+                    canShoot = false;
                     bot.stamina = bot.maxStamina;
                     setLog(`⏳ Chờ ${(CFG.gameSettings.turnGapMs/1000).toFixed(1)}s...`);
                     setTimeout(() => {
@@ -1350,7 +1341,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }, CFG.gameSettings.turnGapMs);
                 } else {
                     // end bot turn -> gap -> start player turn
-                    shootBtn.disabled = true;
+                    canShoot = false;
                     setLog(`⏳ Chờ ${(CFG.gameSettings.turnGapMs/1000).toFixed(1)}s...`);
                     setTimeout(() => {
                         turn = 'player';
@@ -1361,7 +1352,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             turnLock = true;
                             return;
                         }
-                        shootBtn.disabled = false;
+                        canShoot = true;
                         player.stamina = player.maxStamina;
                         setLog('🎯 Lượt của bạn. Chỉnh góc/lực rồi bắn.');
                         startTurnTimer('player');
@@ -1377,14 +1368,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     const burnDmg = Math.round(player.maxHp * burnRatio);
                     player.hp = clamp(player.hp - burnDmg, 0, 999);
                     dmgTexts.push({ x: player.x, y: player.y - player.r - 18, v: burnDmg, t: 0, tier: 1, isBurn: true });
-                    hpP.textContent = player.hp;
                     setLog(`🔥 Bạn bị Thiêu đốt -${burnDmg} HP!`);
                 }
                 if(who === 'bot' && botBurnDebuff && botBurnDebuff.active){
                     const burnDmg = Math.round(bot.maxHp * burnRatio);
                     bot.hp = clamp(bot.hp - burnDmg, 0, 999);
                     dmgTexts.push({ x: bot.x, y: bot.y - bot.r - 18, v: burnDmg, t: 0, tier: 1, isBurn: true });
-                    hpB.textContent = bot.hp;
                     setLog(`🔥 Bot bị Thiêu đốt -${burnDmg} HP!`);
                 }
             }
@@ -2207,9 +2196,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fill();
 
                 // fill based on pow
-                const p = parseFloat(pow.value);
-                const min = parseFloat(pow.min);
-                const max = parseFloat(pow.max);
+                const p = gameState.power;
+                const min = 10;  // pow.min
+                const max = 100; // pow.max
                 const t = (p - min) / (max - min);
 
                 const grad = ctx.createLinearGradient(pb.x, 0, pb.x + pb.w, 0);
@@ -2335,7 +2324,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function drawAngleIndicator(){
                 // bottom-left angle text like Gunny
-                const a = Math.round(parseFloat(ang.value));
+                const a = Math.round(gameState.angle);
                 ctx.save();
                 ctx.fillStyle = 'rgba(0,0,0,.28)';
                 ctx.strokeStyle = 'rgba(255,255,255,.12)';
@@ -2360,8 +2349,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Chỉ vẽ đường line (stroke), KHÔNG fill
                 if (turnLock || turn !== 'player' || proj) return;
 
-                const angleDeg = parseFloat(ang.value);
-                const power = parseFloat(pow.value);
+                const angleDeg = gameState.angle;
+                const power = gameState.power;
                 const dir = +1;
                 const angRad = angleDeg * Math.PI / 180;
                 const speed = power * 6.2;
@@ -2710,15 +2699,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 bot.isThrowing = false;
                 player.throwFrame = 0;
                 bot.throwFrame = 0;
-                hpP.textContent = player.hp;
-                hpB.textContent = bot.hp;
 
                 turn = 'player';
-                shootBtn.disabled = false;
+                canShoot = true;
 
                 windVal = 0;
-                wind.value = 0;
-                windV.textContent = '0.0';
+                gameState.wind = 0;
                 
                 // Clear all projectiles and effects
                 dmgTexts.length = 0;
@@ -2751,20 +2737,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // UI bindings + keyboard
             function syncLabels() {
-                if(angV) angV.textContent = ang.value;
-                if(powV) powV.textContent = pow.value;
-                windVal = clamp(parseInt(wind.value, 10) / 10, -3.0, 3.0);
-                if(windV) windV.textContent = windVal.toFixed(1);
+                windVal = clamp(gameState.wind, -3.0, 3.0);
             }
-            ang.addEventListener('input', () => {
-                syncLabels();
-                const a = parseFloat(ang.value);
-                if(a >= 75) setLog('💡 Góc ' + a.toFixed(0) + '° siêu cao! Đạn rơi mạnh = sát thương cực đại!');
-                else if(a >= 60) setLog('💡 Góc ' + a.toFixed(0) + '° cao. Sát thương sẽ rất lớn khi đạn rơi!');
-                else setLog('💡 Bắn với góc cao để tối đa sát thương!');
-            });
-            pow.addEventListener('input', syncLabels);
-            wind.addEventListener('input', syncLabels);
             syncLabels();
 
             // ---- Canvas UI input handling ----
@@ -2781,10 +2755,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(uiState.showInfo) return;
                 if(key === 'left') doMove(-MOVE_STEP);
                 if(key === 'right') doMove(MOVE_STEP);
-                if(key === 'up') setSliderValue(ang, parseFloat(ang.value) + 1);
-                if(key === 'down') setSliderValue(ang, parseFloat(ang.value) - 1);
+                if(key === 'up') {
+                    setSliderValue('angle', gameState.angle + 1);
+                    const a = gameState.angle;
+                    if(a >= 75) setLog('💡 Góc ' + a.toFixed(0) + '° siêu cao! Đạn rơi mạnh = sát thương cực đại!');
+                    else if(a >= 60) setLog('💡 Góc ' + a.toFixed(0) + '° cao. Sát thương sẽ rất lớn khi đạn rơi!');
+                }
+                if(key === 'down') {
+                    setSliderValue('angle', gameState.angle - 1);
+                    const a = gameState.angle;
+                    if(a >= 75) setLog('💡 Góc ' + a.toFixed(0) + '° siêu cao! Đạn rơi mạnh = sát thương cực đại!');
+                    else if(a >= 60) setLog('💡 Góc ' + a.toFixed(0) + '° cao. Sát thương sẽ rất lớn khi đạn rơi!');
+                }
                 if(key === 'center') {
-                    if(!shootBtn.disabled) shootBtn.click();
+                    if(canShoot) doShoot();
                 }
             }
 
@@ -2817,9 +2801,9 @@ document.addEventListener('DOMContentLoaded', () => {
             function setPowerFromX(px){
                 const pb = uiState.powerBar;
                 const t = clamp((px - pb.x) / pb.w, 0, 1);
-                const min = parseFloat(pow.min);
-                const max = parseFloat(pow.max);
-                setSliderValue(pow, min + t * (max-min));
+                const min = 10;  // pow.min
+                const max = 100; // pow.max
+                setSliderValue('power', min + t * (max-min));
             }
 
             function hitTestInfoBtn(px, py){
@@ -2964,16 +2948,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
                     const isPower = e.shiftKey;
-                    const el = isPower ? pow : ang;
                     const step = isPower ? 2 : 1;
-                    const v = parseInt(el.value, 10) + (e.key === 'ArrowUp' ? step : -step);
-                    el.value = String(clamp(v, parseInt(el.min, 10), parseInt(el.max, 10)));
+                    if (isPower) {
+                        gameState.power = clamp(gameState.power + (e.key === 'ArrowUp' ? step : -step), 10, 100);
+                    } else {
+                        gameState.angle = clamp(gameState.angle + (e.key === 'ArrowUp' ? step : -step), 0, 90);
+                    }
                     syncLabels();
                     e.preventDefault();
                     return;
                 }
                 if (e.key === ' ') {
-                    if (!shootBtn.disabled) shootBtn.click();
+                    if (canShoot) doShoot();
                     e.preventDefault();
                     return;
                 }
@@ -2985,37 +2971,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            shootBtn.addEventListener('click', () => {
+            function doShoot() {
                 if (turnLock || turn !== 'player' || proj) return;
-                const a = parseFloat(ang.value);
-                const p = parseFloat(pow.value);
+                const a = gameState.angle;
+                const p = gameState.power;
                 startShot(player, a, p, +1);
-                    sfxShoot();
+                sfxShoot();
                 setLog(`Bạn bắn: góc ${a.toFixed(0)}°, lực ${p.toFixed(0)} (gió ${windVal.toFixed(1)})`);
-            });
-
-            resetBtn.addEventListener('click', resetAll);
-            
-            // Hold-to-move for buttons (mouse + touch)
-            function setupHoldBtn(btn, dx) {
-                const start = (e) => {
-                    e.preventDefault();
-                    startMoving(dx);
-                };
-                const stop = (e) => {
-                    e.preventDefault();
-                    stopMoving();
-                };
-                btn.addEventListener('mousedown', start);
-                btn.addEventListener('mouseup', stop);
-                btn.addEventListener('mouseleave', stop);
-                btn.addEventListener('touchstart', start, {passive: false});
-                btn.addEventListener('touchend', stop);
-                btn.addEventListener('touchcancel', stop);
             }
+
+            // reset function is already defined above as resetAll
             
-            setupHoldBtn(moveLBtn, -MOVE_STEP);
-            setupHoldBtn(moveRBtn, MOVE_STEP);
+            // Hold-to-move for buttons (mouse + touch) - now canvas-based only
+            // setupHoldBtn removed - using canvas D-pad instead
 
             // Modal handlers
             const buffModal = document.getElementById('buffModal');
@@ -3048,35 +3016,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const configForm = document.getElementById('configForm');
             const resetConfigBtn = document.getElementById('resetConfig');
             
-            // Show cheat button after 3 seconds (dev mode)
-            setTimeout(() => {
-                if(cheatBtn) cheatBtn.style.display = 'inline-flex';
-            }, 3000);
-            
-            if(cheatBtn){
-                cheatBtn.addEventListener('click', () => {
-                    // Load current values into form
-                    if(CFG){
-                        Object.keys(CFG).forEach(key => {
-                            if(typeof CFG[key] === 'object'){
-                                Object.keys(CFG[key]).forEach(subKey => {
-                                    const input = configForm.querySelector(`[name="${key}.${subKey}"]`);
-                                    if(input){
-                                        let val = CFG[key][subKey];
-                                        if(key === 'buffChances') val = Math.round(val * 100);
-                                        // Buffs section values are displayed as-is (decimal)
-                                        input.value = val;
-                                    }
-                                });
-                            } else {
-                                const input = configForm.querySelector(`[name="${key}"]`);
-                                if(input) input.value = CFG[key];
-                            }
-                        });
-                    }
-                    configModal.classList.add('active');
-                });
-            }
+            // Cheat button removed - now accessible via Game Info modal only
             
             if(closeConfigModal){
                 closeConfigModal.addEventListener('click', () => {
