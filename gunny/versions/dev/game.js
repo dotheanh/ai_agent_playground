@@ -394,16 +394,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 H = canvas.height;
 
             function layoutCanvasUI(){
-                // DPad ở giữa chiều cao, sát bên phải
-                uiState.dpad.cx = W - 70;
+                // DPad ở giữa chiều cao, sát bên phải (canvas rộng 1080)
+                uiState.dpad.cx = W - 80;
                 uiState.dpad.cy = H / 2;
 
                 uiState.powerBar.y = H - 42;
-                uiState.powerBar.w = W - 220;
+                uiState.powerBar.w = W - 260;
 
                 uiState.infoBtn.x = W - 48;
 
-                uiState.popup.w = W - 180;
+                uiState.popup.w = W - 200;
                 uiState.popup.h = H - 140;
             }
             layoutCanvasUI();
@@ -2346,7 +2346,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function drawAimPreview() {
-                // show predicted arc for player's current settings when it's player's turn and not firing
+                // Chỉ vẽ đường line (stroke), KHÔNG fill để tránh gradient bao phủ màn hình
                 if (turnLock || turn !== 'player' || proj) return;
 
                 const angleDeg = parseFloat(ang.value);
@@ -2355,22 +2355,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const angRad = angleDeg * Math.PI / 180;
                 const speed = power * 6.2;
 
-                // Start from center of character
                 let x = player.x;
                 let y = player.y - player.r - 2;
                 let vx = Math.cos(angRad) * speed * dir;
                 let vy = -Math.sin(angRad) * speed;
 
                 ctx.save();
-                ctx.strokeStyle = 'rgba(233, 238, 252, 0.25)';
+                ctx.strokeStyle = 'rgba(233, 238, 252, 0.4)';
                 ctx.lineWidth = 2;
                 ctx.setLineDash([6, 6]);
                 ctx.beginPath();
                 ctx.moveTo(x, y);
 
-                // simulate until impact/out (cap steps)
                 const step = 1 / 60;
-                let didImpact = false;
                 for (let i = 0; i < 220; i++) {
                     const ax = windVal * windAccelScale;
                     vx += ax * step;
@@ -2381,23 +2378,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (x < 0 || x >= W || y > H) break;
                     const gy = groundY(x);
                     if (y >= gy) {
-                        // impact point
                         ctx.lineTo(x, gy);
-                        didImpact = true;
-                        // keep arc visible, then mark point
                         ctx.stroke();
                         ctx.setLineDash([]);
-                        ctx.fillStyle = 'rgba(124,92,255,0.55)';
+                        // Vẽ điểm rơi nhỏ, không fill lớn
+                        ctx.strokeStyle = 'rgba(124,92,255,0.8)';
+                        ctx.lineWidth = 2;
                         ctx.beginPath();
                         ctx.arc(x, gy, 5, 0, Math.PI * 2);
-                        ctx.fill();
+                        ctx.stroke();
                         ctx.restore();
                         return;
                     }
                     ctx.lineTo(x, y);
                 }
 
-                // if no impact yet, still draw the partial arc
                 ctx.stroke();
                 ctx.restore();
             }
