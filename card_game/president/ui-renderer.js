@@ -14,6 +14,11 @@ function renderGame(state) {
   const isPlayerTurn = state.currentPlayer === 0 && !state.gameOver;
   const timerClass = timeLeft <= 5 ? 'danger' : timeLeft <= 10 ? 'warning' : '';
 
+  // Disable Play button if player can't beat current combo and it's not a new round
+  const canPlay = !isPlayerTurn ? false :
+    state.newRound ? true :
+    (window.handCanBeat ? window.handCanBeat(state.hands[0], state.lastCombo) : true);
+
   g.innerHTML = `
     <div class="top-bar">
       <div class="logo">TIẾN LÊN</div>
@@ -53,7 +58,7 @@ function renderGame(state) {
     <div class="controls">
       <button class="btn btn-sort" onclick="onSort()">Sắp xếp</button>
       <button class="btn btn-hint" onclick="onHint()" ${!isPlayerTurn ? 'disabled' : ''}>Gợi ý</button>
-      <button class="btn btn-play" onclick="onPlay()" ${!isPlayerTurn ? 'disabled' : ''}>Đánh</button>
+      <button class="btn btn-play" onclick="onPlay()" ${!canPlay ? 'disabled' : ''}>Đánh</button>
       <button class="btn btn-pass${isPlayerTurn && !state.newRound ? ' can-pass' : ''}" onclick="onPass()" ${!isPlayerTurn || state.newRound ? 'disabled' : ''}>Bỏ lượt</button>
     </div>
 

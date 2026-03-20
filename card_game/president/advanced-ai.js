@@ -316,6 +316,25 @@
     // Build context for Medium/Hard modes
     const ctx = buildAIContext(state);
 
+    // === RULE: First move of the whole game must include 3♠ ===
+    const isFirstMove = isNewRound && !lastCombo && state && state.roundNum === 1;
+    if (isFirstMove) {
+      const threeSpade = hand.find(c => c.rank === '3' && c.suit === '♠');
+      if (threeSpade) {
+        // Try to find a valid combo containing 3♠
+        const threeIdx = hand.indexOf(threeSpade);
+        const groupLabels = window.detectComboGroups ? window.detectComboGroups(hand) : [];
+        const label = groupLabels[threeIdx];
+        if (label) {
+          const groupIndices = groupLabels.map((lbl, i) => lbl === label ? i : -1).filter(i => i >= 0);
+          const groupCards = groupIndices.map(i => hand[i]);
+          const combo = detectCombo(groupCards);
+          if (combo) return groupCards;
+        }
+        return [threeSpade]; // fallback: play 3♠ alone
+      }
+    }
+
     const playStyle = decidePlayStyle(hand, lastCombo, isNewRound, ctx);
 
     switch (playStyle) {

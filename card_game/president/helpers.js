@@ -1,10 +1,5 @@
 // ===== HELPER FUNCTIONS =====
-
-// Export to window for other modules
-window.groupByRank = groupByRank;
-window.findStraights = findStraights;
-window.sortHand = sortHand;
-window.detectComboGroups = detectComboGroups;
+// Dependencies: RANK_VALUES, cardValue (from game-engine.js)
 
 function groupByRank(hand) {
   const groups = {};
@@ -111,3 +106,60 @@ function detectComboGroups(hand) {
 
   return labels;
 }
+
+// Check if any combo in hand can beat lastCombo (for disabling Play button)
+function handCanBeat(hand, lastCombo) {
+  if (!lastCombo) return true;
+  for (const c of hand) {
+    if (lastCombo.type === COMBO.SINGLE && cardValue(c) > lastCombo.high) return true;
+  }
+  const groups = groupByRank(hand);
+  if (lastCombo.type === COMBO.PAIR) {
+    for (const cards of Object.values(groups)) {
+      if (cards.length >= 2) {
+        const pair = cards.slice(0,2).sort((a,b) => cardValue(a)-cardValue(b));
+        const c = detectCombo(pair);
+        if (c && canBeat(lastCombo, c)) return true;
+      }
+      // Tứ quý chặt đôi 2
+      if (cards.length >= 4 && RANK_VALUES[lastCombo.cards[0].rank] === 12) return true;
+    }
+    return false;
+  }
+  if (lastCombo.type === COMBO.TRIPLE) {
+    for (const cards of Object.values(groups)) {
+      if (cards.length >= 3) {
+        const triple = cards.slice(0,3).sort((a,b) => cardValue(a)-cardValue(b));
+        const c = detectCombo(triple);
+        if (c && canBeat(lastCombo, c)) return true;
+      }
+    }
+    return false;
+  }
+  if (lastCombo.type === COMBO.STRAIGHT) {
+    const straights = findStraights(hand, lastCombo.len);
+    for (const s of straights) {
+      const c = detectCombo(s);
+      if (c && canBeat(lastCombo, c)) return true;
+    }
+    return false;
+  }
+  if (lastCombo.type === COMBO.FOUR) {
+    for (const cards of Object.values(groups)) {
+      if (cards.length >= 4) {
+        const four = cards.slice(0,4).sort((a,b) => cardValue(a)-cardValue(b));
+        const c = detectCombo(four);
+        if (c && canBeat(lastCombo, c)) return true;
+      }
+    }
+    return false;
+  }
+  return false;
+}
+
+// Export to window for other modules
+window.groupByRank = groupByRank;
+window.findStraights = findStraights;
+window.sortHand = sortHand;
+window.detectComboGroups = detectComboGroups;
+window.handCanBeat = handCanBeat;
