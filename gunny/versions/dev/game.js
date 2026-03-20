@@ -2374,25 +2374,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function drawAngleIndicator(){
-                // bottom-left angle text like Gunny - positioned higher than power bar
                 const a = Math.round(parseFloat(ang.value));
                 ctx.save();
-                ctx.fillStyle = 'rgba(0,0,0,.35)';
-                ctx.strokeStyle = 'rgba(255,255,255,.2)';  // Softer border
-                ctx.lineWidth = 1;  // Thinner border
-                // Moved up from H-58 to H-110 to avoid overlap with power bar
+                // Nền trong suốt hơn
+                ctx.fillStyle = 'rgba(0,0,0,.2)';
+                ctx.strokeStyle = 'rgba(255,255,255,.3)';
+                ctx.lineWidth = 1;
                 ctx.roundRect(12, H - 110, 120, 40, 12);
                 ctx.fill();
                 ctx.stroke();
+                
+                // Label "Góc" - màu vàng nhạt sáng
                 ctx.font = 'bold 13px system-ui';
-                ctx.fillStyle = 'rgba(255,255,255,.85)';
+                ctx.fillStyle = '#ffcc88';
+                ctx.shadowColor = 'rgba(255,200,100,.8)';
+                ctx.shadowBlur = 6;
                 ctx.textAlign = 'left';
                 ctx.fillText('Góc', 22, H - 86);
-                ctx.font = '900 22px system-ui';
+                
+                // Giá trị góc - trắng sáng, to, glow mạnh
+                ctx.font = '900 24px system-ui';
                 ctx.fillStyle = '#ffffff';
-                ctx.shadowColor = 'rgba(255,255,255,.5)';
-                ctx.shadowBlur = 8;
-                ctx.fillText(`${a}°`, 65, H - 86);
+                ctx.shadowColor = 'rgba(255,255,255,1)';
+                ctx.shadowBlur = 15;
+                ctx.fillText(`${a}°`, 62, H - 87);
                 ctx.restore();
             }
 
