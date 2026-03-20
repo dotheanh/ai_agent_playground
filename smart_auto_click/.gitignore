@@ -1,0 +1,12 @@
+# Build artifacts
+build/
+dist/
+*.spec
+
+# Temp files
+__pycache__/
+*.pyc
+*.pyo
+
+# Scripts runtime (keep template, not temp)
+scripts/temp_*.json
