@@ -215,6 +215,43 @@ class AutoClickApp:
             font=("Segoe UI", 9)
         ).grid(row=2, column=1, sticky=tk.W, pady=2, padx=60)
 
+        # Loop Script (only for script modes)
+        self.loop_var = tk.BooleanVar(value=False)
+        self.loop_check = tk.Checkbutton(
+            settings_frame,
+            text="Loop Script:",
+            variable=self.loop_var,
+            command=self._on_loop_toggle,
+            bg=config.WINDOW_BG,
+            fg=config.TEXT_COLOR,
+            selectcolor=config.WINDOW_BG,
+            activebackground=config.WINDOW_BG,
+            font=("Segoe UI", 9)
+        )
+        self.loop_check.grid(row=3, column=0, sticky=tk.W, pady=5)
+
+        self.loop_count_var = tk.IntVar(value=0)
+        loop_spin = tk.Spinbox(
+            settings_frame,
+            from_=0,
+            to=9999,
+            textvariable=self.loop_count_var,
+            width=8,
+            font=("Segoe UI", 9),
+            state="disabled"
+        )
+        loop_spin.grid(row=3, column=1, sticky=tk.W, pady=5, padx=5)
+
+        tk.Label(
+            settings_frame,
+            text=" (0 = forever)",
+            bg=config.WINDOW_BG,
+            fg=config.DIM_COLOR,
+            font=("Segoe UI", 8)
+        ).grid(row=3, column=1, sticky=tk.W, pady=5, padx=80)
+
+        self.loop_widgets = [self.loop_check, loop_spin]
+
         # ===== SCRIPT INFO =====
         self.script_frame = tk.LabelFrame(
             self.root,
@@ -347,9 +384,24 @@ class AutoClickApp:
         self._position_thread.start()
 
     def _on_mode_change(self):
-        """Handle mode change"""
+        """Handle mode change - show/hide loop options"""
         mode = self.current_mode.get()
         self._update_status(f"Mode: {mode}")
+
+        # Show/hide loop widgets based on mode
+        if hasattr(self, 'loop_widgets'):
+            is_script_mode = mode != "continuous"
+            for widget in self.loop_widgets:
+                widget.grid() if is_script_mode else widget.grid_remove()
+
+    def _on_loop_toggle(self):
+        """Handle loop checkbox toggle"""
+        loop_count = loop_spin = None
+        # Find the loop spinbox
+        for widget in self.loop_widgets:
+            if isinstance(widget, tk.Spinbox):
+                widget.config(state="normal" if self.loop_var.get() else "disabled")
+                break
 
     def _on_hotkey_start_stop(self):
         """Handle F1 - Start/Stop based on current mode"""
@@ -447,12 +499,14 @@ class AutoClickApp:
             return
 
         self.is_replaying = True
-        threading.Thread(target=self._replay_thread, daemon=True).start()
-        self._update_status("Replaying... (F1/ESC to stop)", color=config.SUCCESS_COLOR)
+        loop_count = self.loop_count_var.get() if self.loop_var.get() else 0
+        loop_msg = f" (Loop x{loop_count})" if loop_count > 0 else " (Loop forever)"
+        self._update_status(f"Replaying{loop_msg}... (F1/ESC to stop)", color=config.SUCCESS_COLOR)
+        threading.Thread(target=self._replay_thread, args=(loop_count,), daemon=True).start()
 
-    def _replay_thread(self):
+    def _replay_thread(self, loop_count):
         """Background thread for replay"""
-        self.player.replay(self.current_script)
+        self.player.replay(self.current_script, loop_count)
 
         # Wait for replay to finish
         while self.player.is_running:
@@ -460,8 +514,9 @@ class AutoClickApp:
 
         self.is_replaying = False
         result = self.player.stop()
-        self.root.after(0, lambda: self._update_status(
-            f"Replay done - {result['total_clicks']} clicks, {result['actions_completed']} actions",
+        loop_info = f", {result['loops_done']} loops" if result['loops_done'] > 0 else ""
+        self.root.after(0, lambda r=result, li=loop_info: self._update_status(
+            f"Replay done - {r['total_clicks']} clicks, {r['actions_completed']} actions{li}",
             color=config.ACCENT_COLOR
         ))
 

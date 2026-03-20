@@ -114,8 +114,11 @@ class ScriptPlayer:
         self._thread = None
         self._click_count = 0
         self._current_action = 0
+        self._loop_count = 0  # 0 = infinite
+        self._loop_done = 0
+        self._script_data = None
 
-    def replay(self, script_data):
+    def replay(self, script_data, loop_count=0):
         """Replay a script (position or timeline mode)"""
         if self.is_running:
             return False
@@ -123,13 +126,15 @@ class ScriptPlayer:
         if not self._validate_script(script_data):
             return False
 
+        self._script_data = script_data
+        self._loop_count = loop_count
+        self._loop_done = 0
         self.is_running = True
         self.is_paused = False
         self._click_count = 0
         self._current_action = 0
         self._thread = threading.Thread(
             target=self._replay_loop,
-            args=(script_data,),
             daemon=True
         )
         self._thread.start()
@@ -145,47 +150,67 @@ class ScriptPlayer:
             return False
         return True
 
-    def _replay_loop(self, script):
-        """Main loop for script replay"""
-        mode = script.get("mode", "position")
-        actions = script.get("actions", [])
-        interval_ms = script.get("interval", config.DEFAULT_INTERVAL_MS)
+    def _replay_loop(self):
+        """Main loop for script replay with loop support"""
+        while self.is_running:
+            script = self._script_data
+            mode = script.get("mode", "position")
+            actions = script.get("actions", [])
+            interval_ms = script.get("interval", config.DEFAULT_INTERVAL_MS)
 
-        if mode == "timeline":
-            # Timeline mode: respect exact timing
-            start_time = time.time()
-            for i, action in enumerate(actions):
-                if not self.is_running:
-                    break
+            self._current_action = 0
 
-                # Wait until this action's time
-                action_time = action.get("time", 0)
-                while self.is_running and not self.is_paused:
-                    elapsed = time.time() - start_time
-                    if elapsed >= action_time:
+            if mode == "timeline":
+                # Timeline mode: respect exact timing
+                start_time = time.time()
+                for i, action in enumerate(actions):
+                    if not self.is_running:
                         break
-                    time.sleep(0.001)  # Small sleep to avoid CPU spin
 
-                if not self.is_running:
-                    break
+                    # Wait until this action's time
+                    action_time = action.get("time", 0)
+                    while self.is_running and not self.is_paused:
+                        elapsed = time.time() - start_time
+                        if elapsed >= action_time:
+                            break
+                        time.sleep(0.001)
 
-                self._execute_action(action)
-                self._current_action = i + 1
+                    if not self.is_running:
+                        break
 
-        else:
-            # Position mode: use fixed interval
-            for i, action in enumerate(actions):
-                if not self.is_running:
-                    break
+                    self._execute_action(action)
+                    self._current_action = i + 1
 
-                while self.is_running and self.is_paused:
-                    time.sleep(0.1)
+            else:
+                # Position mode: use fixed interval
+                for i, action in enumerate(actions):
+                    if not self.is_running:
+                        break
 
-                if not self.is_running:
-                    break
+                    while self.is_running and self.is_paused:
+                        time.sleep(0.1)
 
-                self._execute_action(action)
-                self._current_action = i + 1
+                    if not self.is_running:
+                        break
+
+                    self._execute_action(action)
+                    self._current_action = i + 1
+
+                    if i < len(actions) - 1:
+                        time.sleep(interval_ms / 1000.0)
+
+            if not self.is_running:
+                break
+
+            # Loop check
+            self._loop_done += 1
+            if self._loop_count > 0 and self._loop_done >= self._loop_count:
+                break
+
+            # Small delay between loops
+            time.sleep(0.5)
+
+        self.is_running = False
 
                 # Wait interval between actions (except last)
                 if i < len(actions) - 1:
@@ -227,7 +252,8 @@ class ScriptPlayer:
             self._thread = None
         return {
             "total_clicks": self._click_count,
-            "actions_completed": self._current_action
+            "actions_completed": self._current_action,
+            "loops_done": self._loop_done
         }
 
     def pause(self):
