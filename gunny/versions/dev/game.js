@@ -292,6 +292,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     size: 46,
                     gap: 8,
                 },
+                // reset button (top-right, next to info)
+                resetBtn: {
+                    x: 0,
+                    y: 16,
+                    r: 16,
+                },
                 // power bar (bottom)
                 powerBar: {
                     x: 110,
@@ -401,7 +407,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 uiState.powerBar.y = H - 42;
                 uiState.powerBar.w = W - 260;
 
+                // Info button top-right, reset button to its left
                 uiState.infoBtn.x = W - 48;
+                uiState.resetBtn.x = W - 88;  // 40px to the left of info button
 
                 uiState.popup.w = W - 200;
                 uiState.popup.h = H - 140;
@@ -2333,6 +2341,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.restore();
             }
 
+            function drawResetButton(){
+                const b = uiState.resetBtn;
+                ctx.save();
+                ctx.fillStyle = 'rgba(255,45,45,.28)';  // Red tint for reset
+                ctx.strokeStyle = 'rgba(255,255,255,.18)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.font = '900 14px system-ui';
+                ctx.fillStyle = 'rgba(233,238,252,.92)';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('↻', b.x, b.y+0.5);
+                ctx.restore();
+            }
+
             function drawAngleIndicator(){
                 // bottom-left angle text like Gunny - positioned higher than power bar
                 const a = Math.round(parseFloat(ang.value));
@@ -2455,6 +2481,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 drawAngleIndicator();
                 drawDPad();
                 drawInfoButton();
+                drawResetButton();
 
                 // players
                 drawPlayer(player, 'rgba(255,255,255,.90)');
@@ -2780,18 +2807,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
                 
                 // If mobile portrait, canvas is rotated -90deg via CSS
-                // We need to transform screen coordinates to match the rotated canvas
+                // Transform screen coordinates to match the rotated canvas internal coordinates
                 if(isMobilePortrait()) {
-                    // Canvas is rotated -90deg:
-                    // - CSS width = 100vh (viewport height)
-                    // - CSS height = 100vw (viewport width)
-                    // - rect.width corresponds to canvas height (640)
-                    // - rect.height corresponds to canvas width (1080)
-                    // Transform: rotate +90deg on coordinates
-                    // (x, y) -> (y, W - x)
-                    const x = (clientY - rect.top) * (W / rect.height);
-                    const y = (rect.width - (clientX - rect.left)) * (H / rect.width);
-                    return {x,y};
+                    // Canvas is rotated -90deg
+                    // Screen (clientX, clientY) relative to rect needs to be transformed
+                    // For -90deg rotation: newX = y, newY = (width - x)
+                    const dx = clientX - rect.left;  // 0 to rect.width (which is visual height)
+                    const dy = clientY - rect.top;   // 0 to rect.height (which is visual width)
+                    
+                    // After -90deg rotation:
+                    // Canvas x = dy (from top, maps to from left in rotated)
+                    // Canvas y = rect.width - dx (from right, maps to from top in rotated)
+                    const x = dy * (W / rect.height);
+                    const y = (rect.width - dx) * (H / rect.width);
+                    
+                    return {x, y};
                 }
                 
                 const x = (clientX - rect.left) * (W / rect.width);
@@ -2849,6 +2879,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 return dist(px,py,b.x,b.y) <= b.r + 6;
             }
 
+            function hitTestResetBtn(px, py){
+                const b = uiState.resetBtn;
+                return dist(px,py,b.x,b.y) <= b.r + 6;
+            }
+
             function hitTestPopupButtons(px, py){
                 const list = uiState._popupBtns;
                 if(!uiState.showInfo || !list) return null;
@@ -2874,6 +2909,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(hitTestInfoBtn(x,y)){
                     // Mở modal HTML thay vì vẽ trên canvas
                     $('#gameInfoModal').addClass('active');
+                    ev.preventDefault();
+                    return;
+                }
+
+                if(hitTestResetBtn(x,y)){
+                    // Reset game
+                    resetAll();
                     ev.preventDefault();
                     return;
                 }
