@@ -62,10 +62,11 @@ card_game/president/
   - Vàng (a): đôi, ba, tứ quý
   - Xanh dương (b): sảnh
   - Xanh lá (c), Hồng (d), Tím (e): các nhóm tiếp theo
-- **Auto-Select Combo**: Khi chọn 1 lá thuộc group (cùng màu), tự động chọn combo phù hợp để beat đối thủ
-  - Đôi / Ba / Tứ quý: chọn tất cả lá cùng rank trong tay → auto chọn nếu hợp lệ
+- **Auto-Select Combo**: Khi click 1 lá bài, tự động chọn combo phù hợp:
+  - Đôi / Ba / Tứ quý: quét toàn hand tìm lá cùng rank → auto chọn nếu combo hợp lệ (beat được hoặc vòng mới)
   - Sảnh: tìm sảnh yếu nhất đủ đánh được (ưu tiên sảnh ngắn)
-  - Không áp dụng nếu combo không thể beat (ví dụ: đối thủ đánh lẻ thì không tự chọn đôi)
+  - Click lần 2 vào lá đã chọn: bỏ chọn lá đó
+  - Không auto-select nếu combo không thể beat combo đối thủ
   - Disabled Play button khi tay không có combo nào beat được
 - **Drag & Drop**: Kéo thả để sắp xếp lại vị trí bài trên tay
 - **Timer**: Đếm ngược 15 giây mỗi lượt
@@ -87,7 +88,7 @@ card_game/president/
 | Level | Description |
 |-------|-------------|
 | **Easy** | Bot cũ - đánh lá yếu nhất, không có chiến thuật |
-| **Medium** (default) | Hand classification, ưu tiên đánh bài lẻ, giữ bài mạnh |
+| **Medium** (default) | Hand classification, ưu tiên đánh combo trước bài lẻ, giữ bài mạnh, auto-win detection |
 | **Hard** | Card counting + danger assessment, đối thủ ≤3 bài → phải chặn |
 
 ### AI Features
@@ -97,6 +98,8 @@ card_game/president/
 - **Danger Assessment**: Đối thủ gần hết bài → buộc phải chặn
 - **Hint System**: Gợi ý dùng chính AI để chọn bài cho player
 - **First Move Rule**: Lượt đầu tiên của ván phải đánh 3♠ hoặc combo chứa 3♠
+- **Smart Start**: Ưu tiên đánh đôi/ba/tứ quý (nếu có) thay vì xé lẻ, đánh hết combo trước khi xét bài lẻ
+- **Auto-Win Detection**: Khi có thể đánh hết bài để về đích → tự đánh ngay (cả player lẫn bot)
 
 ### AI Module API
 ```js

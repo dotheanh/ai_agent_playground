@@ -345,24 +345,31 @@
           : selectWeakestValidCombo(hand, lastCombo);
 
       case 'smart-start': {
-        // Smart start: prefer playing isolated cards
+        // === WIN CHECK: if playing all remaining cards wins the game, do it ===
+        const allCards = [...hand];
+        const winCombo = detectCombo(allCards);
+        if (winCombo) return allCards; // Play all cards to win
+
+        // Smart start: prefer playing isolated cards first
         const classified = classifyHand(hand);
         if (classified.isolated.length > 0) {
-          // Play lowest isolated card
           const sorted = sortHand(classified.isolated);
           return [sorted[0]];
         }
-        // No isolated, play weakest pair/triple/straight
-        if (classified.pairs.length > 0) {
-          return classified.pairs[0].cards;
-        }
-        if (classified.straights.length > 0) {
-          return classified.straights[0].cards;
-        }
+        // No isolated: play weakest combo (pair > triple > four > straight)
+        if (classified.pairs.length > 0) return classified.pairs[0].cards;
+        if (classified.triples.length > 0) return classified.triples[0].cards;
+        if (classified.fours.length > 0) return classified.fours[0].cards;
+        if (classified.straights.length > 0) return classified.straights[0].cards;
         return [sortHand(hand)[0]];
       }
 
       case 'smart-beat': {
+        // === WIN CHECK: if we can beat lastCombo AND play ALL remaining cards ===
+        const allCards = [...hand];
+        const winCombo = detectCombo(allCards);
+        if (winCombo && canBeat(lastCombo, winCombo)) return allCards;
+
         // Check if should pass
         if (shouldPass(hand, lastCombo, ctx)) {
           return null;

@@ -38,6 +38,37 @@ function startTimer() {
   }, 1000);
 }
 
+// === AUTO-WIN: play all remaining cards if they form a valid combo ===
+function checkAndAutoWin() {
+  const hand = state.hands[0];
+  if (hand.length === 0) return false;
+  if (hand.length === 1) return false; // single card, let timer handle it
+
+  // Case 1: open round - play all if they form a valid combo
+  if (state.newRound) {
+    const allCombo = detectCombo(hand);
+    if (allCombo) {
+      for (let i = 0; i < hand.length; i++) state.selectedIndices.add(i);
+      state.statusMsg = 'Chiến thắng! Đánh hết bài!';
+      onPlay();
+      return true;
+    }
+    return false;
+  }
+
+  // Case 2: beat turn - play all if they form a valid combo that beats lastCombo
+  if (state.lastCombo) {
+    const allCombo = detectCombo(hand);
+    if (allCombo && canBeat(state.lastCombo, allCombo)) {
+      for (let i = 0; i < hand.length; i++) state.selectedIndices.add(i);
+      state.statusMsg = 'Chiến thắng! Đánh hết bài!';
+      onPlay();
+      return true;
+    }
+  }
+  return false;
+}
+
 // Auto-play or pass when time runs out
 function onTimeout() {
   if (state.newRound) {
@@ -130,51 +161,54 @@ function toggleSelect(idx) {
 // Auto-select sibling cards in the same combo group if the resulting combo is valid to play
 function tryAutoSelectCombo(clickedIdx) {
   const hand = state.hands[0];
+  const clickedCard = hand[clickedIdx];
+  if (!clickedCard) return;
+
+  // === Same-rank combos: find ALL cards of the same rank in the whole hand ===
+  const sameRankIndices = [];
+  for (let i = 0; i < hand.length; i++) {
+    if (hand[i].rank === clickedCard.rank) sameRankIndices.push(i);
+  }
+  if (sameRankIndices.length >= 2) {
+    const sameCards = sameRankIndices.map(i => hand[i]);
+    const combo = detectCombo(sameCards);
+    if (combo) {
+      const isValid = state.newRound || !state.lastCombo || canBeat(state.lastCombo, combo);
+      if (isValid) {
+        for (const i of sameRankIndices) state.selectedIndices.add(i);
+        return;
+      }
+    }
+  }
+
+  // === Straights: find the smallest valid straight containing the clicked card ===
   const groupLabels = detectComboGroups(hand);
   const clickedLabel = groupLabels[clickedIdx];
-
-  // No group label = isolated card, nothing to auto-select
   if (!clickedLabel) return;
 
-  // Find all indices in the same group
+  // Get all cards in the same straight group
   const groupIndices = groupLabels
     .map((lbl, i) => lbl === clickedLabel ? i : -1)
     .filter(i => i >= 0);
-
   const groupCards = groupIndices.map(i => hand[i]);
-  const sortedCards = sortHand(groupCards);
-  const combo = detectCombo(sortedCards);
-  if (!combo) return;
 
-  // Check if can play (new round or can beat last combo)
-  const isValid = state.newRound || !state.lastCombo || canBeat(state.lastCombo, combo);
-  if (!isValid) return;
+  // Find ALL valid straights from this group (pass null for new round = any is valid)
+  const allStraights = findAllStraightsFromGroup(groupCards, state.newRound ? null : state.lastCombo);
+  if (allStraights.length === 0) return;
 
-  // For same-rank combos (pair/triple/four): select all cards of that rank
-  if (combo.type === COMBO.PAIR || combo.type === COMBO.TRIPLE || combo.type === COMBO.FOUR) {
-    const rank = sortedCards[0].rank;
-    for (let i = 0; i < hand.length; i++) {
-      if (hand[i].rank === rank) state.selectedIndices.add(i);
-    }
-    return;
-  }
+  // Pick the smallest straight that can beat (shortest len, then lowest high)
+  const best = allStraights.reduce((a, b) =>
+    a.len < b.len || (a.len === b.len && a.high < b.high) ? a : b
+  );
 
-  // For straights: try longest first, then shrink until valid
-  if (combo.type === COMBO.STRAIGHT) {
-    const allStraights = findAllStraightsFromGroup(groupCards, state.lastCombo);
-    if (allStraights.length === 0) return;
-    // Pick the smallest straight that can beat (shortest = weakest valid)
-    const best = allStraights.reduce((a, b) =>
-      a.len < b.len || (a.len === b.len && a.high < b.high) ? a : b
-    );
-    const bestSet = new Set(best.cards.map(c => `${c.rank}${c.suit}`));
-    for (const i of groupIndices) {
-      if (bestSet.has(`${hand[i].rank}${hand[i].suit}`)) state.selectedIndices.add(i);
-    }
+  // Select only the cards that are part of the chosen straight
+  const bestSet = new Set(best.cards.map(c => `${c.rank}${c.suit}`));
+  for (const i of groupIndices) {
+    if (bestSet.has(`${hand[i].rank}${hand[i].suit}`)) state.selectedIndices.add(i);
   }
 }
 
-// Find all valid straights from a group of cards that can beat lastCombo
+// Find all valid straights from a group of cards that can beat lastCombo (null = any)
 function findAllStraightsFromGroup(cards, lastCombo) {
   const results = [];
   const sorted = sortHand(cards);
@@ -183,21 +217,21 @@ function findAllStraightsFromGroup(cards, lastCombo) {
 
   // Try all consecutive subsequences of length 3+
   for (let start = 0; start < n; start++) {
-    for (let len = Math.min(n - start, lastCombo ? lastCombo.len || n : n); len >= 3; len--) {
-      if (start + len > n) break;
+    for (let len = n - start; len >= 3; len--) {
       const subset = sorted.slice(start, start + len);
-      // Check if consecutive ranks
+      // Verify consecutive ranks
       const consecutive = subset.every((c, i) =>
         i === 0 || RANK_VALUES[c.rank] === RANK_VALUES[subset[i - 1].rank] + 1
       );
       if (!consecutive) continue;
-      // Check no 2s
+      // No 2s allowed in straights
       if (subset.some(c => RANK_VALUES[c.rank] === 12)) continue;
 
       const combo = detectCombo(subset);
       if (!combo) continue;
-      const isValid = !lastCombo || canBeat(lastCombo, combo);
-      if (isValid) results.push(combo);
+      // For straights: also require same length if lastCombo is a straight
+      if (lastCombo && lastCombo.type === COMBO.STRAIGHT && combo.len !== lastCombo.len) continue;
+      if (!lastCombo || canBeat(lastCombo, combo)) results.push(combo);
     }
   }
   return results;
@@ -217,17 +251,11 @@ function initHandInteractions() {
 
   const cards = handEl.querySelectorAll('.card');
   cards.forEach((card) => {
-    // Click to select
+    // Click to select - use toggleSelect to enable auto-combo logic
     card.addEventListener('click', (e) => {
       if (isDragging || state.gameOver) return;
       const cardIdx = parseInt(card.dataset.idx);
-      if (state.selectedIndices.has(cardIdx)) {
-        state.selectedIndices.delete(cardIdx);
-      } else {
-        state.selectedIndices.add(cardIdx);
-      }
-      // Update only card styles without re-rendering full hand
-      updateCardSelectionStyles();
+      toggleSelect(cardIdx);
     });
 
     // Mouse down - start tracking for potential drag
@@ -569,24 +597,39 @@ function onPass() {
 
 function onHint() {
   if (state.currentPlayer !== 0 || state.gameOver) return;
+  const hand = state.hands[0];
+
+  // === AUTO-WIN CHECK ===
+  if (hand.length > 0) {
+    const allCombo = detectCombo(hand);
+    if (allCombo) {
+      const canWin = state.newRound || (state.lastCombo && canBeat(state.lastCombo, allCombo));
+      if (canWin) {
+        for (let i = 0; i < hand.length; i++) state.selectedIndices.add(i);
+        state.statusMsg = 'Chiến thắng! Đánh hết bài!';
+        updateCardSelectionStyles();
+        const statusEl = document.querySelector('.status-msg');
+        if (statusEl) statusEl.textContent = state.statusMsg;
+        return;
+      }
+    }
+  }
 
   // Ask AI for the best move
   const suggestion = (window.AI && window.AI.selectCards)
-    ? window.AI.selectCards(state.hands[0], state.lastCombo, state.newRound, state)
+    ? window.AI.selectCards(hand, state.lastCombo, state.newRound, state)
     : null;
 
   // Clear current selection
   state.selectedIndices.clear();
 
   if (!suggestion) {
-    // AI says pass - show hint in status
     state.statusMsg = 'Gợi ý: Bỏ lượt';
     renderGame(state);
     return;
   }
 
   // Select the suggested cards
-  const hand = state.hands[0];
   for (const card of suggestion) {
     const idx = hand.findIndex(c => c.rank === card.rank && c.suit === card.suit);
     if (idx >= 0) state.selectedIndices.add(idx);
@@ -594,7 +637,6 @@ function onHint() {
 
   state.statusMsg = `Gợi ý: Đánh ${suggestion.length} lá`;
   updateCardSelectionStyles();
-  // Update status without full re-render
   const statusEl = document.querySelector('.status-msg');
   if (statusEl) statusEl.textContent = state.statusMsg;
 }
@@ -693,6 +735,8 @@ function nextTurn() {
 
   // Start timer for player turn
   if (state.currentPlayer === 0) {
+    // AUTO-WIN: if player can play all remaining cards to win, do it immediately
+    if (checkAndAutoWin()) return;
     startTimer();
   } else {
     setTimeout(aiPlay, 600 + Math.random() * 600);
