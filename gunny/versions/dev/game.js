@@ -281,6 +281,64 @@ document.addEventListener('DOMContentLoaded', () => {
             const hpB = document.getElementById('hpB');
             const logEl = document.getElementById('log');
 
+            // Canvas UI state (Gunny-like on-canvas controls)
+            // NOTE: W/H are defined later; so we initialize with placeholders and compute layout after W/H exists.
+            const uiState = {
+                showInfo: false,
+                // right-side dpad
+                dpad: {
+                    cx: 0,
+                    cy: 0,
+                    size: 46,
+                    gap: 8,
+                },
+                // reset button (top-right, next to info)
+                resetBtn: {
+                    x: 0,
+                    y: 16,
+                    r: 16,
+                },
+                // power bar (bottom)
+                powerBar: {
+                    x: 110,
+                    y: 0,
+                    w: 0,
+                    h: 16,
+                    dragging: false,
+                },
+                // info button (top-right)
+                infoBtn: {
+                    x: 0,
+                    y: 16,
+                    r: 16,
+                },
+                // popup rect
+                popup: {
+                    x: 90,
+                    y: 70,
+                    w: 0,
+                    h: 0,
+                },
+            };
+
+            function setSliderValue(el, v){
+                const min = parseFloat(el.min ?? '0');
+                const max = parseFloat(el.max ?? '100');
+                const nv = clamp(v, min, max);
+                el.value = String(nv);
+                // keep labels/windVal in sync
+                syncLabels();
+            }
+
+            function isInsideRect(px, py, x, y, w, h){
+                return px >= x && px <= x+w && py >= y && py <= y+h;
+            }
+
+            function dist(px, py, x, y){
+                const dx = px - x, dy = py - y;
+                return Math.hypot(dx, dy);
+            }
+
             const ang = document.getElementById('ang');
             const pow = document.getElementById('pow');
             const wind = document.getElementById('wind');
@@ -340,6 +398,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const W = canvas.width,
                 H = canvas.height;
+
+            function layoutCanvasUI(){
+                // DPad ở giữa chiều cao, sát bên phải (canvas rộng 1080)
+                uiState.dpad.cx = W - 80;
+                uiState.dpad.cy = H / 2;
+
+                uiState.powerBar.y = H - 42;
+                uiState.powerBar.w = W - 260;
+
+                // Info button top-right, reset button to its left
+                uiState.infoBtn.x = W - 48;
+                uiState.resetBtn.x = W - 88;  // 40px to the left of info button
+
+                uiState.popup.w = W - 200;
+                uiState.popup.h = H - 140;
+            }
+            layoutCanvasUI();
 
             // Physics
             const g = 260; // gravity px/s^2
@@ -448,6 +523,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             function drawClouds(){
+                ctx.save();
                 ctx.fillStyle = 'rgba(255,255,255,0.08)';
                 for(let c of clouds){
                     ctx.beginPath();
@@ -460,6 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.ellipse(c.x - c.w*0.25, c.y - c.h*0.1, c.w*0.35, c.h*0.5, 0, 0, Math.PI*2);
                     ctx.fill();
                 }
+                ctx.restore();
             }
             
             // Birds - fly across screen every 10s with sine wave trajectory
@@ -1457,19 +1534,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function drawTerrain() {
+                ctx.save();
+                // Reset line dash để tránh leak từ aim preview
+                ctx.setLineDash([]);
+                // Đảm bảo bắt đầu path mới hoàn toàn
                 ctx.beginPath();
                 ctx.moveTo(0, H);
                 for (let x = 0; x < W; x++) ctx.lineTo(x, terrain[x]);
                 ctx.lineTo(W, H);
                 ctx.closePath();
-                // fill
+                
+                // fill với gradient riêng
                 const grad = ctx.createLinearGradient(0, H * 0.5, 0, H);
                 grad.addColorStop(0, 'rgba(255,45,45,.10)');
                 grad.addColorStop(1, 'rgba(255,255,255,.03)');
                 ctx.fillStyle = grad;
                 ctx.fill();
+                
                 ctx.strokeStyle = 'rgba(255,255,255,.08)';
                 ctx.stroke();
+                ctx.restore();
             }
 
             function drawPlayer(ent, color) {
@@ -2112,8 +2196,213 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            function drawPowerBar(){
+                const pb = uiState.powerBar;
+                ctx.save();
+                ctx.globalAlpha = 0.96;
+                
+                // outer frame
+                ctx.fillStyle = 'rgba(0,0,0,.35)';
+                ctx.strokeStyle = 'rgba(255,255,255,.14)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.roundRect(pb.x-8, pb.y-10, pb.w+16, pb.h+20, 12);
+                ctx.fill();
+                ctx.stroke();
+
+                // inner bg
+                ctx.fillStyle = 'rgba(255,255,255,.08)';
+                ctx.beginPath();
+                ctx.roundRect(pb.x, pb.y, pb.w, pb.h, 999);
+                ctx.fill();
+
+                // fill based on pow
+                const p = parseFloat(pow.value);
+                const min = parseFloat(pow.min);
+                const max = parseFloat(pow.max);
+                const t = (p - min) / (max - min);
+
+                const grad = ctx.createLinearGradient(pb.x, 0, pb.x + pb.w, 0);
+                grad.addColorStop(0, 'rgba(255,255,255,.25)');
+                grad.addColorStop(0.45, 'rgba(255,160,60,.75)');
+                grad.addColorStop(1, 'rgba(255,45,45,.9)');
+                
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.roundRect(pb.x, pb.y, Math.max(10, pb.w * t), pb.h, 999);
+                ctx.fill();
+
+                // ticks
+                ctx.strokeStyle = 'rgba(0,0,0,.25)';
+                ctx.lineWidth = 1;
+                for(let i=1;i<10;i++){
+                    const x = pb.x + pb.w * (i/10);
+                    ctx.beginPath();
+                    ctx.moveTo(x, pb.y+2);
+                    ctx.lineTo(x, pb.y + pb.h-2);
+                    ctx.stroke();
+                }
+
+                // knob
+                const kx = pb.x + pb.w * t;
+                ctx.fillStyle = 'rgba(255,255,255,.85)';
+                ctx.strokeStyle = 'rgba(0,0,0,.35)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(kx, pb.y + pb.h/2, 11, 0, Math.PI*2);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+
+                // label
+                ctx.font = 'bold 12px system-ui';
+                ctx.fillStyle = 'rgba(233,238,252,.9)';
+                ctx.textAlign = 'center';
+                ctx.fillText(`Lực: ${Math.round(p)}`, pb.x + pb.w/2, pb.y - 14);
+                ctx.restore();
+            }
+
+            function drawDPad(){
+                const d = uiState.dpad;
+                const s = d.size;
+                const g = d.gap;
+                const cx = d.cx;
+                const cy = d.cy;
+
+                // helper draw btn
+                function btn(x,y,w,h,label){
+                    ctx.save();
+                    ctx.fillStyle = 'rgba(0,0,0,.4)';
+                    ctx.strokeStyle = 'rgba(255,255,255,.25)';  // Thinner, softer border
+                    ctx.lineWidth = 1;
+                    ctx.roundRect(x,y,w,h,14);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // subtle inner glow
+                    const grad = ctx.createRadialGradient(x+w/2,y+h/2,8,x+w/2,y+h/2,28);
+                    grad.addColorStop(0,'rgba(255,45,45,.25)');
+                    grad.addColorStop(1,'rgba(255,45,45,0)');
+                    ctx.fillStyle = grad;
+                    ctx.roundRect(x+1,y+1,w-2,h-2,13);
+                    ctx.fill();
+
+                    // Arrow: bigger and brighter
+                    ctx.font = 'bold 28px system-ui';
+                    ctx.fillStyle = '#ffffff';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.shadowColor = 'rgba(255,255,255,.8)';
+                    ctx.shadowBlur = 12;
+                    ctx.fillText(label, x+w/2, y+h/2+1);
+                    ctx.restore();
+                }
+
+                const up = {x: cx - s/2, y: cy - (s + g) - s/2, w:s, h:s};
+                const down = {x: cx - s/2, y: cy + (s + g) - s/2, w:s, h:s};
+                const left = {x: cx - (s + g) - s/2, y: cy - s/2, w:s, h:s};
+                const right = {x: cx + (s + g) - s/2, y: cy - s/2, w:s, h:s};
+                const center = {x: cx - s/2, y: cy - s/2, w:s, h:s};
+
+                btn(up.x, up.y, up.w, up.h, '↑');
+                btn(down.x, down.y, down.w, down.h, '↓');
+                btn(left.x, left.y, left.w, left.h, '←');
+                btn(right.x, right.y, right.w, right.h, '→');
+
+                // center is shoot
+                ctx.save();
+                ctx.fillStyle = 'rgba(255,45,45,.3)';
+                ctx.strokeStyle = 'rgba(255,255,255,.3)';
+                ctx.lineWidth = 1;  // Thinner border
+                ctx.roundRect(center.x, center.y, center.w, center.h, 14);
+                ctx.fill();
+                ctx.stroke();
+                
+                // inner glow for center
+                const centerGrad = ctx.createRadialGradient(center.x+center.w/2,center.y+center.h/2,8,center.x+center.w/2,center.y+center.h/2,22);
+                centerGrad.addColorStop(0,'rgba(255,80,80,.35)');
+                centerGrad.addColorStop(1,'rgba(255,45,45,0)');
+                ctx.fillStyle = centerGrad;
+                ctx.roundRect(center.x+1,center.y+1,center.w-2,center.h-2,12);
+                ctx.fill();
+                
+                ctx.font = '900 14px system-ui';
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = 'rgba(255,255,255,.6)';
+                ctx.shadowBlur = 10;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('BẮN', center.x + center.w/2, center.y + center.h/2);
+                ctx.restore();
+
+                // stash rects for hit-testing
+                uiState._dpadRects = {up,down,left,right,center};
+            }
+
+            function drawInfoButton(){
+                const b = uiState.infoBtn;
+                ctx.save();
+                ctx.fillStyle = 'rgba(0,0,0,.28)';
+                ctx.strokeStyle = 'rgba(255,255,255,.18)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.font = '900 16px system-ui';
+                ctx.fillStyle = 'rgba(233,238,252,.92)';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('i', b.x, b.y+0.5);
+                ctx.restore();
+            }
+
+            function drawResetButton(){
+                const b = uiState.resetBtn;
+                ctx.save();
+                ctx.fillStyle = 'rgba(255,45,45,.28)';  // Red tint for reset
+                ctx.strokeStyle = 'rgba(255,255,255,.18)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.font = '900 14px system-ui';
+                ctx.fillStyle = 'rgba(233,238,252,.92)';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('↻', b.x, b.y+0.5);
+                ctx.restore();
+            }
+
+            function drawAngleIndicator(){
+                const a = Math.round(parseFloat(ang.value));
+                ctx.save();
+                // Chỉ vẽ viền, không vẽ nền (để text nổi rõ)
+                ctx.strokeStyle = 'rgba(255,255,255,.4)';
+                ctx.lineWidth = 2;
+                ctx.roundRect(12, H - 110, 120, 40, 12);
+                ctx.stroke();
+                
+                // Label "Góc" - không shadow, màu sáng rõ
+                ctx.font = 'bold 13px system-ui';
+                ctx.fillStyle = '#ffddaa';  // Vàng sáng hơn
+                ctx.textAlign = 'left';
+                ctx.fillText('Góc', 22, H - 86);
+                
+                // Giá trị góc - không shadow, chỉ màu trắng đậm
+                ctx.font = '900 26px system-ui';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(`${a}°`, 62, H - 84);
+                ctx.restore();
+            }
+
+            function drawInfoPopup(){
+                // Không vẽ gì - popup chuyển sang HTML modal
+            }
+
             function drawAimPreview() {
-                // show predicted arc for player's current settings when it's player's turn and not firing
+                // Chỉ vẽ đường line (stroke), KHÔNG fill
                 if (turnLock || turn !== 'player' || proj) return;
 
                 const angleDeg = parseFloat(ang.value);
@@ -2122,22 +2411,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const angRad = angleDeg * Math.PI / 180;
                 const speed = power * 6.2;
 
-                // Start from center of character
                 let x = player.x;
                 let y = player.y - player.r - 2;
                 let vx = Math.cos(angRad) * speed * dir;
                 let vy = -Math.sin(angRad) * speed;
 
                 ctx.save();
-                ctx.strokeStyle = 'rgba(233, 238, 252, 0.25)';
+                ctx.strokeStyle = 'rgba(233, 238, 252, 0.4)';
                 ctx.lineWidth = 2;
                 ctx.setLineDash([6, 6]);
+                
+                // Bắt đầu path mới hoàn toàn
                 ctx.beginPath();
                 ctx.moveTo(x, y);
 
-                // simulate until impact/out (cap steps)
                 const step = 1 / 60;
-                let didImpact = false;
                 for (let i = 0; i < 220; i++) {
                     const ax = windVal * windAccelScale;
                     vx += ax * step;
@@ -2148,23 +2436,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (x < 0 || x >= W || y > H) break;
                     const gy = groundY(x);
                     if (y >= gy) {
-                        // impact point
                         ctx.lineTo(x, gy);
-                        didImpact = true;
-                        // keep arc visible, then mark point
                         ctx.stroke();
+                        
+                        // Vẽ điểm rơi nhỏ - dùng path riêng
+                        ctx.save();
                         ctx.setLineDash([]);
-                        ctx.fillStyle = 'rgba(124,92,255,0.55)';
+                        ctx.strokeStyle = 'rgba(124,92,255,0.8)';
+                        ctx.lineWidth = 2;
                         ctx.beginPath();
                         ctx.arc(x, gy, 5, 0, Math.PI * 2);
-                        ctx.fill();
+                        ctx.closePath();
+                        ctx.stroke();
                         ctx.restore();
+                        
+                        ctx.restore(); // restore chính
                         return;
                     }
                     ctx.lineTo(x, y);
                 }
 
-                // if no impact yet, still draw the partial arc
                 ctx.stroke();
                 ctx.restore();
             }
@@ -2202,6 +2493,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // aiming preview (player)
                 drawAimPreview();
+                ctx.setLineDash([]); // Reset to prevent leak
+
+                // --- Canvas UI (vẽ trước nhân vật) ---
+                // Vẽ angle indicator trước (nằm trên cùng)
+                drawAngleIndicator();
+                drawPowerBar();
+                drawDPad();
+                drawInfoButton();
+                drawResetButton();
 
                 // players
                 drawPlayer(player, 'rgba(255,255,255,.90)');
@@ -2414,6 +2714,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fillStyle = 'rgba(233,238,252,.9)';
                 ctx.font = '12px system-ui';
                 ctx.fillText(`Lượt: ${turn === 'player' ? 'Bạn' : 'Bot'}`, 24, 78);
+
+                // Popup info vẽ sau cùng để nằm trên tất cả
+                drawInfoPopup();
             }
 
             function randomSky(){
@@ -2496,10 +2799,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // UI bindings + keyboard
             function syncLabels() {
-                angV.textContent = ang.value;
-                powV.textContent = pow.value;
+                if(angV) angV.textContent = ang.value;
+                if(powV) powV.textContent = pow.value;
                 windVal = clamp(parseInt(wind.value, 10) / 10, -3.0, 3.0);
-                windV.textContent = windVal.toFixed(1);
+                if(windV) windV.textContent = windVal.toFixed(1);
             }
             ang.addEventListener('input', () => {
                 syncLabels();
@@ -2512,11 +2815,172 @@ document.addEventListener('DOMContentLoaded', () => {
             wind.addEventListener('input', syncLabels);
             syncLabels();
 
+            // ---- Canvas UI input handling ----
+            // Detect mobile portrait mode for coordinate transformation
+            function isMobilePortrait() {
+                return window.matchMedia('(max-width: 640px) and (orientation: portrait)').matches;
+            }
+            
+            function canvasPointFromEvent(ev){
+                const rect = canvas.getBoundingClientRect();
+                const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+                const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+                
+                // If mobile portrait, canvas is rotated -90deg via CSS
+                // Transform screen coordinates to match the rotated canvas
+                if(isMobilePortrait()) {
+                    const dx = clientX - rect.left;
+                    const dy = clientY - rect.top;
+                    // For -90deg CSS rotation, map visual coordinates to canvas
+                    // Visual X (dx) maps to Canvas Y (inverted)
+                    // Visual Y (dy) maps to Canvas X
+                    const x = (rect.height - dy) * (W / rect.height);
+                    const y = dx * (H / rect.width);
+                    return {x, y};
+                }
+                
+                const x = (clientX - rect.left) * (W / rect.width);
+                const y = (clientY - rect.top) * (H / rect.height);
+                return {x,y};
+            }
+
+            function handleDpadPress(key){
+                if(uiState.showInfo) return;
+                if(key === 'left') doMove(-MOVE_STEP);
+                if(key === 'right') doMove(MOVE_STEP);
+                if(key === 'up') setSliderValue(ang, parseFloat(ang.value) + 1);
+                if(key === 'down') setSliderValue(ang, parseFloat(ang.value) - 1);
+                if(key === 'center') {
+                    if(!shootBtn.disabled) shootBtn.click();
+                }
+            }
+
+            let dpadHoldInterval = null;
+            function startHold(key){
+                handleDpadPress(key);
+                stopHold();
+                dpadHoldInterval = setInterval(() => handleDpadPress(key), 90);
+            }
+            function stopHold(){
+                if(dpadHoldInterval){ clearInterval(dpadHoldInterval); dpadHoldInterval = null; }
+            }
+
+            function hitTestDpad(px, py){
+                const r = uiState._dpadRects;
+                if(!r) return null;
+                if(isInsideRect(px,py,r.left.x,r.left.y,r.left.w,r.left.h)) return 'left';
+                if(isInsideRect(px,py,r.right.x,r.right.y,r.right.w,r.right.h)) return 'right';
+                if(isInsideRect(px,py,r.up.x,r.up.y,r.up.w,r.up.h)) return 'up';
+                if(isInsideRect(px,py,r.down.x,r.down.y,r.down.w,r.down.h)) return 'down';
+                if(isInsideRect(px,py,r.center.x,r.center.y,r.center.w,r.center.h)) return 'center';
+                return null;
+            }
+
+            function hitTestPowerBar(px, py){
+                const pb = uiState.powerBar;
+                return isInsideRect(px, py, pb.x-20, pb.y-20, pb.w+40, pb.h+40);
+            }
+
+            function setPowerFromX(px){
+                const pb = uiState.powerBar;
+                const t = clamp((px - pb.x) / pb.w, 0, 1);
+                const min = parseFloat(pow.min);
+                const max = parseFloat(pow.max);
+                setSliderValue(pow, min + t * (max-min));
+            }
+
+            function hitTestInfoBtn(px, py){
+                const b = uiState.infoBtn;
+                return dist(px,py,b.x,b.y) <= b.r + 6;
+            }
+
+            function hitTestResetBtn(px, py){
+                const b = uiState.resetBtn;
+                return dist(px,py,b.x,b.y) <= b.r + 6;
+            }
+
+            function hitTestPopupButtons(px, py){
+                const list = uiState._popupBtns;
+                if(!uiState.showInfo || !list) return null;
+                for(const b of list){
+                    if(isInsideRect(px,py,b.x,b.y,b.w,b.h)) return b.key;
+                }
+                // click outside popup closes
+                const p = uiState.popup;
+                if(!isInsideRect(px,py,p.x,p.y,p.w,p.h)) return 'close';
+                return null;
+            }
+
+            function onPointerDown(ev){
+                const {x,y} = canvasPointFromEvent(ev);
+
+                // popup mode - HTML modal, không vẽ trên canvas nữa
+                if(uiState.showInfo){
+                    uiState.showInfo = false;
+                    ev.preventDefault();
+                    return;
+                }
+
+                if(hitTestInfoBtn(x,y)){
+                    // Mở modal HTML thay vì vẽ trên canvas
+                    $('#gameInfoModal').addClass('active');
+                    ev.preventDefault();
+                    return;
+                }
+
+                if(hitTestResetBtn(x,y)){
+                    // Reset game
+                    resetAll();
+                    ev.preventDefault();
+                    return;
+                }
+
+                // power bar drag
+                if(hitTestPowerBar(x,y)){
+                    uiState.powerBar.dragging = true;
+                    setPowerFromX(x);
+                    ev.preventDefault();
+                    return;
+                }
+
+                // dpad
+                const k = hitTestDpad(x,y);
+                if(k){
+                    startHold(k);
+                    ev.preventDefault();
+                    return;
+                }
+            }
+
+            function onPointerMove(ev){
+                if(!uiState.powerBar.dragging) return;
+                const {x} = canvasPointFromEvent(ev);
+                setPowerFromX(x);
+                ev.preventDefault();
+            }
+
+            function onPointerUp(){
+                uiState.powerBar.dragging = false;
+                stopHold();
+            }
+
+            canvas.addEventListener('pointerdown', onPointerDown, {passive:false});
+            window.addEventListener('pointermove', onPointerMove, {passive:false});
+            window.addEventListener('pointerup', onPointerUp);
+
+            canvas.addEventListener('touchstart', onPointerDown, {passive:false});
+            window.addEventListener('touchmove', onPointerMove, {passive:false});
+            window.addEventListener('touchend', onPointerUp);
+
             // Keyboard:
             // - LEFT/RIGHT: move player along terrain
             // - UP/DOWN: adjust angle
             // - Shift + UP/DOWN: adjust power
             // - Space: shoot
+            // Canvas UI:
+            // - D-pad right side: same controls
+            // - Power bar bottom: drag to set power
+            // - Info button top-right: opens popup
             
             let moveInterval = null;
             const MOVE_COST = 8; // stamina per step
