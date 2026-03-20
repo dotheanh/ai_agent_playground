@@ -141,19 +141,66 @@ function tryAutoSelectCombo(clickedIdx) {
     .map((lbl, i) => lbl === clickedLabel ? i : -1)
     .filter(i => i >= 0);
 
-  // Build the candidate combo from all group members
   const groupCards = groupIndices.map(i => hand[i]);
-  const combo = detectCombo(groupCards);
+  const sortedCards = sortHand(groupCards);
+  const combo = detectCombo(sortedCards);
   if (!combo) return;
 
-  // Check if this combo is valid to play right now
+  // Check if can play (new round or can beat last combo)
   const isValid = state.newRound || !state.lastCombo || canBeat(state.lastCombo, combo);
   if (!isValid) return;
 
-  // Auto-select all cards in the group
-  for (const i of groupIndices) {
-    state.selectedIndices.add(i);
+  // For same-rank combos (pair/triple/four): select all cards of that rank
+  if (combo.type === COMBO.PAIR || combo.type === COMBO.TRIPLE || combo.type === COMBO.FOUR) {
+    const rank = sortedCards[0].rank;
+    for (let i = 0; i < hand.length; i++) {
+      if (hand[i].rank === rank) state.selectedIndices.add(i);
+    }
+    return;
   }
+
+  // For straights: try longest first, then shrink until valid
+  if (combo.type === COMBO.STRAIGHT) {
+    const allStraights = findAllStraightsFromGroup(groupCards, state.lastCombo);
+    if (allStraights.length === 0) return;
+    // Pick the smallest straight that can beat (shortest = weakest valid)
+    const best = allStraights.reduce((a, b) =>
+      a.len < b.len || (a.len === b.len && a.high < b.high) ? a : b
+    );
+    const bestSet = new Set(best.cards.map(c => `${c.rank}${c.suit}`));
+    for (const i of groupIndices) {
+      if (bestSet.has(`${hand[i].rank}${hand[i].suit}`)) state.selectedIndices.add(i);
+    }
+  }
+}
+
+// Find all valid straights from a group of cards that can beat lastCombo
+function findAllStraightsFromGroup(cards, lastCombo) {
+  const results = [];
+  const sorted = sortHand(cards);
+  const n = sorted.length;
+  if (n < 3) return results;
+
+  // Try all consecutive subsequences of length 3+
+  for (let start = 0; start < n; start++) {
+    for (let len = Math.min(n - start, lastCombo ? lastCombo.len || n : n); len >= 3; len--) {
+      if (start + len > n) break;
+      const subset = sorted.slice(start, start + len);
+      // Check if consecutive ranks
+      const consecutive = subset.every((c, i) =>
+        i === 0 || RANK_VALUES[c.rank] === RANK_VALUES[subset[i - 1].rank] + 1
+      );
+      if (!consecutive) continue;
+      // Check no 2s
+      if (subset.some(c => RANK_VALUES[c.rank] === 12)) continue;
+
+      const combo = detectCombo(subset);
+      if (!combo) continue;
+      const isValid = !lastCombo || canBeat(lastCombo, combo);
+      if (isValid) results.push(combo);
+    }
+  }
+  return results;
 }
 
 // Drag and drop for card reordering
