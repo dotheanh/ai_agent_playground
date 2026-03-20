@@ -64,6 +64,42 @@ class AutoClickApp:
             bg=config.WINDOW_BG
         ).pack()
 
+        # ===== HOTKEY HINTS =====
+        hotkey_frame = tk.Frame(
+            self.root,
+            bg="#0d1225",
+            padx=15,
+            pady=8
+        )
+        hotkey_frame.pack(fill=tk.X, padx=20, pady=(0, 10))
+
+        hotkeys_info = [
+            ("F1", "Start/Stop", config.ACCENT_COLOR),
+            ("F2", "Record", config.WARNING_COLOR),
+            ("F3", "Replay", config.SUCCESS_COLOR),
+            ("ESC", "Stop All", config.ERROR_COLOR)
+        ]
+
+        for i, (key, action, color) in enumerate(hotkeys_info):
+            col = i * 2
+            tk.Label(
+                hotkey_frame,
+                text=key,
+                bg="#0d1225",
+                fg=color,
+                font=("Consolas", 10, "bold"),
+                width=4
+            ).grid(row=0, column=col, padx=(0 if i == 0 else 8), pady=2)
+
+            tk.Label(
+                hotkey_frame,
+                text=action,
+                bg="#0d1225",
+                fg=config.TEXT_COLOR,
+                font=("Segoe UI", 9),
+                width=10
+            ).grid(row=0, column=col + 1, sticky=tk.W, pady=2)
+
         # ===== MODE SELECTION =====
         mode_frame = tk.LabelFrame(
             self.root,
@@ -257,10 +293,20 @@ class AutoClickApp:
             padx=10
         ).pack(side=tk.LEFT)
 
+        tk.Button(
+            script_btn_frame,
+            text="Reload",
+            command=self._reload_script,
+            bg="#1a2340",
+            fg=config.TEXT_COLOR,
+            font=("Segoe UI", 9),
+            padx=10
+        ).pack(side=tk.LEFT, padx=(5, 0))
+
         # ===== STATUS =====
         self.status_label = tk.Label(
             self.root,
-            text="Ready - Press F1 to start",
+            text="Ready - F1: Click at current position",
             bg=config.WINDOW_BG,
             fg=config.ACCENT_COLOR,
             font=("Segoe UI", 10, "bold"),
@@ -277,28 +323,6 @@ class AutoClickApp:
             font=("Consolas", 9)
         )
         self.pos_label.pack(fill=tk.X, padx=20)
-
-        # ===== HOTKEY INFO =====
-        hotkey_frame = tk.Frame(self.root, bg=config.WINDOW_BG)
-        hotkey_frame.pack(fill=tk.X, padx=20, pady=10)
-
-        hotkeys_info = [
-            ("F1", "Start/Stop"),
-            ("F2", "Record"),
-            ("F3", "Replay"),
-            ("ESC", "Stop All")
-        ]
-
-        for i, (key, action) in enumerate(hotkeys_info):
-            col = i % 2
-            row = i // 2
-            tk.Label(
-                hotkey_frame,
-                text=f"{key}: {action}",
-                bg=config.WINDOW_BG,
-                fg=config.DIM_COLOR,
-                font=("Segoe UI", 8)
-            ).grid(row=row, column=col, sticky=tk.W, padx=10, pady=2)
 
     def _setup_hotkeys(self):
         """Setup global hotkey callbacks"""
