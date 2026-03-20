@@ -14,6 +14,22 @@
 
 ## Các dự án hiện tại
 
+### 🃏 Tiến Lên Miền Nam (Card Game)
+- Game bài Tiến Lên 4 ngườii (1 player + 3 AI bots) với giao diện mobile-first
+- Dark theme hiện đại với accent màu cyan/purple
+- Hỗ trợ đầy đủ luật chơi: đơn, đôi, ba, sảnh, tứ quý
+- Auto-select combo: click 1 lá → tự động chọn đôi/ba/sảnh hợp lệ
+- Drag & drop để sắp xếp lại bài trên tay
+- Gợi ý AI: dùng chính AI để chọn bài phù hợp
+- 3 mức độ khó: Easy / Medium (mặc định) / Hard
+- Card counting + danger assessment ở chế độ Hard
+- Timer 15 giây, tự động bỏ lượt nếu hết giờ
+- Không cần build, chạy trực tiếp trên trình duyệt
+
+**Tech Stack**: Vanilla HTML/CSS/JS (no framework)
+
+**Truy cập**: [https://nhoxtheanh.duckdns.org/card_game/president/](https://nhoxtheanh.duckdns.org/card_game/president/)
+
 ### Gunny-like Demo (100% Vibe Coding)
 - Game bắn súng theo góc/lực/gió với địa hình đồi ngẫu nhiên
 - Sát thương mô phỏng theo động lực học rơi
