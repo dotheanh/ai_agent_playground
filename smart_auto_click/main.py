@@ -74,7 +74,7 @@ class AutoClickApp:
         hotkey_frame.pack(fill=tk.X, padx=20, pady=(0, 10))
 
         hotkeys_info = [
-            ("F1", "Start/Stop", config.ACCENT_COLOR),
+            ("F1", "Start Click", config.ACCENT_COLOR),
             ("F2", "Record", config.WARNING_COLOR),
             ("F3", "Replay", config.SUCCESS_COLOR),
             ("ESC", "Stop All", config.ERROR_COLOR)
@@ -306,7 +306,7 @@ class AutoClickApp:
         # ===== STATUS =====
         self.status_label = tk.Label(
             self.root,
-            text="Ready - F1: Click at current position",
+            text="Ready - F1: Click | F2: Record | F3: Replay | ESC: Stop",
             bg=config.WINDOW_BG,
             fg=config.ACCENT_COLOR,
             font=("Segoe UI", 10, "bold"),
@@ -447,7 +447,7 @@ class AutoClickApp:
 
         self.is_replaying = True
         threading.Thread(target=self._replay_thread, daemon=True).start()
-        self._update_status("Replaying... (F3/ESC to stop)", color=config.SUCCESS_COLOR)
+        self._update_status("Replaying... (Press ESC to stop)", color=config.SUCCESS_COLOR)
 
     def _replay_thread(self):
         """Background thread for replay"""
