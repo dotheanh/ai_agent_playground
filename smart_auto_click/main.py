@@ -74,9 +74,8 @@ class AutoClickApp:
         hotkey_frame.pack(fill=tk.X, padx=20, pady=(0, 10))
 
         hotkeys_info = [
-            ("F1", "Start Click", config.ACCENT_COLOR),
+            ("F1", "Start/Stop", config.ACCENT_COLOR),
             ("F2", "Record", config.WARNING_COLOR),
-            ("F3", "Replay", config.SUCCESS_COLOR),
             ("ESC", "Stop All", config.ERROR_COLOR)
         ]
 
@@ -306,7 +305,7 @@ class AutoClickApp:
         # ===== STATUS =====
         self.status_label = tk.Label(
             self.root,
-            text="Ready - F1: Click | F2: Record | F3: Replay | ESC: Stop",
+            text="Ready - F1: Start/Stop | F2: Record | ESC: Stop",
             bg=config.WINDOW_BG,
             fg=config.ACCENT_COLOR,
             font=("Segoe UI", 10, "bold"),
@@ -328,7 +327,6 @@ class AutoClickApp:
         """Setup global hotkey callbacks"""
         self.hotkeys.on_start_stop = self._on_hotkey_start_stop
         self.hotkeys.on_record = self._on_hotkey_record
-        self.hotkeys.on_replay = self._on_hotkey_replay
         self.hotkeys.on_emergency = self._on_emergency_stop
         self.hotkeys.start()
 
@@ -354,30 +352,33 @@ class AutoClickApp:
         self._update_status(f"Mode: {mode}")
 
     def _on_hotkey_start_stop(self):
-        """Handle F1 - Start/Stop"""
+        """Handle F1 - Start/Stop based on current mode"""
         mode = self.current_mode.get()
 
         if mode == "continuous":
+            # Continuous mode: toggle clicking
             if self.is_continuous_running:
                 self._stop_continuous()
             else:
                 self._start_continuous()
-        elif self.is_replaying:
-            self._stop_replay()
+        else:
+            # Script mode: toggle replay
+            if self.is_replaying:
+                self._stop_replay()
+            else:
+                self._start_replay()
 
     def _on_hotkey_record(self):
         """Handle F2 - Record"""
+        # Check if in continuous mode - can't record
+        if self.current_mode.get() == "continuous":
+            self._update_status("Switch to Script mode to record!", color=config.WARNING_COLOR)
+            return
+
         if self.is_recording:
             self._stop_recording()
         else:
             self._start_recording()
-
-    def _on_hotkey_replay(self):
-        """Handle F3 - Replay"""
-        if self.is_replaying:
-            self._stop_replay()
-        else:
-            self._start_replay()
 
     def _on_emergency_stop(self):
         """Handle ESC - Emergency stop all"""
@@ -447,7 +448,7 @@ class AutoClickApp:
 
         self.is_replaying = True
         threading.Thread(target=self._replay_thread, daemon=True).start()
-        self._update_status("Replaying... (Press ESC to stop)", color=config.SUCCESS_COLOR)
+        self._update_status("Replaying... (F1/ESC to stop)", color=config.SUCCESS_COLOR)
 
     def _replay_thread(self):
         """Background thread for replay"""
