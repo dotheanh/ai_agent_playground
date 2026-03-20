@@ -1535,6 +1535,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function drawTerrain() {
                 ctx.save();
+                // Reset line dash để tránh leak từ aim preview
+                ctx.setLineDash([]);
                 // Đảm bảo bắt đầu path mới hoàn toàn
                 ctx.beginPath();
                 ctx.moveTo(0, H);
@@ -2391,7 +2393,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Giá trị góc - không shadow, chỉ màu trắng đậm
                 ctx.font = '900 26px system-ui';
                 ctx.fillStyle = '#ffffff';
-                ctx.fillText(`${a}°`, 62, H - 87);
+                ctx.fillText(`${a}°`, 62, H - 84);
                 ctx.restore();
             }
 
