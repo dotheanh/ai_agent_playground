@@ -4,6 +4,29 @@ Multi-site React application với support cho nhiều sites (portal, zps).
 
 ## 🚀 Quick Start
 
+### 🗄️ Database (SQLite/SQL.js) - Restore from scratch
+
+Backend (`portal/server`) uses **TypeORM + SQL.js** and persists to `portal/server/portal.db`.
+
+If you want to recreate the DB schema and restore seed data to match the repo backup (`portal/seed/portal_seed.json`), run:
+
+```bash
+cd portal/server
+npm install
+
+# Recreate schema (TypeORM synchronize=true) + import seed
+npm run db:setup
+```
+
+**Notes:**
+- `portal.db` is **NOT committed** (ignored). Only the seed JSON is tracked in git.
+- If you update DB content and want to re-export seed:
+  ```bash
+  cd portal/server
+  npm run db:seed:export
+  ```
+
+
 ### Development
 
 **Terminal 1 - Server API:**
