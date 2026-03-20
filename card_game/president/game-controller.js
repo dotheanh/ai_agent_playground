@@ -31,13 +31,45 @@ function startTimer() {
 
     if (timeLeft <= 0) {
       stopTimer();
-      // Auto-pass if time runs out
       if (state.currentPlayer === 0 && !state.gameOver) {
-        state.statusMsg = 'Hết giờ! Tự động bỏ lượt';
-        onPass();
+        onTimeout();
       }
     }
   }, 1000);
+}
+
+// Auto-play or pass when time runs out
+function onTimeout() {
+  if (state.newRound) {
+    const hand = state.hands[0];
+    if (hand.length === 0) return;
+
+    const sorted = sortHand(hand);
+    const lowestCard = sorted[0];
+    const handIdx = hand.findIndex(c => c.rank === lowestCard.rank && c.suit === lowestCard.suit);
+
+    // Check if lowest card belongs to a combo group - if so, play the whole group
+    const groupLabels = detectComboGroups(hand);
+    const label = groupLabels[handIdx];
+    if (label) {
+      const groupIndices = groupLabels.map((lbl, i) => lbl === label ? i : -1).filter(i => i >= 0);
+      const groupCards = groupIndices.map(i => hand[i]);
+      if (detectCombo(groupCards)) {
+        for (const i of groupIndices) state.selectedIndices.add(i);
+        state.statusMsg = 'Hết giờ! Tự động đánh';
+        onPlay();
+        return;
+      }
+    }
+
+    // Fallback: play lowest single
+    state.selectedIndices.add(handIdx);
+    state.statusMsg = 'Hết giờ! Tự động đánh';
+    onPlay();
+  } else {
+    state.statusMsg = 'Hết giờ! Tự động bỏ lượt';
+    onPass();
+  }
 }
 
 function stopTimer() {
@@ -252,14 +284,19 @@ function onDragEnd(e) {
   renderGame(state);
 }
 
-// Get screen position of player's hand card at index
-function getPlayerCardScreenPos(cardIdx) {
+// Get screen position of a card in player's hand by card data
+function getCardScreenPos(rank, suit) {
   const handEl = document.getElementById('player-hand');
-  if (!handEl) return { x: 200, y: 500 };
-  const cardEl = handEl.querySelector(`.card[data-idx="${cardIdx}"]`);
-  if (!cardEl) return { x: 200, y: 500 };
-  const rect = cardEl.getBoundingClientRect();
-  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+  if (!handEl) return { x: 240, y: 500 };
+  const cards = handEl.querySelectorAll('.card');
+  for (const card of cards) {
+    if (card.dataset.rank === rank && card.dataset.suit === suit) {
+      const rect = card.getBoundingClientRect();
+      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    }
+  }
+  // Fallback: center of hand area
+  return { x: 240, y: 500 };
 }
 
 // Get screen position of opponent avatar
@@ -271,7 +308,8 @@ function getOpponentScreenPos(playerIdx) {
 }
 
 // Animate cards flying from source to table center
-function animatePlay(playerIdx, cards, callback) {
+// cardPositions: array of {rank, suit} for player, or null for opponents (uses avatar)
+function animatePlay(playerIdx, cards, cardPositions, callback) {
   const playedCardsEl = document.querySelector('.played-cards');
   if (!playedCardsEl) { callback && callback(); return; }
 
@@ -279,10 +317,13 @@ function animatePlay(playerIdx, cards, callback) {
   const targetX = tableRect.left + tableRect.width / 2 - 30;
   const targetY = tableRect.top + tableRect.height / 2 - 42;
 
-  // Get source position
-  const sourcePos = playerIdx === 0
-    ? getPlayerCardScreenPos(0)
-    : getOpponentScreenPos(playerIdx);
+  // Get source positions
+  const sourcePositions = cards.map((card, i) => {
+    if (playerIdx === 0 && cardPositions && cardPositions[i]) {
+      return cardPositions[i]; // Use pre-captured positions (before DOM changed)
+    }
+    return getOpponentScreenPos(playerIdx);
+  });
 
   cards.forEach((card, i) => {
     const el = document.createElement('div');
@@ -291,26 +332,23 @@ function animatePlay(playerIdx, cards, callback) {
     el.setAttribute('data-suit', card.suit);
     el.innerHTML = `<span class="center-suit">${card.suit}</span>`;
 
-    // Start position (offset each card slightly)
+    const src = sourcePositions[i];
     const offsetX = (i - (cards.length - 1) / 2) * 20;
-    const startX = sourcePos.x - 30 + offsetX;
-    const startY = sourcePos.y - 42;
+    const startX = src.x - 30 + offsetX;
+    const startY = src.y - 42;
 
     el.style.left = startX + 'px';
     el.style.top = startY + 'px';
 
-    // Animation
     el.style.transition = 'all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     document.body.appendChild(el);
 
-    // Trigger animation
     requestAnimationFrame(() => {
       el.style.left = (targetX + offsetX) + 'px';
       el.style.top = targetY + 'px';
       el.style.transform = 'scale(0.75)';
     });
 
-    // Clean up after animation
     setTimeout(() => {
       el.remove();
       if (i === cards.length - 1) {
@@ -411,7 +449,10 @@ function onPlay() {
 
   stopTimer();
 
-  // Remove from hand
+  // Capture actual screen positions BEFORE modifying DOM
+  const cardPositions = selected.map(c => getCardScreenPos(c.rank, c.suit));
+
+  // Remove from hand BEFORE renderGame
   for (const c of selected) {
     const idx = state.hands[0].findIndex(hc => hc.rank === c.rank && hc.suit === c.suit);
     if (idx >= 0) state.hands[0].splice(idx, 1);
@@ -425,11 +466,11 @@ function onPlay() {
   state.selectedIndices.clear();
   state.statusMsg = '';
 
-  // Render first WITHOUT showing played cards (table shows old cards or empty)
+  // Render first WITHOUT showing played cards
   renderGame(state);
 
-  // Animate cards flying to table, then update lastPlayedCards
-  animatePlay(0, selected, () => {
+  // Animate cards flying to table from captured positions
+  animatePlay(0, selected, cardPositions, () => {
     state.lastPlayedCards = selected;
     const playedCardsEl = document.querySelector('.played-cards');
     if (playedCardsEl) {
@@ -695,7 +736,7 @@ function aiPlay() {
 
   // Render first WITHOUT showing played cards, then animate
   renderGame(state);
-  animatePlay(aiIdx, selected, () => {
+  animatePlay(aiIdx, selected, null, () => {
     state.lastPlayedCards = selected;
     const playedCardsEl = document.querySelector('.played-cards');
     if (playedCardsEl) {

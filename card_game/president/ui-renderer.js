@@ -53,8 +53,8 @@ function renderGame(state) {
     <div class="controls">
       <button class="btn btn-sort" onclick="onSort()">Sắp xếp</button>
       <button class="btn btn-hint" onclick="onHint()" ${!isPlayerTurn ? 'disabled' : ''}>Gợi ý</button>
-      <button class="btn btn-pass${isPlayerTurn && !state.newRound ? ' can-pass' : ''}" onclick="onPass()" ${!isPlayerTurn || state.newRound ? 'disabled' : ''}>Bỏ lượt</button>
       <button class="btn btn-play" onclick="onPlay()" ${!isPlayerTurn ? 'disabled' : ''}>Đánh</button>
+      <button class="btn btn-pass${isPlayerTurn && !state.newRound ? ' can-pass' : ''}" onclick="onPass()" ${!isPlayerTurn || state.newRound ? 'disabled' : ''}>Bỏ lượt</button>
     </div>
 
     <div class="hand-area">
