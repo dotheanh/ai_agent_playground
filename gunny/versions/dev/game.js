@@ -2334,21 +2334,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function drawAngleIndicator(){
-                // bottom-left angle text like Gunny
+                // bottom-left angle text like Gunny - positioned higher than power bar
                 const a = Math.round(parseFloat(ang.value));
                 ctx.save();
                 ctx.fillStyle = 'rgba(0,0,0,.28)';
                 ctx.strokeStyle = 'rgba(255,255,255,.12)';
                 ctx.lineWidth = 1;
-                ctx.roundRect(12, H - 58, 120, 40, 12);
+                // Moved up from H-58 to H-110 to avoid overlap with power bar
+                ctx.roundRect(12, H - 110, 120, 40, 12);
                 ctx.fill();
                 ctx.stroke();
                 ctx.font = 'bold 12px system-ui';
                 ctx.fillStyle = 'rgba(233,238,252,.85)';
                 ctx.textAlign = 'left';
-                ctx.fillText('Góc', 22, H - 34);
+                ctx.fillText('Góc', 22, H - 86);
                 ctx.font = '900 18px system-ui';
-                ctx.fillText(`${a}°`, 62, H - 34);
+                ctx.fillText(`${a}°`, 62, H - 86);
                 ctx.restore();
             }
 
@@ -2768,10 +2769,31 @@ document.addEventListener('DOMContentLoaded', () => {
             syncLabels();
 
             // ---- Canvas UI input handling ----
+            // Detect mobile portrait mode for coordinate transformation
+            function isMobilePortrait() {
+                return window.matchMedia('(max-width: 640px) and (orientation: portrait)').matches;
+            }
+            
             function canvasPointFromEvent(ev){
                 const rect = canvas.getBoundingClientRect();
                 const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
                 const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+                
+                // If mobile portrait, canvas is rotated -90deg via CSS
+                // We need to transform screen coordinates to match the rotated canvas
+                if(isMobilePortrait()) {
+                    // Canvas is rotated -90deg:
+                    // - CSS width = 100vh (viewport height)
+                    // - CSS height = 100vw (viewport width)
+                    // - rect.width corresponds to canvas height (640)
+                    // - rect.height corresponds to canvas width (1080)
+                    // Transform: rotate +90deg on coordinates
+                    // (x, y) -> (y, W - x)
+                    const x = (clientY - rect.top) * (W / rect.height);
+                    const y = (rect.width - (clientX - rect.left)) * (H / rect.width);
+                    return {x,y};
+                }
+                
                 const x = (clientX - rect.left) * (W / rect.width);
                 const y = (clientY - rect.top) * (H / rect.height);
                 return {x,y};

@@ -49,6 +49,30 @@
             background: var(--sky, linear-gradient(#060607, #14060a 60%, #0b0b0d));
             border: 1px solid rgba(255, 255, 255, .08);
             border-radius: 14px;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Mobile portrait mode - rotate canvas to fit */
+        @media (max-width: 640px) and (orientation: portrait) {
+            body {
+                overflow: hidden;
+            }
+            .wrap {
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                min-width: 100vw;
+            }
+            canvas {
+                transform: rotate(-90deg);
+                width: 100vh;
+                height: 100vw;
+                max-width: none;
+                max-height: none;
+                border-radius: 0;
+            }
         }
         
         .panel {
