@@ -2493,6 +2493,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // aiming preview (player)
                 drawAimPreview();
+                ctx.setLineDash([]); // Reset to prevent leak
 
                 // --- Canvas UI (vẽ trước nhân vật) ---
                 // Vẽ angle indicator trước (nằm trên cùng)
