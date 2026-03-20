@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tiến Lên - Card Game</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-primary: #0a0e1a;
+      --bg-secondary: #131a2e;
+      --bg-card: #1a2340;
+      --accent: #00d4ff;
+      --accent2: #7c3aed;
+      --gold: #fbbf24;
+      --green: #22c55e;
+      --red: #ef4444;
+      --text: #e2e8f0;
+      --text-dim: #64748b;
+      --card-w: 72px;
+      --card-h: 100px;
+      --radius: 12px;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text);
+      height: 100dvh;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    /* ===== GAME CONTAINER ===== */
+    #game {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+      background: linear-gradient(180deg, #0d1225 0%, #0a1628 40%, #0f1d35 100%);
+    }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .top-bar .logo {
+      font-size: 16px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+    .top-bar .info {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* ===== OPPONENTS AREA ===== */
+    .opponents {
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 12px;
+      min-height: 90px;
+    }
+    .opponent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+    }
+    .opponent .avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      position: relative;
+    }
+    .opponent .avatar::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .opponent.active .avatar::after { opacity: 1; animation: pulse-ring 1.5s infinite; }
+    .opponent .name { font-size: 11px; font-weight: 600; color: var(--text-dim); }
+    .opponent .card-count {
+      font-size: 10px;
+      background: rgba(255,255,255,0.1);
+      padding: 1px 8px;
+      border-radius: 10px;
+      color: var(--gold);
+    }
+    .opponent.passed .avatar { opacity: 0.3; }
+    .opponent.passed .name::after { content: ' (Bỏ)'; color: var(--red); }
+
+    /* ===== TABLE CENTER ===== */
+    .table-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 200px;
+    }
+    .table-felt {
+      width: 90%;
+      height: 80%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, #1a3a2a 0%, #0d2018 60%, transparent 100%);
+      position: absolute;
+      opacity: 0.5;
+    }
+    .played-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2px;
+      z-index: 2;
+      min-height: 90px;
+      align-items: center;
+    }
+    .status-msg {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold);
+      text-align: center;
+      z-index: 2;
+      margin-top: 8px;
+      min-height: 20px;
+      text-shadow: 0 0 20px rgba(251,191,36,0.3);
+    }
+
+    /* ===== PLAYER CONTROLS ===== */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 6px 16px;
+    }
+    .btn {
+      padding: 10px 28px;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .btn:active { transform: scale(0.95); }
+    .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .btn-play {
+      background: linear-gradient(135deg, var(--accent), #0099cc);
+      color: #000;
+      box-shadow: 0 4px 15px rgba(0,212,255,0.3);
+    }
+    .btn-play:hover:not(:disabled) { box-shadow: 0 4px 25px rgba(0,212,255,0.5); }
+    .btn-pass {
+      background: rgba(255,255,255,0.08);
+      color: var(--text-dim);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .btn-pass:hover:not(:disabled) { background: rgba(255,255,255,0.15); }
+    .btn-pass.can-pass {
+      background: rgba(239,68,68,0.2);
+      color: var(--red);
+      border: 1px solid rgba(239,68,68,0.5);
+      animation: pulse-pass 1.5s infinite;
+    }
+    .btn-pass.can-pass:hover {
+      background: rgba(239,68,68,0.35) !important;
+    }
+    @keyframes pulse-pass {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); }
+      50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.4); }
+    }
+    .btn-hint {
+      background: rgba(251,191,36,0.15);
+      color: var(--gold);
+      border: 1px solid rgba(251,191,36,0.3);
+      padding: 10px 16px;
+    }
+    .btn-hint:hover:not(:disabled) { background: rgba(251,191,36,0.25); }
+    .btn-hint:disabled { opacity: 0.3; cursor: not-allowed; }
+    .btn-sort {
+      background: rgba(124,58,237,0.2);
+      color: var(--accent2);
+      border: 1px solid rgba(124,58,237,0.3);
+      padding: 10px 16px;
+    }
+
+    /* ===== PLAYER HAND ===== */
+    .hand-area {
+      padding: 4px 8px 12px;
+      min-height: 140px;
+      position: relative;
+    }
+    .hand {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      position: relative;
+      height: 130px;
+      overflow: visible;
+    }
+
+    /* ===== CARD STYLES ===== */
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: 8px;
+      background: #fff;
+      font-weight: 700;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, margin-top 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Real card: rank+suit in top-left and bottom-right */
+    .card::before {
+      content: attr(data-rank) "\A" attr(data-suit);
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      font-size: 20px;
+      line-height: 1.1;
+      white-space: pre;
+      text-align: center;
+    }
+    .card::after {
+      content: attr(data-rank) "\A" attr(data-suit);
+      position: absolute;
+      bottom: 2px;
+      right: 3px;
+      font-size: 20px;
+      line-height: 1.1;
+      white-space: pre;
+      text-align: center;
+      transform: rotate(180deg);
+    }
+    .card .center-suit {
+      font-size: 28px;
+      line-height: 1;
+    }
+    .card.red { color: #dc2626; }
+    .card.black { color: #1a1a2e; }
+
+    /* Combo group highlight colors */
+    .card.group-a { box-shadow: 0 -3px 0 0 #fbbf24 inset, 0 2px 8px rgba(0,0,0,0.3); background: linear-gradient(to top, #fffbeb, #fff 30%); }
+    .card.group-b { box-shadow: 0 -3px 0 0 #3b82f6 inset, 0 2px 8px rgba(0,0,0,0.3); background: linear-gradient(to top, #eff6ff, #fff 30%); }
+    .card.group-c { box-shadow: 0 -3px 0 0 #22c55e inset, 0 2px 8px rgba(0,0,0,0.3); background: linear-gradient(to top, #f0fdf4, #fff 30%); }
+    .card.group-d { box-shadow: 0 -3px 0 0 #f472b6 inset, 0 2px 8px rgba(0,0,0,0.3); background: linear-gradient(to top, #fdf2f8, #fff 30%); }
+    .card.group-e { box-shadow: 0 -3px 0 0 #a78bfa inset, 0 2px 8px rgba(0,0,0,0.3); background: linear-gradient(to top, #f5f3ff, #fff 30%); }
+
+    /* Dragging state */
+    .card.dragging {
+      opacity: 0;
+      z-index: 100 !important;
+      transition: none !important;
+    }
+    .dragging-ghost {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      border-radius: 8px;
+      cursor: grabbing !important;
+    }
+    .card.drag-over {
+      border-left: 3px solid var(--accent);
+    }
+
+    /* Timer bar */
+    .timer-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      margin: 0 16px 2px;
+      overflow: hidden;
+    }
+    .timer-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 1s linear;
+      background: var(--green);
+    }
+    .timer-fill.warning { background: var(--gold); }
+    .timer-fill.danger { background: var(--red); }
+
+    /* Hand cards - overlapping fan */
+    .hand .card {
+      position: absolute;
+      bottom: 0;
+      transition: transform 0.2s, margin-bottom 0.2s, box-shadow 0.2s;
+    }
+    .hand .card:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); z-index: 50 !important; }
+    /* Disable hover lift during drag */
+    .hand.dragging-active .card:hover { transform: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: unset !important; }
+    .hand.dragging-active .card { pointer-events: none; }
+    .hand .card.selected {
+      transform: translateY(-18px);
+      box-shadow: 0 8px 25px rgba(0,212,255,0.4);
+      border: 2px solid var(--accent);
+    }
+    .hand .card.selected:hover { transform: translateY(-22px); }
+
+    /* Played cards on table */
+    /* Played cards: smaller, no flicker animation */
+    .played-cards .card {
+      width: 60px;
+      height: 84px;
+      cursor: default;
+    }
+    .played-cards .card::before { font-size: 14px; top: 2px; left: 3px; }
+    .played-cards .card::after { font-size: 14px; bottom: 2px; right: 3px; }
+    .played-cards .card .center-suit { font-size: 24px; }
+
+    /* Flying card animation */
+    .flying-card {
+      position: fixed;
+      width: 60px;
+      height: 84px;
+      border-radius: 8px;
+      background: #fff;
+      z-index: 200;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: card-fly 0.4s ease-out forwards;
+    }
+    .flying-card.red { color: #dc2626; }
+    .flying-card.black { color: #1a1a2e; }
+    .flying-card::before {
+      content: attr(data-rank) "\A" attr(data-suit);
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      font-size: 14px;
+      line-height: 1.1;
+      white-space: pre;
+      text-align: center;
+    }
+    .flying-card .center-suit { font-size: 24px; }
+    @keyframes card-fly {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Card back for opponents */
+    .card-back {
+      width: 28px; height: 40px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--accent2), #4c1d95);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: inline-block;
+      margin: 0 -4px;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(0,212,255,0); }
+      100% { box-shadow: 0 0 0 0 rgba(0,212,255,0); }
+    }
+    @keyframes card-play {
+      from { transform: translateY(40px) scale(0.8); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    @keyframes win-glow {
+      0%, 100% { text-shadow: 0 0 20px rgba(251,191,36,0.5); }
+      50% { text-shadow: 0 0 40px rgba(251,191,36,0.8), 0 0 60px rgba(251,191,36,0.3); }
+    }
+
+    /* ===== MENU / OVERLAY ===== */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .menu-box {
+      background: var(--bg-secondary);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: center;
+      max-width: 360px;
+      width: 90%;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .menu-box h1 {
+      font-size: 32px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent2), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .menu-box p { color: var(--text-dim); margin-bottom: 24px; font-size: 14px; }
+    .menu-box .btn-start {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+    }
+    .menu-box .btn-start:hover { box-shadow: 0 4px 30px rgba(0,212,255,0.5); transform: translateY(-2px); }
+
+    /* Difficulty selector */
+    .difficulty-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    .diff-btn {
+      flex: 1;
+      padding: 8px 4px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      color: var(--text-dim);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .diff-btn:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+    .diff-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,212,255,0.1); }
+    .diff-btn.active.medium { border-color: var(--gold); color: var(--gold); background: rgba(251,191,36,0.1); }
+    .diff-btn.active.hard { border-color: var(--red); color: var(--red); background: rgba(239,68,68,0.1); }
+    .diff-label { font-size: 11px; color: var(--text-dim); margin-bottom: 8px; }
+
+    /* Win overlay */
+    .win-text {
+      font-size: 28px;
+      font-weight: 900;
+      animation: win-glow 2s infinite;
+      margin-bottom: 16px;
+    }
+    .win-sub { color: var(--text-dim); margin-bottom: 24px; }
+
+    /* Turn indicator */
+    .turn-indicator {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 1;
+    }
+    .turn-indicator.show { opacity: 1; }
+
+    /* Timer display */
+    .timer-display {
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      transform: translateY(-50%);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--green);
+      z-index: 5;
+    }
+    .timer-display.warning { color: var(--gold); }
+    .timer-display.danger { color: var(--red); animation: pulse 0.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  </style>
+</head>
+<body>
+<div id="game"></div>
+
+<script src="game-engine.js"></script>
+<script src="helpers.js"></script>
+<script src="advanced-ai.js"></script>
+<script src="ui-renderer.js"></script>
+<script src="game-controller.js"></script>
+
+</body>
+</html>
