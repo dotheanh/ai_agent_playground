@@ -2384,19 +2384,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fill();
                 ctx.stroke();
                 
-                // Label "Góc" - màu vàng nhạt sáng
+                // Label "Góc" - không shadow, màu sáng rõ
                 ctx.font = 'bold 13px system-ui';
-                ctx.fillStyle = '#ffcc88';
-                ctx.shadowColor = 'rgba(255,200,100,.8)';
-                ctx.shadowBlur = 6;
+                ctx.fillStyle = '#ffd699';  // Vàng sáng hơn
                 ctx.textAlign = 'left';
                 ctx.fillText('Góc', 22, H - 86);
                 
-                // Giá trị góc - trắng sáng, to, glow mạnh
+                // Giá trị góc - shadow mạnh để nổi bật
                 ctx.font = '900 24px system-ui';
                 ctx.fillStyle = '#ffffff';
-                ctx.shadowColor = 'rgba(255,255,255,1)';
-                ctx.shadowBlur = 15;
+                ctx.shadowColor = 'rgba(255,255,255,.8)';
+                ctx.shadowBlur = 10;
                 ctx.fillText(`${a}°`, 62, H - 87);
                 ctx.restore();
             }
