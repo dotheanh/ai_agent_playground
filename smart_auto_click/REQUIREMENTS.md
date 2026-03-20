@@ -2,38 +2,21 @@
 
 ## Overview
 
-Chương trình auto click thông minh chạy trên Windows với khả năng record và replay script click. Hỗ trợ 2 chế độ: click liên tục tại vị trí hiện tại và replay script đã record.
-
-## Goals
-
-1. Auto click liên tục tại vị trí chuột hiện tại
-2. Record và replay script click với 2 chế độ: position-only và timeline-based
-3. Hotkey F1 để bắt đầu/dừng
-4. Script có thể edit trực tiếp qua file text
-5. GUI đơn giản, dễ sử dụng
-
-## Technical Stack
-
-- **Runtime**: Python 3.10+
-- **GUI**: Tkinter (built-in)
-- **Mouse Control**: `pynput` hoặc `pyautogui`
-- **Hotkey**: `keyboard` library
-- **Script Format**: JSON (dễ đọc, dễ edit)
+Chương trình auto click thông minh chạy trên Windows với khả năng record và replay script click. Hỗ trợ 3 chế độ: click liên tục, replay position, replay timeline.
 
 ## Features
 
 ### 1. Continuous Click Mode
-- Click liên tục tại vị trí chuột hiện tại
-- Configurable click interval (ms)
+- Click liên tục tại vị trí chuột hiện tại (lock position)
+- Configurable click interval (10ms - 5000ms)
 - Left/Right/Middle click support
 - Single/Double click support
 
 ### 2. Script Recording Mode
 
 #### Position-Only Mode
-- Record vị trí click (x, y) và loại click (left/right/middle)
-- Không record thời gian
-- Khi replay: click tuần tự các điểm với interval cố định (configurable)
+- Record vị trí click (x, y) và loại click
+- Khi replay: click tuần tự các điểm với interval cố định
 - Use case: click lặp lại các vị trí cố định
 
 #### Timeline Mode
@@ -41,28 +24,34 @@ Chương trình auto click thông minh chạy trên Windows với khả năng re
 - Replay đúng timing như khi record
 - Use case: automation script phức tạp cần timing chính xác
 
-### 3. Script Management
+### 3. Loop Script
+- Chỉ hiển thị khi ở mode script
+- Checkbox để bật/tắt loop
+- Nhập số lần loop (0 = vô hạn)
+- Script tự động lặp lại sau khi chạy xong
+
+### 4. Script Management
 - Save/Load script từ file JSON
-- Edit script trực tiếp trong text editor
+- Edit script trực tiếp trong text editor (JSON)
+- Reload script sau khi edit
 - Clone/Duplicate actions
-- Adjust positions/timing manually
 
-### 4. Hotkeys
-- **F1**: Start/Stop clicking
-- **F2**: Start/Stop recording
-- **F3**: Replay script
-- **ESC**: Emergency stop (global)
+### 5. Hotkeys
+- **F1**: Start/Stop (click hoặc replay tùy mode)
+- **F2**: Record (chỉ hoạt động ở mode script)
+- **ESC**: Emergency stop (stop tất cả)
 
-### 5. GUI Features
+### 6. GUI Features
 - Mode selector: Continuous / Position-Only / Timeline
 - Click interval slider (10ms - 5000ms)
 - Click type selector: Left / Right / Middle
 - Click count selector: Single / Double
+- Loop checkbox + count input (script modes only)
+- Hotkey bar hiển thị các phím tắt
 - Recording status indicator
 - Script preview panel
-- Start/Stop buttons
-- Load/Save script buttons
-- Edit script button (open in default text editor)
+- Position display (current mouse position)
+- Load/Save/Edit/Reload/Clear script buttons
 
 ## Script Format
 
@@ -74,8 +63,7 @@ Chương trình auto click thông minh chạy trên Windows với khả năng re
   "interval": 500,
   "actions": [
     {"x": 100, "y": 200, "button": "left", "clicks": 1},
-    {"x": 300, "y": 400, "button": "left", "clicks": 2},
-    {"x": 500, "y": 600, "button": "right", "clicks": 1}
+    {"x": 300, "y": 400, "button": "left", "clicks": 2}
   ]
 }
 ```
@@ -87,8 +75,7 @@ Chương trình auto click thông minh chạy trên Windows với khả năng re
   "mode": "timeline",
   "actions": [
     {"time": 0.0, "x": 100, "y": 200, "button": "left", "clicks": 1},
-    {"time": 1.5, "x": 300, "y": 400, "button": "left", "clicks": 2},
-    {"time": 3.2, "x": 500, "y": 600, "button": "right", "clicks": 1}
+    {"time": 1.5, "x": 300, "y": 400, "button": "left", "clicks": 2}
   ]
 }
 ```
@@ -99,14 +86,13 @@ Chương trình auto click thông minh chạy trên Windows với khả năng re
 smart_auto_click/
 ├── REQUIREMENTS.md
 ├── main.py              # Entry point + GUI
-├── clicker.py           # Click execution logic
+├── clicker.py           # Click execution logic + ScriptPlayer
 ├── recorder.py          # Recording logic
 ├── script_manager.py    # Load/Save/Edit scripts
 ├── hotkey_handler.py    # Global hotkey listener
 ├── config.py            # Configuration constants
-├── scripts/             # Saved scripts directory
-│   ├── example_position.json
-│   └── example_timeline.json
+├── Smart Auto Click.bat # Launcher
+├── scripts/              # Saved scripts directory
 └── requirements.txt     # Python dependencies
 ```
 
@@ -114,59 +100,50 @@ smart_auto_click/
 
 ```
 pynput>=1.7.6
+pyautogui>=0.9.54
 keyboard>=0.13.5
 ```
 
 ## Usage Flow
 
 ### Continuous Click
-1. Mở app
-2. Chọn "Continuous Click" mode
-3. Di chuyển chuột đến vị trí cần click
-4. Nhấn F1 để bắt đầu
-5. Nhấn F1 hoặc ESC để dừng
+1. Mở app → chọn "Continuous Click" mode
+2. Di chuyển chuột đến vị trí cần click
+3. Nhấn F1 để bắt đầu (sẽ lock vị trí và click liên tục)
+4. Nhấn F1 hoặc ESC để dừng
 
-### Position-Only Recording
+### Recording Position-Only
 1. Chọn "Position-Only" mode
-2. Set interval (ví dụ: 500ms)
+2. Set interval (vd: 500ms)
 3. Nhấn F2 để bắt đầu record
 4. Click vào các vị trí cần record
 5. Nhấn F2 để dừng record
 6. Save script
-7. Nhấn F3 để replay
+7. Tick "Loop Script" nếu muốn lặp lại
+8. Nhấn F1 để replay
 
-### Timeline Recording
+### Recording Timeline
 1. Chọn "Timeline" mode
 2. Nhấn F2 để bắt đầu record
 3. Click vào các vị trí theo đúng timing mong muốn
 4. Nhấn F2 để dừng record
 5. Save script
-6. Nhấn F3 để replay
+6. Tick "Loop Script" nếu muốn lặp lại
+7. Nhấn F1 để replay
 
 ### Edit Script
 1. Load script
-2. Click "Edit Script" button → mở file JSON trong notepad/VSCode
+2. Click "Edit" → mở file JSON trong notepad/VSCode
 3. Chỉnh sửa positions/timing/actions
 4. Save file
-5. Reload script trong app
+5. Click "Reload" trong app
 6. Replay để test
 
 ## Safety Features
 
 - Emergency stop (ESC) hoạt động mọi lúc
-- Confirmation dialog trước khi replay script dài
 - Script validation trước khi load
 - Click rate limiter (tối đa 100 clicks/second)
-
-## Future Enhancements (Optional)
-
-- Keyboard input recording
-- Conditional logic (if-else)
-- Loop count configuration
-- Random delay between clicks
-- Image recognition để click vào UI element
-- Multi-monitor support
-- Macro variables (dynamic positions)
 
 ## Running
 
@@ -175,8 +152,4 @@ pip install -r requirements.txt
 python main.py
 ```
 
-## Notes
-
-- Cần chạy với quyền admin để global hotkey hoạt động
-- Script files lưu ở `scripts/` directory
-- Backup scripts trước khi edit để tránh mất data
+Hoặc double-click `Smart Auto Click.bat`
