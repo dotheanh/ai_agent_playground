@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "mode": "position",
+  "actions": [
+    {
+      "x": 1042,
+      "y": 378,
+      "button": "left",
+      "clicks": 1
+    },
+    {
+      "x": 633,
+      "y": 1051,
+      "button": "left",
+      "clicks": 1
+    },
+    {
+      "x": 1075,
+      "y": 380,
+      "button": "left",
+      "clicks": 1
+    }
+  ],
+  "interval": 500
+}

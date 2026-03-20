@@ -31,15 +31,16 @@ class Clicker:
             return mouse.Button.middle
 
     def _perform_click(self, x, y):
-        """Perform click at position using pynput"""
+        """Perform click at locked position using pynput"""
         btn = self._get_pynput_button()
         with mouse.Controller() as mc:
             mc.position = (x, y)
+            time.sleep(0.01)  # Small delay to ensure position is set
             for _ in range(self.click_count):
                 mc.click(btn)
 
     def _continuous_click_loop(self):
-        """Main loop for continuous clicking"""
+        """Main loop for continuous clicking - LOCK position"""
         while self.is_running:
             if not self.is_paused:
                 if self._current_pos:
@@ -55,9 +56,12 @@ class Clicker:
         self._current_pos = (x, y)
 
     def start_continuous(self):
-        """Start continuous clicking at current position"""
+        """Start continuous clicking - CAPTURE current mouse position"""
         if self.is_running:
             return False
+
+        # Capture current mouse position NOW
+        self._current_pos = pyautogui.position()
 
         self.is_running = True
         self.is_paused = False
