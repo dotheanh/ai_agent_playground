@@ -333,6 +333,11 @@
         <!-- Keep legacy HTML controls hidden (logic still reads these values) -->
         <div class="panel" style="display:none">
             <h1>Gunny-like Demo</h1>
+
+            <!-- Hidden legacy elements still required by game.js logic -->
+            <b id="hpP" style="display:none">0</b>
+            <b id="hpB" style="display:none">0</b>
+
             <label>Góc bắn (<span id="angV">45</span>°)</label>
             <input id="ang" type="range" min="0" max="90" value="45" />
 
