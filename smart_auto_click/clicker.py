@@ -212,12 +212,6 @@ class ScriptPlayer:
 
         self.is_running = False
 
-                # Wait interval between actions (except last)
-                if i < len(actions) - 1:
-                    time.sleep(interval_ms / 1000.0)
-
-        self.is_running = False
-
     def _execute_action(self, action):
         """Execute a single click action"""
         x = action.get("x")
