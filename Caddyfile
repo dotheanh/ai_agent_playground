@@ -28,23 +28,14 @@ nhoxtheanh.duckdns.org {
 	@mp4 path *.mp4
 	header @mp4 Content-Type video/mp4
 
+	# Redirect /boman to /boman/
+	redir /boman /boman/ permanent
+
 	# Bot Chat - WebSocket chat room
 	handle_path /boman/* {
 		reverse_proxy localhost:3010 {
 			header_up Host {upstream_hostport}
 			header_up X-Real-IP {remote_host}
-			header_up X-Forwarded-For {remote_host}
-			header_up X-Forwarded-Proto {scheme}
-		}
-	}
-
-	# Bot Chat root path
-	handle /boman {
-		reverse_proxy localhost:3010 {
-			header_up Host {upstream_hostport}
-			header_up X-Real-IP {remote_host}
-			header_up X-Forwarded-For {remote_host}
-			header_up X-Forwarded-Proto {scheme}
 		}
 	}
 
@@ -64,6 +55,12 @@ nhoxtheanh.duckdns.org {
 	# Gunny game
 	handle_path /gunny/* {
 		root * /var/www/tools/gunny
+		file_server
+	}
+
+	# Card game (Tiến Lên Miền Nam)
+	handle_path /card_game/* {
+		root * /var/www/tools
 		file_server
 	}
 
