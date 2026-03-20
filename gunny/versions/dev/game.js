@@ -2376,25 +2376,21 @@ document.addEventListener('DOMContentLoaded', () => {
             function drawAngleIndicator(){
                 const a = Math.round(parseFloat(ang.value));
                 ctx.save();
-                // Nền trong suốt hơn
-                ctx.fillStyle = 'rgba(0,0,0,.2)';
-                ctx.strokeStyle = 'rgba(255,255,255,.3)';
-                ctx.lineWidth = 1;
+                // Chỉ vẽ viền, không vẽ nền (để text nổi rõ)
+                ctx.strokeStyle = 'rgba(255,255,255,.4)';
+                ctx.lineWidth = 2;
                 ctx.roundRect(12, H - 110, 120, 40, 12);
-                ctx.fill();
                 ctx.stroke();
                 
                 // Label "Góc" - không shadow, màu sáng rõ
                 ctx.font = 'bold 13px system-ui';
-                ctx.fillStyle = '#ffd699';  // Vàng sáng hơn
+                ctx.fillStyle = '#ffddaa';  // Vàng sáng hơn
                 ctx.textAlign = 'left';
                 ctx.fillText('Góc', 22, H - 86);
                 
-                // Giá trị góc - shadow mạnh để nổi bật
-                ctx.font = '900 24px system-ui';
+                // Giá trị góc - không shadow, chỉ màu trắng đậm
+                ctx.font = '900 26px system-ui';
                 ctx.fillStyle = '#ffffff';
-                ctx.shadowColor = 'rgba(255,255,255,.8)';
-                ctx.shadowBlur = 10;
                 ctx.fillText(`${a}°`, 62, H - 87);
                 ctx.restore();
             }
@@ -2497,8 +2493,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 drawAimPreview();
 
                 // --- Canvas UI (vẽ trước nhân vật) ---
-                drawPowerBar();
+                // Vẽ angle indicator trước (nằm trên cùng)
                 drawAngleIndicator();
+                drawPowerBar();
                 drawDPad();
                 drawInfoButton();
                 drawResetButton();
