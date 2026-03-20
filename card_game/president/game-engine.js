@@ -7,12 +7,23 @@ const RANKS = ['3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A', '2']
 const RANK_VALUES = { '3':0,'4':1,'5':2,'6':3,'7':4,'8':5,'9':6,'10':7,'J':8,'Q':9,'K':10,'A':11,'2':12 };
 const SUIT_VALUES = { '♠':0, '♣':1, '♦':2, '♥':3 };
 
+// Export to window for other modules
+window.SUITS = SUITS;
+window.RANKS = RANKS;
+window.RANK_VALUES = RANK_VALUES;
+window.SUIT_VALUES = SUIT_VALUES;
+
 // Card value for comparison: rank * 4 + suit
 function cardValue(card) { return RANK_VALUES[card.rank] * 4 + SUIT_VALUES[card.suit]; }
 function isRed(suit) { return suit === '♦' || suit === '♥'; }
 
+// Export functions for other modules
+window.cardValue = cardValue;
+window.isRed = isRed;
+
 // ===== COMBO TYPES =====
 const COMBO = { SINGLE: 1, PAIR: 2, TRIPLE: 3, STRAIGHT: 4, FOUR: 5 };
+window.COMBO = COMBO;
 
 function detectCombo(cards) {
   if (!cards.length) return null;
@@ -50,6 +61,10 @@ function canBeat(prev, next) {
   return next.high > prev.high;
 }
 
+// Export combo functions
+window.detectCombo = detectCombo;
+window.canBeat = canBeat;
+
 // ===== DECK & DEAL =====
 function createDeck() {
   const deck = [];
@@ -63,3 +78,7 @@ function shuffle(arr) {
   }
   return arr;
 }
+
+// Export deck functions
+window.createDeck = createDeck;
+window.shuffle = shuffle;

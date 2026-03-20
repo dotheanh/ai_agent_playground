@@ -182,6 +182,27 @@
       border: 1px solid rgba(255,255,255,0.1);
     }
     .btn-pass:hover:not(:disabled) { background: rgba(255,255,255,0.15); }
+    .btn-pass.can-pass {
+      background: rgba(239,68,68,0.2);
+      color: var(--red);
+      border: 1px solid rgba(239,68,68,0.5);
+      animation: pulse-pass 1.5s infinite;
+    }
+    .btn-pass.can-pass:hover {
+      background: rgba(239,68,68,0.35) !important;
+    }
+    @keyframes pulse-pass {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); }
+      50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.4); }
+    }
+    .btn-hint {
+      background: rgba(251,191,36,0.15);
+      color: var(--gold);
+      border: 1px solid rgba(251,191,36,0.3);
+      padding: 10px 16px;
+    }
+    .btn-hint:hover:not(:disabled) { background: rgba(251,191,36,0.25); }
+    .btn-hint:disabled { opacity: 0.3; cursor: not-allowed; }
     .btn-sort {
       background: rgba(124,58,237,0.2);
       color: var(--accent2);
@@ -306,16 +327,49 @@
     .hand .card.selected:hover { transform: translateY(-22px); }
 
     /* Played cards on table */
-    /* Played cards: smaller */
+    /* Played cards: smaller, no flicker animation */
     .played-cards .card {
       width: 60px;
       height: 84px;
-      animation: card-play 0.3s ease-out;
       cursor: default;
     }
     .played-cards .card::before { font-size: 14px; top: 2px; left: 3px; }
     .played-cards .card::after { font-size: 14px; bottom: 2px; right: 3px; }
     .played-cards .card .center-suit { font-size: 24px; }
+
+    /* Flying card animation */
+    .flying-card {
+      position: fixed;
+      width: 60px;
+      height: 84px;
+      border-radius: 8px;
+      background: #fff;
+      z-index: 200;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: card-fly 0.4s ease-out forwards;
+    }
+    .flying-card.red { color: #dc2626; }
+    .flying-card.black { color: #1a1a2e; }
+    .flying-card::before {
+      content: attr(data-rank) "\A" attr(data-suit);
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      font-size: 14px;
+      line-height: 1.1;
+      white-space: pre;
+      text-align: center;
+    }
+    .flying-card .center-suit { font-size: 24px; }
+    @keyframes card-fly {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
 
     /* Card back for opponents */
     .card-back {
@@ -389,6 +443,33 @@
     }
     .menu-box .btn-start:hover { box-shadow: 0 4px 30px rgba(0,212,255,0.5); transform: translateY(-2px); }
 
+    /* Difficulty selector */
+    .difficulty-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    .diff-btn {
+      flex: 1;
+      padding: 8px 4px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      color: var(--text-dim);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .diff-btn:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+    .diff-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,212,255,0.1); }
+    .diff-btn.active.medium { border-color: var(--gold); color: var(--gold); background: rgba(251,191,36,0.1); }
+    .diff-btn.active.hard { border-color: var(--red); color: var(--red); background: rgba(239,68,68,0.1); }
+    .diff-label { font-size: 11px; color: var(--text-dim); margin-bottom: 8px; }
+
     /* Win overlay */
     .win-text {
       font-size: 28px;
@@ -434,7 +515,7 @@
 
 <script src="game-engine.js"></script>
 <script src="helpers.js"></script>
-<script src="ai-player.js"></script>
+<script src="advanced-ai.js"></script>
 <script src="ui-renderer.js"></script>
 <script src="game-controller.js"></script>
 

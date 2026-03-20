@@ -1,5 +1,11 @@
 // ===== HELPER FUNCTIONS =====
 
+// Export to window for other modules
+window.groupByRank = groupByRank;
+window.findStraights = findStraights;
+window.sortHand = sortHand;
+window.detectComboGroups = detectComboGroups;
+
 function groupByRank(hand) {
   const groups = {};
   for (const c of hand) {

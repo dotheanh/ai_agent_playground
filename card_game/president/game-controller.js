@@ -83,9 +83,45 @@ function updateCardSelectionStyles() {
 
 function toggleSelect(idx) {
   if (state.gameOver) return;
-  if (state.selectedIndices.has(idx)) state.selectedIndices.delete(idx);
-  else state.selectedIndices.add(idx);
+
+  if (state.selectedIndices.has(idx)) {
+    // Deselect: just remove this card
+    state.selectedIndices.delete(idx);
+  } else {
+    // Select: try to auto-complete the combo group this card belongs to
+    state.selectedIndices.add(idx);
+    tryAutoSelectCombo(idx);
+  }
   updateCardSelectionStyles();
+}
+
+// Auto-select sibling cards in the same combo group if the resulting combo is valid to play
+function tryAutoSelectCombo(clickedIdx) {
+  const hand = state.hands[0];
+  const groupLabels = detectComboGroups(hand);
+  const clickedLabel = groupLabels[clickedIdx];
+
+  // No group label = isolated card, nothing to auto-select
+  if (!clickedLabel) return;
+
+  // Find all indices in the same group
+  const groupIndices = groupLabels
+    .map((lbl, i) => lbl === clickedLabel ? i : -1)
+    .filter(i => i >= 0);
+
+  // Build the candidate combo from all group members
+  const groupCards = groupIndices.map(i => hand[i]);
+  const combo = detectCombo(groupCards);
+  if (!combo) return;
+
+  // Check if this combo is valid to play right now
+  const isValid = state.newRound || !state.lastCombo || canBeat(state.lastCombo, combo);
+  if (!isValid) return;
+
+  // Auto-select all cards in the group
+  for (const i of groupIndices) {
+    state.selectedIndices.add(i);
+  }
 }
 
 // Drag and drop for card reordering
@@ -216,6 +252,74 @@ function onDragEnd(e) {
   renderGame(state);
 }
 
+// Get screen position of player's hand card at index
+function getPlayerCardScreenPos(cardIdx) {
+  const handEl = document.getElementById('player-hand');
+  if (!handEl) return { x: 200, y: 500 };
+  const cardEl = handEl.querySelector(`.card[data-idx="${cardIdx}"]`);
+  if (!cardEl) return { x: 200, y: 500 };
+  const rect = cardEl.getBoundingClientRect();
+  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+}
+
+// Get screen position of opponent avatar
+function getOpponentScreenPos(playerIdx) {
+  const oppEls = document.querySelectorAll('.opponent');
+  if (!oppEls || oppEls.length < playerIdx) return { x: 240, y: 100 };
+  const rect = oppEls[playerIdx - 1].getBoundingClientRect();
+  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+}
+
+// Animate cards flying from source to table center
+function animatePlay(playerIdx, cards, callback) {
+  const playedCardsEl = document.querySelector('.played-cards');
+  if (!playedCardsEl) { callback && callback(); return; }
+
+  const tableRect = playedCardsEl.getBoundingClientRect();
+  const targetX = tableRect.left + tableRect.width / 2 - 30;
+  const targetY = tableRect.top + tableRect.height / 2 - 42;
+
+  // Get source position
+  const sourcePos = playerIdx === 0
+    ? getPlayerCardScreenPos(0)
+    : getOpponentScreenPos(playerIdx);
+
+  cards.forEach((card, i) => {
+    const el = document.createElement('div');
+    el.className = `flying-card ${isRed(card.suit) ? 'red' : 'black'}`;
+    el.setAttribute('data-rank', card.rank);
+    el.setAttribute('data-suit', card.suit);
+    el.innerHTML = `<span class="center-suit">${card.suit}</span>`;
+
+    // Start position (offset each card slightly)
+    const offsetX = (i - (cards.length - 1) / 2) * 20;
+    const startX = sourcePos.x - 30 + offsetX;
+    const startY = sourcePos.y - 42;
+
+    el.style.left = startX + 'px';
+    el.style.top = startY + 'px';
+
+    // Animation
+    el.style.transition = 'all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    document.body.appendChild(el);
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+      el.style.left = (targetX + offsetX) + 'px';
+      el.style.top = targetY + 'px';
+      el.style.transform = 'scale(0.75)';
+    });
+
+    // Clean up after animation
+    setTimeout(() => {
+      el.remove();
+      if (i === cards.length - 1) {
+        callback && callback();
+      }
+    }, 380);
+  });
+}
+
 function calculateGapIndex(clientX) {
   const handEl = document.getElementById('player-hand');
   if (!handEl) return 0;
@@ -313,19 +417,32 @@ function onPlay() {
     if (idx >= 0) state.hands[0].splice(idx, 1);
   }
 
-  // Play cards
-  state.lastPlayedCards = selected;
+  // Update state (except lastPlayedCards - will set after animation)
   state.lastCombo = combo;
-  state.lastPlayer = 0;  // Player 0 is the last to play
+  state.lastPlayer = 0;
   state.passedPlayers.clear();
   state.newRound = false;
   state.selectedIndices.clear();
   state.statusMsg = '';
 
-  checkWin(0);
-  if (!state.gameOver) {
-    nextTurn();
-  }
+  // Render first WITHOUT showing played cards (table shows old cards or empty)
+  renderGame(state);
+
+  // Animate cards flying to table, then update lastPlayedCards
+  animatePlay(0, selected, () => {
+    state.lastPlayedCards = selected;
+    const playedCardsEl = document.querySelector('.played-cards');
+    if (playedCardsEl) {
+      playedCardsEl.innerHTML = selected.map(c =>
+        `<div class="card ${isRed(c.suit) ? 'red' : 'black'}" data-rank="${c.rank}" data-suit="${c.suit}"><span class="center-suit">${c.suit}</span></div>`
+      ).join('');
+    }
+    checkWin(0);
+    if (!state.gameOver) {
+      updateAIContext();
+      nextTurn();
+    }
+  });
 }
 
 function onPass() {
@@ -360,6 +477,38 @@ function onPass() {
     // Continue to next player
     nextTurn();
   }
+}
+
+function onHint() {
+  if (state.currentPlayer !== 0 || state.gameOver) return;
+
+  // Ask AI for the best move
+  const suggestion = (window.AI && window.AI.selectCards)
+    ? window.AI.selectCards(state.hands[0], state.lastCombo, state.newRound, state)
+    : null;
+
+  // Clear current selection
+  state.selectedIndices.clear();
+
+  if (!suggestion) {
+    // AI says pass - show hint in status
+    state.statusMsg = 'Gợi ý: Bỏ lượt';
+    renderGame(state);
+    return;
+  }
+
+  // Select the suggested cards
+  const hand = state.hands[0];
+  for (const card of suggestion) {
+    const idx = hand.findIndex(c => c.rank === card.rank && c.suit === card.suit);
+    if (idx >= 0) state.selectedIndices.add(idx);
+  }
+
+  state.statusMsg = `Gợi ý: Đánh ${suggestion.length} lá`;
+  updateCardSelectionStyles();
+  // Update status without full re-render
+  const statusEl = document.querySelector('.status-msg');
+  if (statusEl) statusEl.textContent = state.statusMsg;
 }
 
 function onSort() {
@@ -462,12 +611,46 @@ function nextTurn() {
   }
 }
 
+function setDifficulty(level) {
+  if (window.AI) window.AI.setDifficulty(level);
+  updateDifficultyUI();
+}
+
+function updateDifficultyUI() {
+  const current = window.AI ? window.AI.getDifficulty() : 'medium';
+  ['easy', 'medium', 'hard'].forEach(d => {
+    const btn = document.getElementById(`diff-${d}`);
+    if (btn) {
+      btn.className = `diff-btn${current === d ? ` active ${d}` : ''}`;
+    }
+  });
+}
+
+function updateAIContext() {
+  if (!window.AI || !window.AI.updateContext) return;
+
+  // Track played cards and hand sizes
+  const handSizes = state.hands.map(h => h.length);
+
+  window.AI.updateContext({
+    playedCards: state.lastPlayedCards,
+    handSizes: handSizes,
+    currentPlayer: state.currentPlayer
+  });
+}
+
 function aiPlay() {
   if (state.gameOver) return;
   const aiIdx = state.currentPlayer;
   const hand = state.hands[aiIdx];
 
-  const selected = aiSelectCards(hand, state.lastCombo, state.newRound);
+  // Update AI context with current game state
+  updateAIContext();
+
+  // Use advanced AI (or fallback to old aiSelectCards if window.AI not loaded)
+  const selected = (window.AI && window.AI.selectCards)
+    ? window.AI.selectCards(hand, state.lastCombo, state.newRound, state)
+    : aiSelectCards(hand, state.lastCombo, state.newRound);
 
   if (!selected) {
     // AI passes
@@ -503,17 +686,28 @@ function aiPlay() {
     if (idx >= 0) hand.splice(idx, 1);
   }
 
-  state.lastPlayedCards = selected;
+  // Update state (except lastPlayedCards - will set after animation)
   state.lastCombo = detectCombo(selected);
-  state.lastPlayer = aiIdx;  // Track who played last
+  state.lastPlayer = aiIdx;
   state.passedPlayers.clear();
   state.newRound = false;
   state.statusMsg = `${PLAYER_NAMES[aiIdx]} đánh ${selected.length} lá`;
 
-  checkWin(aiIdx);
-  if (!state.gameOver) {
-    nextTurn();
-  }
+  // Render first WITHOUT showing played cards, then animate
+  renderGame(state);
+  animatePlay(aiIdx, selected, () => {
+    state.lastPlayedCards = selected;
+    const playedCardsEl = document.querySelector('.played-cards');
+    if (playedCardsEl) {
+      playedCardsEl.innerHTML = selected.map(c =>
+        `<div class="card ${isRed(c.suit) ? 'red' : 'black'}" data-rank="${c.rank}" data-suit="${c.suit}"><span class="center-suit">${c.suit}</span></div>`
+      ).join('');
+    }
+    checkWin(aiIdx);
+    if (!state.gameOver) {
+      nextTurn();
+    }
+  });
 }
 
 function startGame() {
@@ -549,6 +743,12 @@ function startGame() {
   state.newRound = true;
   state.statusMsg = `${PLAYER_NAMES[firstPlayer]} có 3♠, đánh trước`;
 
+  // Reset AI context for new game
+  if (window.AI) {
+    window.AI.reset();
+    window.AI.updateContext({ handSizes: [13, 13, 13, 13] });
+  }
+
   stopTimer();
   renderGame(state);
 
@@ -567,10 +767,18 @@ function init() {
       <div class="menu-box">
         <h1>TIẾN LÊN</h1>
         <p>Game bài Tiến Lên Miền Nam</p>
+        <div class="diff-label">Chọn độ khó</div>
+        <div class="difficulty-selector">
+          <button class="diff-btn" id="diff-easy" onclick="setDifficulty('easy')">Easy</button>
+          <button class="diff-btn active medium" id="diff-medium" onclick="setDifficulty('medium')">Medium</button>
+          <button class="diff-btn" id="diff-hard" onclick="setDifficulty('hard')">Hard</button>
+        </div>
         <button class="btn-start" onclick="startGame()">Chơi Ngay</button>
       </div>
     </div>
   `;
+  // Set initial difficulty indicator
+  updateDifficultyUI();
 }
 
 init();
