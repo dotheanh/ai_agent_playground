@@ -281,6 +281,57 @@ document.addEventListener('DOMContentLoaded', () => {
             const hpB = document.getElementById('hpB');
             const logEl = document.getElementById('log');
 
+            // Canvas UI state (Gunny-like on-canvas controls)
+            const uiState = {
+                showInfo: false,
+                // right-side dpad
+                dpad: {
+                    cx: W - 120,
+                    cy: H - 150,
+                    size: 46,
+                    gap: 8,
+                },
+                // power bar (bottom)
+                powerBar: {
+                    x: 110,
+                    y: H - 42,
+                    w: W - 220,
+                    h: 16,
+                    dragging: false,
+                },
+                // info button (top-right)
+                infoBtn: {
+                    x: W - 48,
+                    y: 16,
+                    r: 16,
+                },
+                // popup rect
+                popup: {
+                    x: 90,
+                    y: 70,
+                    w: W - 180,
+                    h: H - 140,
+                },
+            };
+
+            function setSliderValue(el, v){
+                const min = parseFloat(el.min ?? '0');
+                const max = parseFloat(el.max ?? '100');
+                const nv = clamp(v, min, max);
+                el.value = String(nv);
+                // keep labels/windVal in sync
+                syncLabels();
+            }
+
+            function isInsideRect(px, py, x, y, w, h){
+                return px >= x && px <= x+w && py >= y && py <= y+h;
+            }
+
+            function dist(px, py, x, y){
+                const dx = px - x, dy = py - y;
+                return Math.hypot(dx, dy);
+            }
+
             const ang = document.getElementById('ang');
             const pow = document.getElementById('pow');
             const wind = document.getElementById('wind');
@@ -2112,6 +2163,244 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            function drawPowerBar(){
+                const pb = uiState.powerBar;
+                // track
+                ctx.save();
+                ctx.globalAlpha = 0.96;
+                // outer frame
+                ctx.fillStyle = 'rgba(0,0,0,.35)';
+                ctx.strokeStyle = 'rgba(255,255,255,.14)';
+                ctx.lineWidth = 1;
+                ctx.roundRect(pb.x-8, pb.y-10, pb.w+16, pb.h+20, 12);
+                ctx.fill();
+                ctx.stroke();
+
+                // inner bg
+                ctx.fillStyle = 'rgba(255,255,255,.08)';
+                ctx.roundRect(pb.x, pb.y, pb.w, pb.h, 999);
+                ctx.fill();
+
+                // fill based on pow
+                const p = parseFloat(pow.value);
+                const min = parseFloat(pow.min);
+                const max = parseFloat(pow.max);
+                const t = (p - min) / (max - min);
+
+                const grad = ctx.createLinearGradient(pb.x, 0, pb.x + pb.w, 0);
+                grad.addColorStop(0, 'rgba(255,255,255,.25)');
+                grad.addColorStop(0.45, 'rgba(255,160,60,.75)');
+                grad.addColorStop(1, 'rgba(255,45,45,.9)');
+
+                ctx.fillStyle = grad;
+                ctx.roundRect(pb.x, pb.y, Math.max(10, pb.w * t), pb.h, 999);
+                ctx.fill();
+
+                // ticks
+                ctx.strokeStyle = 'rgba(0,0,0,.25)';
+                ctx.lineWidth = 1;
+                for(let i=1;i<10;i++){
+                    const x = pb.x + pb.w * (i/10);
+                    ctx.beginPath();
+                    ctx.moveTo(x, pb.y+2);
+                    ctx.lineTo(x, pb.y + pb.h-2);
+                    ctx.stroke();
+                }
+
+                // knob
+                const kx = pb.x + pb.w * t;
+                ctx.fillStyle = 'rgba(255,255,255,.85)';
+                ctx.strokeStyle = 'rgba(0,0,0,.35)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(kx, pb.y + pb.h/2, 11, 0, Math.PI*2);
+                ctx.fill();
+                ctx.stroke();
+
+                // label
+                ctx.font = 'bold 12px system-ui';
+                ctx.fillStyle = 'rgba(233,238,252,.9)';
+                ctx.textAlign = 'center';
+                ctx.fillText(`Lực: ${Math.round(p)}`, pb.x + pb.w/2, pb.y - 14);
+                ctx.restore();
+            }
+
+            function drawDPad(){
+                const d = uiState.dpad;
+                const s = d.size;
+                const g = d.gap;
+                const cx = d.cx;
+                const cy = d.cy;
+
+                // helper draw btn
+                function btn(x,y,w,h,label){
+                    ctx.save();
+                    ctx.fillStyle = 'rgba(0,0,0,.32)';
+                    ctx.strokeStyle = 'rgba(255,255,255,.16)';
+                    ctx.lineWidth = 1;
+                    ctx.roundRect(x,y,w,h,14);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // subtle inner glow
+                    const grad = ctx.createRadialGradient(x+w/2,y+h/2,6,x+w/2,y+h/2,28);
+                    grad.addColorStop(0,'rgba(255,45,45,.18)');
+                    grad.addColorStop(1,'rgba(255,45,45,0)');
+                    ctx.fillStyle = grad;
+                    ctx.roundRect(x+1,y+1,w-2,h-2,13);
+                    ctx.fill();
+
+                    ctx.font = 'bold 20px system-ui';
+                    ctx.fillStyle = 'rgba(233,238,252,.92)';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(label, x+w/2, y+h/2+1);
+                    ctx.restore();
+                }
+
+                const up = {x: cx - s/2, y: cy - (s + g) - s/2, w:s, h:s};
+                const down = {x: cx - s/2, y: cy + (s + g) - s/2, w:s, h:s};
+                const left = {x: cx - (s + g) - s/2, y: cy - s/2, w:s, h:s};
+                const right = {x: cx + (s + g) - s/2, y: cy - s/2, w:s, h:s};
+                const center = {x: cx - s/2, y: cy - s/2, w:s, h:s};
+
+                btn(up.x, up.y, up.w, up.h, '↑');
+                btn(down.x, down.y, down.w, down.h, '↓');
+                btn(left.x, left.y, left.w, left.h, '←');
+                btn(right.x, right.y, right.w, right.h, '→');
+
+                // center is shoot
+                ctx.save();
+                ctx.fillStyle = 'rgba(255,45,45,.22)';
+                ctx.strokeStyle = 'rgba(255,255,255,.22)';
+                ctx.lineWidth = 1;
+                ctx.roundRect(center.x, center.y, center.w, center.h, 14);
+                ctx.fill();
+                ctx.stroke();
+                ctx.font = '900 14px system-ui';
+                ctx.fillStyle = 'rgba(255,255,255,.92)';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('BẮN', center.x + center.w/2, center.y + center.h/2);
+                ctx.restore();
+
+                // stash rects for hit-testing
+                uiState._dpadRects = {up,down,left,right,center};
+            }
+
+            function drawInfoButton(){
+                const b = uiState.infoBtn;
+                ctx.save();
+                ctx.fillStyle = 'rgba(0,0,0,.28)';
+                ctx.strokeStyle = 'rgba(255,255,255,.18)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.font = '900 16px system-ui';
+                ctx.fillStyle = 'rgba(233,238,252,.92)';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('i', b.x, b.y+0.5);
+                ctx.restore();
+            }
+
+            function drawAngleIndicator(){
+                // bottom-left angle text like Gunny
+                const a = Math.round(parseFloat(ang.value));
+                ctx.save();
+                ctx.fillStyle = 'rgba(0,0,0,.28)';
+                ctx.strokeStyle = 'rgba(255,255,255,.12)';
+                ctx.lineWidth = 1;
+                ctx.roundRect(12, H - 58, 120, 40, 12);
+                ctx.fill();
+                ctx.stroke();
+                ctx.font = 'bold 12px system-ui';
+                ctx.fillStyle = 'rgba(233,238,252,.85)';
+                ctx.textAlign = 'left';
+                ctx.fillText('Góc', 22, H - 34);
+                ctx.font = '900 18px system-ui';
+                ctx.fillText(`${a}°`, 62, H - 34);
+                ctx.restore();
+            }
+
+            function drawInfoPopup(){
+                if(!uiState.showInfo) return;
+
+                const p = uiState.popup;
+
+                // overlay
+                ctx.save();
+                ctx.fillStyle = 'rgba(0,0,0,.72)';
+                ctx.fillRect(0,0,W,H);
+
+                // panel
+                ctx.fillStyle = 'rgba(15,15,20,.96)';
+                ctx.strokeStyle = 'rgba(255,255,255,.16)';
+                ctx.lineWidth = 1;
+                ctx.roundRect(p.x, p.y, p.w, p.h, 18);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = 'rgba(233,238,252,.95)';
+                ctx.font = '900 18px system-ui';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
+                ctx.fillText('Gunny Developing (Canvas UI)', p.x + 18, p.y + 16);
+
+                ctx.font = '13px system-ui';
+                ctx.fillStyle = 'rgba(233,238,252,.85)';
+                const lines = [
+                    '- Mũi tên trái/phải: di chuyển',
+                    '- Mũi tên lên/xuống: chỉnh góc',
+                    '- Kéo thanh lực bên dưới để chỉnh lực (đường bay update realtime)',
+                    '- Nút giữa (BẮN): bắn theo góc/lực hiện tại',
+                    '',
+                    'Dev:',
+                    '- Cheat: mở bảng chỉnh config',
+                ];
+                let yy = p.y + 52;
+                for(const s of lines){
+                    ctx.fillText(s, p.x + 18, yy);
+                    yy += 18;
+                }
+
+                // buttons
+                const btns = [];
+                const bw = 150, bh = 38, gap = 12;
+                const bx = p.x + 18;
+                const by = p.y + p.h - bh - 18;
+
+                btns.push({key:'github', label:'GitHub', x: bx, y: by, w:bw, h:bh});
+                btns.push({key:'cheat', label:'Cheat', x: bx + bw + gap, y: by, w:bw, h:bh});
+                btns.push({key:'close', label:'Đóng', x: p.x + p.w - bw - 18, y: by, w:bw, h:bh});
+
+                function drawBtn(b, accent=false){
+                    ctx.save();
+                    ctx.fillStyle = accent ? 'rgba(255,45,45,.22)' : 'rgba(255,255,255,.08)';
+                    ctx.strokeStyle = 'rgba(255,255,255,.16)';
+                    ctx.lineWidth = 1;
+                    ctx.roundRect(b.x,b.y,b.w,b.h,14);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.font = '900 13px system-ui';
+                    ctx.fillStyle = 'rgba(255,255,255,.92)';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(b.label, b.x + b.w/2, b.y + b.h/2);
+                    ctx.restore();
+                }
+
+                drawBtn(btns[0]);
+                drawBtn(btns[1]);
+                drawBtn(btns[2], true);
+
+                uiState._popupBtns = btns;
+
+                ctx.restore();
+            }
+
             function drawAimPreview() {
                 // show predicted arc for player's current settings when it's player's turn and not firing
                 if (turnLock || turn !== 'player' || proj) return;
@@ -2202,6 +2491,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // aiming preview (player)
                 drawAimPreview();
+
+                // --- Canvas UI ---
+                drawPowerBar();
+                drawAngleIndicator();
+                drawDPad();
+                drawInfoButton();
+                drawInfoPopup();
 
                 // players
                 drawPlayer(player, 'rgba(255,255,255,.90)');
@@ -2496,10 +2792,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // UI bindings + keyboard
             function syncLabels() {
-                angV.textContent = ang.value;
-                powV.textContent = pow.value;
+                if(angV) angV.textContent = ang.value;
+                if(powV) powV.textContent = pow.value;
                 windVal = clamp(parseInt(wind.value, 10) / 10, -3.0, 3.0);
-                windV.textContent = windVal.toFixed(1);
+                if(windV) windV.textContent = windVal.toFixed(1);
             }
             ang.addEventListener('input', () => {
                 syncLabels();
@@ -2512,11 +2808,146 @@ document.addEventListener('DOMContentLoaded', () => {
             wind.addEventListener('input', syncLabels);
             syncLabels();
 
+            // ---- Canvas UI input handling ----
+            function canvasPointFromEvent(ev){
+                const rect = canvas.getBoundingClientRect();
+                const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+                const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+                const x = (clientX - rect.left) * (W / rect.width);
+                const y = (clientY - rect.top) * (H / rect.height);
+                return {x,y};
+            }
+
+            function handleDpadPress(key){
+                if(uiState.showInfo) return;
+                if(key === 'left') doMove(-MOVE_STEP);
+                if(key === 'right') doMove(MOVE_STEP);
+                if(key === 'up') setSliderValue(ang, parseFloat(ang.value) + 1);
+                if(key === 'down') setSliderValue(ang, parseFloat(ang.value) - 1);
+                if(key === 'center') {
+                    if(!shootBtn.disabled) shootBtn.click();
+                }
+            }
+
+            let dpadHoldInterval = null;
+            function startHold(key){
+                handleDpadPress(key);
+                stopHold();
+                dpadHoldInterval = setInterval(() => handleDpadPress(key), 90);
+            }
+            function stopHold(){
+                if(dpadHoldInterval){ clearInterval(dpadHoldInterval); dpadHoldInterval = null; }
+            }
+
+            function hitTestDpad(px, py){
+                const r = uiState._dpadRects;
+                if(!r) return null;
+                if(isInsideRect(px,py,r.left.x,r.left.y,r.left.w,r.left.h)) return 'left';
+                if(isInsideRect(px,py,r.right.x,r.right.y,r.right.w,r.right.h)) return 'right';
+                if(isInsideRect(px,py,r.up.x,r.up.y,r.up.w,r.up.h)) return 'up';
+                if(isInsideRect(px,py,r.down.x,r.down.y,r.down.w,r.down.h)) return 'down';
+                if(isInsideRect(px,py,r.center.x,r.center.y,r.center.w,r.center.h)) return 'center';
+                return null;
+            }
+
+            function hitTestPowerBar(px, py){
+                const pb = uiState.powerBar;
+                return isInsideRect(px, py, pb.x-20, pb.y-20, pb.w+40, pb.h+40);
+            }
+
+            function setPowerFromX(px){
+                const pb = uiState.powerBar;
+                const t = clamp((px - pb.x) / pb.w, 0, 1);
+                const min = parseFloat(pow.min);
+                const max = parseFloat(pow.max);
+                setSliderValue(pow, min + t * (max-min));
+            }
+
+            function hitTestInfoBtn(px, py){
+                const b = uiState.infoBtn;
+                return dist(px,py,b.x,b.y) <= b.r + 6;
+            }
+
+            function hitTestPopupButtons(px, py){
+                const list = uiState._popupBtns;
+                if(!uiState.showInfo || !list) return null;
+                for(const b of list){
+                    if(isInsideRect(px,py,b.x,b.y,b.w,b.h)) return b.key;
+                }
+                // click outside popup closes
+                const p = uiState.popup;
+                if(!isInsideRect(px,py,p.x,p.y,p.w,p.h)) return 'close';
+                return null;
+            }
+
+            function onPointerDown(ev){
+                const {x,y} = canvasPointFromEvent(ev);
+
+                // popup mode
+                if(uiState.showInfo){
+                    const key = hitTestPopupButtons(x,y);
+                    if(key === 'close') uiState.showInfo = false;
+                    else if(key === 'github') window.open('https://github.com/dotheanh/ai_agent_playground', '_blank');
+                    else if(key === 'cheat') {
+                        // open legacy cheat modal
+                        $('#configModal').addClass('active');
+                    }
+                    ev.preventDefault();
+                    return;
+                }
+
+                if(hitTestInfoBtn(x,y)){
+                    uiState.showInfo = true;
+                    ev.preventDefault();
+                    return;
+                }
+
+                // power bar drag
+                if(hitTestPowerBar(x,y)){
+                    uiState.powerBar.dragging = true;
+                    setPowerFromX(x);
+                    ev.preventDefault();
+                    return;
+                }
+
+                // dpad
+                const k = hitTestDpad(x,y);
+                if(k){
+                    startHold(k);
+                    ev.preventDefault();
+                    return;
+                }
+            }
+
+            function onPointerMove(ev){
+                if(!uiState.powerBar.dragging) return;
+                const {x} = canvasPointFromEvent(ev);
+                setPowerFromX(x);
+                ev.preventDefault();
+            }
+
+            function onPointerUp(){
+                uiState.powerBar.dragging = false;
+                stopHold();
+            }
+
+            canvas.addEventListener('pointerdown', onPointerDown, {passive:false});
+            window.addEventListener('pointermove', onPointerMove, {passive:false});
+            window.addEventListener('pointerup', onPointerUp);
+
+            canvas.addEventListener('touchstart', onPointerDown, {passive:false});
+            window.addEventListener('touchmove', onPointerMove, {passive:false});
+            window.addEventListener('touchend', onPointerUp);
+
             // Keyboard:
             // - LEFT/RIGHT: move player along terrain
             // - UP/DOWN: adjust angle
             // - Shift + UP/DOWN: adjust power
             // - Space: shoot
+            // Canvas UI:
+            // - D-pad right side: same controls
+            // - Power bar bottom: drag to set power
+            // - Info button top-right: opens popup
             
             let moveInterval = null;
             const MOVE_COST = 8; // stamina per step
