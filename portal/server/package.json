@@ -8,6 +8,9 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
+    "db:seed:export": "python3 seed_from_db.py export --db portal.db --out ../seed/portal_seed.json",
+    "db:seed:import": "python3 seed_from_db.py import --seed ../seed/portal_seed.json --db portal.db",
+    "db:setup": "npm run build && bash scripts/setup-db.sh",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
