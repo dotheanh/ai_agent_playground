@@ -2807,20 +2807,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
                 
                 // If mobile portrait, canvas is rotated -90deg via CSS
-                // Transform screen coordinates to match the rotated canvas internal coordinates
+                // Transform screen coordinates to match the rotated canvas
                 if(isMobilePortrait()) {
-                    // Canvas is rotated -90deg
-                    // Screen (clientX, clientY) relative to rect needs to be transformed
-                    // For -90deg rotation: newX = y, newY = (width - x)
-                    const dx = clientX - rect.left;  // 0 to rect.width (which is visual height)
-                    const dy = clientY - rect.top;   // 0 to rect.height (which is visual width)
-                    
-                    // After -90deg rotation:
-                    // Canvas x = dy (from top, maps to from left in rotated)
-                    // Canvas y = rect.width - dx (from right, maps to from top in rotated)
-                    const x = dy * (W / rect.height);
-                    const y = (rect.width - dx) * (H / rect.width);
-                    
+                    const dx = clientX - rect.left;
+                    const dy = clientY - rect.top;
+                    // For -90deg CSS rotation, map visual coordinates to canvas
+                    // Visual X (dx) maps to Canvas Y (inverted)
+                    // Visual Y (dy) maps to Canvas X
+                    const x = (rect.height - dy) * (W / rect.height);
+                    const y = dx * (H / rect.width);
                     return {x, y};
                 }
                 
