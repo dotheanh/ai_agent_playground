@@ -36,7 +36,10 @@ function startHttpServer({ broker, port = DEFAULT_PORT } = {}) {
       const data = await parseJsonBody(req);
 
       if (req.url === '/hook/permission-request') {
+        console.log('[HTTP Server] === /hook/permission-request ===');
+        console.log('[HTTP Server] Payload:', JSON.stringify(data, null, 2));
         const result = broker.enqueueRequest(data);
+        console.log('[HTTP Server] Enqueued request, result:', result);
         writeJson(res, 200, { status: 'queued', result });
         return;
       }
@@ -56,7 +59,10 @@ function startHttpServer({ broker, port = DEFAULT_PORT } = {}) {
       // Non-permission events (session_start, session_end, notification)
       // Show bubble directly — broker is not involved.
       if (req.url === '/hook/event') {
-        console.log('[HTTP Server] non-permission event:', data.type);
+        console.log('[HTTP Server] === /hook/event ===');
+        console.log('[HTTP Server] Event type:', data.type);
+        console.log('[HTTP Server] Message:', data.message);
+        console.log('[HTTP Server] Payload:', JSON.stringify(data, null, 2));
         showBubble(data);
         writeJson(res, 200, { status: 'ok' });
         return;

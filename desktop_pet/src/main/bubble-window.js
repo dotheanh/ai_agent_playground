@@ -16,6 +16,7 @@ const AUTO_HIDE = {
   session_start: 8000,
   session_end: 5000,
   notification: 6000,
+  task_completed: 4000,
 };
 
 /**
@@ -83,7 +84,15 @@ function createBubbleWindow() {
  * Show bubble at calculated position
  */
 function showBubble(data) {
-  if (!mainWindow || mainWindow.isDestroyed()) return;
+  console.log('[Bubble] === showBubble ===');
+  console.log('[Bubble] Data:', JSON.stringify(data, null, 2));
+  console.log('[Bubble] Type:', data.type);
+  console.log('[Bubble] Message:', data.message);
+
+  if (!mainWindow || mainWindow.isDestroyed()) {
+    console.log('[Bubble] Main window not available');
+    return;
+  }
 
   // Clear any existing hide timer
   if (hideTimer) {
@@ -92,6 +101,7 @@ function showBubble(data) {
   }
 
   if (!bubbleWindow || bubbleWindow.isDestroyed()) {
+    console.log('[Bubble] Creating new bubble window');
     createBubbleWindow();
   }
 
@@ -102,22 +112,29 @@ function showBubble(data) {
   bubbleWindow.moveTop(); // Ensure bubble is above main window
 
   if (isBubbleReady) {
+    console.log('[Bubble] Sending to bubble window');
     bubbleWindow.webContents
       .executeJavaScript(`showBubble(${JSON.stringify(data)})`)
       .catch((err) => console.error('[Bubble] showBubble failed:', err.message));
   } else {
+    console.log('[Bubble] Queuing pending data');
     pendingBubbleData = data;
   }
 
   // Auto-hide for passive types only. Interactive types (permission_request, ask_question)
   // stay until user clicks Focus button.
+  const autoHideMs = AUTO_HIDE[data.type];
+  console.log('[Bubble] Auto-hide for type:', data.type, '-', autoHideMs, 'ms');
+
   if (!AUTO_HIDE.hasOwnProperty(data.type)) {
     // permission_request and ask_question have no auto-hide
+    console.log('[Bubble] NO auto-hide (interactive type)');
     return;
   }
 
   if (hideTimer) clearTimeout(hideTimer);
   hideTimer = setTimeout(() => {
+    console.log('[Bubble] Auto-hiding bubble');
     hideBubble();
   }, AUTO_HIDE[data.type]);
 }

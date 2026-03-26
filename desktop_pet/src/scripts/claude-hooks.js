@@ -94,10 +94,10 @@ function summarizeToolInput(toolInput) {
 }
 
 function pickMessage(payload) {
-  const eventType = String(payload.hook_event_name || payload.event || '').trim();
+  const rawEventType = String(payload.hook_event_name || payload.event || '').trim();
 
   // TaskCompleted: use task_subject or create generic message
-  if (eventType === 'TaskCompleted') {
+  if (rawEventType === 'TaskCompleted') {
     if (payload.task_subject && payload.task_subject.trim()) {
       return 'Task completed: ' + payload.task_subject.trim();
     }
@@ -145,8 +145,16 @@ async function main() {
     process.exit(2);
   }
 
+  // LOG: Raw payload received
+  console.log('[Hook] RAW PAYLOAD:', JSON.stringify(rawPayload, null, 2));
+
+  const hookEventName = rawPayload.hook_event_name || rawPayload.event || 'UNKNOWN';
+  console.log(`[Hook] Event type: ${hookEventName}`);
+
   const eventType = normalizeEventType(rawPayload);
   const requestId = deriveRequestId(rawPayload);
+
+  console.log(`[Hook] Normalized type: ${eventType}, request_id: ${requestId}`);
 
   if (eventType === 'permission_request' || eventType === 'ask_question') {
     const brokerPayload = {
@@ -156,6 +164,7 @@ async function main() {
       toolName: rawPayload.tool_name || rawPayload.tool || 'Unknown',
       options: extractOptions(rawPayload),
     };
+    console.log('[Hook] Sending permission_request to /hook/permission-request');
     try { await httpPost('/hook/permission-request', brokerPayload); }
     catch { process.exit(2); }
   } else if (eventType === 'post_tool_use') {
@@ -171,17 +180,25 @@ async function main() {
   } else if (eventType === 'notification') {
     // Check if Claude is waiting for user input → show session_end bubble
     const notifType = rawPayload.notification_type || '';
-    if (notifType === 'idle_prompt' || notifType === 'permission_prompt') {
+    const isTaskCompleted = hookEventName === 'TaskCompleted';
+
+    console.log(`[Hook] notification type: ${notifType}, isTaskCompleted: ${isTaskCompleted}`);
+
+    if (notifType === 'idle_prompt' || notifType === 'permission_prompt' || isTaskCompleted) {
       const brokerPayload = {
-        type: notifType === 'idle_prompt' ? 'session_end' : eventType,
+        type: isTaskCompleted ? 'task_completed' : (notifType === 'idle_prompt' ? 'session_end' : eventType),
         message: pickMessage(rawPayload),
         options: [],
       };
+      console.log(`[Hook] Sending ${brokerPayload.type} to /hook/event`);
       try { await httpPost('/hook/event', brokerPayload); }
       catch { /* non-critical */ }
+    } else {
+      console.log(`[Hook] Skipping notification (notifType: ${notifType})`);
     }
   } else {
     // Other events: show bubble directly
+    console.log(`[Hook] Sending ${eventType} to /hook/event`);
     try {
       await httpPost('/hook/event', {
         type: eventType,
