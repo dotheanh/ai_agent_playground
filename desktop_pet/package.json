@@ -11,6 +11,7 @@
     "build:win": "vite build && node scripts/copy-assets.js && electron-builder --win",
     "setup-hooks": "node scripts/setup-claude-hooks.js",
     "test-bubble": "node scripts/test-bubble.js",
+    "trigger-permission": "node scripts/trigger-permission.js",
     "test:permission-broker": "node --test test/permission-broker.test.js"
   },
   "devDependencies": {
