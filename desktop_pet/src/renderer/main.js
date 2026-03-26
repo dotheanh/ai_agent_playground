@@ -108,7 +108,6 @@ let isMouseDown = false;
 let lastMouseX = 0;
 let lastMouseY = 0;
 let autoRotate = false; // Auto-rotate toggle
-let showRuler = false; // Ruler overlay toggle
 let isAlwaysOnTop = true; // Local state for always-on-top
 let dragStartX = 0, dragStartY = 0; // For manual window drag
 const clock = new THREE.Clock();
@@ -316,9 +315,8 @@ function showCustomContextMenu(x, y) {
   const menu = document.createElement('div');
   menu.id = 'custom-context-menu';
   menu.innerHTML = `
-    <div class="menu-item" data-action="toggle-move">${isDragging ? '✓ Orbit Camera' : 'Move Window'}</div>
+    <div class="menu-item" data-action="toggle-move">${isDragging ? 'Orbit Camera' : 'Move Window'}</div>
     <div class="menu-item" data-action="toggle-auto">${autoRotate ? '✓ Auto-Rotate' : 'Auto-Rotate'}</div>
-    <div class="menu-item" data-action="toggle-ruler">${showRuler ? '✓ Ruler' : 'Ruler'}</div>
     <div class="menu-separator"></div>
     <div class="menu-item" data-action="always-on-top">${isAlwaysOnTop ? '✓ Always on Top' : 'Always on Top'}</div>
     <div class="menu-separator"></div>
@@ -356,13 +354,11 @@ function showCustomContextMenu(x, y) {
       case 'toggle-move':
         isDragging = !isDragging;
         updateCursor();
+        // Toggle ruler with move mode
+        if (isDragging) showRulerOverlay(); else hideRulerOverlay();
         break;
       case 'toggle-auto':
         autoRotate = !autoRotate;
-        break;
-      case 'toggle-ruler':
-        showRuler = !showRuler;
-        if (showRuler) showRulerOverlay(); else hideRulerOverlay();
         break;
       case 'always-on-top':
         window.electronAPI.toggleAlwaysOnTop();
