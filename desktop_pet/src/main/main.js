@@ -1,6 +1,7 @@
 const { app, BrowserWindow, screen, Menu, Tray, nativeImage } = require('electron');
 const path = require('path');
 const { startHttpServer } = require('./http-server');
+const { initBubbleManager, syncBubblePosition, destroyBubbleWindow } = require('./bubble-window');
 
 let mainWindow = null;
 let tray = null;
@@ -32,6 +33,12 @@ function createWindow() {
 
   // Expose mainWindow globally for IPC handlers
   global.mainWindow = mainWindow;
+
+  // Init bubble manager
+  initBubbleManager(mainWindow);
+
+  // Sync bubble position when window moves
+  mainWindow.on('moved', () => syncBubblePosition());
 
   if (isDev) {
     mainWindow.loadURL('http://localhost:5173/');
@@ -132,7 +139,7 @@ function showContextMenu() {
 app.whenReady().then(() => {
   createWindow();
   createTray();
-  startHttpServer(mainWindow);
+  startHttpServer();
 });
 
 app.on('window-all-closed', () => {

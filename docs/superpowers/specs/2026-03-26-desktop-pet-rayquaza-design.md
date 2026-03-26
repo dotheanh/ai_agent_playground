@@ -99,22 +99,24 @@ desktop_pet/
 ├── vite.config.js
 ├── electron-builder.json
 ├── scripts/
-│   ├── copy-assets.js         # Copy GLB to dist
-│   └── setup-claude-hooks.js  # Install Claude Code hooks
+│   ├── copy-assets.js            # Copy GLB to dist
+│   ├── setup-claude-hooks.js     # Install Claude Code hooks
+│   └── test-bubble.js            # Test bubble notifications
 ├── src/
 │   ├── main/
-│   │   ├── main.js            # Electron main process, IPC handlers
-│   │   └── http-server.js     # HTTP server for Claude Code hooks
+│   │   ├── main.js               # Electron main process, IPC handlers
+│   │   ├── http-server.js        # HTTP server for Claude Code hooks
+│   │   └── bubble-window.js      # Separate bubble notification window
 │   ├── preload/
-│   │   └── preload.js         # IPC bridge (setWindowPosition, toggleAlwaysOnTop, etc.)
+│   │   └── preload.js             # IPC bridge
 │   ├── renderer/
 │   │   ├── index.html
-│   │   ├── main.js            # Three.js setup, interaction logic, Claude event display
+│   │   ├── main.js               # Three.js setup, interaction logic
 │   │   ├── style.css
 │   │   └── assets/
 │   │       └── MegaRayquazaNLA.glb
 │   └── scripts/
-│       └── claude-hooks.js    # Claude Code hook script (runs in terminal)
+│       └── claude-hooks.js       # Claude Code hook script
 └── build/
     └── icon.ico
 ```
@@ -144,18 +146,26 @@ Claude Code (terminal)
     ↓ hooks → settings.json events
     ↓ HTTP POST → http://localhost:49152
 Desktop Pet (Electron)
-    ↓ IPC 'claude-event'
-Speech Bubble UI
+    ↓ showBubble()
+Bubble Window (separate, transparent, always-on-top)
+    Positioned above main pet window
 ```
 
+### Bubble Window Strategy
+- **Separate window:** 320x80px transparent window for bubble UI
+- **Position:** Centered above main pet window with 10px gap
+- **Click-through:** `setIgnoreMouseEvents(true)` - clicks pass through
+- **Sync:** Bubble repositions when main window moves (`moved` event)
+- **No crop:** Bubble never gets cropped by main window bounds
+
 ### Event Types
-| Event | Bubble Type | Behavior |
-|-------|-------------|----------|
-| `permission_request` | Interactive | Click ✕ to dismiss |
-| `ask_question` | Interactive | Click ✕ to dismiss |
-| `session_start` | Notification | Auto-hide after 5s |
-| `session_end` | Notification | Auto-hide after 3s |
-| `notification` | Notification | Auto-hide after 5s |
+| Event | Icon | Description |
+|-------|------|-------------|
+| `permission_request` | 🔐 | User permission required |
+| `ask_question` | ❓ | Claude asks a question |
+| `session_start` | 🚀 | New session started |
+| `session_end` | 👋 | Session ended |
+| `notification` | ℹ️ | General notification |
 
 ### HTTP Server
 - **Port:** 49152
@@ -167,12 +177,6 @@ Speech Bubble UI
 - **Location:** `src/scripts/claude-hooks.js`
 - **Setup:** Run `npm run setup-hooks` to install hooks to `~/.claude/settings.json`
 - **Hook events:** permission_request, ask_question, session_start, session_end, notification
-
-### Speech Bubble UI
-- Position: Above the pet (bottom: 260px from window top)
-- Theme: Matches context menu (dark bg `#0d0d0d`, red border `#cc0000`)
-- Queue system: Multiple events queued and shown sequentially
-- Animation: Fade-in slide-up (0.25s ease-out)
 
 ---
 

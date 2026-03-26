@@ -1,15 +1,12 @@
 const http = require('http');
-const os = require('os');
+const { showBubble } = require('./bubble-window');
 
 const PORT = 49152;
-let mainWindow = null;
 
 /**
  * Start HTTP server to receive Claude Code hook events
  */
-function startHttpServer(window) {
-  mainWindow = window;
-
+function startHttpServer() {
   const server = http.createServer((req, res) => {
     // CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -34,10 +31,8 @@ function startHttpServer(window) {
           const data = JSON.parse(body);
           console.log('[HTTP Server] Received event:', data.type, data.message?.substring(0, 100));
 
-          // Forward to renderer
-          if (mainWindow && !mainWindow.isDestroyed()) {
-            mainWindow.webContents.send('claude-event', data);
-          }
+          // Show bubble notification
+          showBubble(data);
 
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ status: 'ok' }));
