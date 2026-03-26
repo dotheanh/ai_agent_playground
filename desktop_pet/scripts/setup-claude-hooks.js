@@ -13,7 +13,6 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-// Detect Claude settings path
 function getClaudeSettingsPath() {
   if (process.platform === 'win32') {
     return path.join(os.homedir(), '.claude', 'settings.json');
@@ -22,7 +21,6 @@ function getClaudeSettingsPath() {
 }
 
 function getHookScriptPath() {
-  // Absolute path to the hook script
   const scriptDir = path.resolve(__dirname, '..', 'src', 'scripts');
   return path.join(scriptDir, 'claude-hooks.js').replace(/\\/g, '/');
 }
@@ -30,27 +28,28 @@ function getHookScriptPath() {
 function setupHooks() {
   const settingsPath = getClaudeSettingsPath();
   const hookScriptPath = getHookScriptPath();
-
   console.log('Claude settings path:', settingsPath);
   console.log('Hook script path:', hookScriptPath);
 
-  // Ensure .claude directory exists
   const claudeDir = path.dirname(settingsPath);
   if (!fs.existsSync(claudeDir)) {
     fs.mkdirSync(claudeDir, { recursive: true });
-    console.log('Created .claude directory');
   }
 
-  // Read existing settings or create new
+  // Read existing settings - PRESERVE all existing content
   let settings = {};
   if (fs.existsSync(settingsPath)) {
     try {
-      settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
-      console.log('Loaded existing settings');
+      const content = fs.readFileSync(settingsPath, 'utf-8');
+      settings = JSON.parse(content);
+      console.log('Loaded existing settings (will merge hooks)');
     } catch (e) {
-      console.log('Could not parse existing settings, creating new');
-      settings = {};
+      console.error('Could not parse settings.json:', e.message);
+      process.exit(1);
     }
+  } else {
+    console.error('settings.json not found! Please run Claude Code first.');
+    process.exit(1);
   }
 
   // Ensure hooks object exists
@@ -58,33 +57,53 @@ function setupHooks() {
     settings.hooks = {};
   }
 
-  // Hook script path as string for Node.js exec
-  const hookCmd = `node "${hookScriptPath}"`;
+  // Check if Post hook section already exists
+  if (settings.hooks.Post) {
+    // Merge - don't remove existing Post hooks
+    console.log('Existing Post hooks found, will merge');
+  } else {
+    settings.hooks.Post = [];
+  }
 
-  // Build hook entries for each event type
-  const hookEvents = [
-    'permission_request',
-    'ask_question',
-    'session_start',
-    'session_end',
-    'notification',
+  // Remove any existing desktop-pet hooks (clean slate)
+  settings.hooks.Post = settings.hooks.Post.filter(
+    h => !h.matcher?.includes('permission_request') &&
+         !h.matcher?.includes('ask_question')
+  );
+
+  // Build new hook entries with correct format
+  const newHooks = [
+    {
+      matcher: 'permission_request',
+      hooks: [
+        {
+          type: 'command',
+          command: `node "${hookScriptPath}" "permission_request" "{prompt}"`
+        }
+      ]
+    },
+    {
+      matcher: 'ask_question',
+      hooks: [
+        {
+          type: 'command',
+          command: `node "${hookScriptPath}" "ask_question" "{prompt}"`
+        }
+      ]
+    }
   ];
 
-  // Convert to post hook format (post hooks run after each turn)
-  settings.hooks.post = hookEvents.map(event => ({
-    event: event,
-    hook: hookCmd,
-    prompt: `Send ${event} event to Desktop Pet`,
-  }));
+  // Append new hooks
+  settings.hooks.Post.push(...newHooks);
 
-  // Write settings
+  // Write settings back - preserve everything
   fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
   console.log('✓ Claude Code hooks installed successfully!');
   console.log('');
-  console.log('Events hooked:');
-  hookEvents.forEach(e => console.log(`  - ${e}`));
+  console.log('Added hooks:');
+  newHooks.forEach(h => console.log(`  - Post [${h.matcher}]`));
   console.log('');
-  console.log('Start Desktop Pet to receive events!');
+  console.log('Restart Claude Code terminal to apply changes!');
 }
 
 setupHooks();

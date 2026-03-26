@@ -178,7 +178,8 @@ Bubble Window (separate, transparent, always-on-top)
 ### Claude Code Hook Script
 - **Location:** `src/scripts/claude-hooks.js`
 - **Setup:** Run `npm run setup-hooks` to install hooks to `~/.claude/settings.json`
-- **Hook events:** permission_request, ask_question, session_start, session_end, notification
+- **Hook events:** permission_request, ask_question (interactive); session_start, session_end, notification (auto-hide)
+- **Setup script:** `scripts/setup-claude-hooks.js` - merges hooks without overwriting existing settings.json content
 
 ---
 
