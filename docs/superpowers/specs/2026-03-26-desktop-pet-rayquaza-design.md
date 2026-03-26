@@ -152,13 +152,15 @@ Bubble Window (separate, transparent, always-on-top)
 ```
 
 ### Bubble Window Strategy
-- **Separate window:** 320x80px transparent window for bubble UI
+- **Separate window:** 360x120px transparent window for bubble UI
 - **Position:** Overlapping middle of main pet window (centered vertically, shifted up 100px)
 - **Z-order:** `moveTop()` called after show to ensure bubble is always on top
 - **Click-through:** `setIgnoreMouseEvents(true)` - clicks pass through to windows below
 - **Sync:** Bubble repositions when main window moves (`moved` event)
+- **Race-safe render:** queue payload until bubble HTML `did-finish-load`, then run `showBubble()`
 - **Auto-hide:** Notification types auto-hide after timeout (session_start: 5s, session_end: 3s, notification: 5s)
 - **Interactive:** permission_request & ask_question require manual dismiss (no auto-hide)
+- **Options UI:** bubble can show top 3 permission choices as numbered lines (1..3) when available or fallback defaults for PermissionRequest.
 
 ### Event Types
 | Event | Icon | Auto-hide | Description |
@@ -178,8 +180,10 @@ Bubble Window (separate, transparent, always-on-top)
 ### Claude Code Hook Script
 - **Location:** `src/scripts/claude-hooks.js`
 - **Setup:** Run `npm run setup-hooks` to install hooks to `~/.claude/settings.json`
-- **Hook events:** permission_request, ask_question (interactive); session_start, session_end, notification (auto-hide)
-- **Setup script:** `scripts/setup-claude-hooks.js` - merges hooks without overwriting existing settings.json content
+- **Hook key:** `hooks.PermissionRequest` (valid Claude Code hook field)
+- **Payload handling:** normalize `hook_event_name/tool_name/tool_input` into UI events and readable messages (e.g., `Run: powershell -Command "Get-Date"`)
+- **Options handling:** use payload `permission_suggestions/options` when present; otherwise fallback (`Yes`, `Yes, allow for all projects`, `No`)
+- **Setup script:** `scripts/setup-claude-hooks.js` - updates only Desktop Pet hook entries, preserves all other settings.
 
 ---
 

@@ -2,18 +2,8 @@
 /**
  * Claude Code Hook Script for Desktop Pet
  *
- * This script receives events from Claude Code hooks and forwards them
- * to the Desktop Pet app via HTTP.
- *
- * Usage:
- *   node claude-hooks.js <event_type> [payload]
- *
- * Event types:
- *   - permission_request: When Claude asks for permission
- *   - ask_question: When Claude asks user a question
- *   - session_start: When a new session starts
- *   - session_end: When a session ends
- *   - notification: General notification
+ * Receives hook payload via stdin JSON and forwards normalized events to Desktop Pet.
+ * Works with Claude Code hook payload shape (hook_event_name, tool_name, message, etc).
  */
 
 const http = require('http');
@@ -21,14 +11,9 @@ const http = require('http');
 const PET_HOST = 'localhost';
 const PET_PORT = 49152;
 
-function sendToPet(eventType, message, metadata = {}) {
+function sendToPet(payload) {
   return new Promise((resolve, reject) => {
-    const data = JSON.stringify({
-      type: eventType,
-      message: message,
-      timestamp: new Date().toISOString(),
-      ...metadata
-    });
+    const data = JSON.stringify(payload);
 
     const options = {
       hostname: PET_HOST,
@@ -37,23 +22,22 @@ function sendToPet(eventType, message, metadata = {}) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(data)
-      }
+        'Content-Length': Buffer.byteLength(data),
+      },
     };
 
     const req = http.request(options, (res) => {
       let body = '';
-      res.on('data', chunk => body += chunk);
+      res.on('data', (chunk) => (body += chunk));
       res.on('end', () => {
-        console.log(`[Hook] Sent ${eventType} - Response: ${res.statusCode}`);
+        console.log(`[Hook] Sent ${payload.type} - Response: ${res.statusCode}`);
         resolve(body);
       });
     });
 
     req.on('error', (err) => {
-      // Silently fail if pet is not running
       if (err.code === 'ECONNREFUSED') {
-        console.log(`[Hook] Pet not running, skipping ${eventType}`);
+        console.log(`[Hook] Pet not running, skipping ${payload.type}`);
         resolve();
       } else {
         console.error(`[Hook] Error: ${err.message}`);
@@ -66,30 +50,127 @@ function sendToPet(eventType, message, metadata = {}) {
   });
 }
 
-// Main entry point
-async function main() {
-  const args = process.argv.slice(2);
-  const eventType = args[0] || 'unknown';
-  const message = args[1] || '';
+function normalizeEventType(payload) {
+  const raw = String(payload.hook_event_name || payload.event || '').trim();
+  const toolName = String(payload.tool_name || payload.tool || '').trim();
 
-  let metadata = {};
-
-  // Parse additional arguments
-  if (args.length > 2) {
-    try {
-      metadata = JSON.parse(args[2]);
-    } catch (e) {
-      // Not JSON, treat as additional metadata
-      metadata = { detail: args.slice(2).join(' ') };
-    }
+  if (raw === 'PermissionRequest') {
+    if (toolName === 'AskUserQuestion') return 'ask_question';
+    return 'permission_request';
   }
+
+  if (raw === 'SessionStart') return 'session_start';
+  if (raw === 'SessionEnd') return 'session_end';
+  if (raw === 'Notification') return 'notification';
+  if (raw === 'TaskCompleted') return 'notification';
+
+  return 'notification';
+}
+
+function summarizeToolInput(toolInput) {
+  if (!toolInput || typeof toolInput !== 'object') return '';
+
+  if (typeof toolInput.command === 'string' && toolInput.command.trim()) {
+    return `Run: ${toolInput.command.trim()}`;
+  }
+
+  if (typeof toolInput.file_path === 'string' && toolInput.file_path.trim()) {
+    return `File: ${toolInput.file_path.trim()}`;
+  }
+
+  if (typeof toolInput.pattern === 'string' && toolInput.pattern.trim()) {
+    return `Pattern: ${toolInput.pattern.trim()}`;
+  }
+
+  return `Input: ${JSON.stringify(toolInput)}`;
+}
+
+function pickMessage(payload) {
+  const candidates = [
+    payload.message,
+    payload.reasoning,
+    payload.reason,
+    payload.question,
+    payload.task_subject,
+    payload.permission_prompt,
+    payload.permission_message,
+    summarizeToolInput(payload.tool_input),
+    payload.tool_name ? `Tool: ${payload.tool_name}` : '',
+    payload.tool ? `Tool: ${payload.tool}` : '',
+  ];
+
+  for (const text of candidates) {
+    if (typeof text === 'string' && text.trim()) return text.trim();
+  }
+
+  return 'Claude Code event';
+}
+
+function extractOptions(payload) {
+  if (Array.isArray(payload.permission_suggestions) && payload.permission_suggestions.length > 0) {
+    return payload.permission_suggestions
+      .map((item) => {
+        if (typeof item === 'string') return item;
+        if (item && typeof item === 'object') return item.label || item.title || item.value || '';
+        return '';
+      })
+      .filter(Boolean);
+  }
+
+  if (Array.isArray(payload.options) && payload.options.length > 0) {
+    return payload.options
+      .map((item) => {
+        if (typeof item === 'string') return item;
+        if (item && typeof item === 'object') return item.label || item.title || item.value || '';
+        return '';
+      })
+      .filter(Boolean);
+  }
+
+  // Fallback defaults for PermissionRequest when Claude payload does not expose suggestions.
+  if (String(payload.hook_event_name || '').trim() === 'PermissionRequest') {
+    return ['Yes', 'Yes, allow for all projects', 'No'];
+  }
+
+  return [];
+}
+
+async function main() {
+  let input = '';
+
+  for await (const chunk of process.stdin) {
+    input += chunk;
+  }
+
+  let rawPayload;
+  try {
+    rawPayload = input.trim() ? JSON.parse(input) : {};
+  } catch (e) {
+    console.error('[Hook] Failed to parse stdin:', e.message);
+    process.exit(2); // defer to Claude default prompt flow
+  }
+
+  const normalized = {
+    type: normalizeEventType(rawPayload),
+    message: pickMessage(rawPayload),
+    options: extractOptions(rawPayload),
+    timestamp: new Date().toISOString(),
+    metadata: {
+      hook_event_name: rawPayload.hook_event_name,
+      tool_name: rawPayload.tool_name,
+      tool: rawPayload.tool,
+      danger_level: rawPayload.danger_level,
+      requested_permissions: rawPayload.requested_permissions,
+    },
+  };
 
   try {
-    await sendToPet(eventType, message, metadata);
-  } catch (err) {
-    // Exit with error code for Claude Code
-    process.exit(1);
+    await sendToPet(normalized);
+  } catch {
+    process.exit(2); // defer on transport error
   }
+
+  process.exit(0);
 }
 
 main();

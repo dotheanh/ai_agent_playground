@@ -3,9 +3,11 @@ const { BrowserWindow } = require('electron');
 let bubbleWindow = null;
 let mainWindow = null;
 let hideTimer = null;
+let isBubbleReady = false;
+let pendingBubbleData = null; // Queue latest payload until bubble HTML is ready.
 
-const BUBBLE_WIDTH = 320;
-const BUBBLE_HEIGHT = 80;
+const BUBBLE_WIDTH = 360;
+const BUBBLE_HEIGHT = 120;
 
 // Auto-hide timeouts (ms) for each event type
 const AUTO_HIDE = {
@@ -50,10 +52,26 @@ function createBubbleWindow() {
   });
 
   bubbleWindow.setIgnoreMouseEvents(true); // Click-through
+  isBubbleReady = false;
+  pendingBubbleData = null;
   bubbleWindow.loadURL('data:text/html;charset=utf-8,' + encodeURIComponent(getBubbleHTML()));
+
+  bubbleWindow.webContents.once('did-finish-load', () => {
+    isBubbleReady = true;
+
+    if (pendingBubbleData) {
+      const queued = pendingBubbleData;
+      pendingBubbleData = null;
+      bubbleWindow.webContents
+        .executeJavaScript(`showBubble(${JSON.stringify(queued)})`)
+        .catch((err) => console.error('[Bubble] queued showBubble failed:', err.message));
+    }
+  });
 
   bubbleWindow.on('closed', () => {
     bubbleWindow = null;
+    isBubbleReady = false;
+    pendingBubbleData = null;
   });
 
   return bubbleWindow;
@@ -79,7 +97,14 @@ function showBubble(data) {
   bubbleWindow.setPosition(pos.x, pos.y);
   bubbleWindow.show();
   bubbleWindow.moveTop(); // Ensure bubble is above main window
-  bubbleWindow.webContents.executeJavaScript(`showBubble(${JSON.stringify(data)})`);
+
+  if (isBubbleReady) {
+    bubbleWindow.webContents
+      .executeJavaScript(`showBubble(${JSON.stringify(data)})`)
+      .catch((err) => console.error('[Bubble] showBubble failed:', err.message));
+  } else {
+    pendingBubbleData = data;
+  }
 
   // Auto-hide for non-interactive types
   const timeout = AUTO_HIDE[data.type];
@@ -177,6 +202,13 @@ function getBubbleHTML() {
       color: #e0e0e0;
       line-height: 1.3;
     }
+    .options {
+      margin-top: 4px;
+      font-size: 10px;
+      color: #ff9b9b;
+      line-height: 1.3;
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
@@ -185,6 +217,7 @@ function getBubbleHTML() {
     <div class="content">
       <div class="type" id="type">Notification</div>
       <div class="message" id="msg"></div>
+      <div class="options" id="opts"></div>
     </div>
   </div>
   <script>
@@ -205,10 +238,23 @@ function getBubbleHTML() {
     function showBubble(data) {
       const el = document.getElementById('bubble');
       document.getElementById('icon').textContent = ICONS[data.type] || 'ℹ️';
-      document.getElementById('type').textContent = TYPES[data.type] || data.type;
+      document.getElementById('type').textContent = TYPES[data.type] || (data.type || 'Notification');
+
       let msg = data.message || '';
-      if (msg.length > 80) msg = msg.substring(0, 80) + '...';
+      if (msg.length > 120) msg = msg.substring(0, 120) + '...';
       document.getElementById('msg').textContent = msg;
+
+      const optsEl = document.getElementById('opts');
+      const options = Array.isArray(data.options) ? data.options : [];
+      if (options.length > 0) {
+        const text = options.slice(0, 3).map((o, i) => (i + 1) + '. ' + o).join('\\n');
+        optsEl.textContent = text;
+        optsEl.style.display = 'block';
+      } else {
+        optsEl.textContent = '';
+        optsEl.style.display = 'none';
+      }
+
       el.style.animation = 'none';
       el.offsetHeight;
       el.style.animation = 'bubbleIn 0.25s ease-out';

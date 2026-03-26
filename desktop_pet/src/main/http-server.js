@@ -29,7 +29,12 @@ function startHttpServer() {
       req.on('end', () => {
         try {
           const data = JSON.parse(body);
-          console.log('[HTTP Server] Received event:', data.type, data.message?.substring(0, 100));
+          console.log('[HTTP Server] Received hook payload:', JSON.stringify({
+            type: data.type,
+            message: data.message,
+            optionsCount: Array.isArray(data.options) ? data.options.length : 0,
+            metadata: data.metadata || null,
+          }));
 
           // Show bubble notification
           showBubble(data);

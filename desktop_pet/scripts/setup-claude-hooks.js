@@ -2,11 +2,8 @@
 /**
  * Claude Code Hooks Setup Script
  *
- * Installs Claude Code hooks to forward permission requests and questions
- * to the Desktop Pet app via HTTP.
- *
- * Usage:
- *   node setup-claude-hooks.js
+ * Install Desktop Pet hook into ~/.claude/settings.json using valid hook key:
+ * hooks.PermissionRequest
  */
 
 const fs = require('fs');
@@ -14,9 +11,6 @@ const path = require('path');
 const os = require('os');
 
 function getClaudeSettingsPath() {
-  if (process.platform === 'win32') {
-    return path.join(os.homedir(), '.claude', 'settings.json');
-  }
   return path.join(os.homedir(), '.claude', 'settings.json');
 }
 
@@ -25,85 +19,64 @@ function getHookScriptPath() {
   return path.join(scriptDir, 'claude-hooks.js').replace(/\\/g, '/');
 }
 
+function isDesktopPetHook(entry, hookScriptPath) {
+  if (!entry || !Array.isArray(entry.hooks)) return false;
+  return entry.hooks.some((h) => {
+    if (!h || typeof h.command !== 'string') return false;
+    return h.command.includes(hookScriptPath) || h.command.includes('desktop_pet/src/scripts/claude-hooks.js');
+  });
+}
+
 function setupHooks() {
   const settingsPath = getClaudeSettingsPath();
   const hookScriptPath = getHookScriptPath();
+
   console.log('Claude settings path:', settingsPath);
   console.log('Hook script path:', hookScriptPath);
 
-  const claudeDir = path.dirname(settingsPath);
-  if (!fs.existsSync(claudeDir)) {
-    fs.mkdirSync(claudeDir, { recursive: true });
-  }
-
-  // Read existing settings - PRESERVE all existing content
-  let settings = {};
-  if (fs.existsSync(settingsPath)) {
-    try {
-      const content = fs.readFileSync(settingsPath, 'utf-8');
-      settings = JSON.parse(content);
-      console.log('Loaded existing settings (will merge hooks)');
-    } catch (e) {
-      console.error('Could not parse settings.json:', e.message);
-      process.exit(1);
-    }
-  } else {
+  if (!fs.existsSync(settingsPath)) {
     console.error('settings.json not found! Please run Claude Code first.');
     process.exit(1);
   }
 
-  // Ensure hooks object exists
-  if (!settings.hooks) {
+  let settings;
+  try {
+    settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
+  } catch (e) {
+    console.error('Could not parse settings.json:', e.message);
+    process.exit(1);
+  }
+
+  if (!settings.hooks || typeof settings.hooks !== 'object') {
     settings.hooks = {};
   }
 
-  // Check if Post hook section already exists
-  if (settings.hooks.Post) {
-    // Merge - don't remove existing Post hooks
-    console.log('Existing Post hooks found, will merge');
-  } else {
-    settings.hooks.Post = [];
+  if (!Array.isArray(settings.hooks.PermissionRequest)) {
+    settings.hooks.PermissionRequest = [];
   }
 
-  // Remove any existing desktop-pet hooks (clean slate)
-  settings.hooks.Post = settings.hooks.Post.filter(
-    h => !h.matcher?.includes('permission_request') &&
-         !h.matcher?.includes('ask_question')
+  // Remove previous desktop_pet hook entries only (preserve others)
+  settings.hooks.PermissionRequest = settings.hooks.PermissionRequest.filter(
+    (entry) => !isDesktopPetHook(entry, hookScriptPath)
   );
 
-  // Build new hook entries with correct format
-  const newHooks = [
-    {
-      matcher: 'permission_request',
-      hooks: [
-        {
-          type: 'command',
-          command: `node "${hookScriptPath}" "permission_request" "{prompt}"`
-        }
-      ]
-    },
-    {
-      matcher: 'ask_question',
-      hooks: [
-        {
-          type: 'command',
-          command: `node "${hookScriptPath}" "ask_question" "{prompt}"`
-        }
-      ]
-    }
-  ];
+  // Add valid PermissionRequest hook entry
+  settings.hooks.PermissionRequest.push({
+    matcher: '',
+    hooks: [
+      {
+        type: 'command',
+        command: `node "${hookScriptPath}"`,
+      },
+    ],
+  });
 
-  // Append new hooks
-  settings.hooks.Post.push(...newHooks);
-
-  // Write settings back - preserve everything
   fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
+
   console.log('✓ Claude Code hooks installed successfully!');
-  console.log('');
   console.log('Added hooks:');
-  newHooks.forEach(h => console.log(`  - Post [${h.matcher}]`));
-  console.log('');
-  console.log('Restart Claude Code terminal to apply changes!');
+  console.log('  - hooks.PermissionRequest[matcher=""] -> node claude-hooks.js');
+  console.log('Restart Claude Code terminal to apply changes.');
 }
 
 setupHooks();
