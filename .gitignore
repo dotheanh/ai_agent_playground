@@ -9,3 +9,5 @@
 .bash*
 .profile
 .DS_Store
+.worktrees/
+.worktrees/
