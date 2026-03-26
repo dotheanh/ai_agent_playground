@@ -8,7 +8,8 @@
     "dev:vite": "vite",
     "dev:electron": "wait-on http://localhost:5173 && electron .",
     "build": "vite build && node scripts/copy-assets.js && electron-builder",
-    "build:win": "vite build && node scripts/copy-assets.js && electron-builder --win"
+    "build:win": "vite build && node scripts/copy-assets.js && electron-builder --win",
+    "setup-hooks": "node scripts/setup-claude-hooks.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.0",

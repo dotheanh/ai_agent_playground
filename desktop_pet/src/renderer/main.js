@@ -11,6 +11,12 @@ if (window.electronAPI) {
     console.log('Always on top:', value);
     isAlwaysOnTop = value; // Sync local state
   });
+
+  // Listen for Claude Code events (permission requests, questions, etc.)
+  window.electronAPI.onClaudeEvent((data) => {
+    console.log('[Claude Event]', data.type, data.message);
+    showClaudeNotification(data);
+  });
 }
 
 // Scene setup
@@ -394,4 +400,146 @@ function showCustomContextMenu(x, y) {
   const rect = menu.getBoundingClientRect();
   if (rect.right > window.innerWidth) menu.style.left = (x - rect.width) + 'px';
   if (rect.bottom > window.innerHeight) menu.style.top = (y - rect.height) + 'px';
+}
+
+// ============================================
+// CLAUDE CODE EVENT NOTIFICATIONS (Phase 1)
+// ============================================
+
+const NOTIFICATION_TYPES = {
+  permission_request: { interactive: true, timeout: 0, icon: '🔐' },
+  ask_question: { interactive: true, timeout: 0, icon: '❓' },
+  session_start: { interactive: false, timeout: 5, icon: '🚀' },
+  session_end: { interactive: false, timeout: 3, icon: '👋' },
+  notification: { interactive: false, timeout: 5, icon: 'ℹ️' },
+};
+
+let notificationQueue = [];
+let isShowingNotification = false;
+
+function showClaudeNotification(data) {
+  notificationQueue.push(data);
+  if (!isShowingNotification) {
+    processNotificationQueue();
+  }
+}
+
+function processNotificationQueue() {
+  if (notificationQueue.length === 0) {
+    isShowingNotification = false;
+    return;
+  }
+
+  isShowingNotification = true;
+  const data = notificationQueue.shift();
+  const config = NOTIFICATION_TYPES[data.type] || NOTIFICATION_TYPES.notification;
+
+  // Remove existing bubble if any
+  const existing = document.getElementById('claude-bubble');
+  if (existing) existing.remove();
+
+  const bubble = document.createElement('div');
+  bubble.id = 'claude-bubble';
+
+  // Truncate long messages
+  let displayMsg = data.message || '';
+  if (displayMsg.length > 120) displayMsg = displayMsg.substring(0, 120) + '...';
+
+  bubble.innerHTML = `
+    <div class="bubble-icon">${config.icon}</div>
+    <div class="bubble-content">
+      <div class="bubble-type">${formatEventType(data.type)}</div>
+      <div class="bubble-message">${escapeHtml(displayMsg)}</div>
+    </div>
+    ${config.interactive ? '<div class="bubble-close">✕</div>' : ''}
+  `;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    #claude-bubble {
+      position: absolute;
+      bottom: 260px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0d0d0d;
+      border: 2px solid #cc0000;
+      border-radius: 12px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 320px;
+      min-width: 200px;
+      z-index: 1000;
+      font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 4px 20px rgba(200,0,0,0.4);
+      animation: bubbleIn 0.25s ease-out;
+    }
+    @keyframes bubbleIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    .bubble-icon { font-size: 18px; flex-shrink: 0; }
+    .bubble-content { flex: 1; }
+    .bubble-type {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: #cc0000;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+    .bubble-message {
+      font-size: 12px;
+      color: #e0e0e0;
+      line-height: 1.4;
+    }
+    .bubble-close {
+      flex-shrink: 0;
+      color: #888;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .bubble-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
+  `;
+  bubble.appendChild(style);
+
+  // Click to dismiss interactive bubbles
+  if (config.interactive) {
+    bubble.querySelector('.bubble-close').addEventListener('click', () => {
+      bubble.remove();
+      processNotificationQueue();
+    });
+  }
+
+  document.body.appendChild(bubble);
+
+  // Auto-hide non-interactive
+  if (!config.interactive && config.timeout > 0) {
+    setTimeout(() => {
+      if (document.getElementById('claude-bubble') === bubble) {
+        bubble.remove();
+        processNotificationQueue();
+      }
+    }, config.timeout * 1000);
+  }
+}
+
+function formatEventType(type) {
+  const map = {
+    permission_request: 'Permission Required',
+    ask_question: 'Question',
+    session_start: 'Session Started',
+    session_end: 'Session Ended',
+    notification: 'Notification',
+  };
+  return map[type] || type;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }

@@ -1,5 +1,6 @@
 const { app, BrowserWindow, screen, Menu, Tray, nativeImage } = require('electron');
 const path = require('path');
+const { startHttpServer } = require('./http-server');
 
 let mainWindow = null;
 let tray = null;
@@ -131,6 +132,7 @@ function showContextMenu() {
 app.whenReady().then(() => {
   createWindow();
   createTray();
+  startHttpServer(mainWindow);
 });
 
 app.on('window-all-closed', () => {

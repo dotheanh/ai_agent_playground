@@ -11,4 +11,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // Window actions
   exitApp: () => ipcRenderer.send('exit-app'),
   setWindowPosition: (x, y) => ipcRenderer.send('set-window-position', { x, y }),
+
+  // Claude Code events
+  onClaudeEvent: (callback) => {
+    ipcRenderer.on('claude-event', (event, data) => callback(data));
+  },
 });

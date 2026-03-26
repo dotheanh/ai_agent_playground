@@ -99,18 +99,22 @@ desktop_pet/
 ├── vite.config.js
 ├── electron-builder.json
 ├── scripts/
-│   └── copy-assets.js      # Copy GLB to dist
+│   ├── copy-assets.js         # Copy GLB to dist
+│   └── setup-claude-hooks.js  # Install Claude Code hooks
 ├── src/
 │   ├── main/
-│   │   └── main.js         # Electron main process, IPC handlers
+│   │   ├── main.js            # Electron main process, IPC handlers
+│   │   └── http-server.js     # HTTP server for Claude Code hooks
 │   ├── preload/
-│   │   └── preload.js      # IPC bridge (setWindowPosition, toggleAlwaysOnTop, etc.)
-│   └── renderer/
-│       ├── index.html
-│       ├── main.js         # Three.js setup, interaction logic
-│       ├── style.css
-│       └── assets/
-│           └── MegaRayquazaNLA.glb
+│   │   └── preload.js         # IPC bridge (setWindowPosition, toggleAlwaysOnTop, etc.)
+│   ├── renderer/
+│   │   ├── index.html
+│   │   ├── main.js            # Three.js setup, interaction logic, Claude event display
+│   │   ├── style.css
+│   │   └── assets/
+│   │       └── MegaRayquazaNLA.glb
+│   └── scripts/
+│       └── claude-hooks.js    # Claude Code hook script (runs in terminal)
 └── build/
     └── icon.ico
 ```
@@ -128,6 +132,47 @@ desktop_pet/
 | `exit-app` | renderer → main | Quit application |
 | `hide-window` | renderer → main | Hide window |
 | `show-window` | renderer → main | Show and focus window |
+| `claude-event` | main → renderer | Forward Claude Code hook events |
+
+---
+
+## 7b. Claude Code Integration (AI Integration)
+
+### Architecture
+```
+Claude Code (terminal)
+    ↓ hooks → settings.json events
+    ↓ HTTP POST → http://localhost:49152
+Desktop Pet (Electron)
+    ↓ IPC 'claude-event'
+Speech Bubble UI
+```
+
+### Event Types
+| Event | Bubble Type | Behavior |
+|-------|-------------|----------|
+| `permission_request` | Interactive | Click ✕ to dismiss |
+| `ask_question` | Interactive | Click ✕ to dismiss |
+| `session_start` | Notification | Auto-hide after 5s |
+| `session_end` | Notification | Auto-hide after 3s |
+| `notification` | Notification | Auto-hide after 5s |
+
+### HTTP Server
+- **Port:** 49152
+- **Endpoint:** `POST /`
+- **No dependency:** Uses native Node.js `http` module
+- **Silent fail:** ECONNREFUSED errors are silently ignored (pet not running)
+
+### Claude Code Hook Script
+- **Location:** `src/scripts/claude-hooks.js`
+- **Setup:** Run `npm run setup-hooks` to install hooks to `~/.claude/settings.json`
+- **Hook events:** permission_request, ask_question, session_start, session_end, notification
+
+### Speech Bubble UI
+- Position: Above the pet (bottom: 260px from window top)
+- Theme: Matches context menu (dark bg `#0d0d0d`, red border `#cc0000`)
+- Queue system: Multiple events queued and shown sequentially
+- Animation: Fade-in slide-up (0.25s ease-out)
 
 ---
 
@@ -182,3 +227,9 @@ wheel event:
 - [x] Auto-Rotate toggle with checkmark
 - [x] System tray icon present
 - [x] Exit via menu closes app cleanly
+- [x] HTTP server starts with app (port 49152)
+- [x] Claude Code hooks script created
+- [x] Claude Code hook setup script (`npm run setup-hooks`)
+- [x] Speech bubble notifications for Claude events
+- [x] Interactive bubbles require click to dismiss
+- [x] Notification bubbles auto-hide after timeout
