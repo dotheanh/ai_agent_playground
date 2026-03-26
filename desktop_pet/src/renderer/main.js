@@ -11,21 +11,6 @@ if (window.electronAPI) {
     console.log('Always on top:', value);
     isAlwaysOnTop = value; // Sync local state
   });
-
-  // Listen for drag trigger from menu - Windows will handle the drag
-  window.electronAPI.onTriggerDrag(() => {
-    // Enable drag on canvas, then let Windows native drag take over
-    canvas.style.webkitAppRegion = 'drag';
-    // Trigger a mousedown at center to start native drag
-    const event = new MouseEvent('mousedown', {
-      bubbles: true,
-      cancelable: true,
-      button: 0,
-      clientX: window.innerWidth / 2,
-      clientY: window.innerHeight / 2
-    });
-    canvas.dispatchEvent(event);
-  });
 }
 
 // Scene setup
@@ -123,7 +108,9 @@ let isMouseDown = false;
 let lastMouseX = 0;
 let lastMouseY = 0;
 let autoRotate = false; // Auto-rotate toggle
+let showRuler = false; // Ruler overlay toggle
 let isAlwaysOnTop = true; // Local state for always-on-top
+let dragStartX = 0, dragStartY = 0; // For manual window drag
 const clock = new THREE.Clock();
 
 // Auto-rotate: rotate model slowly in animation loop
@@ -201,10 +188,11 @@ function showRulerOverlay() {
     ${rulerHTML}
   `;
   overlay.style.cssText = `
-    position: fixed;
+    position: absolute;
     top: 0; left: 0; width: ${W}px; height: ${H}px;
     pointer-events: none;
-    z-index: 9998;
+    -webkit-app-region: no-drag;
+    z-index: 0;
     box-sizing: border-box;
   `;
 
@@ -257,25 +245,27 @@ canvas.addEventListener('mousedown', (e) => {
   if (e.button !== 0) return;
 
   isMouseDown = true;
+  dragStartX = e.clientX;
+  dragStartY = e.clientY;
   lastMouseX = e.clientX;
   lastMouseY = e.clientY;
-
-  if (isDragging) {
-    // Enable drag for one-shot move - prevent default to allow OS drag
-    e.preventDefault();
-    document.body.style.webkitAppRegion = 'drag';
-    canvas.style.cursor = 'move';
-    return;
-  }
-
   canvas.style.cursor = 'grabbing';
 });
 
 canvas.addEventListener('mousemove', (e) => {
   if (!isMouseDown) return;
 
-  // Skip orbit rotation when in move mode
-  if (isDragging) return;
+  if (isDragging) {
+    // Move window by updating position via IPC
+    const deltaX = e.clientX - dragStartX;
+    const deltaY = e.clientY - dragStartY;
+    const newX = window.screenX + deltaX;
+    const newY = window.screenY + deltaY;
+    if (window.electronAPI) {
+      window.electronAPI.setWindowPosition(newX, newY);
+    }
+    return;
+  }
 
   // Rotate model
   const deltaX = e.clientX - lastMouseX;
@@ -287,27 +277,26 @@ canvas.addEventListener('mousemove', (e) => {
 });
 
 canvas.addEventListener('mouseup', () => {
+  if (!isMouseDown) return;
   isMouseDown = false;
-  canvas.style.cursor = isDragging ? 'move' : 'grab';
 
   if (isDragging) {
-    // One-shot: disable drag after move
-    canvas.style.webkitAppRegion = 'no-drag';
+    // One-shot: reset to orbit mode after move
+    isDragging = false;
+    hideRulerOverlay();
+    updateCursor();
   }
+
+  canvas.style.cursor = 'grab';
 });
 
 canvas.addEventListener('mouseleave', () => {
   isMouseDown = false;
-  if (isDragging) {
-    canvas.style.webkitAppRegion = 'no-drag';
-  }
-  updateCursor();
 });
 
 // Right-click = custom context menu
 canvas.addEventListener('contextmenu', (e) => {
   e.preventDefault();
-  canvas.style.webkitAppRegion = 'no-drag';
   showCustomContextMenu(e.clientX, e.clientY);
 });
 
@@ -327,8 +316,9 @@ function showCustomContextMenu(x, y) {
   const menu = document.createElement('div');
   menu.id = 'custom-context-menu';
   menu.innerHTML = `
-    <div class="menu-item" data-action="toggle-move">Move Window</div>
+    <div class="menu-item" data-action="toggle-move">${isDragging ? '✓ Orbit Camera' : 'Move Window'}</div>
     <div class="menu-item" data-action="toggle-auto">${autoRotate ? '✓ Auto-Rotate' : 'Auto-Rotate'}</div>
+    <div class="menu-item" data-action="toggle-ruler">${showRuler ? '✓ Ruler' : 'Ruler'}</div>
     <div class="menu-separator"></div>
     <div class="menu-item" data-action="always-on-top">${isAlwaysOnTop ? '✓ Always on Top' : 'Always on Top'}</div>
     <div class="menu-separator"></div>
@@ -366,10 +356,13 @@ function showCustomContextMenu(x, y) {
       case 'toggle-move':
         isDragging = !isDragging;
         updateCursor();
-        if (isDragging) showRulerOverlay(); else hideRulerOverlay();
         break;
       case 'toggle-auto':
         autoRotate = !autoRotate;
+        break;
+      case 'toggle-ruler':
+        showRuler = !showRuler;
+        if (showRuler) showRulerOverlay(); else hideRulerOverlay();
         break;
       case 'always-on-top':
         window.electronAPI.toggleAlwaysOnTop();

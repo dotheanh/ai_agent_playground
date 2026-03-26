@@ -9,12 +9,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   },
 
   // Window actions
-  startMove: () => ipcRenderer.send('start-move'),
-  startDrag: () => ipcRenderer.send('start-drag'),
   exitApp: () => ipcRenderer.send('exit-app'),
-
-  // Drag trigger from menu
-  onTriggerDrag: (callback) => {
-    ipcRenderer.on('trigger-drag', callback);
-  },
+  setWindowPosition: (x, y) => ipcRenderer.send('set-window-position', { x, y }),
 });

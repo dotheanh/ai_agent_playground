@@ -15,7 +15,7 @@ function createWindow() {
     width: 400,
     height: 250,
     x: width - 420,
-    y: height - 370,
+    y: height - 250,
     frame: false,
     transparent: true,
     resizable: false,
@@ -171,21 +171,10 @@ ipcMain.handle('get-always-on-top', () => {
   return isAlwaysOnTop;
 });
 
-ipcMain.on('start-move', () => {
-  // Send message to renderer to enable drag mode temporarily
-  global.mainWindow.webContents.send('trigger-drag');
-});
-
-ipcMain.on('start-drag', (event) => {
-  // Start native drag from main process
-  // Note: startDrag must be called synchronously from a mouse event handler
-  // The webContents sender is the renderer that initiated the drag
+ipcMain.on('set-window-position', (event, { x, y }) => {
   const win = global.mainWindow;
   if (win && !win.isDestroyed()) {
-    win.webContents.executeJavaScript(`
-      document.body.style.webkitAppRegion = 'drag';
-      // The drag will be handled by Electron's native drag
-    `).catch(() => {});
+    win.setPosition(Math.round(x), Math.round(y));
   }
 });
 
