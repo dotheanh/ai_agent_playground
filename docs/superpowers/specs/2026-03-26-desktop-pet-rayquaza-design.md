@@ -171,24 +171,28 @@ desktop_pet/
 ├── vite.config.js
 ├── electron-builder.json
 ├── scripts/
-│   ├── copy-assets.js            # Copy GLB to dist
-│   ├── setup-claude-hooks.js     # Install Claude Code hooks
-│   └── test-bubble.js            # Test bubble notifications
+│   ├── copy-assets.js                # Copy GLB to dist
+│   ├── setup-claude-hooks.js         # Install Claude Code hooks
+│   └── test-bubble.js                # Test bubble notifications
 ├── src/
 │   ├── main/
-│   │   ├── main.js               # Electron main process, IPC handlers
-│   │   ├── http-server.js        # HTTP server for Claude Code hooks
-│   │   └── bubble-window.js      # Separate bubble notification window
+│   │   ├── main.js                   # Electron main process, IPC + broker wiring
+│   │   ├── http-server.js            # Route-based HTTP server (4 endpoints)
+│   │   ├── bubble-window.js          # Separate bubble notification window
+│   │   ├── bubble-html-template.js   # Bubble HTML/CSS/JS (interactive buttons)
+│   │   └── permission-broker.js      # In-memory permission queue + resolve
 │   ├── preload/
-│   │   └── preload.js             # IPC bridge
+│   │   └── preload.js                # IPC bridge
 │   ├── renderer/
 │   │   ├── index.html
-│   │   ├── main.js               # Three.js setup, interaction logic
+│   │   ├── main.js                   # Three.js setup, interaction logic
 │   │   ├── style.css
 │   │   └── assets/
 │   │       └── MegaRayquazaNLA.glb
 │   └── scripts/
-│       └── claude-hooks.js       # Claude Code hook script
+│       └── claude-hooks.js           # Claude Code hook script + requestId
+├── test/
+│   └── permission-broker.test.js    # 13 unit + HTTP route tests
 └── build/
     └── icon.ico
 ```
@@ -215,46 +219,58 @@ desktop_pet/
 ### Architecture
 ```
 Claude Code (terminal)
-    ↓ hooks → settings.json events
+    ↓ hooks.PermissionRequest → stdin JSON
     ↓ HTTP POST → http://localhost:49152
 Desktop Pet (Electron)
-    ↓ showBubble()
+    ↓ Permission Broker (requestId-based queue + FIFO)
+    ↓ showBubble(payload)
 Bubble Window (separate, transparent, always-on-top)
-    Positioned above main pet window
+    - Interactive (clickable): permission_request, ask_question
+    - Passive (auto-hide): session_start, session_end, notification
 ```
 
 ### Bubble Window Strategy
-- **Separate window:** 360x120px transparent window for bubble UI
+- **Separate window:** 360x160px transparent window for bubble UI (taller for buttons)
 - **Position:** Overlapping middle of main pet window (centered vertically, shifted up 100px)
 - **Z-order:** `moveTop()` called after show to ensure bubble is always on top
-- **Click-through:** `setIgnoreMouseEvents(true)` - clicks pass through to windows below
+- **Click-through:** `setIgnoreMouseEvents(true)` by default; enabled only for interactive types
+- **Mouse events:** enabled (`setIgnoreMouseEvents(false)`) only for `permission_request` and `ask_question` — so buttons are clickable
 - **Sync:** Bubble repositions when main window moves (`moved` event)
 - **Race-safe render:** queue payload until bubble HTML `did-finish-load`, then run `showBubble()`
 - **Auto-hide:** Notification types auto-hide after timeout (session_start: 5s, session_end: 3s, notification: 5s)
-- **Interactive:** permission_request & ask_question require manual dismiss (no auto-hide)
-- **Options UI:** bubble can show top 3 permission choices as numbered lines (1..3) when available or fallback defaults for PermissionRequest.
+- **Interactive:** `permission_request` & `ask_question` — buttons POST `/bubble/decision`, no auto-hide
+- **Options UI:** up to 3 styled buttons; fallback defaults for PermissionRequest: `["Yes", "Yes, allow for all projects", "No"]`
 
-### Event Types
-| Event | Icon | Auto-hide | Description |
-|-------|------|-----------|-------------|
-| `permission_request` | 🔐 | No | User permission required |
-| `ask_question` | ❓ | No | Claude asks a question |
-| `session_start` | 🚀 | 5s | New session started |
-| `session_end` | 👋 | 3s | Session ended |
-| `notification` | ℹ️ | 5s | General notification |
+### HTTP Server Endpoints
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/hook/permission-request` | POST | Enqueue permission request via broker → show interactive bubble |
+| `/hook/permission-resolved` | POST | Notify broker that user resolved in Claude UI → hide bubble |
+| `/bubble/decision` | POST | Bubble button click → resolve via broker |
+| `/hook/event` | POST | Non-permission events → show passive bubble directly |
+| **Port:** 49152 | | |
 
-### HTTP Server
-- **Port:** 49152
-- **Endpoint:** `POST /`
-- **No dependency:** Uses native Node.js `http` module
-- **Silent fail:** ECONNREFUSED errors are silently ignored (pet not running)
+### Decision Mapping
+| Button text | decision enum |
+|-------------|---------------|
+| contains "allow for all" | `approve_always` |
+| contains "no" or "deny" | `deny` |
+| contains "yes" or "approve" | `approve_once` |
+| unknown / fallback | `approve_once` |
+
+### Permission Broker (in-memory, Electron main process)
+- **requestId:** SHA-1 hash of event+fingerprint (or `payload.request_id` if present)
+- **FIFO queue:** only 1 bubble shown at a time; pending requests queue up
+- **Idempotent resolve:** second resolve returns `already_resolved`
+- **Timeout:** 60s → expire + hide bubble + activate next
+- **States:** `pending` → `resolved` | `expired` | `already_resolved`
 
 ### Claude Code Hook Script
 - **Location:** `src/scripts/claude-hooks.js`
 - **Setup:** Run `npm run setup-hooks` to install hooks to `~/.claude/settings.json`
 - **Hook key:** `hooks.PermissionRequest` (valid Claude Code hook field)
 - **Payload handling:** normalize `hook_event_name/tool_name/tool_input` into UI events and readable messages (e.g., `Run: powershell -Command "Get-Date"`)
-- **Options handling:** use payload `permission_suggestions/options` when present; otherwise fallback (`Yes`, `Yes, allow for all projects`, `No`)
+- **Options handling:** use payload `permission_suggestions/options` when present; otherwise fallback
 - **Setup script:** `scripts/setup-claude-hooks.js` - updates only Desktop Pet hook entries, preserves all other settings.
 
 ---
