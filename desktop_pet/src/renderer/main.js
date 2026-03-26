@@ -293,6 +293,24 @@ canvas.addEventListener('mouseleave', () => {
   isMouseDown = false;
 });
 
+// Scroll to zoom in/out
+canvas.addEventListener('wheel', (e) => {
+  if (isDragging) return; // No zoom in move mode
+
+  e.preventDefault();
+
+  // Calculate zoom factor based on scroll direction
+  const zoomSpeed = 0.1;
+  const delta = e.deltaY > 0 ? -zoomSpeed : zoomSpeed;
+  const newZoom = camera.zoom + delta;
+
+  // Limit zoom range
+  if (newZoom >= 0.5 && newZoom <= 3) {
+    camera.zoom = newZoom;
+    camera.updateProjectionMatrix();
+  }
+}, { passive: false });
+
 // Right-click = custom context menu
 canvas.addEventListener('contextmenu', (e) => {
   e.preventDefault();

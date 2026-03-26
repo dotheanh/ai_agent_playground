@@ -23,26 +23,13 @@
 
 ## 3. Window Configuration
 
-```
-┌─────────────────────────────────────┐
-│ Frameless, transparent, rounded     │
-│ ┌─────────────────────────────────┐ │
-│ │                                 │ │
-│ │      Three.js Canvas            │ │
-│ │      (MegaRayquazaNLA.glb)     │ │
-│ │                                 │ │
-│ └─────────────────────────────────┘ │
-│        200x200px, resizable        │
-└─────────────────────────────────────┘
-```
-
 ### Window Properties
-- **Size:** 400x450px (default)
+- **Size:** 400x250px
 - **Frame:** Frameless (no title bar, no native controls)
 - **Background:** Fully transparent (transparent: true)
-- **Always on top:** true (via `setAlwaysOnTop`)
+- **Always on top:** true (default)
 - **Resizable:** false (fixed size)
-- **Initial position:** Bottom-right corner of primary screen (20px margin)
+- **Initial position:** Bottom-right corner of primary screen (420px from right, 250px from bottom)
 - **Skip taskbar:** true (no taskbar icon)
 - **Focusable:** true
 
@@ -68,43 +55,39 @@
 ### 5.1 3D Model Rendering
 - Load `MegaRayquazaNLA.glb` via Three.js GLTFLoader
 - Loop the NLA animation continuously
-- Auto-rotate slowly when idle (Y-axis, ~0.002 rad/frame)
 - Render on transparent WebGL canvas
+- Camera zoom: 0.5x - 3x (via scroll wheel)
 
-### 5.2 Drag & Drop
-- Mouse down → detect drag intent (no immediate rotation)
-- Mouse move while down → drag window using Electron `win.dragMove()`
-- Implement drag threshold: 5px movement before triggering drag
-- If threshold not met → treat as potential rotation start
+### 5.2 Interaction Modes
 
-### 5.3 3D Rotation (Custom Orbit)
-- Left-click drag on model → rotate model directly (custom orbit, not camera)
-- Rotate X and Y axes based on mouse delta
-- Rotation speed: 0.01 rad per pixel
-- In Move Window mode: rotation is disabled (one-shot drag takes priority)
+**Orbit Mode (default)**
+- Left-click drag → rotate model (X and Y axes, 0.01 rad/pixel)
+- Scroll wheel → zoom in/out at cursor position (0.5x - 3x)
+- Auto-rotate when enabled (0.5 rad/s on Y-axis)
 
-### 5.4 Context Menu (Right-Click)
+**Move Mode (one-shot)**
+- Right-click → context menu → "Move Window"
+- While dragging: mousemove updates window position via IPC
+- Ruler overlay shows pixel guides (50px increments, red)
+- Mouseup → auto-return to Orbit Mode, ruler hidden
+
+### 5.3 Context Menu (Right-Click)
 ```
 ┌─────────────────────────────┐
-│ ✓ Move Window                │  ← One-shot drag mode, shows ruler
-│ ✓ Auto-Rotate               │  ← Toggle auto-rotation (tick when on)
-│ ─────────────────────────   │
-│ ✓ Always on Top             │  ← Toggle always-on-top (tick when on)
-│ ─────────────────────────   │
-│ Exit                         │  ← Quit application
+│ Move Window                 │  ← One-shot drag, shows ruler
+│ ✓ Auto-Rotate              │  ← Toggle (✓ when active)
+│ ──────────────────────     │
+│ ✓ Always on Top            │  ← Toggle (✓ when active)
+│ ──────────────────────     │
+│ Exit                       │  ← Quit application
 └─────────────────────────────┘
 ```
-- **Move Window**: One-shot drag - after drag completes, auto-returns to orbit mode
-- **Auto-Rotate**: Rotates model automatically on Y-axis at ~0.5 rad/s
-- **Always on Top**: Toggles window z-index priority
-- **Ruler overlay**: Red pixel ruler (50px increments) appears when Move Window is active
 
-### 5.5 System Tray
-- Minimize to system tray instead of closing
-- Tray icon: Rayquaza emoji or small icon
+### 5.4 System Tray
+- Tray icon: transparent placeholder (16x16)
 - Tray tooltip: "Mega Rayquaza Pet"
-- Double-click tray → show pet
-- Right-click tray → same context menu
+- Double-click → show pet
+- Tray menu: Always on Top, Show Pet, Hide Pet, Exit
 
 ---
 
@@ -115,15 +98,16 @@ desktop_pet/
 ├── package.json
 ├── vite.config.js
 ├── electron-builder.json
+├── scripts/
+│   └── copy-assets.js      # Copy GLB to dist
 ├── src/
 │   ├── main/
-│   │   ├── main.js           # Electron main process
-│   │   └── tray.js           # System tray handling
+│   │   └── main.js         # Electron main process, IPC handlers
 │   ├── preload/
-│   │   └── preload.js        # IPC bridge (drag, context menu)
+│   │   └── preload.js      # IPC bridge (setWindowPosition, toggleAlwaysOnTop, etc.)
 │   └── renderer/
 │       ├── index.html
-│       ├── main.js           # Three.js setup & render loop
+│       ├── main.js         # Three.js setup, interaction logic
 │       ├── style.css
 │       └── assets/
 │           └── MegaRayquazaNLA.glb
@@ -133,78 +117,68 @@ desktop_pet/
 
 ---
 
-## 7. Key Implementation Details
+## 7. IPC Channels
 
-### IPC Channels
 | Channel | Direction | Purpose |
 |---------|-----------|---------|
-| `drag-start` | renderer → main | Notify drag started |
-| `drag-end` | renderer → main | Notify drag ended |
-| `show-context-menu` | renderer → main | Trigger context menu |
-| `toggle-always-on-top` | renderer → main | Toggle window flag |
+| `set-window-position` | renderer → main | Update window position (x, y) |
+| `toggle-always-on-top` | renderer → main | Toggle always-on-top flag |
+| `get-always-on-top` | renderer → main (invoke) | Get current always-on-top state |
+| `always-on-top-changed` | main → renderer | Notify state change |
+| `exit-app` | renderer → main | Quit application |
+| `hide-window` | renderer → main | Hide window |
+| `show-window` | renderer → main | Show and focus window |
 
-### Drag Detection Logic
+---
+
+## 8. Key Implementation Details
+
+### Drag & Move Logic
 ```
+toggle-move (context menu):
+  isDragging = true
+  showRulerOverlay()
+  isDragging = false  // (after mouseup)
+
 mousedown:
-  record startX, startY, startTime
+  if (isDragging):
+    record start position
 
-mousemove (while down):
-  distance = sqrt((x - startX)² + (y - startY)²)
-  elapsed = now - startTime
+mousemove (while isDragging):
+  deltaX = clientX - dragStartX
+  deltaY = clientY - dragStartY
+  newX = window.screenX + deltaX
+  newY = window.screenY + deltaY
+  setWindowPosition(newX, newY)
 
-  if (distance > 5px AND elapsed > 150ms):
-    → trigger drag (window.dragMove())
-    → disable orbit controls
-    → clear drag state
-  else if (distance <= 5px AND elapsed > 300ms):
-    → enable orbit controls for rotation
+mouseup:
+  isDragging = false
+  hideRulerOverlay()
+  → returns to orbit mode
+```
+
+### Zoom Logic
+```
+wheel event:
+  if (isDragging) return  // no zoom in move mode
+  delta = (deltaY > 0) ? -0.1 : 0.1
+  newZoom = camera.zoom + delta
+  if (0.5 <= newZoom <= 3):
+    camera.zoom = newZoom
 ```
 
 ---
 
-## 8. Context Menu Behavior
+## 9. Success Criteria
 
-| Action | Behavior |
-|--------|----------|
-| Click "Always on Top" | Toggle checkmark + `win.setAlwaysOnTop(!current)` |
-| Click "Show Pet" | `win.show()`, `win.focus()` |
-| Click "Hide Pet" | `win.hide()` |
-| Click "Exit" | `app.quit()` |
-| Click outside menu | Dismiss menu |
-
----
-
-## 9. Error Handling
-
-| Scenario | Handling |
-|----------|----------|
-| GLB file not found | Show error overlay, disable 3D render |
-| WebGL not supported | Show fallback message |
-| Window off-screen on startup | Reset to bottom-right corner |
-
----
-
-## 10. Out of Scope (v1)
-
-- Animation blending between multiple animations
-- Loading `MegaRayquazaExport.glb` with 4 animations
-- Resizable window
-- Background click-through mode
-- Persistent position storage
-- Custom window opacity
-- Sound effects
-
----
-
-## 11. Success Criteria
-
-- [ ] App launches without errors
-- [ ] Transparent frameless window appears at bottom-right
-- [ ] Rayquaza model renders and animates (loop)
-- [ ] Drag window by clicking anywhere
-- [ ] Rotate camera by click+drag on model
-- [ ] Right-click shows context menu
-- [ ] Always on top toggle works
-- [ ] Hide/show pet via menu
-- [ ] System tray icon present
-- [ ] Exit via menu closes app cleanly
+- [x] App launches without errors
+- [x] Transparent frameless window appears at bottom-right
+- [x] Rayquaza model renders and animates (loop)
+- [x] Move Window mode with pixel ruler overlay
+- [x] Orbit mode with model rotation
+- [x] Scroll wheel zoom (0.5x - 3x)
+- [x] Right-click shows custom context menu
+- [x] Always on top toggle with checkmark
+- [x] Auto-Rotate toggle with checkmark
+- [x] System tray icon present
+- [x] Exit via menu closes app cleanly
