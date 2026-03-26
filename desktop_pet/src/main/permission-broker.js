@@ -7,14 +7,18 @@ function normalizeOptions(options) {
 }
 
 function mapDecisionFromOption(optionText) {
-  const normalized = String(optionText || '').toLowerCase();
+  const normalized = String(optionText || '').toLowerCase().trim();
 
   if (normalized.includes('allow for all')) {
     return 'approve_always';
   }
 
-  if (normalized.includes('no') || normalized.includes('deny')) {
+  if (/\b(no|deny)\b/.test(normalized)) {
     return 'deny';
+  }
+
+  if (/\b(yes|approve)\b/.test(normalized)) {
+    return 'approve_once';
   }
 
   return 'approve_once';
@@ -114,7 +118,7 @@ function createPermissionBroker({ onShow, onHide, now = Date.now, timeoutMs = 60
         return { status: 'expired', requestId, currentStatus: finalized.status };
       }
 
-      return { status: 'not_pending', requestId, currentStatus: finalized.status };
+      return { status: 'already_resolved', requestId, currentStatus: finalized.status };
     }
 
     const request = requests.get(requestId);

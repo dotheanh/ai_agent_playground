@@ -44,7 +44,7 @@ test('resolve active request and activate next in FIFO', () => {
   assert.equal(events[events.length - 1].payload.requestId, 'req-2');
 });
 
-test('idempotent resolve: second resolve returns not_pending resolved', () => {
+test('idempotent resolve: second resolve returns already_resolved', () => {
   const broker = createPermissionBroker({
     onShow: () => {},
     onHide: () => {},
@@ -57,7 +57,7 @@ test('idempotent resolve: second resolve returns not_pending resolved', () => {
   const second = broker.resolveByDecision({ requestId: 'req-1', decision: 'deny', source: 'bubble_click' });
 
   assert.equal(first.status, 'resolved');
-  assert.equal(second.status, 'not_pending');
+  assert.equal(second.status, 'already_resolved');
   assert.equal(second.currentStatus, 'resolved');
 });
 
@@ -114,6 +114,7 @@ test('mapDecisionFromOption maps allow-all, deny and default branches', () => {
   assert.equal(broker.mapDecisionFromOption('Yes, allow for all projects'), 'approve_always');
   assert.equal(broker.mapDecisionFromOption('No'), 'deny');
   assert.equal(broker.mapDecisionFromOption('Yes'), 'approve_once');
+  assert.equal(broker.mapDecisionFromOption('unknown option'), 'approve_once');
 });
 
 test('duplicate enqueue same requestId does not duplicate queue activation', () => {
@@ -133,4 +134,162 @@ test('duplicate enqueue same requestId does not duplicate queue activation', () 
 
   const showReq2 = events.filter((event) => event.type === 'show' && event.payload.requestId === 'req-2');
   assert.equal(showReq2.length, 1);
+});
+
+// ─── HTTP route contract tests (Task 2) ───────────────────────────────────────
+
+const http = require('node:http');
+const { startHttpServer } = require('../src/main/http-server');
+
+function httpPost(port, path, payload) {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify(payload);
+    const req = http.request(
+      { hostname: 'localhost', port, path, method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) } },
+      (res) => {
+        let data = '';
+        res.on('data', (chunk) => { data += chunk; });
+        res.on('end', () => {
+          try { resolve({ status: res.statusCode, body: JSON.parse(data) }); }
+          catch { resolve({ status: res.statusCode, body: data }); }
+        });
+      }
+    );
+    req.on('error', reject);
+    req.write(body);
+    req.end();
+  });
+}
+
+test('POST /hook/permission-request enqueues request and returns 200', (t, done) => {
+  const calls = [];
+  const mockBroker = {
+    enqueueRequest: (payload) => { calls.push(['enqueue', payload]); return { status: 'pending' }; },
+    resolveByDecision: () => ({ status: 'resolved' }),
+    resolveByClaudeUi: () => ({ status: 'resolved' }),
+  };
+
+  const server = startHttpServer({ broker: mockBroker, port: 0 });
+  const addr = server.address();
+
+  httpPost(addr.port, '/hook/permission-request', { requestId: 'r1', message: 'Test', toolName: 'Bash', options: ['Yes'] })
+    .then((res) => {
+      assert.equal(res.status, 200);
+      assert.equal(res.body.status, 'queued');
+      assert.deepEqual(calls[0], ['enqueue', { requestId: 'r1', message: 'Test', toolName: 'Bash', options: ['Yes'] }]);
+      server.close();
+      done();
+    })
+    .catch(done);
+});
+
+test('POST /bubble/decision resolves request and returns 200', (t, done) => {
+  const calls = [];
+  const mockBroker = {
+    enqueueRequest: () => {},
+    resolveByDecision: (payload) => { calls.push(['decision', payload]); return { status: 'resolved' }; },
+    resolveByClaudeUi: () => ({ status: 'resolved' }),
+  };
+
+  const server = startHttpServer({ broker: mockBroker, port: 0 });
+  const addr = server.address();
+
+  httpPost(addr.port, '/bubble/decision', { requestId: 'r1', decision: 'approve_once', source: 'bubble_click' })
+    .then((res) => {
+      assert.equal(res.status, 200);
+      assert.equal(res.body.status, 'resolved');
+      assert.deepEqual(calls[0], ['decision', { requestId: 'r1', decision: 'approve_once', source: 'bubble_click' }]);
+      server.close();
+      done();
+    })
+    .catch(done);
+});
+
+test('POST /bubble/decision returns 404 for unknown requestId', (t, done) => {
+  const mockBroker = {
+    enqueueRequest: () => {},
+    resolveByDecision: () => ({ status: 'request_not_found' }),
+    resolveByClaudeUi: () => ({ status: 'resolved' }),
+  };
+
+  const server = startHttpServer({ broker: mockBroker, port: 0 });
+  const addr = server.address();
+
+  httpPost(addr.port, '/bubble/decision', { requestId: 'unknown', decision: 'deny', source: 'bubble_click' })
+    .then((res) => {
+      assert.equal(res.status, 404);
+      assert.equal(res.body.status, 'request_not_found');
+      server.close();
+      done();
+    })
+    .catch(done);
+});
+
+test('POST /hook/permission-resolved calls resolveByClaudeUi and returns 200', (t, done) => {
+  const calls = [];
+  const mockBroker = {
+    enqueueRequest: () => {},
+    resolveByDecision: () => ({ status: 'resolved' }),
+    resolveByClaudeUi: (payload) => { calls.push(['claude_ui', payload]); return { status: 'resolved' }; },
+  };
+
+  const server = startHttpServer({ broker: mockBroker, port: 0 });
+  const addr = server.address();
+
+  httpPost(addr.port, '/hook/permission-resolved', { requestId: 'r1' })
+    .then((res) => {
+      assert.equal(res.status, 200);
+      assert.equal(res.body.status, 'resolved');
+      assert.deepEqual(calls[0], ['claude_ui', { requestId: 'r1' }]);
+      server.close();
+      done();
+    })
+    .catch(done);
+});
+
+test('unknown route returns 404', (t, done) => {
+  const mockBroker = {
+    enqueueRequest: () => {},
+    resolveByDecision: () => ({ status: 'resolved' }),
+    resolveByClaudeUi: () => ({ status: 'resolved' }),
+  };
+
+  const server = startHttpServer({ broker: mockBroker, port: 0 });
+  const addr = server.address();
+
+  httpPost(addr.port, '/hook/unknown', { requestId: 'r1' })
+    .then((res) => {
+      assert.equal(res.status, 404);
+      server.close();
+      done();
+    })
+    .catch(done);
+});
+
+test('malformed JSON returns 400', (t, done) => {
+  const mockBroker = {
+    enqueueRequest: () => {},
+    resolveByDecision: () => ({ status: 'resolved' }),
+    resolveByClaudeUi: () => ({ status: 'resolved' }),
+  };
+
+  const server = startHttpServer({ broker: mockBroker, port: 0 });
+  const addr = server.address();
+
+  const req = http.request(
+    { hostname: 'localhost', port: addr.port, path: '/hook/permission-request', method: 'POST', headers: { 'Content-Type': 'application/json' } },
+    (res) => {
+      let data = '';
+      res.on('data', (chunk) => { data += chunk; });
+      res.on('end', () => {
+        assert.equal(res.statusCode, 400);
+        assert.ok(JSON.parse(data).error);
+        server.close();
+        done();
+      });
+    }
+  );
+  req.on('error', done);
+  req.write('{ invalid json }');
+  req.end();
 });
