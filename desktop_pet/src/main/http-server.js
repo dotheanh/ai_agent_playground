@@ -1,28 +1,17 @@
 const http = require('http');
+const { showBubble } = require('./bubble-window');
 
 const DEFAULT_PORT = 49152;
 
 function parseJsonBody(req) {
   return new Promise((resolve, reject) => {
     let body = '';
-
-    req.on('data', (chunk) => {
-      body += chunk.toString();
-    });
-
+    req.on('data', (chunk) => { body += chunk.toString(); });
     req.on('end', () => {
-      if (!body) {
-        resolve({});
-        return;
-      }
-
-      try {
-        resolve(JSON.parse(body));
-      } catch (error) {
-        reject(error);
-      }
+      if (!body) { resolve({}); return; }
+      try { resolve(JSON.parse(body)); }
+      catch (error) { reject(error); }
     });
-
     req.on('error', reject);
   });
 }
@@ -33,26 +22,15 @@ function writeJson(res, statusCode, payload) {
 }
 
 function startHttpServer({ broker, port = DEFAULT_PORT } = {}) {
-  if (!broker) {
-    throw new Error('startHttpServer requires broker');
-  }
+  if (!broker) throw new Error('startHttpServer requires broker');
 
   const server = http.createServer(async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    if (req.method === 'OPTIONS') {
-      res.writeHead(200);
-      res.end();
-      return;
-    }
-
-    if (req.method !== 'POST') {
-      res.writeHead(404);
-      res.end();
-      return;
-    }
+    if (req.method === 'OPTIONS') { res.writeHead(200); res.end(); return; }
+    if (req.method !== 'POST') { res.writeHead(404); res.end(); return; }
 
     try {
       const data = await parseJsonBody(req);
@@ -65,14 +43,22 @@ function startHttpServer({ broker, port = DEFAULT_PORT } = {}) {
 
       if (req.url === '/bubble/decision') {
         const result = broker.resolveByDecision(data);
-        const statusCode = result.status === 'request_not_found' ? 404 : 200;
-        writeJson(res, statusCode, result);
+        writeJson(res, result.status === 'request_not_found' ? 404 : 200, result);
         return;
       }
 
       if (req.url === '/hook/permission-resolved') {
         const result = broker.resolveByClaudeUi(data);
         writeJson(res, 200, result);
+        return;
+      }
+
+      // Non-permission events (session_start, session_end, notification)
+      // Show bubble directly — broker is not involved.
+      if (req.url === '/hook/event') {
+        console.log('[HTTP Server] non-permission event:', data.type);
+        showBubble(data);
+        writeJson(res, 200, { status: 'ok' });
         return;
       }
 
@@ -86,10 +72,9 @@ function startHttpServer({ broker, port = DEFAULT_PORT } = {}) {
   server.on('error', (error) => {
     if (error.code === 'EADDRINUSE') {
       console.log(`[HTTP Server] Port ${port} already in use, skipping...`);
-      return;
+    } else {
+      console.error('[HTTP Server] Error:', error.message);
     }
-
-    console.error('[HTTP Server] Error:', error.message);
   });
 
   server.listen(port, () => {
