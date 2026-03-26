@@ -171,6 +171,85 @@ window.addEventListener('resize', onResize);
 
 updateCursor();
 
+// ============================================
+// RULER OVERLAY FOR MOVE MODE
+// ============================================
+function showRulerOverlay() {
+  const existing = document.getElementById('ruler-overlay');
+  if (existing) existing.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'ruler-overlay';
+  const W = 400, H = 450;
+
+  // Build ruler marks HTML
+  let rulerHTML = '';
+  for (let i = 0; i <= W; i += 50) {
+    rulerHTML += `<div class="ruler-mark" style="left:${i}px"><span>${i}</span></div>`;
+  }
+  for (let i = 0; i <= H; i += 50) {
+    rulerHTML += `<div class="ruler-mark-v" style="top:${i}px"><span>${i}</span></div>`;
+  }
+
+  overlay.innerHTML = `
+    <div class="ruler-corner tl"></div>
+    <div class="ruler-corner tr"></div>
+    <div class="ruler-corner bl"></div>
+    <div class="ruler-corner br"></div>
+    ${rulerHTML}
+  `;
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0; left: 0; width: ${W}px; height: ${H}px;
+    pointer-events: none;
+    z-index: 9998;
+    box-sizing: border-box;
+  `;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .ruler-corner {
+      position: absolute;
+      width: 12px; height: 12px;
+      border-color: #ff3333;
+      border-style: solid;
+    }
+    .ruler-corner.tl { top: 0; left: 0; border-width: 3px 0 0 3px; }
+    .ruler-corner.tr { top: 0; right: 0; border-width: 3px 3px 0 0; }
+    .ruler-corner.bl { bottom: 0; left: 0; border-width: 0 0 3px 3px; }
+    .ruler-corner.br { bottom: 0; right: 0; border-width: 0 3px 3px 0; }
+    .ruler-mark {
+      position: absolute; top: 0;
+      width: 1px; height: 8px;
+      background: rgba(255,50,50,0.6);
+    }
+    .ruler-mark span {
+      position: absolute; top: 10px; left: 2px;
+      font-size: 9px; color: #ff3333;
+      font-family: 'Courier New', monospace;
+      white-space: nowrap;
+    }
+    .ruler-mark-v {
+      position: absolute; left: 0;
+      height: 1px; width: 8px;
+      background: rgba(255,50,50,0.6);
+    }
+    .ruler-mark-v span {
+      position: absolute; left: 10px; top: -5px;
+      font-size: 9px; color: #ff3333;
+      font-family: 'Courier New', monospace;
+      white-space: nowrap;
+    }
+  `;
+  overlay.appendChild(style);
+  document.body.appendChild(overlay);
+}
+
+function hideRulerOverlay() {
+  const existing = document.getElementById('ruler-overlay');
+  if (existing) existing.remove();
+}
+
 // Left-click: orbit rotation OR one-shot move
 canvas.addEventListener('mousedown', (e) => {
   if (e.button !== 0) return;
@@ -189,7 +268,10 @@ canvas.addEventListener('mousedown', (e) => {
 canvas.addEventListener('mousemove', (e) => {
   if (!isMouseDown) return;
 
-  // Always rotate model
+  // Skip orbit rotation when in move mode
+  if (isDragging) return;
+
+  // Rotate model
   const deltaX = e.clientX - lastMouseX;
   const deltaY = e.clientY - lastMouseY;
   scene.rotation.y += deltaX * 0.01;
@@ -236,13 +318,16 @@ function showCustomContextMenu(x, y) {
   const existingMenu = document.getElementById('custom-context-menu');
   if (existingMenu) existingMenu.remove();
 
+  // Get always-on-top state from main process
+  const isOnTop = window.electronAPI ? window.electronAPI.getAlwaysOnTop() : false;
+
   const menu = document.createElement('div');
   menu.id = 'custom-context-menu';
   menu.innerHTML = `
-    <div class="menu-item" data-action="toggle-move">${isDragging ? 'Orbit Camera' : 'Move Window'}</div>
-    <div class="menu-item" data-action="toggle-auto">${autoRotate ? 'Stop Auto-Rotate' : 'Auto-Rotate'}</div>
+    <div class="menu-item" data-action="toggle-move">${isDragging ? '✓ Orbit Camera' : 'Move Window'}</div>
+    <div class="menu-item" data-action="toggle-auto">${autoRotate ? '✓ Auto-Rotate' : 'Auto-Rotate'}</div>
     <div class="menu-separator"></div>
-    <div class="menu-item" data-action="always-on-top">Always on Top</div>
+    <div class="menu-item" data-action="always-on-top">${isOnTop ? '✓ Always on Top' : 'Always on Top'}</div>
     <div class="menu-separator"></div>
     <div class="menu-item" data-action="exit">Exit</div>
   `;
@@ -250,23 +335,23 @@ function showCustomContextMenu(x, y) {
     position: fixed;
     left: ${x}px;
     top: ${y}px;
-    background: #1a1a2e;
-    border: 1px solid #333;
+    background: #0d0d0d;
+    border: 1px solid #cc0000;
     border-radius: 8px;
     padding: 4px 0;
     min-width: 160px;
     z-index: 9999;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 16px rgba(200,0,0,0.3);
     font-family: 'Segoe UI', sans-serif;
     font-size: 13px;
-    color: #eaeaea;
+    color: #e0e0e0;
   `;
 
   const style = document.createElement('style');
   style.textContent = `
     .menu-item { padding: 8px 16px; cursor: pointer; transition: background 0.15s; }
-    .menu-item:hover { background: #16213e; color: #fff; }
-    .menu-separator { height: 1px; background: #333; margin: 4px 8px; }
+    .menu-item:hover { background: #cc0000; color: #fff; }
+    .menu-separator { height: 1px; background: #cc0000; margin: 4px 8px; opacity: 0.4; }
   `;
   menu.appendChild(style);
 
@@ -278,6 +363,7 @@ function showCustomContextMenu(x, y) {
       case 'toggle-move':
         isDragging = !isDragging;
         updateCursor();
+        if (isDragging) showRulerOverlay(); else hideRulerOverlay();
         break;
       case 'toggle-auto':
         autoRotate = !autoRotate;

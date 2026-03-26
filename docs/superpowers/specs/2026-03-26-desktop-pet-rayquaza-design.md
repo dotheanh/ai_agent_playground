@@ -37,24 +37,25 @@
 ```
 
 ### Window Properties
-- **Size:** 200x200px (default)
+- **Size:** 400x450px (default)
 - **Frame:** Frameless (no title bar, no native controls)
 - **Background:** Fully transparent (transparent: true)
 - **Always on top:** true (via `setAlwaysOnTop`)
 - **Resizable:** false (fixed size)
-- **Initial position:** Bottom-right corner of primary screen
+- **Initial position:** Bottom-right corner of primary screen (20px margin)
 - **Skip taskbar:** true (no taskbar icon)
-- **Focusable:** false (click-through when not interacting)
+- **Focusable:** true
 
 ---
 
 ## 4. Visual Design
 
 ### Color Palette
-- Context menu background: `#1a1a2e` (dark blue)
-- Context menu text: `#eaeaea`
-- Context menu hover: `#16213e`
-- Context menu accent: `#e94560`
+- Context menu background: `#0d0d0d` (black)
+- Context menu text: `#e0e0e0`
+- Context menu hover: `#cc0000` (red)
+- Context menu border: `#cc0000` (red)
+- Ruler overlay: `#ff3333` (red) - visible only in Move Window mode
 
 ### Typography
 - Font: Segoe UI (system font)
@@ -76,27 +77,27 @@
 - Implement drag threshold: 5px movement before triggering drag
 - If threshold not met → treat as potential rotation start
 
-### 5.3 3D Rotation (Orbit Controls)
-- After drag threshold not met + mouse moves → enable orbit controls
-- Left-click drag on model → rotate camera around model
-- Orbit controls with:
-  - `enableZoom: false`
-  - `enablePan: false`
-  - `rotateSpeed: 0.5`
-  - `minPolarAngle: 0.5`
-  - `maxPolarAngle: Math.PI - 0.5`
+### 5.3 3D Rotation (Custom Orbit)
+- Left-click drag on model → rotate model directly (custom orbit, not camera)
+- Rotate X and Y axes based on mouse delta
+- Rotation speed: 0.01 rad per pixel
+- In Move Window mode: rotation is disabled (one-shot drag takes priority)
 
 ### 5.4 Context Menu (Right-Click)
 ```
-┌────────────────────────┐
-│ ☑ Always on Top        │  ← Toggle always-on-top
-│ ─────────────────────  │
-│ Show Pet               │  ← Show window (if hidden)
-│ Hide Pet               │  ← Hide window (minimize to tray)
-│ ─────────────────────  │
-│ Exit                   │  ← Quit application
-└────────────────────────┘
+┌─────────────────────────────┐
+│ ✓ Move Window                │  ← One-shot drag mode, shows ruler
+│ ✓ Auto-Rotate               │  ← Toggle auto-rotation (tick when on)
+│ ─────────────────────────   │
+│ ✓ Always on Top             │  ← Toggle always-on-top (tick when on)
+│ ─────────────────────────   │
+│ Exit                         │  ← Quit application
+└─────────────────────────────┘
 ```
+- **Move Window**: One-shot drag - after drag completes, auto-returns to orbit mode
+- **Auto-Rotate**: Rotates model automatically on Y-axis at ~0.5 rad/s
+- **Always on Top**: Toggles window z-index priority
+- **Ruler overlay**: Red pixel ruler (50px increments) appears when Move Window is active
 
 ### 5.5 System Tray
 - Minimize to system tray instead of closing
