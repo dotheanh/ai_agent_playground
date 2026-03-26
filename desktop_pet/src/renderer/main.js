@@ -112,9 +112,31 @@ function showError(message) {
   overlay.querySelector('span').textContent = message;
 }
 
-// Animation loop
+// ============================================
+// INTERACTION: ORBIT + MOVE (ONE-SHOT) + AUTO-ROTATE
+// ============================================
+
+const canvas = renderer.domElement;
+let isDragging = false; // For move mode
+let isMouseDown = false;
+let lastMouseX = 0;
+let lastMouseY = 0;
+let autoRotate = false; // Auto-rotate toggle
 const clock = new THREE.Clock();
 
+// Auto-rotate: rotate model slowly in animation loop
+function updateAutoRotate(delta) {
+  if (autoRotate && !isMouseDown) {
+    scene.rotation.y += delta * 0.5; // Slow rotation
+  }
+}
+
+// Update cursor
+function updateCursor() {
+  canvas.style.cursor = isDragging ? 'move' : 'grab';
+}
+
+// Animation loop
 function animate() {
   requestAnimationFrame(animate);
 
@@ -125,7 +147,9 @@ function animate() {
     mixer.update(delta);
   }
 
-  // No auto-rotate - orbit is manual via mouse drag
+  // Auto-rotate if enabled
+  updateAutoRotate(delta);
+
   controls.update();
   renderer.render(scene, camera);
 }
@@ -145,73 +169,56 @@ function onResize() {
 
 window.addEventListener('resize', onResize);
 
-// ============================================
-// MODE SYSTEM: ORBIT vs MOVE
-// ============================================
-
-const canvas = renderer.domElement;
-let currentMode = 'orbit'; // 'orbit' or 'move'
-let isMouseDown = false;
-let lastMouseX = 0;
-let lastMouseY = 0;
-
-// Update canvas cursor based on mode
-function updateCursor() {
-  canvas.style.cursor = currentMode === 'orbit' ? 'grab' : 'default';
-}
 updateCursor();
 
-// Left-click: orbit OR move based on mode
+// Left-click: orbit rotation OR one-shot move
 canvas.addEventListener('mousedown', (e) => {
-  if (e.button === 0) { // Left click only
-    isMouseDown = true;
-    lastMouseX = e.clientX;
-    lastMouseY = e.clientY;
-    canvas.style.cursor = 'grabbing';
+  if (e.button !== 0) return;
 
-    if (currentMode === 'move') {
-      // Enable drag for window movement
-      canvas.style.webkitAppRegion = 'drag';
-    }
+  isMouseDown = true;
+  lastMouseX = e.clientX;
+  lastMouseY = e.clientY;
+  canvas.style.cursor = 'grabbing';
+
+  if (isDragging) {
+    // Enable drag for one-shot move
+    canvas.style.webkitAppRegion = 'drag';
   }
 });
 
 canvas.addEventListener('mousemove', (e) => {
   if (!isMouseDown) return;
 
-  if (currentMode === 'orbit') {
-    // Rotate model based on mouse movement
-    const deltaX = e.clientX - lastMouseX;
-    const deltaY = e.clientY - lastMouseY;
-    scene.rotation.y += deltaX * 0.01;
-    scene.rotation.x += deltaY * 0.01;
-    lastMouseX = e.clientX;
-    lastMouseY = e.clientY;
-  }
-  // In 'move' mode, CSS -webkit-app-region handles it
+  // Always rotate model
+  const deltaX = e.clientX - lastMouseX;
+  const deltaY = e.clientY - lastMouseY;
+  scene.rotation.y += deltaX * 0.01;
+  scene.rotation.x += deltaY * 0.01;
+  lastMouseX = e.clientX;
+  lastMouseY = e.clientY;
 });
 
 canvas.addEventListener('mouseup', () => {
   isMouseDown = false;
-  if (currentMode === 'orbit') {
-    updateCursor();
-  } else {
+  canvas.style.cursor = isDragging ? 'move' : 'grab';
+
+  if (isDragging) {
+    // One-shot: disable drag after move
     canvas.style.webkitAppRegion = 'no-drag';
   }
 });
 
 canvas.addEventListener('mouseleave', () => {
   isMouseDown = false;
-  if (currentMode === 'move') {
+  if (isDragging) {
     canvas.style.webkitAppRegion = 'no-drag';
   }
   updateCursor();
 });
 
-// Right-click = custom context menu (always works, even in move mode)
+// Right-click = custom context menu
 canvas.addEventListener('contextmenu', (e) => {
   e.preventDefault();
-  // Disable drag temporarily for right-click
   canvas.style.webkitAppRegion = 'no-drag';
   showCustomContextMenu(e.clientX, e.clientY);
 });
@@ -226,14 +233,14 @@ document.addEventListener('click', (e) => {
 
 // Custom context menu
 function showCustomContextMenu(x, y) {
-  // Remove existing menu
   const existingMenu = document.getElementById('custom-context-menu');
   if (existingMenu) existingMenu.remove();
 
   const menu = document.createElement('div');
   menu.id = 'custom-context-menu';
   menu.innerHTML = `
-    <div class="menu-item" data-action="toggle-mode">${currentMode === 'orbit' ? 'Move Window' : 'Orbit Camera'}</div>
+    <div class="menu-item" data-action="toggle-move">${isDragging ? 'Orbit Camera' : 'Move Window'}</div>
+    <div class="menu-item" data-action="toggle-auto">${autoRotate ? 'Stop Auto-Rotate' : 'Auto-Rotate'}</div>
     <div class="menu-separator"></div>
     <div class="menu-item" data-action="always-on-top">Always on Top</div>
     <div class="menu-separator"></div>
@@ -247,7 +254,7 @@ function showCustomContextMenu(x, y) {
     border: 1px solid #333;
     border-radius: 8px;
     padding: 4px 0;
-    min-width: 150px;
+    min-width: 160px;
     z-index: 9999;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     font-family: 'Segoe UI', sans-serif;
@@ -255,34 +262,25 @@ function showCustomContextMenu(x, y) {
     color: #eaeaea;
   `;
 
-  // Add styles
   const style = document.createElement('style');
   style.textContent = `
-    .menu-item {
-      padding: 8px 16px;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    .menu-item:hover {
-      background: #16213e;
-      color: #fff;
-    }
-    .menu-separator {
-      height: 1px;
-      background: #333;
-      margin: 4px 8px;
-    }
+    .menu-item { padding: 8px 16px; cursor: pointer; transition: background 0.15s; }
+    .menu-item:hover { background: #16213e; color: #fff; }
+    .menu-separator { height: 1px; background: #333; margin: 4px 8px; }
   `;
   menu.appendChild(style);
 
-  // Handle menu actions
   menu.addEventListener('click', (e) => {
     const action = e.target.dataset.action;
     if (!action || !window.electronAPI) return;
 
     switch (action) {
-      case 'toggle-mode':
-        toggleMode();
+      case 'toggle-move':
+        isDragging = !isDragging;
+        updateCursor();
+        break;
+      case 'toggle-auto':
+        autoRotate = !autoRotate;
         break;
       case 'always-on-top':
         window.electronAPI.toggleAlwaysOnTop();
@@ -296,25 +294,8 @@ function showCustomContextMenu(x, y) {
 
   document.body.appendChild(menu);
 
-  // Adjust position if menu goes off screen
+  // Adjust position if off screen
   const rect = menu.getBoundingClientRect();
-  if (rect.right > window.innerWidth) {
-    menu.style.left = (x - rect.width) + 'px';
-  }
-  if (rect.bottom > window.innerHeight) {
-    menu.style.top = (y - rect.height) + 'px';
-  }
-}
-
-// Toggle between orbit and move mode
-function toggleMode() {
-  if (currentMode === 'orbit') {
-    currentMode = 'move';
-    canvas.style.webkitAppRegion = 'drag';
-  } else {
-    currentMode = 'orbit';
-    canvas.style.webkitAppRegion = 'no-drag';
-    controls.enabled = false;
-  }
-  updateCursor();
+  if (rect.right > window.innerWidth) menu.style.left = (x - rect.width) + 'px';
+  if (rect.bottom > window.innerHeight) menu.style.top = (y - rect.height) + 'px';
 }
