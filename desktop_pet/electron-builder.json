@@ -1,0 +1,15 @@
+{
+  "appId": "com.desktoppet.rayquaza",
+  "productName": "Desktop Pet Rayquaza",
+  "directories": {
+    "output": "dist"
+  },
+  "files": [
+    "src/**/*",
+    "dist-renderer/**/*"
+  ],
+  "win": {
+    "target": "portable"
+  },
+  "forceCodeSigning": false
+}
