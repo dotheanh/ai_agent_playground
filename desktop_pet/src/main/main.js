@@ -198,3 +198,10 @@ ipcMain.on('set-window-position', (event, { x, y }) => {
 ipcMain.on('exit-app', () => {
   app.quit();
 });
+
+ipcMain.on('focus-terminal', () => {
+  // Bring Claude Code / terminal window to foreground
+  const { exec } = require('child_process');
+  // Windows: use PowerShell to activate the most recent console window
+  exec('powershell -Command "(Add-Type -MemberDefinition \'[DllImport(\\\"user32.dll\\\")]public static extern bool SetForegroundWindow(IntPtr hWnd);[DllImport(\\\"user32.dll\\\")]public static extern bool ShowWindow(IntPtr hWnd,int nCmdShow);[DllImport(\\\"user32.dll\\\")]public static extern bool IsIconic(IntPtr hWnd);\' -Name Win32 -Namespace W32 -PassThru)::W32.ShowWindow((Get-Process | Where-Object {$_.MainWindowHandle -ne 0 -and $_.ProcessName -match \'claude|code|terminal|cmd|powershell\'} | Sort-Object LastAccessTime -Descending | Select-Object -First 1).MainWindowHandle, 9)"');
+});

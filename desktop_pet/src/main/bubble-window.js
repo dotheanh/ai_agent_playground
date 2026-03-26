@@ -96,6 +96,7 @@ function showBubble(data) {
 
   const pos = getBubblePosition();
   bubbleWindow.setPosition(pos.x, pos.y);
+  bubbleWindow.setIgnoreMouseEvents(false); // Allow button clicks
   bubbleWindow.show();
   bubbleWindow.moveTop(); // Ensure bubble is above main window
 

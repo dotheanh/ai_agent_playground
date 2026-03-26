@@ -29,7 +29,6 @@ function getBubbleHTML() {
       min-width: 180px;
       box-shadow: 0 4px 20px rgba(200,0,0,0.5);
       animation: bubbleIn 0.25s ease-out;
-      cursor: default;
     }
     @keyframes bubbleIn {
       from { opacity: 0; transform: translateX(-50%) translateY(10px); }
@@ -49,6 +48,19 @@ function getBubbleHTML() {
       color: #e0e0e0;
       line-height: 1.3;
     }
+    #focus-btn {
+      flex-shrink: 0;
+      background: #cc0000;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 10px;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #focus-btn:hover { background: #ff2222; }
   </style>
 </head>
 <body>
@@ -58,6 +70,7 @@ function getBubbleHTML() {
       <div class="type" id="type">Notification</div>
       <div class="message" id="msg"></div>
     </div>
+    <button id="focus-btn">Focus</button>
   </div>
   <script>
     const ICONS = {
@@ -74,6 +87,12 @@ function getBubbleHTML() {
       session_end:        'Session Ended',
       notification:       'Notification'
     };
+
+    document.getElementById('focus-btn').addEventListener('click', function() {
+      if (window.electronAPI && window.electronAPI.focusTerminal) {
+        window.electronAPI.focusTerminal();
+      }
+    });
 
     function showBubble(data) {
       document.getElementById('icon').textContent = ICONS[data.type] || 'ℹ️';
