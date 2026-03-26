@@ -207,7 +207,61 @@ Không tạo docs ngoài `docs/superpowers/specs`.
 
 ---
 
-## 12. Unresolved questions
+## 12. Limitation
+
+> **Immediate-resolve không chờ user trên request hiện tại**
+
+Claude Code hook cho phép trả về `hookSpecificOutput` để auto-resolve permission:
+
+```json
+{
+  "hookSpecificOutput": {
+    "hookEventName": "PermissionRequest",
+    "decision": { "behavior": "allow" }
+  }
+}
+```
+
+**Tuy nhiên:** `hookSpecificOutput` là **synchronous** — Claude Code không đợi reply từ external tool. Kết quả:
+- Request hiện tại được auto-resolve ✅
+- Request tiếp theo **cũng được auto-resolve luôn** (vì hook không có cơ chế "lắng nghe" kết quả trả về)
+- Không thể hiện bubble rồi đợi user click
+
+**Hành vi hiện tại:**
+- Bubble hiện thông báo permission request ✅
+- Click nút trên bubble → gửi `/bubble/decision` → **terminal vẫn hỏi** (limitation)
+- Approve/Deny trong terminal → `PostToolUse` fire → broker hide bubble ✅
+
+**Giải pháp thay thế đang dùng:** Không dùng `hookSpecificOutput`. Dùng:
+1. `PermissionRequest` hook → hiện bubble thông báo
+2. `PostToolUse` hook → broker auto-hide bubble khi user approve trong terminal
+
+---
+
+## 13. Feature bổ sung: Claude done → bubble notification
+
+### Trigger
+`TaskCompleted` hook fire khi Claude hoàn thành task và chờ user ra lệnh tiếp.
+
+### Flow
+1. Claude emit `TaskCompleted` event
+2. Hook script nhận, chuẩn hóa message
+3. Gửi `POST /hook/event` với type `session_end` hoặc `notification`
+4. Bubble hiện notification ngắn (auto-hide sau 5s)
+
+### Cài đặt
+`desktop_pet/src/scripts/claude-hooks.js` đã handle `TaskCompleted` → `notification` → `/hook/event`.
+`TaskCompleted` hook đã được install trong `settings.json`.
+
+### Auto-hide
+- Non-interactive types: auto-hide sau 5s (config `AUTO_HIDE` trong `bubble-window.js`)
+- Interactive types (`permission_request`, `ask_question`): KHÔNG auto-hide — chờ resolve hoặc timeout 60s
+
+---
+
+## 14. Unresolved questions
 
 1. Hook payload hiện tại có luôn cung cấp `requestId` ổn định cho toàn bộ event lifecycle không, hay cần tự sinh deterministic ID từ payload hash?
+   → **Đã giải quyết:** `deriveRequestId()` tự sinh từ fingerprint (event + tool + input + prompt)
 2. Claude side có emit event resolved riêng biệt đủ dữ liệu để map ngược requestId trong mọi trường hợp không?
+   → **Đã giải quyết:** `PostToolUse` cùng fingerprint → cùng requestId → match với enqueued request
