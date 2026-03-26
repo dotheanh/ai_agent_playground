@@ -1,5 +1,5 @@
 const { BrowserWindow } = require('electron');
-const { getBubbleHTML } = require('./bubble-html-template');
+const path = require('path');
 
 let bubbleWindow = null;
 let mainWindow = null;
@@ -49,13 +49,14 @@ function createBubbleWindow() {
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
+      preload: path.join(__dirname, '../preload/bubble-preload.js'),
     },
   });
 
   bubbleWindow.setIgnoreMouseEvents(true, { forward: true }); // Click-through by default
   isBubbleReady = false;
   pendingBubbleData = null;
-  bubbleWindow.loadURL('data:text/html;charset=utf-8,' + encodeURIComponent(getBubbleHTML()));
+  bubbleWindow.loadURL('file://' + path.join(__dirname, '../../public/bubble.html'));
 
   bubbleWindow.webContents.once('did-finish-load', () => {
     isBubbleReady = true;

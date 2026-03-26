@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: transparent;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    #bubble {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0d0d0d;
+      border: 2px solid #cc0000;
+      border-radius: 12px;
+      padding: 8px 14px;
+      max-width: 300px;
+      min-width: 180px;
+      box-shadow: 0 4px 20px rgba(200,0,0,0.5);
+      animation: bubbleIn 0.25s ease-out;
+    }
+    @keyframes bubbleIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    .header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .icon    { font-size: 16px; flex-shrink: 0; }
+    .type {
+      font-size: 9px;
+      text-transform: uppercase;
+      color: #cc0000;
+      letter-spacing: 0.5px;
+    }
+    .message {
+      font-size: 11px;
+      color: #e0e0e0;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    #focus-btn {
+      width: 100%;
+      background: #cc0000;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 10px;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 4px 0;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #focus-btn:hover { background: #ff2222; }
+  </style>
+</head>
+<body>
+  <div id="bubble">
+    <div class="header">
+      <div class="icon" id="icon">ℹ️</div>
+      <div class="type" id="type">Notification</div>
+    </div>
+    <div class="message" id="msg"></div>
+    <button id="focus-btn">Focus</button>
+  </div>
+  <script>
+    const ICONS = {
+      permission_request: '🔐',
+      ask_question:      '❓',
+      session_start:     '🚀',
+      session_end:       '👋',
+      notification:      'ℹ️'
+    };
+    const TYPE_NAMES = {
+      permission_request: 'Permission Required',
+      ask_question:       'Question',
+      session_start:      'Session Started',
+      session_end:        'Session Ended',
+      notification:       'Notification'
+    };
+
+    document.getElementById('focus-btn').addEventListener('click', function() {
+      if (window.electronAPI) {
+        window.electronAPI.focusTerminal();
+        window.electronAPI.hideBubble();
+      }
+    });
+
+    function showBubble(data) {
+      document.getElementById('icon').textContent = ICONS[data.type] || 'ℹ️';
+      document.getElementById('type').textContent  = TYPE_NAMES[data.type] || (data.type || 'Notification');
+
+      var msg = data.message || '';
+      if (msg.length > 120) msg = msg.substring(0, 120) + '...';
+      document.getElementById('msg').textContent = msg;
+
+      var el = document.getElementById('bubble');
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = 'bubbleIn 0.25s ease-out';
+    }
+  </script>
+</body>
+</html>
