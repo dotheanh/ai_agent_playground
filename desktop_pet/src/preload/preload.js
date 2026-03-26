@@ -12,6 +12,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   exitApp: () => ipcRenderer.send('exit-app'),
   setWindowPosition: (x, y) => ipcRenderer.send('set-window-position', { x, y }),
   focusTerminal: () => ipcRenderer.send('focus-terminal'),
+  hideBubble: () => ipcRenderer.send('hide-bubble'),
 
   // Claude Code events
   onClaudeEvent: (callback) => {

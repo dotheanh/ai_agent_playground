@@ -22,9 +22,6 @@ function getBubbleHTML() {
       border: 2px solid #cc0000;
       border-radius: 12px;
       padding: 8px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
       max-width: 300px;
       min-width: 180px;
       box-shadow: 0 4px 20px rgba(200,0,0,0.5);
@@ -34,29 +31,29 @@ function getBubbleHTML() {
       from { opacity: 0; transform: translateX(-50%) translateY(10px); }
       to   { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
+    .header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
     .icon    { font-size: 16px; flex-shrink: 0; }
-    .content { flex: 1; }
     .type {
       font-size: 9px;
       text-transform: uppercase;
       color: #cc0000;
       letter-spacing: 0.5px;
-      margin-bottom: 2px;
     }
     .message {
       font-size: 11px;
       color: #e0e0e0;
       line-height: 1.3;
+      margin-bottom: 6px;
     }
     #focus-btn {
-      flex-shrink: 0;
+      width: 100%;
       background: #cc0000;
       border: none;
       border-radius: 6px;
       color: #fff;
       font-size: 10px;
       font-family: 'Segoe UI', sans-serif;
-      padding: 4px 10px;
+      padding: 4px 0;
       cursor: pointer;
       transition: background 0.15s;
     }
@@ -65,11 +62,11 @@ function getBubbleHTML() {
 </head>
 <body>
   <div id="bubble">
-    <div class="icon" id="icon">ℹ️</div>
-    <div class="content">
+    <div class="header">
+      <div class="icon" id="icon">ℹ️</div>
       <div class="type" id="type">Notification</div>
-      <div class="message" id="msg"></div>
     </div>
+    <div class="message" id="msg"></div>
     <button id="focus-btn">Focus</button>
   </div>
   <script>
@@ -91,6 +88,9 @@ function getBubbleHTML() {
     document.getElementById('focus-btn').addEventListener('click', function() {
       if (window.electronAPI && window.electronAPI.focusTerminal) {
         window.electronAPI.focusTerminal();
+      }
+      if (window.electronAPI && window.electronAPI.hideBubble) {
+        window.electronAPI.hideBubble();
       }
     });
 
