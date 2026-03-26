@@ -41,10 +41,13 @@ Không chọn:
    - Nhận decision từ bubble và resolve đúng request
    - Nhận event resolved từ Claude UI để auto-hide bubble
 
-3. **Bubble Window UI** (`desktop_pet/src/main/bubble-window.js`)
-   - Render message + options dạng button click được
-   - Click option gọi endpoint decision
-   - Disable nút khi đang gửi để chống double submit
+3. **Bubble Window UI** (`desktop_pet/src/main/bubble-window.js`, `public/bubble.html`)
+   - Render message + Focus button
+   - Click **Focus** → gọi IPC `focus-terminal` (activate Claude Code window) + `hideBubble`
+   - Chơi tiếng chuông 2 âm (880Hz → 1320Hz) qua Web Audio API khi bubble hiện
+   - `permission_request` / `ask_question`: **KHÔNG auto-hide** — chờ user bấm Focus
+   - `session_start` (8s) / `session_end` (5s) / `notification` (6s): **có auto-hide**
+   - Bubble window `focusable: true` để button click được
 
 4. **HTTP Gateway** (`desktop_pet/src/main/http-server.js`)
    - Expose API nội bộ cho hook + bubble
@@ -60,15 +63,14 @@ Không chọn:
 3. Broker tạo pending request (hoặc update nếu trùng id)
 4. Broker show bubble cho request active
 
-### 4.2 User bấm trong bubble
-1. Bubble click option -> `POST /bubble/decision`
-2. Broker validate request pending
-3. Broker resolve request theo decision mapping
-4. Broker mark resolved + hide bubble
-5. Broker chuyển sang request kế tiếp trong queue (nếu có)
+### 4.2 User bấm Focus trong bubble
+1. Bubble click **Focus** button → IPC `focus-terminal` + `hideBubble`
+2. Claude Code window được activate lên foreground
+3. User approve/deny trực tiếp trong terminal
+4. `PostToolUse` fire → `POST /hook/permission-resolved` → broker hide bubble
 
-### 4.3 User bấm trực tiếp trong Claude UI
-1. Hook nhận event resolved (cùng requestId)
+### 4.3 User approve/deny trực tiếp trong Claude UI
+1. Hook nhận `PostToolUse` (cùng requestId)
 2. Hook gửi `POST /hook/permission-resolved`
 3. Broker clear pending tương ứng
 4. Nếu bubble đang hiển thị request đó -> hide ngay

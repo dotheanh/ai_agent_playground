@@ -10,12 +10,12 @@ let pendingBubbleData = null; // Queue latest payload until bubble HTML is ready
 const BUBBLE_WIDTH = 360;
 const BUBBLE_HEIGHT = 120;
 
-// Auto-hide timeouts (ms) for each event type
+// Auto-hide timeouts (ms) for passive event types.
+// permission_request & ask_question: NO auto-hide (require user action via Focus button).
 const AUTO_HIDE = {
-  session_start: 5000,
-  session_end: 3000,
-  notification: 5000,
-  // Interactive types (permission_request, ask_question) don't auto-hide
+  session_start: 8000,
+  session_end: 5000,
+  notification: 6000,
 };
 
 /**
@@ -44,7 +44,7 @@ function createBubbleWindow() {
     resizable: false,
     alwaysOnTop: true,
     skipTaskbar: true,
-    focusable: false,
+    focusable: true,
     show: false,
     webPreferences: {
       contextIsolation: true,
@@ -109,13 +109,17 @@ function showBubble(data) {
     pendingBubbleData = data;
   }
 
-  // Auto-hide for non-interactive types
-  const timeout = AUTO_HIDE[data.type];
-  if (timeout) {
-    hideTimer = setTimeout(() => {
-      hideBubble();
-    }, timeout);
+  // Auto-hide for passive types only. Interactive types (permission_request, ask_question)
+  // stay until user clicks Focus button.
+  if (!AUTO_HIDE.hasOwnProperty(data.type)) {
+    // permission_request and ask_question have no auto-hide
+    return;
   }
+
+  if (hideTimer) clearTimeout(hideTimer);
+  hideTimer = setTimeout(() => {
+    hideBubble();
+  }, AUTO_HIDE[data.type]);
 }
 
 /**
