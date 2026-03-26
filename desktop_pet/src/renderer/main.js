@@ -10,6 +10,21 @@ if (window.electronAPI) {
   window.electronAPI.onAlwaysOnTopChanged((value) => {
     console.log('Always on top:', value);
   });
+
+  // Listen for drag trigger from menu - Windows will handle the drag
+  window.electronAPI.onTriggerDrag(() => {
+    // Enable drag on canvas, then let Windows native drag take over
+    canvas.style.webkitAppRegion = 'drag';
+    // Trigger a mousedown at center to start native drag
+    const event = new MouseEvent('mousedown', {
+      bubbles: true,
+      cancelable: true,
+      button: 0,
+      clientX: window.innerWidth / 2,
+      clientY: window.innerHeight / 2
+    });
+    canvas.dispatchEvent(event);
+  });
 }
 
 // Scene setup
@@ -110,11 +125,7 @@ function animate() {
     mixer.update(delta);
   }
 
-  // Auto-rotate when not interacting
-  if (!controls.enabled) {
-    scene.rotation.y += 0.002;
-  }
-
+  // No auto-rotate - orbit is manual via mouse drag
   controls.update();
   renderer.render(scene, camera);
 }
@@ -135,77 +146,175 @@ function onResize() {
 window.addEventListener('resize', onResize);
 
 // ============================================
-// DRAG DETECTION & ORBIT CONTROLS TOGGLE
+// MODE SYSTEM: ORBIT vs MOVE
 // ============================================
 
-let isDragging = false;
-let dragStartX = 0;
-let dragStartY = 0;
-let dragStartTime = 0;
-let hasMoved = false;
-
 const canvas = renderer.domElement;
+let currentMode = 'orbit'; // 'orbit' or 'move'
+let isMouseDown = false;
+let lastMouseX = 0;
+let lastMouseY = 0;
 
+// Update canvas cursor based on mode
+function updateCursor() {
+  canvas.style.cursor = currentMode === 'orbit' ? 'grab' : 'default';
+}
+updateCursor();
+
+// Left-click: orbit OR move based on mode
 canvas.addEventListener('mousedown', (e) => {
-  if (e.button !== 0) return; // Only left click
+  if (e.button === 0) { // Left click only
+    isMouseDown = true;
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+    canvas.style.cursor = 'grabbing';
 
-  isDragging = true;
-  dragStartX = e.clientX;
-  dragStartY = e.clientY;
-  dragStartTime = Date.now();
-  hasMoved = false;
-
-  canvas.classList.add('dragging');
-});
-
-document.addEventListener('mousemove', (e) => {
-  if (!isDragging) return;
-
-  const distance = Math.sqrt(
-    Math.pow(e.clientX - dragStartX, 2) +
-    Math.pow(e.clientY - dragStartY, 2)
-  );
-  const elapsed = Date.now() - dragStartTime;
-
-  // Drag threshold: 5px and 150ms
-  if (distance > 5 && elapsed > 150 && !hasMoved) {
-    hasMoved = true;
-    canvas.classList.remove('dragging');
-
-    // Trigger window drag using -webkit-app-region
-    canvas.style.webkitAppRegion = 'drag';
-  }
-
-  // After 300ms without drag, enable rotation
-  if (!hasMoved && elapsed > 300) {
-    controls.enabled = true;
-    canvas.classList.remove('dragging');
-    canvas.classList.add('rotating');
+    if (currentMode === 'move') {
+      // Enable drag for window movement
+      canvas.style.webkitAppRegion = 'drag';
+    }
   }
 });
 
-document.addEventListener('mouseup', () => {
-  if (!isDragging) return;
+canvas.addEventListener('mousemove', (e) => {
+  if (!isMouseDown) return;
 
-  isDragging = false;
-  canvas.classList.remove('dragging', 'rotating');
+  if (currentMode === 'orbit') {
+    // Rotate model based on mouse movement
+    const deltaX = e.clientX - lastMouseX;
+    const deltaY = e.clientY - lastMouseY;
+    scene.rotation.y += deltaX * 0.01;
+    scene.rotation.x += deltaY * 0.01;
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+  }
+  // In 'move' mode, CSS -webkit-app-region handles it
+});
 
-  if (!hasMoved) {
-    // It was a click - enable rotation mode
-    controls.enabled = true;
+canvas.addEventListener('mouseup', () => {
+  isMouseDown = false;
+  if (currentMode === 'orbit') {
+    updateCursor();
   } else {
-    // Was a drag - disable controls, restore auto-rotate
-    controls.enabled = false;
+    canvas.style.webkitAppRegion = 'no-drag';
   }
-
-  // Reset drag region
-  canvas.style.webkitAppRegion = 'no-drag';
 });
 
-// Right-click context menu
+canvas.addEventListener('mouseleave', () => {
+  isMouseDown = false;
+  if (currentMode === 'move') {
+    canvas.style.webkitAppRegion = 'no-drag';
+  }
+  updateCursor();
+});
+
+// Right-click = custom context menu (always works, even in move mode)
 canvas.addEventListener('contextmenu', (e) => {
   e.preventDefault();
-  if (window.electronAPI) {
-    window.electronAPI.showContextMenu();
+  // Disable drag temporarily for right-click
+  canvas.style.webkitAppRegion = 'no-drag';
+  showCustomContextMenu(e.clientX, e.clientY);
+});
+
+// Hide context menu on click outside
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('custom-context-menu');
+  if (menu && !menu.contains(e.target)) {
+    menu.remove();
   }
 });
+
+// Custom context menu
+function showCustomContextMenu(x, y) {
+  // Remove existing menu
+  const existingMenu = document.getElementById('custom-context-menu');
+  if (existingMenu) existingMenu.remove();
+
+  const menu = document.createElement('div');
+  menu.id = 'custom-context-menu';
+  menu.innerHTML = `
+    <div class="menu-item" data-action="toggle-mode">${currentMode === 'orbit' ? 'Move Window' : 'Orbit Camera'}</div>
+    <div class="menu-separator"></div>
+    <div class="menu-item" data-action="always-on-top">Always on Top</div>
+    <div class="menu-separator"></div>
+    <div class="menu-item" data-action="exit">Exit</div>
+  `;
+  menu.style.cssText = `
+    position: fixed;
+    left: ${x}px;
+    top: ${y}px;
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 4px 0;
+    min-width: 150px;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: #eaeaea;
+  `;
+
+  // Add styles
+  const style = document.createElement('style');
+  style.textContent = `
+    .menu-item {
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .menu-item:hover {
+      background: #16213e;
+      color: #fff;
+    }
+    .menu-separator {
+      height: 1px;
+      background: #333;
+      margin: 4px 8px;
+    }
+  `;
+  menu.appendChild(style);
+
+  // Handle menu actions
+  menu.addEventListener('click', (e) => {
+    const action = e.target.dataset.action;
+    if (!action || !window.electronAPI) return;
+
+    switch (action) {
+      case 'toggle-mode':
+        toggleMode();
+        break;
+      case 'always-on-top':
+        window.electronAPI.toggleAlwaysOnTop();
+        break;
+      case 'exit':
+        window.electronAPI.exitApp();
+        break;
+    }
+    menu.remove();
+  });
+
+  document.body.appendChild(menu);
+
+  // Adjust position if menu goes off screen
+  const rect = menu.getBoundingClientRect();
+  if (rect.right > window.innerWidth) {
+    menu.style.left = (x - rect.width) + 'px';
+  }
+  if (rect.bottom > window.innerHeight) {
+    menu.style.top = (y - rect.height) + 'px';
+  }
+}
+
+// Toggle between orbit and move mode
+function toggleMode() {
+  if (currentMode === 'orbit') {
+    currentMode = 'move';
+    canvas.style.webkitAppRegion = 'drag';
+  } else {
+    currentMode = 'orbit';
+    canvas.style.webkitAppRegion = 'no-drag';
+    controls.enabled = false;
+  }
+  updateCursor();
+}

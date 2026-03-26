@@ -1,9 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  // Context menu
-  showContextMenu: () => ipcRenderer.send('show-context-menu'),
-
   // Always on top
   toggleAlwaysOnTop: () => ipcRenderer.send('toggle-always-on-top'),
   getAlwaysOnTop: () => ipcRenderer.invoke('get-always-on-top'),
@@ -11,12 +8,12 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.on('always-on-top-changed', (event, value) => callback(value));
   },
 
-  // Window visibility
-  showWindow: () => ipcRenderer.send('show-window'),
-  hideWindow: () => ipcRenderer.send('hide-window'),
+  // Window actions
+  startMove: () => ipcRenderer.send('start-move'),
+  exitApp: () => ipcRenderer.send('exit-app'),
 
-  // Drag detection
-  onDragStart: (callback) => {
-    ipcRenderer.on('drag-start', callback);
+  // Drag trigger from menu
+  onTriggerDrag: (callback) => {
+    ipcRenderer.on('trigger-drag', callback);
   },
 });

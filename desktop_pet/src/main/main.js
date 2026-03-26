@@ -15,7 +15,7 @@ function createWindow() {
     width: 400,
     height: 250,
     x: width - 420,
-    y: height - 170,
+    y: height - 370,
     frame: false,
     transparent: true,
     resizable: false,
@@ -28,6 +28,9 @@ function createWindow() {
       nodeIntegration: false,
     },
   });
+
+  // Expose mainWindow globally for IPC handlers
+  global.mainWindow = mainWindow;
 
   if (isDev) {
     mainWindow.loadURL('http://localhost:5173/');
@@ -166,4 +169,13 @@ ipcMain.on('hide-window', () => {
 
 ipcMain.handle('get-always-on-top', () => {
   return isAlwaysOnTop;
+});
+
+ipcMain.on('start-move', () => {
+  // Send message to renderer to enable drag mode temporarily
+  global.mainWindow.webContents.send('trigger-drag');
+});
+
+ipcMain.on('exit-app', () => {
+  app.quit();
 });
