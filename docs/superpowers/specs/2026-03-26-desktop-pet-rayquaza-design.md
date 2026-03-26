@@ -9,6 +9,78 @@
 
 ---
 
+## 1b. Quick Start (Dev + Hooks)
+
+### First-time setup
+```bash
+cd desktop_pet
+npm install
+npm run setup-hooks
+```
+
+### Start app (dev mode)
+```bash
+cd desktop_pet
+npm run dev
+```
+
+### Important notes
+- After `npm run setup-hooks`, **restart Claude Code terminal** to reload hook config.
+- Hook key in `~/.claude/settings.json` must be `hooks.PermissionRequest`.
+- If bubble not showing, verify pet app is running and port `49152` is listening.
+
+### Quick bubble test
+```bash
+cd desktop_pet
+npm run test-bubble
+# or
+node scripts/test-bubble.js permission_request "Can I read package.json?"
+```
+
+### Build Windows executable
+```bash
+cd desktop_pet
+npm run build:win
+```
+
+---
+
+## 1b. Quick Start (Dev + Hooks)
+
+### First-time setup
+```bash
+cd desktop_pet
+npm install
+npm run setup-hooks
+```
+
+### Start app (dev mode)
+```bash
+cd desktop_pet
+npm run dev
+```
+
+### Important notes
+- After `npm run setup-hooks`, **restart Claude Code terminal** to reload hook config.
+- Hook key in `~/.claude/settings.json` must be `hooks.PermissionRequest`.
+- If bubble not showing, verify pet app is running and port `49152` is listening.
+
+### Quick bubble test
+```bash
+cd desktop_pet
+npm run test-bubble
+# or
+node scripts/test-bubble.js permission_request "Can I read package.json?"
+```
+
+### Build Windows executable
+```bash
+cd desktop_pet
+npm run build:win
+```
+
+---
+
 ## 2. Tech Stack
 
 | Layer | Technology | Purpose |
