@@ -110,6 +110,10 @@ function createPermissionBroker({ onShow, onHide, now = Date.now, timeoutMs = 60
   function resolveByDecision({ requestId, decision, source }) {
     const finalized = finalizedStatuses.get(requestId);
     if (finalized) {
+      if (finalized.status === 'expired') {
+        return { status: 'expired', requestId, currentStatus: finalized.status };
+      }
+
       return { status: 'not_pending', requestId, currentStatus: finalized.status };
     }
 
@@ -120,6 +124,10 @@ function createPermissionBroker({ onShow, onHide, now = Date.now, timeoutMs = 60
     }
 
     if (request.status !== 'pending') {
+      if (request.status === 'expired') {
+        return { status: 'expired', requestId, currentStatus: request.status };
+      }
+
       return { status: 'not_pending', requestId, currentStatus: request.status };
     }
 

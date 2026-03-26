@@ -101,7 +101,7 @@ test('cannot resolve expired request', () => {
 
   const result = broker.resolveByDecision({ requestId: 'req-1', decision: 'approve_once', source: 'bubble_click' });
 
-  assert.equal(result.status, 'not_pending');
+  assert.equal(result.status, 'expired');
   assert.equal(result.currentStatus, 'expired');
 });
 
