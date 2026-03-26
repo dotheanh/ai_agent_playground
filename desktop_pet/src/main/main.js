@@ -1,11 +1,14 @@
 const { app, BrowserWindow, screen, Menu, Tray, nativeImage } = require('electron');
 const path = require('path');
 const { startHttpServer } = require('./http-server');
-const { initBubbleManager, syncBubblePosition, destroyBubbleWindow } = require('./bubble-window');
+const { createPermissionBroker } = require('./permission-broker');
+const { initBubbleManager, syncBubblePosition, destroyBubbleWindow, showBubble, hideBubble } = require('./bubble-window');
 
 let mainWindow = null;
 let tray = null;
 let isAlwaysOnTop = true;
+let permissionBroker = null;
+let permissionBroker = null;
 
 const isDev = !app.isPackaged;
 
@@ -139,7 +142,13 @@ function showContextMenu() {
 app.whenReady().then(() => {
   createWindow();
   createTray();
-  startHttpServer();
+
+  permissionBroker = createPermissionBroker({
+    onShow: (payload) => showBubble(payload),
+    onHide: () => hideBubble(),
+  });
+
+  startHttpServer({ broker: permissionBroker, port: 49152 });
 });
 
 app.on('window-all-closed', () => {
