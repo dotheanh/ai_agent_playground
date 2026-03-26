@@ -23,7 +23,34 @@ function mapDecisionFromOption(optionText) {
 function createPermissionBroker({ onShow, onHide, now = Date.now, timeoutMs = 60000 }) {
   const requests = new Map();
   const queue = [];
+  const finalizedStatuses = new Map();
   let activeRequestId = null;
+
+  function cleanupFinalizedStatuses() {
+    const cutoff = now() - timeoutMs;
+
+    for (const [requestId, finalized] of finalizedStatuses.entries()) {
+      if (finalized.finalizedAt < cutoff) {
+        finalizedStatuses.delete(requestId);
+      }
+    }
+  }
+
+  function removeFromQueue(requestId) {
+    let index = queue.indexOf(requestId);
+
+    while (index !== -1) {
+      queue.splice(index, 1);
+      index = queue.indexOf(requestId);
+    }
+  }
+
+  function finalizeRequest(requestId, status) {
+    requests.delete(requestId);
+    removeFromQueue(requestId);
+    finalizedStatuses.set(requestId, { status, finalizedAt: now() });
+    cleanupFinalizedStatuses();
+  }
 
   function activateNext() {
     if (activeRequestId) {
@@ -48,6 +75,8 @@ function createPermissionBroker({ onShow, onHide, now = Date.now, timeoutMs = 60
   }
 
   function enqueueRequest(input) {
+    cleanupFinalizedStatuses();
+
     const existing = requests.get(input.requestId);
 
     if (existing && existing.status === 'pending') {
@@ -67,21 +96,31 @@ function createPermissionBroker({ onShow, onHide, now = Date.now, timeoutMs = 60
     };
 
     requests.set(request.requestId, request);
-    queue.push(request.requestId);
+    finalizedStatuses.delete(request.requestId);
+
+    if (!queue.includes(request.requestId)) {
+      queue.push(request.requestId);
+    }
+
     activateNext();
 
     return request;
   }
 
   function resolveByDecision({ requestId, decision, source }) {
+    const finalized = finalizedStatuses.get(requestId);
+    if (finalized) {
+      return { status: 'not_pending', requestId, currentStatus: finalized.status };
+    }
+
     const request = requests.get(requestId);
 
     if (!request) {
       return { status: 'request_not_found' };
     }
 
-    if (request.status === 'resolved') {
-      return { status: 'already_resolved' };
+    if (request.status !== 'pending') {
+      return { status: 'not_pending', requestId, currentStatus: request.status };
     }
 
     request.status = 'resolved';
@@ -91,8 +130,10 @@ function createPermissionBroker({ onShow, onHide, now = Date.now, timeoutMs = 60
     if (activeRequestId === requestId) {
       onHide({ requestId });
       activeRequestId = null;
-      activateNext();
     }
+
+    finalizeRequest(requestId, 'resolved');
+    activateNext();
 
     return {
       status: 'resolved',
@@ -112,7 +153,7 @@ function createPermissionBroker({ onShow, onHide, now = Date.now, timeoutMs = 60
   function expireOld() {
     const cutoff = now() - timeoutMs;
 
-    for (const requestId of queue) {
+    for (const requestId of [...queue]) {
       const request = requests.get(requestId);
       if (!request || request.status !== 'pending') {
         continue;
@@ -128,6 +169,8 @@ function createPermissionBroker({ onShow, onHide, now = Date.now, timeoutMs = 60
         onHide({ requestId });
         activeRequestId = null;
       }
+
+      finalizeRequest(requestId, 'expired');
     }
 
     activateNext();
