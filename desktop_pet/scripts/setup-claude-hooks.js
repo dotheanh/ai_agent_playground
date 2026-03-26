@@ -6,6 +6,7 @@
  * - hooks.PermissionRequest  -> show bubble + queue decision
  * - hooks.PostToolUse        -> hide bubble when user resolves in terminal
  * - hooks.Notification        -> show session_end bubble when Claude waits for input
+ * - hooks.TaskCompleted      -> show bubble when Claude finishes a task
  */
 
 const fs = require('fs');
@@ -107,6 +108,23 @@ function setupHooks() {
     ],
   });
 
+  // Add TaskCompleted hook (fires when Claude completes a task)
+  if (!Array.isArray(settings.hooks.TaskCompleted)) {
+    settings.hooks.TaskCompleted = [];
+  }
+  settings.hooks.TaskCompleted = settings.hooks.TaskCompleted.filter(
+    (entry) => !isDesktopPetHook(entry, hookScriptPath)
+  );
+  settings.hooks.TaskCompleted.push({
+    matcher: '',
+    hooks: [
+      {
+        type: 'command',
+        command: `node "${hookScriptPath}"`,
+      },
+    ],
+  });
+
   fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
 
   console.log('✓ Claude Code hooks installed successfully!');
@@ -114,6 +132,7 @@ function setupHooks() {
   console.log('  - hooks.PermissionRequest -> node claude-hooks.js  (show permission bubble)');
   console.log('  - hooks.PostToolUse       -> node claude-hooks.js  (hide bubble on terminal resolve)');
   console.log('  - hooks.Notification       -> node claude-hooks.js  (session_end idle bubble)');
+  console.log('  - hooks.TaskCompleted      -> node claude-hooks.js  (task completed bubble)');
   console.log('Restart Claude Code terminal to apply changes.');
 }
 

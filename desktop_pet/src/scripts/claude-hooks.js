@@ -94,12 +94,21 @@ function summarizeToolInput(toolInput) {
 }
 
 function pickMessage(payload) {
+  const eventType = String(payload.hook_event_name || payload.event || '').trim();
+
+  // TaskCompleted: use task_subject or create generic message
+  if (eventType === 'TaskCompleted') {
+    if (payload.task_subject && payload.task_subject.trim()) {
+      return 'Task completed: ' + payload.task_subject.trim();
+    }
+    return 'Claude has completed a task';
+  }
+
   const candidates = [
     payload.message,
     payload.reasoning,
     payload.reason,
     payload.question,
-    payload.task_subject,
     payload.permission_prompt,
     payload.permission_message,
     summarizeToolInput(payload.tool_input),
