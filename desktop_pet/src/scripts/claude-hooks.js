@@ -149,8 +149,30 @@ async function main() {
     };
     try { await httpPost('/hook/permission-request', brokerPayload); }
     catch { process.exit(2); }
+  } else if (eventType === 'post_tool_use') {
+    // User approved in terminal → tool executed → hide active bubble
+    // requestId is derived from same fingerprint → matches enqueued request
+    try {
+      await httpPost('/hook/permission-resolved', {
+        requestId,
+        toolName: rawPayload.tool_name || rawPayload.tool || '',
+        toolUseId: rawPayload.tool_use_id || '',
+      });
+    } catch { /* non-critical */ }
+  } else if (eventType === 'notification') {
+    // Check if Claude is waiting for user input → show session_end bubble
+    const notifType = rawPayload.notification_type || '';
+    if (notifType === 'idle_prompt' || notifType === 'permission_prompt') {
+      const brokerPayload = {
+        type: notifType === 'idle_prompt' ? 'session_end' : eventType,
+        message: pickMessage(rawPayload),
+        options: [],
+      };
+      try { await httpPost('/hook/event', brokerPayload); }
+      catch { /* non-critical */ }
+    }
   } else {
-    // Non-permission events: show bubble directly without broker
+    // Other events: show bubble directly
     try {
       await httpPost('/hook/event', {
         type: eventType,

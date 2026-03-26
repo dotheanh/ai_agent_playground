@@ -2,8 +2,10 @@
 /**
  * Claude Code Hooks Setup Script
  *
- * Install Desktop Pet hook into ~/.claude/settings.json using valid hook key:
- * hooks.PermissionRequest
+ * Install Desktop Pet hooks into ~/.claude/settings.json:
+ * - hooks.PermissionRequest  -> show bubble + queue decision
+ * - hooks.PostToolUse        -> hide bubble when user resolves in terminal
+ * - hooks.Notification        -> show session_end bubble when Claude waits for input
  */
 
 const fs = require('fs');
@@ -71,11 +73,47 @@ function setupHooks() {
     ],
   });
 
+  // Add PostToolUse hook (fires when tool executes after user approve in terminal)
+  if (!Array.isArray(settings.hooks.PostToolUse)) {
+    settings.hooks.PostToolUse = [];
+  }
+  settings.hooks.PostToolUse = settings.hooks.PostToolUse.filter(
+    (entry) => !isDesktopPetHook(entry, hookScriptPath)
+  );
+  settings.hooks.PostToolUse.push({
+    matcher: '',
+    hooks: [
+      {
+        type: 'command',
+        command: `node "${hookScriptPath}"`,
+      },
+    ],
+  });
+
+  // Add Notification hook (fires for idle_prompt = Claude waiting for user input)
+  if (!Array.isArray(settings.hooks.Notification)) {
+    settings.hooks.Notification = [];
+  }
+  settings.hooks.Notification = settings.hooks.Notification.filter(
+    (entry) => !isDesktopPetHook(entry, hookScriptPath)
+  );
+  settings.hooks.Notification.push({
+    matcher: '',
+    hooks: [
+      {
+        type: 'command',
+        command: `node "${hookScriptPath}"`,
+      },
+    ],
+  });
+
   fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
 
   console.log('✓ Claude Code hooks installed successfully!');
   console.log('Added hooks:');
-  console.log('  - hooks.PermissionRequest[matcher=""] -> node claude-hooks.js');
+  console.log('  - hooks.PermissionRequest -> node claude-hooks.js  (show permission bubble)');
+  console.log('  - hooks.PostToolUse       -> node claude-hooks.js  (hide bubble on terminal resolve)');
+  console.log('  - hooks.Notification       -> node claude-hooks.js  (session_end idle bubble)');
   console.log('Restart Claude Code terminal to apply changes.');
 }
 
