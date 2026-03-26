@@ -153,19 +153,21 @@ Bubble Window (separate, transparent, always-on-top)
 
 ### Bubble Window Strategy
 - **Separate window:** 320x80px transparent window for bubble UI
-- **Position:** Centered above main pet window with 10px gap
-- **Click-through:** `setIgnoreMouseEvents(true)` - clicks pass through
+- **Position:** Overlapping middle of main pet window (centered vertically, shifted up 100px)
+- **Z-order:** `moveTop()` called after show to ensure bubble is always on top
+- **Click-through:** `setIgnoreMouseEvents(true)` - clicks pass through to windows below
 - **Sync:** Bubble repositions when main window moves (`moved` event)
-- **No crop:** Bubble never gets cropped by main window bounds
+- **Auto-hide:** Notification types auto-hide after timeout (session_start: 5s, session_end: 3s, notification: 5s)
+- **Interactive:** permission_request & ask_question require manual dismiss (no auto-hide)
 
 ### Event Types
-| Event | Icon | Description |
-|-------|------|-------------|
-| `permission_request` | 🔐 | User permission required |
-| `ask_question` | ❓ | Claude asks a question |
-| `session_start` | 🚀 | New session started |
-| `session_end` | 👋 | Session ended |
-| `notification` | ℹ️ | General notification |
+| Event | Icon | Auto-hide | Description |
+|-------|------|-----------|-------------|
+| `permission_request` | 🔐 | No | User permission required |
+| `ask_question` | ❓ | No | Claude asks a question |
+| `session_start` | 🚀 | 5s | New session started |
+| `session_end` | 👋 | 3s | Session ended |
+| `notification` | ℹ️ | 5s | General notification |
 
 ### HTTP Server
 - **Port:** 49152

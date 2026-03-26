@@ -1,16 +1,41 @@
-const { BrowserWindow, screen } = require('electron');
+const { BrowserWindow } = require('electron');
 
 let bubbleWindow = null;
 let mainWindow = null;
+let hideTimer = null;
+
+const BUBBLE_WIDTH = 320;
+const BUBBLE_HEIGHT = 80;
+
+// Auto-hide timeouts (ms) for each event type
+const AUTO_HIDE = {
+  session_start: 5000,
+  session_end: 3000,
+  notification: 5000,
+  // Interactive types (permission_request, ask_question) don't auto-hide
+};
 
 /**
- * Create a small transparent window for bubble notifications
- * Positioned above the main pet window
+ * Calculate bubble position (shared logic)
+ */
+function getBubblePosition() {
+  if (!mainWindow) return { x: 0, y: 0 };
+
+  const mainBounds = mainWindow.getBounds();
+  const x = mainBounds.x + (mainBounds.width / 2) - (BUBBLE_WIDTH / 2);
+  // Bubble positioned to overlap middle of main window
+  const y = mainBounds.y + (mainBounds.height / 2) - (BUBBLE_HEIGHT / 2) - 100;
+
+  return { x: Math.round(x), y: Math.round(y) };
+}
+
+/**
+ * Create bubble window
  */
 function createBubbleWindow() {
   bubbleWindow = new BrowserWindow({
-    width: 320,
-    height: 80,
+    width: BUBBLE_WIDTH,
+    height: BUBBLE_HEIGHT,
     frame: false,
     transparent: true,
     resizable: false,
@@ -35,33 +60,44 @@ function createBubbleWindow() {
 }
 
 /**
- * Show bubble at position above main window
+ * Show bubble at calculated position
  */
 function showBubble(data) {
   if (!mainWindow || mainWindow.isDestroyed()) return;
+
+  // Clear any existing hide timer
+  if (hideTimer) {
+    clearTimeout(hideTimer);
+    hideTimer = null;
+  }
 
   if (!bubbleWindow || bubbleWindow.isDestroyed()) {
     createBubbleWindow();
   }
 
-  // Position bubble above main window
-  const mainBounds = mainWindow.getBounds();
-  const bubbleWidth = 320;
-  const bubbleHeight = 80;
-
-  // Center bubble above main window
-  const bubbleX = mainBounds.x + (mainBounds.width / 2) - (bubbleWidth / 2);
-  const bubbleY = mainBounds.y - bubbleHeight - 10; // 10px gap
-
-  bubbleWindow.setPosition(Math.round(bubbleX), Math.round(bubbleY));
+  const pos = getBubblePosition();
+  bubbleWindow.setPosition(pos.x, pos.y);
   bubbleWindow.show();
+  bubbleWindow.moveTop(); // Ensure bubble is above main window
   bubbleWindow.webContents.executeJavaScript(`showBubble(${JSON.stringify(data)})`);
+
+  // Auto-hide for non-interactive types
+  const timeout = AUTO_HIDE[data.type];
+  if (timeout) {
+    hideTimer = setTimeout(() => {
+      hideBubble();
+    }, timeout);
+  }
 }
 
 /**
- * Hide bubble window
+ * Hide bubble
  */
 function hideBubble() {
+  if (hideTimer) {
+    clearTimeout(hideTimer);
+    hideTimer = null;
+  }
   if (bubbleWindow && !bubbleWindow.isDestroyed()) {
     bubbleWindow.hide();
   }
@@ -73,18 +109,12 @@ function hideBubble() {
 function syncBubblePosition() {
   if (!bubbleWindow || !mainWindow || bubbleWindow.isDestroyed()) return;
 
-  const mainBounds = mainWindow.getBounds();
-  const bubbleWidth = 320;
-  const bubbleHeight = 80;
-
-  const bubbleX = mainBounds.x + (mainBounds.width / 2) - (bubbleWidth / 2);
-  const bubbleY = mainBounds.y - bubbleHeight - 10;
-
-  bubbleWindow.setPosition(Math.round(bubbleX), Math.round(bubbleY));
+  const pos = getBubblePosition();
+  bubbleWindow.setPosition(pos.x, pos.y);
 }
 
 /**
- * Initialize bubble manager
+ * Init bubble manager
  */
 function initBubbleManager(mainWin) {
   mainWindow = mainWin;
