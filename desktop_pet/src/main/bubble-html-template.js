@@ -49,31 +49,6 @@ function getBubbleHTML() {
       color: #e0e0e0;
       line-height: 1.3;
     }
-    .opts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 6px;
-    }
-    .opt-btn {
-      background: #1a1a1a;
-      border: 1px solid #cc0000;
-      border-radius: 6px;
-      color: #ff9b9b;
-      font-size: 10px;
-      font-family: 'Segoe UI', sans-serif;
-      padding: 3px 8px;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    .opt-btn:hover:not(:disabled) { background: #2a0a0a; }
-    .opt-btn:disabled { opacity: 0.5; cursor: default; }
-    #status {
-      font-size: 9px;
-      color: #888;
-      margin-top: 4px;
-      min-height: 12px;
-    }
   </style>
 </head>
 <body>
@@ -82,8 +57,6 @@ function getBubbleHTML() {
     <div class="content">
       <div class="type" id="type">Notification</div>
       <div class="message" id="msg"></div>
-      <div class="opts" id="opts"></div>
-      <div id="status"></div>
     </div>
   </div>
   <script>
@@ -101,61 +74,8 @@ function getBubbleHTML() {
       session_end:        'Session Ended',
       notification:       'Notification'
     };
-    const CALLBACK_URL = 'http://localhost:49152/bubble/decision';
-
-    function mapLabel(label) {
-      const t = String(label || '').toLowerCase();
-      if (t.includes('allow for all')) return 'approve_always';
-      if (/\b(no|deny)\b/.test(t))     return 'deny';
-      return 'approve_once';
-    }
-
-    async function sendDecision(requestId, decision) {
-      const res = await fetch(CALLBACK_URL, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ requestId, decision, source: 'bubble_click' }),
-      });
-      if (!res.ok) throw new Error('request_failed');
-    }
-
-    function setStatus(text) {
-      document.getElementById('status').textContent = text;
-    }
-
-    function setButtonsDisabled(disabled) {
-      document.querySelectorAll('.opt-btn').forEach(function(b) {
-        b.disabled = disabled;
-      });
-    }
-
-    function renderOptions(options) {
-      var wrap = document.getElementById('opts');
-      wrap.innerHTML = '';
-      options.slice(0, 3).forEach(function(label) {
-        var btn = document.createElement('button');
-        btn.className = 'opt-btn';
-        btn.textContent = label;
-        btn.onclick = async function() {
-          setButtonsDisabled(true);
-          setStatus('Sending...');
-          try {
-            var decision = mapLabel(label);
-            // requestId is passed via showBubble closure
-            await sendDecision(window._bubbleRequestId, decision);
-            setStatus('Sent ✓');
-          } catch(e) {
-            setStatus('Failed – retry');
-            setButtonsDisabled(false);
-          }
-        };
-        wrap.appendChild(btn);
-      });
-    }
 
     function showBubble(data) {
-      window._bubbleRequestId = data.requestId || null;
-
       document.getElementById('icon').textContent = ICONS[data.type] || 'ℹ️';
       document.getElementById('type').textContent  = TYPE_NAMES[data.type] || (data.type || 'Notification');
 
@@ -163,12 +83,6 @@ function getBubbleHTML() {
       if (msg.length > 120) msg = msg.substring(0, 120) + '...';
       document.getElementById('msg').textContent = msg;
 
-      setStatus('');
-
-      var options = Array.isArray(data.options) ? data.options : [];
-      renderOptions(options.length > 0 ? options : []);
-
-      // Re-trigger entrance animation
       var el = document.getElementById('bubble');
       el.style.animation = 'none';
       el.offsetHeight;

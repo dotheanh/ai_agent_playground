@@ -8,7 +8,7 @@ let isBubbleReady = false;
 let pendingBubbleData = null; // Queue latest payload until bubble HTML is ready.
 
 const BUBBLE_WIDTH = 360;
-const BUBBLE_HEIGHT = 160; // Taller to fit interactive buttons
+const BUBBLE_HEIGHT = 120;
 
 // Auto-hide timeouts (ms) for each event type
 const AUTO_HIDE = {
@@ -96,11 +96,6 @@ function showBubble(data) {
 
   const pos = getBubblePosition();
   bubbleWindow.setPosition(pos.x, pos.y);
-
-  // Enable mouse events for interactive permission types so buttons are clickable
-  const isInteractive = data.type === 'permission_request' || data.type === 'ask_question';
-  bubbleWindow.setIgnoreMouseEvents(!isInteractive, { forward: true });
-
   bubbleWindow.show();
   bubbleWindow.moveTop(); // Ensure bubble is above main window
 
