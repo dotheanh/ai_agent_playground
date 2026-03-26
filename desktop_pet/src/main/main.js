@@ -8,7 +8,6 @@ let mainWindow = null;
 let tray = null;
 let isAlwaysOnTop = true;
 let permissionBroker = null;
-let permissionBroker = null;
 
 const isDev = !app.isPackaged;
 
