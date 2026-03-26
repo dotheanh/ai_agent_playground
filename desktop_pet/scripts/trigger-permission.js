@@ -10,7 +10,8 @@ const { spawn } = require('child_process');
 
 const proc = spawn('claude', [
   '--print',
-  'powershell -Command "Get-Date"'
+  '--model', 'claude-haiku-4-5-20251001',
+  'powershell Get-Date'
 ], {
   stdio: ['pipe', 'pipe', 'inherit'],
   shell: true,
