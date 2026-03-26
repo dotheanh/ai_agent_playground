@@ -9,6 +9,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 if (window.electronAPI) {
   window.electronAPI.onAlwaysOnTopChanged((value) => {
     console.log('Always on top:', value);
+    isAlwaysOnTop = value; // Sync local state
   });
 
   // Listen for drag trigger from menu - Windows will handle the drag
@@ -122,6 +123,7 @@ let isMouseDown = false;
 let lastMouseX = 0;
 let lastMouseY = 0;
 let autoRotate = false; // Auto-rotate toggle
+let isAlwaysOnTop = true; // Local state for always-on-top
 const clock = new THREE.Clock();
 
 // Auto-rotate: rotate model slowly in animation loop
@@ -257,12 +259,16 @@ canvas.addEventListener('mousedown', (e) => {
   isMouseDown = true;
   lastMouseX = e.clientX;
   lastMouseY = e.clientY;
-  canvas.style.cursor = 'grabbing';
 
   if (isDragging) {
-    // Enable drag for one-shot move
-    canvas.style.webkitAppRegion = 'drag';
+    // Enable drag for one-shot move - prevent default to allow OS drag
+    e.preventDefault();
+    document.body.style.webkitAppRegion = 'drag';
+    canvas.style.cursor = 'move';
+    return;
   }
+
+  canvas.style.cursor = 'grabbing';
 });
 
 canvas.addEventListener('mousemove', (e) => {
@@ -318,16 +324,13 @@ function showCustomContextMenu(x, y) {
   const existingMenu = document.getElementById('custom-context-menu');
   if (existingMenu) existingMenu.remove();
 
-  // Get always-on-top state from main process
-  const isOnTop = window.electronAPI ? window.electronAPI.getAlwaysOnTop() : false;
-
   const menu = document.createElement('div');
   menu.id = 'custom-context-menu';
   menu.innerHTML = `
-    <div class="menu-item" data-action="toggle-move">${isDragging ? '✓ Orbit Camera' : 'Move Window'}</div>
+    <div class="menu-item" data-action="toggle-move">Move Window</div>
     <div class="menu-item" data-action="toggle-auto">${autoRotate ? '✓ Auto-Rotate' : 'Auto-Rotate'}</div>
     <div class="menu-separator"></div>
-    <div class="menu-item" data-action="always-on-top">${isOnTop ? '✓ Always on Top' : 'Always on Top'}</div>
+    <div class="menu-item" data-action="always-on-top">${isAlwaysOnTop ? '✓ Always on Top' : 'Always on Top'}</div>
     <div class="menu-separator"></div>
     <div class="menu-item" data-action="exit">Exit</div>
   `;

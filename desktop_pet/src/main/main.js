@@ -176,6 +176,19 @@ ipcMain.on('start-move', () => {
   global.mainWindow.webContents.send('trigger-drag');
 });
 
+ipcMain.on('start-drag', (event) => {
+  // Start native drag from main process
+  // Note: startDrag must be called synchronously from a mouse event handler
+  // The webContents sender is the renderer that initiated the drag
+  const win = global.mainWindow;
+  if (win && !win.isDestroyed()) {
+    win.webContents.executeJavaScript(`
+      document.body.style.webkitAppRegion = 'drag';
+      // The drag will be handled by Electron's native drag
+    `).catch(() => {});
+  }
+});
+
 ipcMain.on('exit-app', () => {
   app.quit();
 });
