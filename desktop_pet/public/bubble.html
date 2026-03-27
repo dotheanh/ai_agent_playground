@@ -145,7 +145,12 @@
         playChime();
       }
       document.getElementById('icon').textContent = ICONS[data.type] || 'ℹ️';
-      document.getElementById('type').textContent  = TYPE_NAMES[data.type] || (data.type || 'Notification');
+      // Add bell icon before type name for notification bubbles
+      var typeName = TYPE_NAMES[data.type] || (data.type || 'Notification');
+      if (data.type === 'notification' || data.type === 'user_prompt_submit' || data.type === 'pre_tool_use' || data.type === 'post_tool_use') {
+        typeName = '🔔 ' + typeName;
+      }
+      document.getElementById('type').textContent = typeName;
 
       var msg = data.message || '';
 
