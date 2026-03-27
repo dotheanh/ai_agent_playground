@@ -16,47 +16,61 @@ class SuggestionEngine:
         """
         Get autocomplete suggestions.
 
-        Args:
-            context: Text before cursor (e.g., "Tôi ")
-            prefix: Current word being typed (e.g., "kh")
-
-        Returns:
-            List of up to 5 suggestion strings (case-sensitive, no punctuation)
+        Returns up to 5 suggestions:
+        1) Corpus bigrams first
+        2) Fill remaining from dictionary (supports empty prefix)
         """
-        # Extract previous word from context (keep original case)
         previous_word = self._extract_previous_word(context)
-
         if not previous_word:
-            return []
+            return self._get_dictionary_words(prefix)[:5]
 
-        # Get bigrams for previous word (case-sensitive)
+        # corpus candidates
         bigrams = self._get_bigrams(previous_word)
-
-        # Filter by prefix (case-sensitive)
-        filtered = [
-            (word2, freq) for word2, freq in bigrams
-            if word2.startswith(prefix)
-        ]
-
-        # Sort by frequency
+        filtered = [(w2, f) for w2, f in bigrams if w2.startswith(prefix)]
         filtered.sort(key=lambda x: x[1], reverse=True)
 
-        # Collect suggestions (filter out punctuation)
-        suggestions = []
-        for word2, freq in filtered:
+        suggestions: list[str] = []
+        for word2, _freq in filtered:
             clean_word = self._clean_word(word2)
             if clean_word and clean_word not in suggestions:
                 suggestions.append(clean_word)
+            if len(suggestions) >= 5:
+                return suggestions[:5]
 
-        # Fallback to dictionary if < 5
-        if len(suggestions) < 5 and prefix:
-            dict_words = self._get_dictionary_words(prefix)
-            for word in dict_words:
-                clean_word = self._clean_word(word)
-                if clean_word and clean_word not in suggestions:
-                    suggestions.append(clean_word)
-                if len(suggestions) >= 5:
-                    break
+        # dictionary fallback to fill to 5
+        for word in self._get_dictionary_words(prefix):
+            clean_word = self._clean_word(word)
+            if clean_word and clean_word not in suggestions:
+                suggestions.append(clean_word)
+            if len(suggestions) >= 5:
+                break
+
+        return suggestions[:5]
+
+    def get_next_word_suggestions(self, context: str) -> list[str]:
+        """Get suggestions right after user presses space (prefix empty)."""
+        previous_word = self._extract_previous_word(context)
+        if not previous_word:
+            return self._get_dictionary_words("")[:5]
+
+        suggestions: list[str] = []
+
+        # corpus-first
+        bigrams = self._get_bigrams(previous_word)
+        for word2, freq in sorted(bigrams, key=lambda x: x[1], reverse=True):
+            clean = self._clean_word(word2)
+            if clean and clean not in suggestions:
+                suggestions.append(clean)
+            if len(suggestions) >= 5:
+                return suggestions[:5]
+
+        # dictionary fallback
+        for word in self._get_dictionary_words(""):
+            clean = self._clean_word(word)
+            if clean and clean not in suggestions:
+                suggestions.append(clean)
+            if len(suggestions) >= 5:
+                break
 
         return suggestions[:5]
 
@@ -65,77 +79,79 @@ class SuggestionEngine:
         context = context.strip()
         if not context:
             return ""
-
-        # Split by spaces and get last token
         words = context.split()
-        if not words:
-            return ""
-
-        return words[-1]  # Keep original case
+        return words[-1] if words else ""
 
     def _clean_word(self, word: str) -> str:
-        """Remove punctuation from word for suggestions."""
-        # Remove trailing punctuation
-        while word and word[-1] in '.,;:!?':
+        """Remove trailing punctuation from suggestion words."""
+        while word and word[-1] in ".,;:!?":
             word = word[:-1]
         return word
 
     def _get_bigrams(self, word: str) -> list[tuple[str, int]]:
         """Get bigrams for word from database or cache (case-sensitive)."""
-        # Check cache first
         cached = self._cache.get(word)
         if cached is not None:
             return cached
 
-        # Query database
         conn = sqlite3.connect(self._db_path)
         cursor = conn.cursor()
-
-        cursor.execute("""
+        cursor.execute(
+            """
             SELECT word2, freq FROM bigram_frequency
             WHERE word1 = ?
             ORDER BY freq DESC
-        """, (word,))
-
+            """,
+            (word,),
+        )
         results = [(row[0], row[1]) for row in cursor.fetchall()]
         conn.close()
 
-        # Cache result
         self._cache.set(word, results)
-
         return results
 
     def _get_dictionary_words(self, prefix: str) -> list[str]:
-        """Get dictionary words starting with prefix."""
+        """Get dictionary words by prefix (case-insensitive)."""
         conn = sqlite3.connect(self._db_path)
         cursor = conn.cursor()
 
-        cursor.execute("""
-            SELECT word FROM dictionary
-            WHERE word LIKE ?
-            ORDER BY word
-        """, (f"{prefix}%",))
+        if prefix:
+            cursor.execute(
+                """
+                SELECT word FROM dictionary
+                WHERE LOWER(word) LIKE LOWER(?)
+                ORDER BY word
+                LIMIT 300
+                """,
+                (f"{prefix}%",),
+            )
+        else:
+            cursor.execute(
+                """
+                SELECT word FROM dictionary
+                ORDER BY LENGTH(word), word
+                LIMIT 300
+                """
+            )
 
         results = [row[0] for row in cursor.fetchall()]
         conn.close()
-
         return results
 
     def add_bigram(self, word1: str, word2: str, freq: int) -> None:
         """Add or update bigram (for testing)."""
         conn = sqlite3.connect(self._db_path)
         cursor = conn.cursor()
-
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT INTO bigram_frequency (word1, word2, freq)
             VALUES (?, ?, ?)
             ON CONFLICT(word1, word2) DO UPDATE SET freq = freq + ?
-        """, (word1, word2, freq, freq))
-
+            """,
+            (word1, word2, freq, freq),
+        )
         conn.commit()
         conn.close()
-
-        # Invalidate cache
         self._cache.clear()
 
     def reload(self) -> None:

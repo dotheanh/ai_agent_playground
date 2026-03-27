@@ -1,173 +1,125 @@
 # Vietnamese Autocomplete Writer
 
-A lightweight standalone text editor that provides real-time Vietnamese autocomplete suggestions based on your personal writing style.
+Standalone text editor for Vietnamese writing style autocomplete.
 
-**No VS Code conflicts. No external dependencies. Just works.**
+**Status:** Active (Standalone)
+**VS Code Extension:** Deprecated (conflict-prone)
 
 ---
 
-## 🚀 Quick Start
-
-### 1. Install Dependencies
+## Quick Start
 
 ```bash
 pip install customtkinter
-```
-
-### 2. Run the App
-
-```bash
 python main.py
 ```
 
-### 3. Import Your Corpus
-
-Click **"Import Corpus"** button → Select a folder with `.txt` files (your old writings, diaries, etc.)
-
-**Done!** The app will remember your corpus next time you open it.
+Import corpus once via **Import Corpus** button. Corpus is persisted in SQLite and auto-loaded next launch.
 
 ---
 
-## ✨ Features
+## Main Features
 
-### Autocomplete
-- **Ghost Text** - Top-1 suggestion hiển thị mờ ngay tại con trỏ
-- **Dropdown List** - Top 5 suggestions ngay sát vị trí gõ (không đánh số, width tự fit theo option dài nhất)
-- **Frequency-based** - Learns from your writing style
-- **Dictionary Fallback** - Works even without corpus
+### Autocomplete UX
+- **Ghost text (VSCode-like inline tail):** top-1 suggestion rendered inline inside textbox
+- **Dropdown top-5:** appears near caret, dynamic width by longest option, no numbering
+- **Arrow Up/Down:** move selected suggestion without closing dropdown
+- **Tab:** accept selected suggestion
+  - If cursor after space: **insert next word**
+  - If typing prefix: **replace prefix only**
 
-### Smart Typing (Non-intrusive)
-- **Không ép lúc bấm dấu** - App không tự chèn `.`/`,` hay auto-cap ngay khi anh nhấn phím
-- **Chuẩn hoá khi bấm Space** - Sau khi hoàn tất từ + Space, app mới kiểm tra/sửa spacing quanh `.` `,`
-- **Auto capitalize theo ngữ cảnh** - Viết hoa từ đầu dòng và từ đầu tiên sau dấu chấm (khi bấm Space)
-- **Vietnamese support** - Built-in Vietnamese dictionary, xử lý Unicode tiếng Việt tốt hơn khi normalize theo dòng hiện tại
+### Suggestion Logic
+- Corpus bigram first
+- If corpus < 5 results → fill from Vietnamese dictionary (including compound words)
+- Dictionary lookup case-insensitive
+- Suggestions clean trailing punctuation (`.,;:!?`)
 
-### Persistent Storage
-- **Auto-load corpus** - No need to re-import on restart
-- **SQLite database** - Fast and reliable
-- **Hot reload engine after import** - Import xong là dùng ngay, cache tự clear/reload
+### Smart Normalize (Non-intrusive)
+- Native typing preserved (no forced punctuation insertion on keypress)
+- Normalize only on `Space`:
+  - remove extra space before `.` `,`
+  - ensure one space after `.` `,`
+  - collapse multiple spaces
+  - capitalize line-start word and first word after period
 
-### Case-Sensitive
-- **Preserves your writing style** - "Tôi" and "tôi" are treated as different words
-- **Exact matches** - Suggestions match your original capitalization
-- **Clean suggestions** - Tự lọc dấu câu thừa ở cuối (`.` `,` `;` `:` `!` `?`) trước khi hiển thị suggestion
+### Persistence
+- SQLite DB persisted at `data/database.db`
+- Corpus auto-loaded on startup
+- Dictionary auto-loaded into DB if empty at startup
 
-### Server Logging
-- **Import logs** - Log chi tiết kết quả import corpus (word count, bigram count, top bigrams)
-- **Debug logs** - Log request suggest/import để theo dõi hành vi runtime dễ hơn
-
-### VS Code Extension Status
-- **Deprecated** - Hiện tại tập trung hoàn toàn vào standalone app để tránh conflict với autocomplete native của VS Code.
-
-### Case-Sensitive
-- **Preserves your writing style** - "Tôi" and "tôi" are treated as different words
-- **Exact matches** - Suggestions match your original capitalization
-
-### Persistent Storage
-- **Auto-load corpus** - No need to re-import on restart
-- **SQLite database** - Fast and reliable
+### Logging
+- Import logs in `server.log` include word count, bigram count, top bigrams
 
 ---
 
-## ⌨️ Keyboard Shortcuts
+## Keyboard
 
 | Key | Action |
-|-----|--------|
-| `Tab` | Accept suggestion |
-| `Up/Down` | Navigate suggestions |
-| `Enter` | Accept + newline + auto-capitalize |
-| `Esc` | Dismiss suggestions |
-
-### Smart Typing
-| Key | Action |
-|-----|--------|
-| `Space` | Trigger normalize: fix spacing quanh dấu câu + capitalize đầu dòng/sau dấu chấm |
-| `.` | Giữ native typing (không auto chèn ngay) |
-| `,` | Giữ native typing (không auto chèn ngay) |
-| `Enter` | Giữ native typing (capitalize sẽ áp dụng khi hoàn tất từ + Space) |
+|---|---|
+| Tab | Accept selected suggestion |
+| Up / Down | Navigate dropdown |
+| Esc | Hide suggestions |
+| Space | Trigger normalize + next-word suggestions |
 
 ---
 
-## 📁 Project Structure
+## Architecture
+
+```
+UI (CustomTkinter)
+  ├─ TextEditor (inline ghost + dropdown)
+  ├─ Import dialog
+  └─ Smart normalize on Space
+
+Core
+  ├─ SuggestionEngine (corpus first)
+  ├─ Dictionary fallback
+  └─ Cache
+
+Data (SQLite)
+  ├─ word_frequency
+  ├─ bigram_frequency
+  ├─ dictionary
+  └─ metadata
+```
+
+---
+
+## Project Structure
 
 ```
 writer/
-├── main.py                    # Standalone app entry point
-├── requirements.txt           # App dependencies
+├── main.py
 ├── src/
-│   ├── ui/                   # UI components
-│   │   ├── text_editor.py    # Text editor with ghost text
-│   │   ├── suggestion_dropdown.py # Dropdown list
-│   │   └── dialogs.py        # Import corpus dialog
-│   ├── core/                 # Core logic
-│   │   ├── suggestion_engine.py  # Suggestion algorithm
-│   │   ├── corpus_processor.py  # Text processing
-│   │   └── cache_manager.py      # Caching
-│   └── data/                 # Data layer
-│       ├── database.py         # SQLite
-│       └── dictionary.py        # Vietnamese dictionary
+│   ├── ui/
+│   │   ├── text_editor.py
+│   │   ├── dialogs.py
+│   │   └── main_window.py
+│   ├── core/
+│   │   ├── suggestion_engine.py
+│   │   ├── corpus_processor.py
+│   │   └── cache_manager.py
+│   └── data/
+│       ├── database.py
+│       └── dictionary.py
 ├── data/
-│   ├── database.db           # User corpus database (auto-created)
-│   └── vietnamese_dict.txt     # Dictionary
-└── input/                    # Place corpus .txt files here
+│   ├── database.db
+│   └── vietnamese_dict.txt
+└── input/
 ```
 
 ---
 
-## 🏗️ Architecture
+## Dev
 
-```
-┌─────────────────────────────────────────────────────────┐
-│              Vietnamese Autocomplete Writer             │
-│  ┌─────────────────────────────────────────────────┐   │
-│  │  CustomTkinter UI                              │   │
-│  │  - Text Editor                                 │   │
-│  │  - Ghost text (top-1)                          │   │
-│  │  - Dropdown list (top-5, dynamic width)        │   │
-│  │  - Smart normalize on SPACE                    │   │
-│  └─────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────┐   │
-│  │  Suggestion Engine (in-process)                │   │
-│  │  - Bigram frequency ranking                     │   │
-│  │  - Dictionary fallback                          │   │
-│  │  - Case-sensitive matching                      │   │
-│  │  - Punctuation cleanup                          │   │
-│  └─────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────┐   │
-│  │  SQLite Database                                │   │
-│  │  - word_frequency                               │   │
-│  │  - bigram_frequency                             │   │
-│  │  - dictionary                                   │   │
-│  │  - metadata                                     │   │
-│  └─────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────┘
-```
-
----
-
-## 🔧 Development
-
-### Run Tests
 ```bash
 pytest tests/ -v
 ```
 
-### Database Location
-Database is stored at `data/database.db` and persists between sessions.
-
-### Clear Database
-To reset and start fresh:
+Reset DB:
 ```bash
 rm data/database.db
 ```
-
----
-
-## 📋 Requirements
-
-- Python 3.10+
-- customtkinter
-- SQLite (built-in)
 
 ---
 

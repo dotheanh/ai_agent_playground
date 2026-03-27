@@ -1,4 +1,4 @@
-"""Custom text editor with ghost autocomplete + dropdown list."""
+"""Custom text editor with inline ghost autocomplete + dropdown list."""
 
 import re
 import customtkinter as ctk
@@ -17,26 +17,28 @@ class TextEditor(ctk.CTkTextbox):
         self._current_prefix: str = ""
         self._ghost_text: str = ""
 
-        # Smart normalize policy: only run when user presses SPACE
+        # flags
         self._smart_normalize_enabled: bool = True
         self._suppress_keyrelease_once: bool = False
+        self._internal_ghost_edit: bool = False
 
-        # Regex for smart normalize
+        # regex (normalize on SPACE)
         self._re_space_before_punct = re.compile(r"\s+([\.,])")
         self._re_missing_space_after_punct = re.compile(r"([\.,])(\S)")
         self._re_multi_spaces = re.compile(r" {2,}")
         self._re_cap_after_period = re.compile(r"(\.\s+)([a-zà-ỹđ])", re.UNICODE)
         self._re_first_alpha = re.compile(r"^([^A-Za-zÀ-Ỹà-ỹđĐ]*)([a-zà-ỹđ])", re.UNICODE)
 
-        # Ghost label: child of textbox for stable local positioning
-        self.ghost_label = ctk.CTkLabel(self, text="", text_color="#A8A8A8", font=("Consolas", 14))
+        # inline ghost via tag (most robust, VSCode-like)
+        self.tag_config("ghost", foreground="#8A8A8A")
 
-        # Dropdown frame: child of parent so it can escape textbox clipping
+        # dropdown on parent (not clipped)
+        self._parent = parent
         self.dropdown_visible = False
         self.dropdown_buttons: list[ctk.CTkButton] = []
         self.dropdown_frame = ctk.CTkFrame(parent, fg_color="#2b2b2b")
 
-        # Bindings
+        # bindings
         self.bind("<Key>", self._on_key_press)
         self.bind("<KeyRelease>", self._on_key_release)
         self.bind("<Tab>", self._on_tab)
@@ -48,36 +50,41 @@ class TextEditor(ctk.CTkTextbox):
     # Input handling
     # -----------------------------
     def _on_key_press(self, event):
-        """Keep typing behavior native. No forced '.'/',' insertion."""
+        """Keep typing native (non-intrusive)."""
         return None
 
     def _on_key_release(self, event):
-        """Trigger normalize on SPACE; trigger autocomplete on normal chars."""
+        if self._internal_ghost_edit:
+            return
+
         if self._suppress_keyrelease_once:
             self._suppress_keyrelease_once = False
             return
 
-        # Normalize only when user explicitly presses SPACE
-        if event.keysym == "space":
-            self._normalize_before_cursor_on_space()
-            self._hide_all()
-            return
-
-        # Ignore modifier/special keys for autocomplete query
-        if event.state & 0xff0000:
-            self._hide_all()
-            return
-
+        # Keys that should NOT trigger re-query/hide (keep dropdown stable)
         if event.keysym in [
             "Return", "BackSpace", "Delete", "Left", "Right", "Home", "End",
-            "Up", "Down", "Tab", "Escape", "period", "comma"
+            "Up", "Down", "Tab", "Escape"
         ]:
             return
 
+        # normalize + next-word suggestions on SPACE
+        if event.keysym == "space":
+            self._clear_inline_ghost()
+            self._normalize_before_cursor_on_space()
+            self._run_next_word_suggestions_after_space()
+            return
+
+        # ignore pure modifier key releases
+        if event.keysym in ["Shift_L", "Shift_R", "Control_L", "Control_R", "Alt_L", "Alt_R"]:
+            return
+
+        # remove stale ghost before processing current key
+        self._clear_inline_ghost()
         self._run_autocomplete_query()
 
     def _normalize_before_cursor_on_space(self):
-        """After user presses SPACE, normalize spacing/caps before cursor only."""
+        """Normalize spacing/capitalization only when user presses SPACE."""
         if not self._smart_normalize_enabled:
             return
 
@@ -94,25 +101,17 @@ class TextEditor(ctk.CTkTextbox):
         before = line[:col]
         after = line[col:]
 
-        # Must end with space (user just typed space)
         if not before.endswith(" "):
             return
 
         normalized = before
-
-        # 1) remove spaces before punctuation
         normalized = self._re_space_before_punct.sub(r"\1", normalized)
-
-        # 2) ensure single space after punctuation if missing
         normalized = self._re_missing_space_after_punct.sub(r"\1 \2", normalized)
-
-        # 3) collapse multiple spaces
         normalized = self._re_multi_spaces.sub(" ", normalized)
 
-        # 4) capitalize first word at start of current line
+        # capitalize first word of current line
         normalized = self._re_first_alpha.sub(lambda m: m.group(1) + m.group(2).upper(), normalized, count=1)
-
-        # 5) capitalize first word after period on current line
+        # capitalize first word after period
         normalized = self._re_cap_after_period.sub(lambda m: m.group(1) + m.group(2).upper(), normalized)
 
         if normalized != before:
@@ -122,32 +121,56 @@ class TextEditor(ctk.CTkTextbox):
             self._suppress_keyrelease_once = True
             self.delete("1.0", "end-1c")
             self.insert("1.0", new_text)
-
-            new_col = len(normalized)
-            self.mark_set("insert", f"{line_idx + 1}.{new_col}")
+            self.mark_set("insert", f"{line_idx + 1}.{len(normalized)}")
 
     # -----------------------------
-    # Autocomplete query + render
+    # Query + render
     # -----------------------------
+    def _run_next_word_suggestions_after_space(self):
+        """After SPACE, show next-word suggestions with empty prefix."""
+        content = self.get("1.0", "end-1c")
+        cursor_pos = self.index("insert")
+
+        lines = content.split("\n")
+        line_idx = int(cursor_pos.split(".")[0]) - 1
+        col = int(cursor_pos.split(".")[1])
+
+        if line_idx < len(lines):
+            text_before_cursor = lines[line_idx][:col]
+        else:
+            text_before_cursor = ""
+
+        if not text_before_cursor.endswith(" "):
+            self._hide_all()
+            return
+
+        context = text_before_cursor.rstrip() + " "
+        suggestions = self.suggestion_engine.get_next_word_suggestions(context)
+
+        if suggestions:
+            self.suggestions = suggestions[:5]
+            self.selected_index = 0
+            self._current_prefix = ""
+            self._show_ghost_and_dropdown()
+        else:
+            self._hide_all()
+
     def _run_autocomplete_query(self):
         content = self.get("1.0", "end-1c")
         cursor_pos = self.index("insert")
 
         lines = content.split("\n")
-        current_line_idx = int(cursor_pos.split(".")[0]) - 1
-        current_col = int(cursor_pos.split(".")[1])
+        line_idx = int(cursor_pos.split(".")[0]) - 1
+        col = int(cursor_pos.split(".")[1])
 
-        if current_line_idx < len(lines):
-            text_before_cursor = lines[current_line_idx][:current_col]
-        else:
-            text_before_cursor = ""
+        text_before_cursor = lines[line_idx][:col] if line_idx < len(lines) else ""
 
-        all_text_before = "\n".join(lines[:current_line_idx])
-        if all_text_before:
-            all_text_before += "\n"
-        all_text_before += text_before_cursor
+        all_before = "\n".join(lines[:line_idx])
+        if all_before:
+            all_before += "\n"
+        all_before += text_before_cursor
 
-        words = all_text_before.split()
+        words = all_before.split()
         if not words:
             self._hide_all()
             return
@@ -173,46 +196,67 @@ class TextEditor(ctk.CTkTextbox):
         cursor_pos = self.index("insert")
         content = self.get("1.0", "end-1c")
         lines = content.split("\n")
-        current_line_idx = int(cursor_pos.split(".")[0]) - 1
-        current_col = int(cursor_pos.split(".")[1])
+        line_idx = int(cursor_pos.split(".")[0]) - 1
+        col = int(cursor_pos.split(".")[1])
 
-        if current_line_idx >= len(lines):
+        if line_idx >= len(lines):
             self._hide_all()
             return
 
-        current_line = lines[current_line_idx]
-        text_before_cursor = current_line[:current_col]
-        words = text_before_cursor.split()
+        line_before = lines[line_idx][:col]
 
-        if words:
-            prefix = words[-1]
-            self._ghost_text = suggestion[len(prefix):] if suggestion.startswith(prefix) else suggestion
-        else:
+        if line_before.endswith(" "):
+            # next-word mode: ghost is full suggestion
             self._ghost_text = suggestion
+        else:
+            # prefix mode: ghost is suffix after prefix
+            words = line_before.split()
+            if words:
+                prefix = words[-1]
+                self._ghost_text = suggestion[len(prefix):] if suggestion.startswith(prefix) else suggestion
+            else:
+                self._ghost_text = suggestion
 
-        self._render_ghost()
+        # If suffix empty in prefix mode, hide ghost but keep dropdown
+        if self._ghost_text:
+            self._render_inline_ghost()
+        else:
+            self._clear_inline_ghost()
+
         self._render_dropdown()
 
-    def _render_ghost(self):
+    # -----------------------------
+    # Ghost rendering (inline tag)
+    # -----------------------------
+    def _clear_inline_ghost(self):
+        ranges = self.tag_ranges("ghost")
+        if ranges:
+            self._internal_ghost_edit = True
+            try:
+                self.delete(ranges[0], ranges[1])
+            finally:
+                self.tag_remove("ghost", "1.0", "end")
+                self._internal_ghost_edit = False
+
+    def _render_inline_ghost(self):
+        self._clear_inline_ghost()
         if not self._ghost_text:
-            self.ghost_label.place_forget()
             return
 
+        insert_idx = self.index("insert")
+        self._internal_ghost_edit = True
         try:
-            bbox = self.bbox("insert")
-            if not bbox:
-                self.ghost_label.place_forget()
-                return
+            self.insert(insert_idx, self._ghost_text, ("ghost",))
+            self.mark_set("insert", insert_idx)  # caret stays before ghost
+        finally:
+            self._internal_ghost_edit = False
 
-            # label is child of textbox => local coordinates
-            x = bbox[0] + bbox[2]
-            y = bbox[1]
-            self.ghost_label.configure(text=self._ghost_text)
-            self.ghost_label.place(x=x, y=y)
-            self.ghost_label.lift()
-        except Exception:
-            self.ghost_label.place_forget()
+        self.tag_raise("ghost")
+        self.tag_raise("sel")
 
+    # -----------------------------
+    # Dropdown
+    # -----------------------------
     def _render_dropdown(self):
         try:
             for btn in self.dropdown_buttons:
@@ -222,9 +266,10 @@ class TextEditor(ctk.CTkTextbox):
             bbox = self.bbox("insert")
             if not bbox:
                 self.dropdown_frame.place_forget()
+                self.dropdown_visible = False
                 return
 
-            # dropdown_frame is child of parent window => convert from textbox-local to parent-local
+            # convert textbox local to parent local
             x = self.winfo_x() + bbox[0]
             y = self.winfo_y() + bbox[1] + bbox[3] + 4
 
@@ -234,7 +279,7 @@ class TextEditor(ctk.CTkTextbox):
             for i, suggestion in enumerate(self.suggestions):
                 btn = ctk.CTkButton(
                     self.dropdown_frame,
-                    text=suggestion,  # no numbering
+                    text=suggestion,
                     width=dropdown_width,
                     height=28,
                     fg_color="#2b2b2b" if i != self.selected_index else "#0078d4",
@@ -253,7 +298,7 @@ class TextEditor(ctk.CTkTextbox):
             self.dropdown_visible = False
 
     # -----------------------------
-    # Suggestion actions
+    # Accept / hide
     # -----------------------------
     def _select_from_dropdown(self, index: int):
         if 0 <= index < len(self.suggestions):
@@ -267,27 +312,52 @@ class TextEditor(ctk.CTkTextbox):
 
         suggestion = self.suggestions[self.selected_index]
 
+        # IMPORTANT: remove inline ghost FIRST, then read content/caret
+        # so we don't reconstruct text from a snapshot that still contains ghost chars.
+        self._clear_inline_ghost()
+
         cursor_pos = self.index("insert")
         content = self.get("1.0", "end-1c")
         lines = content.split("\n")
-        current_line_idx = int(cursor_pos.split(".")[0]) - 1
-        current_col = int(cursor_pos.split(".")[1])
+        line_idx = int(cursor_pos.split(".")[0]) - 1
+        col = int(cursor_pos.split(".")[1])
 
-        if current_line_idx >= len(lines):
+        if line_idx >= len(lines):
             return
 
-        current_line = lines[current_line_idx]
-        text_before_cursor = current_line[:current_col]
-        words = text_before_cursor.split()
+        line = lines[line_idx]
+        before = line[:col]
+        after = line[col:]
 
-        if words:
-            new_line = " ".join(words[:-1]) + " " + suggestion if len(words) > 1 else suggestion
-            remaining = current_line[current_col:]
-            lines[current_line_idx] = new_line + remaining
-            new_content = "\n".join(lines)
+        # Prevent immediate key-release cycle from re-querying mid-mutation
+        self._suppress_keyrelease_once = True
 
+        # space-mode: insert next word
+        if before.endswith(" ") or self._current_prefix == "":
+            new_line = before + suggestion + after
+            lines[line_idx] = new_line
             self.delete("1.0", "end-1c")
-            self.insert("1.0", new_content)
+            self.insert("1.0", "\n".join(lines))
+            self.mark_set("insert", f"{line_idx + 1}.{col + len(suggestion)}")
+            return
+
+        # prefix-mode: replace only prefix
+        words = before.split()
+        if words:
+            prefix = words[-1]
+            start_col = max(0, col - len(prefix))
+            new_line = line[:start_col] + suggestion + line[col:]
+            lines[line_idx] = new_line
+            self.delete("1.0", "end-1c")
+            self.insert("1.0", "\n".join(lines))
+            self.mark_set("insert", f"{line_idx + 1}.{start_col + len(suggestion)}")
+            return
+
+        # fallback
+        lines[line_idx] = before + suggestion + after
+        self.delete("1.0", "end-1c")
+        self.insert("1.0", "\n".join(lines))
+        self.mark_set("insert", f"{line_idx + 1}.{col + len(suggestion)}")
 
     def _hide_all(self):
         self._ghost_text = ""
@@ -295,10 +365,7 @@ class TextEditor(ctk.CTkTextbox):
         self.selected_index = 0
         self._current_prefix = ""
 
-        try:
-            self.ghost_label.place_forget()
-        except Exception:
-            pass
+        self._clear_inline_ghost()
 
         try:
             self.dropdown_frame.place_forget()
@@ -307,7 +374,7 @@ class TextEditor(ctk.CTkTextbox):
             pass
 
     # -----------------------------
-    # Navigation keys
+    # navigation
     # -----------------------------
     def _on_tab(self, event):
         if self.suggestions:
