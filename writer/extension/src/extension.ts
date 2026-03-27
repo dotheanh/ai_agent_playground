@@ -11,8 +11,46 @@ interface ImportResult {
     error: string | null;
 }
 
+async function disableConflictingSettings(): Promise<void> {
+    /** Automatically disable VS Code settings that conflict with our extension */
+    const conflictingSettings = [
+        { key: 'editor.quickSuggestions', current: vscode.workspace.getConfiguration('editor').get('quickSuggestions') },
+        { key: 'editor.wordBasedSuggestions', current: vscode.workspace.getConfiguration('editor').get('wordBasedSuggestions') },
+    ];
+
+    const hasConflicts = conflictingSettings.some(s => s.current !== 'off' && s.current !== false);
+
+    if (hasConflicts) {
+        const choice = await vscode.window.showInformationMessage(
+            'Vietnamese Autocomplete: Disable conflicting VS Code suggestions?',
+            'Disable Conflicts',
+            'Ignore'
+        );
+
+        if (choice === 'Disable Conflicts') {
+            // Disable quick suggestions for text files
+            await vscode.workspace.getConfiguration('editor').update('quickSuggestions', {
+                other: false,
+                comments: false,
+                strings: false
+            }, vscode.ConfigurationTarget.Global);
+
+            // Disable word-based suggestions
+            await vscode.workspace.getConfiguration('editor').update('wordBasedSuggestions', 'off', vscode.ConfigurationTarget.Global);
+
+            // Disable inline suggestions from other extensions
+            await vscode.workspace.getConfiguration('editor').update('inlineSuggest.enabled', false, vscode.ConfigurationTarget.Global);
+
+            vscode.window.showInformationMessage('Conflicting settings disabled! Restart may be required.');
+        }
+    }
+}
+
 export async function activate(context: vscode.ExtensionContext) {
     console.log('Vietnamese Autocomplete extension is activating');
+
+    // Disable conflicting VS Code settings
+    await disableConflictingSettings();
 
     // Start Python server
     try {
