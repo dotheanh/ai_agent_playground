@@ -12,7 +12,7 @@ class TextEditor(ctk.CTkTextbox):
         super().__init__(parent, **kwargs)
 
         self.suggestion_engine = SuggestionEngine()
-        self.suggestions: list[str] = []
+        self.suggestions: list[tuple[str, bool]] = []  # [(word, is_from_dictionary), ...]
         self.selected_index: int = 0
         self._current_prefix: str = ""
         self._ghost_text: str = ""
@@ -196,7 +196,8 @@ class TextEditor(ctk.CTkTextbox):
         if not self.suggestions:
             return
 
-        suggestion = self.suggestions[self.selected_index]
+        # Extract word from tuple (word, is_from_dictionary)
+        suggestion_word = self.suggestions[self.selected_index][0]
 
         cursor_pos = self.index("insert")
         content = self.get("1.0", "end-1c")
@@ -212,18 +213,18 @@ class TextEditor(ctk.CTkTextbox):
 
         if line_before.endswith(" "):
             # next-word mode: ghost is full suggestion
-            self._ghost_text = suggestion
+            self._ghost_text = suggestion_word
         else:
             # prefix mode: ghost is the REST after prefix
             words = line_before.split()
             if words:
                 prefix = words[-1]
-                if suggestion.startswith(prefix):
-                    self._ghost_text = suggestion[len(prefix):]
+                if suggestion_word.startswith(prefix):
+                    self._ghost_text = suggestion_word[len(prefix):]
                 else:
-                    self._ghost_text = suggestion  # no match, show full as ghost
+                    self._ghost_text = suggestion_word  # no match, show full as ghost
             else:
-                self._ghost_text = suggestion
+                self._ghost_text = suggestion_word
 
         # If suffix empty, hide ghost but keep dropdown
         if self._ghost_text:
@@ -315,10 +316,30 @@ class TextEditor(ctk.CTkTextbox):
                 pass
 
             # Render dropdown buttons
-            for i, suggestion in enumerate(self.suggestions):
+            for i, (suggestion_word, is_from_dictionary) in enumerate(self.suggestions):
+                # Parse font string (e.g., "Consolas 11") to get family and size
+                font_config = self.cget("font")
+                if isinstance(font_config, str):
+                    parts = font_config.rsplit(None, 1)  # Split from right, max 1 split
+                    family = parts[0] if len(parts) > 1 else "Consolas"
+                    try:
+                        size = int(parts[1]) if len(parts) > 1 else 11
+                    except ValueError:
+                        size = 11
+                else:
+                    family = font_config[0] if isinstance(font_config, (list, tuple)) else "Consolas"
+                    size = font_config[1] if isinstance(font_config, (list, tuple)) and len(font_config) > 1 else 11
+
+                # Use italic font for dictionary-sourced suggestions
+                if is_from_dictionary:
+                    font = ctk.CTkFont(family=family, size=size, slant="italic")
+                else:
+                    font = font_config
+
                 btn = ctk.CTkButton(
                     self.dropdown_frame,
-                    text=suggestion,
+                    text=suggestion_word,
+                    font=font,
                     width=dropdown_width,
                     height=28,
                     fg_color="#2b2b2b" if i != self.selected_index else "#0078d4",
@@ -345,6 +366,8 @@ class TextEditor(ctk.CTkTextbox):
     def _select_from_dropdown(self, index: int):
         if 0 <= index < len(self.suggestions):
             self.selected_index = index
+            # Extract word from tuple (word, is_from_dictionary)
+            self._current_suggestion_word = self.suggestions[index][0]
             self._accept_suggestion()
             self._hide_all()
 
@@ -352,7 +375,8 @@ class TextEditor(ctk.CTkTextbox):
         if not self.suggestions:
             return
 
-        suggestion = self.suggestions[self.selected_index]
+        # Extract word from tuple (word, is_from_dictionary)
+        suggestion = self._current_suggestion_word if hasattr(self, '_current_suggestion_word') else self.suggestions[self.selected_index][0]
 
         # IMPORTANT: remove inline ghost FIRST, then read content/caret
         # so we don't reconstruct text from a snapshot that still contains ghost chars.
@@ -406,6 +430,8 @@ class TextEditor(ctk.CTkTextbox):
         self.suggestions = []
         self.selected_index = 0
         self._current_prefix = ""
+        if hasattr(self, '_current_suggestion_word'):
+            delattr(self, '_current_suggestion_word')
 
         self._clear_inline_ghost()
 

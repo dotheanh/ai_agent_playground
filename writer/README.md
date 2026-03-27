@@ -38,6 +38,7 @@ Import corpus once via **Import Corpus** button. Corpus is persisted in SQLite a
   - Example: typing `tự đo` can suggest `tự động`, `tự đóng`
 - **Accented chars do NOT trigger variant expansion:** if last typed char already has diacritic, no expansion occurs
   - Example: typing `tự độ` only matches `tự động` (no `tự đóng` because `ộ` is already accented)
+- **Dictionary suggestions shown in italics:** suggestions sourced from dictionary (fallback when corpus has < 5 results) appear in italic font to distinguish them from corpus-based suggestions
 
 ### Smart Normalize (Non-intrusive)
 - Native typing preserved (no forced punctuation insertion on keypress)

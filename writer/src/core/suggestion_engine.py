@@ -28,14 +28,13 @@ class SuggestionEngine:
         self._db_path = db_path or "data/database.db"
         self._cache = CacheManager(max_size=1000)
 
-    def get_suggestions(self, context: str, prefix: str) -> list[str]:
+    def get_suggestions(self, context: str, prefix: str) -> list[tuple[str, bool]]:
         """
         Get autocomplete suggestions.
 
-        Returns up to 5 suggestions:
-        1) Corpus bigrams first
-        2) Fill remaining from dictionary
-        3) If last typed char is a vowel, match Vietnamese vowel variants too
+        Returns up to 8 suggestions as tuples: (word, is_from_dictionary)
+        - First 5 from corpus (by frequency)
+        - Next 3 from dictionary (alphabetically sorted, not checking overlap with corpus)
         """
         previous_word = self._extract_previous_word(context)
         if not previous_word:
@@ -43,7 +42,9 @@ class SuggestionEngine:
 
         prefix_variants = self._expand_last_vowel_variants(prefix)
 
-        # corpus candidates
+        suggestions: list[tuple[str, bool]] = []
+
+        # Get up to 5 from corpus (by frequency)
         bigrams = self._get_bigrams(previous_word)
         filtered = [
             (w2, f) for w2, f in bigrams
@@ -51,51 +52,53 @@ class SuggestionEngine:
         ]
         filtered.sort(key=lambda x: x[1], reverse=True)
 
-        suggestions: list[str] = []
         for word2, _freq in filtered:
             clean_word = self._clean_word(word2)
-            if clean_word and clean_word not in suggestions:
-                suggestions.append(clean_word)
+            if clean_word and clean_word not in [w for w, _ in suggestions]:
+                suggestions.append((clean_word, False))  # from corpus
             if len(suggestions) >= 5:
-                return suggestions[:5]
+                break
 
-        # dictionary fallback to fill to 5 (with vowel-variant expansion)
+        # Always add up to 3 from dictionary (alphabetically, no overlap check)
         for variant in prefix_variants:
             for word in self._get_dictionary_words(variant):
                 clean_word = self._clean_word(word)
-                if clean_word and clean_word not in suggestions:
-                    suggestions.append(clean_word)
-                if len(suggestions) >= 5:
-                    return suggestions[:5]
+                if clean_word and len(suggestions) < 8:
+                    # Only add if not already in suggestions (from corpus)
+                    if clean_word not in [w for w, _ in suggestions]:
+                        suggestions.append((clean_word, True))  # from dictionary
+                if len(suggestions) >= 8:
+                    return suggestions[:8]
 
-        return suggestions[:5]
+        return suggestions[:8]
 
-    def get_next_word_suggestions(self, context: str) -> list[str]:
+    def get_next_word_suggestions(self, context: str) -> list[tuple[str, bool]]:
         """Get suggestions right after user presses space (prefix empty)."""
         previous_word = self._extract_previous_word(context)
         if not previous_word:
             return self._collect_dictionary_only("")
 
-        suggestions: list[str] = []
+        suggestions: list[tuple[str, bool]] = []
 
-        # corpus-first
+        # Get up to 5 from corpus (by frequency)
         bigrams = self._get_bigrams(previous_word)
         for word2, freq in sorted(bigrams, key=lambda x: x[1], reverse=True):
             clean = self._clean_word(word2)
-            if clean and clean not in suggestions:
-                suggestions.append(clean)
-            if len(suggestions) >= 5:
-                return suggestions[:5]
-
-        # dictionary fallback
-        for word in self._get_dictionary_words(""):
-            clean = self._clean_word(word)
-            if clean and clean not in suggestions:
-                suggestions.append(clean)
+            if clean and clean not in [w for w, _ in suggestions]:
+                suggestions.append((clean, False))  # from corpus
             if len(suggestions) >= 5:
                 break
 
-        return suggestions[:5]
+        # Add up to 3 from dictionary (alphabetically)
+        for word in self._get_dictionary_words(""):
+            clean = self._clean_word(word)
+            if clean and len(suggestions) < 8:
+                if clean not in [w for w, _ in suggestions]:
+                    suggestions.append((clean, True))  # from dictionary
+            if len(suggestions) >= 8:
+                break
+
+        return suggestions[:8]
 
     # -----------------------------
     # Matching helpers
@@ -210,14 +213,14 @@ class SuggestionEngine:
         conn.close()
         return results
 
-    def _collect_dictionary_only(self, prefix: str) -> list[str]:
+    def _collect_dictionary_only(self, prefix: str) -> list[tuple[str, bool]]:
         """Collect dictionary-only suggestions with vowel-variant expansion."""
-        suggestions: list[str] = []
+        suggestions: list[tuple[str, bool]] = []
         for variant in self._expand_last_vowel_variants(prefix):
             for word in self._get_dictionary_words(variant):
                 clean = self._clean_word(word)
-                if clean and clean not in suggestions:
-                    suggestions.append(clean)
+                if clean and clean not in [w for w, _ in suggestions]:
+                    suggestions.append((clean, True))  # always from dictionary
                 if len(suggestions) >= 5:
                     return suggestions[:5]
         return suggestions[:5]
