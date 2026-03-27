@@ -53,6 +53,15 @@
       transition: background 0.15s;
     }
     #focus-btn:hover { background: #ff2222; }
+    /* Low priority bubble - no button, simpler style */
+    #bubble.low-priority {
+      border-color: #666;
+      box-shadow: 0 2px 10px rgba(100,100,100,0.3);
+      padding: 6px 12px;
+    }
+    #bubble.low-priority #focus-btn {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -117,10 +126,19 @@
       if (msg.length > 120) msg = msg.substring(0, 120) + '...';
       document.getElementById('msg').textContent = msg;
 
-      var el = document.getElementById('bubble');
-      el.style.animation = 'none';
-      el.offsetHeight;
-      el.style.animation = 'bubbleIn 0.25s ease-out';
+      var bubble = document.getElementById('bubble');
+      // Add priority class for styling (hides focus button for low priority)
+      if (data.isLowPriority) {
+        bubble.classList.add('low-priority');
+        bubble.classList.remove('high-priority');
+      } else if (data.isHighPriority) {
+        bubble.classList.add('high-priority');
+        bubble.classList.remove('low-priority');
+      }
+
+      bubble.style.animation = 'none';
+      bubble.offsetHeight;
+      bubble.style.animation = 'bubbleIn 0.25s ease-out';
     }
   </script>
 </body>

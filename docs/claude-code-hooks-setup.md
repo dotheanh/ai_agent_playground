@@ -243,6 +243,27 @@ type C:\Users\NITRO\.claude\hooks\debug.log
 
 ---
 
+## Priority System
+
+### High Priority vs Low Priority Bubbles
+
+| Feature | Low Priority | High Priority |
+|---------|--------------|---------------|
+| **Types** | session_start, session_end, notification, task_completed, user_prompt_submit, pre_tool_use, post_tool_use | permission_request, ask_question |
+| **Auto-hide** | ✅ 10s | ❌ No (requires user action) |
+| **Sound** | ❌ No | ✅ Yes (chime) |
+| **Focus button** | ❌ No | ✅ Yes |
+| **Border** | Grey (#666) | Red (#cc0000) |
+| **Size** | Smaller, compact | Full size |
+
+### Priority Rules
+
+1. **Low Priority showing + High Priority comes** → Low Priority auto-hides, High Priority shows immediately
+2. **High Priority showing + Low Priority comes** → Low Priority queues, shows after High Priority closes
+3. **Low Priority showing + Low Priority comes** → Previous auto-hides, new one shows
+
+---
+
 ## Troubleshooting
 
 | Vấn đề | Nguyên nhân | Giải pháp |
@@ -251,6 +272,7 @@ type C:\Users\NITRO\.claude\hooks\debug.log
 | Không có log | Desktop_pet không chạy | Start desktop_pet trước |
 | Hook không trigger | Matcher sai | Dùng tool names cụ thể |
 | Config không load | Không restart Claude | Restart session sau khi config |
+| Low priority bubble vẫn có Focus button | Missing priority class in bubble.html | Add class logic in showBubble() |
 
 ---
 
@@ -263,3 +285,5 @@ type C:\Users\NITRO\.claude\hooks\debug.log
 - **2026-03-27**: Add `UserPromptSubmit` notification bubble
 - **2026-03-27**: Add priority system (High/Low) with auto-hide, sound, focus button
 - **2026-03-27**: High Priority interrupts Low Priority, Low Priority queues when High Priority active
+- **2026-03-27**: Fix low-priority bubble layout (hide Focus button, grey border, no sound)
+- **2026-03-27**: Fix bubble.html to add priority classes in showBubble()
