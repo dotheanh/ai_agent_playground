@@ -46,26 +46,20 @@ async function disableConflictingSettings() {
     // Check for conflicts
     const quickSuggestions = config.get('quickSuggestions');
     const wordBasedSuggestions = config.get('wordBasedSuggestions');
+    const inlineSuggest = config.get('inlineSuggest.enabled');
+    // Only warn if VS Code built-in suggestions are on
     const hasConflicts = quickSuggestions !== false || wordBasedSuggestions !== 'off';
     if (hasConflicts) {
-        const choice = await vscode.window.showInformationMessage('Vietnamese Autocomplete: Disable conflicting VS Code suggestions?', 'Disable Conflicts', 'Ignore');
-        if (choice === 'Disable Conflicts') {
-            // Disable quick suggestions
-            await config.update('quickSuggestions', false, vscode.ConfigurationTarget.Global);
-            // Disable word-based suggestions
-            await config.update('wordBasedSuggestions', 'off', vscode.ConfigurationTarget.Global);
-            // Disable VS Code's inline suggestions
-            await config.update('inlineSuggest.enabled', false, vscode.ConfigurationTarget.Global);
-            // Also disable suggestions for specific languages if possible
-            await config.update('suggest.showWords', false, vscode.ConfigurationTarget.Global);
-            vscode.window.showInformationMessage('Conflicting settings disabled! Restart may be required.');
-            console.log('Disabled conflicting VS Code suggestions');
+        const choice = await vscode.window.showInformationMessage('⚠️ VS Code built-in suggestions may conflict with this extension.', 'Show Settings', 'Ignore');
+        if (choice === 'Show Settings') {
+            vscode.commands.executeCommand('workbench.action.openSettings', 'editor.quickSuggestions');
         }
     }
+    console.log('Vietnamese Autocomplete settings checked');
 }
 async function activate(context) {
     console.log('Vietnamese Autocomplete extension is activating');
-    // Disable conflicting VS Code settings
+    // Check conflicting VS Code settings
     await disableConflictingSettings();
     // Start Python server
     try {
@@ -81,12 +75,18 @@ async function activate(context) {
     const inlineDisposable = vscode.languages.registerInlineCompletionItemProvider({ pattern: '**/*' }, inlineProvider);
     context.subscriptions.push(inlineDisposable);
     console.log('Registered inline completion provider (ghost text)');
-    // Register dropdown completion provider (shows 5 suggestions)
-    const dropdownProvider = new completions_1.DropdownCompletionProvider();
-    const dropdownDisposable = vscode.languages.registerCompletionItemProvider({ pattern: '**/*' }, dropdownProvider, ' ' // Trigger on space character
-    );
-    context.subscriptions.push(dropdownDisposable);
-    console.log('Registered dropdown completion provider (5 suggestions)');
+    // Register command to show suggestions QuickPick
+    const showSuggestionsDisposable = vscode.commands.registerCommand('vietnameseAutocomplete.showSuggestions', async () => {
+        await (0, completions_1.showSuggestionsQuickPick)();
+    });
+    context.subscriptions.push(showSuggestionsDisposable);
+    console.log('Registered showSuggestions command');
+    // Register keyboard shortcut: Ctrl+Space to show suggestions
+    const keybindingDisposable = vscode.commands.registerCommand('_vietnameseAutocomplete.trigger', async () => {
+        await (0, completions_1.showSuggestionsQuickPick)();
+    });
+    context.subscriptions.push(keybindingDisposable);
+    console.log('Registered keyboard shortcut (Ctrl+Space)');
     // Register Import Corpus command
     const importCommand = vscode.commands.registerCommand('vietnameseAutocomplete.importCorpus', async () => {
         const folder = await vscode.window.showOpenDialog({
@@ -106,14 +106,14 @@ async function activate(context) {
                 });
                 const result = await response.json();
                 if (result.success) {
-                    vscode.window.showInformationMessage(`Imported ${result.words} words, ${result.bigrams} bigrams!`);
+                    vscode.window.showInformationMessage(`✅ Imported ${result.words} words, ${result.bigrams} bigrams!`);
                 }
                 else {
-                    vscode.window.showErrorMessage(`Import failed: ${result.error}`);
+                    vscode.window.showErrorMessage(`❌ Import failed: ${result.error}`);
                 }
             }
             catch (error) {
-                vscode.window.showErrorMessage('Failed to import corpus. Make sure the Python server is running (python server.py)');
+                vscode.window.showErrorMessage('❌ Failed to import corpus. Make sure Python server is running (python server.py)');
             }
         }
     });

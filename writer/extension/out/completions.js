@@ -1,5 +1,5 @@
 "use strict";
-/** VS Code CompletionItemProvider - Dropdown list with 5 suggestions */
+/** Vietnamese Autocomplete - QuickPick-based dropdown */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -34,84 +34,92 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DropdownCompletionProvider = void 0;
+exports.showSuggestionsQuickPick = showSuggestionsQuickPick;
 const vscode = __importStar(require("vscode"));
 const http = __importStar(require("http"));
-class DropdownCompletionProvider {
-    constructor() {
-        this.serverUrl = vscode.workspace
-            .getConfiguration('vietnameseAutocomplete')
-            .get('pythonServerUrl', 'http://127.0.0.1:8000');
+let lastSuggestions = [];
+let lastPrefix = '';
+async function showSuggestionsQuickPick() {
+    const editor = vscode.window.activeTextEditor;
+    if (!editor)
+        return;
+    const position = editor.selection.active;
+    const line = editor.document.lineAt(position);
+    const textBeforeCursor = line.text.substring(0, position.character);
+    // Extract context and prefix
+    const words = textBeforeCursor.split(/\s+/);
+    if (words.length === 0 || words[words.length - 1] === '') {
+        return;
     }
-    async provideCompletionItems(document, position, token, context) {
-        if (token.isCancellationRequested) {
-            return null;
+    const prefix = words[words.length - 1];
+    const contextText = words.length > 1 ? words.slice(0, -1).join(' ') + ' ' : '';
+    // Fetch suggestions from server
+    try {
+        const suggestions = await fetchSuggestions(contextText, prefix);
+        if (suggestions.length === 0) {
+            return;
         }
-        // Only trigger on trigger characters (space, etc.)
-        // Get text before cursor
-        const line = document.lineAt(position.line);
-        const textBeforeCursor = line.text.substring(0, position.character);
-        // Extract context and prefix
-        const words = textBeforeCursor.split(/\s+/);
-        if (words.length === 0 || words[words.length - 1] === '') {
-            return null;
-        }
-        const prefix = words[words.length - 1];
-        const contextText = words.length > 1 ? words.slice(0, -1).join(' ') + ' ' : '';
-        try {
-            const suggestions = await this.fetchSuggestions(contextText, prefix);
-            if (suggestions.length === 0) {
-                return null;
-            }
-            // Create completion items with icons and detail
-            const items = suggestions.map((suggestion, index) => {
-                const item = new vscode.CompletionItem(suggestion, vscode.CompletionItemKind.Text);
-                // Add detail text showing it's from Vietnamese Autocomplete
-                item.detail = `💡 Vietnamese Autocomplete ${index === 0 ? '(Best match)' : ''}`;
-                // Add sort text to prioritize order
-                item.sortText = String.fromCharCode(0 + index);
-                // Add documentation
-                item.documentation = new vscode.MarkdownString(`Vietnamese Autocomplete suggestion\n**Rank:** #${index + 1}`);
-                return item;
-            });
-            return items;
-        }
-        catch (error) {
-            console.error('Dropdown: Failed to fetch suggestions:', error);
-            return null;
-        }
-    }
-    async fetchSuggestions(context, prefix) {
-        return new Promise((resolve, reject) => {
-            const postData = JSON.stringify({ context, prefix });
-            const req = http.request({
-                hostname: '127.0.0.1',
-                port: 8000,
-                path: '/api/suggest',
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Content-Length': Buffer.byteLength(postData)
-                }
-            }, (res) => {
-                let responseBody = '';
-                res.on('data', (chunk) => responseBody += chunk);
-                res.on('end', () => {
-                    try {
-                        const response = JSON.parse(responseBody);
-                        resolve(response.suggestions);
-                    }
-                    catch (e) {
-                        reject(e);
-                    }
-                });
-            });
-            req.on('error', reject);
-            req.write(postData);
-            req.end();
+        lastSuggestions = suggestions;
+        lastPrefix = prefix;
+        // Show QuickPick
+        const items = suggestions.map((suggestion, index) => ({
+            label: suggestion,
+            description: index === 0 ? '💡 Best match' : `#${index + 1}`
+        }));
+        const selected = await vscode.window.showQuickPick(items, {
+            placeHolder: `Suggestions for "${prefix}" (${suggestions.length} results)`,
+            matchOnDescription: true
         });
+        if (selected) {
+            // Accept the suggestion
+            await acceptSuggestion(editor, position, prefix, selected.label);
+        }
     }
-    dispose() { }
+    catch (error) {
+        console.error('Failed to fetch suggestions:', error);
+        vscode.window.showErrorMessage('Vietnamese Autocomplete: Failed to connect to server');
+    }
 }
-exports.DropdownCompletionProvider = DropdownCompletionProvider;
+async function acceptSuggestion(editor, position, prefix, suggestion) {
+    // Calculate the range to replace (from start of prefix to cursor)
+    const startPos = new vscode.Position(position.line, position.character - prefix.length);
+    const range = new vscode.Range(startPos, position);
+    // Replace prefix with full suggestion
+    await editor.edit(editBuilder => {
+        editBuilder.replace(range, suggestion);
+    });
+    // Move cursor to end of inserted text
+    const newPos = new vscode.Position(position.line, position.character - prefix.length + suggestion.length);
+    editor.selection = new vscode.Selection(newPos, newPos);
+}
+async function fetchSuggestions(context, prefix) {
+    return new Promise((resolve, reject) => {
+        const postData = JSON.stringify({ context, prefix });
+        const req = http.request({
+            hostname: '127.0.0.1',
+            port: 8000,
+            path: '/api/suggest',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(postData)
+            }
+        }, (res) => {
+            let responseBody = '';
+            res.on('data', (chunk) => responseBody += chunk);
+            res.on('end', () => {
+                try {
+                    const response = JSON.parse(responseBody);
+                    resolve(response.suggestions);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            });
+        });
+        req.on('error', reject);
+        req.write(postData);
+        req.end();
+    });
+}
 //# sourceMappingURL=completions.js.map

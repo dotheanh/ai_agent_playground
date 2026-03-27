@@ -16,6 +16,11 @@
   "contributes": {
     "commands": [
       {
+        "command": "vietnameseAutocomplete.showSuggestions",
+        "title": "Show Suggestions",
+        "category": "Vietnamese Autocomplete"
+      },
+      {
         "command": "vietnameseAutocomplete.importCorpus",
         "title": "Import Corpus",
         "category": "Vietnamese Autocomplete"
@@ -24,6 +29,15 @@
         "command": "vietnameseAutocomplete.openSettings",
         "title": "Open Settings",
         "category": "Vietnamese Autocomplete"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "vietnameseAutocomplete.showSuggestions",
+        "key": "ctrl+space",
+        "mac": "cmd+space",
+        "when": "editorTextFocus && !editorReadonly",
+        "description": "Show Vietnamese Autocomplete suggestions"
       }
     ],
     "configuration": {
