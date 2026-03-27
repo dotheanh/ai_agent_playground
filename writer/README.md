@@ -6,19 +6,12 @@ A lightweight standalone text editor that provides real-time Vietnamese autocomp
 
 ---
 
-## ⚠️ VS Code Extension DEPRECATED
-
-The VS Code Extension version has been deprecated due to conflicts with VS Code's built-in autocomplete system. Please use the **Standalone App** below.
-
----
-
 ## 🚀 Quick Start
 
 ### 1. Install Dependencies
 
 ```bash
-pip install -r requirements-server.txt
-pip install -r requirements.txt
+pip install customtkinter
 ```
 
 ### 2. Run the App
@@ -27,24 +20,34 @@ pip install -r requirements.txt
 python main.py
 ```
 
-That's it! The app will:
-- Open a text editor window
-- Connect to the built-in suggestion engine
-- Ready for you to start writing
-
 ### 3. Import Your Corpus
 
 Click **"Import Corpus"** button → Select a folder with `.txt` files (your old writings, diaries, etc.)
+
+**Done!** The app will remember your corpus next time you open it.
 
 ---
 
 ## ✨ Features
 
-- **Real-time Ghost Text** - See the best suggestion highlighted as you type
-- **Dropdown List** - Shows top 5 suggestions
+### Autocomplete
+- **Ghost Text** - See the best suggestion highlighted as you type
+- **Dropdown List** - Shows top 5 suggestions (numbered 1-5)
 - **Frequency-based** - Learns from your writing style
 - **Dictionary Fallback** - Works even without corpus
-- **Vietnamese Support** - Built-in Vietnamese dictionary
+
+### Smart Typing
+- **Auto space after punctuation** - Type `.` or `,` automatically adds space
+- **Auto capitalize** - After `.` or Enter, next word is auto-capitalized
+- **Vietnamese support** - Built-in Vietnamese dictionary
+
+### Case-Sensitive
+- **Preserves your writing style** - "Tôi" and "tôi" are treated as different words
+- **Exact matches** - Suggestions match your original capitalization
+
+### Persistent Storage
+- **Auto-load corpus** - No need to re-import on restart
+- **SQLite database** - Fast and reliable
 
 ---
 
@@ -54,8 +57,15 @@ Click **"Import Corpus"** button → Select a folder with `.txt` files (your old
 |-----|--------|
 | `Tab` | Accept suggestion |
 | `Up/Down` | Navigate suggestions |
-| `Enter` | Accept + newline |
-| `Escape` | Dismiss |
+| `Enter` | Accept + newline + auto-capitalize |
+| `Esc` | Dismiss suggestions |
+
+### Smart Typing
+| Key | Action |
+|-----|--------|
+| `.` | Auto-add `. ` + capitalize next word |
+| `,` | Auto-add `, ` |
+| `Enter` | Auto-capitalize first letter |
 
 ---
 
@@ -64,13 +74,12 @@ Click **"Import Corpus"** button → Select a folder with `.txt` files (your old
 ```
 writer/
 ├── main.py                    # Standalone app entry point
-├── server.py                 # FastAPI backend (built-in)
 ├── requirements.txt           # App dependencies
-├── requirements-server.txt   # Backend dependencies
 ├── src/
 │   ├── ui/                   # UI components
 │   │   ├── text_editor.py    # Text editor with ghost text
-│   │   └── suggestion_dropdown.py # Dropdown list
+│   │   ├── suggestion_dropdown.py # Dropdown list
+│   │   └── dialogs.py        # Import corpus dialog
 │   ├── core/                 # Core logic
 │   │   ├── suggestion_engine.py  # Suggestion algorithm
 │   │   ├── corpus_processor.py  # Text processing
@@ -79,9 +88,9 @@ writer/
 │       ├── database.py         # SQLite
 │       └── dictionary.py        # Vietnamese dictionary
 ├── data/
-│   ├── database.db           # User corpus database
-│   └── vietnamese_dict.txt   # Dictionary
-└── input/                   # Place corpus .txt files here
+│   ├── database.db           # User corpus database (auto-created)
+│   └── vietnamese_dict.txt     # Dictionary
+└── input/                    # Place corpus .txt files here
 ```
 
 ---
@@ -94,18 +103,20 @@ writer/
 │  ┌─────────────────────────────────────────────────┐   │
 │  │  CustomTkinter UI                                 │   │
 │  │  - Text Editor with Ghost Text                   │   │
-│  │  - Suggestion Dropdown                           │   │
-│  │  - Import Corpus Dialog                          │   │
+│  │  - Dropdown List (5 suggestions)                │   │
+│  │  - Smart Typing (auto space, capitalize)        │   │
 │  └─────────────────────────────────────────────────┘   │
 │  ┌─────────────────────────────────────────────────┐   │
-│  │  Suggestion Engine (Same Process)               │   │
+│  │  Suggestion Engine (Same Process)                 │   │
 │  │  - BigRAM Frequency                             │   │
 │  │  - Dictionary Fallback                           │   │
+│  │  - Case-Sensitive Matching                      │   │
 │  └─────────────────────────────────────────────────┘   │
 │  ┌─────────────────────────────────────────────────┐   │
 │  │  SQLite Database                                 │   │
-│  │  - word_frequency                                │   │
-│  │  - bigram_frequency                              │   │
+│  │  - word_frequency                               │   │
+│  │  - bigram_frequency                             │   │
+│  │  - dictionary                                   │   │
 │  └─────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -114,27 +125,18 @@ writer/
 
 ## 🔧 Development
 
-### Run App
-```bash
-python main.py
-```
-
 ### Run Tests
 ```bash
 pytest tests/ -v
 ```
 
-### Backend API (Optional)
-If you want to use the FastAPI server separately:
-```bash
-python server.py
-```
+### Database Location
+Database is stored at `data/database.db` and persists between sessions.
 
-Test API:
-```powershell
-# PowerShell
-$body = @{ context = "tôi "; prefix = "tôi" } | ConvertTo-Json
-Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/suggest" -Method Post -Body $body
+### Clear Database
+To reset and start fresh:
+```bash
+rm data/database.db
 ```
 
 ---
