@@ -214,15 +214,18 @@ class TextEditor(ctk.CTkTextbox):
             # next-word mode: ghost is full suggestion
             self._ghost_text = suggestion
         else:
-            # prefix mode: ghost is suffix after prefix
+            # prefix mode: ghost is the REST after prefix
             words = line_before.split()
             if words:
                 prefix = words[-1]
-                self._ghost_text = suggestion[len(prefix):] if suggestion.startswith(prefix) else suggestion
+                if suggestion.startswith(prefix):
+                    self._ghost_text = suggestion[len(prefix):]
+                else:
+                    self._ghost_text = suggestion  # no match, show full as ghost
             else:
                 self._ghost_text = suggestion
 
-        # If suffix empty in prefix mode, hide ghost but keep dropdown
+        # If suffix empty, hide ghost but keep dropdown
         if self._ghost_text:
             self._render_inline_ghost()
         else:
