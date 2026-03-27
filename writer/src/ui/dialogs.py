@@ -114,7 +114,12 @@ class ImportCorpusDialog:
             text=f"✓ Imported {len(word_freq)} words, {len(bigram_freq)} bigrams!",
             text_color="#00ff00"
         )
-        self.on_complete(result)
+
+        # Reload suggestion engine to pick up new data
+        if self.on_complete:
+            result['reload_engine'] = True
+            self.on_complete(result)
+
         self.dialog.destroy()
 
     def _on_error(self, error_msg):

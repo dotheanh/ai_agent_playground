@@ -71,14 +71,18 @@ class TextEditor(ctk.CTkTextbox):
         self._current_prefix = words[-1]
         context = " ".join(words[:-1]) + " " if len(words) > 1 else ""
 
+        print(f"[DEBUG] Getting suggestions for context='{context}', prefix='{self._current_prefix}'")
+
         # Get suggestions
         suggestions = self.suggestion_engine.get_suggestions(context, self._current_prefix)
+        print(f"[DEBUG] Got {len(suggestions)} suggestions: {suggestions[:3]}...")
 
         if suggestions and len(suggestions) > 0:
             self.suggestions = suggestions[:5]
             self.selected_index = 0
             self._update_ghost_text()
         else:
+            print("[DEBUG] No suggestions, clearing ghost")
             self._clear_ghost()
 
     def _update_ghost_text(self):

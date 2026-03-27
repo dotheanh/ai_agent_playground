@@ -125,3 +125,8 @@ class SuggestionEngine:
 
         # Invalidate cache
         self._cache.clear()
+
+    def reload(self) -> None:
+        """Reload suggestions - clear cache to pick up new corpus data."""
+        self._cache.clear()
+        print("[DEBUG] SuggestionEngine cache cleared!")

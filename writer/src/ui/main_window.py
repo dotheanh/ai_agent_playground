@@ -58,6 +58,10 @@ class MainWindow(ctk.CTk):
                 self.status_label.configure(
                     text=f"Imported {result['words']} words, {result['bigrams']} bigrams"
                 )
+                # Reload suggestion engine to pick up new corpus data
+                if result.get("reload_engine"):
+                    self.editor.suggestion_engine.reload()
+                    print("[DEBUG] Suggestion engine reloaded!")
 
         dialog = ImportCorpusDialog(self, on_complete=on_complete)
         dialog.dialog.wait_window()
