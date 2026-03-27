@@ -1,93 +1,50 @@
 # Vietnamese Autocomplete Writer
 
-VS Code extension provides real-time Vietnamese autocomplete suggestions based on your personal writing style, powered by a FastAPI backend.
+A lightweight standalone text editor that provides real-time Vietnamese autocomplete suggestions based on your personal writing style.
 
-## ⚠️ IMPORTANT: VS Code Auto-Complete Conflicts
-
-**Before installing, you must disable VS Code's built-in autocomplete to avoid conflicts:**
-
-### Settings to Disable (REQUIRED)
-
-1. Open VS Code Settings (`Ctrl+,`)
-2. Search and disable these settings:
-
-| Setting | Value | Why |
-|---------|-------|-----|
-| `editor.quickSuggestions` | `false` | Conflicts with our ghost text |
-| `editor.wordBasedSuggestions` | `off` | Conflicts with word suggestions |
-| `editor.inlineSuggest.enabled` | `false` | Conflicts with inline suggestions |
-
-### Or Use Extension's Auto-Disable
-
-When extension activates, it will prompt:
-```
-"Vietnamese Autocomplete: Disable conflicting VS Code suggestions?"
-```
-
-Click **"Disable Conflicts"** to auto-configure.
+**No VS Code conflicts. No external dependencies. Just works.**
 
 ---
 
-## 📦 Installation
+## ⚠️ VS Code Extension DEPRECATED
 
-### Step 1: Install Backend Dependencies
+The VS Code Extension version has been deprecated due to conflicts with VS Code's built-in autocomplete system. Please use the **Standalone App** below.
+
+---
+
+## 🚀 Quick Start
+
+### 1. Install Dependencies
 
 ```bash
-cd writer
 pip install -r requirements-server.txt
+pip install -r requirements.txt
 ```
 
-### Step 2: Package & Install Extension
+### 2. Run the App
 
 ```bash
-cd extension
-npm install
-npm run compile
-npx vsce package
-code --install-extension vietnamese-autocomplete-0.1.0.vsix
+python main.py
 ```
 
-### Step 3: Reload VS Code
+That's it! The app will:
+- Open a text editor window
+- Connect to the built-in suggestion engine
+- Ready for you to start writing
 
-Press `Ctrl+Shift+P` → `Developer: Reload Window`
+### 3. Import Your Corpus
+
+Click **"Import Corpus"** button → Select a folder with `.txt` files (your old writings, diaries, etc.)
 
 ---
 
-## 🚀 Startup
+## ✨ Features
 
-### Step 1: Start Python Backend Server
-
-```bash
-cd writer
-python server.py
-```
-
-Server runs at: `http://127.0.0.1:8000`
-
-### Step 2: Open VS Code
-
-Extension will auto-activate and connect to backend.
-
-### Step 3: Import Your Corpus
-
-Press `Ctrl+Shift+P`, then:
-```
-Vietnamese Autocomplete: Import Corpus
-```
-Select a folder containing `.txt` files (your old writings, diaries, etc.)
-
-### Step 4: Start Writing!
-
-Open any `.txt` or `.md` file and type Vietnamese text.
-
----
-
-## 🔧 VS Code Commands
-
-| Command | Description |
-|---------|-------------|
-| `Vietnamese Autocomplete: Import Corpus` | Import corpus from folder |
-| `Vietnamese Autocomplete: Open Settings` | Open extension settings |
+- **Real-time Ghost Text** - See the best suggestion highlighted as you type
+- **Dropdown List** - Shows top 5 suggestions
+- **Frequency-based** - Learns from your writing style
+- **Dictionary Fallback** - Works even without corpus
+- **Vietnamese Support** - Built-in Vietnamese dictionary
 
 ---
 
@@ -95,59 +52,10 @@ Open any `.txt` or `.md` file and type Vietnamese text.
 
 | Key | Action |
 |-----|--------|
-| `Tab` | Accept ghost text suggestion |
-| `Escape` | Dismiss suggestion |
-
----
-
-## ⚙️ Configuration
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `vietnameseAutocomplete.pythonServerUrl` | `http://127.0.0.1:8000` | Backend server URL |
-
----
-
-## 🔍 Troubleshooting
-
-### "Extension not showing commands"
-
-1. Uninstall old extension
-2. Reload VS Code (`Ctrl+Shift+P` → `Developer: Reload Window`)
-3. Reinstall extension
-
-### "Suggestions not appearing"
-
-1. Make sure `python server.py` is running
-2. Check server is running at `http://127.0.0.1:8000`
-3. Verify corpus is imported (check status bar)
-
-### "VS Code suggestions conflict with extension"
-
-Disable these in VS Code Settings:
-- `editor.quickSuggestions` → `false`
-- `editor.wordBasedSuggestions` → `off`
-- `editor.inlineSuggest.enabled` → `false`
-
----
-
-## 🏗️ Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│              VS Code Extension (TypeScript)               │
-│  - Ghost text inline completions                         │
-│  - Auto-disable conflicting settings                      │
-└──────────────────────┬──────────────────────────────────┘
-                       │ HTTP POST /api/suggest
-                       ▼
-┌─────────────────────────────────────────────────────────┐
-│              Python FastAPI Backend                       │
-│  Port: 127.0.0.1:8000                                   │
-│  - /api/suggest - Get suggestions                       │
-│  - /api/import - Import corpus                           │
-└─────────────────────────────────────────────────────────┘
-```
+| `Tab` | Accept suggestion |
+| `Up/Down` | Navigate suggestions |
+| `Enter` | Accept + newline |
+| `Escape` | Dismiss |
 
 ---
 
@@ -155,60 +63,87 @@ Disable these in VS Code Settings:
 
 ```
 writer/
-├── server.py                    # FastAPI backend
-├── requirements-server.txt     # Python dependencies
-├── extension/                  # VS Code Extension
-│   ├── package.json           # Extension manifest
-│   └── src/
-│       ├── extension.ts        # Entry point + commands
-│       ├── inline-completions.ts # Ghost text provider
-│       └── python-server.ts   # Backend manager
-├── src/                       # Shared Python code
-│   ├── core/                  # Suggestion engine
-│   └── data/                  # SQLite database
-└── data/
-    └── database.db            # User corpus data
+├── main.py                    # Standalone app entry point
+├── server.py                 # FastAPI backend (built-in)
+├── requirements.txt           # App dependencies
+├── requirements-server.txt   # Backend dependencies
+├── src/
+│   ├── ui/                   # UI components
+│   │   ├── text_editor.py    # Text editor with ghost text
+│   │   └── suggestion_dropdown.py # Dropdown list
+│   ├── core/                 # Core logic
+│   │   ├── suggestion_engine.py  # Suggestion algorithm
+│   │   ├── corpus_processor.py  # Text processing
+│   │   └── cache_manager.py      # Caching
+│   └── data/                 # Data layer
+│       ├── database.py         # SQLite
+│       └── dictionary.py        # Vietnamese dictionary
+├── data/
+│   ├── database.db           # User corpus database
+│   └── vietnamese_dict.txt   # Dictionary
+└── input/                   # Place corpus .txt files here
 ```
 
 ---
 
-## 🔨 Development
+## 🏗️ Architecture
 
-### Run Backend
+```
+┌─────────────────────────────────────────────────────────┐
+│              Vietnamese Autocomplete Writer                  │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  CustomTkinter UI                                 │   │
+│  │  - Text Editor with Ghost Text                   │   │
+│  │  - Suggestion Dropdown                           │   │
+│  │  - Import Corpus Dialog                          │   │
+│  └─────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  Suggestion Engine (Same Process)               │   │
+│  │  - BigRAM Frequency                             │   │
+│  │  - Dictionary Fallback                           │   │
+│  └─────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  SQLite Database                                 │   │
+│  │  - word_frequency                                │   │
+│  │  - bigram_frequency                              │   │
+│  └─────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🔧 Development
+
+### Run App
+```bash
+python main.py
+```
+
+### Run Tests
+```bash
+pytest tests/ -v
+```
+
+### Backend API (Optional)
+If you want to use the FastAPI server separately:
 ```bash
 python server.py
 ```
 
-### Test API
-```bash
-curl http://127.0.0.1:8000/health
-```
-
-### Compile Extension
-```bash
-cd extension
-npm install
-npm run compile
-```
-
-### Package Extension
-```bash
-cd extension
-npx vsce package
+Test API:
+```powershell
+# PowerShell
+$body = @{ context = "tôi "; prefix = "tôi" } | ConvertTo-Json
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/suggest" -Method Post -Body $body
 ```
 
 ---
 
 ## 📋 Requirements
 
-### Python
 - Python 3.10+
-- fastapi
-- uvicorn
-- pydantic
-
-### VS Code
-- VS Code 1.85+
+- customtkinter
+- SQLite (built-in)
 
 ---
 
