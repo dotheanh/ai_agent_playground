@@ -1,7 +1,6 @@
 """Custom text editor with autocomplete support."""
 
 import customtkinter as ctk
-from src.ui.suggestion_dropdown import SuggestionDropdown
 from src.core.suggestion_engine import SuggestionEngine
 
 
@@ -12,28 +11,40 @@ class TextEditor(ctk.CTkTextbox):
         super().__init__(parent, **kwargs)
 
         self.suggestion_engine = SuggestionEngine()
-        # Pass parent's parent (main window) instead of self for popup
-        self.suggestion_dropdown = SuggestionDropdown(self.winfo_toplevel())
+        self.suggestions: list[str] = []
+        self.selected_index: int = -1
+        self._show_suggestions: bool = False
 
-        # Bind key events
-        self.bind("<KeyRelease>", self._on_key_release)
+        # Create suggestion panel (inline, not popup)
+        self.suggestion_frame = ctk.CTkFrame(self, fg_color="#3a3a3a", corner_radius=4)
+        self.suggestion_label = ctk.CTkLabel(
+            self.suggestion_frame,
+            text="",
+            justify="left",
+            anchor="w",
+            wraplength=400
+        )
+        self.suggestion_label.pack(padx=8, pady=6)
+
+        # Bind key events - Tab BEFORE KeyRelease
         self.bind("<Tab>", self._on_tab)
-        self.bind("<Return>", self._on_return)
         self.bind("<Up>", self._on_up)
         self.bind("<Down>", self._on_down)
         self.bind("<Escape>", self._on_escape)
+        self.bind("<KeyRelease>", self._on_key_release)
 
     def _on_key_release(self, event):
         """Handle key release for autocomplete trigger."""
         # Ignore modifier keys
         if event.state & 0xff0000:  # Control, Alt, Shift
+            self._hide_suggestions()
             return
 
         # Get current text and cursor position
         content = self.get("1.0", "end-1c")
         cursor_pos = self.index("insert")
 
-        # Get text before cursor
+        # Get text before cursor on current line
         lines = content.split("\n")
         current_line_idx = int(cursor_pos.split(".")[0]) - 1
         current_col = int(cursor_pos.split(".")[1])
@@ -46,13 +57,13 @@ class TextEditor(ctk.CTkTextbox):
         # Get all text before cursor for context
         all_text_before = "\n".join(lines[:current_line_idx])
         if all_text_before:
-            all_text_before += "\n"
+            all_text_before += " "
         all_text_before += text_before_cursor
 
         # Extract context and prefix
         words = all_text_before.split()
         if not words:
-            self.suggestion_dropdown.hide()
+            self._hide_suggestions()
             return
 
         # Simple prefix detection
@@ -63,62 +74,50 @@ class TextEditor(ctk.CTkTextbox):
         # Get suggestions
         suggestions = self.suggestion_engine.get_suggestions(context, prefix)
 
-        if suggestions:
-            # Get cursor coordinates
-            try:
-                bbox = self.bbox(cursor_pos)
-                if bbox:
-                    x = self.winfo_rootx() + bbox[0]
-                    y = self.winfo_rooty() + bbox[1] + bbox[3]
-                    self.suggestion_dropdown.show(suggestions, x, y)
-            except Exception:
-                self.suggestion_dropdown.hide()
+        if suggestions and len(suggestions) > 0:
+            self.suggestions = suggestions
+            self.selected_index = 0
+            self._show_suggestions = True
+            self._update_suggestion_display()
         else:
-            self.suggestion_dropdown.hide()
+            self._hide_suggestions()
 
-    def _on_tab(self, event):
-        """Handle Tab key - accept suggestion."""
-        if self.suggestion_dropdown.is_visible():
-            selected = self.suggestion_dropdown.get_selected()
-            if selected:
-                self._accept_suggestion(selected)
-                return "break"  # Prevent default Tab behavior
-        return None
+    def _update_suggestion_display(self):
+        """Update the suggestion panel display."""
+        if not self._show_suggestions or not self.suggestions:
+            self.suggestion_frame.place_forget()
+            return
 
-    def _on_return(self, event):
-        """Handle Enter key - accept suggestion and newline."""
-        if self.suggestion_dropdown.is_visible():
-            selected = self.suggestion_dropdown.get_selected()
-            if selected:
-                self._accept_suggestion(selected)
-                self.insert("insert", "\n")
-                self.suggestion_dropdown.hide()
-                return "break"
-        return None
+        # Format: highlight prefix, show full suggestion
+        current_word = self.suggestions[0]
+        display_text = f"Tab: {current_word}"
 
-    def _on_up(self, event):
-        """Handle Up arrow - navigate suggestions."""
-        if self.suggestion_dropdown.is_visible():
-            self.suggestion_dropdown.select_previous()
-            return "break"
-        return None
+        self.suggestion_label.configure(text=display_text)
 
-    def _on_down(self, event):
-        """Handle Down arrow - navigate suggestions."""
-        if self.suggestion_dropdown.is_visible():
-            self.suggestion_dropdown.select_next()
-            return "break"
-        return None
+        # Position suggestion panel below cursor
+        try:
+            bbox = self.bbox("insert")
+            if bbox:
+                x = 10
+                y = bbox[1] + bbox[3] + 5
+                self.suggestion_frame.place(x=x, y=y)
+        except Exception:
+            self.suggestion_frame.place_forget()
 
-    def _on_escape(self, event):
-        """Handle Escape key - hide suggestions."""
-        if self.suggestion_dropdown.is_visible():
-            self.suggestion_dropdown.hide()
-            return "break"
-        return None
+    def _hide_suggestions(self):
+        """Hide suggestion panel."""
+        self._show_suggestions = False
+        self.suggestions = []
+        self.selected_index = -1
+        self.suggestion_frame.place_forget()
 
-    def _accept_suggestion(self, suggestion: str):
-        """Accept selected suggestion."""
+    def _accept_suggestion(self):
+        """Accept current suggestion."""
+        if not self._show_suggestions or not self.suggestions:
+            return
+
+        suggestion = self.suggestions[self.selected_index]
+
         # Get current cursor position
         cursor_pos = self.index("insert")
 
@@ -136,13 +135,51 @@ class TextEditor(ctk.CTkTextbox):
             words = text_before_cursor.split()
             if words:
                 new_line = " ".join(words[:-1]) + " " + suggestion if len(words) > 1 else suggestion
+                remaining = current_line[current_col:]
 
                 # Update the line
-                lines[current_line_idx] = new_line + current_line[current_col:]
+                lines[current_line_idx] = new_line + remaining
                 new_content = "\n".join(lines)
 
                 # Update text widget
                 self.delete("1.0", "end-1c")
                 self.insert("1.0", new_content)
 
-        self.suggestion_dropdown.hide()
+        self._hide_suggestions()
+
+    def _on_tab(self, event):
+        """Handle Tab key - accept suggestion."""
+        if self._show_suggestions and self.suggestions:
+            self._accept_suggestion()
+            return "break"
+        return None
+
+    def _on_return(self, event):
+        """Handle Enter key."""
+        # If suggestions shown, accept and let newline happen
+        if self._show_suggestions and self.suggestions:
+            self._accept_suggestion()
+        return None
+
+    def _on_up(self, event):
+        """Handle Up arrow - navigate suggestions."""
+        if self._show_suggestions and self.suggestions:
+            self.selected_index = (self.selected_index - 1) % len(self.suggestions)
+            self._update_suggestion_display()
+            return "break"
+        return None
+
+    def _on_down(self, event):
+        """Handle Down arrow - navigate suggestions."""
+        if self._show_suggestions and self.suggestions:
+            self.selected_index = (self.selected_index + 1) % len(self.suggestions)
+            self._update_suggestion_display()
+            return "break"
+        return None
+
+    def _on_escape(self, event):
+        """Handle Escape key - hide suggestions."""
+        if self._show_suggestions:
+            self._hide_suggestions()
+            return "break"
+        return None

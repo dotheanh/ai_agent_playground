@@ -40,6 +40,16 @@ function startHttpServer({ broker, port = DEFAULT_PORT } = {}) {
         console.log('[HTTP Server] Payload:', JSON.stringify(data, null, 2));
         const result = broker.enqueueRequest(data);
         console.log('[HTTP Server] Enqueued request, result:', result);
+        // Show permission bubble immediately - this is high priority!
+        showBubble({
+          requestId: result.requestId,
+          type: 'permission_request',
+          message: result.message,
+          toolName: result.toolName,
+          options: result.options,
+          isHighPriority: true,
+          isLowPriority: false,
+        });
         writeJson(res, 200, { status: 'queued', result });
         return;
       }

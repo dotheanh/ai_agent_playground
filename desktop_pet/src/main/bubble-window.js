@@ -116,9 +116,15 @@ function showBubble(data) {
   const isHighPriority = isHighPriorityBubble(type);
   const isLowPriority = isLowPriorityBubble(type);
 
-  // Rule 1: High Priority currently showing + Low Priority comes → Queue, don't show
+  // Rule 1: High Priority currently showing + Low Priority comes → IGNORE (don't queue)
   if (currentBubbleType && isHighPriorityBubble(currentBubbleType) && isLowPriority) {
-    console.log('[Bubble] High priority is active (' + currentBubbleType + '), queuing low priority bubble (' + type + ')');
+    console.log('[Bubble] High priority is active (' + currentBubbleType + '), IGNORING low priority bubble (' + type + ')');
+    return; // Ignore, don't queue
+  }
+
+  // Rule 2: High Priority currently showing + High Priority comes → QUEUE
+  if (currentBubbleType && isHighPriorityBubble(currentBubbleType) && isHighPriority) {
+    console.log('[Bubble] High priority is active (' + currentBubbleType + '), QUEUING high priority bubble (' + type + ')');
     console.log('[Bubble] Current pendingBubbleData:', pendingBubbleData ? pendingBubbleData.type : 'null');
     pendingBubbleData = {
       ...data,
@@ -127,10 +133,10 @@ function showBubble(data) {
       autoHideMs: isLowPriority ? AUTO_HIDE_TIMEOUT : null,
     };
     console.log('[Bubble] Queued bubble:', pendingBubbleData.type);
-    return; // Don't show, wait for high priority to close
+    return; // Don't show, wait for current high priority to close
   }
 
-  // Rule 2: Low Priority currently showing + High Priority comes → Auto-hide Low Priority, show High Priority
+  // Rule 3: Low Priority currently showing + High Priority comes → Auto-hide Low Priority, show High Priority
   if (isHighPriority && currentBubbleType && isLowPriorityBubble(currentBubbleType)) {
     console.log('[Bubble] High priority interrupting low priority bubble');
     if (hideTimer) {
@@ -215,6 +221,7 @@ function showBubble(data) {
 
 /**
  * Hide bubble and show next queued bubble if available
+ * Only show queued High Priority bubbles (Low Priority are ignored)
  */
 function hideBubble() {
   if (hideTimer) {
@@ -226,13 +233,17 @@ function hideBubble() {
   }
   // Reset current type
   currentBubbleType = null;
-  // Check if there's a queued low priority bubble
-  if (pendingBubbleData && isLowPriorityBubble(pendingBubbleData.type)) {
-    console.log('[Bubble] hideBubble: showing queued low priority bubble');
+  // Check if there's a queued high priority bubble (Low Priority are ignored, not queued)
+  if (pendingBubbleData && isHighPriorityBubble(pendingBubbleData.type)) {
+    console.log('[Bubble] hideBubble: showing queued high priority bubble');
     const queued = pendingBubbleData;
     pendingBubbleData = null;
     // Small delay to ensure hide completes
     setTimeout(() => showBubble(queued), 100);
+  } else if (pendingBubbleData) {
+    // Low priority in queue - ignore it
+    console.log('[Bubble] hideBubble: ignoring queued low priority bubble');
+    pendingBubbleData = null;
   }
 }
 
