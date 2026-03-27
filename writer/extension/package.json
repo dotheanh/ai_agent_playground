@@ -1,0 +1,35 @@
+{
+  "name": "vietnamese-autocomplete",
+  "displayName": "Vietnamese Autocomplete",
+  "description": "AI-powered Vietnamese autocomplete for your writing style",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Vietnamese Autocomplete",
+      "properties": {
+        "vietnameseAutocomplete.pythonServerUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8000",
+          "description": "URL of the Python autocomplete server"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "18.x",
+    "typescript": "^5.3.3",
+    "@vscode/vsce": "^2.22.0"
+  }
+}
