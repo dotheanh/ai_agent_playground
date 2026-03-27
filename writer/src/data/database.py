@@ -147,19 +147,19 @@ def batch_update_frequencies(word_freq: dict[str, int], bigram_freq: dict[tuple[
         # Begin transaction
         cursor.execute("BEGIN")
 
-        # Batch insert word frequencies
-        word_data = [(word, freq) for word, freq in word_freq.items()]
-        cursor.executemany("""
-            INSERT INTO word_frequency (word, freq) VALUES (?, ?)
-            ON CONFLICT(word) DO UPDATE SET freq = freq + ?
-        """, word_data)
+        # Batch insert word frequencies (use INSERT OR REPLACE pattern)
+        for word, freq in word_freq.items():
+            cursor.execute("""
+                INSERT INTO word_frequency (word, freq) VALUES (?, ?)
+                ON CONFLICT(word) DO UPDATE SET freq = freq + ?
+            """, (word, freq, freq))
 
         # Batch insert bigram frequencies
-        bigram_data = [(w1, w2, freq, freq) for (w1, w2), freq in bigram_freq.items()]
-        cursor.executemany("""
-            INSERT INTO bigram_frequency (word1, word2, freq) VALUES (?, ?, ?)
-            ON CONFLICT(word1, word2) DO UPDATE SET freq = freq + ?
-        """, bigram_data)
+        for (w1, w2), freq in bigram_freq.items():
+            cursor.execute("""
+                INSERT INTO bigram_frequency (word1, word2, freq) VALUES (?, ?, ?)
+                ON CONFLICT(word1, word2) DO UPDATE SET freq = freq + ?
+            """, (w1, w2, freq, freq))
 
         conn.commit()
     except Exception as e:
