@@ -29,8 +29,12 @@ Import corpus once via **Import Corpus** button. Corpus is persisted in SQLite a
   - If typing prefix: **replace prefix only**
 
 ### Suggestion Logic
-- Corpus bigram first
-- If corpus < 5 results → fill from Vietnamese dictionary (including compound words)
+- **Priority-based suggestions:**
+  1. Corpus bigram (previous_word + prefix) - up to 5 results
+  2. Dictionary bigram (previous_word + prefix) - up to 2 results
+  3. Single word from dictionary - up to 1 result
+  - Example: typing `"thánh thầ"` searches `"thánh thầ..."` first, returns `"thánh thần"`
+  - Falls back to single word `"thầ"` only if no bigram matches
 - Dictionary lookup case-insensitive
 - Suggestions clean trailing punctuation (`.,;:!?`)
 - **Vietnamese vowel-variant expansion:** if last typed char is a TONELESS lowercase vowel (a, e, i, o, u, y), engine tries all Vietnamese diacritic variants of that vowel for matching
@@ -38,7 +42,7 @@ Import corpus once via **Import Corpus** button. Corpus is persisted in SQLite a
   - Example: typing `tự đo` can suggest `tự động`, `tự đóng`
 - **Accented chars do NOT trigger variant expansion:** if last typed char already has diacritic, no expansion occurs
   - Example: typing `tự độ` only matches `tự động` (no `tự đóng` because `ộ` is already accented)
-- **Dictionary suggestions shown in italics:** suggestions sourced from dictionary (fallback when corpus has < 5 results) appear in italic font to distinguish them from corpus-based suggestions
+- **Dictionary suggestions shown in italics:** suggestions sourced from dictionary appear in italic font to distinguish them from corpus-based suggestions
 
 ### Smart Normalize (Non-intrusive)
 - Native typing preserved (no forced punctuation insertion on keypress)
@@ -84,8 +88,10 @@ Core
 
 Data (SQLite)
   ├─ word_frequency
-  ├─ bigram_frequency
-  ├─ dictionary
+  ├─ bigram_frequency (corpus)
+  ├─ dictionary (single words)
+  ├─ dictionary_multi_words (compound words/phrases)
+  ├─ dictionary_bigrams (bigrams from dictionary)
   └─ metadata
 ```
 

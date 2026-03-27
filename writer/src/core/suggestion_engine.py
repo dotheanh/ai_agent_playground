@@ -33,42 +33,59 @@ class SuggestionEngine:
         Get autocomplete suggestions.
 
         Returns up to 8 suggestions as tuples: (word, is_from_dictionary)
-        - First 5 from corpus (by frequency)
-        - Next 3 from dictionary (alphabetically sorted, not checking overlap with corpus)
+        Priority:
+        1. Bigram from corpus (previous_word + prefix) - up to 5
+        2. Bigram from dictionary (previous_word + prefix) - up to 2
+        3. Single word from dictionary - up to 1
         """
         previous_word = self._extract_previous_word(context)
         if not previous_word:
             return self._collect_dictionary_only(prefix)
 
         prefix_variants = self._expand_last_vowel_variants(prefix)
-
         suggestions: list[tuple[str, bool]] = []
 
-        # Get up to 5 from corpus (by frequency)
-        bigrams = self._get_bigrams(previous_word)
-        filtered = [
-            (w2, f) for w2, f in bigrams
-            if self._starts_with_any_prefix(w2, prefix_variants)
-        ]
-        filtered.sort(key=lambda x: x[1], reverse=True)
+        # Step 1: Get bigram from corpus (previous_word + prefix)
+        if prefix:
+            bigrams = self._get_bigrams(previous_word)
+            filtered = [
+                (w2, f) for w2, f in bigrams
+                if self._starts_with_any_prefix(w2, prefix_variants)
+            ]
+            filtered.sort(key=lambda x: x[1], reverse=True)
 
-        for word2, _freq in filtered:
-            clean_word = self._clean_word(word2)
-            if clean_word and clean_word not in [w for w, _ in suggestions]:
-                suggestions.append((clean_word, False))  # from corpus
-            if len(suggestions) >= 5:
-                break
+            for word2, _freq in filtered:
+                clean_word = self._clean_word(word2)
+                if clean_word and clean_word not in [w for w, _ in suggestions]:
+                    suggestions.append((clean_word, False))  # from corpus
+                if len(suggestions) >= 5:
+                    break
 
-        # Always add up to 3 from dictionary (alphabetically, no overlap check)
-        for variant in prefix_variants:
-            for word in self._get_dictionary_words(variant):
-                clean_word = self._clean_word(word)
-                if clean_word and len(suggestions) < 8:
-                    # Only add if not already in suggestions (from corpus)
-                    if clean_word not in [w for w, _ in suggestions]:
-                        suggestions.append((clean_word, True))  # from dictionary
+        # Step 2: Get bigram from dictionary (previous_word + prefix)
+        if prefix and len(suggestions) < 7:
+            for variant in prefix_variants:
+                dict_bigrams = self._get_dictionary_bigrams(previous_word, variant)
+                for word, _freq in dict_bigrams:
+                    clean_word = self._clean_word(word)
+                    if clean_word and clean_word not in [w for w, _ in suggestions]:
+                        suggestions.append((clean_word, True))  # from dictionary bigrams
+                    if len(suggestions) >= 7:
+                        break
+                if len(suggestions) >= 7:
+                    break
+
+        # Step 3: Get single word from dictionary if needed
+        if len(suggestions) < 8 and prefix:
+            for variant in prefix_variants:
+                single_words = self._get_dictionary_single_words(variant)
+                for word in single_words:
+                    clean_word = self._clean_word(word)
+                    if clean_word and clean_word not in [w for w, _ in suggestions]:
+                        suggestions.append((clean_word, True))  # from dictionary single words
+                    if len(suggestions) >= 8:
+                        break
                 if len(suggestions) >= 8:
-                    return suggestions[:8]
+                    break
 
         return suggestions[:8]
 
@@ -89,12 +106,21 @@ class SuggestionEngine:
             if len(suggestions) >= 5:
                 break
 
-        # Add up to 3 from dictionary (alphabetically)
-        for word in self._get_dictionary_words(""):
+        # Add multi-words from dictionary (alphabetically)
+        for word in self._get_dictionary_multi_words(""):
+            clean = self._clean_word(word)
+            if clean and len(suggestions) < 7:
+                if clean not in [w for w, _ in suggestions]:
+                    suggestions.append((clean, True))  # from dictionary multi-words
+            if len(suggestions) >= 7:
+                break
+
+        # Add single words if needed
+        for word in self._get_dictionary_single_words(""):
             clean = self._clean_word(word)
             if clean and len(suggestions) < 8:
                 if clean not in [w for w, _ in suggestions]:
-                    suggestions.append((clean, True))  # from dictionary
+                    suggestions.append((clean, True))  # from dictionary single words
             if len(suggestions) >= 8:
                 break
 
@@ -210,6 +236,81 @@ class SuggestionEngine:
             )
 
         results = [row[0] for row in cursor.fetchall()]
+        conn.close()
+        return results
+
+    def _get_dictionary_multi_words(self, prefix: str) -> list[str]:
+        """Get multi-words (phrases) from dictionary by prefix (case-insensitive)."""
+        conn = sqlite3.connect(self._db_path)
+        cursor = conn.cursor()
+
+        if prefix:
+            cursor.execute(
+                """
+                SELECT word FROM dictionary_multi_words
+                WHERE LOWER(word) LIKE LOWER(?) AND word LIKE '% %'
+                ORDER BY word
+                LIMIT 100
+                """,
+                (f"{prefix}%",),
+            )
+        else:
+            cursor.execute(
+                """
+                SELECT word FROM dictionary_multi_words
+                WHERE word LIKE '% %'
+                ORDER BY LENGTH(word), word
+                LIMIT 100
+                """
+            )
+
+        results = [row[0] for row in cursor.fetchall()]
+        conn.close()
+        return results
+
+    def _get_dictionary_single_words(self, prefix: str) -> list[str]:
+        """Get single words from dictionary by prefix (case-insensitive)."""
+        conn = sqlite3.connect(self._db_path)
+        cursor = conn.cursor()
+
+        if prefix:
+            cursor.execute(
+                """
+                SELECT word FROM dictionary
+                WHERE LOWER(word) LIKE LOWER(?) AND word NOT LIKE '% %'
+                ORDER BY word
+                LIMIT 100
+                """,
+                (f"{prefix}%",),
+            )
+        else:
+            cursor.execute(
+                """
+                SELECT word FROM dictionary
+                WHERE word NOT LIKE '% %'
+                ORDER BY LENGTH(word), word
+                LIMIT 100
+                """
+            )
+
+        results = [row[0] for row in cursor.fetchall()]
+        conn.close()
+        return results
+
+    def _get_dictionary_bigrams(self, word1: str, prefix: str) -> list[tuple[str, int]]:
+        """Get dictionary bigrams for (word1 + prefix)."""
+        conn = sqlite3.connect(self._db_path)
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            SELECT word2, freq FROM dictionary_bigrams
+            WHERE word1 = ? AND LOWER(word2) LIKE LOWER(?)
+            ORDER BY freq DESC
+            """,
+            (word1, f"{prefix}%"),
+        )
+        results = [(row[0], row[1]) for row in cursor.fetchall()]
         conn.close()
         return results
 
