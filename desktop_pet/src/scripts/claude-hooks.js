@@ -165,7 +165,18 @@ async function main() {
 
   console.log(`[Hook] eventType: ${eventType}, hookEventName: ${hookEventName}`);
 
-  if (eventType === 'permission_request' || eventType === 'ask_question') {
+  if (eventType === 'user_prompt_submit') {
+    // UserPromptSubmit: show bubble that user submitted prompt
+    console.log(`[Hook] UserPromptSubmit event detected`);
+    const brokerPayload = {
+      type: 'notification',
+      message: `User submitted: ${(rawPayload.prompt || '').substring(0, 100)}${(rawPayload.prompt || '').length > 100 ? '...' : ''}`,
+      options: [],
+    };
+    console.log(`[Hook] Sending user_prompt_submit to /hook/event`);
+    try { await httpPost('/hook/event', brokerPayload); }
+    catch { /* non-critical */ }
+  } else if (eventType === 'permission_request' || eventType === 'ask_question') {
     console.log(`[Hook] Permission/Ask event detected`);
     const brokerPayload = {
       requestId,
@@ -177,6 +188,17 @@ async function main() {
     console.log('[Hook] Sending permission_request to /hook/permission-request');
     try { await httpPost('/hook/permission-request', brokerPayload); }
     catch { process.exit(2); }
+  } else if (eventType === 'pre_tool_use') {
+    // PreToolUse: show bubble before tool executes
+    console.log(`[Hook] PreToolUse event: ${rawPayload.tool_name || rawPayload.tool}`);
+    const brokerPayload = {
+      type: 'notification',
+      message: `About to run: ${rawPayload.tool_name || rawPayload.tool}`,
+      options: [],
+    };
+    console.log(`[Hook] Sending pre_tool_use to /hook/event`);
+    try { await httpPost('/hook/event', brokerPayload); }
+    catch { /* non-critical */ }
   } else if (eventType === 'post_tool_use') {
     console.log(`[Hook] PostToolUse event: ${rawPayload.tool_name || rawPayload.tool}`);
     // First, try to resolve any pending permission (hide bubble if user approved in terminal)
