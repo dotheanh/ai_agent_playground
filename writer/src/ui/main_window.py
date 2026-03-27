@@ -25,7 +25,9 @@ class MainWindow(ctk.CTk):
         self.editor = TextEditor(
             self,
             corner_radius=0,
-            border_width=0
+            border_width=0,
+            text_color="#ffffff",
+            fg_color="#1e1e1e"
         )
         self.editor.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 
