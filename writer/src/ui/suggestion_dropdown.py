@@ -10,6 +10,7 @@ class SuggestionDropdown:
         self.parent = parent
         self.suggestions: list[str] = []
         self.selected_index: int = -1
+        self._destroyed = False
 
         # Create popup window
         self.popup = ctk.CTkToplevel(parent)
@@ -28,40 +29,57 @@ class SuggestionDropdown:
 
     def show(self, suggestions: list[str], x: int, y: int):
         """Display dropdown at given coordinates."""
+        if self._destroyed:
+            return
+
         self.suggestions = suggestions
         self.selected_index = -1
 
         # Clear existing buttons
         for btn in self.buttons:
-            btn.destroy()
+            try:
+                btn.destroy()
+            except Exception:
+                pass
         self.buttons.clear()
 
         if not suggestions:
-            self.popup.withdraw()
+            self.hide()
             return
 
         # Create buttons for each suggestion
         for i, suggestion in enumerate(suggestions):
-            btn = ctk.CTkButton(
-                self.frame,
-                text=suggestion,
-                width=200,
-                height=30,
-                fg_color="transparent",
-                hover_color="#3a3a3a",
-                command=lambda idx=i: self.select(idx),
-                anchor="w"
-            )
-            btn.pack(fill="x", padx=2, pady=1)
-            self.buttons.append(btn)
+            try:
+                btn = ctk.CTkButton(
+                    self.frame,
+                    text=suggestion,
+                    width=200,
+                    height=30,
+                    fg_color="transparent",
+                    hover_color="#3a3a3a",
+                    command=lambda idx=i: self.select(idx),
+                    anchor="w"
+                )
+                btn.pack(fill="x", padx=2, pady=1)
+                self.buttons.append(btn)
+            except Exception:
+                break
 
         # Position popup
-        self.popup.geometry(f"+{x}+{y}")
-        self.popup.deiconify()
+        try:
+            self.popup.geometry(f"+{x}+{y}")
+            self.popup.deiconify()
+        except Exception:
+            pass
 
     def hide(self):
         """Hide dropdown."""
-        self.popup.withdraw()
+        if self._destroyed:
+            return
+        try:
+            self.popup.withdraw()
+        except Exception:
+            pass
 
     def select_next(self):
         """Navigate to next suggestion."""
@@ -99,4 +117,17 @@ class SuggestionDropdown:
 
     def is_visible(self) -> bool:
         """Check if dropdown is visible."""
-        return self.popup.winfo_viewable()
+        if self._destroyed:
+            return False
+        try:
+            return self.popup.winfo_viewable()
+        except Exception:
+            return False
+
+    def destroy(self):
+        """Destroy the dropdown."""
+        self._destroyed = True
+        try:
+            self.popup.destroy()
+        except Exception:
+            pass

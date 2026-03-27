@@ -12,7 +12,8 @@ class TextEditor(ctk.CTkTextbox):
         super().__init__(parent, **kwargs)
 
         self.suggestion_engine = SuggestionEngine()
-        self.suggestion_dropdown = SuggestionDropdown(self)
+        # Pass parent's parent (main window) instead of self for popup
+        self.suggestion_dropdown = SuggestionDropdown(self.winfo_toplevel())
 
         # Bind key events
         self.bind("<KeyRelease>", self._on_key_release)
