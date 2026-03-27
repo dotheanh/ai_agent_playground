@@ -12,21 +12,22 @@ class TextEditor(ctk.CTkTextbox):
 
         self.suggestion_engine = SuggestionEngine()
         self.suggestions: list[str] = []
-        self.selected_index: int = -1
+        self.selected_index: int = 0
         self._show_suggestions: bool = False
+        self._current_prefix: str = ""
 
-        # Create suggestion panel (inline, not popup)
-        self.suggestion_frame = ctk.CTkFrame(self, fg_color="#3a3a3a", corner_radius=4)
-        self.suggestion_label = ctk.CTkLabel(
-            self.suggestion_frame,
-            text="",
-            justify="left",
-            anchor="w",
-            wraplength=400
-        )
-        self.suggestion_label.pack(padx=8, pady=6)
+        # Create suggestion dropdown (popup within main window)
+        self.dropdown = ctk.CTkToplevel(self.winfo_toplevel())
+        self.dropdown.withdraw()
+        self.dropdown.attributes('-topmost', True)
+        self.dropdown.configure(fg_color="#1e1e1e")
 
-        # Bind key events - Tab BEFORE KeyRelease
+        self.dropdown_frame = ctk.CTkFrame(self.dropdown, fg_color="#1e1e1e", corner_radius=8)
+        self.dropdown_frame.pack()
+
+        self.dropdown_buttons: list[ctk.CTkButton] = []
+
+        # Bind key events
         self.bind("<Tab>", self._on_tab)
         self.bind("<Up>", self._on_up)
         self.bind("<Down>", self._on_down)
@@ -37,7 +38,11 @@ class TextEditor(ctk.CTkTextbox):
         """Handle key release for autocomplete trigger."""
         # Ignore modifier keys
         if event.state & 0xff0000:  # Control, Alt, Shift
-            self._hide_suggestions()
+            self._hide_dropdown()
+            return
+
+        # Ignore special keys
+        if event.keysym in ['Return', 'BackSpace', 'Delete', 'Left', 'Right', 'Home', 'End']:
             return
 
         # Get current text and cursor position
@@ -63,60 +68,81 @@ class TextEditor(ctk.CTkTextbox):
         # Extract context and prefix
         words = all_text_before.split()
         if not words:
-            self._hide_suggestions()
+            self._hide_dropdown()
             return
 
-        # Simple prefix detection
-        last_word = words[-1]
+        # Get last word as prefix
+        self._current_prefix = words[-1]
         context = " ".join(words[:-1]) + " " if len(words) > 1 else ""
-        prefix = last_word
 
         # Get suggestions
-        suggestions = self.suggestion_engine.get_suggestions(context, prefix)
+        suggestions = self.suggestion_engine.get_suggestions(context, self._current_prefix)
 
         if suggestions and len(suggestions) > 0:
-            self.suggestions = suggestions
+            self.suggestions = suggestions[:5]  # Top 5
             self.selected_index = 0
             self._show_suggestions = True
-            self._update_suggestion_display()
+            self._show_dropdown()
         else:
-            self._hide_suggestions()
+            self._hide_dropdown()
 
-    def _update_suggestion_display(self):
-        """Update the suggestion panel display."""
-        if not self._show_suggestions or not self.suggestions:
-            self.suggestion_frame.place_forget()
+    def _show_dropdown(self):
+        """Show suggestion dropdown at cursor position."""
+        if not self.suggestions:
             return
 
-        # Format: highlight prefix, show full suggestion
-        current_word = self.suggestions[0]
-        display_text = f"Tab: {current_word}"
+        # Clear existing buttons
+        for btn in self.dropdown_buttons:
+            btn.destroy()
+        self.dropdown_buttons.clear()
 
-        self.suggestion_label.configure(text=display_text)
+        # Create buttons for each suggestion
+        for i, suggestion in enumerate(self.suggestions):
+            btn = ctk.CTkButton(
+                self.dropdown_frame,
+                text=suggestion,
+                width=200,
+                height=28,
+                fg_color="#2d2d2d" if i != 0 else "#0078d4",
+                hover_color="#3a3a3a" if i != 0 else "#006cbd",
+                command=lambda idx=i: self._accept_suggestion(idx),
+                anchor="w",
+                corner_radius=4
+            )
+            btn.pack(fill="x", padx=2, pady=2)
+            self.dropdown_buttons.append(btn)
 
-        # Position suggestion panel below cursor
+        # Position dropdown near cursor
         try:
             bbox = self.bbox("insert")
             if bbox:
-                x = 10
-                y = bbox[1] + bbox[3] + 5
-                self.suggestion_frame.place(x=x, y=y)
+                x = self.winfo_rootx() + bbox[0]
+                y = self.winfo_rooty() + bbox[1] + bbox[3] + 5
+                self.dropdown.geometry(f"+{x}+{y}")
+                self.dropdown.deiconify()
         except Exception:
-            self.suggestion_frame.place_forget()
+            pass
 
-    def _hide_suggestions(self):
-        """Hide suggestion panel."""
+    def _hide_dropdown(self):
+        """Hide suggestion dropdown."""
         self._show_suggestions = False
         self.suggestions = []
-        self.selected_index = -1
-        self.suggestion_frame.place_forget()
+        self.selected_index = 0
+        self._current_prefix = ""
+        try:
+            self.dropdown.withdraw()
+        except Exception:
+            pass
 
-    def _accept_suggestion(self):
-        """Accept current suggestion."""
-        if not self._show_suggestions or not self.suggestions:
+    def _accept_suggestion(self, index: int = None):
+        """Accept selected suggestion."""
+        if index is None:
+            index = self.selected_index
+
+        if not self.suggestions or index >= len(self.suggestions):
             return
 
-        suggestion = self.suggestions[self.selected_index]
+        suggestion = self.suggestions[index]
 
         # Get current cursor position
         cursor_pos = self.index("insert")
@@ -145,27 +171,26 @@ class TextEditor(ctk.CTkTextbox):
                 self.delete("1.0", "end-1c")
                 self.insert("1.0", new_content)
 
-        self._hide_suggestions()
+        self._hide_dropdown()
 
     def _on_tab(self, event):
         """Handle Tab key - accept suggestion."""
         if self._show_suggestions and self.suggestions:
-            self._accept_suggestion()
+            self._accept_suggestion(self.selected_index)
             return "break"
         return None
 
     def _on_return(self, event):
         """Handle Enter key."""
-        # If suggestions shown, accept and let newline happen
         if self._show_suggestions and self.suggestions:
-            self._accept_suggestion()
+            self._accept_suggestion(self.selected_index)
         return None
 
     def _on_up(self, event):
         """Handle Up arrow - navigate suggestions."""
         if self._show_suggestions and self.suggestions:
             self.selected_index = (self.selected_index - 1) % len(self.suggestions)
-            self._update_suggestion_display()
+            self._update_selection()
             return "break"
         return None
 
@@ -173,13 +198,21 @@ class TextEditor(ctk.CTkTextbox):
         """Handle Down arrow - navigate suggestions."""
         if self._show_suggestions and self.suggestions:
             self.selected_index = (self.selected_index + 1) % len(self.suggestions)
-            self._update_suggestion_display()
+            self._update_selection()
             return "break"
         return None
 
     def _on_escape(self, event):
         """Handle Escape key - hide suggestions."""
         if self._show_suggestions:
-            self._hide_suggestions()
+            self._hide_dropdown()
             return "break"
         return None
+
+    def _update_selection(self):
+        """Update visual selection in dropdown."""
+        for i, btn in enumerate(self.dropdown_buttons):
+            if i == self.selected_index:
+                btn.configure(fg_color="#0078d4", hover_color="#006cbd")
+            else:
+                btn.configure(fg_color="#2d2d2d", hover_color="#3a3a3a")
