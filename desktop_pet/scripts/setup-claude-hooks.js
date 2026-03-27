@@ -108,6 +108,40 @@ function setupHooks() {
     ],
   });
 
+  // Add Stop hook (fires when Claude AI stops after completing work — idle state)
+  if (!Array.isArray(settings.hooks.Stop)) {
+    settings.hooks.Stop = [];
+  }
+  settings.hooks.Stop = settings.hooks.Stop.filter(
+    (entry) => !isDesktopPetHook(entry, hookScriptPath)
+  );
+  settings.hooks.Stop.push({
+    matcher: '',
+    hooks: [
+      {
+        type: 'command',
+        command: `node "${hookScriptPath}"`,
+      },
+    ],
+  });
+
+  // Add SessionEnd hook (fires when session is closed)
+  if (!Array.isArray(settings.hooks.SessionEnd)) {
+    settings.hooks.SessionEnd = [];
+  }
+  settings.hooks.SessionEnd = settings.hooks.SessionEnd.filter(
+    (entry) => !isDesktopPetHook(entry, hookScriptPath)
+  );
+  settings.hooks.SessionEnd.push({
+    matcher: '',
+    hooks: [
+      {
+        type: 'command',
+        command: `node "${hookScriptPath}"`,
+      },
+    ],
+  });
+
   // Add TaskCompleted hook (fires when Claude completes a task)
   if (!Array.isArray(settings.hooks.TaskCompleted)) {
     settings.hooks.TaskCompleted = [];
@@ -131,8 +165,10 @@ function setupHooks() {
   console.log('Added hooks:');
   console.log('  - hooks.PermissionRequest -> node claude-hooks.js  (show permission bubble)');
   console.log('  - hooks.PostToolUse       -> node claude-hooks.js  (hide bubble on terminal resolve)');
-  console.log('  - hooks.Notification       -> node claude-hooks.js  (session_end idle bubble)');
+  console.log('  - hooks.Notification       -> node claude-hooks.js  (idle/permission notification bubble)');
   console.log('  - hooks.TaskCompleted      -> node claude-hooks.js  (task completed bubble)');
+  console.log('  - hooks.Stop              -> node claude-hooks.js  (AI done, idle bubble)');
+  console.log('  - hooks.SessionEnd        -> node claude-hooks.js  (session ended bubble)');
   console.log('Restart Claude Code terminal to apply changes.');
 }
 

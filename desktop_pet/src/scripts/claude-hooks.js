@@ -81,6 +81,7 @@ function normalizeEventType(payload) {
   if (raw === 'SessionEnd')         return 'session_end';
   if (raw === 'TaskCompleted')      return 'notification';
   if (raw === 'UserPromptSubmit')   return 'user_prompt_submit';
+  if (raw === 'Stop')               return 'session_end'; // AI stopped, show idle bubble
   return 'notification';
 }
 
@@ -219,6 +220,17 @@ async function main() {
       options: [],
     };
     console.log(`[Hook] Sending notification to /hook/event`);
+    try { await httpPost('/hook/event', brokerPayload); }
+    catch { /* non-critical */ }
+  } else if (eventType === 'session_end') {
+    // Stop (AI done) or SessionEnd (session closed): show idle bubble
+    console.log(`[Hook] session_end event detected (hook: ${hookEventName})`);
+    const brokerPayload = {
+      type: 'session_end',
+      message: pickMessage(rawPayload),
+      options: [],
+    };
+    console.log(`[Hook] Sending session_end to /hook/event`);
     try { await httpPost('/hook/event', brokerPayload); }
     catch { /* non-critical */ }
   } else if (eventType === 'session_start') {
