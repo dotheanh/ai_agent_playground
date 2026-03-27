@@ -1,137 +1,190 @@
 # Vietnamese Autocomplete Writer
 
-VS Code extension that provides real-time Vietnamese autocomplete suggestions based on your personal writing style, powered by a FastAPI backend.
+VS Code extension provides real-time Vietnamese autocomplete suggestions based on your personal writing style, powered by a FastAPI backend.
 
-## ⚠️ DEPRECATED: Standalone App
+## ⚠️ IMPORTANT: VS Code Auto-Complete Conflicts
 
-The standalone app version (CustomTkinter UI) has been deprecated. Please use the **VS Code Extension** version below.
+**Before installing, you must disable VS Code's built-in autocomplete to avoid conflicts:**
+
+### Settings to Disable (REQUIRED)
+
+1. Open VS Code Settings (`Ctrl+,`)
+2. Search and disable these settings:
+
+| Setting | Value | Why |
+|---------|-------|-----|
+| `editor.quickSuggestions` | `false` | Conflicts with our ghost text |
+| `editor.wordBasedSuggestions` | `off` | Conflicts with word suggestions |
+| `editor.inlineSuggest.enabled` | `false` | Conflicts with inline suggestions |
+
+### Or Use Extension's Auto-Disable
+
+When extension activates, it will prompt:
+```
+"Vietnamese Autocomplete: Disable conflicting VS Code suggestions?"
+```
+
+Click **"Disable Conflicts"** to auto-configure.
 
 ---
 
-## Features
+## 📦 Installation
 
-- Import personal text corpus (.txt files)
-- Real-time Vietnamese autocomplete with ghost text
-- Frequency-based suggestions from your writing style
-- Dictionary fallback for unknown words
-- Works in any text file in VS Code
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│              VS Code Extension (TypeScript)               │
-│  - Ghost text inline completions                          │
-│  - VS Code commands                                       │
-└──────────────────────┬──────────────────────────────────┘
-                       │ HTTP
-                       ▼
-┌─────────────────────────────────────────────────────────┐
-│              Python FastAPI Backend                       │
-│  - Suggestion engine (bigram frequency)                  │
-│  - Corpus processor                                       │
-│  - SQLite database                                        │
-└─────────────────────────────────────────────────────────┘
-```
-
-## Installation
-
-### 1. Install VS Code Extension
+### Step 1: Install Backend Dependencies
 
 ```bash
-cd extension
-vsce package
-code --install-extension vietnamese-autocomplete-0.1.0.vsix
-```
-
-### 2. Install Backend Dependencies
-
-```bash
+cd writer
 pip install -r requirements-server.txt
 ```
 
-## Usage
-
-### 1. Start Backend Server
+### Step 2: Package & Install Extension
 
 ```bash
+cd extension
+npm install
+npm run compile
+npx vsce package
+code --install-extension vietnamese-autocomplete-0.1.0.vsix
+```
+
+### Step 3: Reload VS Code
+
+Press `Ctrl+Shift+P` → `Developer: Reload Window`
+
+---
+
+## 🚀 Startup
+
+### Step 1: Start Python Backend Server
+
+```bash
+cd writer
 python server.py
 ```
 
-Server will start on `http://127.0.0.1:8000`
+Server runs at: `http://127.0.0.1:8000`
 
-### 2. Open VS Code
+### Step 2: Open VS Code
 
-The extension will automatically activate and connect to the backend.
+Extension will auto-activate and connect to backend.
 
-### 3. Import Corpus
+### Step 3: Import Your Corpus
 
-Press `Ctrl+Shift+P` and run:
+Press `Ctrl+Shift+P`, then:
 ```
 Vietnamese Autocomplete: Import Corpus
 ```
+Select a folder containing `.txt` files (your old writings, diaries, etc.)
 
-Select a folder containing `.txt` files.
+### Step 4: Start Writing!
 
-### 4. Start Writing
+Open any `.txt` or `.md` file and type Vietnamese text.
 
-Type Vietnamese text - ghost text suggestions will appear automatically.
+---
 
-## VS Code Commands
+## 🔧 VS Code Commands
 
 | Command | Description |
 |---------|-------------|
 | `Vietnamese Autocomplete: Import Corpus` | Import corpus from folder |
 | `Vietnamese Autocomplete: Open Settings` | Open extension settings |
 
-## Configuration
+---
+
+## ⌨️ Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Accept ghost text suggestion |
+| `Escape` | Dismiss suggestion |
+
+---
+
+## ⚙️ Configuration
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `vietnameseAutocomplete.pythonServerUrl` | `http://127.0.0.1:8000` | Backend URL |
+| `vietnameseAutocomplete.pythonServerUrl` | `http://127.0.0.1:8000` | Backend server URL |
 
-## Keyboard Shortcuts
+---
 
-- **Tab**: Accept suggestion
-- **Up/Down**: Navigate suggestions (when ghost text shown)
+## 🔍 Troubleshooting
 
-## Project Structure
+### "Extension not showing commands"
+
+1. Uninstall old extension
+2. Reload VS Code (`Ctrl+Shift+P` → `Developer: Reload Window`)
+3. Reinstall extension
+
+### "Suggestions not appearing"
+
+1. Make sure `python server.py` is running
+2. Check server is running at `http://127.0.0.1:8000`
+3. Verify corpus is imported (check status bar)
+
+### "VS Code suggestions conflict with extension"
+
+Disable these in VS Code Settings:
+- `editor.quickSuggestions` → `false`
+- `editor.wordBasedSuggestions` → `off`
+- `editor.inlineSuggest.enabled` → `false`
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│              VS Code Extension (TypeScript)               │
+│  - Ghost text inline completions                         │
+│  - Auto-disable conflicting settings                      │
+└──────────────────────┬──────────────────────────────────┘
+                       │ HTTP POST /api/suggest
+                       ▼
+┌─────────────────────────────────────────────────────────┐
+│              Python FastAPI Backend                       │
+│  Port: 127.0.0.1:8000                                   │
+│  - /api/suggest - Get suggestions                       │
+│  - /api/import - Import corpus                           │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📁 Project Structure
 
 ```
 writer/
-├── server.py                     # FastAPI backend
-├── requirements-server.txt       # Backend dependencies
-├── extension/                    # VS Code Extension
-│   ├── package.json             # Extension manifest
-│   ├── src/
-│   │   ├── extension.ts         # Entry point
-│   │   ├── inline-completions.ts # Inline completions
-│   │   └── python-server.ts    # Server manager
-│   └── out/                     # Compiled JS
-├── src/                         # Shared Python code
-│   ├── core/                    # Suggestion engine
-│   └── data/                    # Database layer
+├── server.py                    # FastAPI backend
+├── requirements-server.txt     # Python dependencies
+├── extension/                  # VS Code Extension
+│   ├── package.json           # Extension manifest
+│   └── src/
+│       ├── extension.ts        # Entry point + commands
+│       ├── inline-completions.ts # Ghost text provider
+│       └── python-server.ts   # Backend manager
+├── src/                       # Shared Python code
+│   ├── core/                  # Suggestion engine
+│   └── data/                  # SQLite database
 └── data/
-    ├── database.db               # SQLite database
-    └── vietnamese_dict.txt      # Dictionary
+    └── database.db            # User corpus data
 ```
 
-## Development
+---
+
+## 🔨 Development
 
 ### Run Backend
-
 ```bash
 python server.py
 ```
 
 ### Test API
-
 ```bash
 curl http://127.0.0.1:8000/health
 ```
 
 ### Compile Extension
-
 ```bash
 cd extension
 npm install
@@ -139,11 +192,25 @@ npm run compile
 ```
 
 ### Package Extension
-
 ```bash
 cd extension
-vsce package
+npx vsce package
 ```
+
+---
+
+## 📋 Requirements
+
+### Python
+- Python 3.10+
+- fastapi
+- uvicorn
+- pydantic
+
+### VS Code
+- VS Code 1.85+
+
+---
 
 ## License
 

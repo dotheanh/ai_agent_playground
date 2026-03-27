@@ -48,16 +48,48 @@ async function activate(context) {
     }
     catch (error) {
         console.error('Failed to start Python server:', error);
+        vscode.window.showWarningMessage('Failed to start Python server. Please run "python server.py" manually.');
     }
     // Register inline completions provider
     const provider = new inline_completions_1.AutocompleteProvider();
     const disposable = vscode.languages.registerInlineCompletionItemProvider({ pattern: '**/*' }, provider);
     context.subscriptions.push(disposable);
-    // Register accept command
-    const acceptCommand = vscode.commands.registerCommand('vietnameseAutocomplete.accept', (suggestion) => {
-        console.log('Accepted suggestion:', suggestion);
+    // Register Import Corpus command
+    const importCommand = vscode.commands.registerCommand('vietnameseAutocomplete.importCorpus', async () => {
+        const folder = await vscode.window.showOpenDialog({
+            canSelectFolders: true,
+            openLabel: 'Select Corpus Folder'
+        });
+        if (folder && folder.length > 0) {
+            const folderPath = folder[0].fsPath;
+            const serverUrl = vscode.workspace
+                .getConfiguration('vietnameseAutocomplete')
+                .get('pythonServerUrl', 'http://127.0.0.1:8000');
+            try {
+                const response = await fetch(`${serverUrl}/api/import`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ folder_path: folderPath })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    vscode.window.showInformationMessage(`Imported ${result.words} words, ${result.bigrams} bigrams!`);
+                }
+                else {
+                    vscode.window.showErrorMessage(`Import failed: ${result.error}`);
+                }
+            }
+            catch (error) {
+                vscode.window.showErrorMessage('Failed to import corpus. Make sure the Python server is running (python server.py)');
+            }
+        }
     });
-    context.subscriptions.push(acceptCommand);
+    context.subscriptions.push(importCommand);
+    // Register Open Settings command
+    const settingsCommand = vscode.commands.registerCommand('vietnameseAutocomplete.openSettings', () => {
+        vscode.commands.executeCommand('workbench.action.openSettings', 'vietnameseAutocomplete');
+    });
+    context.subscriptions.push(settingsCommand);
     console.log('Vietnamese Autocomplete extension is active');
 }
 function deactivate() {

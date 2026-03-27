@@ -8,9 +8,24 @@
     "vscode": "^1.85.0"
   },
   "categories": ["Other"],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:plaintext",
+    "onLanguage:markdown"
+  ],
   "main": "./out/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "vietnameseAutocomplete.importCorpus",
+        "title": "Import Corpus",
+        "category": "Vietnamese Autocomplete"
+      },
+      {
+        "command": "vietnameseAutocomplete.openSettings",
+        "title": "Open Settings",
+        "category": "Vietnamese Autocomplete"
+      }
+    ],
     "configuration": {
       "title": "Vietnamese Autocomplete",
       "properties": {
