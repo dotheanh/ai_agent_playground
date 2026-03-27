@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import { startPythonServer, stopPythonServer } from './python-server';
 import { AutocompleteProvider } from './inline-completions';
+import { DropdownCompletionProvider } from './completions';
 
 interface ImportResult {
     success: boolean;
@@ -13,12 +14,12 @@ interface ImportResult {
 
 async function disableConflictingSettings(): Promise<void> {
     /** Automatically disable VS Code settings that conflict with our extension */
-    const conflictingSettings = [
-        { key: 'editor.quickSuggestions', current: vscode.workspace.getConfiguration('editor').get('quickSuggestions') },
-        { key: 'editor.wordBasedSuggestions', current: vscode.workspace.getConfiguration('editor').get('wordBasedSuggestions') },
-    ];
+    const config = vscode.workspace.getConfiguration('editor');
 
-    const hasConflicts = conflictingSettings.some(s => s.current !== 'off' && s.current !== false);
+    // Check for conflicts
+    const quickSuggestions = config.get('quickSuggestions');
+    const wordBasedSuggestions = config.get('wordBasedSuggestions');
+    const hasConflicts = quickSuggestions !== false || wordBasedSuggestions !== 'off';
 
     if (hasConflicts) {
         const choice = await vscode.window.showInformationMessage(
@@ -28,20 +29,20 @@ async function disableConflictingSettings(): Promise<void> {
         );
 
         if (choice === 'Disable Conflicts') {
-            // Disable quick suggestions for text files
-            await vscode.workspace.getConfiguration('editor').update('quickSuggestions', {
-                other: false,
-                comments: false,
-                strings: false
-            }, vscode.ConfigurationTarget.Global);
+            // Disable quick suggestions
+            await config.update('quickSuggestions', false, vscode.ConfigurationTarget.Global);
 
             // Disable word-based suggestions
-            await vscode.workspace.getConfiguration('editor').update('wordBasedSuggestions', 'off', vscode.ConfigurationTarget.Global);
+            await config.update('wordBasedSuggestions', 'off', vscode.ConfigurationTarget.Global);
 
-            // Disable inline suggestions from other extensions
-            await vscode.workspace.getConfiguration('editor').update('inlineSuggest.enabled', false, vscode.ConfigurationTarget.Global);
+            // Disable VS Code's inline suggestions
+            await config.update('inlineSuggest.enabled', false, vscode.ConfigurationTarget.Global);
+
+            // Also disable suggestions for specific languages if possible
+            await config.update('suggest.showWords', false, vscode.ConfigurationTarget.Global);
 
             vscode.window.showInformationMessage('Conflicting settings disabled! Restart may be required.');
+            console.log('Disabled conflicting VS Code suggestions');
         }
     }
 }
@@ -61,14 +62,24 @@ export async function activate(context: vscode.ExtensionContext) {
         vscode.window.showWarningMessage('Failed to start Python server. Please run "python server.py" manually.');
     }
 
-    // Register inline completions provider
-    const provider = new AutocompleteProvider();
-    const disposable = vscode.languages.registerInlineCompletionItemProvider(
+    // Register inline completions provider (ghost text)
+    const inlineProvider = new AutocompleteProvider();
+    const inlineDisposable = vscode.languages.registerInlineCompletionItemProvider(
         { pattern: '**/*' },
-        provider
+        inlineProvider
     );
+    context.subscriptions.push(inlineDisposable);
+    console.log('Registered inline completion provider (ghost text)');
 
-    context.subscriptions.push(disposable);
+    // Register dropdown completion provider (shows 5 suggestions)
+    const dropdownProvider = new DropdownCompletionProvider();
+    const dropdownDisposable = vscode.languages.registerCompletionItemProvider(
+        { pattern: '**/*' },
+        dropdownProvider,
+        ' '  // Trigger on space character
+    );
+    context.subscriptions.push(dropdownDisposable);
+    console.log('Registered dropdown completion provider (5 suggestions)');
 
     // Register Import Corpus command
     const importCommand = vscode.commands.registerCommand(
