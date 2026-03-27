@@ -103,15 +103,20 @@ class CorpusProcessor:
         Returns:
             (word_freq, bigram_freq) aggregated from all files
         """
-        total_word_freq = Counter()
-        total_bigram_freq = Counter()
+        total_word_freq = {}
+        total_bigram_freq = {}
 
-        for filename in os.listdir(folder_path):
-            if filename.endswith('.txt'):
-                file_path = os.path.join(folder_path, filename)
-                word_freq, bigram_freq = self.process_corpus_file(file_path)
+        txt_files = [f for f in os.listdir(folder_path) if f.endswith('.txt')]
 
-                total_word_freq.update(word_freq)
-                total_bigram_freq.update(bigram_freq)
+        for filename in txt_files:
+            file_path = os.path.join(folder_path, filename)
+            word_freq, bigram_freq = self.process_corpus_file(file_path)
 
-        return dict(total_word_freq), dict(total_bigram_freq)
+            # Manual merge for speed
+            for word, freq in word_freq.items():
+                total_word_freq[word] = total_word_freq.get(word, 0) + freq
+
+            for bigram, freq in bigram_freq.items():
+                total_bigram_freq[bigram] = total_bigram_freq.get(bigram, 0) + freq
+
+        return total_word_freq, total_bigram_freq

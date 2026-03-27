@@ -73,12 +73,14 @@ function normalizeEventType(payload) {
   const raw = String(payload.hook_event_name || payload.event || '').trim();
   const tool = String(payload.tool_name || payload.tool || '').trim();
 
-  if (raw === 'PermissionRequest') return tool === 'AskUserQuestion' ? 'ask_question' : 'permission_request';
-  if (raw === 'PostToolUse')      return 'post_tool_use';
-  if (raw === 'Notification')     return 'notification';
-  if (raw === 'SessionStart')     return 'session_start';
-  if (raw === 'SessionEnd')       return 'session_end';
-  if (raw === 'TaskCompleted')    return 'notification';
+  if (raw === 'PermissionRequest')  return tool === 'AskUserQuestion' ? 'ask_question' : 'permission_request';
+  if (raw === 'PostToolUse')        return 'post_tool_use';
+  if (raw === 'PreToolUse')         return 'pre_tool_use';
+  if (raw === 'Notification')       return 'notification';
+  if (raw === 'SessionStart')       return 'session_start';
+  if (raw === 'SessionEnd')         return 'session_end';
+  if (raw === 'TaskCompleted')      return 'notification';
+  if (raw === 'UserPromptSubmit')   return 'user_prompt_submit';
   return 'notification';
 }
 

@@ -5,19 +5,34 @@ let bubbleWindow = null;
 let mainWindow = null;
 let hideTimer = null;
 let isBubbleReady = false;
-let pendingBubbleData = null; // Queue latest payload until bubble HTML is ready.
+let pendingBubbleData = null;
+let currentBubbleType = null;
 
 const BUBBLE_WIDTH = 360;
 const BUBBLE_HEIGHT = 120;
 
-// Auto-hide timeouts (ms) for passive event types.
-// permission_request & ask_question: NO auto-hide (require user action via Focus button).
-const AUTO_HIDE = {
-  session_start: 10000,
-  session_end: 10000,
-  notification: 10000,
-  task_completed: 10000,
+// Single auto-hide timeout for all passive events
+const AUTO_HIDE_TIMEOUT = 10000;
+
+// Bubble types by priority (higher = more important)
+// LOW priority: auto-hide, no sound, no focus button
+// HIGH priority: no auto-hide, has sound, has focus button
+const BUBBLE_PRIORITY = {
+  // Low priority (auto-hide, passive notifications)
+  LOW: ['session_start', 'session_end', 'notification', 'task_completed', 'user_prompt_submit', 'pre_tool_use', 'post_tool_use'],
+  // High priority (no auto-hide, requires user action)
+  HIGH: ['permission_request', 'ask_question'],
 };
+
+// Check if bubble type is low priority (auto-hide)
+function isLowPriorityBubble(type) {
+  return BUBBLE_PRIORITY.LOW.includes(type);
+}
+
+// Check if bubble type is high priority (no auto-hide)
+function isHighPriorityBubble(type) {
+  return BUBBLE_PRIORITY.HIGH.includes(type);
+}
 
 /**
  * Calculate bubble position (shared logic)
@@ -81,7 +96,10 @@ function createBubbleWindow() {
 }
 
 /**
- * Show bubble at calculated position
+ * Show bubble at calculated position with priority handling
+ * Rules:
+ * - Low Priority currently showing + High Priority comes → Low Priority auto-hides, High Priority shows
+ * - High Priority currently showing + Low Priority comes → Low Priority queues, waits for High Priority to close
  */
 function showBubble(data) {
   console.log('[Bubble] === showBubble ===');
@@ -92,6 +110,35 @@ function showBubble(data) {
   if (!mainWindow || mainWindow.isDestroyed()) {
     console.log('[Bubble] Main window not available');
     return;
+  }
+
+  const type = data.type;
+  const isHighPriority = isHighPriorityBubble(type);
+  const isLowPriority = isLowPriorityBubble(type);
+
+  // Rule 1: High Priority currently showing + Low Priority comes → Queue, don't show
+  if (currentBubbleType && isHighPriorityBubble(currentBubbleType) && isLowPriority) {
+    console.log('[Bubble] High priority is active, queuing low priority bubble');
+    pendingBubbleData = {
+      ...data,
+      isHighPriority,
+      isLowPriority,
+      autoHideMs: isLowPriority ? AUTO_HIDE_TIMEOUT : null,
+    };
+    return; // Don't show, wait for high priority to close
+  }
+
+  // Rule 2: Low Priority currently showing + High Priority comes → Auto-hide Low Priority
+  if (isHighPriority && currentBubbleType && isLowPriorityBubble(currentBubbleType)) {
+    console.log('[Bubble] High priority interrupting low priority bubble');
+    if (hideTimer) {
+      clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+    if (bubbleWindow && !bubbleWindow.isDestroyed()) {
+      bubbleWindow.hide();
+    }
+    currentBubbleType = null; // Reset current type
   }
 
   // Clear any existing hide timer
@@ -111,32 +158,68 @@ function showBubble(data) {
   bubbleWindow.show();
   bubbleWindow.moveTop(); // Ensure bubble is above main window
 
+  // Update current bubble type
+  currentBubbleType = type;
+
   if (isBubbleReady) {
     console.log('[Bubble] Sending to bubble window');
+    // Pass priority info to bubble HTML for different layouts
+    const bubbleData = {
+      ...data,
+      isHighPriority,
+      isLowPriority,
+      autoHideMs: isLowPriority ? AUTO_HIDE_TIMEOUT : null,
+    };
     bubbleWindow.webContents
-      .executeJavaScript(`showBubble(${JSON.stringify(data)})`)
+      .executeJavaScript(`showBubble(${JSON.stringify(bubbleData)})`)
       .catch((err) => console.error('[Bubble] showBubble failed:', err.message));
+
+    // Play sound effect ONLY for high priority bubbles (no sound for low priority)
+    if (isHighPriority) {
+      console.log('[Bubble] Playing sound effect (high priority)');
+      try {
+        // Windows notification sound via Beep API
+        const { exec } = require('child_process');
+        exec('powershell -Command "[Console]::Beep(800, 200)"');
+      } catch (e) {
+        console.log('[Bubble] Sound play failed:', e.message);
+      }
+    } else {
+      console.log('[Bubble] NO sound (low priority)');
+    }
   } else {
     console.log('[Bubble] Queuing pending data');
-    pendingBubbleData = data;
+    pendingBubbleData = {
+      ...data,
+      isHighPriority,
+      isLowPriority,
+      autoHideMs: isLowPriority ? AUTO_HIDE_TIMEOUT : null,
+    };
   }
 
-  // Auto-hide for passive types only. Interactive types (permission_request, ask_question)
+  // Auto-hide for low priority types only. High priority types (permission_request, ask_question)
   // stay until user clicks Focus button.
-  const autoHideMs = AUTO_HIDE[data.type];
-  console.log('[Bubble] Auto-hide for type:', data.type, '-', autoHideMs, 'ms');
+  console.log('[Bubble] Priority:', isHighPriority ? 'HIGH (no auto-hide)' : 'LOW (auto-hide)');
 
-  if (!AUTO_HIDE.hasOwnProperty(data.type)) {
-    // permission_request and ask_question have no auto-hide
-    console.log('[Bubble] NO auto-hide (interactive type)');
+  if (isHighPriority) {
+    console.log('[Bubble] NO auto-hide (high priority type)');
     return;
   }
 
+  // Low priority: set auto-hide timer, NO sound effect
   if (hideTimer) clearTimeout(hideTimer);
   hideTimer = setTimeout(() => {
     console.log('[Bubble] Auto-hiding bubble');
+    currentBubbleType = null; // Reset when auto-hiding
     hideBubble();
-  }, AUTO_HIDE[data.type]);
+    // Check if there's a queued low priority bubble
+    if (pendingBubbleData && isLowPriorityBubble(pendingBubbleData.type)) {
+      console.log('[Bubble] Showing queued low priority bubble');
+      const queued = pendingBubbleData;
+      pendingBubbleData = null;
+      showBubble(queued);
+    }
+  }, AUTO_HIDE_TIMEOUT);
 }
 
 /**

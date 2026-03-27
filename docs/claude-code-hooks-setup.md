@@ -259,3 +259,7 @@ type C:\Users\NITRO\.claude\hooks\debug.log
 - **2026-03-27**: Fix `SessionStart` bubble display (typo `payloadMessage` → `pickMessage`)
 - **2026-03-27**: Add `PostToolUse` notification bubble
 - **2026-03-27**: Xác nhận hooks hoạt động với cả VS Code Extension VÀ CLI standalone
+- **2026-03-27**: Add `PreToolUse` notification bubble
+- **2026-03-27**: Add `UserPromptSubmit` notification bubble
+- **2026-03-27**: Add priority system (High/Low) with auto-hide, sound, focus button
+- **2026-03-27**: High Priority interrupts Low Priority, Low Priority queues when High Priority active

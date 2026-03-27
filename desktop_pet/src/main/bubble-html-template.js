@@ -27,6 +27,18 @@ function getBubbleHTML() {
       box-shadow: 0 4px 20px rgba(200,0,0,0.5);
       animation: bubbleIn 0.25s ease-out;
     }
+    /* Low priority bubble - simpler, no button */
+    #bubble.low-priority {
+      border-color: #666;
+      box-shadow: 0 2px 10px rgba(100,100,100,0.3);
+      padding: 6px 12px;
+    }
+    #bubble.low-priority .focus-btn {
+      display: none;
+    }
+    #bubble.low-priority .message {
+      margin-bottom: 0;
+    }
     @keyframes bubbleIn {
       from { opacity: 0; transform: translateX(-50%) translateY(10px); }
       to   { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -45,7 +57,7 @@ function getBubbleHTML() {
       line-height: 1.3;
       margin-bottom: 6px;
     }
-    #focus-btn {
+    .focus-btn {
       width: 100%;
       background: #cc0000;
       border: none;
@@ -57,7 +69,7 @@ function getBubbleHTML() {
       cursor: pointer;
       transition: background 0.15s;
     }
-    #focus-btn:hover { background: #ff2222; }
+    .focus-btn:hover { background: #ff2222; }
   </style>
 </head>
 <body>
@@ -67,7 +79,7 @@ function getBubbleHTML() {
       <div class="type" id="type">Notification</div>
     </div>
     <div class="message" id="msg"></div>
-    <button id="focus-btn">Focus</button>
+    <button class="focus-btn" id="focus-btn">Focus</button>
   </div>
   <script>
     const ICONS = {
@@ -75,14 +87,22 @@ function getBubbleHTML() {
       ask_question:      '❓',
       session_start:     '🚀',
       session_end:       '👋',
-      notification:      'ℹ️'
+      notification:      'ℹ️',
+      task_completed:    '✅',
+      user_prompt_submit:'📝',
+      pre_tool_use:      '⚙️',
+      post_tool_use:     '✔️'
     };
     const TYPE_NAMES = {
       permission_request: 'Permission Required',
       ask_question:       'Question',
       session_start:      'Session Started',
       session_end:        'Session Ended',
-      notification:       'Notification'
+      notification:       'Notification',
+      task_completed:     'Task Completed',
+      user_prompt_submit: 'Prompt Submitted',
+      pre_tool_use:       'Tool Starting',
+      post_tool_use:      'Tool Completed'
     };
 
     document.getElementById('focus-btn').addEventListener('click', function() {
@@ -101,6 +121,16 @@ function getBubbleHTML() {
       var msg = data.message || '';
       if (msg.length > 120) msg = msg.substring(0, 120) + '...';
       document.getElementById('msg').textContent = msg;
+
+      // Apply priority-based styling
+      var bubble = document.getElementById('bubble');
+      if (data.isLowPriority) {
+        bubble.classList.add('low-priority');
+        bubble.classList.remove('high-priority');
+      } else if (data.isHighPriority) {
+        bubble.classList.add('high-priority');
+        bubble.classList.remove('low-priority');
+      }
 
       var el = document.getElementById('bubble');
       el.style.animation = 'none';

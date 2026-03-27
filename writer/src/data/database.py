@@ -133,3 +133,37 @@ def get_dictionary_words_starting_with(prefix: str, db_path: Optional[str] = Non
     conn.close()
 
     return results
+
+
+def batch_update_frequencies(word_freq: dict[str, int], bigram_freq: dict[tuple[str, str], int]) -> None:
+    """
+    Batch update word and bigram frequencies in a single transaction.
+    Much faster than individual updates.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        # Begin transaction
+        cursor.execute("BEGIN")
+
+        # Batch insert word frequencies
+        word_data = [(word, freq) for word, freq in word_freq.items()]
+        cursor.executemany("""
+            INSERT INTO word_frequency (word, freq) VALUES (?, ?)
+            ON CONFLICT(word) DO UPDATE SET freq = freq + ?
+        """, word_data)
+
+        # Batch insert bigram frequencies
+        bigram_data = [(w1, w2, freq, freq) for (w1, w2), freq in bigram_freq.items()]
+        cursor.executemany("""
+            INSERT INTO bigram_frequency (word1, word2, freq) VALUES (?, ?, ?)
+            ON CONFLICT(word1, word2) DO UPDATE SET freq = freq + ?
+        """, bigram_data)
+
+        conn.commit()
+    except Exception as e:
+        conn.rollback()
+        raise e
+    finally:
+        conn.close()

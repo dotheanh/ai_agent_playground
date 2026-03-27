@@ -5,7 +5,7 @@ import threading
 import customtkinter as ctk
 from tkinter import filedialog
 from src.core.corpus_processor import CorpusProcessor
-from src.data.database import update_word_frequency, update_bigram_frequency
+from src.data.database import batch_update_frequencies
 
 
 class ImportCorpusDialog:
@@ -92,12 +92,8 @@ class ImportCorpusDialog:
             processor = CorpusProcessor()
             word_freq, bigram_freq = processor.process_corpus_folder(self.folder_path)
 
-            # Update database
-            for word, freq in word_freq.items():
-                update_word_frequency(word, freq)
-
-            for (word1, word2), freq in bigram_freq.items():
-                update_bigram_frequency(word1, word2, freq)
+            # Batch update database (much faster)
+            batch_update_frequencies(word_freq, bigram_freq)
 
             # Update UI on main thread
             self.parent.after(0, lambda: self._on_complete(
