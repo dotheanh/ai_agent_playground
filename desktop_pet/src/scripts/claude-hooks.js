@@ -133,9 +133,16 @@ function extractOptions(payload) {
 
 // ─── CLI ─────────────────────────────────────────────────────────────────────
 
+console.error('[CLAUDE-HOOKS] === SCRIPT STARTED ===');
+console.error('[CLAUDE-HOOKS] PID:', process.pid);
+console.error('[CLAUDE-HOOKS] CWD:', process.cwd());
+
 async function main() {
+  console.error('[CLAUDE-HOOKS] Reading from stdin...');
   let input = '';
   for await (const chunk of process.stdin) { input += chunk; }
+
+  console.error('[CLAUDE-HOOKS] Received input, length:', input.length);
 
   let rawPayload;
   try {
@@ -156,7 +163,10 @@ async function main() {
 
   console.log(`[Hook] Normalized type: ${eventType}, request_id: ${requestId}`);
 
+  console.log(`[Hook] eventType: ${eventType}, hookEventName: ${hookEventName}`);
+
   if (eventType === 'permission_request' || eventType === 'ask_question') {
+    console.log(`[Hook] Permission/Ask event detected`);
     const brokerPayload = {
       requestId,
       type: eventType,
@@ -168,8 +178,8 @@ async function main() {
     try { await httpPost('/hook/permission-request', brokerPayload); }
     catch { process.exit(2); }
   } else if (eventType === 'post_tool_use') {
-    // User approved in terminal → tool executed → hide active bubble
-    // requestId is derived from same fingerprint → matches enqueued request
+    console.log(`[Hook] PostToolUse event: ${rawPayload.tool_name || rawPayload.tool}`);
+    // First, try to resolve any pending permission (hide bubble if user approved in terminal)
     try {
       await httpPost('/hook/permission-resolved', {
         requestId,
@@ -177,6 +187,27 @@ async function main() {
         toolUseId: rawPayload.tool_use_id || '',
       });
     } catch { /* non-critical */ }
+
+    // Then, show a notification bubble that tool completed
+    const brokerPayload = {
+      type: 'notification',
+      message: `${rawPayload.tool_name || rawPayload.tool} completed: ${summarizeToolInput(rawPayload.tool_input)}`,
+      options: [],
+    };
+    console.log(`[Hook] Sending notification to /hook/event`);
+    try { await httpPost('/hook/event', brokerPayload); }
+    catch { /* non-critical */ }
+  } else if (eventType === 'session_start') {
+    // SessionStart hook: show session_start bubble
+    console.log(`[Hook] SessionStart event detected`);
+    const brokerPayload = {
+      type: 'session_start',
+      message: pickMessage(rawPayload),
+      options: [],
+    };
+    console.log(`[Hook] Sending session_start to /hook/event`);
+    try { await httpPost('/hook/event', brokerPayload); }
+    catch { /* non-critical */ }
   } else if (eventType === 'notification') {
     // Check if Claude is waiting for user input → show session_end bubble
     const notifType = rawPayload.notification_type || '';

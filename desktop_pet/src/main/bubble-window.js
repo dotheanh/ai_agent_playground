@@ -13,10 +13,10 @@ const BUBBLE_HEIGHT = 120;
 // Auto-hide timeouts (ms) for passive event types.
 // permission_request & ask_question: NO auto-hide (require user action via Focus button).
 const AUTO_HIDE = {
-  session_start: 8000,
-  session_end: 5000,
-  notification: 6000,
-  task_completed: 4000,
+  session_start: 10000,
+  session_end: 10000,
+  notification: 10000,
+  task_completed: 10000,
 };
 
 /**
