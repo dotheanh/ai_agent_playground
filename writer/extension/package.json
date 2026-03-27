@@ -1,6 +1,7 @@
 {
   "name": "vietnamese-autocomplete",
   "displayName": "Vietnamese Autocomplete",
+  "publisher": "local",
   "description": "AI-powered Vietnamese autocomplete for your writing style",
   "version": "0.1.0",
   "engines": {
