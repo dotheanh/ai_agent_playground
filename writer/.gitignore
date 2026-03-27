@@ -11,6 +11,9 @@ build/
 # Database
 data/*.db
 
+# Input corpus (user data - don't commit)
+input/input_texts/
+
 # IDE
 .vscode/
 .idea/
