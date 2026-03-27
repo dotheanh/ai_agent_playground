@@ -15,10 +15,7 @@ class TextEditor(ctk.CTkTextbox):
         self.selected_index: int = 0
         self._current_prefix: str = ""
         self._ghost_text: str = ""
-
-        # Create ghost text overlay label
-        self.ghost_label = ctk.CTkLabel(self.winfo_toplevel(), text="", text_color="#6b6b6b", font=("Consolas", 14))
-        self.ghost_label.place(x=0, y=0)
+        self._ghost_label_created: bool = False
 
         # Bind key events
         self.bind("<Tab>", self._on_tab)
@@ -26,8 +23,7 @@ class TextEditor(ctk.CTkTextbox):
         self.bind("<Down>", self._on_down)
         self.bind("<Escape>", self._on_escape)
         self.bind("<KeyRelease>", self._on_key_release)
-        self.bind("<FocusIn>", self._on_focus)
-        self.bind("<FocusOut>", self._on_focus_out)
+        self.bind("<Map>", self._on_map)  # When widget is mapped (shown)
 
     def _on_key_release(self, event):
         """Handle key release for autocomplete trigger."""
@@ -36,10 +32,13 @@ class TextEditor(ctk.CTkTextbox):
             self._clear_ghost()
             return
 
-        # Ignore special keys
-        if event.keysym in ['Return', 'BackSpace', 'Delete', 'Left', 'Right', 'Home', 'End', 'space']:
-            if event.keysym == 'space':
-                self._clear_ghost()
+        # Handle space key - clear ghost but still allow suggestions
+        if event.keysym == 'space':
+            self._clear_ghost()
+            return
+
+        # Ignore special keys that don't trigger autocomplete
+        if event.keysym in ['Return', 'BackSpace', 'Delete', 'Left', 'Right', 'Home', 'End']:
             return
 
         # Get current text and cursor position
@@ -117,10 +116,20 @@ class TextEditor(ctk.CTkTextbox):
             # Render ghost text at cursor position
             self._render_ghost()
 
+    def _on_map(self, event):
+        """Called when widget is mapped (shown). Create ghost label here."""
+        if not self._ghost_label_created:
+            # Create ghost text overlay label on main window
+            try:
+                main_window = self.winfo_toplevel()
+                self.ghost_label = ctk.CTkLabel(main_window, text="", text_color="#6b6b6b", font=("Consolas", 14))
+                self._ghost_label_created = True
+            except Exception:
+                pass
+
     def _render_ghost(self):
         """Render ghost text overlay at cursor position."""
-        if not self._ghost_text:
-            self.ghost_label.place_forget()
+        if not self._ghost_text or not hasattr(self, 'ghost_label'):
             return
 
         try:
@@ -132,8 +141,9 @@ class TextEditor(ctk.CTkTextbox):
                 y = self.winfo_rooty() + bbox[1]
                 self.ghost_label.configure(text=self._ghost_text)
                 self.ghost_label.place(x=x, y=y)
+                self.ghost_label.lift()  # Bring to front
         except Exception:
-            self.ghost_label.place_forget()
+            pass
 
     def _clear_ghost(self):
         """Clear ghost text and suggestions."""
@@ -141,15 +151,11 @@ class TextEditor(ctk.CTkTextbox):
         self.suggestions = []
         self.selected_index = 0
         self._current_prefix = ""
-        self.ghost_label.place_forget()
-
-    def _on_focus(self, event):
-        """Handle focus in."""
-        pass
-
-    def _on_focus_out(self, event):
-        """Handle focus out."""
-        self._clear_ghost()
+        try:
+            if hasattr(self, 'ghost_label'):
+                self.ghost_label.place_forget()
+        except Exception:
+            pass
 
     def _accept_suggestion(self):
         """Accept current suggestion."""
