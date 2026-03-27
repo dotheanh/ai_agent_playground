@@ -249,7 +249,7 @@ type C:\Users\NITRO\.claude\hooks\debug.log
 
 | Feature | Low Priority | High Priority |
 |---------|--------------|---------------|
-| **Types** | session_start, session_end, notification, task_completed, user_prompt_submit, pre_tool_use, post_tool_use | permission_request, ask_question |
+| **Types** | session_start, notification, task_completed, user_prompt_submit, pre_tool_use, post_tool_use | permission_request, ask_question, session_end |
 | **Auto-hide** | ✅ 10s | ❌ No (requires user action) |
 | **Sound** | ❌ No | ✅ Yes (chime) |
 | **Focus button** | ❌ No | ✅ Yes |
@@ -287,3 +287,6 @@ type C:\Users\NITRO\.claude\hooks\debug.log
 - **2026-03-27**: High Priority interrupts Low Priority, Low Priority queues when High Priority active
 - **2026-03-27**: Fix low-priority bubble layout (hide Focus button, grey border, no sound)
 - **2026-03-27**: Fix bubble.html to add priority classes in showBubble()
+- **2026-03-27**: Upgrade `session_end` to HIGH priority (chime, no auto-hide, Focus button) — fires when Claude completes a request and awaits user input
+- **2026-03-27**: Add `Stop` hook (AI done via /stop) → session_end bubble
+- **2026-03-27**: Add `SessionEnd` hook (session closed) → session_end bubble

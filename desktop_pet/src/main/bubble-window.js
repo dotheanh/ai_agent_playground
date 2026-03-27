@@ -19,9 +19,9 @@ const AUTO_HIDE_TIMEOUT = 10000;
 // HIGH priority: no auto-hide, has sound, has focus button
 const BUBBLE_PRIORITY = {
   // Low priority (auto-hide, passive notifications)
-  LOW: ['session_start', 'session_end', 'notification', 'task_completed', 'user_prompt_submit', 'pre_tool_use', 'post_tool_use'],
+  LOW: ['session_start', 'notification', 'task_completed', 'user_prompt_submit', 'pre_tool_use', 'post_tool_use'],
   // High priority (no auto-hide, requires user action)
-  HIGH: ['permission_request', 'ask_question'],
+  HIGH: ['permission_request', 'ask_question', 'session_end'],
 };
 
 // Check if bubble type is low priority (auto-hide)

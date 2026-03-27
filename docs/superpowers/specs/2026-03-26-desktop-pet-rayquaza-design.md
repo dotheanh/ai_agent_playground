@@ -190,7 +190,8 @@ Desktop Pet (Electron)
     ↓ showBubble(payload)
 Bubble Window (separate, transparent, always-on-top)
     - Interactive (clickable): permission_request, ask_question
-    - Passive (auto-hide): session_start, session_end, notification
+    - Passive (auto-hide): session_start, notification
+    - Interactive (no auto-hide): permission_request, ask_question, session_end
 ```
 
 ### Bubble Window Strategy
@@ -201,7 +202,7 @@ Bubble Window (separate, transparent, always-on-top)
 - **Mouse events:** enabled (`setIgnoreMouseEvents(false)`) only for `permission_request` and `ask_question` — so buttons are clickable
 - **Sync:** Bubble repositions when main window moves (`moved` event)
 - **Race-safe render:** queue payload until bubble HTML `did-finish-load`, then run `showBubble()`
-- **Auto-hide:** Notification types auto-hide after timeout (session_start: 5s, session_end: 3s, notification: 5s)
+- **Auto-hide:** Notification types auto-hide after timeout (session_start: 5s, notification: 5s). session_end và permission_request không auto-hide.
 - **Interactive:** `permission_request` & `ask_question` — buttons POST `/bubble/decision`, no auto-hide
 - **Options UI:** up to 3 styled buttons; fallback defaults for PermissionRequest: `["Yes", "Yes, allow for all projects", "No"]`
 
