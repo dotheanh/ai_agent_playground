@@ -167,3 +167,51 @@ def batch_update_frequencies(word_freq: dict[str, int], bigram_freq: dict[tuple[
         raise e
     finally:
         conn.close()
+
+
+def get_metadata(key: str, db_path: Optional[str] = None) -> Optional[str]:
+    """Get metadata value by key."""
+    path = db_path or DATABASE_PATH
+    conn = get_db_connection(path)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT value FROM metadata WHERE key = ?", (key,))
+    row = cursor.fetchone()
+    conn.close()
+
+    return row['value'] if row else None
+
+
+def set_metadata(key: str, value: str, db_path: Optional[str] = None) -> None:
+    """Set metadata key-value pair."""
+    path = db_path or DATABASE_PATH
+    conn = get_db_connection(path)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO metadata (key, value) VALUES (?, ?)
+        ON CONFLICT(key) DO UPDATE SET value = ?
+    """, (key, value, value))
+
+    conn.commit()
+    conn.close()
+
+
+def get_corpus_stats(db_path: Optional[str] = None) -> dict:
+    """Get corpus statistics."""
+    path = db_path or DATABASE_PATH
+    conn = get_db_connection(path)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) as count FROM word_frequency")
+    word_count = cursor.fetchone()['count']
+
+    cursor.execute("SELECT COUNT(*) as count FROM bigram_frequency")
+    bigram_count = cursor.fetchone()['count']
+
+    conn.close()
+
+    return {
+        'word_count': word_count,
+        'bigram_count': bigram_count
+    }

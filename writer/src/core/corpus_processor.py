@@ -38,7 +38,7 @@ class CorpusProcessor:
     def tokenize(self, text: str) -> list[str]:
         """
         Tokenize Vietnamese text.
-        Returns list of words/phrases.
+        Returns list of words/phrases (case-sensitive, no lowercase).
         """
         # Normalize first
         text = self.normalize_text(text)
@@ -46,8 +46,8 @@ class CorpusProcessor:
         # Use simple segmentation (space-based)
         tokens = self._segment(text)
 
-        # Filter empty tokens and lowercase
-        tokens = [t.lower().strip() for t in tokens if t.strip()]
+        # Filter empty tokens but KEEP original case
+        tokens = [t.strip() for t in tokens if t.strip()]
 
         return tokens
 

@@ -27,11 +27,110 @@ class TextEditor(ctk.CTkTextbox):
         print("[DEBUG] Dropdown frame created")
 
         # Bind key events
+        self.bind("<Key>", self._on_key_press)  # KeyPress to intercept keys
         self.bind("<Tab>", self._on_tab)
         self.bind("<Up>", self._on_up)
         self.bind("<Down>", self._on_down)
         self.bind("<Escape>", self._on_escape)
-        self.bind("<KeyRelease>", self._on_key_release)
+
+    def _on_key_press(self, event):
+        """Handle key press for smart typing and autocomplete."""
+        # Handle smart typing rules BEFORE the key is inserted
+        if event.keysym == 'period':  # Typing "."
+            self._handle_period()
+            return "break"
+
+        if event.keysym == 'comma':  # Typing ","
+            self._handle_comma()
+            return "break"
+
+        # For Enter, handle auto-capitalize after processing
+        if event.keysym == 'Return':
+            # Let the newline be inserted, then capitalize
+            self.after(10, self._capitalize_line_start)
+            return None
+
+        return None
+
+    def _handle_period(self):
+        """Handle period - add space and capitalize."""
+        # Insert period
+        self.insert("insert", ". ")
+
+        # Clear suggestions
+        self._hide_all()
+
+        # Schedule capitalize
+        self.after(10, self._capitalize_next_word)
+
+    def _handle_comma(self):
+        """Handle comma - add space after."""
+        # Insert comma with space
+        self.insert("insert", ", ")
+
+        # Clear suggestions
+        self._hide_all()
+
+    def _capitalize_next_word(self):
+        """Capitalize the next word after cursor."""
+        content = self.get("1.0", "end-1c")
+        cursor_pos = self.index("insert")
+        lines = content.split("\n")
+        current_line_idx = int(cursor_pos.split(".")[0]) - 1
+        current_col = int(cursor_pos.split(".")[1])
+
+        if current_line_idx < len(lines):
+            current_line = lines[current_line_idx]
+
+            # Find next word after cursor
+            remaining = current_line[current_col:]
+            next_word_start = len(current_line[:current_col])
+
+            # Skip spaces to find next word
+            i = 0
+            while i < len(remaining) and remaining[i] == ' ':
+                i += 1
+
+            if i < len(remaining):
+                # Found a word - capitalize it
+                word_start = next_word_start + i
+                if remaining[i].isalpha():
+                    # Delete the uncapitalized part and insert capitalized
+                    word_end = word_start
+                    while word_end < len(current_line) and current_line[word_end] not in ' .,;:!?\n':
+                        word_end += 1
+
+                    # Replace word with capitalized version
+                    word = current_line[word_start:word_end]
+                    capitalized = word.upper()
+
+                    # Update line
+                    lines[current_line_idx] = current_line[:word_start] + capitalized + current_line[word_end:]
+
+                    # Clear and reinsert
+                    self.delete("1.0", "end-1c")
+                    self.insert("1.0", "\n".join(lines))
+
+    def _capitalize_line_start(self):
+        """Capitalize the first letter of the new line after Enter."""
+        content = self.get("1.0", "end-1c")
+        lines = content.split("\n")
+
+        # Find current line
+        cursor_pos = self.index("insert")
+        current_line_idx = int(cursor_pos.split(".")[0]) - 1
+
+        if current_line_idx < len(lines):
+            line = lines[current_line_idx]
+            # Find first letter and capitalize
+            for i, char in enumerate(line):
+                if char.isalpha():
+                    if line[i].islower():
+                        lines[current_line_idx] = line[:i] + line[i].upper() + line[i+1:]
+                        # Update
+                        self.delete("1.0", "end-1c")
+                        self.insert("1.0", "\n".join(lines))
+                    break
 
     def _on_key_release(self, event):
         """Handle key release for autocomplete trigger."""
@@ -40,13 +139,14 @@ class TextEditor(ctk.CTkTextbox):
             self._hide_all()
             return
 
-        # Handle space key - clear ghost but still allow suggestions
+        # Handle space key - clear ghost
         if event.keysym == 'space':
             self._hide_all()
             return
 
         # Ignore special keys that don't trigger autocomplete
-        if event.keysym in ['Return', 'BackSpace', 'Delete', 'Left', 'Right', 'Home', 'End']:
+        if event.keysym in ['Return', 'BackSpace', 'Delete', 'Left', 'Right', 'Home', 'End',
+                           'period', 'comma']:
             return
 
         # Get current text and cursor position
@@ -66,7 +166,7 @@ class TextEditor(ctk.CTkTextbox):
         # Get all text before cursor for context
         all_text_before = "\n".join(lines[:current_line_idx])
         if all_text_before:
-            all_text_before += " "
+            all_text_before += "\n"
         all_text_before += text_before_cursor
 
         # Extract context and prefix

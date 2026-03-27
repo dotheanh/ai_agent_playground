@@ -17,22 +17,22 @@ class SuggestionEngine:
         Get autocomplete suggestions.
 
         Args:
-            context: Text before cursor (e.g., "lam ")
-            prefix: Current word being typed (e.g., "v")
+            context: Text before cursor (e.g., "Tôi ")
+            prefix: Current word being typed (e.g., "kh")
 
         Returns:
-            List of up to 5 suggestion strings
+            List of up to 5 suggestion strings (case-sensitive, no punctuation)
         """
-        # Extract previous word from context
+        # Extract previous word from context (keep original case)
         previous_word = self._extract_previous_word(context)
 
         if not previous_word:
             return []
 
-        # Get bigrams for previous word
+        # Get bigrams for previous word (case-sensitive)
         bigrams = self._get_bigrams(previous_word)
 
-        # Filter by prefix
+        # Filter by prefix (case-sensitive)
         filtered = [
             (word2, freq) for word2, freq in bigrams
             if word2.startswith(prefix)
@@ -41,22 +41,27 @@ class SuggestionEngine:
         # Sort by frequency
         filtered.sort(key=lambda x: x[1], reverse=True)
 
-        # Collect suggestions
-        suggestions = [word2 for word2, freq in filtered]
+        # Collect suggestions (filter out punctuation)
+        suggestions = []
+        for word2, freq in filtered:
+            clean_word = self._clean_word(word2)
+            if clean_word and clean_word not in suggestions:
+                suggestions.append(clean_word)
 
         # Fallback to dictionary if < 5
         if len(suggestions) < 5 and prefix:
             dict_words = self._get_dictionary_words(prefix)
             for word in dict_words:
-                if word not in suggestions:
-                    suggestions.append(word)
+                clean_word = self._clean_word(word)
+                if clean_word and clean_word not in suggestions:
+                    suggestions.append(clean_word)
                 if len(suggestions) >= 5:
                     break
 
         return suggestions[:5]
 
     def _extract_previous_word(self, context: str) -> str:
-        """Extract the last word from context."""
+        """Extract the last word from context (case-sensitive)."""
         context = context.strip()
         if not context:
             return ""
@@ -66,10 +71,17 @@ class SuggestionEngine:
         if not words:
             return ""
 
-        return words[-1].lower()
+        return words[-1]  # Keep original case
+
+    def _clean_word(self, word: str) -> str:
+        """Remove punctuation from word for suggestions."""
+        # Remove trailing punctuation
+        while word and word[-1] in '.,;:!?':
+            word = word[:-1]
+        return word
 
     def _get_bigrams(self, word: str) -> list[tuple[str, int]]:
-        """Get bigrams for word from database or cache."""
+        """Get bigrams for word from database or cache (case-sensitive)."""
         # Check cache first
         cached = self._cache.get(word)
         if cached is not None:

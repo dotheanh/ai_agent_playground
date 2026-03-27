@@ -3,6 +3,7 @@
 import customtkinter as ctk
 from src.ui.text_editor import TextEditor
 from src.ui.dialogs import ImportCorpusDialog
+from src.data.database import get_corpus_stats, get_metadata
 
 
 class MainWindow(ctk.CTk):
@@ -34,10 +35,33 @@ class MainWindow(ctk.CTk):
         # Status bar
         self.status_label = ctk.CTkLabel(
             self,
-            text="Ready - Import corpus to start",
+            text="Loading...",
             anchor="w"
         )
         self.status_label.grid(row=2, column=0, sticky="w", padx=10, pady=5)
+
+        # Check corpus on startup
+        self._check_corpus_on_startup()
+
+    def _check_corpus_on_startup(self):
+        """Check if corpus is already imported and update status."""
+        try:
+            stats = get_corpus_stats()
+            if stats['bigram_count'] > 0:
+                self.status_label.configure(
+                    text=f"✅ Loaded {stats['word_count']} words, {stats['bigram_count']} bigrams from corpus"
+                )
+                print(f"[DEBUG] Auto-loaded corpus: {stats['word_count']} words, {stats['bigram_count']} bigrams")
+            else:
+                self.status_label.configure(
+                    text="Ready - Import corpus to start (or corpus is empty)"
+                )
+                print("[DEBUG] No corpus found, waiting for import")
+        except Exception as e:
+            self.status_label.configure(
+                text="Ready - Import corpus to start"
+            )
+            print(f"[DEBUG] Error checking corpus: {e}")
 
     def _create_menu(self):
         """Create menu bar."""
@@ -57,8 +81,9 @@ class MainWindow(ctk.CTk):
         """Show import corpus dialog."""
         def on_complete(result):
             if result.get("success"):
+                # Update status with import stats
                 self.status_label.configure(
-                    text=f"Imported {result['words']} words, {result['bigrams']} bigrams"
+                    text=f"✅ Imported {result['words']} words, {result['bigrams']} bigrams"
                 )
                 # Reload suggestion engine to pick up new corpus data
                 if result.get("reload_engine"):
