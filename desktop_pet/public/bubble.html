@@ -106,7 +106,10 @@
     });
 
     function showBubble(data) {
-      playChime();
+      // Only play sound for high priority bubbles (permission_request, ask_question)
+      if (data.isHighPriority) {
+        playChime();
+      }
       document.getElementById('icon').textContent = ICONS[data.type] || 'ℹ️';
       document.getElementById('type').textContent  = TYPE_NAMES[data.type] || (data.type || 'Notification');
 

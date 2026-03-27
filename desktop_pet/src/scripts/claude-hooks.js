@@ -171,7 +171,7 @@ async function main() {
     // UserPromptSubmit: show bubble that user submitted prompt
     console.log(`[Hook] UserPromptSubmit event detected`);
     const brokerPayload = {
-      type: 'notification',
+      type: 'user_prompt_submit',
       message: `User submitted: ${(rawPayload.prompt || '').substring(0, 100)}${(rawPayload.prompt || '').length > 100 ? '...' : ''}`,
       options: [],
     };

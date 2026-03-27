@@ -118,17 +118,19 @@ function showBubble(data) {
 
   // Rule 1: High Priority currently showing + Low Priority comes → Queue, don't show
   if (currentBubbleType && isHighPriorityBubble(currentBubbleType) && isLowPriority) {
-    console.log('[Bubble] High priority is active, queuing low priority bubble');
+    console.log('[Bubble] High priority is active (' + currentBubbleType + '), queuing low priority bubble (' + type + ')');
+    console.log('[Bubble] Current pendingBubbleData:', pendingBubbleData ? pendingBubbleData.type : 'null');
     pendingBubbleData = {
       ...data,
       isHighPriority,
       isLowPriority,
       autoHideMs: isLowPriority ? AUTO_HIDE_TIMEOUT : null,
     };
+    console.log('[Bubble] Queued bubble:', pendingBubbleData.type);
     return; // Don't show, wait for high priority to close
   }
 
-  // Rule 2: Low Priority currently showing + High Priority comes → Auto-hide Low Priority
+  // Rule 2: Low Priority currently showing + High Priority comes → Auto-hide Low Priority, show High Priority
   if (isHighPriority && currentBubbleType && isLowPriorityBubble(currentBubbleType)) {
     console.log('[Bubble] High priority interrupting low priority bubble');
     if (hideTimer) {
@@ -139,6 +141,7 @@ function showBubble(data) {
       bubbleWindow.hide();
     }
     currentBubbleType = null; // Reset current type
+    // Don't return - continue to show the high priority bubble below
   }
 
   // Clear any existing hide timer
@@ -174,19 +177,7 @@ function showBubble(data) {
       .executeJavaScript(`showBubble(${JSON.stringify(bubbleData)})`)
       .catch((err) => console.error('[Bubble] showBubble failed:', err.message));
 
-    // Play sound effect ONLY for high priority bubbles (no sound for low priority)
-    if (isHighPriority) {
-      console.log('[Bubble] Playing sound effect (high priority)');
-      try {
-        // Windows notification sound via Beep API
-        const { exec } = require('child_process');
-        exec('powershell -Command "[Console]::Beep(800, 200)"');
-      } catch (e) {
-        console.log('[Bubble] Sound play failed:', e.message);
-      }
-    } else {
-      console.log('[Bubble] NO sound (low priority)');
-    }
+    console.log('[Bubble] Sound will play in bubble (high priority only)');
   } else {
     console.log('[Bubble] Queuing pending data');
     pendingBubbleData = {
@@ -223,7 +214,7 @@ function showBubble(data) {
 }
 
 /**
- * Hide bubble
+ * Hide bubble and show next queued bubble if available
  */
 function hideBubble() {
   if (hideTimer) {
@@ -232,6 +223,16 @@ function hideBubble() {
   }
   if (bubbleWindow && !bubbleWindow.isDestroyed()) {
     bubbleWindow.hide();
+  }
+  // Reset current type
+  currentBubbleType = null;
+  // Check if there's a queued low priority bubble
+  if (pendingBubbleData && isLowPriorityBubble(pendingBubbleData.type)) {
+    console.log('[Bubble] hideBubble: showing queued low priority bubble');
+    const queued = pendingBubbleData;
+    pendingBubbleData = null;
+    // Small delay to ensure hide completes
+    setTimeout(() => showBubble(queued), 100);
   }
 }
 
