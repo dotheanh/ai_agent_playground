@@ -63,9 +63,14 @@ class TextEditor(ctk.CTkTextbox):
 
         # Keys that should NOT trigger re-query/hide (keep dropdown stable)
         if event.keysym in [
-            "Return", "BackSpace", "Delete", "Left", "Right", "Home", "End",
+            "Return", "Left", "Right", "Home", "End",
             "Up", "Down", "Tab", "Escape"
         ]:
+            return
+
+        # Re-query on BackSpace/Delete so suggestions update immediately
+        if event.keysym in ["BackSpace", "Delete"]:
+            self._run_autocomplete_query()
             return
 
         # normalize + next-word suggestions on SPACE
@@ -269,13 +274,44 @@ class TextEditor(ctk.CTkTextbox):
                 self.dropdown_visible = False
                 return
 
-            # convert textbox local to parent local
-            x = self.winfo_x() + bbox[0]
-            y = self.winfo_y() + bbox[1] + bbox[3] + 4
+            # Calculate dropdown position relative to parent window
+            parent_x = self.winfo_x()
+            parent_y = self.winfo_y()
 
             max_len = max((len(s) for s in self.suggestions), default=10)
             dropdown_width = max(120, min(420, max_len * 8 + 28))
+            dropdown_height = len(self.suggestions) * 28 + 10
 
+            # Position dropdown directly under caret (aligned to caret x position)
+            x = parent_x + bbox[0]
+            y = parent_y + bbox[1] + bbox[3] + 2
+
+            # Get main window bounds
+            try:
+                main_win = self
+                while main_win.master:
+                    main_win = main_win.master
+                widget_x = main_win.winfo_x()
+                widget_y = main_win.winfo_y()
+                widget_width = main_win.winfo_width()
+                widget_height = main_win.winfo_height()
+                screen_height = main_win.winfo_screenheight()
+
+                # Keep dropdown within widget bounds horizontally
+                max_x = widget_x + widget_width - dropdown_width
+                x = max(widget_x, min(x, max_x))
+
+                # Prevent dropdown from going below widget bottom
+                bottom_y = y + dropdown_height
+                if bottom_y > widget_y + widget_height:
+                    # Try to show above caret if possible
+                    y = parent_y + bbox[1] - dropdown_height - 2
+                    if y < widget_y:
+                        y = parent_y + bbox[1] + bbox[3] + 2  # fallback to bottom
+            except Exception:
+                pass
+
+            # Render dropdown buttons
             for i, suggestion in enumerate(self.suggestions):
                 btn = ctk.CTkButton(
                     self.dropdown_frame,
@@ -293,7 +329,10 @@ class TextEditor(ctk.CTkTextbox):
             self.dropdown_frame.place(x=x, y=y)
             self.dropdown_frame.lift()
             self.dropdown_visible = True
-        except Exception:
+        except Exception as e:
+            import traceback
+            print(f"[ERROR] Dropdown render failed: {e}")
+            traceback.print_exc()
             self.dropdown_frame.place_forget()
             self.dropdown_visible = False
 
@@ -385,14 +424,16 @@ class TextEditor(ctk.CTkTextbox):
 
     def _on_up(self, event):
         if self.suggestions:
-            self.selected_index = max(0, self.selected_index - 1)
+            # loop navigation: from first -> last
+            self.selected_index = (self.selected_index - 1) % len(self.suggestions)
             self._show_ghost_and_dropdown()
             return "break"
         return None
 
     def _on_down(self, event):
         if self.suggestions:
-            self.selected_index = min(len(self.suggestions) - 1, self.selected_index + 1)
+            # loop navigation: from last -> first
+            self.selected_index = (self.selected_index + 1) % len(self.suggestions)
             self._show_ghost_and_dropdown()
             return "break"
         return None

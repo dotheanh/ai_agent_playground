@@ -110,13 +110,21 @@ class SuggestionEngine:
 
     def _expand_last_vowel_variants(self, prefix: str) -> list[str]:
         """
-        Expand only LAST char when it's a vowel to Vietnamese variants.
+        Expand only LAST char when it's a TONELESS lowercase vowel (u e o a i y) to Vietnamese variants.
+        If last char is already accented, keep it as-is (no variant expansion).
         Example: "na" -> ["na", "nà", "ná", ... "nâ", "nă", ...]
+        Example: "tự" -> ["tự"] (no expansion because 'ự' is already accented)
         """
         if not prefix:
             return [""]
 
         last_char = prefix[-1]
+
+        # Only expand for toneless lowercase vowels: a, e, i, o, u, y
+        toneless_vowels = "aeoiuyAEIOUY"
+        if last_char not in toneless_vowels:
+            return [prefix]
+
         group = self._get_vowel_group(last_char)
         if not group:
             return [prefix]
