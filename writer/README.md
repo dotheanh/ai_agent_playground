@@ -33,6 +33,10 @@ Import corpus once via **Import Corpus** button. Corpus is persisted in SQLite a
 - If corpus < 5 results → fill from Vietnamese dictionary (including compound words)
 - Dictionary lookup case-insensitive
 - Suggestions clean trailing punctuation (`.,;:!?`)
+- **Vietnamese vowel-variant expansion:** if last typed char is a vowel, engine tries all Vietnamese diacritic variants of that vowel for matching and sorts by corpus frequency first
+  - Example: typing `đi na` can still suggest `đi nào`, `đi này` without requiring `đi nà` first.
+- **Vietnamese vowel-variant expansion:** if last typed char is a vowel, engine tries all Vietnamese diacritic variants of that vowel for matching and sorts by corpus frequency first
+  - Example: typing `đi na` can still suggest `đi nào`, `đi này` without requiring `đi nà` first.
 
 ### Smart Normalize (Non-intrusive)
 - Native typing preserved (no forced punctuation insertion on keypress)

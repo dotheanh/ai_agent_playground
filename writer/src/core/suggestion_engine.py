@@ -8,6 +8,22 @@ from src.core.cache_manager import CacheManager
 class SuggestionEngine:
     """Generate autocomplete suggestions based on corpus statistics."""
 
+    # Vietnamese vowel variant groups (lower + upper)
+    _VOWEL_GROUPS = [
+        "aàáạảãăằắặẳẵâầấậẩẫ",
+        "AÀÁẠẢÃĂẰẮẶẲẴÂẦẤẬẨẪ",
+        "eèéẹẻẽêềếệểễ",
+        "EÈÉẸẺẼÊỀẾỆỂỄ",
+        "iìíịỉĩ",
+        "IÌÍỊỈĨ",
+        "oòóọỏõôồốộổỗơờớợởỡ",
+        "OÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠ",
+        "uùúụủũưừứựửữ",
+        "UÙÚỤỦŨƯỪỨỰỬỮ",
+        "yỳýỵỷỹ",
+        "YỲÝỴỶỸ",
+    ]
+
     def __init__(self, db_path: Optional[str] = None):
         self._db_path = db_path or "data/database.db"
         self._cache = CacheManager(max_size=1000)
@@ -18,15 +34,21 @@ class SuggestionEngine:
 
         Returns up to 5 suggestions:
         1) Corpus bigrams first
-        2) Fill remaining from dictionary (supports empty prefix)
+        2) Fill remaining from dictionary
+        3) If last typed char is a vowel, match Vietnamese vowel variants too
         """
         previous_word = self._extract_previous_word(context)
         if not previous_word:
-            return self._get_dictionary_words(prefix)[:5]
+            return self._collect_dictionary_only(prefix)
+
+        prefix_variants = self._expand_last_vowel_variants(prefix)
 
         # corpus candidates
         bigrams = self._get_bigrams(previous_word)
-        filtered = [(w2, f) for w2, f in bigrams if w2.startswith(prefix)]
+        filtered = [
+            (w2, f) for w2, f in bigrams
+            if self._starts_with_any_prefix(w2, prefix_variants)
+        ]
         filtered.sort(key=lambda x: x[1], reverse=True)
 
         suggestions: list[str] = []
@@ -37,13 +59,14 @@ class SuggestionEngine:
             if len(suggestions) >= 5:
                 return suggestions[:5]
 
-        # dictionary fallback to fill to 5
-        for word in self._get_dictionary_words(prefix):
-            clean_word = self._clean_word(word)
-            if clean_word and clean_word not in suggestions:
-                suggestions.append(clean_word)
-            if len(suggestions) >= 5:
-                break
+        # dictionary fallback to fill to 5 (with vowel-variant expansion)
+        for variant in prefix_variants:
+            for word in self._get_dictionary_words(variant):
+                clean_word = self._clean_word(word)
+                if clean_word and clean_word not in suggestions:
+                    suggestions.append(clean_word)
+                if len(suggestions) >= 5:
+                    return suggestions[:5]
 
         return suggestions[:5]
 
@@ -51,7 +74,7 @@ class SuggestionEngine:
         """Get suggestions right after user presses space (prefix empty)."""
         previous_word = self._extract_previous_word(context)
         if not previous_word:
-            return self._get_dictionary_words("")[:5]
+            return self._collect_dictionary_only("")
 
         suggestions: list[str] = []
 
@@ -74,6 +97,47 @@ class SuggestionEngine:
 
         return suggestions[:5]
 
+    # -----------------------------
+    # Matching helpers
+    # -----------------------------
+    def _starts_with_any_prefix(self, word: str, prefixes: list[str]) -> bool:
+        if not prefixes:
+            return True
+        for p in prefixes:
+            if word.startswith(p):
+                return True
+        return False
+
+    def _expand_last_vowel_variants(self, prefix: str) -> list[str]:
+        """
+        Expand only LAST char when it's a vowel to Vietnamese variants.
+        Example: "na" -> ["na", "nà", "ná", ... "nâ", "nă", ...]
+        """
+        if not prefix:
+            return [""]
+
+        last_char = prefix[-1]
+        group = self._get_vowel_group(last_char)
+        if not group:
+            return [prefix]
+
+        head = prefix[:-1]
+        variants = [prefix]  # keep original first
+        for ch in group:
+            cand = head + ch
+            if cand not in variants:
+                variants.append(cand)
+        return variants
+
+    def _get_vowel_group(self, ch: str) -> str:
+        for group in self._VOWEL_GROUPS:
+            if ch in group:
+                return group
+        return ""
+
+    # -----------------------------
+    # DB + normalization
+    # -----------------------------
     def _extract_previous_word(self, context: str) -> str:
         """Extract the last word from context (case-sensitive)."""
         context = context.strip()
@@ -137,6 +201,18 @@ class SuggestionEngine:
         results = [row[0] for row in cursor.fetchall()]
         conn.close()
         return results
+
+    def _collect_dictionary_only(self, prefix: str) -> list[str]:
+        """Collect dictionary-only suggestions with vowel-variant expansion."""
+        suggestions: list[str] = []
+        for variant in self._expand_last_vowel_variants(prefix):
+            for word in self._get_dictionary_words(variant):
+                clean = self._clean_word(word)
+                if clean and clean not in suggestions:
+                    suggestions.append(clean)
+                if len(suggestions) >= 5:
+                    return suggestions[:5]
+        return suggestions[:5]
 
     def add_bigram(self, word1: str, word2: str, freq: int) -> None:
         """Add or update bigram (for testing)."""
