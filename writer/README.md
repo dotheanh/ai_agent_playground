@@ -31,15 +31,33 @@ Click **"Import Corpus"** button → Select a folder with `.txt` files (your old
 ## ✨ Features
 
 ### Autocomplete
-- **Ghost Text** - See the best suggestion highlighted as you type
-- **Dropdown List** - Shows top 5 suggestions (numbered 1-5)
+- **Ghost Text** - Top-1 suggestion hiển thị mờ ngay tại con trỏ
+- **Dropdown List** - Top 5 suggestions ngay sát vị trí gõ (không đánh số, width tự fit theo option dài nhất)
 - **Frequency-based** - Learns from your writing style
 - **Dictionary Fallback** - Works even without corpus
 
-### Smart Typing
-- **Auto space after punctuation** - Type `.` or `,` automatically adds space
-- **Auto capitalize** - After `.` or Enter, next word is auto-capitalized
-- **Vietnamese support** - Built-in Vietnamese dictionary
+### Smart Typing (Non-intrusive)
+- **Không ép lúc bấm dấu** - App không tự chèn `.`/`,` hay auto-cap ngay khi anh nhấn phím
+- **Chuẩn hoá khi bấm Space** - Sau khi hoàn tất từ + Space, app mới kiểm tra/sửa spacing quanh `.` `,`
+- **Auto capitalize theo ngữ cảnh** - Viết hoa từ đầu dòng và từ đầu tiên sau dấu chấm (khi bấm Space)
+- **Vietnamese support** - Built-in Vietnamese dictionary, xử lý Unicode tiếng Việt tốt hơn khi normalize theo dòng hiện tại
+
+### Persistent Storage
+- **Auto-load corpus** - No need to re-import on restart
+- **SQLite database** - Fast and reliable
+- **Hot reload engine after import** - Import xong là dùng ngay, cache tự clear/reload
+
+### Case-Sensitive
+- **Preserves your writing style** - "Tôi" and "tôi" are treated as different words
+- **Exact matches** - Suggestions match your original capitalization
+- **Clean suggestions** - Tự lọc dấu câu thừa ở cuối (`.` `,` `;` `:` `!` `?`) trước khi hiển thị suggestion
+
+### Server Logging
+- **Import logs** - Log chi tiết kết quả import corpus (word count, bigram count, top bigrams)
+- **Debug logs** - Log request suggest/import để theo dõi hành vi runtime dễ hơn
+
+### VS Code Extension Status
+- **Deprecated** - Hiện tại tập trung hoàn toàn vào standalone app để tránh conflict với autocomplete native của VS Code.
 
 ### Case-Sensitive
 - **Preserves your writing style** - "Tôi" and "tôi" are treated as different words
@@ -63,9 +81,10 @@ Click **"Import Corpus"** button → Select a folder with `.txt` files (your old
 ### Smart Typing
 | Key | Action |
 |-----|--------|
-| `.` | Auto-add `. ` + capitalize next word |
-| `,` | Auto-add `, ` |
-| `Enter` | Auto-capitalize first letter |
+| `Space` | Trigger normalize: fix spacing quanh dấu câu + capitalize đầu dòng/sau dấu chấm |
+| `.` | Giữ native typing (không auto chèn ngay) |
+| `,` | Giữ native typing (không auto chèn ngay) |
+| `Enter` | Giữ native typing (capitalize sẽ áp dụng khi hoàn tất từ + Space) |
 
 ---
 
@@ -99,24 +118,27 @@ writer/
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│              Vietnamese Autocomplete Writer                  │
+│              Vietnamese Autocomplete Writer             │
 │  ┌─────────────────────────────────────────────────┐   │
-│  │  CustomTkinter UI                                 │   │
-│  │  - Text Editor with Ghost Text                   │   │
-│  │  - Dropdown List (5 suggestions)                │   │
-│  │  - Smart Typing (auto space, capitalize)        │   │
+│  │  CustomTkinter UI                              │   │
+│  │  - Text Editor                                 │   │
+│  │  - Ghost text (top-1)                          │   │
+│  │  - Dropdown list (top-5, dynamic width)        │   │
+│  │  - Smart normalize on SPACE                    │   │
 │  └─────────────────────────────────────────────────┘   │
 │  ┌─────────────────────────────────────────────────┐   │
-│  │  Suggestion Engine (Same Process)                 │   │
-│  │  - BigRAM Frequency                             │   │
-│  │  - Dictionary Fallback                           │   │
-│  │  - Case-Sensitive Matching                      │   │
+│  │  Suggestion Engine (in-process)                │   │
+│  │  - Bigram frequency ranking                     │   │
+│  │  - Dictionary fallback                          │   │
+│  │  - Case-sensitive matching                      │   │
+│  │  - Punctuation cleanup                          │   │
 │  └─────────────────────────────────────────────────┘   │
 │  ┌─────────────────────────────────────────────────┐   │
-│  │  SQLite Database                                 │   │
+│  │  SQLite Database                                │   │
 │  │  - word_frequency                               │   │
 │  │  - bigram_frequency                             │   │
 │  │  - dictionary                                   │   │
+│  │  - metadata                                     │   │
 │  └─────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────┘
 ```
