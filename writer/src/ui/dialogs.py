@@ -7,20 +7,24 @@ from src.core.corpus_processor import CorpusProcessor
 from src.data.database import update_word_frequency, update_bigram_frequency
 
 
-class ImportCorpusDialog(ctk.CTkDialog):
+class ImportCorpusDialog:
     """Dialog for importing text corpus."""
 
     def __init__(self, parent, on_complete=None):
-        super().__init__(parent)
-
         self.on_complete = on_complete
         self.folder_path = ""
+        self.parent = parent
+        self.dialog = None
 
-        self.title("Import Text Corpus")
-        self.geometry("500x200")
+        # Create dialog window
+        self.dialog = ctk.CTkToplevel(parent)
+        self.dialog.title("Import Text Corpus")
+        self.dialog.geometry("500x200")
+        self.dialog.transient(parent)
+        self.dialog.grab_set()
 
         # Frame
-        frame = ctk.CTkFrame(self)
+        frame = ctk.CTkFrame(self.dialog)
         frame.pack(fill="both", expand=True, padx=20, pady=20)
 
         # Label
@@ -59,6 +63,7 @@ class ImportCorpusDialog(ctk.CTkDialog):
         folder = filedialog.askdirectory()
         if folder:
             self.folder_path = folder
+            self.path_entry.delete(0, "end")
             self.path_entry.insert(0, folder)
             self.import_btn.configure(state="normal")
 
@@ -79,10 +84,10 @@ class ImportCorpusDialog(ctk.CTkDialog):
             update_bigram_frequency(word1, word2, freq)
 
         # Close dialog with success
-        self.result = {
+        result = {
             "success": True,
             "words": len(word_freq),
             "bigrams": len(bigram_freq)
         }
-        self.on_complete(self.result)
-        self.destroy()
+        self.on_complete(result)
+        self.dialog.destroy()
