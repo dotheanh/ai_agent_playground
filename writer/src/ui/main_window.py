@@ -60,4 +60,4 @@ class MainWindow(ctk.CTk):
                 )
 
         dialog = ImportCorpusDialog(self, on_complete=on_complete)
-        dialog.wait_window()
+        dialog.dialog.wait_window()
