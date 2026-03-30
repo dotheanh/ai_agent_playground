@@ -13,7 +13,10 @@ def test_get_suggestions_returns_top_5():
     engine.add_bigram("lam", "quen", 10)
 
     suggestions = engine.get_suggestions("lam ", "")
+    # Returns list of tuples (word, is_from_dictionary)
     assert len(suggestions) == 5
+    # All should be from corpus (is_from_dictionary=False)
+    assert all(not is_dict for _, is_dict in suggestions)
 
 
 def test_get_suggestions_filters_by_prefix():
@@ -27,9 +30,11 @@ def test_get_suggestions_filters_by_prefix():
     # Filter by prefix "v"
     suggestions = engine.get_suggestions("lam ", "v")
 
-    assert all(s.startswith("v") for s in suggestions)
-    assert "việc" in suggestions
-    assert "vui" in suggestions
+    # Suggestions are tuples (word, is_from_dictionary)
+    words = [word for word, _ in suggestions]
+    assert all(word.startswith("v") for word in words)
+    assert "việc" in words
+    assert "vui" in words
 
 
 def test_get_suggestions_sorts_by_frequency():
@@ -42,9 +47,11 @@ def test_get_suggestions_sorts_by_frequency():
 
     suggestions = engine.get_suggestions("testword ", "")
 
-    assert suggestions[0] == "việc"
-    assert suggestions[1] == "bài"
-    assert suggestions[2] == "người"
+    # Suggestions are tuples (word, is_from_dictionary)
+    words = [word for word, _ in suggestions]
+    assert words[0] == "việc"
+    assert words[1] == "bài"
+    assert words[2] == "người"
 
 
 def test_get_suggestions_fallback_to_dictionary():
@@ -57,6 +64,8 @@ def test_get_suggestions_fallback_to_dictionary():
     # Should fill remaining from dictionary
     suggestions = engine.get_suggestions("testprefix ", "v")
 
+    # Suggestions are tuples (word, is_from_dictionary)
+    words = [word for word, _ in suggestions]
     # Should have at least the bigram + some dictionary words
     assert len(suggestions) >= 1
-    assert "việc" in suggestions
+    assert "việc" in words

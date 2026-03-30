@@ -1,0 +1,9 @@
+Suggestions: [('việc', False), ('vui', False), ('và', False), ('với', False), ('vậy', False), ('V', True), ('VAC', True), ('VNCH', True)]
+  word=việc, starts_v=True
+  word=vui, starts_v=True
+  word=và, starts_v=True
+  word=với, starts_v=True
+  word=vậy, starts_v=True
+  word=V, starts_v=False
+  word=VAC, starts_v=False
+  word=VNCH, starts_v=False

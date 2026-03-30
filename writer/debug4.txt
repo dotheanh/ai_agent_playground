@@ -1,0 +1,8 @@
+Dict bigrams for lam:
+  ('lam', 'chướng', 1)
+  ('lam', 'khí', 1)
+  ('lam', 'làm', 1)
+  ('lam', 'lũ', 1)
+  ('lam', 'nham', 1)
+  ('lam', 'sơn chướng khí', 1)
+  ('lam', 'đồng', 1)

@@ -1,0 +1,6 @@
+Corpus bigrams for lam, word2 starting with v:
+  ('lam', 'việc', 1320)
+  ('lam', 'vui', 300)
+  ('lam', 'và', 9)
+  ('lam', 'với', 1)
+  ('lam', 'vậy', 1)

@@ -46,28 +46,33 @@ class SuggestionEngine:
         suggestions: list[tuple[str, bool]] = []
 
         # Step 1: Get bigram from corpus (previous_word + prefix)
+        # Always get bigrams when there's a previous_word (even with empty prefix)
+        bigrams = self._get_bigrams(previous_word)
         if prefix:
-            bigrams = self._get_bigrams(previous_word)
             filtered = [
                 (w2, f) for w2, f in bigrams
                 if self._starts_with_any_prefix(w2, prefix_variants)
             ]
-            filtered.sort(key=lambda x: x[1], reverse=True)
+        else:
+            # No prefix - return all bigrams sorted by frequency
+            filtered = bigrams
+        filtered.sort(key=lambda x: x[1], reverse=True)
 
-            for word2, _freq in filtered:
-                clean_word = self._clean_word(word2)
-                if clean_word and clean_word not in [w for w, _ in suggestions]:
-                    suggestions.append((clean_word, False))  # from corpus
-                if len(suggestions) >= 5:
-                    break
+        for word2, _freq in filtered:
+            clean_word = self._clean_word(word2)
+            if clean_word and clean_word not in [w for w, _ in suggestions]:
+                suggestions.append((clean_word, False))  # from corpus
+            if len(suggestions) >= 5:
+                break
 
         # Step 2: Get bigram from dictionary (previous_word + prefix)
-        if prefix and len(suggestions) < 7:
+        if len(suggestions) < 7 and prefix:
             for variant in prefix_variants:
                 dict_bigrams = self._get_dictionary_bigrams(previous_word, variant)
                 for word, _freq in dict_bigrams:
                     clean_word = self._clean_word(word)
-                    if clean_word and clean_word not in [w for w, _ in suggestions]:
+                    # Filter by prefix (case-sensitive for dictionary bigrams)
+                    if clean_word and clean_word.startswith(prefix) and clean_word not in [w for w, _ in suggestions]:
                         suggestions.append((clean_word, True))  # from dictionary bigrams
                     if len(suggestions) >= 7:
                         break
@@ -80,7 +85,8 @@ class SuggestionEngine:
                 single_words = self._get_dictionary_single_words(variant)
                 for word in single_words:
                     clean_word = self._clean_word(word)
-                    if clean_word and clean_word not in [w for w, _ in suggestions]:
+                    # Filter by prefix (case-sensitive for dictionary single words)
+                    if clean_word and clean_word.startswith(prefix) and clean_word not in [w for w, _ in suggestions]:
                         suggestions.append((clean_word, True))  # from dictionary single words
                     if len(suggestions) >= 8:
                         break
