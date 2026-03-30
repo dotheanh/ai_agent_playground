@@ -315,26 +315,30 @@ class TextEditor(ctk.CTkTextbox):
             except Exception:
                 pass
 
-            # Render dropdown buttons
-            for i, (suggestion_word, is_from_dictionary) in enumerate(self.suggestions):
-                # Parse font string (e.g., "Consolas 11") to get family and size
-                font_config = self.cget("font")
-                if isinstance(font_config, str):
-                    parts = font_config.rsplit(None, 1)  # Split from right, max 1 split
-                    family = parts[0] if len(parts) > 1 else "Consolas"
-                    try:
-                        size = int(parts[1]) if len(parts) > 1 else 11
-                    except ValueError:
-                        size = 11
+            # Render dropdown buttons - use same font as editor
+            # Get font from editor or use default Consolas 14
+            try:
+                editor_font = self.cget("font")
+                if hasattr(editor_font, 'cget'):
+                    # It's a CTkFont object
+                    family = editor_font.cget("family")
+                    size = editor_font.cget("size")
+                elif isinstance(editor_font, (list, tuple)):
+                    family = editor_font[0] if len(editor_font) > 0 else "Consolas"
+                    size = editor_font[1] if len(editor_font) > 1 else 14
                 else:
-                    family = font_config[0] if isinstance(font_config, (list, tuple)) else "Consolas"
-                    size = font_config[1] if isinstance(font_config, (list, tuple)) and len(font_config) > 1 else 11
+                    family = "Consolas"
+                    size = 14
+            except Exception:
+                family = "Consolas"
+                size = 14
 
-                # Use italic font for dictionary-sourced suggestions
+            # Use italic font for dictionary-sourced suggestions
+            for i, (suggestion_word, is_from_dictionary) in enumerate(self.suggestions):
                 if is_from_dictionary:
                     font = ctk.CTkFont(family=family, size=size, slant="italic")
                 else:
-                    font = font_config
+                    font = ctk.CTkFont(family=family, size=size)
 
                 btn = ctk.CTkButton(
                     self.dropdown_frame,

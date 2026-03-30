@@ -22,13 +22,15 @@ class MainWindow(ctk.CTk):
         # Menu bar
         self._create_menu()
 
-        # Text editor
+        # Text editor - use Consolas font (same as VSCode/Notepad)
+        editor_font = ctk.CTkFont(family="Consolas", size=14)
         self.editor = TextEditor(
             self,
             corner_radius=0,
             border_width=0,
             text_color="#ffffff",
-            fg_color="#1e1e1e"
+            fg_color="#1e1e1e",
+            font=editor_font
         )
         self.editor.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 
