@@ -1,48 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
-
-// ============ LOCAL STORAGE ============
-const STORAGE_KEY = 'gpt_conversations'
-
-const loadConversations = () => {
-  try {
-    const data = localStorage.getItem(STORAGE_KEY)
-    return data ? JSON.parse(data) : []
-  } catch {
-    return []
-  }
-}
-
-const saveConversations = (conversations) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations))
-  } catch (e) {
-    console.error('Failed to save conversations:', e)
-  }
-}
 
 // ============ TOOL DEFINITIONS ============
 const TOOLS = {
   get_current_time: {
     name: 'get_current_time',
     description: 'Trả về ngày giờ hiện tại của máy',
-    parameters: {
-      type: 'object',
-      properties: {},
-      required: []
-    }
+    parameters: { type: 'object', properties: {}, required: [] }
   },
   calculate: {
     name: 'calculate',
     description: 'Tính toán biểu thức toán học đơn giản',
     parameters: {
       type: 'object',
-      properties: {
-        expression: {
-          type: 'string',
-          description: 'Biểu thức toán học (VD: 2 + 2 * 3)'
-        }
-      },
+      properties: { expression: { type: 'string', description: 'Biểu thức toán học' } },
       required: ['expression']
     }
   },
@@ -63,20 +34,14 @@ const TOOLS = {
     description: 'Lưu 1 ghi chú vào bộ nhớ trong phiên',
     parameters: {
       type: 'object',
-      properties: {
-        note: { type: 'string', description: 'Nội dung ghi chú' }
-      },
+      properties: { note: { type: 'string', description: 'Nội dung ghi chú' } },
       required: ['note']
     }
   },
   recall_notes: {
     name: 'recall_notes',
     description: 'Đọc lại toàn bộ ghi chú đã lưu trong phiên',
-    parameters: {
-      type: 'object',
-      properties: {},
-      required: []
-    }
+    parameters: { type: 'object', properties: {}, required: [] }
   }
 }
 
@@ -87,10 +52,8 @@ const executeTool = async (toolName, args) => {
       return new Date().toLocaleString('vi-VN')
 
     case 'calculate': {
-      const expr = args.expression
-        .replace(/[^0-9+\-*/().^√πe]/g, '')
+      const expr = args.expression?.replace(/[^0-9+\-*/().]/g, '') || '0'
       try {
-        // Safe eval for basic math
         const result = Function(`"use strict"; return (${expr})`)()
         return `Kết quả: ${result}`
       } catch {
@@ -102,43 +65,57 @@ const executeTool = async (toolName, args) => {
       const city = args.city
       const days = args.days || 1
       try {
-        // Geocode city
         const geoRes = await fetch(
           `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`
         )
         const geoData = await geoRes.json()
-        if (!geoData.results?.length) return `Không tìm thấy thành phố: ${city}`
+        if (!geoData.results?.length) return `Không tìm thấy: ${city}`
 
         const { latitude, longitude, name, country } = geoData.results[0]
-
-        // Get weather
         const weatherRes = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Asia/Ho_Chi_Minh&forecast_days=${days}`
+          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&timezone=Asia/Ho_Chi_Minh&forecast_days=${days}`
         )
         const weatherData = await weatherRes.json()
         const daily = weatherData.daily
 
         let result = `${name}, ${country}:\n`
         for (let i = 0; i < Math.min(days, daily.time.length); i++) {
-          const date = new Date(daily.time[i]).toLocaleDateString('vi-VN', {
-            weekday: 'short', day: 'numeric', month: 'short'
-          })
-          result += `${date}: ${daily.temperature_2m_min[i]}°C - ${daily.temperature_2m_max[i]}°C\n`
+          result += `${daily.time[i]}: ${daily.temperature_2m_min[i]}°C - ${daily.temperature_2m_max[i]}°C\n`
         }
         return result.trim()
       } catch (err) {
-        return `Lỗi khi lấy thời tiết: ${err.message}`
+        return `Lỗi: ${err.message}`
       }
     }
 
     case 'remember_note':
-      return `Đã lưu ghi chú: "${args.note}"`
+      return `Đã lưu: "${args.note}"`
 
     case 'recall_notes':
-      return 'Tính năng recall_notes cần xử lý riêng (xem trong notes array)'
+      return 'Xem trong notes array'
 
     default:
-      return `Tool không được hỗ trợ: ${toolName}`
+      return `Tool không hỗ trợ: ${toolName}`
+  }
+}
+
+// ============ LOCAL STORAGE ============
+const STORAGE_KEY = 'gpt_conversations'
+
+const loadConversations = () => {
+  try {
+    const data = localStorage.getItem(STORAGE_KEY)
+    return data ? JSON.parse(data) : []
+  } catch {
+    return []
+  }
+}
+
+const saveConversations = (conversations) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations))
+  } catch (e) {
+    console.error('Save failed:', e)
   }
 }
 
@@ -156,7 +133,7 @@ function App() {
     systemPrompt: 'You are a helpful assistant. Your name is Thế Anh.'
   })
 
-  // Conversation history state (local DB)
+  // Conversation history
   const [conversations, setConversations] = useState(loadConversations)
   const [currentConversationId, setCurrentConversationId] = useState(null)
   const [conversationName, setConversationName] = useState('')
@@ -169,19 +146,193 @@ function App() {
     remember_note: true,
     recall_notes: true
   })
-  const [toolCalls, setToolCalls] = useState([]) // [{id, name, args, result, expanded}]
   const [notes, setNotes] = useState([])
+
+  // Timeline state (Workshop 3)
+  const [timeline, setTimeline] = useState([]) // [{type: 'thinking'|'tool_call'|'tool_result'|'done', content, timestamp}]
+  const [loopWarning, setLoopWarning] = useState(null)
+  const timelineRef = useRef(null)
 
   const [lastRequest, setLastRequest] = useState(null)
   const [lastResponse, setLastResponse] = useState(null)
   const [error, setError] = useState(null)
 
-  // Auto-save conversations to localStorage
+  // Auto-scroll timeline
+  useEffect(() => {
+    if (timelineRef.current) {
+      timelineRef.current.scrollTop = timelineRef.current.scrollHeight
+    }
+  }, [timeline])
+
+  // Auto-save
   useEffect(() => {
     saveConversations(conversations)
   }, [conversations])
 
-  // Create new conversation
+  // Build tools payload
+  const buildToolsPayload = () => {
+    return Object.entries(enabledTools)
+      .filter(([, enabled]) => enabled)
+      .map(([name]) => ({
+        type: 'function',
+        function: {
+          name: TOOLS[name].name,
+          description: TOOLS[name].description,
+          parameters: TOOLS[name].parameters
+        }
+      }))
+  }
+
+  // Add step to timeline with animation
+  const addTimelineStep = (type, content) => {
+    setTimeline(prev => [...prev, { type, content, id: Date.now() + Math.random() }])
+  }
+
+  // Execute tool with result
+  const executeToolWithResult = async (toolCall) => {
+    const args = JSON.parse(toolCall.function.arguments || '{}')
+    let result = await executeTool(toolCall.function.name, args)
+
+    if (toolCall.function.name === 'remember_note') {
+      setNotes(prev => [...prev, args.note])
+      result = `Đã lưu ghi chú #${notes.length + 1}`
+    }
+    if (toolCall.function.name === 'recall_notes') {
+      result = notes.length > 0
+        ? `Có ${notes.length} ghi chú:\n${notes.map((n, i) => `${i + 1}. ${n}`).join('\n')}`
+        : 'Chưa có ghi chú nào.'
+    }
+
+    return result
+  }
+
+  // AGENTIC LOOP - Main handler
+  const handleSend = async () => {
+    if (!input.trim() || !settings.apiKey) return
+
+    setError(null)
+    setIsLoading(true)
+    setTimeline([])
+    setLoopWarning(null)
+
+    const userMessage = { role: 'user', content: input }
+    const newMessages = [...messages, userMessage]
+
+    setMessages(prev => {
+      const updated = [...prev, userMessage]
+      saveCurrentConversation(updated)
+      return updated
+    })
+    setInput('')
+
+    // Message history for loop
+    const messageHistory = [...newMessages]
+    const MAX_LOOPS = 10
+
+    const buildApiMessages = (msgs) => {
+      const apiMsgs = []
+      if (settings.systemPrompt?.trim()) {
+        apiMsgs.push({ role: 'system', content: settings.systemPrompt })
+      }
+      msgs.forEach(m => apiMsgs.push({ role: m.role, content: m.content }))
+      return apiMsgs
+    }
+
+    try {
+      let loopCount = 0
+      let finalContent = ''
+
+      while (loopCount < MAX_LOOPS) {
+        addTimelineStep('thinking', '🤔 Thinking...')
+
+        const toolsPayload = buildToolsPayload()
+        const requestBody = {
+          model: settings.model,
+          messages: buildApiMessages(messageHistory),
+          ...(toolsPayload.length > 0 && { tools: toolsPayload }),
+          temperature: 0.7,
+          max_tokens: 2048
+        }
+
+        setLastRequest(requestBody)
+        setActiveTab('request')
+
+        const res = await fetch(`${settings.baseUrl}/chat/completions`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${settings.apiKey}`
+          },
+          body: JSON.stringify(requestBody)
+        })
+
+        const data = await res.json()
+        setLastResponse(data)
+        setActiveTab('response')
+
+        if (!res.ok || !data?.choices?.[0]?.message) {
+          throw new Error(data?.error?.message || `HTTP ${res.status}`)
+        }
+
+        const assistantMsg = data.choices[0].message
+
+        // Check for tool calls
+        if (assistantMsg.tool_calls?.length > 0) {
+          // Display tool calls in timeline
+          for (const call of assistantMsg.tool_calls) {
+            const args = JSON.parse(call.function.arguments || '{}')
+            const argsStr = Object.entries(args).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join(', ')
+            addTimelineStep('tool_call', `🔧 ${call.function.name}(${argsStr || ''})`)
+          }
+
+          // Execute tools
+          const toolResults = []
+          for (const call of assistantMsg.tool_calls) {
+            const result = await executeToolWithResult(call)
+            addTimelineStep('tool_result', `📥 ${result}`)
+            toolResults.push({
+              role: 'tool',
+              tool_call_id: call.id,
+              content: result
+            })
+          }
+
+          // Add to message history
+          messageHistory.push(assistantMsg)
+          messageHistory.push(...toolResults)
+
+          loopCount++
+        } else {
+          // No more tool calls - we're done!
+          finalContent = assistantMsg.content || 'No response'
+          addTimelineStep('done', `✅ ${finalContent}`)
+          break
+        }
+
+        // Check loop limit
+        if (loopCount >= MAX_LOOPS) {
+          setLoopWarning(`⚠️ Đã đạt giới hạn ${MAX_LOOPS} vòng lặp!`)
+          addTimelineStep('done', `⚠️ Dừng sau ${MAX_LOOPS} vòng.`)
+        }
+      }
+
+      // Add final message to chat
+      if (finalContent) {
+        setMessages(prev => {
+          const updated = [...prev, { role: 'assistant', content: finalContent }]
+          saveCurrentConversation(updated)
+          return updated
+        })
+      }
+
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  // Conversation management
   const createNewConversation = () => {
     const newConv = {
       id: Date.now().toString(),
@@ -196,24 +347,17 @@ function App() {
     return newConv
   }
 
-  // Save current conversation
   const saveCurrentConversation = (msgs) => {
     if (!currentConversationId) {
       createNewConversation()
     }
     setConversations(prev => prev.map(conv =>
       conv.id === currentConversationId
-        ? {
-            ...conv,
-            messages: msgs,
-            settings: { ...settings },
-            updatedAt: new Date().toISOString()
-          }
+        ? { ...conv, messages: msgs, updatedAt: new Date().toISOString() }
         : conv
     ))
   }
 
-  // Load conversation
   const loadConversation = (convId) => {
     const conv = conversations.find(c => c.id === convId)
     if (conv) {
@@ -224,205 +368,9 @@ function App() {
     }
   }
 
-  // Delete conversation
   const deleteConversation = (convId) => {
     setConversations(prev => prev.filter(c => c.id !== convId))
-    if (currentConversationId === convId) {
-      handleClear()
-    }
-  }
-
-  // Build tools payload for API
-  const buildToolsPayload = () => {
-    return Object.entries(enabledTools)
-      .filter(([, enabled]) => enabled)
-      .map(([name]) => ({
-        type: 'function',
-        function: {
-          name: TOOLS[name].name,
-          description: TOOLS[name].description,
-          parameters: TOOLS[name].parameters
-        }
-      }))
-  }
-
-  // Execute tool and return result
-  const handleToolExecution = async (toolCall) => {
-    const args = JSON.parse(toolCall.function.arguments || '{}')
-    let result = await executeTool(toolCall.function.name, args)
-
-    // Special handling for remember_note
-    if (toolCall.function.name === 'remember_note') {
-      const newNote = args.note
-      setNotes(prev => [...prev, newNote])
-      result = `Đã lưu ghi chú #${notes.length + 1}`
-    }
-
-    // Special handling for recall_notes
-    if (toolCall.function.name === 'recall_notes') {
-      result = notes.length > 0
-        ? `Tổng ${notes.length} ghi chú:\n${notes.map((n, i) => `${i + 1}. ${n}`).join('\n')}`
-        : 'Chưa có ghi chú nào.'
-    }
-
-    return result
-  }
-
-  // Main send handler
-  const handleSend = async () => {
-    if (!input.trim() || !settings.apiKey) return
-
-    setError(null)
-    setToolCalls([])
-    setIsLoading(true)
-
-    const userMessage = { role: 'user', content: input }
-    const newMessages = [...messages, userMessage]
-
-    setMessages(prev => {
-      const updated = [...prev, userMessage]
-      saveCurrentConversation(updated)
-      return updated
-    })
-    setInput('')
-
-    // Build messages for API (use newMessages to include current user message)
-    const buildApiMessages = (msgHistory) => {
-      const msgs = []
-      if (settings.systemPrompt?.trim()) {
-        msgs.push({ role: 'system', content: settings.systemPrompt })
-      }
-      msgs.push(...msgHistory.map(m => ({ role: m.role, content: m.content })))
-      return msgs
-    }
-
-    // ============ ROUND 1: Call with tools ============
-    const toolsPayload = buildToolsPayload()
-    const requestBody1 = {
-      model: settings.model,
-      messages: buildApiMessages(newMessages), // Use newMessages instead of messages
-      ...(toolsPayload.length > 0 && { tools: toolsPayload }),
-      temperature: 0.7,
-      max_tokens: 2048
-    }
-
-    setLastRequest(requestBody1)
-    setActiveTab('request')
-
-    try {
-      const res1 = await fetch(`${settings.baseUrl}/chat/completions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${settings.apiKey}`
-        },
-        body: JSON.stringify(requestBody1)
-      })
-
-      const data1 = await res1.json()
-      setLastResponse(data1)
-      setActiveTab('response')
-
-      if (!res1.ok || !data1?.choices?.[0]?.message) {
-        throw new Error(data1?.error?.message || data1?.error || `HTTP ${res1.status}`)
-      }
-
-      const assistantMsg = data1.choices[0].message
-
-      // ============ CHECK FOR TOOL CALLS ============
-      if (assistantMsg?.tool_calls?.length > 0) {
-        // Display tool calls
-        const tc = assistantMsg.tool_calls
-        const displayCalls = tc.map((t, i) => ({
-          id: `tc-${Date.now()}-${i}`,
-          name: t.function.name,
-          args: t.function.arguments,
-          result: null,
-          expanded: true
-        }))
-        setToolCalls(displayCalls)
-
-        // Execute tools
-        const executedResults = []
-        for (const call of tc) {
-          const result = await handleToolExecution(call)
-          executedResults.push({
-            tool_call_id: call.id,
-            name: call.function.name,
-            content: result
-          })
-          setToolCalls(prev => prev.map(tc =>
-            tc.name === call.function.name
-              ? { ...tc, result }
-              : tc
-          ))
-        }
-
-        // ============ ROUND 2: Send tool results back (NO tools field) ============
-        // Build complete message history with system prompt
-        const completeMessages = []
-        if (settings.systemPrompt?.trim()) {
-          completeMessages.push({ role: 'system', content: settings.systemPrompt })
-        }
-        // Add all user messages
-        completeMessages.push(...messages.map(m => ({ role: m.role, content: m.content })))
-        // Add current user message
-        completeMessages.push({ role: 'user', content: input })
-        // Add assistant's tool call message
-        completeMessages.push(assistantMsg)
-        // Add tool results
-        completeMessages.push(...executedResults.map(r => ({
-          role: 'tool',
-          tool_call_id: r.tool_call_id,
-          content: r.content
-        })))
-
-        const requestBody2 = {
-          model: settings.model,
-          messages: completeMessages,
-          temperature: 0.7,
-          max_tokens: 2048
-          // NO tools field - this is intentional!
-        }
-
-        setLastRequest(requestBody2)
-        setActiveTab('response')
-
-        const res2 = await fetch(`${settings.baseUrl}/chat/completions`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${settings.apiKey}`
-          },
-          body: JSON.stringify(requestBody2)
-        })
-
-        const data2 = await res2.json()
-        setLastResponse(data2)
-
-        if (!res2.ok || !data2?.choices?.[0]?.message) {
-          throw new Error(data2?.error?.message || data2?.error || `HTTP ${res2.status}`)
-        }
-
-        const finalContent = data2.choices[0].message?.content || 'No response'
-        setMessages(prev => {
-          const updated = [...prev, { role: 'assistant', content: finalContent }]
-          saveCurrentConversation(updated)
-          return updated
-        })
-      } else {
-        // No tool calls, just text response
-        setMessages(prev => {
-          const updated = [...prev, { role: 'assistant', content: assistantMsg?.content || 'No response' }]
-          saveCurrentConversation(updated)
-          return updated
-        })
-      }
-    } catch (err) {
-      setError(err.message)
-    } finally {
-      setIsLoading(false)
-    }
+    if (currentConversationId === convId) handleClear()
   }
 
   const handleClear = () => {
@@ -430,10 +378,11 @@ function App() {
     setLastRequest(null)
     setLastResponse(null)
     setError(null)
-    setToolCalls([])
+    setTimeline([])
     setNotes([])
     setCurrentConversationId(null)
     setConversationName('')
+    setLoopWarning(null)
   }
 
   const handleKeyDown = (e) => {
@@ -451,32 +400,7 @@ function App() {
     setEnabledTools(prev => ({ ...prev, [toolName]: !prev[toolName] }))
   }
 
-  const toggleToolExpanded = (id) => {
-    setToolCalls(prev => prev.map(tc =>
-      tc.id === id ? { ...tc, expanded: !tc.expanded } : tc
-    ))
-  }
-
-  const highlightJson = (json) => {
-    if (!json) return ''
-    const str = typeof json === 'string' ? json : JSON.stringify(json, null, 2)
-    return str.replace(
-      /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g,
-      (match) => {
-        let cls = 'number'
-        if (/^"/.test(match)) {
-          cls = /:$/.test(match) ? 'key' : 'string'
-        } else if (/true|false/.test(match)) {
-          cls = 'boolean'
-        } else if (/null/.test(match)) {
-          cls = 'null'
-        }
-        return `<span class="${cls}">${match}</span>`
-      }
-    )
-  }
-
-  const status = isLoading ? 'Loading...' : error ? 'Error' : 'Ready'
+  const status = isLoading ? 'Running...' : error ? 'Error' : 'Ready'
 
   return (
     <>
@@ -484,32 +408,17 @@ function App() {
       <div className="settings-bar">
         <label>
           API Key
-          <input
-            type="password"
-            value={settings.apiKey}
-            onChange={(e) => handleSettingsChange('apiKey', e.target.value)}
-          />
+          <input type="password" value={settings.apiKey} onChange={(e) => handleSettingsChange('apiKey', e.target.value)} />
         </label>
         <label>
           Base URL
-          <input
-            type="text"
-            value={settings.baseUrl}
-            onChange={(e) => handleSettingsChange('baseUrl', e.target.value)}
-          />
+          <input type="text" value={settings.baseUrl} onChange={(e) => handleSettingsChange('baseUrl', e.target.value)} />
         </label>
         <label>
           Model
-          <input
-            type="text"
-            value={settings.model}
-            onChange={(e) => handleSettingsChange('model', e.target.value)}
-          />
+          <input type="text" value={settings.model} onChange={(e) => handleSettingsChange('model', e.target.value)} />
         </label>
-        <button
-          className="settings-toggle"
-          onClick={() => setShowSettings(!showSettings)}
-        >
+        <button className="settings-toggle" onClick={() => setShowSettings(!showSettings)}>
           {showSettings ? 'Hide' : 'Show'} Config
         </button>
       </div>
@@ -519,31 +428,34 @@ function App() {
         <div className="system-prompt-bar">
           <label className="system-prompt-label">
             System Prompt
-            <textarea
-              className="system-prompt-input"
-              value={settings.systemPrompt}
-              onChange={(e) => handleSettingsChange('systemPrompt', e.target.value)}
-            />
+            <textarea className="system-prompt-input" value={settings.systemPrompt} onChange={(e) => handleSettingsChange('systemPrompt', e.target.value)} />
           </label>
         </div>
       )}
 
-      {/* Tools Selection Bar */}
+      {/* Tools Bar */}
       {showSettings && (
         <div className="tools-bar">
           <span className="tools-label">Tools:</span>
           {Object.entries(TOOLS).map(([name, tool]) => (
             <label key={name} className="tool-checkbox">
-              <input
-                type="checkbox"
-                checked={enabledTools[name]}
-                onChange={() => handleToolToggle(name)}
-              />
+              <input type="checkbox" checked={enabledTools[name]} onChange={() => handleToolToggle(name)} />
               <span>{tool.name}</span>
             </label>
           ))}
         </div>
       )}
+
+      {/* Example Task */}
+      <div className="example-bar">
+        <span className="example-label">Example:</span>
+        <button
+          className="example-btn"
+          onClick={() => setInput('Tìm thời tiết TP.HCM 3 ngày tới, tính nhiệt độ trung bình, lưu kết quả vào note.')}
+        >
+          Tìm thời tiết TP.HCM 3 ngày tới, tính nhiệt độ trung bình, lưu kết quả vào note.
+        </button>
+      </div>
 
       {/* Main Content */}
       <div className="app-container">
@@ -551,32 +463,19 @@ function App() {
         <div className="sidebar">
           <div className="sidebar-header">
             <h3>History</h3>
-            <button className="btn-new-chat" onClick={() => { handleClear(); createNewConversation(); }}>
-              + New
-            </button>
+            <button className="btn-new-chat" onClick={() => { handleClear(); createNewConversation(); }}>+ New</button>
           </div>
           <div className="conversation-list">
             {conversations.length === 0 ? (
-              <div className="no-conversations">No conversations yet</div>
+              <div className="no-conversations">No conversations</div>
             ) : (
               conversations.map(conv => (
-                <div
-                  key={conv.id}
-                  className={`conversation-item ${conv.id === currentConversationId ? 'active' : ''}`}
-                  onClick={() => loadConversation(conv.id)}
-                >
+                <div key={conv.id} className={`conversation-item ${conv.id === currentConversationId ? 'active' : ''}`} onClick={() => loadConversation(conv.id)}>
                   <div className="conversation-info">
                     <div className="conversation-name">{conv.name}</div>
-                    <div className="conversation-meta">
-                      {conv.messages.length} msgs · {new Date(conv.updatedAt).toLocaleDateString('vi-VN')}
-                    </div>
+                    <div className="conversation-meta">{conv.messages.length} msgs</div>
                   </div>
-                  <button
-                    className="btn-delete-conv"
-                    onClick={(e) => { e.stopPropagation(); deleteConversation(conv.id); }}
-                  >
-                    ×
-                  </button>
+                  <button className="btn-delete-conv" onClick={(e) => { e.stopPropagation(); deleteConversation(conv.id); }}>×</button>
                 </div>
               ))
             )}
@@ -587,13 +486,11 @@ function App() {
         <div className="chat-panel">
           <div className="chat-header">
             <h1>{conversationName || 'Chat'}</h1>
-            <span className={`badge ${isLoading ? 'loading' : error ? 'error' : ''}`}>
-              {status}
-            </span>
+            <span className={`badge ${isLoading ? 'loading' : error ? 'error' : ''}`}>{status}</span>
           </div>
 
           <div className="chat-messages">
-            {messages.length === 0 && toolCalls.length === 0 ? (
+            {messages.length === 0 && timeline.length === 0 ? (
               <div className="empty-state">
                 <div className="icon">&gt;_</div>
                 <p>Send a message to start</p>
@@ -606,46 +503,27 @@ function App() {
                     <div className="message-content">{msg.content}</div>
                   </div>
                 ))}
-
-                {/* Tool Calls Display */}
-                {toolCalls.map((tc) => (
-                  <div key={tc.id} className="tool-call-block">
-                    <div
-                      className="tool-call-header"
-                      onClick={() => toggleToolExpanded(tc.id)}
-                    >
-                      <span className="tool-icon">⚡</span>
-                      <span className="tool-name">{tc.name}</span>
-                      <span className={`tool-status ${tc.result ? 'done' : 'loading'}`}>
-                        {tc.result ? '✓ Done' : '⟳ Executing...'}
-                      </span>
-                      <span className="tool-expand">{tc.expanded ? '▼' : '▶'}</span>
-                    </div>
-
-                    {tc.expanded && (
-                      <div className="tool-call-body">
-                        <div className="tool-section">
-                          <div className="tool-section-label">Arguments</div>
-                          <pre
-                            className="tool-args"
-                            dangerouslySetInnerHTML={{
-                              __html: highlightJson(JSON.parse(tc.args || '{}'))
-                            }}
-                          />
-                        </div>
-                        {tc.result && (
-                          <div className="tool-section">
-                            <div className="tool-section-label">Result</div>
-                            <div className="tool-result">{tc.result}</div>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                ))}
               </>
             )}
           </div>
+
+          {/* Timeline View (Workshop 3) */}
+          {timeline.length > 0 && (
+            <div className="timeline-container" ref={timelineRef}>
+              {loopWarning && <div className="loop-warning">{loopWarning}</div>}
+              {timeline.map((step, idx) => (
+                <div key={step.id} className={`timeline-step ${step.type}`} style={{ animationDelay: `${idx * 0.1}s` }}>
+                  <span className="step-icon">
+                    {step.type === 'thinking' && '🤔'}
+                    {step.type === 'tool_call' && '🔧'}
+                    {step.type === 'tool_result' && '📥'}
+                    {step.type === 'done' && '✅'}
+                  </span>
+                  <span className="step-content">{step.content}</span>
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="chat-input-area">
             <div className="input-wrapper">
@@ -657,78 +535,59 @@ function App() {
                 onKeyDown={handleKeyDown}
                 disabled={isLoading}
               />
-              <button
-                className="btn btn-primary"
-                onClick={handleSend}
-                disabled={isLoading || !settings.apiKey}
-              >
+              <button className="btn btn-primary" onClick={handleSend} disabled={isLoading || !settings.apiKey}>
                 {isLoading ? '...' : 'Send'}
               </button>
-              <button className="btn btn-secondary btn-clear" onClick={handleClear}>
-                Clear
-              </button>
+              <button className="btn btn-secondary btn-clear" onClick={handleClear}>Clear</button>
             </div>
           </div>
         </div>
 
-        {/* Right Panel - JSON Request/Response */}
+        {/* Right Panel - JSON */}
         <div className="json-panel">
           <div className="json-header">
             <div className="json-tabs">
-              <button
-                className={`json-tab ${activeTab === 'request' ? 'active' : ''}`}
-                onClick={() => setActiveTab('request')}
-              >
-                Request
-              </button>
-              <button
-                className={`json-tab ${activeTab === 'response' ? 'active' : ''}`}
-                onClick={() => setActiveTab('response')}
-              >
-                Response
-              </button>
+              <button className={`json-tab ${activeTab === 'request' ? 'active' : ''}`} onClick={() => setActiveTab('request')}>Request</button>
+              <button className={`json-tab ${activeTab === 'response' ? 'active' : ''}`} onClick={() => setActiveTab('response')}>Response</button>
             </div>
-            {(lastRequest || lastResponse) && (
-              <span className="badge">JSON</span>
-            )}
+            {(lastRequest || lastResponse) && <span className="badge">JSON</span>}
           </div>
 
           <div className="json-content">
-            {error && activeTab === 'response' && (
-              <div className="error-display">
-                <span className="error-label">Error:</span> {error}
-              </div>
-            )}
-
+            {error && <div className="error-display"><span className="error-label">Error:</span> {error}</div>}
             {activeTab === 'request' ? (
               lastRequest ? (
-                <pre
-                  className="json-display"
-                  dangerouslySetInnerHTML={{ __html: highlightJson(lastRequest) }}
-                />
+                <pre className="json-display" dangerouslySetInnerHTML={{ __html: highlightJson(lastRequest) }} />
               ) : (
-                <div className="empty-state">
-                  <div className="icon">{'{}'}</div>
-                  <p>Request will appear here</p>
-                </div>
+                <div className="empty-state"><div className="icon">{'{}'}</div><p>Request will appear here</p></div>
               )
             ) : (
               lastResponse ? (
-                <pre
-                  className="json-display"
-                  dangerouslySetInnerHTML={{ __html: highlightJson(lastResponse) }}
-                />
+                <pre className="json-display" dangerouslySetInnerHTML={{ __html: highlightJson(lastResponse) }} />
               ) : (
-                <div className="empty-state">
-                  <div className="icon">{'{}'}</div>
-                  <p>Response will appear here</p>
-                </div>
+                <div className="empty-state"><div className="icon">{'{}'}</div><p>Response will appear here</p></div>
               )
             )}
           </div>
         </div>
       </div>
     </>
+  )
+}
+
+// JSON Syntax Highlighting
+const highlightJson = (json) => {
+  if (!json) return ''
+  const str = typeof json === 'string' ? json : JSON.stringify(json, null, 2)
+  return str.replace(
+    /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g,
+    (match) => {
+      let cls = 'number'
+      if (/^"/.test(match)) cls = /:$/.test(match) ? 'key' : 'string'
+      else if (/true|false/.test(match)) cls = 'boolean'
+      else if (/null/.test(match)) cls = 'null'
+      return `<span class="${cls}">${match}</span>`
+    }
   )
 }
 
