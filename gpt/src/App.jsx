@@ -111,7 +111,8 @@ const executeTool = async (toolName, args) => {
     }
 
     case 'remember_note':
-      return `Đã lưu: "${args.note}"`
+      // Don't return here - let executeToolWithResult handle it
+      return `__REMEMBER_NOTE__:${args.note}`
 
     case 'recall_notes':
       return 'Xem trong notes array'
@@ -196,9 +197,11 @@ function App() {
     const args = JSON.parse(toolCall.function.arguments || '{}')
     let result = await executeTool(toolCall.function.name, args)
 
-    if (toolCall.function.name === 'remember_note') {
-      setNotes(prev => [...prev, args.note])
-      result = `Đã lưu ghi chú #${notes.length + 1}`
+    if (toolCall.function.name === 'remember_note' && result.startsWith('__REMEMBER_NOTE__')) {
+      const noteContent = result.replace('__REMEMBER_NOTE__:', '')
+      const currentNotes = notes.length
+      setNotes(prev => [...prev, noteContent])
+      result = `Đã lưu ghi chú #${currentNotes + 1}`
     }
     if (toolCall.function.name === 'recall_notes') {
       result = notes.length > 0
@@ -335,6 +338,7 @@ function App() {
       id: crypto.randomUUID(),
       name: `Chat ${new Date().toLocaleDateString('vi-VN')}`,
       messages: [],
+      notes: [],
       settings: { ...settings },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
@@ -355,6 +359,7 @@ function App() {
     const updated = {
       ...conv,
       messages: msgs,
+      notes: notes, // Save notes with conversation
       updatedAt: new Date().toISOString()
     }
     const newConvs = allConvs.map(c => c.id === convId ? updated : c)
@@ -367,9 +372,10 @@ function App() {
     const conv = allConvs.find(c => c.id === convId)
     if (conv) {
       setCurrentConversationId(convId)
-      setMessages(conv.messages)
+      setMessages(conv.messages || [])
       setConversationName(conv.name)
       setSettings(prev => ({ ...prev, ...conv.settings }))
+      setNotes(conv.notes || []) // Load notes
       setConversations(allConvs)
     }
   }
