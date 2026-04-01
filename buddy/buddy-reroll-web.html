@@ -275,16 +275,33 @@
       50% { transform: scale(1.05); }
     }
 
-    /* Pet Hearts Animation */
+    /* Pet Hearts Animation - overlay only */
     .pet-hearts {
-      font-size: 0.8rem;
-      margin-bottom: 0.5rem;
-      animation: heart-float 0.5s ease-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 100;
+      white-space: pre;
+      text-align: center;
+    }
+
+    .pet-hearts span {
+      animation: heart-float 0.5s ease-out forwards;
     }
 
     @keyframes heart-float {
-      0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-30px); }
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
     }
 
     .history-info {
@@ -311,6 +328,282 @@
       color: var(--text-secondary);
       font-size: 1.1rem;
       font-weight: 400;
+    }
+
+    /* Mode Selector */
+    .mode-selector {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .mode-btn {
+      padding: 0.8rem 1.5rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: relative;
+    }
+
+    .mode-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: var(--border-light);
+    }
+
+    .mode-btn.selected {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .mode-btn[title]::after {
+      content: attr(title);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-5px);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .mode-btn:hover::after {
+      opacity: 1;
+    }
+
+    /* Risk Banner */
+    .risk-banner {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      border-left: 4px solid #d97706;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      color: #92400e;
+      font-size: 0.85rem;
+      display: none;
+    }
+
+    .risk-banner.active {
+      display: block;
+    }
+
+    .risk-banner strong {
+      color: #b45309;
+    }
+
+    /* Risk Modal */
+    .risk-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .risk-modal-overlay.active {
+      display: flex;
+    }
+
+    .risk-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .risk-modal-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .risk-modal-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .risk-modal-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .risk-highlight {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #f87171;
+      margin: 1rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .risk-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+
+    .risk-list li {
+      padding: 0.75rem;
+      background: var(--bg-secondary);
+      border-left: 3px solid #f87171;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .risk-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .risk-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .risk-btn {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .risk-btn-cancel {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .risk-btn-cancel:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .risk-btn-confirm {
+      background: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
+      border: none;
+      color: white;
+    }
+
+    .risk-btn-confirm:hover {
+      background: linear-gradient(135deg, #f87171 0%, #b91c1c 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(248, 113, 113, 0.4);
+    }
+
+    /* Hash Algorithm Selector for OAuth */
+    .oauth-algo-section {
+      display: none;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .oauth-algo-section.active {
+      display: block;
+    }
+
+    .hash-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 600px) {
+      .hash-compare {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hash-option {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .hash-option.fnv {
+      border-color: #22c55e;
+    }
+
+    .hash-option.bun {
+      border-color: #f59e0b;
+    }
+
+    .hash-option.selected {
+      box-shadow: 0 0 10px var(--accent-glow);
+      border-color: var(--accent);
+    }
+
+    .hash-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hash-option.fnv .hash-title {
+      color: #22c55e;
+    }
+
+    .hash-option.bun .hash-title {
+      color: #f59e0b;
+    }
+
+    .hash-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .hash-option.fnv .hash-desc {
+      color: #86efac;
+    }
+
+    .hash-option.bun .hash-desc {
+      color: #fcd34d;
+    }
+
+    .hash-badge {
+      font-size: 0.65rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: var(--bg-secondary);
     }
 
     .main-grid {
@@ -385,8 +678,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border);
+      overflow: hidden;  /* <-- Thêm dòng này */
     }
 
     /* New Preview Styles */
@@ -1135,6 +1427,16 @@
       </button>
       <h1>Claude Buddy Reroll</h1>
       <p class="subtitle">Tìm Buddy hoàn hảo cho Claude Code của bạn</p>
+
+      <!-- Mode Selector -->
+      <div class="mode-selector">
+        <button class="mode-btn selected" data-mode="api-key" title="Dành cho người dùng API key - Tự do chọn userID">
+          🔑 API Key
+        </button>
+        <button class="mode-btn" data-mode="oauth-account" title="Dành cho người dùng đăng nhập Claude Account - Phải brute-force salt trong binary">
+          👤 OAuth Account
+        </button>
+      </div>
     </header>
 
     <div class="main-grid">
@@ -1279,16 +1581,53 @@
         </div>
       </div>
 
+      <!-- OAuth Algorithm Selector (hidden by default) -->
+      <div class="oauth-algo-section" id="oauthAlgoSection">
+        <div class="section-label">Hash Algorithm (OAuth)</div>
+        <div class="hash-compare">
+          <div class="hash-option fnv selected" data-hash="fnv">
+            <div class="hash-title">
+              <span>🟢 FNV-1a</span>
+              <span class="hash-badge">Browser</span>
+            </div>
+            <div class="hash-desc">
+              Chạy trực tiếp trên browser - Nhanh nhưng kết quả có thể không chính xác 100% so với Bun.hash
+            </div>
+          </div>
+          <div class="hash-option bun" data-hash="bun">
+            <div class="hash-title">
+              <span>🟠 Bun.hash</span>
+              <span class="hash-badge">Exact Match</span>
+            </div>
+            <div class="hash-desc">
+              Chính xác 100% - Download script standalone để chạy offline (độ chính xác cao nhất)
+            </div>
+          </div>
+        </div>
+        <button id="downloadScriptBtn" style="margin-top: 1rem; width: 100%; padding: 0.75rem; background: var(--accent); border: none; border-radius: 8px; color: white; cursor: pointer; display: none;">
+          📥 Download Bun.hash Script
+        </button>
+      </div>
+
+      <!-- Risk Banner (OAuth) -->
+      <div class="risk-banner" id="riskBanner">
+        ⚠️ <strong>Cảnh báo:</strong> OAuth Account mode yêu cầu brute-force salt trong binary Claude Code.
+        Sử dụng có rủi ro pháp lý - <strong>Play at your own risk!</strong>
+      </div>
+
       <!-- Instructions (Right) -->
       <div class="instructions">
-        <h3>📋 Hướng dẫn sau khi tìm thấy UID</h3>
-        <ol>
+        <h3 id="instructionsTitle">📋 Hướng dẫn sau khi tìm thấy UID</h3>
+        <ol id="instructionsList">
           <li>Mở file <code>~/.claude.json</code></li>
           <li>Xóa field <code>companion</code> (nếu có)</li>
           <li>Thay thế <code>userID</code> bằng UID mới</li>
           <li>Restart Claude Code</li>
           <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
         </ol>
+        <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(74, 222, 128, 0.1); border-radius: 8px; font-size: 0.75rem; color: var(--success);">
+          💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service
+        </div>
       </div>
     </div>
   </div>
@@ -1534,6 +1873,7 @@
 
     // === STATE ===
     const state = {
+      modeType: 'api-key',  // 'api-key' or 'oauth-account'
       species: null,
       rarity: 'legendary',
       eye: null,
@@ -1542,6 +1882,168 @@
       algo: 'fnv',
       mode: 'random'
     };
+
+    let currentHashAlgorithm = 'fnv'; // 'fnv' or 'bun'
+
+    // === MODE & RISK HANDLERS ===
+    function openRiskModal() {
+      document.getElementById('riskModal').classList.add('active');
+    }
+
+    function closeRiskModal() {
+      document.getElementById('riskModal').classList.remove('active');
+    }
+
+    function confirmRisk() {
+      state.modeType = 'oauth-account';
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.classList.remove('selected');
+        btn.dataset.mode === 'oauth-account' && btn.classList.add('selected');
+      });
+      document.getElementById('oauthAlgoSection').classList.add('active');
+      document.getElementById('riskBanner').classList.add('active');
+      closeRiskModal();
+      updateInstructionsForMode();
+    }
+
+    function updateInstructionsForMode() {
+      const instructionsTitle = document.getElementById('instructionsTitle');
+      const instructionsList = document.getElementById('instructionsList');
+      const existingNote = instructionsList.parentNode.querySelector('div[style*="rgba"]');
+
+      if (state.modeType === 'oauth-account') {
+        instructionsTitle.innerHTML = '📋 Hướng dẫn sau khi tìm thấy SALT';
+        instructionsList.innerHTML = `
+          <li>Download script <code>bun-hash-search.ts</code> từ trang web này</li>
+          <li>Lấy account UUID từ <code>~/.claude/.credentials.json</code></li>
+          <li>Chạy script: <code>bun bun-hash-search.ts</code></li>
+          <li>Copy salt tìm được</li>
+          <li>Chạy: <code>bun buddy-reroll.ts --restore</code> để backup</li>
+          <li>Patch binary: Chạy lại script với salt mong muốn</li>
+          <li>Xóa companion state trong <code>~/.claude/.config.json</code></li>
+          <li>Restart Claude Code</li>
+          <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
+        `;
+        if (existingNote) {
+          existingNote.style.background = 'rgba(248, 113, 113, 0.1)';
+          existingNote.style.color = '#f87171';
+          existingNote.innerHTML = '⚠️ <strong>Cảnh báo:</strong> Thao tác này có rủi ro pháp lý - chỉ sử dụng nếu hiểu rõ rủi ro';
+        }
+      } else {
+        instructionsTitle.innerHTML = '📋 Hướng dẫn sau khi tìm thấy UID';
+        instructionsList.innerHTML = `
+          <li>Mở file <code>~/.claude.json</code></li>
+          <li>Xóa field <code>companion</code> (nếu có)</li>
+          <li>Thay thế <code>userID</code> bằng UID mới</li>
+          <li>Restart Claude Code</li>
+          <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
+        `;
+        if (!existingNote) {
+          const note = document.createElement('div');
+          note.style.marginTop = '1rem';
+          note.style.padding = '0.75rem';
+          note.style.background = 'rgba(74, 222, 128, 0.1)';
+          note.style.borderRadius = '8px';
+          note.style.fontSize = '0.75rem';
+          note.style.color = 'var(--success)';
+          note.innerHTML = '💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service';
+          instructionsList.parentNode.appendChild(note);
+        }
+      }
+    }
+
+    // === HASH FUNCTIONS ===
+    function hashFNV1a(s) {
+      let h = 2166136261 >>> 0;
+      for (let i = 0; i < s.length; i++) {
+        h ^= s.charCodeAt(i);
+        h = Math.imul(h, 16777619) >>> 0;
+      }
+      return h;
+    }
+
+    // === PRNG ===
+    function mulberry32(seed) {
+      let a = seed >>> 0;
+      return function () {
+        a |= 0;
+        a = (a + 0x6d2b79f5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function pick(rng, arr) {
+      return arr[Math.floor(rng() * arr.length)];
+    }
+
+    // === ROLLING LOGIC ===
+    function rollRarity(rng) {
+      const total = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
+      let roll = rng() * total;
+      for (const r of RARITIES) {
+        roll -= RARITY_WEIGHTS[r];
+        if (roll < 0) return r;
+      }
+      return 'common';
+    }
+
+    function rollStats(rng, rarity) {
+      const floor = RARITY_FLOOR[rarity];
+      let peak = pick(rng, STAT_NAMES);
+      let dump = pick(rng, STAT_NAMES);
+      while (dump === peak) dump = pick(rng, STAT_NAMES);
+
+      const stats = {};
+      for (const name of STAT_NAMES) {
+        if (name === peak) {
+          stats[name] = Math.min(100, floor + 50 + Math.floor(rng() * 30));
+        } else if (name === dump) {
+          stats[name] = Math.max(1, floor - 10 + Math.floor(rng() * 15));
+        } else {
+          stats[name] = floor + Math.floor(rng() * 40);
+        }
+      }
+      return stats;
+    }
+
+    function rollBuddy(input) {
+      const rng = mulberry32(hashFNV1a(input));
+      const rarity = rollRarity(rng);
+      return {
+        rarity,
+        species: pick(rng, SPECIES),
+        eye: pick(rng, EYES),
+        hat: rarity === 'common' ? 'none' : pick(rng, HATS),
+        shiny: rng() < 0.01,
+        stats: rollStats(rng, rarity)
+      };
+    }
+
+    function matches(buddy) {
+      if (state.species != null && buddy.species !== state.species) return false;
+      if (state.rarity != null && buddy.rarity !== state.rarity) return false;
+      if (state.eye != null && buddy.eye !== state.eye) return false;
+      if (state.hat != null && buddy.hat !== state.hat) return false;
+      if (state.shiny !== 'any' && buddy.shiny !== (state.shiny === 'true')) return false;
+      return true;
+    }
+
+    // === OAUTH BRUTE-FORCE ===
+    function generateOAuthSalt(index) {
+      if (index < 1000000) {
+        return `friend-2026-${String(index).padStart(3, '0')}`;
+      }
+      const chars = 'abcdefghijklmnopqrstuvwxyz0123456789-_';
+      let salt = '';
+      let n = index - 1000000;
+      for (let j = 0; j < 15; j++) {
+        salt += chars[n % chars.length];
+        n = Math.floor(n / chars.length);
+      }
+      return salt;
+    }
 
     // === HASH FUNCTIONS ===
     function hashFNV(s) {
@@ -1708,7 +2210,7 @@
     }
 
     // === PET ANIMATION ===
-    const PET_BURST_MS = 2500;
+    const PET_BURST_MS = 4000;
     const PET_HEARTS = [
       `   ♥    ♥   `,
       `  ♥  ♥  ♥  `,
@@ -1719,40 +2221,58 @@
 
     function petBuddy() {
       const petBtn = document.getElementById('petBtn');
-      const previewCard = petBtn.closest('.preview-panel');
+      const spriteBob = document.querySelector('.sprite-bob');
 
       // Get current state
       const species = state.species || 'duck';
       const rarity = state.rarity || 'legendary';
       const eye = state.eye || '·';
       const hat = state.hat || 'none';
-      const rarityColor = RARITY_COLORS[rarity];
+
+      // Pause idle animation
+      if (animationInterval) {
+        clearInterval(animationInterval);
+        animationInterval = null;
+      }
 
       // Button animation
       petBtn.classList.add('petting');
       setTimeout(() => petBtn.classList.remove('petting'), 500);
 
-      // Hearts animation
-      const heartsContainer = document.createElement('div');
-      heartsContainer.className = 'pet-hearts';
-      heartsContainer.innerHTML = PET_HEARTS[0];
-      previewCard.insertBefore(heartsContainer, previewCard.firstChild);
+      // Spawn multiple hearts at different positions and delays
+      const numHearts = 8;
+      for (let i = 0; i < numHearts; i++) {
+        setTimeout(() => {
+          const heartsContainer = document.createElement('div');
+          heartsContainer.className = 'pet-hearts';
+          heartsContainer.style.animationDelay = `${i * 0.2}s`;
+          heartsContainer.style.left = `${25 + i * 10}%`;
+          const heartSpan = document.createElement('span');
+          heartSpan.textContent = PET_HEARTS[0];
+          heartsContainer.appendChild(heartSpan);
+          spriteBob.insertBefore(heartsContainer, spriteBob.firstChild);
 
-      // Remove hearts after animation
-      setTimeout(() => {
-        if (heartsContainer.parentNode) {
-          heartsContainer.parentNode.removeChild(heartsContainer);
-        }
-      }, 500);
+          // Remove heart after animation
+          setTimeout(() => {
+            if (heartsContainer.parentNode) {
+              heartsContainer.parentNode.removeChild(heartsContainer);
+            }
+          }, 700);
+        }, i * 200);
+      }
 
-      // Run pet animation on sprite (fast frame cycling for 2.5s)
+      // Run pet animation on sprite (fast frame cycling for 4s)
       const frameCount = BODIES[species]?.length || 3;
       const startTime = Date.now();
       let petTick = 0;
 
       const petAnimate = () => {
         const elapsed = Date.now() - startTime;
-        if (elapsed >= PET_BURST_MS) return;
+        if (elapsed >= PET_BURST_MS) {
+          // Resume idle animation after pet ends
+          startAnimation(species, eye, hat);
+          return;
+        }
 
         // When petting: cycle ALL frames fast
         const spriteLines = renderSprite(species, eye, hat, petTick % frameCount);
@@ -1762,7 +2282,7 @@
         }
 
         petTick++;
-        requestAnimationFrame(petAnimate);
+        setInterval(petAnimate, 1000);
       };
 
       petAnimate();
@@ -1856,6 +2376,40 @@
           document.getElementById('sequentialSettings').style.display = state.mode === 'sequential' ? 'block' : 'none';
         };
       });
+
+      // Mode selector
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.onclick = () => {
+          const mode = btn.dataset.mode;
+          document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          state.modeType = mode;
+          document.getElementById('oauthAlgoSection').classList.toggle('active', mode === 'oauth-account');
+          document.getElementById('riskBanner').classList.toggle('active', mode === 'oauth-account');
+          updateInstructionsForMode();
+
+          if (mode === 'oauth-account') {
+            openRiskModal();
+          } else {
+            updateInstructionsForMode();
+          }
+        };
+      });
+
+      // Hash algorithm selector (OAuth)
+      document.querySelectorAll('.hash-option').forEach(opt => {
+        opt.onclick = () => {
+          document.querySelectorAll('.hash-option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          currentHashAlgorithm = opt.dataset.hash;
+          document.getElementById('downloadScriptBtn').style.display = opt.dataset.hash === 'bun' ? 'block' : 'none';
+        };
+      });
+
+      // Download script button
+      document.getElementById('downloadScriptBtn').onclick = () => {
+        window.open('bun-hash-search.ts', '_blank');
+      };
     }
 
     function toggleSelection(type, value, element) {
@@ -1893,19 +2447,35 @@
 
       const found = [];
       const startTime = Date.now();
+      let searchInput = state.modeType === 'oauth-account' ? prefix : null;
+
+      if (state.modeType === 'oauth-account' && !searchInput) {
+        outputArea.innerHTML = '<div class="output-line output-error">❌ Vui lòng nhập account UUID từ ~/.claude/.credentials.json</div>';
+        runBtn.disabled = false;
+        runBtn.innerHTML = '<span>🚀</span><span>Bắt đầu tìm kiếm</span>';
+        return;
+      }
 
       await new Promise(resolve => {
         setTimeout(() => {
           for (let i = 0; i < limit; i++) {
-            const userId = state.mode === 'sequential'
-              ? `${prefix}${i}`
-              : generateRandomId(32);
+            let searchValue;
 
-            const buddy = rollBuddy(userId);
+            if (state.modeType === 'oauth-account') {
+              const salt = generateOAuthSalt(i);
+              searchValue = searchInput + salt;
+            } else {
+              searchValue = state.mode === 'sequential'
+                ? `${prefix}${i}`
+                : generateRandomId(32);
+            }
+
+            const buddy = rollBuddy(searchValue);
 
             if (!matches(buddy)) continue;
 
-            found.push({ userId, buddy, attempts: i + 1 });
+            const idKey = state.modeType === 'oauth-account' ? 'salt' : 'userId';
+            found.push({ [idKey]: searchValue, buddy, attempts: i + 1 });
             if (found.length >= count) break;
 
             if (i % 100000 === 0) {
@@ -1918,14 +2488,17 @@
           if (found.length === 0) {
             outputArea.innerHTML = `<div class="output-line output-error">❌ Không tìm thấy (đã thử ${limit.toLocaleString()} lần, ${elapsed}s)</div>`;
           } else {
-            // Save found results to history
             found.forEach(match => {
-              saveToHistory(match.buddy, match.userId);
+              const idKey = state.modeType === 'oauth-account' ? 'salt' : 'userId';
+              saveToHistory(match.buddy, match[idKey]);
             });
 
             let html = `<div class="output-line output-success">🎉 Tìm thấy ${found.length} kết quả (${elapsed}s)</div>`;
             found.forEach((match, idx) => {
               const shinyText = match.buddy.shiny ? '<span class="shiny-text">✨</span>' : '';
+              const idLabel = state.modeType === 'oauth-account' ? 'SALT' : 'UID';
+              const idKey = state.modeType === 'oauth-account' ? 'salt' : 'userId';
+
               html += `
 <div class="output-line">
   <div style="margin-bottom: 0.5rem;">
@@ -1936,7 +2509,7 @@
   <div>Rarity: ${match.buddy.rarity} ${RARITY_STARS[match.buddy.rarity]} ${shinyText}</div>
   <div>Eye: ${match.buddy.eye}</div>
   <div>Hat: ${match.buddy.hat}</div>
-  <div style="margin-top: 0.5rem; color: var(--accent);">UID: <code>${match.userId}</code></div>
+  <div style="margin-top: 0.5rem; color: var(--accent);">${idLabel}: <code>${match[idKey]}</code></div>
 </div>`;
             });
             outputArea.innerHTML = html;
@@ -1957,6 +2530,28 @@
     // Pet button handler
     document.getElementById('petBtn')?.addEventListener('click', petBuddy);
   </script>
+
+  <!-- Risk Modal -->
+  <div class="risk-modal-overlay" id="riskModal">
+    <div class="risk-modal">
+      <div class="risk-modal-header">
+        <div class="risk-modal-icon">⚠️</div>
+        <div class="risk-modal-title">Rủi ro pháp lý</div>
+      </div>
+      <div class="risk-highlight">Play at your own risk!</div>
+      <ul class="risk-list">
+        <li>Binary patching có thể vi phạm Terms of Service của Anthropic</li>
+        <li>Account có thể bị suspend hoặc ban vĩnh viễn</li>
+        <li>Buddy info được gửi về API buddy_react của Anthropic</li>
+        <li>Server có thể phát hiện mismatch giữa buddy thực tế và expected</li>
+        <li>Không có cách nào ẩn danh hoàn toàn khi dùng OAuth</li>
+      </ul>
+      <div class="risk-actions">
+        <button class="risk-btn risk-btn-cancel" onclick="closeRiskModal()">Tôi hiểu - Quay lại</button>
+        <button class="risk-btn risk-btn-confirm" onclick="confirmRisk()">Tôi hiểu - Tiếp tục</button>
+      </div>
+    </div>
+  </div>
 
   <!-- History Modal -->
   <div class="modal-overlay" id="historyModal">
