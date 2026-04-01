@@ -152,7 +152,7 @@ function App() {
   const [settings, setSettings] = useState({
     apiKey: 'sk-d586e1d2f63743aa9453c1113ea90066',
     baseUrl: 'https://chat.zingplay.com/api',
-    model: 'gpt-4.1-mini',
+    model: 'local-model-mini',
     systemPrompt: 'You are a helpful assistant. Your name is Thế Anh.'
   })
 
@@ -277,6 +277,8 @@ function App() {
     setIsLoading(true)
 
     const userMessage = { role: 'user', content: input }
+    const newMessages = [...messages, userMessage]
+
     setMessages(prev => {
       const updated = [...prev, userMessage]
       saveCurrentConversation(updated)
@@ -284,7 +286,7 @@ function App() {
     })
     setInput('')
 
-    // Build messages for API
+    // Build messages for API (use newMessages to include current user message)
     const buildApiMessages = (msgHistory) => {
       const msgs = []
       if (settings.systemPrompt?.trim()) {
@@ -298,7 +300,7 @@ function App() {
     const toolsPayload = buildToolsPayload()
     const requestBody1 = {
       model: settings.model,
-      messages: buildApiMessages(messages),
+      messages: buildApiMessages(newMessages), // Use newMessages instead of messages
       ...(toolsPayload.length > 0 && { tools: toolsPayload }),
       temperature: 0.7,
       max_tokens: 2048
@@ -321,11 +323,11 @@ function App() {
       setLastResponse(data1)
       setActiveTab('response')
 
-      if (!res1.ok) {
-        throw new Error(data1.error?.message || `HTTP ${res1.status}`)
+      if (!res1.ok || !data1?.choices?.[0]?.message) {
+        throw new Error(data1?.error?.message || data1?.error || `HTTP ${res1.status}`)
       }
 
-      const assistantMsg = data1.choices?.[0]?.message
+      const assistantMsg = data1.choices[0].message
 
       // ============ CHECK FOR TOOL CALLS ============
       if (assistantMsg?.tool_calls?.length > 0) {
@@ -357,26 +359,27 @@ function App() {
         }
 
         // ============ ROUND 2: Send tool results back (NO tools field) ============
-        const toolMessages = [
-          ...messages,
-          userMessage,
-          assistantMsg,
-          ...executedResults.map(r => ({
-            role: 'tool',
-            tool_call_id: r.tool_call_id,
-            name: r.name,
-            content: r.content
-          }))
-        ]
+        // Build complete message history with system prompt
+        const completeMessages = []
+        if (settings.systemPrompt?.trim()) {
+          completeMessages.push({ role: 'system', content: settings.systemPrompt })
+        }
+        // Add all user messages
+        completeMessages.push(...messages.map(m => ({ role: m.role, content: m.content })))
+        // Add current user message
+        completeMessages.push({ role: 'user', content: input })
+        // Add assistant's tool call message
+        completeMessages.push(assistantMsg)
+        // Add tool results
+        completeMessages.push(...executedResults.map(r => ({
+          role: 'tool',
+          tool_call_id: r.tool_call_id,
+          content: r.content
+        })))
 
         const requestBody2 = {
           model: settings.model,
-          messages: [
-            ...(settings.systemPrompt?.trim()
-              ? [{ role: 'system', content: settings.systemPrompt }]
-              : []),
-            ...toolMessages
-          ],
+          messages: completeMessages,
           temperature: 0.7,
           max_tokens: 2048
           // NO tools field - this is intentional!
@@ -397,16 +400,16 @@ function App() {
         const data2 = await res2.json()
         setLastResponse(data2)
 
-        if (res2.ok) {
-          const finalContent = data2.choices?.[0]?.message?.content || 'No response'
-          setMessages(prev => {
-            const updated = [...prev, { role: 'assistant', content: finalContent }]
-            saveCurrentConversation(updated)
-            return updated
-          })
-        } else {
-          throw new Error(data2.error?.message || `HTTP ${res2.status}`)
+        if (!res2.ok || !data2?.choices?.[0]?.message) {
+          throw new Error(data2?.error?.message || data2?.error || `HTTP ${res2.status}`)
         }
+
+        const finalContent = data2.choices[0].message?.content || 'No response'
+        setMessages(prev => {
+          const updated = [...prev, { role: 'assistant', content: finalContent }]
+          saveCurrentConversation(updated)
+          return updated
+        })
       } else {
         // No tool calls, just text response
         setMessages(prev => {
