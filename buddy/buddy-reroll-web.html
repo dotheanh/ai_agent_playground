@@ -90,47 +90,73 @@
     }
 
     .main-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .top-section {
+      grid-column: 1 / -1;
+    }
+
+    .bottom-section {
+      grid-column: 1 / -1;
       display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 2rem;
-      align-items: start;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
     }
 
     @media (max-width: 1100px) {
-      .main-grid {
+      .bottom-section {
         grid-template-columns: 1fr;
       }
     }
 
-    /* Preview Panel - Left Side */
-    .preview-panel {
+    /* Combined Card for Preview + Attributes */
+    .combined-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 2rem;
-      position: sticky;
-      top: 2rem;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .combined-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Preview Panel */
+    .preview-panel {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem;
     }
 
     .preview-header {
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .preview-title {
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
 
-    /* Buddy Display */
+    /* Buddy Display - taller */
     .buddy-display {
       background: #000;
-      border-radius: 20px;
-      padding: 2rem;
-      min-height: 280px;
+      border-radius: 16px;
+      padding: 1.5rem;
+      min-height: 320px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -434,7 +460,8 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 1.5rem;
+      padding: 1rem;
+      height: 100%;
     }
 
     .panel-header {
@@ -812,35 +839,35 @@
 
     /* Instructions panel */
     .instructions {
-      margin-top: 2rem;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1rem;
+      height: 100%;
     }
 
     .instructions h3 {
-      font-size: 1rem;
-      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
       color: var(--accent);
     }
 
     .instructions ol {
       padding-left: 1.25rem;
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
 
     .instructions li {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .instructions code {
       background: var(--bg-secondary);
-      padding: 0.2rem 0.5rem;
-      border-radius: 6px;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
       font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--accent);
     }
 
@@ -883,64 +910,71 @@
     </header>
 
     <div class="main-grid">
-      <!-- Left Panel: Preview -->
-      <div class="preview-panel">
-        <div class="preview-header">
-          <div class="preview-title">Live Preview</div>
-        </div>
+      <!-- Combined Card: Preview + Attributes -->
+      <div class="top-section">
+        <div class="combined-card">
+          <!-- Preview Panel -->
+          <div class="preview-panel">
+            <div class="preview-header">
+              <div class="preview-title">Live Preview</div>
+            </div>
 
-        <!-- Buddy Display -->
-        <div class="buddy-display">
-          <div class="buddy-preview" id="buddyPreview">
-            <div class="no-selection">Chọn thuộc tính để xem preview</div>
-          </div>
-        </div>
-
-        <!-- Controls Panel -->
-        <div class="controls-panel" style="margin-top: 1.5rem;">
-          <div class="panel-header">
-            <span class="panel-icon">🎯</span>
-            <h2 class="panel-title">Chọn thuộc tính</h2>
+            <!-- Buddy Display -->
+            <div class="buddy-display">
+              <div class="buddy-preview" id="buddyPreview">
+                <div class="no-selection">Chọn thuộc tính để xem preview</div>
+              </div>
+            </div>
           </div>
 
-          <!-- Species -->
-          <div class="config-section">
-            <div class="section-label">Species</div>
-            <div class="species-grid" id="speciesGrid"></div>
-          </div>
+          <!-- Attributes Panel -->
+          <div class="controls-panel">
+            <div class="panel-header">
+              <span class="panel-icon">🎯</span>
+              <h2 class="panel-title">Chọn thuộc tính</h2>
+            </div>
 
-          <!-- Rarity -->
-          <div class="config-section">
-            <div class="section-label">Rarity</div>
-            <div class="rarity-row" id="rarityRow"></div>
-          </div>
+            <!-- Species -->
+            <div class="config-section">
+              <div class="section-label">Species</div>
+              <div class="species-grid" id="speciesGrid"></div>
+            </div>
 
-          <!-- Eye -->
-          <div class="config-section">
-            <div class="section-label">Eye</div>
-            <div class="icon-grid" id="eyeGrid"></div>
-          </div>
+            <!-- Rarity -->
+            <div class="config-section">
+              <div class="section-label">Rarity</div>
+              <div class="rarity-row" id="rarityRow"></div>
+            </div>
 
-          <!-- Hat -->
-          <div class="config-section">
-            <div class="section-label">Hat</div>
-            <div class="hat-grid" id="hatGrid"></div>
-          </div>
+            <!-- Eye -->
+            <div class="config-section">
+              <div class="section-label">Eye</div>
+              <div class="icon-grid" id="eyeGrid"></div>
+            </div>
 
-          <!-- Shiny -->
-          <div class="config-section">
-            <div class="section-label">Shiny</div>
-            <div class="toggle-group" id="shinyGroup">
-              <button class="toggle-btn selected" data-value="any">Any</button>
-              <button class="toggle-btn" data-value="true">Yes ✨</button>
-              <button class="toggle-btn" data-value="false">No</button>
+            <!-- Hat -->
+            <div class="config-section">
+              <div class="section-label">Hat</div>
+              <div class="hat-grid" id="hatGrid"></div>
+            </div>
+
+            <!-- Shiny -->
+            <div class="config-section">
+              <div class="section-label">Shiny</div>
+              <div class="toggle-group" id="shinyGroup">
+                <button class="toggle-btn selected" data-value="any">Any</button>
+                <button class="toggle-btn" data-value="true">Yes ✨</button>
+                <button class="toggle-btn" data-value="false">No</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Right Panel: Settings -->
-      <div class="controls-panel">
+      <!-- Bottom Row: Settings + Instructions -->
+      <div class="bottom-section">
+        <!-- Search Settings (Left) -->
+        <div class="controls-panel">
         <div class="panel-header">
           <span class="panel-icon">⚙️</span>
           <h2 class="panel-title">Cài đặt tìm kiếm</h2>
@@ -1010,18 +1044,18 @@
           <div class="output-area" id="outputArea"></div>
         </div>
       </div>
-    </div>
 
-    <!-- Instructions -->
-    <div class="instructions">
-      <h3>📋 Hướng dẫn sử dụng sau khi tìm thấy UID</h3>
-      <ol>
-        <li>Mở file <code>~/.claude.json</code> (hoặc <code>C:\Users\[Tên]\.claude.json</code> trên Windows)</li>
-        <li>Xóa field <code>companion</code> (nếu có) — đây là pet cũ đang được lưu</li>
-        <li>Thay thế <code>userID</code> bằng UID mới tìm được</li>
-        <li>Restart Claude Code</li>
-        <li>Gõ lệnh <code>/buddy</code> để nhận Buddy mới!</li>
-      </ol>
+      <!-- Instructions (Right) -->
+      <div class="instructions">
+        <h3>📋 Hướng dẫn sau khi tìm thấy UID</h3>
+        <ol>
+          <li>Mở file <code>~/.claude.json</code></li>
+          <li>Xóa field <code>companion</code> (nếu có)</li>
+          <li>Thay thế <code>userID</code> bằng UID mới</li>
+          <li>Restart Claude Code</li>
+          <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
+        </ol>
+      </div>
     </div>
   </div>
 
