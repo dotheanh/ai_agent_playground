@@ -61,6 +61,10 @@
       position: relative;
     }
 
+    header {
+      position: relative;
+    }
+
     header::after {
       content: '';
       position: absolute;
@@ -70,6 +74,226 @@
       width: 200px;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    .history-btn {
+      position: absolute;
+      top: 1rem;
+      right: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .history-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: var(--border-light);
+    }
+
+    .history-btn .badge {
+      background: var(--accent);
+      color: white;
+      padding: 0.1rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+    }
+
+    /* History Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      max-width: 800px;
+      width: 90%;
+      max-height: 80vh;
+      overflow: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .close-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+    }
+
+    .close-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .history-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .history-item {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    .history-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .history-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .history-uid {
+      background: var(--bg-tertiary);
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      display: inline-block;
+    }
+
+    .copy-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+
+    .copy-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .history-preview {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .history-avatar {
+      background: var(--bg-tertiary);
+      padding: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.55rem;
+      line-height: 1;
+      white-space: pre;
+      flex-shrink: 0;
+      min-width: 70px;
+      overflow: visible;
+    }
+
+    /* Pet Button */
+    .pet-btn {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .pet-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: var(--accent);
+    }
+
+    .pet-btn:active {
+      transform: scale(0.98);
+    }
+
+    .pet-btn.petting {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+      animation: pet-pulse 0.5s ease;
+    }
+
+    @keyframes pet-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Pet Hearts Animation */
+    .pet-hearts {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      animation: heart-float 0.5s ease-out;
+    }
+
+    @keyframes heart-float {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-30px); }
+    }
+
+    .history-info {
+      flex: 1;
+      font-size: 0.85rem;
+    }
+
+    .history-info div {
+      margin-bottom: 0.25rem;
     }
 
     h1 {
@@ -905,6 +1129,10 @@
 <body>
   <div class="container">
     <header>
+      <button class="history-btn" id="historyBtn">
+        <span>📜 Lịch sử</span>
+        <span class="badge" id="historyBadge">0</span>
+      </button>
       <h1>Claude Buddy Reroll</h1>
       <p class="subtitle">Tìm Buddy hoàn hảo cho Claude Code của bạn</p>
     </header>
@@ -925,6 +1153,12 @@
                 <div class="no-selection">Chọn thuộc tính để xem preview</div>
               </div>
             </div>
+
+            <!-- Pet Button -->
+            <button class="pet-btn" id="petBtn">
+              <span>🐾</span>
+              <span>Pet Buddy</span>
+            </button>
           </div>
 
           <!-- Attributes Panel -->
@@ -1395,8 +1629,156 @@
       return true;
     }
 
+    // === HISTORY MANAGEMENT ===
+    const MAX_HISTORY = 10;
+
+    function loadHistory() {
+      const saved = localStorage.getItem('buddyHistory');
+      return saved ? JSON.parse(saved) : [];
+    }
+
+    function saveToHistory(buddy, userId) {
+      const history = loadHistory();
+      const entry = {
+        id: Date.now(),
+        userId,
+        buddy,
+        timestamp: new Date().toISOString()
+      };
+      history.unshift(entry);
+      if (history.length > MAX_HISTORY) {
+        history.pop();
+      }
+      localStorage.setItem('buddyHistory', JSON.stringify(history));
+      updateHistoryBadge();
+    }
+
+    function updateHistoryBadge() {
+      const history = loadHistory();
+      const badge = document.getElementById('historyBadge');
+      if (badge) {
+        badge.textContent = history.length;
+        badge.style.display = history.length > 0 ? 'inline' : 'none';
+      }
+    }
+
+    function showHistoryModal() {
+      const history = loadHistory();
+      if (history.length === 0) {
+        alert('Chưa có lịch sử!');
+        return;
+      }
+
+      const overlay = document.getElementById('historyModal');
+      const list = document.getElementById('historyList');
+
+      list.innerHTML = history.map(entry => {
+        const buddy = entry.buddy;
+        const date = new Date(entry.timestamp);
+        const dateStr = date.toLocaleDateString('vi-VN') + ' ' + date.toLocaleTimeString('vi-VN', {hour: '2-digit', minute: '2-digit'});
+        const rarityColor = RARITY_COLORS[buddy.rarity];
+
+        // Render ASCII sprite for history
+        const asciiLines = BODIES[buddy.species] ? BODIES[buddy.species][0] : BODIES.duck[0];
+        const ascii = asciiLines.map(l => l.replace('{E}', buddy.eye)).join('\n');
+
+        return `
+          <div class="history-item">
+            <div class="history-item-header">
+              <span class="history-date">${dateStr}</span>
+              <div>
+                <span class="history-uid">${entry.userId}</span>
+                <button class="copy-btn" onclick="copyToClipboard('${entry.userId}')">📋</button>
+              </div>
+            </div>
+            <div class="history-preview">
+              <pre class="history-avatar" style="color: ${rarityColor}; font-family: 'Fira Code', monospace; font-size: 0.55rem; line-height: 1; margin: 0; white-space: pre;">${ascii}</pre>
+              <div class="history-info">
+                <div style="font-weight: 500; color: var(--text-primary);">${buddy.species} ${RARITY_STARS[buddy.rarity]}</div>
+                <div style="color: var(--text-secondary);">rarity: ${buddy.rarity}</div>
+                <div style="color: var(--text-secondary);">eye: ${buddy.eye}, hat: ${buddy.hat}</div>
+                ${buddy.shiny ? '<div style="color: #f472b6;">✨ Shiny</div>' : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      overlay.classList.add('active');
+    }
+
+    // === PET ANIMATION ===
+    const PET_BURST_MS = 2500;
+    const PET_HEARTS = [
+      `   ♥    ♥   `,
+      `  ♥  ♥  ♥  `,
+      ` ♥   ♥  ♥   `,
+      `♥  ♥      ♥ `,
+      '·    ·   ·  '
+    ];
+
+    function petBuddy() {
+      const petBtn = document.getElementById('petBtn');
+      const previewCard = petBtn.closest('.preview-panel');
+
+      // Get current state
+      const species = state.species || 'duck';
+      const rarity = state.rarity || 'legendary';
+      const eye = state.eye || '·';
+      const hat = state.hat || 'none';
+      const rarityColor = RARITY_COLORS[rarity];
+
+      // Button animation
+      petBtn.classList.add('petting');
+      setTimeout(() => petBtn.classList.remove('petting'), 500);
+
+      // Hearts animation
+      const heartsContainer = document.createElement('div');
+      heartsContainer.className = 'pet-hearts';
+      heartsContainer.innerHTML = PET_HEARTS[0];
+      previewCard.insertBefore(heartsContainer, previewCard.firstChild);
+
+      // Remove hearts after animation
+      setTimeout(() => {
+        if (heartsContainer.parentNode) {
+          heartsContainer.parentNode.removeChild(heartsContainer);
+        }
+      }, 500);
+
+      // Run pet animation on sprite (fast frame cycling for 2.5s)
+      const frameCount = BODIES[species]?.length || 3;
+      const startTime = Date.now();
+      let petTick = 0;
+
+      const petAnimate = () => {
+        const elapsed = Date.now() - startTime;
+        if (elapsed >= PET_BURST_MS) return;
+
+        // When petting: cycle ALL frames fast
+        const spriteLines = renderSprite(species, eye, hat, petTick % frameCount);
+        const spriteContent = document.getElementById('spriteContent');
+        if (spriteContent) {
+          spriteContent.textContent = spriteLines.join('\n');
+        }
+
+        petTick++;
+        requestAnimationFrame(petAnimate);
+      };
+
+      petAnimate();
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Đã copy UID: ' + text);
+      });
+    }
+
     // === UI ===
     function initUI() {
+      // History
+      document.getElementById('historyBtn').onclick = showHistoryModal;
+
       // Species - use ASCII art from first frame
       const speciesGrid = document.getElementById('speciesGrid');
       SPECIES.forEach(s => {
@@ -1536,6 +1918,11 @@
           if (found.length === 0) {
             outputArea.innerHTML = `<div class="output-line output-error">❌ Không tìm thấy (đã thử ${limit.toLocaleString()} lần, ${elapsed}s)</div>`;
           } else {
+            // Save found results to history
+            found.forEach(match => {
+              saveToHistory(match.buddy, match.userId);
+            });
+
             let html = `<div class="output-line output-success">🎉 Tìm thấy ${found.length} kết quả (${elapsed}s)</div>`;
             found.forEach((match, idx) => {
               const shinyText = match.buddy.shiny ? '<span class="shiny-text">✨</span>' : '';
@@ -1565,6 +1952,21 @@
     // Initialize
     initUI();
     updatePreview(); // Show initial preview
+    updateHistoryBadge(); // Update badge on load
+
+    // Pet button handler
+    document.getElementById('petBtn')?.addEventListener('click', petBuddy);
   </script>
+
+  <!-- History Modal -->
+  <div class="modal-overlay" id="historyModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">📜 Lịch sử kết quả</h2>
+        <button class="close-btn" onclick="document.getElementById('historyModal').classList.remove('active')">×</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+  </div>
 </body>
 </html>
