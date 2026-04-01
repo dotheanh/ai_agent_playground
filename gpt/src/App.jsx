@@ -1,6 +1,28 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
 
+// ============ DATABASE LAYER (localStorage) ============
+const DB_KEY = 'gpt_conversations'
+
+const dbOperations = {
+  getAll() {
+    try {
+      const data = localStorage.getItem(DB_KEY)
+      return data ? JSON.parse(data) : []
+    } catch {
+      return []
+    }
+  },
+
+  save(conversations) {
+    try {
+      localStorage.setItem(DB_KEY, JSON.stringify(conversations))
+    } catch (e) {
+      console.error('Save failed:', e)
+    }
+  }
+}
+
 // ============ TOOL DEFINITIONS ============
 const TOOLS = {
   get_current_time: {
@@ -99,26 +121,6 @@ const executeTool = async (toolName, args) => {
   }
 }
 
-// ============ LOCAL STORAGE ============
-const STORAGE_KEY = 'gpt_conversations'
-
-const loadConversations = () => {
-  try {
-    const data = localStorage.getItem(STORAGE_KEY)
-    return data ? JSON.parse(data) : []
-  } catch {
-    return []
-  }
-}
-
-const saveConversations = (conversations) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations))
-  } catch (e) {
-    console.error('Save failed:', e)
-  }
-}
-
 // ============ MAIN APP ============
 function App() {
   const [input, setInput] = useState('')
@@ -133,8 +135,8 @@ function App() {
     systemPrompt: 'You are a helpful assistant. Your name is Thế Anh.'
   })
 
-  // Conversation history
-  const [conversations, setConversations] = useState(loadConversations)
+  // Conversation state
+  const [conversations, setConversations] = useState([])
   const [currentConversationId, setCurrentConversationId] = useState(null)
   const [conversationName, setConversationName] = useState('')
 
@@ -148,8 +150,8 @@ function App() {
   })
   const [notes, setNotes] = useState([])
 
-  // Timeline state (Workshop 3)
-  const [timeline, setTimeline] = useState([]) // [{type: 'thinking'|'tool_call'|'tool_result'|'done', content, timestamp}]
+  // Timeline state
+  const [timeline, setTimeline] = useState([])
   const [loopWarning, setLoopWarning] = useState(null)
   const timelineRef = useRef(null)
 
@@ -157,17 +159,18 @@ function App() {
   const [lastResponse, setLastResponse] = useState(null)
   const [error, setError] = useState(null)
 
+  // Initialize - load conversations from localStorage
+  useEffect(() => {
+    const convs = dbOperations.getAll()
+    setConversations(convs)
+  }, [])
+
   // Auto-scroll timeline
   useEffect(() => {
     if (timelineRef.current) {
       timelineRef.current.scrollTop = timelineRef.current.scrollHeight
     }
   }, [timeline])
-
-  // Auto-save
-  useEffect(() => {
-    saveConversations(conversations)
-  }, [conversations])
 
   // Build tools payload
   const buildToolsPayload = () => {
@@ -183,7 +186,7 @@ function App() {
       }))
   }
 
-  // Add step to timeline with animation
+  // Add step to timeline
   const addTimelineStep = (type, content) => {
     setTimeline(prev => [...prev, { type, content, id: Date.now() + Math.random() }])
   }
@@ -206,7 +209,7 @@ function App() {
     return result
   }
 
-  // AGENTIC LOOP - Main handler
+  // AGENTIC LOOP
   const handleSend = async () => {
     if (!input.trim() || !settings.apiKey) return
 
@@ -218,14 +221,18 @@ function App() {
     const userMessage = { role: 'user', content: input }
     const newMessages = [...messages, userMessage]
 
-    setMessages(prev => {
-      const updated = [...prev, userMessage]
-      saveCurrentConversation(updated)
-      return updated
-    })
+    setMessages(newMessages)
     setInput('')
 
-    // Message history for loop
+    // Ensure conversation exists
+    let convId = currentConversationId
+    if (!convId) {
+      convId = createNewConversation()
+    }
+
+    // Save user message
+    updateConversation(convId, newMessages)
+
     const messageHistory = [...newMessages]
     const MAX_LOOPS = 10
 
@@ -276,16 +283,13 @@ function App() {
 
         const assistantMsg = data.choices[0].message
 
-        // Check for tool calls
         if (assistantMsg.tool_calls?.length > 0) {
-          // Display tool calls in timeline
           for (const call of assistantMsg.tool_calls) {
             const args = JSON.parse(call.function.arguments || '{}')
             const argsStr = Object.entries(args).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join(', ')
             addTimelineStep('tool_call', `🔧 ${call.function.name}(${argsStr || ''})`)
           }
 
-          // Execute tools
           const toolResults = []
           for (const call of assistantMsg.tool_calls) {
             const result = await executeToolWithResult(call)
@@ -297,32 +301,25 @@ function App() {
             })
           }
 
-          // Add to message history
           messageHistory.push(assistantMsg)
           messageHistory.push(...toolResults)
-
           loopCount++
         } else {
-          // No more tool calls - we're done!
           finalContent = assistantMsg.content || 'No response'
           addTimelineStep('done', `✅ ${finalContent}`)
           break
         }
 
-        // Check loop limit
         if (loopCount >= MAX_LOOPS) {
           setLoopWarning(`⚠️ Đã đạt giới hạn ${MAX_LOOPS} vòng lặp!`)
           addTimelineStep('done', `⚠️ Dừng sau ${MAX_LOOPS} vòng.`)
         }
       }
 
-      // Add final message to chat
       if (finalContent) {
-        setMessages(prev => {
-          const updated = [...prev, { role: 'assistant', content: finalContent }]
-          saveCurrentConversation(updated)
-          return updated
-        })
+        const finalMessages = [...messageHistory, { role: 'assistant', content: finalContent }]
+        setMessages(finalMessages)
+        await updateConversation(convId, finalMessages)
       }
 
     } catch (err) {
@@ -332,45 +329,58 @@ function App() {
     }
   }
 
-  // Conversation management
+  // Conversation operations
   const createNewConversation = () => {
-    const newConv = {
-      id: Date.now().toString(),
-      name: conversationName || `Chat ${new Date().toLocaleDateString('vi-VN')}`,
+    const conv = {
+      id: crypto.randomUUID(),
+      name: `Chat ${new Date().toLocaleDateString('vi-VN')}`,
       messages: [],
       settings: { ...settings },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     }
-    setConversations(prev => [newConv, ...prev])
-    setCurrentConversationId(newConv.id)
-    return newConv
+    const allConvs = dbOperations.getAll()
+    dbOperations.save([conv, ...allConvs])
+    setConversations([conv, ...allConvs])
+    setCurrentConversationId(conv.id)
+    setConversationName(conv.name)
+    return conv.id
   }
 
-  const saveCurrentConversation = (msgs) => {
-    if (!currentConversationId) {
-      createNewConversation()
+  const updateConversation = (convId, msgs) => {
+    const allConvs = dbOperations.getAll()
+    const conv = allConvs.find(c => c.id === convId)
+    if (!conv) return
+
+    const updated = {
+      ...conv,
+      messages: msgs,
+      updatedAt: new Date().toISOString()
     }
-    setConversations(prev => prev.map(conv =>
-      conv.id === currentConversationId
-        ? { ...conv, messages: msgs, updatedAt: new Date().toISOString() }
-        : conv
-    ))
+    const newConvs = allConvs.map(c => c.id === convId ? updated : c)
+    dbOperations.save(newConvs)
+    setConversations(newConvs)
   }
 
   const loadConversation = (convId) => {
-    const conv = conversations.find(c => c.id === convId)
+    const allConvs = dbOperations.getAll()
+    const conv = allConvs.find(c => c.id === convId)
     if (conv) {
       setCurrentConversationId(convId)
       setMessages(conv.messages)
-      setSettings(prev => ({ ...prev, ...conv.settings }))
       setConversationName(conv.name)
+      setSettings(prev => ({ ...prev, ...conv.settings }))
+      setConversations(allConvs)
     }
   }
 
   const deleteConversation = (convId) => {
-    setConversations(prev => prev.filter(c => c.id !== convId))
-    if (currentConversationId === convId) handleClear()
+    const allConvs = dbOperations.getAll().filter(c => c.id !== convId)
+    dbOperations.save(allConvs)
+    setConversations(allConvs)
+    if (currentConversationId === convId) {
+      handleClear()
+    }
   }
 
   const handleClear = () => {
@@ -398,6 +408,11 @@ function App() {
 
   const handleToolToggle = (toolName) => {
     setEnabledTools(prev => ({ ...prev, [toolName]: !prev[toolName] }))
+  }
+
+  const handleNewChat = () => {
+    handleClear()
+    createNewConversation()
   }
 
   const status = isLoading ? 'Running...' : error ? 'Error' : 'Ready'
@@ -463,19 +478,28 @@ function App() {
         <div className="sidebar">
           <div className="sidebar-header">
             <h3>History</h3>
-            <button className="btn-new-chat" onClick={() => { handleClear(); createNewConversation(); }}>+ New</button>
+            <button className="btn-new-chat" onClick={handleNewChat}>+ New</button>
           </div>
           <div className="conversation-list">
             {conversations.length === 0 ? (
               <div className="no-conversations">No conversations</div>
             ) : (
               conversations.map(conv => (
-                <div key={conv.id} className={`conversation-item ${conv.id === currentConversationId ? 'active' : ''}`} onClick={() => loadConversation(conv.id)}>
+                <div
+                  key={conv.id}
+                  className={`conversation-item ${conv.id === currentConversationId ? 'active' : ''}`}
+                  onClick={() => loadConversation(conv.id)}
+                >
                   <div className="conversation-info">
                     <div className="conversation-name">{conv.name}</div>
                     <div className="conversation-meta">{conv.messages.length} msgs</div>
                   </div>
-                  <button className="btn-delete-conv" onClick={(e) => { e.stopPropagation(); deleteConversation(conv.id); }}>×</button>
+                  <button
+                    className="btn-delete-conv"
+                    onClick={(e) => { e.stopPropagation(); deleteConversation(conv.id); }}
+                  >
+                    ×
+                  </button>
                 </div>
               ))
             )}
@@ -496,23 +520,21 @@ function App() {
                 <p>Send a message to start</p>
               </div>
             ) : (
-              <>
-                {messages.map((msg, idx) => (
-                  <div key={idx} className={`message ${msg.role}`}>
-                    <div className="label">{msg.role}</div>
-                    <div className="message-content">{msg.content}</div>
-                  </div>
-                ))}
-              </>
+              messages.map((msg, idx) => (
+                <div key={idx} className={`message ${msg.role}`}>
+                  <div className="label">{msg.role}</div>
+                  <div className="message-content">{msg.content}</div>
+                </div>
+              ))
             )}
           </div>
 
-          {/* Timeline View (Workshop 3) */}
+          {/* Timeline */}
           {timeline.length > 0 && (
             <div className="timeline-container" ref={timelineRef}>
               {loopWarning && <div className="loop-warning">{loopWarning}</div>}
-              {timeline.map((step, idx) => (
-                <div key={step.id} className={`timeline-step ${step.type}`} style={{ animationDelay: `${idx * 0.1}s` }}>
+              {timeline.map((step) => (
+                <div key={step.id} className={`timeline-step ${step.type}`}>
                   <span className="step-icon">
                     {step.type === 'thinking' && '🤔'}
                     {step.type === 'tool_call' && '🔧'}
