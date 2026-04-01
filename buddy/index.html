@@ -1879,6 +1879,7 @@
       });
       document.getElementById('oauthAlgoSection').style.display = 'none';
       document.getElementById('commandOutput').style.display = 'none';
+      closeRiskModal();
       updateInstructionsForMode();
     }
 
@@ -2361,14 +2362,11 @@
           document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
           btn.classList.add('selected');
           state.modeType = mode;
-          document.getElementById('oauthAlgoSection').classList.toggle('active', mode === 'oauth-account');
-          document.getElementById('riskBanner').classList.toggle('active', mode === 'oauth-account');
+          document.getElementById('oauthAlgoSection').style.display = mode === 'oauth-account' ? 'block' : 'none';
           updateInstructionsForMode();
 
           if (mode === 'oauth-account') {
             openRiskModal();
-          } else {
-            updateInstructionsForMode();
           }
         };
       });

@@ -389,26 +389,6 @@
       opacity: 1;
     }
 
-    /* Risk Banner */
-    .risk-banner {
-      background: #fef3c7;
-      border: 1px solid #f59e0b;
-      border-left: 4px solid #d97706;
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      color: #92400e;
-      font-size: 0.85rem;
-      display: none;
-    }
-
-    .risk-banner.active {
-      display: block;
-    }
-
-    .risk-banner strong {
-      color: #b45309;
-    }
 
     /* Risk Modal */
     .risk-modal-overlay {
@@ -520,19 +500,6 @@
       box-shadow: 0 4px 15px rgba(248, 113, 113, 0.4);
     }
 
-    /* Hash Algorithm Selector for OAuth */
-    .oauth-algo-section {
-      display: none;
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-
-    .oauth-algo-section.active {
-      display: block;
-    }
 
     .hash-compare {
       display: grid;
@@ -1911,32 +1878,42 @@
         btn.dataset.mode === 'api-key' && btn.classList.add('selected');
       });
       document.getElementById('oauthAlgoSection').style.display = 'none';
+      document.getElementById('commandOutput').style.display = 'none';
+      closeRiskModal();
       updateInstructionsForMode();
+    }
+
+    function generateOAuthCommand() {
+      const prefix = document.getElementById('prefixInput').value || '';
+      const limit = document.getElementById('limitInput').value || '50000000';
+      const count = document.getElementById('countInput').value || '1';
+      const rarity = document.querySelector('[data-rarity].selected')?.dataset.rarity || 'legendary';
+
+      const command = `bun buddy-reroll.ts --uuid "${prefix}" --rarity ${rarity} --limit ${limit} --count ${count}`;
+      document.getElementById('commandText').textContent = command;
     }
 
     function updateInstructionsForMode() {
       const instructionsTitle = document.getElementById('instructionsTitle');
       const instructionsList = document.getElementById('instructionsList');
-      const existingNote = instructionsList.parentNode.querySelector('div[style*="rgba"]');
+      const note = document.getElementById('instructionsNote');
 
       if (state.modeType === 'oauth-account') {
         instructionsTitle.innerHTML = '📋 Hướng dẫn sau khi tìm thấy SALT';
         instructionsList.innerHTML = `
-          <li>Download script <code>bun-hash-search.ts</code> từ trang web này</li>
-          <li>Lấy account UUID từ <code>~/.claude/.credentials.json</code></li>
-          <li>Chạy script: <code>bun bun-hash-search.ts</code></li>
-          <li>Copy salt tìm được</li>
-          <li>Chạy: <code>bun buddy-reroll.ts --restore</code> để backup</li>
-          <li>Patch binary: Chạy lại script với salt mong muốn</li>
+          <li>Nhập account UUID của bạn vào ô "Prefix" ở bên trên</li>
+          <li>Chọn Hash Algorithm: Bun.hash để get exact match</li>
+          <li>Copy command được sinh ra và chạy trong terminal</li>
+          <li>Script sẽ brute-force salt và hiển thị kết quả</li>
+          <li>Dùng claude-buddy-reroll để patch binary với salt tìm được</li>
           <li>Xóa companion state trong <code>~/.claude/.config.json</code></li>
           <li>Restart Claude Code</li>
           <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
         `;
-        if (existingNote) {
-          existingNote.style.background = 'rgba(248, 113, 113, 0.1)';
-          existingNote.style.color = '#f87171';
-          existingNote.innerHTML = '⚠️ <strong>Cảnh báo:</strong> Thao tác này có rủi ro pháp lý - chỉ sử dụng nếu hiểu rõ rủi ro';
-        }
+        note.style.background = 'rgba(248, 113, 113, 0.1)';
+        note.style.color = '#f87171';
+        note.style.border = '1px solid #f87171';
+        note.innerHTML = '⚠️ <strong>Cảnh báo:</strong> Thao tác này có rủi ro pháp lý - binary patching có thể vi phạm ToS';
       } else {
         instructionsTitle.innerHTML = '📋 Hướng dẫn sau khi tìm thấy UID';
         instructionsList.innerHTML = `
@@ -1946,17 +1923,10 @@
           <li>Restart Claude Code</li>
           <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
         `;
-        if (!existingNote) {
-          const note = document.createElement('div');
-          note.style.marginTop = '1rem';
-          note.style.padding = '0.75rem';
-          note.style.background = 'rgba(74, 222, 128, 0.1)';
-          note.style.borderRadius = '8px';
-          note.style.fontSize = '0.75rem';
-          note.style.color = 'var(--success)';
-          note.innerHTML = '💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service';
-          instructionsList.parentNode.appendChild(note);
-        }
+        note.style.background = 'rgba(74, 222, 128, 0.1)';
+        note.style.color = 'var(--success)';
+        note.style.border = 'none';
+        note.innerHTML = '💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service';
       }
     }
 
@@ -2392,14 +2362,11 @@
           document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
           btn.classList.add('selected');
           state.modeType = mode;
-          document.getElementById('oauthAlgoSection').classList.toggle('active', mode === 'oauth-account');
-          document.getElementById('riskBanner').classList.toggle('active', mode === 'oauth-account');
+          document.getElementById('oauthAlgoSection').style.display = mode === 'oauth-account' ? 'block' : 'none';
           updateInstructionsForMode();
 
           if (mode === 'oauth-account') {
             openRiskModal();
-          } else {
-            updateInstructionsForMode();
           }
         };
       });
@@ -2410,13 +2377,21 @@
           document.querySelectorAll('.hash-option').forEach(o => o.classList.remove('selected'));
           opt.classList.add('selected');
           currentHashAlgorithm = opt.dataset.hash;
-          document.getElementById('downloadScriptBtn').style.display = opt.dataset.hash === 'bun' ? 'block' : 'none';
+          if (opt.dataset.hash === 'bun' && state.modeType === 'oauth-account') {
+            generateOAuthCommand();
+            document.getElementById('commandOutput').style.display = 'block';
+          } else {
+            document.getElementById('commandOutput').style.display = 'none';
+          }
         };
       });
 
-      // Download script button
-      document.getElementById('downloadScriptBtn').onclick = () => {
-        window.open('bun-hash-search.ts', '_blank');
+      // Copy command button
+      document.getElementById('copyCommandBtn').onclick = () => {
+        const commandText = document.getElementById('commandText').textContent;
+        navigator.clipboard.writeText(commandText).then(() => {
+          alert('Đã copy command!');
+        });
       };
     }
 
@@ -2555,7 +2530,7 @@
         <li>Không có cách nào ẩn danh hoàn toàn khi dùng OAuth</li>
       </ul>
       <div class="risk-actions">
-        <button class="risk-btn risk-btn-cancel" onclick="closeRiskModal()">Tôi hiểu - Quay lại</button>
+        <button class="risk-btn risk-btn-cancel" onclick="switchToApiKey()">Quay lại</button>
         <button class="risk-btn risk-btn-confirm" onclick="confirmRisk()">Tôi hiểu - Tiếp tục</button>
       </div>
     </div>
