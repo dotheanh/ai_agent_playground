@@ -153,6 +153,7 @@ function App() {
 
   // Timeline state
   const [timeline, setTimeline] = useState([])
+  const [timelineExpanded, setTimelineExpanded] = useState(true)
   const [loopWarning, setLoopWarning] = useState(null)
   const timelineRef = useRef(null)
 
@@ -537,19 +538,27 @@ function App() {
 
           {/* Timeline */}
           {timeline.length > 0 && (
-            <div className="timeline-container" ref={timelineRef}>
-              {loopWarning && <div className="loop-warning">{loopWarning}</div>}
-              {timeline.map((step) => (
-                <div key={step.id} className={`timeline-step ${step.type}`}>
-                  <span className="step-icon">
-                    {step.type === 'thinking' && '🤔'}
-                    {step.type === 'tool_call' && '🔧'}
-                    {step.type === 'tool_result' && '📥'}
-                    {step.type === 'done' && '✅'}
-                  </span>
-                  <span className="step-content">{step.content}</span>
+            <div className={`timeline-container ${!timelineExpanded ? 'collapsed' : ''}`}>
+              <div className="timeline-header" onClick={() => setTimelineExpanded(!timelineExpanded)}>
+                <span className="timeline-title">📋 Execution Log</span>
+                <span className="timeline-toggle">{timelineExpanded ? '▼' : '▶'}</span>
+              </div>
+              {timelineExpanded && (
+                <div className="timeline-content" ref={timelineRef}>
+                  {loopWarning && <div className="loop-warning">{loopWarning}</div>}
+                  {timeline.map((step) => (
+                    <div key={step.id} className={`timeline-step ${step.type}`}>
+                      <span className="step-icon">
+                        {step.type === 'thinking' && '🤔'}
+                        {step.type === 'tool_call' && '🔧'}
+                        {step.type === 'tool_result' && '📥'}
+                        {step.type === 'done' && '✅'}
+                      </span>
+                      <span className="step-content">{step.content}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
           )}
 
