@@ -1579,40 +1579,39 @@
           <div class="section-label">Kết quả</div>
           <div class="output-area" id="outputArea"></div>
         </div>
-      </div>
 
-      <!-- OAuth Algorithm Selector (hidden by default) -->
-      <div class="oauth-algo-section" id="oauthAlgoSection">
-        <div class="section-label">Hash Algorithm (OAuth)</div>
-        <div class="hash-compare">
-          <div class="hash-option fnv selected" data-hash="fnv">
-            <div class="hash-title">
-              <span>🟢 FNV-1a</span>
-              <span class="hash-badge">Browser</span>
+        <!-- OAuth Hash Algorithm Selector (inside controls-panel for OAuth mode) -->
+        <div class="config-section oauth-algo-section" id="oauthAlgoSection" style="display: none;">
+          <div class="section-label">Hash Algorithm</div>
+          <div class="hash-compare">
+            <div class="hash-option fnv selected" data-hash="fnv">
+              <div class="hash-title">
+                <span>🟢 FNV-1a</span>
+                <span class="hash-badge">Browser</span>
+              </div>
+              <div class="hash-desc">
+                Chạy trực tiếp trên browser - Nhanh nhưng không chính xác 100%
+              </div>
             </div>
-            <div class="hash-desc">
-              Chạy trực tiếp trên browser - Nhanh nhưng kết quả có thể không chính xác 100% so với Bun.hash
+            <div class="hash-option bun" data-hash="bun">
+              <div class="hash-title">
+                <span>🟠 Bun.hash</span>
+                <span class="hash-badge">Exact</span>
+              </div>
+              <div class="hash-desc">
+                Chính xác 100% - Copy command bên dưới để chạy
+              </div>
             </div>
           </div>
-          <div class="hash-option bun" data-hash="bun">
-            <div class="hash-title">
-              <span>🟠 Bun.hash</span>
-              <span class="hash-badge">Exact Match</span>
+          <div id="commandOutput" style="margin-top: 1rem; display: none;">
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">Copy lệnh này và chạy:</div>
+            <div style="background: #0d1117; padding: 0.75rem; border-radius: 6px; font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #f87171; word-break: break-all;" id="commandText">
             </div>
-            <div class="hash-desc">
-              Chính xác 100% - Download script standalone để chạy offline (độ chính xác cao nhất)
-            </div>
+            <button id="copyCommandBtn" style="margin-top: 0.5rem; width: 100%; padding: 0.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer; font-size: 0.75rem;">
+              📋 Copy Command
+            </button>
           </div>
         </div>
-        <button id="downloadScriptBtn" style="margin-top: 1rem; width: 100%; padding: 0.75rem; background: var(--accent); border: none; border-radius: 8px; color: white; cursor: pointer; display: none;">
-          📥 Download Bun.hash Script
-        </button>
-      </div>
-
-      <!-- Risk Banner (OAuth) -->
-      <div class="risk-banner" id="riskBanner">
-        ⚠️ <strong>Cảnh báo:</strong> OAuth Account mode yêu cầu brute-force salt trong binary Claude Code.
-        Sử dụng có rủi ro pháp lý - <strong>Play at your own risk!</strong>
       </div>
 
       <!-- Instructions (Right) -->
@@ -1625,7 +1624,7 @@
           <li>Restart Claude Code</li>
           <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
         </ol>
-        <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(74, 222, 128, 0.1); border-radius: 8px; font-size: 0.75rem; color: var(--success);">
+        <div id="instructionsNote" style="margin-top: 1rem; padding: 0.75rem; border-radius: 8px; font-size: 0.75rem;">
           💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service
         </div>
       </div>
@@ -1900,9 +1899,18 @@
         btn.classList.remove('selected');
         btn.dataset.mode === 'oauth-account' && btn.classList.add('selected');
       });
-      document.getElementById('oauthAlgoSection').classList.add('active');
-      document.getElementById('riskBanner').classList.add('active');
+      document.getElementById('oauthAlgoSection').style.display = 'block';
       closeRiskModal();
+      updateInstructionsForMode();
+    }
+
+    function switchToApiKey() {
+      state.modeType = 'api-key';
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.classList.remove('selected');
+        btn.dataset.mode === 'api-key' && btn.classList.add('selected');
+      });
+      document.getElementById('oauthAlgoSection').style.display = 'none';
       updateInstructionsForMode();
     }
 
