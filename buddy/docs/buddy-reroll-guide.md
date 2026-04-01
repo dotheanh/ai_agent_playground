@@ -171,6 +171,10 @@ Script sẽ tìm pet:
 
 ### Custom options
 
+```bash
+bun buddy-reroll.js --species cat --rarity legendary --eye ✦ --hat crown --shiny --count 1
+```
+
 Sửa file `buddy-reroll.js`, thay đổi biến `TARGET`:
 
 ```javascript
