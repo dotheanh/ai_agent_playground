@@ -1,0 +1,23 @@
+{
+  "name": "claude-buddy-reroll",
+  "version": "1.0.0",
+  "description": "Reroll your Claude Code companion buddy — bruteforce the salt to get the rarity, species, and traits you want",
+  "main": "buddy-reroll.ts",
+  "scripts": {
+    "start": "bun buddy-reroll.ts",
+    "search": "bun buddy-reroll.ts --search",
+    "current": "bun buddy-reroll.ts --current",
+    "restore": "bun buddy-reroll.ts --restore"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "buddy",
+    "companion",
+    "reroll"
+  ],
+  "license": "MIT",
+  "engines": {
+    "bun": ">=1.0.0"
+  }
+}
