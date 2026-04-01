@@ -14,9 +14,14 @@ const HATS = ['none', 'crown', 'tophat', 'propeller', 'halo', 'wizard', 'beanie'
 const STAT_NAMES = ['DEBUGGING', 'PATIENCE', 'CHAOS', 'WISDOM', 'SNARK']
 const RARITY_FLOOR = { common: 5, uncommon: 15, rare: 25, epic: 35, legendary: 50 }
 
-// --- Hash function (Bun.hash) ---
-function hashBun(s) {
-  return Number(BigInt(Bun.hash(s)) & 0xffffffffn)
+// --- Hash function (FNV-1a - matches Claude Code) ---
+function hashString(s) {
+  let h = 2166136261
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i)
+    h = Math.imul(h, 16777619)
+  }
+  return h >>> 0
 }
 
 // --- PRNG (Mulberry32 — same as Claude Code) ---
@@ -36,7 +41,8 @@ function pick(rng, arr) {
 }
 
 function rollRarity(rng) {
-  let roll = rng() * 100
+  const total = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0) // 91
+  let roll = rng() * total
   for (const r of RARITIES) {
     roll -= RARITY_WEIGHTS[r]
     if (roll < 0) return r
@@ -59,7 +65,7 @@ function rollStats(rng, rarity) {
 }
 
 function rollFull(uid) {
-  const rng = mulberry32(hashBun(uid + SALT))
+  const rng = mulberry32(hashString(uid + SALT))
   const rarity = rollRarity(rng)
   const species = pick(rng, SPECIES)
   const eye = pick(rng, EYES)

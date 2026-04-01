@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Buddy Reroll - Tìm UID cho Buddy hoàn hảo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --border: #30363d;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-muted: #6e7681;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --success: #3fb950;
+      --error: #f85149;
+      --common: #8b949e;
+      --uncommon: #3fb950;
+      --rare: #58a6ff;
+      --epic: #a371f7;
+      --legendary: #f0883e;
+      --shiny: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #ff6b6b);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--epic) 50%, var(--legendary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-icon {
+      font-size: 1.25rem;
+    }
+
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .config-section {
+      margin-bottom: 1.25rem;
+    }
+
+    .config-section:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Grid layouts */
+    .species-grid, .hat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .rarity-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .icon-grid {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .species-btn, .hat-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 0.4rem;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .species-btn:hover, .hat-btn:hover {
+      background: var(--border);
+      color: var(--text-primary);
+    }
+
+    .species-btn.selected, .hat-btn.selected {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .species-btn .emoji, .hat-btn .emoji {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .rarity-pill {
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      border: 1px solid;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: transparent;
+    }
+
+    .rarity-pill[data-rarity="common"] { border-color: var(--common); color: var(--common); }
+    .rarity-pill[data-rarity="uncommon"] { border-color: var(--uncommon); color: var(--uncommon); }
+    .rarity-pill[data-rarity="rare"] { border-color: var(--rare); color: var(--rare); }
+    .rarity-pill[data-rarity="epic"] { border-color: var(--epic); color: var(--epic); }
+    .rarity-pill[data-rarity="legendary"] { border-color: var(--legendary); color: var(--legendary); }
+
+    .rarity-pill.selected[data-rarity="common"] { background: var(--common); color: var(--bg-primary); }
+    .rarity-pill.selected[data-rarity="uncommon"] { background: var(--uncommon); color: var(--bg-primary); }
+    .rarity-pill.selected[data-rarity="rare"] { background: var(--rare); color: var(--bg-primary); }
+    .rarity-pill.selected[data-rarity="epic"] { background: var(--epic); color: white; }
+    .rarity-pill.selected[data-rarity="legendary"] { background: var(--legendary); color: var(--bg-primary); }
+
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-btn:hover {
+      background: var(--border);
+    }
+
+    .icon-btn.selected {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .toggle-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .toggle-btn {
+      flex: 1;
+      padding: 0.6rem 0.8rem;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .toggle-btn:hover {
+      background: var(--border);
+    }
+
+    .toggle-btn.selected {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* Algorithm selector */
+    .algo-selector {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      padding: 0.25rem;
+    }
+
+    .algo-btn {
+      flex: 1;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .algo-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .algo-btn.selected {
+      background: var(--accent);
+      color: white;
+    }
+
+    .algo-btn small {
+      display: block;
+      font-size: 0.65rem;
+      opacity: 0.7;
+    }
+
+    /* Inputs */
+    .number-input {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .number-input input {
+      flex: 1;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+      color: var(--text-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .number-input input:focus {
+      border-color: var(--accent);
+    }
+
+    .number-input label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      min-width: 60px;
+    }
+
+    /* Run button */
+    .run-btn {
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--epic) 100%);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .run-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(88, 166, 255, 0.3);
+    }
+
+    .run-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Output */
+    .output-area {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      min-height: 200px;
+      max-height: 350px;
+      overflow: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      white-space: pre-wrap;
+    }
+
+    .output-area:empty::before {
+      content: 'Chờ kết quả...';
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .output-line {
+      padding: 0.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .output-line:last-child {
+      border-bottom: none;
+    }
+
+    .output-success { color: var(--success); }
+    .output-error { color: var(--error); }
+    .output-info { color: var(--accent); }
+
+    .attempts-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+    }
+
+    /* Instructions panel */
+    .instructions {
+      margin-top: 2rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .instructions h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .instructions ol {
+      padding-left: 1.25rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .instructions li {
+      margin-bottom: 0.5rem;
+    }
+
+    .instructions code {
+      background: var(--bg-tertiary);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    /* Shiny animation */
+    @keyframes shiny-shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .shiny-text {
+      background: var(--shiny);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shiny-shimmer 2s linear infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Claude Buddy Reroll</h1>
+      <p class="subtitle">Tìm UID sinh ra Buddy hoàn hảo cho Claude Code của bạn</p>
+    </header>
+
+    <div class="main-grid">
+      <!-- Left Panel: Filters -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-icon">🎯</span>
+          <h2 class="panel-title">Chọn thuộc tính Buddy</h2>
+        </div>
+
+        <!-- Species -->
+        <div class="config-section">
+          <div class="section-label">Species (Loài)</div>
+          <div class="species-grid" id="speciesGrid"></div>
+        </div>
+
+        <!-- Rarity -->
+        <div class="config-section">
+          <div class="section-label">Rarity (Độ hiếm)</div>
+          <div class="rarity-row" id="rarityRow"></div>
+        </div>
+
+        <!-- Eye -->
+        <div class="config-section">
+          <div class="section-label">Eye (Mắt)</div>
+          <div class="icon-grid" id="eyeGrid"></div>
+        </div>
+
+        <!-- Hat -->
+        <div class="config-section">
+          <div class="section-label">Hat (Mũ)</div>
+          <div class="hat-grid" id="hatGrid"></div>
+        </div>
+
+        <!-- Shiny -->
+        <div class="config-section">
+          <div class="section-label">Shiny (Lấp lánh)</div>
+          <div class="toggle-group" id="shinyGroup">
+            <button class="toggle-btn" data-value="any">Bất kỳ</button>
+            <button class="toggle-btn" data-value="true">Có ✨</button>
+            <button class="toggle-btn" data-value="false">Không</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Settings -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-icon">⚙️</span>
+          <h2 class="panel-title">Cài đặt tìm kiếm</h2>
+        </div>
+
+        <!-- Algorithm -->
+        <div class="config-section">
+          <div class="section-label">Thuật toán Hash</div>
+          <div class="algo-selector" id="algoSelector">
+            <button class="algo-btn selected" data-algo="fnv">
+              FNV-1a
+              <small>Claude Code 2.1.68+</small>
+            </button>
+            <button class="algo-btn" data-algo="bun">
+              Bun.hash
+              <small>Legacy / Bun runtime</small>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mode -->
+        <div class="config-section">
+          <div class="section-label">Chế độ</div>
+          <div class="toggle-group" id="modeGroup">
+            <button class="toggle-btn selected" data-mode="random">🎲 Ngẫu nhiên</button>
+            <button class="toggle-btn" data-mode="sequential">🔢 Theo thứ tự</button>
+          </div>
+        </div>
+
+        <!-- Sequential Settings -->
+        <div class="config-section" id="sequentialSettings" style="display: none;">
+          <div class="number-input">
+            <input type="text" id="prefixInput" placeholder="user-" value="user-">
+            <label>Prefix</label>
+          </div>
+        </div>
+
+        <!-- Limit -->
+        <div class="config-section">
+          <div class="section-label">Số lần thử tối đa</div>
+          <div class="number-input">
+            <input type="number" id="limitInput" value="5000000" min="1">
+            <label>lần</label>
+          </div>
+        </div>
+
+        <!-- Count -->
+        <div class="config-section">
+          <div class="section-label">Số kết quả</div>
+          <div class="number-input">
+            <input type="number" id="countInput" value="1" min="1" max="10">
+            <label>UID</label>
+          </div>
+        </div>
+
+        <!-- Run Button -->
+        <div class="config-section">
+          <button class="run-btn" id="runBtn" onclick="runSearch()">
+            <span>🚀</span>
+            <span>Bắt đầu tìm kiếm</span>
+          </button>
+        </div>
+
+        <!-- Output -->
+        <div class="config-section">
+          <div class="section-label">Kết quả</div>
+          <div class="output-area" id="outputArea"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions">
+      <h3>📋 Hướng dẫn sử dụng sau khi tìm thấy UID</h3>
+      <ol>
+        <li>Mở file <code>~/.claude.json</code> (hoặc <code>C:\Users\[Tên]\.claude.json</code> trên Windows)</li>
+        <li>Xóa field <code>companion</code> (nếu có) — đây là pet cũ đang được lưu</li>
+        <li>Thay thế <code>userID</code> bằng UID mới tìm được</li>
+        <li>Restart Claude Code</li>
+        <li>Gõ lệnh <code>/buddy</code> để nhận Buddy mới!</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    // === CONSTANTS ===
+    const SPECIES = ['duck', 'goose', 'blob', 'cat', 'dragon', 'octopus', 'owl', 'penguin', 'turtle', 'snail', 'ghost', 'axolotl', 'capybara', 'cactus', 'robot', 'rabbit', 'mushroom', 'chonk'];
+    const SPECIES_EMOJI = { duck: '🦆', goose: '🪿', blob: '🫧', cat: '🐱', dragon: '🐉', octopus: '🐙', owl: '🦉', penguin: '🐧', turtle: '🐢', snail: '🐌', ghost: '👻', axolotl: '🦎', capybara: '🦫', cactus: '🌵', robot: '🤖', rabbit: '🐰', mushroom: '🍄', chonk: '😸' };
+
+    const RARITIES = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
+    const RARITY_WEIGHTS = { common: 60, uncommon: 25, rare: 10, epic: 4, legendary: 1 };
+    const RARITY_STARS = { common: '★', uncommon: '★★', rare: '★★★', epic: '★★★★', legendary: '★★★★★' };
+
+    const EYES = ['·', '✦', '×', '◉', '@', '°'];
+    const HATS = ['none', 'crown', 'tophat', 'propeller', 'halo', 'wizard', 'beanie', 'tinyduck'];
+    const HAT_EMOJI = { none: '🚫', crown: '👑', tophat: '🎩', propeller: '🌀', halo: '😇', wizard: '🧙', beanie: '🎿', tinyduck: '🦆' };
+
+    const STAT_NAMES = ['DEBUGGING', 'PATIENCE', 'CHAOS', 'WISDOM', 'SNARK'];
+    const RARITY_FLOOR = { common: 5, uncommon: 15, rare: 25, epic: 35, legendary: 50 };
+    const SALT = 'friend-2026-401';
+
+    // === STATE ===
+    const state = {
+      species: null,
+      rarity: 'legendary',
+      eye: null,
+      hat: null,
+      shiny: 'any',
+      algo: 'fnv',
+      mode: 'random'
+    };
+
+    // === HASH FUNCTIONS ===
+    function hashFNV(s) {
+      let h = 2166136261;
+      for (let i = 0; i < s.length; i++) {
+        h ^= s.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return h >>> 0;
+    }
+
+    function hashBun(s) {
+      return Number(BigInt(Bun.hash(s)) & 0xffffffffn);
+    }
+
+    function hashString(s) {
+      return state.algo === 'fnv' ? hashFNV(s) : hashBun(s);
+    }
+
+    // === PRNG ===
+    function mulberry32(seed) {
+      let a = seed >>> 0;
+      return function () {
+        a |= 0;
+        a = (a + 0x6d2b79f5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function pick(rng, arr) {
+      return arr[Math.floor(rng() * arr.length)];
+    }
+
+    // === ROLLING LOGIC ===
+    function rollRarity(rng) {
+      const total = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
+      let roll = rng() * total;
+      for (const r of RARITIES) {
+        roll -= RARITY_WEIGHTS[r];
+        if (roll < 0) return r;
+      }
+      return 'common';
+    }
+
+    function rollStats(rng, rarity) {
+      const floor = RARITY_FLOOR[rarity];
+      let peak = pick(rng, STAT_NAMES);
+      let dump = pick(rng, STAT_NAMES);
+      while (dump === peak) dump = pick(rng, STAT_NAMES);
+
+      const stats = {};
+      for (const name of STAT_NAMES) {
+        if (name === peak) {
+          stats[name] = Math.min(100, floor + 50 + Math.floor(rng() * 30));
+        } else if (name === dump) {
+          stats[name] = Math.max(1, floor - 10 + Math.floor(rng() * 15));
+        } else {
+          stats[name] = floor + Math.floor(rng() * 40);
+        }
+      }
+      return stats;
+    }
+
+    function rollBuddy(userId) {
+      const rng = mulberry32(hashString(userId + SALT));
+      const rarity = rollRarity(rng);
+      return {
+        rarity,
+        species: pick(rng, SPECIES),
+        eye: pick(rng, EYES),
+        hat: rarity === 'common' ? 'none' : pick(rng, HATS),
+        shiny: rng() < 0.01,
+        stats: rollStats(rng, rarity)
+      };
+    }
+
+    function matches(buddy) {
+      if (state.species != null && buddy.species !== state.species) return false;
+      if (state.rarity != null && buddy.rarity !== state.rarity) return false;
+      if (state.eye != null && buddy.eye !== state.eye) return false;
+      if (state.hat != null && buddy.hat !== state.hat) return false;
+      if (state.shiny !== 'any' && buddy.shiny !== (state.shiny === 'true')) return false;
+      return true;
+    }
+
+    // === UI ===
+    function initUI() {
+      // Species
+      const speciesGrid = document.getElementById('speciesGrid');
+      SPECIES.forEach(s => {
+        const btn = document.createElement('button');
+        btn.className = 'species-btn';
+        btn.dataset.species = s;
+        btn.innerHTML = `<span class="emoji">${SPECIES_EMOJI[s]}</span>${s}`;
+        btn.onclick = () => toggleSelection('species', s, btn);
+        speciesGrid.appendChild(btn);
+      });
+
+      // Rarity
+      const rarityRow = document.getElementById('rarityRow');
+      RARITIES.forEach(r => {
+        const pill = document.createElement('button');
+        pill.className = 'rarity-pill';
+        pill.dataset.rarity = r;
+        pill.textContent = r.charAt(0).toUpperCase() + r.slice(1);
+        pill.onclick = () => toggleSelection('rarity', r, pill);
+        if (r === 'legendary') pill.classList.add('selected');
+        rarityRow.appendChild(pill);
+      });
+
+      // Eye
+      const eyeGrid = document.getElementById('eyeGrid');
+      EYES.forEach(e => {
+        const btn = document.createElement('button');
+        btn.className = 'icon-btn';
+        btn.dataset.eye = e;
+        btn.textContent = e;
+        btn.onclick = () => toggleSelection('eye', e, btn);
+        eyeGrid.appendChild(btn);
+      });
+
+      // Hat
+      const hatGrid = document.getElementById('hatGrid');
+      HATS.forEach(h => {
+        const btn = document.createElement('button');
+        btn.className = 'hat-btn';
+        btn.dataset.hat = h;
+        btn.innerHTML = `<span class="emoji">${HAT_EMOJI[h]}</span>${h}`;
+        btn.onclick = () => toggleSelection('hat', h, btn);
+        hatGrid.appendChild(btn);
+      });
+
+      // Shiny
+      document.querySelectorAll('#shinyGroup .toggle-btn').forEach(btn => {
+        btn.onclick = () => {
+          document.querySelectorAll('#shinyGroup .toggle-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          state.shiny = btn.dataset.value;
+        };
+      });
+      document.querySelector('#shinyGroup .toggle-btn').classList.add('selected');
+
+      // Algorithm
+      document.querySelectorAll('#algoSelector .algo-btn').forEach(btn => {
+        btn.onclick = () => {
+          document.querySelectorAll('#algoSelector .algo-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          state.algo = btn.dataset.algo;
+        };
+      });
+
+      // Mode
+      document.querySelectorAll('#modeGroup .toggle-btn').forEach(btn => {
+        btn.onclick = () => {
+          document.querySelectorAll('#modeGroup .toggle-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          state.mode = btn.dataset.mode;
+          document.getElementById('sequentialSettings').style.display = state.mode === 'sequential' ? 'block' : 'none';
+        };
+      });
+    }
+
+    function toggleSelection(type, value, element) {
+      if (state[type] === value) {
+        state[type] = null;
+        element.classList.remove('selected');
+      } else {
+        document.querySelectorAll(`[data-${type}]`).forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+        state[type] = value;
+      }
+    }
+
+    // === SEARCH ===
+    function generateRandomId(bytes = 32) {
+      const chars = '0123456789abcdef';
+      let result = '';
+      for (let i = 0; i < bytes * 2; i++) {
+        result += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return result;
+    }
+
+    async function runSearch() {
+      const runBtn = document.getElementById('runBtn');
+      const outputArea = document.getElementById('outputArea');
+      const limit = parseInt(document.getElementById('limitInput').value) || 5000000;
+      const count = parseInt(document.getElementById('countInput').value) || 1;
+      const prefix = document.getElementById('prefixInput').value || 'user-';
+
+      runBtn.disabled = true;
+      runBtn.innerHTML = '<div class="spinner"></div><span>Đang tìm kiếm...</span>';
+      outputArea.innerHTML = '<div class="output-line">⏳ Bắt đầu tìm kiếm...</div>';
+
+      const found = [];
+      const startTime = Date.now();
+
+      await new Promise(resolve => {
+        setTimeout(() => {
+          for (let i = 0; i < limit; i++) {
+            const userId = state.mode === 'sequential'
+              ? `${prefix}${i}`
+              : generateRandomId(32);
+
+            const buddy = rollBuddy(userId);
+
+            if (!matches(buddy)) continue;
+
+            found.push({ userId, buddy, attempts: i + 1 });
+            if (found.length >= count) break;
+
+            if (i % 100000 === 0) {
+              outputArea.innerHTML = `<div class="output-line">🔍 Đã thử ${i.toLocaleString()} lần...</div>`;
+            }
+          }
+
+          const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
+
+          if (found.length === 0) {
+            outputArea.innerHTML = `<div class="output-line output-error">❌ Không tìm thấy (đã thử ${limit.toLocaleString()} lần, ${elapsed}s)</div>`;
+          } else {
+            let html = `<div class="output-line output-success">🎉 Tìm thấy ${found.length} kết quả (${elapsed}s)</div>`;
+            found.forEach((match, idx) => {
+              const shinyText = match.buddy.shiny ? '<span class="shiny-text">✨</span>' : '';
+              html += `
+<div class="output-line">
+  <div style="margin-bottom: 0.5rem;">
+    <strong>#${idx + 1}</strong>
+    <span class="attempts-badge">${match.attempts.toLocaleString()} lần</span>
+  </div>
+  <div>Species: ${SPECIES_EMOJI[match.buddy.species]} ${match.buddy.species}</div>
+  <div>Rarity: ${match.buddy.rarity} ${RARITY_STARS[match.buddy.rarity]} ${shinyText}</div>
+  <div>Eye: ${match.buddy.eye}</div>
+  <div>Hat: ${match.buddy.hat}</div>
+  <div style="margin-top: 0.5rem; color: var(--accent);">UID: <code>${match.userId}</code></div>
+</div>`;
+            });
+            outputArea.innerHTML = html;
+          }
+
+          runBtn.disabled = false;
+          runBtn.innerHTML = '<span>🚀</span><span>Bắt đầu tìm kiếm</span>';
+          resolve();
+        }, 50);
+      });
+    }
+
+    // Initialize
+    initUI();
+  </script>
+</body>
+</html>
