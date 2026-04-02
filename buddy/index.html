@@ -2645,6 +2645,7 @@
           btn.classList.add('selected');
           state.shiny = btn.dataset.value;
           updatePreview();
+          showEstimate();
         };
       });
       document.querySelector('#shinyGroup .toggle-btn').classList.add('selected');
@@ -2744,6 +2745,34 @@
       });
     }
 
+    // === PROGRESS ESTIMATE ===
+    function calcExpectedAttempts() {
+      const RARITY_PROBS = { common: 0.6, uncommon: 0.25, rare: 0.10, epic: 0.04, legendary: 0.01 };
+      const SPECIES_COUNT = 18;
+      const EYE_COUNT = 6;
+      const HAT_COUNT = 8;
+      const SHINY_PROB = 0.01;
+
+      let p = RARITY_PROBS[state.rarity] || 0.01;
+      if (state.species) p *= 1 / SPECIES_COUNT;
+      if (state.eye) p *= 1 / EYE_COUNT;
+      if (state.hat && state.hat !== 'none') p *= 1 / HAT_COUNT;
+      if (state.shiny === 'true') p *= SHINY_PROB;
+      if (state.shiny === 'false') p *= (1 - SHINY_PROB);
+
+      return Math.round(1 / p);
+    }
+
+    function showEstimate() {
+      const outputArea = document.getElementById('outputArea');
+      const expected = calcExpectedAttempts();
+      const prob = (1 / expected * 100).toFixed(6);
+      outputArea.innerHTML = `
+<div class="output-line">&#127919; Trung binh can ~${expected.toLocaleString()} lan de ra ket qua</div>
+<div class="output-line" style="color: var(--text-secondary); font-size: 0.8rem;">&#128202; Xac suat: 1/${expected.toLocaleString()} (${prob}%)</div>
+`;
+    }
+
     function toggleSelection(type, value, element) {
       if (state[type] === value) {
         state[type] = null;
@@ -2754,6 +2783,7 @@
         state[type] = value;
       }
       updatePreview();
+      showEstimate();
     }
 
     // === SEARCH ===
@@ -2793,91 +2823,86 @@
 
       runBtn.disabled = true;
       runBtn.innerHTML = '<div class="spinner"></div><span>Đang tìm kiếm...</span>';
-      outputArea.innerHTML = '<div class="output-line">⏳ Bắt đầu tìm kiếm...</div>';
+
+      // Yield to event loop so UI updates before heavy loop starts
+      await new Promise(resolve => setTimeout(resolve, 0));
 
       const found = [];
       const startTime = Date.now();
+      const expected = calcExpectedAttempts();
       const oauthUuid = (state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt')
         ? document.getElementById('uuidInput').value.trim()
         : null;
 
+      // Progress update every 0.5s
+      let lastUpdate = 0;
+      let i = 0;
+      const progressInterval = setInterval(() => {
+        const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+        const speed = Math.round(i / elapsed);
+        const pct = Math.min(100, (i / limit * 100)).toFixed(1);
+        outputArea.innerHTML = `
+<div class="output-line">&#128269; Da thu: ${i.toLocaleString()} / ${limit.toLocaleString()} lan (${pct}%)</div>
+<div class="output-line" style="color: var(--text-secondary); font-size: 0.8rem;">&#9889; Toc do: ~${speed.toLocaleString()} lan/giay | &#9201; ${elapsed}s</div>
+`;
+      }, 500);
+
       await new Promise(resolve => {
-        setTimeout(() => {
-          for (let i = 0; i < limit; i++) {
-            let searchValue;
+        for (i = 0; i < limit; i++) {
+          let searchValue;
 
-            if (state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt') {
-              // Patch Salt: search for salt using UUID as base
-              const salt = generateOAuthSalt(i);
-              searchValue = oauthUuid + salt;
-            } else if (state.modeType === 'oauth-account' && state.oauthSubMode === 'delete-uuid') {
-              // Delete UUID: generate random 32-byte hex userID (FNV-1a hash, same algorithm)
-              searchValue = generateRandomId(32);
-            } else {
-              // API Key mode
-              searchValue = state.mode === 'sequential'
-                ? `${prefix}${i}`
-                : generateRandomId(32);
-            }
-
-            const buddy = rollBuddy(searchValue);
-
-            if (!matches(buddy)) continue;
-
-            const idKey = (state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt')
-              ? 'salt'
-              : 'userId';
-            found.push({ [idKey]: searchValue, buddy, attempts: i + 1 });
-            if (found.length >= count) break;
-
-            if (i % 100000 === 0) {
-              outputArea.innerHTML = `<div class="output-line">🔍 Đã thử ${i.toLocaleString()} lần...</div>`;
-            }
-          }
-
-          const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
-
-          if (found.length === 0) {
-            outputArea.innerHTML = `<div class="output-line output-error">❌ Không tìm thấy (đã thử ${limit.toLocaleString()} lần, ${elapsed}s)</div>`;
+          if (state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt') {
+            const salt = generateOAuthSalt(i);
+            searchValue = oauthUuid + salt;
+          } else if (state.modeType === 'oauth-account' && state.oauthSubMode === 'delete-uuid') {
+            searchValue = generateRandomId(32);
           } else {
-            found.forEach(match => {
-              const isPatchSalt = state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt';
-              const idKey = isPatchSalt ? 'salt' : 'userId';
-              saveToHistory(match.buddy, match[idKey]);
-            });
-
-            let html = `<div class="output-line output-success">🎉 Tìm thấy ${found.length} kết quả (${elapsed}s)</div>`;
-            found.forEach((match, idx) => {
-              const shinyText = match.buddy.shiny ? '<span class="shiny-text">✨</span>' : '';
-              const isPatchSalt = state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt';
-              const isDeleteUuid = state.modeType === 'oauth-account' && state.oauthSubMode === 'delete-uuid';
-              const idLabel = isPatchSalt ? 'SALT' : 'UID';
-              const idKey = isPatchSalt ? 'salt' : 'userId';
-              const applyBtn = isDeleteUuid
-                ? `<button class="apply-btn" style="margin-top: 0.5rem; padding: 0.4rem 0.8rem; background: var(--success); border: none; border-radius: 6px; color: white; cursor: pointer; font-size: 0.75rem;" onclick="applyDeleteUuid('${match[idKey]}')">✅ Apply</button>`
-                : '';
-
-              html += `
-<div class="output-line">
-  <div style="margin-bottom: 0.5rem;">
-    <strong>#${idx + 1}</strong>
-    <span class="attempts-badge">${match.attempts.toLocaleString()} lần</span>
-  </div>
-  <div>Species: ${SPECIES_EMOJI[match.buddy.species]} ${match.buddy.species}</div>
-  <div>Rarity: ${match.buddy.rarity} ${RARITY_STARS[match.buddy.rarity]} ${shinyText}</div>
-  <div>Eye: ${match.buddy.eye}</div>
-  <div>Hat: ${match.buddy.hat}</div>
-  <div style="margin-top: 0.5rem; color: var(--accent);">${idLabel}: <code>${match[idKey]}</code></div>
-  ${applyBtn}
-</div>`;
-            });
-            outputArea.innerHTML = html;
+            searchValue = state.mode === 'sequential'
+              ? `${prefix}${i}`
+              : generateRandomId(32);
           }
 
-          runBtn.disabled = false;
-          runBtn.innerHTML = '<span>🚀</span><span>Bắt đầu tìm kiếm</span>';
-          resolve();
-        }, 50);
+          const buddy = rollBuddy(searchValue);
+
+          if (!matches(buddy)) continue;
+
+          const idKey = (state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt')
+            ? 'salt'
+            : 'userId';
+          found.push({ [idKey]: searchValue, buddy, attempts: i + 1 });
+          if (found.length >= count) break;
+        }
+
+        clearInterval(progressInterval);
+        const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
+
+        if (found.length === 0) {
+          outputArea.innerHTML = '<div class="output-line output-error">&#10060; Khong tim thay (da thu ' + limit.toLocaleString() + ' lan, ' + elapsed + 's)</div>';
+        } else {
+          found.forEach(match => {
+            const isPatchSalt = state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt';
+            const idKey = isPatchSalt ? 'salt' : 'userId';
+            saveToHistory(match.buddy, match[idKey]);
+          });
+
+          let html = '<div class="output-line output-success">&#127882; Tim thay ' + found.length + ' ket qua (' + elapsed + 's)</div>';
+          found.forEach((match, idx) => {
+            const shinyText = match.buddy.shiny ? '<span class="shiny-text">&#10024;</span>' : '';
+            const isPatchSalt = state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt';
+            const isDeleteUuid = state.modeType === 'oauth-account' && state.oauthSubMode === 'delete-uuid';
+            const idLabel = isPatchSalt ? 'SALT' : 'UID';
+            const idKey = isPatchSalt ? 'salt' : 'userId';
+            const applyBtn = isDeleteUuid
+              ? '<button class="apply-btn" style="margin-top:0.5rem;padding:0.4rem 0.8rem;background:var(--success);border:none;border-radius:6px;color:white;cursor:pointer;font-size:0.75rem;" onclick="applyDeleteUuid(\'' + match[idKey] + '\')">&#10004; Apply</button>'
+              : '';
+            html += '<div class="output-line"><div style="margin-bottom:0.5rem;"><strong>#' + (idx + 1) + '</strong> <span class="attempts-badge">' + match.attempts.toLocaleString() + ' lan</span></div><div>Species: ' + (SPECIES_EMOJI[match.buddy.species] || '') + ' ' + match.buddy.species + '</div><div>Rarity: ' + match.buddy.rarity + ' ' + (RARITY_STARS[match.buddy.rarity] || '') + ' ' + shinyText + '</div><div>Eye: ' + match.buddy.eye + '</div><div>Hat: ' + match.buddy.hat + '</div><div style="margin-top:0.5rem;color:var(--accent);">' + idLabel + ': <code>' + match[idKey] + '</code></div>' + applyBtn + '</div>';
+          });
+          outputArea.innerHTML = html;
+        }
+
+        runBtn.disabled = false;
+        runBtn.innerHTML = '<span>&#128640;</span><span>Bắt đầu tìm kiếm</span>';
+        resolve();
       });
     }
 
@@ -2885,6 +2910,7 @@
     initUI();
     updatePreview(); // Show initial preview
     updateHistoryBadge(); // Update badge on load
+    showEstimate(); // Show initial estimate
 
     // Initialize default mode (avoid risk modal for initial load)
     if (DEFAULT_MODE === 'oauth-account') {
