@@ -1203,7 +1203,9 @@
 
     /* Hide Bun.hash in API Key mode */
     .api-key-mode .algo-btn[data-algo="bun"] {
-      display: none;
+      opacity: 0.4;
+      pointer-events: none;
+      cursor: not-allowed;
     }
 
     /* Inputs */
@@ -1758,10 +1760,15 @@
         </div>
 
         <!-- Run Button -->
-        <div class="config-section">
+        <div class="config-section" id="runBtnSection">
           <button class="run-btn" id="runBtn" onclick="runSearch()">
             <span>🚀</span>
             <span>Bắt đầu tìm kiếm</span>
+          </button>
+          <!-- Tạo Command button (patch-salt + Bun only) -->
+          <button class="run-btn" id="genCmdBtn" onclick="generateSearchCommand()" style="display: none; margin-top: 0.5rem; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+            <span>⚡</span>
+            <span>Tạo Command</span>
           </button>
         </div>
 
@@ -1970,6 +1977,7 @@
     // Animation state
     let animationFrame = 0;
     let animationInterval = null;
+    let petAnimationId = null;
 
     function updatePreview() {
       const preview = document.getElementById('buddyPreview');
@@ -2040,7 +2048,9 @@
     }
 
     function startAnimation(species, eye, hat) {
-      if (animationInterval) clearInterval(animationInterval);
+      // Clear both idle and pet animations before starting
+      if (animationInterval) { clearInterval(animationInterval); animationInterval = null; }
+      if (petAnimationId) { clearInterval(petAnimationId); petAnimationId = null; }
 
       // IDLE_SEQUENCE from source: [0, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 2, 0, 0, 0]
       const IDLE_SEQUENCE = [0, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 2, 0, 0, 0];
@@ -2112,6 +2122,7 @@
       document.getElementById('oauthInstructions').style.display = 'none';
       document.getElementById('shellAliasSection').style.display = 'none';
       document.body.classList.add('api-key-mode');
+      document.getElementById('algoSelector').classList.add('api-key-mode');
       document.getElementById('shellAliasSection').style.display = 'none';
       // Show API instructions
       document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn sau khi tìm thấy UID';
@@ -2186,6 +2197,10 @@
         btn.classList.remove('selected');
         btn.dataset.submode === 'delete-uuid' && btn.classList.add('selected');
       });
+      // Disable Bun.hash (delete-uuid only uses FNV)
+      document.getElementById('algoSelector').classList.add('api-key-mode');
+      // Reset algo UI to FNV (hide Search Command, show Run button)
+      handleAlgoChange('fnv');
       // Hide patch-salt elements
       document.getElementById('oauthSection').style.display = 'none';
       document.getElementById('searchCommandSection').style.display = 'none';
@@ -2227,6 +2242,8 @@
         btn.dataset.submode === 'patch-salt' && btn.classList.add('selected');
       });
       // Show patch-salt elements
+      // Enable Bun.hash (patch-salt supports both FNV and Bun)
+      document.getElementById('algoSelector').classList.remove('api-key-mode');
       document.getElementById('oauthSection').style.display = 'block';
       document.getElementById('searchCommandSection').style.display = 'block';
       document.getElementById('oauthInstructions').style.display = 'block';
@@ -2249,8 +2266,8 @@
         <li>Copy & chạy Patch Command</li>
         <li>Restart Claude Code & gõ <code>/buddy</code></li>
       `;
-      // Generate initial commands
-      generateSearchCommand();
+      // Update UI based on current algo selection
+      handleAlgoChange(state.algo);
     }
 
     // Apply delete-uuid: generate script to modify ~/.claude.json
@@ -2292,6 +2309,7 @@
       const eye = document.querySelector('[data-eye].selected')?.dataset.eye;
       const hat = document.querySelector('[data-hat].selected')?.dataset.hat;
       const shiny = state.shiny === 'true' ? '--shiny' : '';
+      const algo = state.algo; // 'fnv' or 'bun'
 
       if (!uuid) {
         document.getElementById('searchCommandText').textContent = 'Nhập Account UUID để tạo command...';
@@ -2303,8 +2321,34 @@
       if (eye) cmd += ` --eye "${eye}"`;
       if (hat && hat !== 'none') cmd += ` --hat ${hat}`;
       if (shiny) cmd += ` ${shiny}`;
+      if (algo === 'bun') cmd += ' --bun';
 
       document.getElementById('searchCommandText').textContent = cmd;
+    }
+
+    // Handle algo switch in patch-salt mode
+    function handleAlgoChange(algo) {
+      if (state.modeType !== 'oauth-account' || state.oauthSubMode !== 'patch-salt') return;
+
+      const runBtn = document.getElementById('runBtn');
+      const genCmdBtn = document.getElementById('genCmdBtn');
+      const outputArea = document.getElementById('outputArea');
+      const searchCmdSection = document.getElementById('searchCommandSection');
+
+      if (algo === 'fnv') {
+        // FNV: run locally in browser, hide Bun-specific elements
+        runBtn.style.display = 'block';
+        genCmdBtn.style.display = 'none';
+        outputArea.style.display = 'block';
+        searchCmdSection.style.display = 'none';
+      } else {
+        // Bun: must run via CLI, hide browser search
+        runBtn.style.display = 'none';
+        genCmdBtn.style.display = 'block';
+        outputArea.style.display = 'none';
+        searchCmdSection.style.display = 'block';
+        generateSearchCommand();
+      }
     }
 
     function generatePatchCommands() {
@@ -2526,10 +2570,8 @@
       const hat = state.hat || 'none';
 
       // Pause idle animation
-      if (animationInterval) {
-        clearInterval(animationInterval);
-        animationInterval = null;
-      }
+      if (animationInterval) { clearInterval(animationInterval); animationInterval = null; }
+      if (petAnimationId) { clearInterval(petAnimationId); petAnimationId = null; }
 
       // Button animation
       petBtn.classList.add('petting');
@@ -2562,10 +2604,12 @@
       const startTime = Date.now();
       let petTick = 0;
 
-      const petAnimate = () => {
+      petAnimationId = setInterval(() => {
         const elapsed = Date.now() - startTime;
         if (elapsed >= PET_BURST_MS) {
-          // Resume idle animation after pet ends
+          // End pet animation and resume idle
+          clearInterval(petAnimationId);
+          petAnimationId = null;
           startAnimation(species, eye, hat);
           return;
         }
@@ -2578,10 +2622,7 @@
         }
 
         petTick++;
-        setInterval(petAnimate, 1000);
-      };
-
-      petAnimate();
+      }, 200);
     }
 
     function copyToClipboard(text) {
@@ -2697,6 +2738,7 @@
           document.querySelectorAll('#algoSelector .algo-btn').forEach(b => b.classList.remove('selected'));
           btn.classList.add('selected');
           state.algo = btn.dataset.algo;
+          handleAlgoChange(state.algo);
         };
       });
 

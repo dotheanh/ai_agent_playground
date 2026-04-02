@@ -255,7 +255,7 @@ const state = {
 |----------|----------|
 | `switchToApiKey()` | Select API Key mode |
 | `activateOAuthMode()` | Select OAuth mode (default delete-uuid), also creates Shell Alias section |
-| `switchToDeleteUuid()` | Select delete-uuid sub-mode, injects Shell Alias section, shows apply-buddy.bat instructions |
+| `switchToDeleteUuid()` | Select delete-uuid sub-mode, disables Bun.hash selector, injects Shell Alias section, shows apply-buddy.bat instructions |
 | `switchToPatchSalt()` | Select patch-salt sub-mode (via risk modal), shows patch/restore commands, hides Shell Alias section |
 | `openRiskModal()` | Show ToS warning before patch-salt |
 | `closeRiskModal()` | Dismiss modal (used by "Quay lại" in risk modal — stays in OAuth mode) |
@@ -270,7 +270,7 @@ const state = {
 | `searchCommandSection` | hidden | hidden | visible |
 | `oauthInstructions` | hidden | hidden | visible |
 | `shellAliasSection` | hidden | visible | hidden |
-| Bun.hash selector | hidden (CSS) | hidden | visible |
+| Bun.hash selector | disabled (gray) | disabled (gray) | enabled |
 
 ---
 
@@ -315,7 +315,7 @@ const state = {
   <button data-algo="bun">Bun.hash <small>Legacy / Bun</small></button>
 </div>
 ```
-- Hidden in api-key mode (CSS)
+- Disabled in api-key mode (opacity 0.4, pointer-events none)
 - Bun.hash only available in patch-salt mode
 
 ### 6.7 Run Button
