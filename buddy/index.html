@@ -76,10 +76,9 @@
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
 
-    .history-btn {
+    .history-btn, .about-btn {
       position: absolute;
       top: 1rem;
-      right: 2rem;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -94,7 +93,15 @@
       gap: 0.5rem;
     }
 
-    .history-btn:hover {
+    .about-btn {
+      left: 2rem;
+    }
+
+    .history-btn {
+      right: 2rem;
+    }
+
+    .history-btn:hover, .about-btn:hover {
       background: var(--bg-hover);
       color: var(--text-primary);
       border-color: var(--border-light);
@@ -117,6 +124,7 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
+      cursor: pointer;
     }
 
     .modal-overlay.active {
@@ -1383,11 +1391,106 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* About Modal */
+    .about-content {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .about-content h3 {
+      color: var(--accent);
+      font-size: 1rem;
+      margin: 1.25rem 0 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .about-content h3:first-child {
+      margin-top: 0;
+    }
+
+    .about-content p {
+      margin-bottom: 0.75rem;
+    }
+
+    .about-content ul {
+      padding-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .about-content li {
+      margin-bottom: 0.35rem;
+    }
+
+    .about-content code {
+      background: var(--bg-secondary);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .about-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .about-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-section h4 {
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-warn {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      border-radius: 8px;
+      padding: 0.75rem;
+      color: #f87171;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    .about-cheat {
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      border-radius: 8px;
+      padding: 0.75rem;
+      color: var(--success);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    .about-formula {
+      background: #0d1117;
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin: 0.5rem 0;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
+      <button class="about-btn" id="aboutBtn">
+        <span>ℹ️</span>
+        <span>About Buddy</span>
+      </button>
       <button class="history-btn" id="historyBtn">
         <span>📜 Lịch sử</span>
         <span class="badge" id="historyBadge">0</span>
@@ -1930,84 +2033,6 @@
       }
     }
 
-    // === HASH FUNCTIONS ===
-    function hashFNV1a(s) {
-      let h = 2166136261 >>> 0;
-      for (let i = 0; i < s.length; i++) {
-        h ^= s.charCodeAt(i);
-        h = Math.imul(h, 16777619) >>> 0;
-      }
-      return h;
-    }
-
-    // === PRNG ===
-    function mulberry32(seed) {
-      let a = seed >>> 0;
-      return function () {
-        a |= 0;
-        a = (a + 0x6d2b79f5) | 0;
-        let t = Math.imul(a ^ (a >>> 15), 1 | a);
-        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-      };
-    }
-
-    function pick(rng, arr) {
-      return arr[Math.floor(rng() * arr.length)];
-    }
-
-    // === ROLLING LOGIC ===
-    function rollRarity(rng) {
-      const total = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
-      let roll = rng() * total;
-      for (const r of RARITIES) {
-        roll -= RARITY_WEIGHTS[r];
-        if (roll < 0) return r;
-      }
-      return 'common';
-    }
-
-    function rollStats(rng, rarity) {
-      const floor = RARITY_FLOOR[rarity];
-      let peak = pick(rng, STAT_NAMES);
-      let dump = pick(rng, STAT_NAMES);
-      while (dump === peak) dump = pick(rng, STAT_NAMES);
-
-      const stats = {};
-      for (const name of STAT_NAMES) {
-        if (name === peak) {
-          stats[name] = Math.min(100, floor + 50 + Math.floor(rng() * 30));
-        } else if (name === dump) {
-          stats[name] = Math.max(1, floor - 10 + Math.floor(rng() * 15));
-        } else {
-          stats[name] = floor + Math.floor(rng() * 40);
-        }
-      }
-      return stats;
-    }
-
-    function rollBuddy(input) {
-      const rng = mulberry32(hashFNV1a(input));
-      const rarity = rollRarity(rng);
-      return {
-        rarity,
-        species: pick(rng, SPECIES),
-        eye: pick(rng, EYES),
-        hat: rarity === 'common' ? 'none' : pick(rng, HATS),
-        shiny: rng() < 0.01,
-        stats: rollStats(rng, rarity)
-      };
-    }
-
-    function matches(buddy) {
-      if (state.species != null && buddy.species !== state.species) return false;
-      if (state.rarity != null && buddy.rarity !== state.rarity) return false;
-      if (state.eye != null && buddy.eye !== state.eye) return false;
-      if (state.hat != null && buddy.hat !== state.hat) return false;
-      if (state.shiny !== 'any' && buddy.shiny !== (state.shiny === 'true')) return false;
-      return true;
-    }
-
     // === OAUTH BRUTE-FORCE ===
     function generateOAuthSalt(index) {
       if (index < 1000000) {
@@ -2274,8 +2299,36 @@
 
     // === UI ===
     function initUI() {
+      // About Buddy button
+      const aboutBtn = document.getElementById('aboutBtn');
+      if (aboutBtn) {
+        aboutBtn.onclick = function() {
+          const modal = document.getElementById('aboutModal');
+          if (modal) modal.classList.add('active');
+        };
+      }
+
       // History
-      document.getElementById('historyBtn').onclick = showHistoryModal;
+      const historyBtn = document.getElementById('historyBtn');
+      if (historyBtn) {
+        historyBtn.onclick = showHistoryModal;
+      }
+
+      // Close modals when clicking outside (using event delegation)
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-overlay') && e.target.classList.contains('active')) {
+          e.target.classList.remove('active');
+        }
+      });
+
+      // Close modals with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.getElementById('aboutModal').classList.remove('active');
+          document.getElementById('historyModal').classList.remove('active');
+          document.getElementById('riskModal')?.classList.remove('active');
+        }
+      });
 
       // Species - use ASCII art from first frame
       const speciesGrid = document.getElementById('speciesGrid');
@@ -2544,6 +2597,73 @@
         <button class="close-btn" onclick="document.getElementById('historyModal').classList.remove('active')">×</button>
       </div>
       <div class="history-list" id="historyList"></div>
+    </div>
+  </div>
+
+  <!-- About Buddy Modal -->
+  <div class="modal-overlay" id="aboutModal">
+    <div class="modal" style="max-width: 700px;">
+      <div class="modal-header">
+        <h2 class="modal-title">ℹ️ About Claude Buddy</h2>
+        <button class="close-btn" onclick="document.getElementById('aboutModal').classList.remove('active')">×</button>
+      </div>
+      <div class="about-content">
+        <!-- Tổng quan -->
+        <h3>🎯 Tổng quan</h3>
+        <p>Claude Buddy là pet ảo xuất hiện bên cạnh input box khi bạn gõ <code>/buddy</code>. Mỗi user có một buddy duy nhất dựa trên userID của họ.</p>
+        <p>Buddy gồm 2 phần:</p>
+        <ul>
+          <li><strong>Bones</strong> (từ hash): Species, Rarity, Eye, Hat, Shiny, Stats</li>
+          <li><strong>Soul</strong> (từ AI): Name, Personality - được lưu trong <code>~/.claude.json</code> field <code>companion</code></li>
+        </ul>
+
+        <!-- Thuộc tính Buddy -->
+        <h3>📊 Thuộc tính Buddy</h3>
+        <ul>
+          <li><strong>Species</strong> (18): duck, goose, blob, cat, dragon, octopus, owl, penguin, turtle, snail, ghost, axolotl, capybara, cactus, robot, rabbit, mushroom, chonk</li>
+          <li><strong>Rarity</strong> (5): common (60%), uncommon (25%), rare (10%), epic (4%), legendary (1%)</li>
+          <li><strong>Eye</strong> (6): · ✦ × ◉ @ °</li>
+          <li><strong>Hat</strong> (8): none, crown, tophat, propeller, halo, wizard, beanie, tinyduck</li>
+          <li><strong>Shiny</strong>: 1% probability</li>
+          <li><strong>Stats</strong> (5): DEBUGGING, PATIENCE, CHAOS, WISDOM, SNARK</li>
+        </ul>
+
+        <!-- Cách hash hoạt động -->
+        <h3>🔐 Cách thức Hash tạo Buddy</h3>
+        <p>Claude Code sử dụng công thức:</p>
+        <div class="about-formula">hash(userID + SALT) → seed → mulberry32 PRNG → Buddy attributes</div>
+        <p>Trong đó:</p>
+        <ul>
+          <li><strong>SALT</strong> hiện tại: <code>friend-2026-401</code></li>
+          <li><strong>Hash function</strong>: FNV-1a hoặc Bun.hash</li>
+          <li><strong>PRNG</strong>: Mulberry32 - dùng seed từ hash để random các thuộc tính</li>
+        </ul>
+
+        <!-- API Key User -->
+        <div class="about-section">
+          <h4>🔑 Người dùng API Key</h4>
+          <p>Với API key, bạn tự do đặt <code>userID</code> trong file <code>~/.claude.json</code>.</p>
+          <p><strong>Cách Claude thiết lập userID:</strong> User tự khai báo thủ công trong config. Nếu bạn không tự đặt thì Claude sẽ tạo random userID trong lần đầu tiên sử dụng.</p>
+          <div class="about-cheat">
+            <strong>✓ Cách cheat:</strong> Dùng tool này để tìm UID sinh ra buddy mong muốn, sau đó sửa <code>userID</code> trong <code>~/.claude.json</code> và xóa field <code>companion</code>.
+          </div>
+        </div>
+
+        <!-- OAuth User -->
+        <div class="about-section">
+          <h4>👤 Người dùng OAuth / Claude Account</h4>
+          <p>Với OAuth, Claude Code dùng account UUID từ server, không thể tự do thay đổi.</p>
+          <p><strong>Cách Claude thiết lập userID:</strong></p>
+          <ol style="padding-left: 1.25rem; margin: 0.5rem 0;">
+            <li>Đọc OAuth token từ <code>~/.claude/.credentials.json</code></li>
+            <li>Gọi API <code>https://api.anthropic.com/api/oauth/profile</code> để lấy UUID</li>
+            <li>Dùng UUID + salt trong binary để tính hash → sinh buddy</li>
+          </ol>
+          <div class="about-warn">
+            <strong>⚠️ Cách cheat (có rủi ro):</strong> Phải brute-force tìm salt trong binary, sau đó patch binary để thay đổi salt. Binary patching có thể vi phạm Terms of Service.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
