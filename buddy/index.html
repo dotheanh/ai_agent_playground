@@ -1677,7 +1677,16 @@
                 <button class="toggle-btn" data-value="false">No</button>
               </div>
             </div>
+
           </div>
+        </div>
+      </div>
+
+      <!-- OAuth Sub-mode Toggle (outside combined-card) -->
+      <div id="oauthSubModeToggle" style="display: none;">
+        <div class="mode-selector">
+          <button class="mode-btn selected" data-submode="delete-uuid">🗑️ Xóa accountUuid</button>
+          <button class="mode-btn" data-submode="patch-salt">🔧 Patch binary Salt</button>
         </div>
       </div>
 
@@ -2050,6 +2059,7 @@
     // === STATE ===
     const state = {
       modeType: DEFAULT_MODE,
+      oauthSubMode: 'delete-uuid',  // 'delete-uuid' or 'patch-salt'
       species: null,
       rarity: 'legendary',
       eye: null,
@@ -2071,8 +2081,9 @@
     }
 
     function confirmRisk() {
-      activateOAuthMode();
+      // Legacy - now just closes modal and switches to delete-uuid
       closeRiskModal();
+      switchToDeleteUuid();
     }
 
     function switchToApiKey() {
@@ -2082,6 +2093,7 @@
         btn.dataset.mode === 'api-key' && btn.classList.add('selected');
       });
       // Hide OAuth elements
+      document.getElementById('oauthSubModeToggle').style.display = 'none';
       document.getElementById('oauthSection').style.display = 'none';
       document.getElementById('searchCommandSection').style.display = 'none';
       document.getElementById('oauthInstructions').style.display = 'none';
@@ -2107,15 +2119,86 @@
 
     function activateOAuthMode() {
       state.modeType = 'oauth-account';
+      state.oauthSubMode = 'delete-uuid'; // Default to delete-uuid
       document.querySelectorAll('.mode-btn').forEach(btn => {
         btn.classList.remove('selected');
         btn.dataset.mode === 'oauth-account' && btn.classList.add('selected');
       });
       // Show OAuth elements
+      document.getElementById('oauthSubModeToggle').style.display = 'block';
+      document.getElementById('oauthSection').style.display = 'none';
+      document.getElementById('searchCommandSection').style.display = 'none';
+      document.getElementById('oauthInstructions').style.display = 'none';
+      // Update sub-mode button selection
+      document.querySelectorAll('#oauthSubModeToggle .mode-btn').forEach(btn => {
+        btn.classList.remove('selected');
+        btn.dataset.submode === 'delete-uuid' && btn.classList.add('selected');
+      });
+      document.body.classList.remove('api-key-mode');
+      // Update banner for delete-uuid sub-mode (lower risk)
+      const banner = document.getElementById('instructionsBanner');
+      banner.style.display = 'block';
+      banner.style.background = 'rgba(251, 191, 36, 0.1)';
+      banner.style.color = '#fbbf24';
+      banner.style.border = '1px solid #fbbf24';
+      banner.innerHTML = '⚠️ Xóa <code>accountUuid</code> → fallback sang <code>userID</code> (an toàn hơn binary patching)';
+      // Update instructions
+      document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn';
+      document.getElementById('instructionsList').innerHTML = `
+        <li>Chọn thuộc tính Buddy mong muốn</li>
+        <li>Bấm "Bắt đầu tìm kiếm" để brute-force userID</li>
+        <li>Sau khi tìm được userID → bấm "Apply" để cập nhật config</li>
+        <li>Restart Claude Code & gõ <code>/buddy</code></li>
+      `;
+    }
+
+    function switchToDeleteUuid() {
+      state.oauthSubMode = 'delete-uuid';
+      // Update sub-mode button selection
+      document.querySelectorAll('#oauthSubModeToggle .mode-btn').forEach(btn => {
+        btn.classList.remove('selected');
+        btn.dataset.submode === 'delete-uuid' && btn.classList.add('selected');
+      });
+      // Hide patch-salt elements
+      document.getElementById('oauthSection').style.display = 'none';
+      document.getElementById('searchCommandSection').style.display = 'none';
+      document.getElementById('oauthInstructions').style.display = 'none';
+      // Update banner (lower risk)
+      const banner = document.getElementById('instructionsBanner');
+      banner.style.display = 'block';
+      banner.style.background = 'rgba(251, 191, 36, 0.1)';
+      banner.style.color = '#fbbf24';
+      banner.style.border = '1px solid #fbbf24';
+      banner.innerHTML = '⚠️ Xóa <code>accountUuid</code> → fallback sang <code>userID</code> (an toàn hơn binary patching)';
+      // Update instructions
+      document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn';
+      document.getElementById('instructionsList').innerHTML = `
+        <li>Chọn thuộc tính Buddy mong muốn</li>
+        <li>Bấm "Bắt đầu tìm kiếm" để brute-force userID</li>
+        <li>Sau khi tìm được userID → bấm "Apply" để cập nhật config</li>
+        <li>Restart Claude Code & gõ <code>/buddy</code></li>
+      `;
+    }
+
+    function switchToPatchSalt() {
+      state.oauthSubMode = 'patch-salt';
+      // Update sub-mode button selection
+      document.querySelectorAll('#oauthSubModeToggle .mode-btn').forEach(btn => {
+        btn.classList.remove('selected');
+        btn.dataset.submode === 'patch-salt' && btn.classList.add('selected');
+      });
+      // Show patch-salt elements
       document.getElementById('oauthSection').style.display = 'block';
       document.getElementById('searchCommandSection').style.display = 'block';
       document.getElementById('oauthInstructions').style.display = 'block';
-      // Update instructions
+      // Update banner (high risk)
+      const banner = document.getElementById('instructionsBanner');
+      banner.style.display = 'block';
+      banner.style.background = 'rgba(248, 113, 113, 0.1)';
+      banner.style.color = '#f87171';
+      banner.style.border = '1px solid #f87171';
+      banner.innerHTML = '⚠️ <strong>Cảnh báo:</strong> Binary patching có thể vi phạm ToS - <strong>Play at your own risk!</strong>';
+      // Update instructions for patch-salt
       document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn';
       document.getElementById('instructionsList').innerHTML = `
         <li>Chọn thuộc tính Buddy mong muốn</li>
@@ -2125,15 +2208,38 @@
         <li>Copy & chạy Patch Command</li>
         <li>Restart Claude Code & gõ <code>/buddy</code></li>
       `;
-      // Show red warning banner for OAuth
-      const banner = document.getElementById('instructionsBanner');
-      banner.style.display = 'block';
-      banner.style.background = 'rgba(248, 113, 113, 0.1)';
-      banner.style.color = '#f87171';
-      banner.style.border = '1px solid #f87171';
-      banner.innerHTML = '⚠️ <strong>Cảnh báo:</strong> Binary patching có thể vi phạm ToS - <strong>Play at your own risk!</strong>';
       // Generate initial commands
       generateSearchCommand();
+    }
+
+    // Apply delete-uuid: generate script to modify ~/.claude.json
+    window.applyDeleteUuid = function(userId) {
+      const safeUserId = userId.replace(/'/g, "\\'");
+      const script = "@echo off\necho Applying buddy config...\nnode -e \"const p=require('path');const f=require('path').join(process.env.USERPROFILE||process.env.HOME,'.claude.json');const c=JSON.parse(require('fs').readFileSync(f,'utf8'));if(c.oauthAccount)delete c.oauthAccount.accountUuid;delete c.companion;c.userID='" + safeUserId + "';require('fs').writeFileSync(f,JSON.stringify(c,null,2));console.log('Done! Restart Claude Code and type /buddy');\"\npause";
+
+      const blob = new Blob([script], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'apply-buddy.bat';
+      a.click();
+      URL.revokeObjectURL(url);
+
+      const outputArea = document.getElementById('outputArea');
+      outputArea.innerHTML = '<div class="output-line output-success">&#10004; Da tao file apply-buddy.bat</div>';
+      const cmdDiv = document.createElement('div');
+      cmdDiv.style.cssText = 'margin-top:0.5rem;padding:0.5rem;background:#0d1117;border-radius:6px;font-family:Fira Code,monospace;font-size:0.65rem;color:#22c55e;word-break:break-all;white-space:pre-wrap;';
+      cmdDiv.textContent = script;
+      outputArea.appendChild(cmdDiv);
+      const copyBtn = document.createElement('button');
+      copyBtn.textContent = '📋 Copy Command';
+      copyBtn.style.cssText = 'margin-top:0.5rem;padding:0.4rem 0.8rem;background:var(--accent);border:none;border-radius:6px;color:white;cursor:pointer;font-size:0.75rem;';
+      copyBtn.onclick = function() {
+        navigator.clipboard.writeText(script);
+        copyBtn.textContent = '✅ Da copy!';
+        setTimeout(function() { copyBtn.textContent = '📋 Copy Command'; }, 2000);
+      };
+      outputArea.appendChild(copyBtn);
     }
 
     function generateSearchCommand() {
@@ -2567,12 +2673,36 @@
         btn.onclick = () => {
           const mode = btn.dataset.mode;
           if (mode === 'oauth-account') {
-            openRiskModal();
+            activateOAuthMode();
           } else {
             switchToApiKey();
           }
         };
       });
+
+      // OAuth sub-mode toggle
+      document.querySelectorAll('#oauthSubModeToggle .mode-btn').forEach(btn => {
+        btn.onclick = () => {
+          const subMode = btn.dataset.submode;
+          if (subMode === 'patch-salt' && state.oauthSubMode !== 'patch-salt') {
+            // Switching to patch-salt requires risk confirmation
+            openRiskModal();
+            // Store pending submode for confirmation
+            window.pendingOAuthSubMode = 'patch-salt';
+          } else if (subMode === 'delete-uuid') {
+            switchToDeleteUuid();
+          }
+        };
+      });
+
+      // Risk modal confirmation for patch-salt submode
+      window.confirmRiskModal = function() {
+        closeRiskModal();
+        if (window.pendingOAuthSubMode === 'patch-salt') {
+          window.pendingOAuthSubMode = null;
+          switchToPatchSalt();
+        }
+      };
 
       // UUID input - generate command on change
       document.getElementById('uuidInput')?.addEventListener('input', generateSearchCommand);
@@ -2642,12 +2772,11 @@
       const limit = parseInt(document.getElementById('limitInput').value) || 50000000;
       const count = parseInt(document.getElementById('countInput').value) || 1;
 
-      // Validate UUID for OAuth mode FIRST (before any other processing)
-      if (state.modeType === 'oauth-account') {
+      // OAuth Patch Salt mode: validate UUID
+      if (state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt') {
         const uuidInput = document.getElementById('uuidInput');
         const uuid = uuidInput.value.trim();
         if (!uuid) {
-          // Show red outline on required field
           uuidInput.style.borderColor = 'var(--error)';
           uuidInput.style.boxShadow = '0 0 0 2px rgba(248, 113, 113, 0.3)';
           outputArea.innerHTML = '<div class="output-line output-error">❌ Vui lòng nhập Account UUID (OAuth) từ ~/.claude/.credentials.json</div>';
@@ -2655,7 +2784,6 @@
           runBtn.innerHTML = '<span>🚀</span><span>Bắt đầu tìm kiếm</span>';
           return;
         }
-        // Clear error style if valid
         uuidInput.style.borderColor = '';
         uuidInput.style.boxShadow = '';
       }
@@ -2669,8 +2797,7 @@
 
       const found = [];
       const startTime = Date.now();
-      // OAuth uses UUID as base, API Key uses prefix (sequential) or random (random mode)
-      const oauthUuid = state.modeType === 'oauth-account'
+      const oauthUuid = (state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt')
         ? document.getElementById('uuidInput').value.trim()
         : null;
 
@@ -2679,10 +2806,15 @@
           for (let i = 0; i < limit; i++) {
             let searchValue;
 
-            if (state.modeType === 'oauth-account') {
+            if (state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt') {
+              // Patch Salt: search for salt using UUID as base
               const salt = generateOAuthSalt(i);
               searchValue = oauthUuid + salt;
+            } else if (state.modeType === 'oauth-account' && state.oauthSubMode === 'delete-uuid') {
+              // Delete UUID: generate random 32-byte hex userID (FNV-1a hash, same algorithm)
+              searchValue = generateRandomId(32);
             } else {
+              // API Key mode
               searchValue = state.mode === 'sequential'
                 ? `${prefix}${i}`
                 : generateRandomId(32);
@@ -2692,7 +2824,9 @@
 
             if (!matches(buddy)) continue;
 
-            const idKey = state.modeType === 'oauth-account' ? 'salt' : 'userId';
+            const idKey = (state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt')
+              ? 'salt'
+              : 'userId';
             found.push({ [idKey]: searchValue, buddy, attempts: i + 1 });
             if (found.length >= count) break;
 
@@ -2707,15 +2841,21 @@
             outputArea.innerHTML = `<div class="output-line output-error">❌ Không tìm thấy (đã thử ${limit.toLocaleString()} lần, ${elapsed}s)</div>`;
           } else {
             found.forEach(match => {
-              const idKey = state.modeType === 'oauth-account' ? 'salt' : 'userId';
+              const isPatchSalt = state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt';
+              const idKey = isPatchSalt ? 'salt' : 'userId';
               saveToHistory(match.buddy, match[idKey]);
             });
 
             let html = `<div class="output-line output-success">🎉 Tìm thấy ${found.length} kết quả (${elapsed}s)</div>`;
             found.forEach((match, idx) => {
               const shinyText = match.buddy.shiny ? '<span class="shiny-text">✨</span>' : '';
-              const idLabel = state.modeType === 'oauth-account' ? 'SALT' : 'UID';
-              const idKey = state.modeType === 'oauth-account' ? 'salt' : 'userId';
+              const isPatchSalt = state.modeType === 'oauth-account' && state.oauthSubMode === 'patch-salt';
+              const isDeleteUuid = state.modeType === 'oauth-account' && state.oauthSubMode === 'delete-uuid';
+              const idLabel = isPatchSalt ? 'SALT' : 'UID';
+              const idKey = isPatchSalt ? 'salt' : 'userId';
+              const applyBtn = isDeleteUuid
+                ? `<button class="apply-btn" style="margin-top: 0.5rem; padding: 0.4rem 0.8rem; background: var(--success); border: none; border-radius: 6px; color: white; cursor: pointer; font-size: 0.75rem;" onclick="applyDeleteUuid('${match[idKey]}')">✅ Apply</button>`
+                : '';
 
               html += `
 <div class="output-line">
@@ -2728,6 +2868,7 @@
   <div>Eye: ${match.buddy.eye}</div>
   <div>Hat: ${match.buddy.hat}</div>
   <div style="margin-top: 0.5rem; color: var(--accent);">${idLabel}: <code>${match[idKey]}</code></div>
+  ${applyBtn}
 </div>`;
             });
             outputArea.innerHTML = html;
@@ -2747,32 +2888,11 @@
 
     // Initialize default mode (avoid risk modal for initial load)
     if (DEFAULT_MODE === 'oauth-account') {
-      // Manually activate OAuth mode without risk modal
-      document.querySelectorAll('.mode-btn').forEach(btn => {
-        btn.classList.remove('selected');
-        btn.dataset.mode === 'oauth-account' && btn.classList.add('selected');
-      });
-      document.getElementById('oauthSection').style.display = 'block';
-      document.getElementById('searchCommandSection').style.display = 'block';
-      document.getElementById('oauthInstructions').style.display = 'block';
-      document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn';
-      document.getElementById('instructionsList').innerHTML = `
-        <li>Chọn thuộc tính Buddy mong muốn</li>
-        <li>Nhập Account UUID (từ ~/.claude/.credentials.json)</li>
-        <li>Copy & chạy Search Command trong terminal</li>
-        <li>Nhập salt tìm được vào ô "Salt" bên dưới</li>
-        <li>Copy & chạy Patch Command</li>
-        <li>Restart Claude Code & gõ <code>/buddy</code></li>
-      `;
-      document.getElementById('instructionsBanner').style.display = 'block';
-      document.getElementById('instructionsBanner').style.background = 'rgba(248, 113, 113, 0.1)';
-      document.getElementById('instructionsBanner').style.color = '#f87171';
-      document.getElementById('instructionsBanner').style.border = '1px solid #f87171';
-      document.getElementById('instructionsBanner').innerHTML = '⚠️ <strong>Cảnh báo:</strong> Binary patching có thể vi phạm ToS - <strong>Play at your own risk!</strong>';
-      document.body.classList.remove('api-key-mode');
-      generateSearchCommand();
+      // Manually activate OAuth mode without risk modal - default to delete-uuid submode
+      activateOAuthMode();
     } else {
       // API Key mode - hide OAuth elements
+      document.getElementById('oauthSubModeToggle').style.display = 'none';
       document.getElementById('oauthSection').style.display = 'none';
       document.getElementById('searchCommandSection').style.display = 'none';
       document.getElementById('oauthInstructions').style.display = 'none';
@@ -2807,7 +2927,7 @@
       </ul>
       <div class="risk-actions">
         <button class="risk-btn risk-btn-cancel" onclick="switchToApiKey()">Quay lại</button>
-        <button class="risk-btn risk-btn-confirm" onclick="confirmRisk()">Tôi hiểu - Tiếp tục</button>
+        <button class="risk-btn risk-btn-confirm" onclick="confirmRiskModal()">Tôi hiểu - Tiếp tục</button>
       </div>
     </div>
   </div>
