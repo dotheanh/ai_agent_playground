@@ -1198,6 +1198,11 @@
       margin-top: 0.15rem;
     }
 
+    /* Hide Bun.hash in API Key mode */
+    .api-key-mode .algo-btn[data-algo="bun"] {
+      display: none;
+    }
+
     /* Inputs */
     .input-row {
       display: flex;
@@ -1749,9 +1754,14 @@
           <div class="section-label">Search Command</div>
           <div style="background: #0d1117; padding: 0.75rem; border-radius: 6px; font-family: 'Fira Code', monospace; font-size: 0.7rem; color: #f87171; word-break: break-all;" id="searchCommandText">
           </div>
-          <button id="copySearchCmdBtn" style="margin-top: 0.5rem; width: 100%; padding: 0.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer; font-size: 0.75rem;">
-            📋 Copy Search Command
-          </button>
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+            <button id="runSearchCmdBtn" style="flex: 1; padding: 0.5rem; background: #22c55e; border: none; border-radius: 6px; color: white; cursor: pointer; font-size: 0.75rem;">
+              ▶️ Chạy Search
+            </button>
+            <button id="copySearchCmdBtn" style="flex: 1; padding: 0.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer; font-size: 0.75rem;">
+              📋 Copy
+            </button>
+          </div>
         </div>
       </div>
 
@@ -2033,9 +2043,13 @@
       animationInterval = setInterval(updateSprite, 500);
     }
 
+    // === DEFAULT MODE FLAG ===
+    // 'api-key' or 'oauth-account' - change here to set default mode on page load
+    const DEFAULT_MODE = 'oauth-account';
+
     // === STATE ===
     const state = {
-      modeType: 'api-key',  // 'api-key' or 'oauth-account'
+      modeType: DEFAULT_MODE,
       species: null,
       rarity: 'legendary',
       eye: null,
@@ -2071,6 +2085,7 @@
       document.getElementById('oauthSection').style.display = 'none';
       document.getElementById('searchCommandSection').style.display = 'none';
       document.getElementById('oauthInstructions').style.display = 'none';
+      document.body.classList.add('api-key-mode');
       // Show API instructions
       document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn sau khi tìm thấy UID';
       document.getElementById('instructionsList').innerHTML = `
@@ -2098,6 +2113,7 @@
       });
       // Show OAuth elements
       document.getElementById('oauthSection').style.display = 'block';
+      document.getElementById('searchCommandSection').style.display = 'block';
       document.getElementById('oauthInstructions').style.display = 'block';
       // Update instructions
       document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn';
@@ -2135,7 +2151,7 @@
         return;
       }
 
-      let cmd = `bun scripts/search-salt.js --uuid "${uuid}" --rarity ${rarity} --limit ${limit} --count ${count}`;
+      let cmd = `bun run https://raw.githubusercontent.com/dotheanh/ai_agent_playground/main/buddy/scripts/search-salt.js --uuid "${uuid}" --rarity ${rarity} --limit ${limit} --count ${count}`;
       if (species) cmd += ` --species ${species}`;
       if (eye) cmd += ` --eye "${eye}"`;
       if (hat && hat !== 'none') cmd += ` --hat ${hat}`;
@@ -2151,8 +2167,8 @@
         return;
       }
       document.getElementById('patchCommands').style.display = 'block';
-      document.getElementById('patchCommandText').textContent = `bun scripts/patch-salt.js --salt "${salt}"`;
-      document.getElementById('restoreCommandText').textContent = 'bun scripts/patch-salt.js --restore';
+      document.getElementById('patchCommandText').textContent = `bun run https://raw.githubusercontent.com/dotheanh/ai_agent_playground/main/buddy/scripts/patch-salt.js --salt "${salt}"`;
+      document.getElementById('restoreCommandText').textContent = 'bun run https://raw.githubusercontent.com/dotheanh/ai_agent_playground/main/buddy/scripts/patch-salt.js --restore';
     }
 
     function updateInstructionsForMode() {
@@ -2571,6 +2587,23 @@
         const text = document.getElementById('searchCommandText').textContent;
         navigator.clipboard.writeText(text);
       });
+
+      // Run Search button - open terminal with command
+      document.getElementById('runSearchCmdBtn')?.addEventListener('click', () => {
+        const cmd = document.getElementById('searchCommandText').textContent;
+        if (!cmd || cmd.includes('Nhập Account UUID')) return;
+        const encoded = encodeURIComponent(cmd);
+        const ps = `start powershell -NoExit -Command "${cmd.replace(/"/g, '\\"')}"`;
+        const link = `javascript:void(0)`;
+        // Create temp script to run
+        const blob = new Blob([`start powershell -NoExit -Command "${cmd.replace(/"/g, '`"')}"`], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'run-search.bat';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
       document.getElementById('copyPatchCmdBtn')?.addEventListener('click', () => {
         const text = document.getElementById('patchCommandText').textContent;
         navigator.clipboard.writeText(text);
@@ -2636,7 +2669,10 @@
 
       const found = [];
       const startTime = Date.now();
-      const searchInput = state.modeType === 'oauth-account' ? prefix : null;
+      // OAuth uses UUID as base, API Key uses prefix (sequential) or random (random mode)
+      const oauthUuid = state.modeType === 'oauth-account'
+        ? document.getElementById('uuidInput').value.trim()
+        : null;
 
       await new Promise(resolve => {
         setTimeout(() => {
@@ -2645,7 +2681,7 @@
 
             if (state.modeType === 'oauth-account') {
               const salt = generateOAuthSalt(i);
-              searchValue = searchInput + salt;
+              searchValue = oauthUuid + salt;
             } else {
               searchValue = state.mode === 'sequential'
                 ? `${prefix}${i}`
@@ -2708,6 +2744,47 @@
     initUI();
     updatePreview(); // Show initial preview
     updateHistoryBadge(); // Update badge on load
+
+    // Initialize default mode (avoid risk modal for initial load)
+    if (DEFAULT_MODE === 'oauth-account') {
+      // Manually activate OAuth mode without risk modal
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.classList.remove('selected');
+        btn.dataset.mode === 'oauth-account' && btn.classList.add('selected');
+      });
+      document.getElementById('oauthSection').style.display = 'block';
+      document.getElementById('searchCommandSection').style.display = 'block';
+      document.getElementById('oauthInstructions').style.display = 'block';
+      document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn';
+      document.getElementById('instructionsList').innerHTML = `
+        <li>Chọn thuộc tính Buddy mong muốn</li>
+        <li>Nhập Account UUID (từ ~/.claude/.credentials.json)</li>
+        <li>Copy & chạy Search Command trong terminal</li>
+        <li>Nhập salt tìm được vào ô "Salt" bên dưới</li>
+        <li>Copy & chạy Patch Command</li>
+        <li>Restart Claude Code & gõ <code>/buddy</code></li>
+      `;
+      document.getElementById('instructionsBanner').style.display = 'block';
+      document.getElementById('instructionsBanner').style.background = 'rgba(248, 113, 113, 0.1)';
+      document.getElementById('instructionsBanner').style.color = '#f87171';
+      document.getElementById('instructionsBanner').style.border = '1px solid #f87171';
+      document.getElementById('instructionsBanner').innerHTML = '⚠️ <strong>Cảnh báo:</strong> Binary patching có thể vi phạm ToS - <strong>Play at your own risk!</strong>';
+      document.body.classList.remove('api-key-mode');
+      generateSearchCommand();
+    } else {
+      // API Key mode - hide OAuth elements
+      document.getElementById('oauthSection').style.display = 'none';
+      document.getElementById('searchCommandSection').style.display = 'none';
+      document.getElementById('oauthInstructions').style.display = 'none';
+      document.body.classList.add('api-key-mode');
+    }
+
+    // Toggle api-key-mode class for algo visibility
+    if (DEFAULT_MODE === 'api-key') {
+      document.body.classList.add('api-key-mode');
+    } else {
+      document.body.classList.remove('api-key-mode');
+    }
 
     // Pet button handler
     document.getElementById('petBtn')?.addEventListener('click', petBuddy);
