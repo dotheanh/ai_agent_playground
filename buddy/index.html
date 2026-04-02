@@ -2087,6 +2087,7 @@
       // Hide OAuth warning, show default note
       document.getElementById('instructionsWarning').style.display = 'none';
       const note = document.getElementById('instructionsNote');
+      note.style.display = 'block';
       note.style.background = 'rgba(74, 222, 128, 0.1)';
       note.style.color = 'var(--success)';
       note.style.border = 'none';
@@ -2106,8 +2107,8 @@
       // Update instructions
       document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn';
       document.getElementById('instructionsList').innerHTML = `
-        <li>Nhập Account UUID (từ ~/.claude/.credentials.json)</li>
         <li>Chọn thuộc tính Buddy mong muốn</li>
+        <li>Nhập Account UUID (từ ~/.claude/.credentials.json)</li>
         <li>Copy & chạy Search Command trong terminal</li>
         <li>Nhập salt tìm được vào ô "Salt" bên dưới</li>
         <li>Copy & chạy Patch Command</li>
@@ -2115,12 +2116,9 @@
       `;
       // Show warning at top of instructions
       document.getElementById('instructionsWarning').style.display = 'block';
-      // Reset note to default for API key
+      // Hide the safe-note for OAuth mode
       const note = document.getElementById('instructionsNote');
-      note.style.background = 'rgba(74, 222, 128, 0.1)';
-      note.style.color = 'var(--success)';
-      note.style.border = 'none';
-      note.innerHTML = '💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service';
+      note.style.display = 'none';
       // Generate initial commands
       generateSearchCommand();
     }
@@ -2613,7 +2611,27 @@
       const outputArea = document.getElementById('outputArea');
       const limit = parseInt(document.getElementById('limitInput').value) || 50000000;
       const count = parseInt(document.getElementById('countInput').value) || 1;
-      const prefix = document.getElementById('prefixInput').value || 'user-';
+
+      // Validate UUID for OAuth mode FIRST (before any other processing)
+      if (state.modeType === 'oauth-account') {
+        const uuidInput = document.getElementById('uuidInput');
+        const uuid = uuidInput.value.trim();
+        if (!uuid) {
+          // Show red outline on required field
+          uuidInput.style.borderColor = 'var(--error)';
+          uuidInput.style.boxShadow = '0 0 0 2px rgba(248, 113, 113, 0.3)';
+          outputArea.innerHTML = '<div class="output-line output-error">❌ Vui lòng nhập Account UUID (OAuth) từ ~/.claude/.credentials.json</div>';
+          runBtn.disabled = false;
+          runBtn.innerHTML = '<span>🚀</span><span>Bắt đầu tìm kiếm</span>';
+          return;
+        }
+        // Clear error style if valid
+        uuidInput.style.borderColor = '';
+        uuidInput.style.boxShadow = '';
+      }
+
+      const prefixInput = document.getElementById('prefixInput');
+      const prefix = prefixInput ? prefixInput.value || 'user-' : 'user-';
 
       runBtn.disabled = true;
       runBtn.innerHTML = '<div class="spinner"></div><span>Đang tìm kiếm...</span>';
@@ -2621,18 +2639,7 @@
 
       const found = [];
       const startTime = Date.now();
-      let searchInput = state.modeType === 'oauth-account' ? prefix : null;
-
-      // Validate UUID for OAuth mode
-      if (state.modeType === 'oauth-account') {
-        const uuid = document.getElementById('uuidInput').value.trim();
-        if (!uuid) {
-          outputArea.innerHTML = '<div class="output-line output-error">❌ Vui lòng nhập Account UUID (OAuth) từ ~/.claude/.credentials.json</div>';
-          runBtn.disabled = false;
-          runBtn.innerHTML = '<span>🚀</span><span>Bắt đầu tìm kiếm</span>';
-          return;
-        }
-      }
+      const searchInput = state.modeType === 'oauth-account' ? prefix : null;
 
       await new Promise(resolve => {
         setTimeout(() => {
