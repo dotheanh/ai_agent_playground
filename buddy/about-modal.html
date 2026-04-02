@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Claude Buddy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --border: #2a2a3a;
+      --text-primary: #f0f0f5;
+      --text-secondary: #8888a0;
+      --accent: #7c5cff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; background: var(--bg-primary); color: var(--text-primary); padding: 2rem; }
+
+    .btn-open {
+      padding: 1rem 2rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+    }
+    .btn-open:hover { background: #9b7fff; }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      cursor: pointer;
+    }
+    .modal-overlay.active { display: flex; }
+
+    .modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      max-width: 700px;
+      width: 90%;
+      max-height: 80vh;
+      overflow: auto;
+      cursor: default;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title { font-size: 1.2rem; font-weight: 600; }
+
+    .close-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+    }
+    .close-btn:hover { background: var(--bg-card); color: var(--text-primary); }
+
+    .about-content { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+    .about-content h3 { color: var(--accent); font-size: 1rem; margin: 1.25rem 0 0.5rem 0; }
+    .about-content h3:first-child { margin-top: 0; }
+    .about-content p { margin-bottom: 0.75rem; }
+    .about-content ul { padding-left: 1.25rem; margin-bottom: 0.75rem; }
+    .about-content li { margin-bottom: 0.35rem; }
+    .about-content code { background: var(--bg-secondary); padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--accent); }
+
+    .about-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .about-section:last-child { margin-bottom: 0; }
+    .about-section h4 { color: var(--text-primary); font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+    .about-cheat { background: rgba(74, 222, 128, 0.1); border: 1px solid rgba(74, 222, 128, 0.3); border-radius: 8px; padding: 0.75rem; color: #4ade80; font-size: 0.8rem; margin-top: 0.5rem; }
+    .about-warn { background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.3); border-radius: 8px; padding: 0.75rem; color: #f87171; font-size: 0.8rem; margin-top: 0.5rem; }
+    .about-formula { background: #0d1117; border-radius: 6px; padding: 0.75rem; font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--accent); margin: 0.5rem 0; text-align: center; }
+
+    /* More Info Section - Hidden by default */
+    .more-info { display: none; }
+    .more-info.expanded { display: block; }
+
+    .btn-more {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-family: 'Outfit', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .btn-more:hover { background: var(--bg-card); color: var(--text-primary); }
+    .btn-more .arrow { transition: transform 0.2s; }
+    .btn-more.expanded .arrow { transform: rotate(180deg); }
+
+    /* Table styles */
+    table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.8rem; }
+    th, td { padding: 0.5rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--text-primary); font-weight: 600; }
+    td code { background: var(--bg-primary); padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.7rem; }
+
+    .formula-block {
+      background: #0d1117;
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      margin: 0.75rem 0;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .note-box {
+      background: rgba(124, 92, 255, 0.1);
+      border: 1px solid rgba(124, 92, 255, 0.3);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.8rem;
+      margin: 0.75rem 0;
+    }
+  </style>
+</head>
+<body>
+  <button class="btn-open" onclick="document.getElementById('modal').classList.add('active')">
+    ℹ️ Open About Buddy Modal
+  </button>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">ℹ️ About Claude Buddy</h2>
+        <button class="close-btn" onclick="document.getElementById('modal').classList.remove('active')">×</button>
+      </div>
+      <div class="about-content">
+        <!-- Tổng quan -->
+        <h3>🎯 Tổng quan</h3>
+        <p>Claude Buddy là pet ảo xuất hiện bên cạnh input box khi bạn gõ <code>/buddy</code>. Mỗi user có một buddy duy nhất dựa trên userID của họ.</p>
+        <p>Buddy gồm 2 phần:</p>
+        <ul>
+          <li><strong>Bones</strong> (từ hash): Species, Rarity, Eye, Hat, Shiny, Stats</li>
+          <li><strong>Soul</strong> (từ AI): Name, Personality - được lưu trong <code>~/.claude.json</code> field <code>companion</code></li>
+        </ul>
+
+        <!-- Thuộc tính Buddy -->
+        <h3>📊 Thuộc tính Buddy</h3>
+        <ul>
+          <li><strong>Species</strong> (18): duck, goose, blob, cat, dragon, octopus, owl, penguin, turtle, snail, ghost, axolotl, capybara, cactus, robot, rabbit, mushroom, chonk</li>
+          <li><strong>Rarity</strong> (5): common (60%), uncommon (25%), rare (10%), epic (4%), legendary (1%)</li>
+          <li><strong>Eye</strong> (6): · ✦ × ◉ @ °</li>
+          <li><strong>Hat</strong> (8): none, crown, tophat, propeller, halo, wizard, beanie, tinyduck</li>
+          <li><strong>Shiny</strong>: 1% probability</li>
+          <li><strong>Stats</strong> (5): DEBUGGING, PATIENCE, CHAOS, WISDOM, SNARK</li>
+        </ul>
+
+        <!-- Cách hash hoạt động -->
+        <h3>🔐 Cách thức Hash tạo Buddy</h3>
+        <p>Claude Code sử dụng công thức:</p>
+        <div class="about-formula">hash(userID + SALT) → seed → mulberry32 PRNG → Buddy attributes</div>
+        <p>Trong đó:</p>
+        <ul>
+          <li><strong>SALT</strong> hiện tại: <code>friend-2026-401</code></li>
+          <li><strong>Hash function</strong>: FNV-1a hoặc Bun.hash</li>
+          <li><strong>PRNG</strong>: Mulberry32 - dùng seed từ hash để random các thuộc tính</li>
+        </ul>
+
+        <!-- API Key User -->
+        <div class="about-section">
+          <h4>🔑 Người dùng API Key</h4>
+          <p>Với API key, bạn tự do đặt <code>userID</code> trong file <code>~/.claude.json</code>.</p>
+          <p><strong>Cách Claude thiết lập userID:</strong> User tự khai báo thủ công trong config. Nếu bạn không tự đặt thì Claude sẽ tạo random userID trong lần đầu tiên sử dụng.</p>
+          <div class="about-cheat">
+            <strong>✓ Cách cheat:</strong> Dùng tool này để tìm UID sinh ra buddy mong muốn, sau đó sửa <code>userID</code> trong <code>~/.claude.json</code> và xóa field <code>companion</code>.
+          </div>
+        </div>
+
+        <!-- OAuth User -->
+        <div class="about-section">
+          <h4>👤 Người dùng OAuth / Claude Account</h4>
+          <p>Với OAuth, Claude Code dùng account UUID từ server, không thể tự do thay đổi.</p>
+          <p><strong>Cách Claude thiết lập userID:</strong></p>
+          <ol style="padding-left: 1.25rem; margin: 0.5rem 0;">
+            <li>Đọc OAuth token từ <code>~/.claude/.credentials.json</code></li>
+            <li>Gọi API <code>https://api.anthropic.com/api/oauth/profile</code> để lấy UUID</li>
+            <li>Dùng UUID + salt trong binary để tính hash → sinh buddy</li>
+          </ol>
+          <div class="about-warn">
+            <strong>⚠️ Cách cheat (có rủi ro):</strong> Phải brute-force tìm salt trong binary, sau đó patch binary để thay đổi salt. Binary patching có thể vi phạm Terms of Service.
+          </div>
+        </div>
+
+        <!-- More Info Button -->
+        <button class="btn-more" id="moreBtn" onclick="toggleMoreInfo()">
+          <span class="arrow">▼</span>
+          <span>Thông tin thêm</span>
+          <span class="arrow">▼</span>
+        </button>
+
+        <!-- More Info Section -->
+        <div class="more-info" id="moreInfo">
+          <h3>🔬 Hệ thống Buddy hoạt động như thế nào</h3>
+          <p>Buddy của bạn <strong>không phải ngẫu nhiên</strong>. Nó được tạo một cách xác định từ user identity của bạn sử dụng seeded PRNG. Cùng identity = cùng buddy, mọi lúc.</p>
+
+          <h3>Thuật toán</h3>
+          <div class="formula-block">identity + "friend-2026-401"  →  FNV-1a hash  →  Mulberry32 PRNG seed
+                                                        │
+                                              ┌─────────┼─────────────┐
+                                              ▼         ▼             ▼
+                                           rarity    species    eye/hat/stats</div>
+
+          <ol style="padding-left: 1.25rem; margin: 0.5rem 0;">
+            <li><strong>Xác định identity</strong>: <code>oauthAccount.accountUuid ?? userID ?? "anon"</code></li>
+            <p style="margin-left: 1.5rem; font-size: 0.8rem; color: var(--text-secondary);">Nếu bạn đăng nhập bằng OAuth, <code>accountUuid</code> được ưu tiên. <code>userID</code> chỉ được dùng như fallback.</p>
+            <li><strong>Hashing</strong>: Chuỗi identity + salt <code>"friend-2026-401"</code> được hash với FNV-1a (32-bit).</li>
+            <li><strong>PRNG</strong>: Hash được dùng làm seed cho Mulberry32 generator, tạo ra các số ngẫu nhiên xác định.</li>
+            <li><strong>Rolling</strong>: PRNG được sử dụng theo thứ tự:</li>
+            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+              <li>Call đầu tiên → <strong>rarity</strong> (có trọng số: common 60%, uncommon 25%, rare 10%, epic 4%, legendary 1%)</li>
+              <li>Call thứ hai → <strong>species</strong> (đều nhau across 18 species)</li>
+              <li>Call thứ ba → <strong>eye style</strong></li>
+              <li>Call thứ tư → <strong>hat</strong> (common luôn nhận "none")</li>
+              <li>Call thứ năm → <strong>shiny</strong> (1% chance)</li>
+              <li>Các call còn lại → <strong>stats</strong> (DEBUGGING, PATIENCE, CHAOS, WISDOM, SNARK)</li>
+            </ul>
+          </ol>
+
+          <h3>Điều gì được lưu trữ vs. Điều gì được tạo lại</h3>
+          <table>
+            <tr><th>Trường</th><th>Lưu trữ?</th><th>Nguồn</th></tr>
+            <tr><td>name</td><td>Có</td><td>AI-generated</td></tr>
+            <tr><td>personality</td><td>Có</td><td>AI-generated</td></tr>
+            <tr><td>hatchedAt</td><td>Có</td><td>Timestamp</td></tr>
+            <tr><td>rarity</td><td><strong>Không</strong></td><td>Tạo lại từ hash</td></tr>
+            <tr><td>species</td><td><strong>Không</strong></td><td>Tạo lại từ hash</td></tr>
+            <tr><td>eye, hat, shiny</td><td><strong>Không</strong></td><td>Tạo lại từ hash</td></tr>
+            <tr><td>stats</td><td><strong>Không</strong></td><td>Tạo lại từ hash</td></tr>
+          </table>
+          <div class="note-box">
+            <strong>Comment trong mã nguồn của Claude:</strong> "Bones are regenerated from hash(userId) on every read so species renames don't break stored companions and users can't edit their way to a legendary."
+          </div>
+
+          <h3>Tỷ lệ Rarity</h3>
+          <table>
+            <tr><th>Rarity</th><th>Weight</th><th>Probability</th><th>Stars</th></tr>
+            <tr><td>Common</td><td>60</td><td>60%</td><td>★</td></tr>
+            <tr><td>Uncommon</td><td>25</td><td>25%</td><td>★★</td></tr>
+            <tr><td>Rare</td><td>10</td><td>10%</td><td>★★★</td></tr>
+            <tr><td>Epic</td><td>4</td><td>4%</td><td>★★★★</td></tr>
+            <tr><td>Legendary</td><td>1</td><td>1%</td><td>★★★★★</td></tr>
+          </table>
+
+          <h3>Cosmetics: Eyes, Hats, and Shiny</h3>
+          <p>Ngoài rarity và species, mỗi buddy còn có eye style, hat, và shiny status - tất cả đều được xác định từ cùng một identity hash.</p>
+
+          <h4>Eyes (6 styles, uniform random)</h4>
+          <table>
+            <tr><th>Eye</th><th>Look</th><th>On a cat</th></tr>
+            <tr><td>·</td><td>Dot</td><td>( ·   ·)</td></tr>
+            <tr><td>✦</td><td>Star</td><td>( ✦   ✦)</td></tr>
+            <tr><td>×</td><td>Cross</td><td>( ×   ×)</td></tr>
+            <tr><td>◉</td><td>Bullseye</td><td>( ◉   ◉)</td></tr>
+            <tr><td>@</td><td>At sign</td><td>( @   @)</td></tr>
+            <tr><td>°</td><td>Circle</td><td>( °   °)</td></tr>
+          </table>
+
+          <h4>Hats (8 styles - common luôn nhận "none")</h4>
+          <table>
+            <tr><th>Hat</th><th>ASCII</th><th>Notes</th></tr>
+            <tr><td>none</td><td>(blank)</td><td>All commons get this</td></tr>
+            <tr><td>crown</td><td>\^^^/</td><td></td></tr>
+            <tr><td>tophat</td><td>[___]</td><td></td></tr>
+            <tr><td>propeller</td><td>-+-</td><td></td></tr>
+            <tr><td>halo</td><td>(   )</td><td></td></tr>
+            <tr><td>wizard</td><td>/^\</td><td></td></tr>
+            <tr><td>beanie</td><td>(___)</td><td></td></tr>
+            <tr><td>tinyduck</td><td>,></td><td>A tiny duck sitting on its head</td></tr>
+          </table>
+
+          <p><strong>Shiny:</strong> 1% chance. Rolled sau hat. Cũng được xác định từ identity - bạn không thể giả mạo bằng cách sửa config.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Close modal when clicking outside
+    document.getElementById('modal').addEventListener('click', function(e) {
+      if (e.target.id === 'modal') {
+        document.getElementById('modal').classList.remove('active');
+      }
+    });
+
+    // Close with Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.getElementById('modal').classList.remove('active');
+      }
+    });
+
+    // Toggle More Info
+    function toggleMoreInfo() {
+      const moreInfo = document.getElementById('moreInfo');
+      const btn = document.getElementById('moreBtn');
+      moreInfo.classList.toggle('expanded');
+      btn.classList.toggle('expanded');
+    }
+  </script>
+</body>
+</html>

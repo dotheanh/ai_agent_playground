@@ -1601,8 +1601,8 @@
           </div>
         </div>
 
-        <!-- Mode -->
-        <div class="config-section">
+        <!-- Mode (API Key only) -->
+        <div class="config-section" id="apiModeSection">
           <div class="section-label">Chế độ</div>
           <div class="toggle-group" id="modeGroup">
             <button class="toggle-btn selected" data-mode="random">🎲 Random</button>
@@ -1650,37 +1650,26 @@
           <div class="output-area" id="outputArea"></div>
         </div>
 
-        <!-- OAuth Hash Algorithm Selector (inside controls-panel for OAuth mode) -->
-        <div class="config-section oauth-algo-section" id="oauthAlgoSection" style="display: none;">
-          <div class="section-label">Hash Algorithm</div>
-          <div class="hash-compare">
-            <div class="hash-option fnv selected" data-hash="fnv">
-              <div class="hash-title">
-                <span>🟢 FNV-1a</span>
-                <span class="hash-badge">Browser</span>
-              </div>
-              <div class="hash-desc">
-                Chạy trực tiếp trên browser - Nhanh nhưng không chính xác 100%
-              </div>
-            </div>
-            <div class="hash-option bun" data-hash="bun">
-              <div class="hash-title">
-                <span>🟠 Bun.hash</span>
-                <span class="hash-badge">Exact</span>
-              </div>
-              <div class="hash-desc">
-                Chính xác 100% - Copy command bên dưới để chạy
-              </div>
-            </div>
+        <!-- OAuth Section (hidden by default) -->
+        <div class="config-section" id="oauthSection" style="display: none;">
+          <div class="section-label">Account UUID (OAuth)</div>
+          <div class="input-row">
+            <input type="text" id="uuidInput" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+            <label>UUID</label>
           </div>
-          <div id="commandOutput" style="margin-top: 1rem; display: none;">
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">Copy lệnh này và chạy:</div>
-            <div style="background: #0d1117; padding: 0.75rem; border-radius: 6px; font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #f87171; word-break: break-all;" id="commandText">
-            </div>
-            <button id="copyCommandBtn" style="margin-top: 0.5rem; width: 100%; padding: 0.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer; font-size: 0.75rem;">
-              📋 Copy Command
-            </button>
+          <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem;">
+            Lấy từ ~/.claude/.credentials.json → account.uuid
           </div>
+        </div>
+
+        <!-- Search Command Output (OAuth) -->
+        <div class="config-section" id="searchCommandSection" style="display: none;">
+          <div class="section-label">Search Command</div>
+          <div style="background: #0d1117; padding: 0.75rem; border-radius: 6px; font-family: 'Fira Code', monospace; font-size: 0.7rem; color: #f87171; word-break: break-all;" id="searchCommandText">
+          </div>
+          <button id="copySearchCmdBtn" style="margin-top: 0.5rem; width: 100%; padding: 0.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer; font-size: 0.75rem;">
+            📋 Copy Search Command
+          </button>
         </div>
       </div>
 
@@ -1694,6 +1683,29 @@
           <li>Restart Claude Code</li>
           <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
         </ol>
+
+        <!-- OAuth: Salt Input & Patch Commands (hidden by default) -->
+        <div id="oauthInstructions" style="display: none; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+          <div class="section-label">Salt (từ kết quả search)</div>
+          <div class="input-row">
+            <input type="text" id="saltInput" placeholder="friend-2026-042" style="flex: 1;">
+          </div>
+
+          <div id="patchCommands" style="margin-top: 1rem; display: none;">
+            <div class="section-label">Patch Command</div>
+            <div style="background: #0d1117; padding: 0.75rem; border-radius: 6px; font-family: 'Fira Code', monospace; font-size: 0.7rem; color: #f87171; word-break: break-all;" id="patchCommandText"></div>
+            <button id="copyPatchCmdBtn" style="margin-top: 0.5rem; width: 100%; padding: 0.5rem; background: #dc2626; border: none; border-radius: 6px; color: white; cursor: pointer; font-size: 0.75rem;">
+              📋 Copy Patch Command
+            </button>
+
+            <div class="section-label" style="margin-top: 1rem;">Restore Command (Backup)</div>
+            <div style="background: #0d1117; padding: 0.75rem; border-radius: 6px; font-family: 'Fira Code', monospace; font-size: 0.7rem; color: #22c55e; word-break: break-all;" id="restoreCommandText"></div>
+            <button id="copyRestoreCmdBtn" style="margin-top: 0.5rem; width: 100%; padding: 0.5rem; background: #22c55e; border: none; border-radius: 6px; color: white; cursor: pointer; font-size: 0.75rem;">
+              📋 Copy Restore Command
+            </button>
+          </div>
+        </div>
+
         <div id="instructionsNote" style="margin-top: 1rem; padding: 0.75rem; border-radius: 8px; font-size: 0.75rem;">
           💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service
         </div>
@@ -1964,14 +1976,8 @@
     }
 
     function confirmRisk() {
-      state.modeType = 'oauth-account';
-      document.querySelectorAll('.mode-btn').forEach(btn => {
-        btn.classList.remove('selected');
-        btn.dataset.mode === 'oauth-account' && btn.classList.add('selected');
-      });
-      document.getElementById('oauthAlgoSection').style.display = 'block';
+      activateOAuthMode();
       closeRiskModal();
-      updateInstructionsForMode();
     }
 
     function switchToApiKey() {
@@ -1980,56 +1986,97 @@
         btn.classList.remove('selected');
         btn.dataset.mode === 'api-key' && btn.classList.add('selected');
       });
-      document.getElementById('oauthAlgoSection').style.display = 'none';
-      document.getElementById('commandOutput').style.display = 'none';
+      // Hide OAuth elements
+      document.getElementById('oauthSection').style.display = 'none';
+      document.getElementById('searchCommandSection').style.display = 'none';
+      document.getElementById('oauthInstructions').style.display = 'none';
+      document.getElementById('apiModeSection').style.display = 'block';
+      // Show API instructions
+      document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn sau khi tìm thấy UID';
+      document.getElementById('instructionsList').innerHTML = `
+        <li>Mở file <code>~/.claude.json</code></li>
+        <li>Xóa field <code>companion</code> (nếu có)</li>
+        <li>Thay thế <code>userID</code> bằng UID mới</li>
+        <li>Restart Claude Code</li>
+        <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
+      `;
+      const note = document.getElementById('instructionsNote');
+      note.style.background = 'rgba(74, 222, 128, 0.1)';
+      note.style.color = 'var(--success)';
+      note.style.border = 'none';
+      note.innerHTML = '💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service';
       closeRiskModal();
-      updateInstructionsForMode();
     }
 
-    function generateOAuthCommand() {
-      const prefix = document.getElementById('prefixInput').value || '';
+    function activateOAuthMode() {
+      state.modeType = 'oauth-account';
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.classList.remove('selected');
+        btn.dataset.mode === 'oauth-account' && btn.classList.add('selected');
+      });
+      // Show OAuth elements
+      document.getElementById('oauthSection').style.display = 'block';
+      document.getElementById('apiModeSection').style.display = 'none';
+      document.getElementById('oauthInstructions').style.display = 'block';
+      // Update instructions
+      document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn OAuth';
+      document.getElementById('instructionsList').innerHTML = `
+        <li>Nhập Account UUID (từ ~/.claude/.credentials.json)</li>
+        <li>Chọn thuộc tính Buddy mong muốn</li>
+        <li>Copy & chạy Search Command trong terminal</li>
+        <li>Nhập salt tìm được vào ô "Salt" bên dưới</li>
+        <li>Copy & chạy Patch Command</li>
+        <li>Restart Claude Code & gõ <code>/buddy</code></li>
+      `;
+      const note = document.getElementById('instructionsNote');
+      note.style.background = 'rgba(248, 113, 113, 0.1)';
+      note.style.color = '#f87171';
+      note.style.border = '1px solid #f87171';
+      note.innerHTML = '⚠️ <strong>Cảnh báo:</strong> Binary patching có thể vi phạm ToS - <strong>Play at your own risk!</strong>';
+      // Generate initial commands
+      generateSearchCommand();
+    }
+
+    function generateSearchCommand() {
+      const uuid = document.getElementById('uuidInput').value.trim();
       const limit = document.getElementById('limitInput').value || '50000000';
       const count = document.getElementById('countInput').value || '1';
       const rarity = document.querySelector('[data-rarity].selected')?.dataset.rarity || 'legendary';
+      const species = document.querySelector('[data-species].selected')?.dataset.species;
+      const eye = document.querySelector('[data-eye].selected')?.dataset.eye;
+      const hat = document.querySelector('[data-hat].selected')?.dataset.hat;
+      const shiny = state.shiny === 'true' ? '--shiny' : '';
 
-      const command = `bun buddy-reroll.ts --uuid "${prefix}" --rarity ${rarity} --limit ${limit} --count ${count}`;
-      document.getElementById('commandText').textContent = command;
+      if (!uuid) {
+        document.getElementById('searchCommandText').textContent = 'Nhập Account UUID để tạo command...';
+        return;
+      }
+
+      let cmd = `bun scripts/search-salt.js --uuid "${uuid}" --rarity ${rarity} --limit ${limit} --count ${count}`;
+      if (species) cmd += ` --species ${species}`;
+      if (eye) cmd += ` --eye "${eye}"`;
+      if (hat && hat !== 'none') cmd += ` --hat ${hat}`;
+      if (shiny) cmd += ` ${shiny}`;
+
+      document.getElementById('searchCommandText').textContent = cmd;
+    }
+
+    function generatePatchCommands() {
+      const salt = document.getElementById('saltInput').value.trim();
+      if (!salt || salt.length !== 15) {
+        document.getElementById('patchCommands').style.display = 'none';
+        return;
+      }
+      document.getElementById('patchCommands').style.display = 'block';
+      document.getElementById('patchCommandText').textContent = `bun scripts/patch-salt.js --salt "${salt}"`;
+      document.getElementById('restoreCommandText').textContent = 'bun scripts/patch-salt.js --restore';
     }
 
     function updateInstructionsForMode() {
-      const instructionsTitle = document.getElementById('instructionsTitle');
-      const instructionsList = document.getElementById('instructionsList');
-      const note = document.getElementById('instructionsNote');
-
       if (state.modeType === 'oauth-account') {
-        instructionsTitle.innerHTML = '📋 Hướng dẫn sau khi tìm thấy SALT';
-        instructionsList.innerHTML = `
-          <li>Nhập account UUID của bạn vào ô "Prefix" ở bên trên</li>
-          <li>Chọn Hash Algorithm: Bun.hash để get exact match</li>
-          <li>Copy command được sinh ra và chạy trong terminal</li>
-          <li>Script sẽ brute-force salt và hiển thị kết quả</li>
-          <li>Dùng claude-buddy-reroll để patch binary với salt tìm được</li>
-          <li>Xóa companion state trong <code>~/.claude/.config.json</code></li>
-          <li>Restart Claude Code</li>
-          <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
-        `;
-        note.style.background = 'rgba(248, 113, 113, 0.1)';
-        note.style.color = '#f87171';
-        note.style.border = '1px solid #f87171';
-        note.innerHTML = '⚠️ <strong>Cảnh báo:</strong> Thao tác này có rủi ro pháp lý - binary patching có thể vi phạm ToS';
+        activateOAuthMode();
       } else {
-        instructionsTitle.innerHTML = '📋 Hướng dẫn sau khi tìm thấy UID';
-        instructionsList.innerHTML = `
-          <li>Mở file <code>~/.claude.json</code></li>
-          <li>Xóa field <code>companion</code> (nếu có)</li>
-          <li>Thay thế <code>userID</code> bằng UID mới</li>
-          <li>Restart Claude Code</li>
-          <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
-        `;
-        note.style.background = 'rgba(74, 222, 128, 0.1)';
-        note.style.color = 'var(--success)';
-        note.style.border = 'none';
-        note.innerHTML = '💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service';
+        switchToApiKey();
       }
     }
 
@@ -2412,40 +2459,35 @@
       document.querySelectorAll('.mode-btn').forEach(btn => {
         btn.onclick = () => {
           const mode = btn.dataset.mode;
-          document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
-          btn.classList.add('selected');
-          state.modeType = mode;
-          document.getElementById('oauthAlgoSection').style.display = mode === 'oauth-account' ? 'block' : 'none';
-          updateInstructionsForMode();
-
           if (mode === 'oauth-account') {
             openRiskModal();
-          }
-        };
-      });
-
-      // Hash algorithm selector (OAuth)
-      document.querySelectorAll('.hash-option').forEach(opt => {
-        opt.onclick = () => {
-          document.querySelectorAll('.hash-option').forEach(o => o.classList.remove('selected'));
-          opt.classList.add('selected');
-          currentHashAlgorithm = opt.dataset.hash;
-          if (opt.dataset.hash === 'bun' && state.modeType === 'oauth-account') {
-            generateOAuthCommand();
-            document.getElementById('commandOutput').style.display = 'block';
           } else {
-            document.getElementById('commandOutput').style.display = 'none';
+            switchToApiKey();
           }
         };
       });
 
-      // Copy command button
-      document.getElementById('copyCommandBtn').onclick = () => {
-        const commandText = document.getElementById('commandText').textContent;
-        navigator.clipboard.writeText(commandText).then(() => {
-          alert('Đã copy command!');
-        });
-      };
+      // UUID input - generate command on change
+      document.getElementById('uuidInput')?.addEventListener('input', generateSearchCommand);
+      document.getElementById('limitInput')?.addEventListener('input', generateSearchCommand);
+      document.getElementById('countInput')?.addEventListener('input', generateSearchCommand);
+
+      // Salt input - generate patch commands on change
+      document.getElementById('saltInput')?.addEventListener('input', generatePatchCommands);
+
+      // Copy buttons
+      document.getElementById('copySearchCmdBtn')?.addEventListener('click', () => {
+        const text = document.getElementById('searchCommandText').textContent;
+        navigator.clipboard.writeText(text);
+      });
+      document.getElementById('copyPatchCmdBtn')?.addEventListener('click', () => {
+        const text = document.getElementById('patchCommandText').textContent;
+        navigator.clipboard.writeText(text);
+      });
+      document.getElementById('copyRestoreCmdBtn')?.addEventListener('click', () => {
+        const text = document.getElementById('restoreCommandText').textContent;
+        navigator.clipboard.writeText(text);
+      });
     }
 
     function toggleSelection(type, value, element) {
