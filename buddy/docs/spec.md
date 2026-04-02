@@ -57,6 +57,7 @@ index.html
 --text-muted:   #555566    /* Muted text */
 --accent:       #7c5cff    /* Primary accent */
 --accent-glow:  rgba(124,92,255,0.4) /* Glow effect */
+--accent-hover: #9b7fff    /* Accent hover state */
 --success:      #4ade80    /* Success state */
 --error:        #f87171    /* Error state */
 --common:       #6b7280    /* Rarity colors */
@@ -202,7 +203,12 @@ oauthAccount?.accountUuid  ??  userID  ??  "anon"
 |-------|---------|---------|
 | `riskModal` | Switch to patch-salt | Warning, ToS risks, confirm/cancel |
 | `historyModal` | Click history button | Last 10 results, ASCII preview |
-| `aboutModal` | Click About Buddy | Full explanation, tables, sprites |
+| `aboutModal` | Click About Buddy | Full explanation, tables, sprites, references |
+
+**About Modal Style Boxes:**
+- `.about-cheat` — green success box: "✓ Cách cheat" (API Key mode guide)
+- `.about-cheat-safe` — yellow/amber box: "✓ Cách cheat an toàn" (safe OAuth deletion method)
+- `.about-warn` — red warning box: "⚠️ Cách cheat (có rủi ro)" (binary patching risk)
 
 ### 4.3 Header Buttons
 
@@ -212,6 +218,8 @@ oauthAccount?.accountUuid  ??  userID  ??  "anon"
 ```
 
 Badge shows count of history items, hidden when 0.
+
+**Style:** Both buttons use accent-colored gradient background, purple border with subtle glow, and scale up on hover with stronger glow effect.
 
 ---
 
@@ -250,8 +258,8 @@ const state = {
 | `switchToDeleteUuid()` | Select delete-uuid sub-mode, injects Shell Alias section, shows apply-buddy.bat instructions |
 | `switchToPatchSalt()` | Select patch-salt sub-mode (via risk modal), shows patch/restore commands, hides Shell Alias section |
 | `openRiskModal()` | Show ToS warning before patch-salt |
-| `closeRiskModal()` | Dismiss modal |
-| `confirmRiskModal()` | Confirm → switch to patch-salt |
+| `closeRiskModal()` | Dismiss modal (used by "Quay lại" in risk modal — stays in OAuth mode) |
+| `confirmRisk()` | Confirm risk modal → calls `switchToDeleteUuid()` |
 
 ### 5.4 Conditional UI Visibility
 
@@ -500,7 +508,8 @@ buddy/
 └── [external repos referenced]
     ├── grayashh/buddy-reroll     # CLI + React UI
     ├── ithiria894/claude-code-buddy-reroll  # FNV-only + verify.js + shiny_hunt.js
-    └── claude-buddy-reroll-main   # Original analysis source
+    ├── RoggeOhta/claude-buddy-reroll  # Reference source
+    └── linux.do/t/topic/1871870  # Discussion thread
 ```
 
 ---
@@ -638,3 +647,7 @@ if (DEFAULT_MODE === 'api-key') {
 | Date | Description |
 |------|-------------|
 | 2026-04-02 | Initial spec from full code review |
+| 2026-04-02 | Added `.about-cheat-safe` yellow warning box style in About modal |
+| 2026-04-02 | Enhanced header buttons (About/History) with gradient, accent border, glow |
+| 2026-04-02 | Added "Nguồn tham khảo" (References) section in About modal |
+| 2026-04-02 | Fixed risk modal "Quay lại" → calls `closeRiskModal()` instead of `switchToApiKey()` |
