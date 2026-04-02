@@ -642,6 +642,53 @@ if (DEFAULT_MODE === 'api-key') {
 
 ---
 
+## 12. Animation System
+
+### 12.1 Overview
+
+| Animation | Trigger | Duration | Notes |
+|-----------|---------|----------|-------|
+| Idle | Default | ∞ | 15-step sequence, 500ms tick |
+| Pet | Pet button | 4000ms | Hearts + fast frames |
+| Hatch | Hatch button | 3000ms | laying→wobble→crack→burst→emerge |
+
+### 12.2 Hatch Animation
+
+**State:**
+```javascript
+let hatchPhase = 'idle'; // 'idle' | 'laying' | 'wobble' | 'crack' | 'burst' | 'emerge'
+let hatchProgress = 0; // 0-1
+let hatchIntervalId = null;
+let hatchBuddyData = null; // snapshot of buddy attrs at hatch start
+const HATCH_DURATION = 3000; // ms
+```
+
+**Sprite data (`EGG_SPRITES`):** ASCII art eggs for laying/wobble/crack/burst phases.
+
+**startHatch() flow:**
+1. Disable both Pet + Hatch buttons
+2. Snapshot `hatchBuddyData` from current state
+3. Reset `hatchPhase = 'laying'`, start `setInterval` (single interval)
+4. Interval updates `hatchProgress`, determines phase from progress thresholds, calls `updatePreview()`
+5. Phase thresholds: laying≥0.00, wobble≥0.20, crack≥0.40, burst≥0.55, emerge≥0.70
+6. On complete: clear interval, reset state, re-enable buttons, call `updatePreview()`
+
+**updatePreview() hatch branch:** Renders egg sprite for laying/wobble/crack, burst fragments for burst, real buddy for emerge. Uses CSS classes `.hatch-{phase}` for animations.
+
+**CSS keyframes:** `wobble-shake`, `burst-expand`, `emerg-pop` applied via `.sprite-bob` class.
+
+### 12.3 setInterval Pattern (IMPORTANT)
+
+All animations use exactly 1 active interval at a time. When starting a new animation:
+```javascript
+if (animationInterval) { clearInterval(animationInterval); animationInterval = null; }
+if (petAnimationId) { clearInterval(petAnimationId); petAnimationId = null; }
+if (hatchIntervalId) { clearInterval(hatchIntervalId); hatchIntervalId = null; }
+// ... then start new interval
+```
+
+---
+
 ## Revision History
 
 | Date | Description |
