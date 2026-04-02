@@ -246,9 +246,9 @@ const state = {
 | Function | Triggers |
 |----------|----------|
 | `switchToApiKey()` | Select API Key mode |
-| `activateOAuthMode()` | Select OAuth mode (default delete-uuid) |
-| `switchToDeleteUuid()` | Select delete-uuid sub-mode |
-| `switchToPatchSalt()` | Select patch-salt sub-mode (via risk modal) |
+| `activateOAuthMode()` | Select OAuth mode (default delete-uuid), also creates Shell Alias section |
+| `switchToDeleteUuid()` | Select delete-uuid sub-mode, injects Shell Alias section, shows apply-buddy.bat instructions |
+| `switchToPatchSalt()` | Select patch-salt sub-mode (via risk modal), shows patch/restore commands, hides Shell Alias section |
 | `openRiskModal()` | Show ToS warning before patch-salt |
 | `closeRiskModal()` | Dismiss modal |
 | `confirmRiskModal()` | Confirm → switch to patch-salt |
@@ -261,6 +261,7 @@ const state = {
 | `oauthSection` (UUID input) | hidden | hidden | visible |
 | `searchCommandSection` | hidden | hidden | visible |
 | `oauthInstructions` | hidden | hidden | visible |
+| `shellAliasSection` | hidden | visible | hidden |
 | Bun.hash selector | hidden (CSS) | hidden | visible |
 
 ---
@@ -332,7 +333,9 @@ Injected per result in output area when `oauthSubMode === 'delete-uuid'`:
 `<button class="apply-btn" onclick="applyDeleteUuid('${match.userId}')">✅ Apply</button>`
 ```
 
-Downloads `apply-buddy.bat` with Node.js script to modify `~/.claude.json`.
+- Escapes single quotes: `safeUserId = userId.replace(/'/g, "\\'")`
+- Downloads `apply-buddy.bat` (not `.cmd` or Node script)
+- Output area shows script content + copy button with "Đã copy!" feedback
 
 ---
 
@@ -536,20 +539,45 @@ Restore command:
 
 ### 11.3 applyDeleteUuid(userId)
 
-Downloads a `.bat` file with inline Node.js script:
-```javascript
-node -e "
-  const path = require('path');
-  const fs = require('fs');
-  const f = path.join(process.env.HOME || process.env.USERPROFILE, '.claude.json');
-  const c = JSON.parse(fs.readFileSync(f, 'utf8'));
-  if (c.oauthAccount) delete c.oauthAccount.accountUuid;
-  delete c.companion;
-  c.userID = '${userId}';
-  fs.writeFileSync(f, JSON.stringify(c, null, 2));
-  console.log('Config updated...');
-"
+Downloads a Windows `.bat` file (not Node.js inline) for maximum Windows compatibility:
+
+```batch
+@echo off
+echo Applying buddy config...
+node -e "const p=require('path');const f=require('path').join(process.env.USERPROFILE||process.env.HOME,'.claude.json');const c=JSON.parse(require('fs').readFileSync(f,'utf8'));if(c.oauthAccount)delete c.oauthAccount.accountUuid;delete c.companion;c.userID='${userId}';require('fs').writeFileSync(f,JSON.stringify(c,null,2));console.log('Done! Restart Claude Code and type /buddy');"
+pause
 ```
+
+Steps executed:
+1. Delete `oauthAccount.accountUuid` (preserves rest of `oauthAccount`)
+2. Delete `companion` (forces fresh hatch)
+3. Set `userID` to found value
+4. Write updated config with 2-space indentation
+
+After download, output area displays the script content with a copy button.
+
+### 11.3b Shell Alias Section (switchToDeleteUuid)
+
+Dynamically injected into `.instructions` panel when switching to delete-uuid sub-mode. The section is created once on first switch, then toggled via `display: block/none`:
+
+```javascript
+let shellAliasSection = document.getElementById('shellAliasSection');
+if (!shellAliasSection) {
+  shellAliasSection = document.createElement('div');
+  shellAliasSection.id = 'shellAliasSection';
+  shellAliasSection.style.cssText = '...green theme...';
+  instructionsPanel.appendChild(shellAliasSection);
+}
+shellAliasSection.style.display = 'block';
+shellAliasSection.innerHTML = '...shell alias HTML...';
+```
+
+**Shell alias content:**
+```bash
+alias claude='node -e "const f=require(\"os\").homedir()+\"\\\\.claude.json\";try{const c=JSON.parse(require(\"fs\").readFileSync(f));if(c.oauthAccount?.accountUuid){delete c.oauthAccount.accountUuid;require(\"fs\").writeFileSync(f,JSON.stringify(c,null,2));console.log(\"[buddy-fix] accountUuid removed\");}}catch{}" && command claude'
+```
+
+Key difference from apply script: **does NOT delete companion** — only removes `accountUuid` so Claude falls back to existing `userID`. Survives Claude Code updates and re-logins permanently.
 
 ### 11.4 initUI() — Dynamic DOM Building
 

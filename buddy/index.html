@@ -79,18 +79,19 @@
     .history-btn, .about-btn {
       position: absolute;
       top: 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-hover) 100%);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
       padding: 0.5rem 1rem;
-      color: var(--text-secondary);
+      color: var(--accent);
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      box-shadow: 0 0 10px rgba(124, 92, 255, 0.15), inset 0 1px 0 rgba(255,255,255,0.05);
     }
 
     .about-btn {
@@ -102,9 +103,11 @@
     }
 
     .history-btn:hover, .about-btn:hover {
-      background: var(--bg-hover);
-      color: var(--text-primary);
-      border-color: var(--border-light);
+      background: linear-gradient(135deg, var(--accent) 0%, #9333ea 100%);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow), 0 4px 15px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
     }
 
     .history-btn .badge {
@@ -1477,6 +1480,16 @@
       margin-top: 0.5rem;
     }
 
+    .about-cheat-safe {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 8px;
+      padding: 0.75rem;
+      color: #f59e0b;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
     .about-formula {
       background: #0d1117;
       border-radius: 6px;
@@ -1607,7 +1620,7 @@
         <button class="mode-btn selected" data-mode="api-key" title="Dành cho người dùng API key - Tự do chọn userID">
           🔑 API Key
         </button>
-        <button class="mode-btn" data-mode="oauth-account" title="Dành cho người dùng đăng nhập Claude Account - Phải brute-force salt trong binary">
+        <button class="mode-btn" data-mode="oauth-account" title="Dành cho người dùng đăng nhập Claude Account">
           👤 OAuth Account
         </button>
       </div>
@@ -2097,7 +2110,9 @@
       document.getElementById('oauthSection').style.display = 'none';
       document.getElementById('searchCommandSection').style.display = 'none';
       document.getElementById('oauthInstructions').style.display = 'none';
+      document.getElementById('shellAliasSection').style.display = 'none';
       document.body.classList.add('api-key-mode');
+      document.getElementById('shellAliasSection').style.display = 'none';
       // Show API instructions
       document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn sau khi tìm thấy UID';
       document.getElementById('instructionsList').innerHTML = `
@@ -2149,7 +2164,19 @@
         <li>Bấm "Bắt đầu tìm kiếm" để brute-force userID</li>
         <li>Sau khi tìm được userID → bấm "Apply" để cập nhật config</li>
         <li>Restart Claude Code & gõ <code>/buddy</code></li>
+        <li><strong>Quan trọng:</strong> Sau Claude update/re-login, chạy lại file <code>apply-buddy.bat</code> hoặc dùng Shell alias bên dưới</li>
       `;
+      // Show Shell alias section
+      let shellAliasSection = document.getElementById('shellAliasSection');
+      if (!shellAliasSection) {
+        shellAliasSection = document.createElement('div');
+        shellAliasSection.id = 'shellAliasSection';
+        shellAliasSection.style.cssText = 'margin-top:1rem;padding:0.75rem;background:rgba(34,197,94,0.1);border:1px solid #22c55e;border-radius:8px;font-size:0.7rem;';
+        const instructionsPanel = document.querySelector('.instructions');
+        if (instructionsPanel) instructionsPanel.appendChild(shellAliasSection);
+      }
+      shellAliasSection.style.display = "block";
+      shellAliasSection.innerHTML = '<div style="margin-bottom:0.5rem;font-weight:600;color:#22c55e;">&#127793; Shell Alias (tự động mỗi lần mở Claude)</div><div style="margin-bottom:0.5rem;color:var(--text-secondary);">Sau khi Claude Code update/re-login, server sẽ ghi lại accountUuid vào config. Shell alias sẽ xóa accountUuid (giữ nguyên companion - không hatch lại):</div><pre id="shellAliasCode" style="background:#0d1117;padding:0.5rem;border-radius:6px;font-family:Fira Code,monospace;font-size:0.65rem;color:#22c55e;white-space:pre-wrap;overflow-x:auto;">alias claude=\'node -e "const f=require(\"os\").homedir()+\"/.claude.json\";try{const c=JSON.parse(require(\"fs\").readFileSync(f));if(c.oauthAccount?.accountUuid){delete c.oauthAccount.accountUuid;require(\"fs\").writeFileSync(f,JSON.stringify(c,null,2));console.log(\"[buddy-fix] accountUuid removed\");}}catch{}" && command claude\'</pre><button id="copyShellAliasBtn" style="margin-top:0.5rem;padding:0.4rem 0.8rem;background:var(--accent);border:none;border-radius:6px;color:white;cursor:pointer;font-size:0.75rem;">&#128203; Copy</button><div style="color:var(--text-muted);margin-top:1rem;">Thêm vào <code>~/.bashrc</code> hoặc <code>~/.zshrc</code> rồi chạy <code>source ~/.bashrc</code></div>';document.getElementById('copyShellAliasBtn').onclick=function(){navigator.clipboard.writeText(document.getElementById('shellAliasCode').textContent);this.textContent='\u2705 Da copy!';setTimeout(function(){document.getElementById('copyShellAliasBtn').textContent='\u{1F4CB} Copy';},2000);};
     }
 
     function switchToDeleteUuid() {
@@ -2177,7 +2204,19 @@
         <li>Bấm "Bắt đầu tìm kiếm" để brute-force userID</li>
         <li>Sau khi tìm được userID → bấm "Apply" để cập nhật config</li>
         <li>Restart Claude Code & gõ <code>/buddy</code></li>
+        <li><strong>Quan trọng:</strong> Sau Claude update/re-login, chạy lại file <code>apply-buddy.bat</code> hoặc dùng Shell alias bên dưới</li>
       `;
+      // Show Shell alias section
+      let shellAliasSection = document.getElementById('shellAliasSection');
+      if (!shellAliasSection) {
+        shellAliasSection = document.createElement('div');
+        shellAliasSection.id = 'shellAliasSection';
+        shellAliasSection.style.cssText = 'margin-top:1rem;padding:0.75rem;background:rgba(34,197,94,0.1);border:1px solid #22c55e;border-radius:8px;font-size:0.7rem;';
+        const instructionsPanel = document.querySelector('.instructions');
+        if (instructionsPanel) instructionsPanel.appendChild(shellAliasSection);
+      }
+      shellAliasSection.style.display = 'block';
+      shellAliasSection.innerHTML = '<div style="margin-bottom:0.5rem;font-weight:600;color:#22c55e;">&#127793; Shell Alias (tự động mỗi lần mở Claude)</div><div style="margin-bottom:0.5rem;color:var(--text-secondary);">Sau khi Claude Code update/re-login, server sẽ ghi lại accountUuid vào config. Shell alias sẽ xóa accountUuid (giữ nguyên companion - không hatch lại):</div><pre id="shellAliasCode" style="background:#0d1117;padding:0.5rem;border-radius:6px;font-family:Fira Code,monospace;font-size:0.65rem;color:#22c55e;white-space:pre-wrap;overflow-x:auto;">alias claude=\'node -e "const f=require(\"os\").homedir()+\"/.claude.json\";try{const c=JSON.parse(require(\"fs\").readFileSync(f));if(c.oauthAccount?.accountUuid){delete c.oauthAccount.accountUuid;require(\"fs\").writeFileSync(f,JSON.stringify(c,null,2));console.log(\"[buddy-fix] accountUuid removed\");}}catch{}" && command claude\'</pre><button id="copyShellAliasBtn" style="margin-top:0.5rem;padding:0.4rem 0.8rem;background:var(--accent);border:none;border-radius:6px;color:white;cursor:pointer;font-size:0.75rem;">&#128203; Copy</button><div style="color:var(--text-muted);margin-top:1rem;">Thêm vào <code>~/.bashrc</code> hoặc <code>~/.zshrc</code> rồi chạy <code>source ~/.bashrc</code></div>';document.getElementById('copyShellAliasBtn').onclick=function(){navigator.clipboard.writeText(document.getElementById('shellAliasCode').textContent);this.textContent='\u2705 Da copy!';setTimeout(function(){document.getElementById('copyShellAliasBtn').textContent='\u{1F4CB} Copy';},2000);};
     }
 
     function switchToPatchSalt() {
@@ -2191,6 +2230,8 @@
       document.getElementById('oauthSection').style.display = 'block';
       document.getElementById('searchCommandSection').style.display = 'block';
       document.getElementById('oauthInstructions').style.display = 'block';
+      // Hide shell alias (only for delete-uuid submode)
+      document.getElementById('shellAliasSection').style.display = 'none';
       // Update banner (high risk)
       const banner = document.getElementById('instructionsBanner');
       banner.style.display = 'block';
@@ -3014,7 +3055,7 @@
           <p>Với API key, bạn tự do đặt <code>userID</code> trong file <code>~/.claude.json</code>.</p>
           <p><strong>Cách Claude thiết lập userID:</strong> User tự khai báo thủ công trong config. Nếu bạn không tự đặt thì Claude sẽ tạo random userID trong lần đầu tiên sử dụng.</p>
           <div class="about-cheat">
-            <strong>✓ Cách cheat:</strong> Dùng tool này để tìm UID sinh ra buddy mong muốn, sau đó sửa <code>userID</code> trong <code>~/.claude.json</code> và xóa field <code>companion</code>.
+            <strong>✓ Cách cheat đơn giản:</strong> Dùng tool này để tìm UID sinh ra buddy mong muốn, sau đó sửa <code>userID</code> trong <code>~/.claude.json</code> và xóa field <code>companion</code>. Khi này Claude sẽ hatch lại buddy theo <code>userID</code> bạn vừa update.
           </div>
         </div>
 
@@ -3028,6 +3069,9 @@
             <li>Gọi API <code>https://api.anthropic.com/api/oauth/profile</code> để lấy UUID</li>
             <li>Dùng UUID + salt trong binary để tính hash → sinh buddy</li>
           </ol>
+          <div class="about-cheat-safe">
+            <strong>✓ Cách cheat an toàn:</strong> Dùng tool này để tìm UID sinh ra buddy mong muốn, sau đó sửa <code>userID</code>, xóa field <code>accountUuid</code> và <code>companion</code> trong <code>~/.claude.json</code>. Dùng <code>Shell Alias</code> để xóa <code>accountUuid</code> trước mỗi lần khởi động Claude. Khi không tìm thấy <code>accountUuid</code>, Claude sẽ fallback qua dùng <code>userID</code> để xác định buddy.
+          </div>
           <div class="about-warn">
             <strong>⚠️ Cách cheat (có rủi ro):</strong> Phải brute-force tìm salt trong binary, sau đó patch binary để thay đổi salt. Binary patching có thể vi phạm Terms of Service.
           </div>
@@ -3197,6 +3241,13 @@
           </table>
 
           <p><strong>Shiny:</strong> 1% chance. Rolled sau hat. Cũng được xác định từ identity - bạn không thể giả mạo bằng cách sửa config.</p>
+
+          <h3>Nguồn tham khảo</h3>
+          <ul style="padding-left: 1.25rem;">
+            <li><a href="https://linux.do/t/topic/1871870" target="_blank" style="color: var(--accent);">https://linux.do/t/topic/1871870</a></li>
+            <li><a href="https://github.com/ithiria894/claude-code-buddy-reroll" target="_blank" style="color: var(--accent);">https://github.com/ithiria894/claude-code-buddy-reroll</a></li>
+            <li><a href="https://github.com/RoggeOhta/claude-buddy-reroll" target="_blank" style="color: var(--accent);">https://github.com/RoggeOhta/claude-buddy-reroll</a></li>
+          </ul>
         </div>
       </div>
     </div>
