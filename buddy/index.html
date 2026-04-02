@@ -1758,6 +1758,9 @@
       <!-- Instructions (Right) -->
       <div class="instructions">
         <h3 id="instructionsTitle">📋 Hướng dẫn sau khi tìm thấy UID</h3>
+        <div id="instructionsWarning" style="display: none; margin-bottom: 1rem; padding: 0.75rem; border-radius: 8px; font-size: 0.75rem; background: rgba(248, 113, 113, 0.1); color: #f87171; border: 1px solid #f87171;">
+          ⚠️ <strong>Cảnh báo:</strong> Binary patching có thể vi phạm ToS - <strong>Play at your own risk!</strong>
+        </div>
         <ol id="instructionsList">
           <li>Mở file <code>~/.claude.json</code></li>
           <li>Xóa field <code>companion</code> (nếu có)</li>
@@ -2072,7 +2075,6 @@
       document.getElementById('oauthSection').style.display = 'none';
       document.getElementById('searchCommandSection').style.display = 'none';
       document.getElementById('oauthInstructions').style.display = 'none';
-      document.getElementById('apiModeSection').style.display = 'block';
       // Show API instructions
       document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn sau khi tìm thấy UID';
       document.getElementById('instructionsList').innerHTML = `
@@ -2082,6 +2084,8 @@
         <li>Restart Claude Code</li>
         <li>Gõ <code>/buddy</code> để nhận Buddy mới!</li>
       `;
+      // Hide OAuth warning, show default note
+      document.getElementById('instructionsWarning').style.display = 'none';
       const note = document.getElementById('instructionsNote');
       note.style.background = 'rgba(74, 222, 128, 0.1)';
       note.style.color = 'var(--success)';
@@ -2098,10 +2102,9 @@
       });
       // Show OAuth elements
       document.getElementById('oauthSection').style.display = 'block';
-      document.getElementById('apiModeSection').style.display = 'none';
       document.getElementById('oauthInstructions').style.display = 'block';
       // Update instructions
-      document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn OAuth';
+      document.getElementById('instructionsTitle').innerHTML = '📋 Hướng dẫn';
       document.getElementById('instructionsList').innerHTML = `
         <li>Nhập Account UUID (từ ~/.claude/.credentials.json)</li>
         <li>Chọn thuộc tính Buddy mong muốn</li>
@@ -2110,11 +2113,14 @@
         <li>Copy & chạy Patch Command</li>
         <li>Restart Claude Code & gõ <code>/buddy</code></li>
       `;
+      // Show warning at top of instructions
+      document.getElementById('instructionsWarning').style.display = 'block';
+      // Reset note to default for API key
       const note = document.getElementById('instructionsNote');
-      note.style.background = 'rgba(248, 113, 113, 0.1)';
-      note.style.color = '#f87171';
-      note.style.border = '1px solid #f87171';
-      note.innerHTML = '⚠️ <strong>Cảnh báo:</strong> Binary patching có thể vi phạm ToS - <strong>Play at your own risk!</strong>';
+      note.style.background = 'rgba(74, 222, 128, 0.1)';
+      note.style.color = 'var(--success)';
+      note.style.border = 'none';
+      note.innerHTML = '💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service';
       // Generate initial commands
       generateSearchCommand();
     }
