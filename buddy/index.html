@@ -1481,6 +1481,105 @@
       color: var(--accent);
       margin: 0.5rem 0;
       text-align: center;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .about-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.8rem;
+    }
+
+    .about-content th, .about-content td {
+      padding: 0.5rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-content th {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .note-box {
+      background: rgba(124, 92, 255, 0.1);
+      border: 1px solid rgba(124, 92, 255, 0.3);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.8rem;
+      margin: 0.75rem 0;
+    }
+
+    .btn-more {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-family: 'Outfit', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-more:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .btn-more .arrow {
+      transition: transform 0.2s;
+    }
+
+    .btn-more.expanded .arrow {
+      transform: rotate(180deg);
+    }
+
+    .more-info {
+      display: none;
+    }
+
+    .more-info.expanded {
+      display: block;
+    }
+
+    .species-grid-modal {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      gap: 0.5rem;
+      margin: 0.75rem 0;
+    }
+
+    .species-item {
+      text-align: center;
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+    }
+
+    .species-item pre {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.5rem;
+      line-height: 1.1;
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .about-content h4 {
+      color: var(--text-primary);
+      font-size: 0.85rem;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    .about-content ol, .about-content ol ul {
+      padding-left: 1.5rem;
+      margin: 0.5rem 0;
     }
   </style>
 </head>
@@ -1601,20 +1700,15 @@
           </div>
         </div>
 
-        <!-- Mode (API Key only) -->
-        <div class="config-section" id="apiModeSection">
-          <div class="section-label">Chế độ</div>
-          <div class="toggle-group" id="modeGroup">
-            <button class="toggle-btn selected" data-mode="random">🎲 Random</button>
-            <button class="toggle-btn" data-mode="sequential">🔢 Sequential</button>
-          </div>
-        </div>
-
-        <!-- Sequential Settings -->
-        <div class="config-section" id="sequentialSettings" style="display: none;">
+        <!-- OAuth UUID (OAuth Account only) -->
+        <div class="config-section" id="oauthSection" style="display: none;">
+          <div class="section-label">Account UUID (OAuth) <span style="color: var(--error);">*</span></div>
           <div class="input-row">
-            <input type="text" id="prefixInput" placeholder="user-" value="user-">
-            <label>Prefix</label>
+            <input type="text" id="uuidInput" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" style="flex: 1;">
+            <label>UUID</label>
+          </div>
+          <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem;">
+            Lấy từ <code>~/.claude/.credentials.json</code> → <code>account.uuid</code>
           </div>
         </div>
 
@@ -1648,18 +1742,6 @@
         <div class="config-section">
           <div class="section-label">Kết quả</div>
           <div class="output-area" id="outputArea"></div>
-        </div>
-
-        <!-- OAuth Section (hidden by default) -->
-        <div class="config-section" id="oauthSection" style="display: none;">
-          <div class="section-label">Account UUID (OAuth)</div>
-          <div class="input-row">
-            <input type="text" id="uuidInput" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
-            <label>UUID</label>
-          </div>
-          <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem;">
-            Lấy từ ~/.claude/.credentials.json → account.uuid
-          </div>
         </div>
 
         <!-- Search Command Output (OAuth) -->
@@ -2377,6 +2459,14 @@
         }
       });
 
+      // Toggle More Info in About Modal
+      window.toggleMoreInfo = function() {
+        const moreInfo = document.getElementById('moreInfo');
+        const btn = document.getElementById('moreBtn');
+        if (moreInfo) moreInfo.classList.toggle('expanded');
+        if (btn) btn.classList.toggle('expanded');
+      };
+
       // Species - use ASCII art from first frame
       const speciesGrid = document.getElementById('speciesGrid');
       SPECIES.forEach(s => {
@@ -2527,11 +2617,15 @@
       const startTime = Date.now();
       let searchInput = state.modeType === 'oauth-account' ? prefix : null;
 
-      if (state.modeType === 'oauth-account' && !searchInput) {
-        outputArea.innerHTML = '<div class="output-line output-error">❌ Vui lòng nhập account UUID từ ~/.claude/.credentials.json</div>';
-        runBtn.disabled = false;
-        runBtn.innerHTML = '<span>🚀</span><span>Bắt đầu tìm kiếm</span>';
-        return;
+      // Validate UUID for OAuth mode
+      if (state.modeType === 'oauth-account') {
+        const uuid = document.getElementById('uuidInput').value.trim();
+        if (!uuid) {
+          outputArea.innerHTML = '<div class="output-line output-error">❌ Vui lòng nhập Account UUID (OAuth) từ ~/.claude/.credentials.json</div>';
+          runBtn.disabled = false;
+          runBtn.innerHTML = '<span>🚀</span><span>Bắt đầu tìm kiếm</span>';
+          return;
+        }
       }
 
       await new Promise(resolve => {
@@ -2704,6 +2798,172 @@
           <div class="about-warn">
             <strong>⚠️ Cách cheat (có rủi ro):</strong> Phải brute-force tìm salt trong binary, sau đó patch binary để thay đổi salt. Binary patching có thể vi phạm Terms of Service.
           </div>
+        </div>
+
+        <!-- More Info Button -->
+        <button class="btn-more" id="moreBtn" onclick="toggleMoreInfo()">
+          <span class="arrow">▼</span>
+          <span>Thông tin thêm</span>
+          <span class="arrow">▼</span>
+        </button>
+
+        <!-- More Info Section -->
+        <div class="more-info" id="moreInfo">
+          <h3>🔬 Hệ thống Buddy hoạt động như thế nào</h3>
+          <p>Buddy của bạn <strong>không phải ngẫu nhiên</strong>. Nó được tạo một cách xác định từ user identity của bạn sử dụng seeded PRNG. Cùng identity = cùng buddy, mọi lúc.</p>
+
+          <h3>Thuật toán</h3>
+          <div class="about-formula">identity + "friend-2026-401"  →  FNV-1a hash  →  Mulberry32 PRNG seed
+                                                        │
+                                              ┌─────────┼─────────────┐
+                                              ▼         ▼             ▼
+                                           rarity    species    eye/hat/stats</div>
+
+          <ol style="padding-left: 1.25rem; margin: 0.5rem 0;">
+            <li><strong>Xác định identity</strong>: <code>oauthAccount.accountUuid ?? userID ?? "anon"</code></li>
+            <p style="margin-left: 1.5rem; font-size: 0.8rem; color: var(--text-secondary);">Nếu bạn đăng nhập bằng OAuth, <code>accountUuid</code> được ưu tiên. <code>userID</code> chỉ được dùng như fallback.</p>
+            <li><strong>Hashing</strong>: Chuỗi identity + salt <code>"friend-2026-401"</code> được hash với FNV-1a (32-bit).</li>
+            <li><strong>PRNG</strong>: Hash được dùng làm seed cho Mulberry32 generator, tạo ra các số ngẫu nhiên xác định.</li>
+            <li><strong>Rolling</strong>: PRNG được sử dụng theo thứ tự:</li>
+            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+              <li>Call đầu tiên → <strong>rarity</strong> (có trọng số: common 60%, uncommon 25%, rare 10%, epic 4%, legendary 1%)</li>
+              <li>Call thứ hai → <strong>species</strong> (đều nhau across 18 species)</li>
+              <li>Call thứ ba → <strong>eye style</strong></li>
+              <li>Call thứ tư → <strong>hat</strong> (common luôn nhận "none")</li>
+              <li>Call thứ năm → <strong>shiny</strong> (1% chance)</li>
+              <li>Các call còn lại → <strong>stats</strong> (DEBUGGING, PATIENCE, CHAOS, WISDOM, SNARK)</li>
+            </ul>
+          </ol>
+
+          <h3>Điều gì được lưu trữ vs. Điều gì được tạo lại</h3>
+          <table>
+            <tr><th>Trường</th><th>Lưu trữ?</th><th>Nguồn</th></tr>
+            <tr><td>name</td><td>Có</td><td>AI-generated</td></tr>
+            <tr><td>personality</td><td>Có</td><td>AI-generated</td></tr>
+            <tr><td>hatchedAt</td><td>Có</td><td>Timestamp</td></tr>
+            <tr><td>rarity</td><td><strong>Không</strong></td><td>Tạo lại từ hash</td></tr>
+            <tr><td>species</td><td><strong>Không</strong></td><td>Tạo lại từ hash</td></tr>
+            <tr><td>eye, hat, shiny</td><td><strong>Không</strong></td><td>Tạo lại từ hash</td></tr>
+            <tr><td>stats</td><td><strong>Không</strong></td><td>Tạo lại từ hash</td></tr>
+          </table>
+          <div class="note-box">
+            <strong>Comment trong mã nguồn của Claude:</strong> "Bones are regenerated from hash(userId) on every read so species renames don't break stored companions and users can't edit their way to a legendary."
+          </div>
+
+          <h3>Tỷ lệ Rarity</h3>
+          <table>
+            <tr><th>Rarity</th><th>Weight</th><th>Probability</th><th>Stars</th></tr>
+            <tr><td>Common</td><td>60</td><td>60%</td><td>★</td></tr>
+            <tr><td>Uncommon</td><td>25</td><td>25%</td><td>★★</td></tr>
+            <tr><td>Rare</td><td>10</td><td>10%</td><td>★★★</td></tr>
+            <tr><td>Epic</td><td>4</td><td>4%</td><td>★★★★</td></tr>
+            <tr><td>Legendary</td><td>1</td><td>1%</td><td>★★★★★</td></tr>
+          </table>
+
+          <h3>Danh sách Species</h3>
+          <div class="species-grid-modal">
+            <div class="species-item"><pre>    __
+  &lt;({E} )___
+   (  ._&gt;
+    `--´</pre>duck</div>
+            <div class="species-item"><pre>     ({E}&gt;
+     ||
+   _(__)_
+    ^^^^</pre>goose</div>
+            <div class="species-item"><pre>   .----.
+  ( {E}  {E} )
+  (      )
+   `----´</pre>blob</div>
+            <div class="species-item"><pre>   /\_/\
+  ( {E}  {E})
+  (  ω  )
+  (")_(")</pre>cat</div>
+            <div class="species-item"><pre>  /^\_/^\
+ &lt;  {E}  {E}  &gt;
+ (   ~~   )
+  `-vvvv-´</pre>dragon</div>
+            <div class="species-item"><pre>   .----.
+  ( {E}  {E} )
+  (______)
+  /\/\  /\</pre>octopus</div>
+            <div class="species-item"><pre>   /\  /\
+  (({E})({E}))
+  (  &gt;&lt;  )
+   `----´</pre>owl</div>
+            <div class="species-item"><pre>  .---.
+  ({E}&gt;{E})
+ /(   )\
+  `---´</pre>penguin</div>
+            <div class="species-item"><pre>   _,--._
+  ( {E}  {E} )
+ /[______]\
+  ``    ``</pre>turtle</div>
+            <div class="species-item"><pre> {E}    .--.
+  \  ( @ )
+   \_`--´
+  ~~~~~~~</pre>snail</div>
+            <div class="species-item"><pre>   .----.
+  / {E}  {E} \
+  |      |
+  ~`~``~`~</pre>ghost</div>
+            <div class="species-item"><pre>}~(______)~{
+}~({E} .. {E})~{
+  ( .--. )
+  (_/  \_)</pre>axolotl</div>
+            <div class="species-item"><pre>  n______n
+ ( {E}    {E} )
+ (   oo   )
+  `------´</pre>capybara</div>
+            <div class="species-item"><pre> n  ____  n
+ | |{E}  {E}| |
+ |_|    |_|
+   |    |</pre>cactus</div>
+            <div class="species-item"><pre>   .[||].
+  [ {E}  {E} ]
+  [ ==== ]
+  `------´</pre>robot</div>
+            <div class="species-item"><pre>   (\__/)
+  ( {E}  {E} )
+ =(  ..  )=
+  (")__(")</pre>rabbit</div>
+            <div class="species-item"><pre> .-o-OO-o-.
+(__________)
+   |{E}  {E}|
+   |____|</pre>mushroom</div>
+            <div class="species-item"><pre>  /\    /\
+ ( {E}    {E} )
+ (   ..   )
+  `------´</pre>chonk</div>
+          </div>
+
+          <h3>Cosmetics: Eyes, Hats, and Shiny</h3>
+          <p>Ngoài rarity và species, mỗi buddy còn có eye style, hat, và shiny status - tất cả đều được xác định từ cùng một identity hash.</p>
+
+          <h4>Eyes (6 styles, uniform random)</h4>
+          <table>
+            <tr><th>Eye</th><th>Look</th><th>On a cat</th></tr>
+            <tr><td>·</td><td>Dot</td><td>( ·   ·)</td></tr>
+            <tr><td>✦</td><td>Star</td><td>( ✦   ✦)</td></tr>
+            <tr><td>×</td><td>Cross</td><td>( ×   ×)</td></tr>
+            <tr><td>◉</td><td>Bullseye</td><td>( ◉   ◉)</td></tr>
+            <tr><td>@</td><td>At sign</td><td>( @   @)</td></tr>
+            <tr><td>°</td><td>Circle</td><td>( °   °)</td></tr>
+          </table>
+
+          <h4>Hats (8 styles - common luôn nhận "none")</h4>
+          <table>
+            <tr><th>Hat</th><th>ASCII</th><th>Notes</th></tr>
+            <tr><td>none</td><td>(blank)</td><td>All commons get this</td></tr>
+            <tr><td>crown</td><td>\^^^/</td><td></td></tr>
+            <tr><td>tophat</td><td>[___]</td><td></td></tr>
+            <tr><td>propeller</td><td>-+-</td><td></td></tr>
+            <tr><td>halo</td><td>(   )</td><td></td></tr>
+            <tr><td>wizard</td><td>/^\</td><td></td></tr>
+            <tr><td>beanie</td><td>(___)</td><td></td></tr>
+            <tr><td>tinyduck</td><td>,></td><td>A tiny duck sitting on its head</td></tr>
+          </table>
+
+          <p><strong>Shiny:</strong> 1% chance. Rolled sau hat. Cũng được xác định từ identity - bạn không thể giả mạo bằng cách sửa config.</p>
         </div>
       </div>
     </div>
