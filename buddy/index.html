@@ -2087,9 +2087,6 @@
       banner.style.color = 'var(--success)';
       banner.style.border = '1px solid var(--success)';
       banner.innerHTML = '💡 Lưu ý: Thao tác này an toàn, không vi phạm Terms of Service';
-      // Hide safe-note (merged into banner)
-      const note = document.getElementById('instructionsNote');
-      note.style.display = 'none';
       closeRiskModal();
     }
 
@@ -2119,9 +2116,6 @@
       banner.style.color = '#f87171';
       banner.style.border = '1px solid #f87171';
       banner.innerHTML = '⚠️ <strong>Cảnh báo:</strong> Binary patching có thể vi phạm ToS - <strong>Play at your own risk!</strong>';
-      // Hide safe-note for OAuth mode
-      const note = document.getElementById('instructionsNote');
-      note.style.display = 'none';
       // Generate initial commands
       generateSearchCommand();
     }
