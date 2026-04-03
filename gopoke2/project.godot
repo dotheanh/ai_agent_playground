@@ -14,6 +14,14 @@ config/name="GoPoke v2"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GPRuntime="*res://addons/godot-mcp/pilot_runtime.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-mcp/plugin.cfg")
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
