@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZPS | Next-Gen AI Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    colors: {
+                        crimson: '#dc143c',
+                        'crimson-dark': '#8b0000',
+                        'crimson-light': '#ff3b5c',
+                        'crimson-glow': '#ff1744',
+                        'void': '#020202',
+                        'void-light': '#0a0a0a',
+                        'charcoal': '#111'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --crimson: #dc143c;
+            --crimson-dark: #8b0000;
+            --crimson-light: #ff3b5c;
+            --crimson-glow: #ff1744;
+            --void: #020202;
+            --void-light: #0a0a0a;
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--void);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 24px;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-ring {
+            width: 80px;
+            height: 80px;
+            border: 3px solid transparent;
+            border-top-color: var(--crimson);
+            border-radius: 50%;
+            animation: loader-spin 1s linear infinite;
+            position: relative;
+        }
+
+        .loader-ring::before {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border: 3px solid transparent;
+            border-top-color: var(--crimson-light);
+            border-radius: 50%;
+            animation: loader-spin 0.6s linear infinite reverse;
+        }
+
+        @keyframes loader-spin {
+            to { transform: rotate(360deg); }
+        }
+
+        body {
+            background-color: var(--void);
+            color: white;
+            overflow-x: hidden;
+            font-family: 'Outfit', sans-serif;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--crimson);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--crimson);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.15s ease-out;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-ring.hover {
+            width: 60px;
+            height: 60px;
+            border-color: var(--crimson-light);
+            background: rgba(220, 20, 60, 0.1);
+        }
+
+        /* Three.js Canvas */
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Grid Background */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(220,20,60,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(220,20,60,0.04) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Scanlines */
+        .scanlines::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.15) 2px,
+                rgba(0, 0, 0, 0.15) 4px
+            );
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(220, 20, 60, 0.15);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(220,20,60,0.08) 0%, rgba(10,10,10,0.9) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(220, 20, 60, 0.2);
+        }
+
+        /* Text Gradients */
+        .text-gradient-red {
+            background: linear-gradient(135deg, #ff1744, #dc143c, #ff6b6b, #ff1744);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% auto;
+            animation: gradient-flow 4s linear infinite;
+        }
+
+        .text-gradient-metallic {
+            background: linear-gradient(90deg, #666 0%, #fff 25%, #888 50%, #fff 75%, #666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 400% auto;
+            animation: metallic-shine 6s linear infinite;
+        }
+
+        @keyframes gradient-flow {
+            0% { background-position: 0% center; }
+            100% { background-position: 300% center; }
+        }
+
+        @keyframes metallic-shine {
+            0% { background-position: -400% center; }
+            100% { background-position: 400% center; }
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--crimson-light);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-1 3s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffff;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(14px, 9999px, 127px, 0); }
+            20% { clip: rect(66px, 9999px, 86px, 0); }
+            40% { clip: rect(81px, 9999px, 137px, 0); }
+            60% { clip: rect(21px, 9999px, 4px, 0); }
+            80% { clip: rect(104px, 9999px, 132px, 0); }
+            100% { clip: rect(122px, 9999px, 68px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            20% { clip: rect(2px, 9999px, 67px, 0); }
+            40% { clip: rect(34px, 9999px, 115px, 0); }
+            60% { clip: rect(86px, 9999px, 14px, 0); }
+            80% { clip: rect(23px, 9999px, 83px, 0); }
+            100% { clip: rect(111px, 9999px, 48px, 0); }
+        }
+
+        /* Cyber Button */
+        .cyber-btn {
+            position: relative;
+            background: linear-gradient(90deg, var(--crimson-dark), var(--crimson));
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+
+        .cyber-btn:hover {
+            box-shadow: 0 0 40px rgba(220, 20, 60, 0.6), 0 0 80px rgba(220, 20, 60, 0.3);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        /* Neon Border */
+        .neon-border {
+            position: relative;
+        }
+
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(90deg, var(--crimson), var(--crimson-light), var(--crimson), var(--crimson-light));
+            background-size: 400% 100%;
+            border-radius: inherit;
+            z-index: -1;
+            animation: neon-flow 3s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes neon-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+
+        /* Floating Orb */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: orb-float 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(220,20,60,0.35) 0%, transparent 70%);
+            top: -250px;
+            left: -200px;
+        }
+
+        .orb-2 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139,0,0,0.4) 0%, transparent 70%);
+            bottom: -200px;
+            right: -150px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(220,20,60,0.25) 0%, transparent 70%);
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -2s;
+            animation-duration: 8s;
+        }
+
+        @keyframes orb-float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -60px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.95); }
+        }
+
+        /* 3D Card */
+        .cyber-card {
+            perspective: 1500px;
+        }
+
+        .cyber-card-inner {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+            transform-style: preserve-3d;
+        }
+
+        .cyber-card:hover .cyber-card-inner {
+            transform: translateY(-15px) rotateX(5deg) rotateY(-5deg);
+            box-shadow:
+                30px 30px 60px rgba(0,0,0,0.6),
+                -30px -30px 60px rgba(220,20,60,0.1);
+        }
+
+        /* Animated Border */
+        .animated-border {
+            position: relative;
+        }
+
+        .animated-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--crimson), var(--crimson-light), var(--crimson));
+            background-size: 200% 100%;
+            animation: border-flow 3s linear infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        @keyframes border-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* Reveal Animations */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Magnetic Button */
+        .magnetic {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Pulse Ring */
+        .pulse-ring {
+            position: relative;
+        }
+
+        .pulse-ring::after {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            border: 2px solid var(--crimson);
+            border-radius: inherit;
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--void); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--crimson), var(--crimson-dark));
+            border-radius: 3px;
+        }
+
+        /* Tech Lines */
+        .tech-lines {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .tech-lines::before,
+        .tech-lines::after {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--crimson), transparent);
+            opacity: 0.2;
+        }
+
+        .tech-lines::before { left: 15%; }
+        .tech-lines::after { left: 85%; }
+
+        /* Horizontal Scroll Section */
+        .horizontal-scroll {
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Hexagon Grid */
+        .hex-grid {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23dc143c' fill-opacity='0.03'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Floating Elements */
+        .float-element {
+            animation: float-element 6s ease-in-out infinite;
+        }
+
+        @keyframes float-element {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Tilt Effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .tilt-card:hover {
+            transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
+        }
+
+        /* Glow Text */
+        .glow-text {
+            text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--crimson), var(--crimson-light));
+            z-index: 10001;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* Section title hover underline */
+        .title-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .title-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--crimson);
+            transition: width 0.4s ease;
+        }
+
+        .title-underline:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Character Animation */
+        .hero-char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .hero-char.animate {
+            animation: hero-char-reveal 0.8s forwards;
+        }
+
+        @keyframes hero-char-reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Counter Animation */
+        .counter {
+            display: inline-block;
+        }
+
+        /* Nav Links */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--crimson);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* Mobile menu */
+        #mobile-menu {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-ring"></div>
+        <div class="text-sm font-mono text-crimson-light tracking-widest" id="loader-text">INITIALIZING</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Three.js Canvas -->
+    <canvas id="three-canvas"></canvas>
+
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Background -->
+    <div class="fixed inset-0 z-0 grid-bg"></div>
+    <div class="fixed inset-0 z-0 hex-grid"></div>
+
+    <!-- Floating Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 transition-all duration-500" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-2xl font-black tracking-tighter flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="w-10 h-10 bg-gradient-to-br from-crimson to-crimson-dark rounded-xl flex items-center justify-center neon-border">
+                    <span class="text-white font-black text-xl">Z</span>
+                </div>
+                <span class="text-white">Z<span class="text-crimson">PS</span></span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex gap-10 text-sm font-medium text-gray-400">
+                <li><a href="#home" class="nav-link hover:text-crimson transition-colors">Home</a></li>
+                <li><a href="#products" class="nav-link hover:text-crimson transition-colors">Products</a></li>
+                <li><a href="#ai" class="nav-link hover:text-crimson transition-colors">AI Tech</a></li>
+                <li><a href="#features" class="nav-link hover:text-crimson transition-colors">Features</a></li>
+                <li><a href="#contact" class="nav-link hover:text-crimson transition-colors">Contact</a></li>
+            </ul>
+
+            <!-- CTA -->
+            <button class="hidden md:block px-7 py-3 cyber-btn rounded-full text-sm font-bold text-white magnetic">
+                Get Started
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white p-2" onclick="toggleMenu()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-40 bg-void flex flex-col items-center justify-center gap-8">
+        <a href="#home" class="text-2xl font-bold hover:text-crimson transition-colors" onclick="toggleMenu()">Home</a>
+        <a href="#products" class="text-2xl font-bold hover:text-crimson transition-colors" onclick="toggleMenu()">Products</a>
+        <a href="#ai" class="text-2xl font-bold hover:text-crimson transition-colors" onclick="toggleMenu()">AI Tech</a>
+        <a href="#features" class="text-2xl font-bold hover:text-crimson transition-colors" onclick="toggleMenu()">Features</a>
+        <a href="#contact" class="text-2xl font-bold hover:text-crimson transition-colors" onclick="toggleMenu()">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20 px-6 overflow-hidden">
+        <div class="tech-lines"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-crimson/30 reveal-scale">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-crimson opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-crimson"></span>
+                    </span>
+                    <span class="text-sm font-mono text-crimson-light">AI-POWERED FUTURE</span>
+                </div>
+
+                <h1 class="text-6xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight">
+                    <span class="block reveal-up">Redefine</span>
+                    <span class="text-gradient-red glitch" data-text="Tomorrow" id="hero-title">Tomorrow</span>
+                    <span class="block text-gradient-metallic text-4xl md:text-5xl mt-2 reveal-up" style="animation-delay: 0.2s">With AI Intelligence</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed reveal-up" style="animation-delay: 0.3s">
+                    Experience the next generation of smart devices. Powered by advanced neural networks,
+                    our products learn, adapt, and evolve with you.
+                </p>
+
+                <div class="flex flex-wrap gap-5 reveal-up" style="animation-delay: 0.4s">
+                    <button class="px-8 py-4 cyber-btn rounded-full font-bold text-lg flex items-center gap-3 magnetic">
+                        Explore Products
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </button>
+                    <button class="px-8 py-4 glass rounded-full font-bold text-lg hover:bg-white/5 transition-all border border-crimson/30 magnetic">
+                        Watch Demo
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="flex items-center gap-12 pt-4 reveal-up" style="animation-delay: 0.5s">
+                    <div class="text-center">
+                        <div class="text-4xl font-black text-gradient-red counter" data-target="50">0</div>
+                        <div class="text-xs text-gray-500 uppercase tracking-widest mt-1">Products</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black text-gradient-red counter" data-target="10000">0</div>
+                        <div class="text-xs text-gray-500 uppercase tracking-widest mt-1">Users</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black text-gradient-red counter" data-target="99">0</div>
+                        <div class="text-xs text-gray-500 uppercase tracking-widest mt-1">Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual -->
+            <div class="relative hidden lg:block">
+                <div class="relative w-full aspect-square max-w-lg mx-auto">
+                    <!-- Glowing Rings -->
+                    <div class="absolute inset-0 rounded-full border border-crimson/15 animate-[spin_40s_linear_infinite]"></div>
+                    <div class="absolute inset-8 rounded-full border border-crimson/25 animate-[spin_35s_linear_infinite_reverse]"></div>
+                    <div class="absolute inset-16 rounded-full border border-crimson/35 animate-[spin_30s_linear_infinite]"></div>
+                    <div class="absolute inset-24 rounded-full border border-crimson/45 animate-[spin_25s_linear_infinite_reverse]"></div>
+
+                    <!-- Central AI Core -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-56 h-56 relative">
+                            <div class="absolute inset-0 bg-gradient-to-br from-crimson to-crimson-dark rounded-full animate-pulse" style="box-shadow: 0 0 60px rgba(220,20,60,0.6), 0 0 120px rgba(220,20,60,0.3)"></div>
+                            <div class="absolute inset-4 bg-void rounded-full flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="text-5xl font-black text-gradient-red">AI</div>
+                                    <div class="text-xs text-gray-500 font-mono mt-1 tracking-widest">CORE v3.0</div>
+                                </div>
+                            </div>
+                            <!-- Orbiting Elements -->
+                            <div class="absolute w-5 h-5 bg-crimson rounded-full top-0 left-1/2 -translate-x-1/2 animate-[spin_3s_linear_infinite]" style="box-shadow: 0 0 15px var(--crimson)"></div>
+                            <div class="absolute w-4 h-4 bg-crimson-light rounded-full bottom-10 right-10 animate-[spin_4s_linear_infinite_reverse]" style="box-shadow: 0 0 15px var(--crimson-light)"></div>
+                            <div class="absolute w-3 h-3 bg-white rounded-full top-14 left-14 animate-[spin_5s_linear_infinite]"></div>
+                            <div class="absolute w-3 h-3 bg-crimson-light rounded-full bottom-14 right-14 animate-[spin_6s_linear_infinite_reverse]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Labels -->
+                    <div class="absolute top-8 -left-4 glass px-4 py-2 rounded-lg text-xs font-mono float-element" style="animation-delay: 0s">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-crimson rounded-full animate-pulse"></div>
+                            Neural Processing
+                        </div>
+                    </div>
+                    <div class="absolute bottom-20 right-0 glass px-4 py-2 rounded-lg text-xs font-mono float-element" style="animation-delay: 1s">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-crimson rounded-full animate-pulse"></div>
+                            Real-time Learning
+                        </div>
+                    </div>
+                    <div class="absolute top-1/2 -left-10 glass px-4 py-2 rounded-lg text-xs font-mono float-element" style="animation-delay: 2s">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-crimson rounded-full animate-pulse"></div>
+                            Edge Computing
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+            <span class="text-xs tracking-[0.3em] uppercase text-gray-500">Scroll</span>
+            <div class="w-6 h-10 border border-crimson/30 rounded-full flex justify-center p-1">
+                <div class="w-1 h-3 bg-crimson rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Banner -->
+    <div class="py-8 bg-void border-y border-crimson/10 relative overflow-hidden">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <span class="text-2xl font-black text-gray-700 mx-8">NEURAL NETWORKS</span>
+                <span class="text-2xl font-black text-crimson/30 mx-8">●</span>
+                <span class="text-2xl font-black text-gray-700 mx-8">EDGE COMPUTING</span>
+                <span class="text-2xl font-black text-crimson/30 mx-8">●</span>
+                <span class="text-2xl font-black text-gray-700 mx-8">MACHINE LEARNING</span>
+                <span class="text-2xl font-black text-crimson/30 mx-8">●</span>
+                <span class="text-2xl font-black text-gray-700 mx-8">QUANTUM PROCESSING</span>
+                <span class="text-2xl font-black text-crimson/30 mx-8">●</span>
+                <span class="text-2xl font-black text-gray-700 mx-8">NEURAL NETWORKS</span>
+                <span class="text-2xl font-black text-crimson/30 mx-8">●</span>
+                <span class="text-2xl font-black text-gray-700 mx-8">EDGE COMPUTING</span>
+                <span class="text-2xl font-black text-crimson/30 mx-8">●</span>
+                <span class="text-2xl font-black text-gray-700 mx-8">MACHINE LEARNING</span>
+                <span class="text-2xl font-black text-crimson/30 mx-8">●</span>
+                <span class="text-2xl font-black text-gray-700 mx-8">QUANTUM PROCESSING</span>
+                <span class="text-2xl font-black text-crimson/30 mx-8">●</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Showcase Section -->
+    <section id="ai" class="py-40 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-24">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-crimson/20 mb-6 reveal-scale">
+                    <span class="text-xs font-mono text-crimson">// AI REVOLUTION</span>
+                </div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 reveal-up">
+                    <span class="text-gradient-red title-underline">Intelligent</span> Technology
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal-up" style="animation-delay: 0.1s">
+                    Our AI-powered devices adapt to your lifestyle, learning from every interaction
+                    to provide a truly personalized experience.
+                </p>
+            </div>
+
+            <!-- AI Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- AI Feature 1 -->
+                <div class="cyber-card group reveal-up" style="animation-delay: 0.1s">
+                    <div class="cyber-card-inner glass-card p-8 rounded-3xl h-full">
+                        <div class="relative w-20 h-20 mb-6">
+                            <div class="absolute inset-0 bg-crimson/20 rounded-2xl animate-pulse"></div>
+                            <div class="absolute inset-2 bg-void rounded-xl flex items-center justify-center">
+                                <svg class="w-10 h-10 text-crimson" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="absolute -top-1 -right-1 w-4 h-4 bg-crimson rounded-full animate-ping"></div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gradient-metallic">Neural Processing</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Advanced neural networks process data locally, ensuring privacy while
+                            delivering lightning-fast responses.
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-crimson/20">
+                            <div class="flex items-center justify-between text-xs font-mono">
+                                <span class="text-gray-500">Speed</span>
+                                <span class="text-crimson">0.3ms</span>
+                            </div>
+                            <div class="mt-2 h-1 bg-void rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-crimson to-crimson-light w-[95%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Feature 2 -->
+                <div class="cyber-card group reveal-up" style="animation-delay: 0.2s">
+                    <div class="cyber-card-inner glass-card p-8 rounded-3xl h-full">
+                        <div class="relative w-20 h-20 mb-6">
+                            <div class="absolute inset-0 bg-crimson/20 rounded-2xl animate-pulse" style="animation-delay: 0.5s"></div>
+                            <div class="absolute inset-2 bg-void rounded-xl flex items-center justify-center">
+                                <svg class="w-10 h-10 text-crimson" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gradient-metallic">Adaptive Learning</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Your devices learn your preferences over time, anticipating your needs
+                            before you even realize them.
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-crimson/20">
+                            <div class="flex items-center justify-between text-xs font-mono">
+                                <span class="text-gray-500">Learning Rate</span>
+                                <span class="text-crimson">98.5%</span>
+                            </div>
+                            <div class="mt-2 h-1 bg-void rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-crimson to-crimson-light w-[98%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Feature 3 -->
+                <div class="cyber-card group reveal-up" style="animation-delay: 0.3s">
+                    <div class="cyber-card-inner glass-card p-8 rounded-3xl h-full">
+                        <div class="relative w-20 h-20 mb-6">
+                            <div class="absolute inset-0 bg-crimson/20 rounded-2xl animate-pulse" style="animation-delay: 1s"></div>
+                            <div class="absolute inset-2 bg-void rounded-xl flex items-center justify-center">
+                                <svg class="w-10 h-10 text-crimson" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gradient-metallic">Global Sync</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Seamlessly connect and synchronize across all your devices with
+                            our distributed AI network.
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-crimson/20">
+                            <div class="flex items-center justify-between text-xs font-mono">
+                                <span class="text-gray-500">Latency</span>
+                                <span class="text-crimson">12ms</span>
+                            </div>
+                            <div class="mt-2 h-1 bg-void rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-crimson to-crimson-light w-[88%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Showcase -->
+    <section id="products" class="py-40 bg-void-light relative">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-crimson/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-crimson-dark/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-black mb-4 reveal-up">
+                        Featured <span class="text-gradient-red">Products</span>
+                    </h2>
+                    <p class="text-gray-400 reveal-up" style="animation-delay: 0.1s">Engineered for the future</p>
+                </div>
+                <button class="flex items-center gap-2 text-crimson hover:text-crimson-light transition-colors font-medium group magnetic reveal-up" style="animation-delay: 0.2s">
+                    View All
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="cyber-card group reveal-up" style="animation-delay: 0.1s">
+                    <div class="cyber-card-inner glass rounded-3xl overflow-hidden scanlines">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-crimson/20 via-void to-void-light"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="relative">
+                                    <div class="w-32 h-48 border-2 border-crimson/40 rounded-2xl flex items-center justify-center bg-void/50 backdrop-blur">
+                                        <span class="text-crimson/60 text-sm font-mono">Z-PHONE</span>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-crimson rounded-full flex items-center justify-center animate-pulse">
+                                        <span class="text-white text-xs font-bold">AI</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Scan Effect -->
+                            <div class="absolute inset-0 overflow-hidden">
+                                <div class="absolute inset-x-0 h-1 bg-gradient-to-b from-transparent via-crimson/50 to-transparent animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs text-crimson font-mono mb-2">// SMARTPHONE</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-crimson transition-colors">Z-Phone X1 Pro</h3>
+                            <p class="text-gray-500 text-sm mb-4">Neural-powered mobile computing</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-black">$1,299</span>
+                                <button class="px-5 py-2 bg-crimson hover:bg-crimson-dark text-white text-sm font-bold rounded-lg transition-colors magnetic">
+                                    Pre-order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="cyber-card group reveal-up" style="animation-delay: 0.2s">
+                    <div class="cyber-card-inner glass rounded-3xl overflow-hidden scanlines">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-crimson/20 via-void to-void-light"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="relative">
+                                    <div class="w-56 h-36 border-2 border-crimson/40 rounded-lg flex items-center justify-center bg-void/50 backdrop-blur">
+                                        <span class="text-crimson/60 text-sm font-mono">Z-LAPTOP</span>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-crimson rounded-full flex items-center justify-center">
+                                        <span class="text-white text-xs font-bold">M3</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute inset-0 overflow-hidden">
+                                <div class="absolute inset-x-0 h-1 bg-gradient-to-b from-transparent via-crimson/50 to-transparent animate-pulse" style="animation-delay: 1s"></div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs text-crimson font-mono mb-2">// LAPTOP</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-crimson transition-colors">Z-Book Ultra</h3>
+                            <p class="text-gray-500 text-sm mb-4">AI-enhanced productivity</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-black">$2,499</span>
+                                <button class="px-5 py-2 bg-crimson hover:bg-crimson-dark text-white text-sm font-bold rounded-lg transition-colors magnetic">
+                                    Pre-order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="cyber-card group reveal-up" style="animation-delay: 0.3s">
+                    <div class="cyber-card-inner glass rounded-3xl overflow-hidden scanlines">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-crimson/20 via-void to-void-light"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="relative">
+                                    <div class="w-28 h-28 border-2 border-crimson/40 rounded-full flex items-center justify-center bg-void/50 backdrop-blur">
+                                        <span class="text-crimson/60 text-sm font-mono">Z-WATCH</span>
+                                    </div>
+                                    <div class="absolute -top-1 -right-1 w-6 h-6 bg-crimson rounded-full animate-pulse"></div>
+                                </div>
+                            </div>
+                            <div class="absolute inset-0 overflow-hidden">
+                                <div class="absolute inset-x-0 h-1 bg-gradient-to-b from-transparent via-crimson/50 to-transparent animate-pulse" style="animation-delay: 2s"></div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs text-crimson font-mono mb-2">// WEARABLE</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-crimson transition-colors">Z-Watch Elite</h3>
+                            <p class="text-gray-500 text-sm mb-4">Health & AI companion</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-black">$599</span>
+                                <button class="px-5 py-2 bg-crimson hover:bg-crimson-dark text-white text-sm font-bold rounded-lg transition-colors magnetic">
+                                    Pre-order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-40 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="order-2 lg:order-1 reveal-up">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-crimson/20 to-transparent rounded-3xl blur-3xl"></div>
+                        <div class="relative glass-card p-10 rounded-3xl animated-border">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="text-center p-6">
+                                    <div class="text-5xl font-black text-gradient-red">3nm</div>
+                                    <div class="text-xs text-gray-500 font-mono">PROCESS</div>
+                                </div>
+                                <div class="text-center p-6">
+                                    <div class="text-5xl font-black text-gradient-red">200+</div>
+                                    <div class="text-xs text-gray-500 font-mono">TFLOPS</div>
+                                </div>
+                                <div class="text-center p-6">
+                                    <div class="text-5xl font-black text-gradient-red">1TB</div>
+                                    <div class="text-xs text-gray-500 font-mono">STORAGE</div>
+                                </div>
+                                <div class="text-center p-6">
+                                    <div class="text-5xl font-black text-gradient-red">64GB</div>
+                                    <div class="text-xs text-gray-500 font-mono">RAM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 space-y-8">
+                    <h2 class="text-4xl md:text-6xl font-black reveal-up">
+                        Built for <span class="text-gradient-red">Performance</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed reveal-up" style="animation-delay: 0.1s">
+                        Every device is engineered with precision-machined components and
+                        cutting-edge technology to deliver unparalleled performance.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 glass rounded-xl reveal-up magnetic" style="animation-delay: 0.2s">
+                            <div class="w-12 h-12 bg-crimson/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-crimson" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold mb-1">Ultra-Fast Processing</h4>
+                                <p class="text-sm text-gray-400">Next-gen architecture delivers 40% faster performance</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 glass rounded-xl reveal-up magnetic" style="animation-delay: 0.3s">
+                            <div class="w-12 h-12 bg-crimson/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-crimson" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold mb-1">Military-Grade Security</h4>
+                                <p class="text-sm text-gray-400">Hardware-level encryption protects your data</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 glass rounded-xl reveal-up magnetic" style="animation-delay: 0.4s">
+                            <div class="w-12 h-12 bg-crimson/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-crimson" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold mb-1">All-Day Battery</h4>
+                                <p class="text-sm text-gray-400">Advanced power management for 48+ hour use</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-40 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-void via-crimson/5 to-void"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black mb-8 reveal-up">
+                Ready to <span class="text-gradient-red">Upgrade</span>?
+            </h2>
+            <p class="text-gray-400 mb-12 text-lg max-w-xl mx-auto reveal-up" style="animation-delay: 0.1s">
+                Be the first to experience the future of technology.
+                Join our exclusive waiting list.
+            </p>
+
+            <form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto mb-8 reveal-up" style="animation-delay: 0.2s">
+                <input type="email" placeholder="Enter your email"
+                    class="flex-1 px-6 py-4 bg-void-light border border-crimson/30 rounded-full focus:outline-none focus:border-crimson text-white placeholder-gray-600 transition-colors">
+                <button class="px-8 py-4 cyber-btn rounded-full font-bold text-white whitespace-nowrap magnetic">
+                    Join Waitlist
+                </button>
+            </form>
+            <p class="text-gray-600 text-sm reveal-up" style="animation-delay: 0.3s">No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-void-light pt-20 pb-10 border-t border-crimson/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="text-2xl font-black tracking-tighter mb-6 flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-crimson to-crimson-dark rounded-xl flex items-center justify-center">
+                            <span class="text-white font-black text-xl">Z</span>
+                        </div>
+                        <span class="text-white">Z<span class="text-crimson">PS</span></span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6">
+                        Pioneering the future of AI-powered technology.
+                        Built for tomorrow, available today.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-crimson transition-colors group magnetic">
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-crimson transition-colors group magnetic">
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.361-.2 6.78-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-crimson transition-colors group magnetic">
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white">Products</h4>
+                    <ul class="space-y-3 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-crimson transition-colors">Smartphones</a></li>
+                        <li><a href="#" class="hover:text-crimson transition-colors">Laptops</a></li>
+                        <li><a href="#" class="hover:text-crimson transition-colors">Wearables</a></li>
+                        <li><a href="#" class="hover:text-crimson transition-colors">Accessories</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white">Company</h4>
+                    <ul class="space-y-3 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-crimson transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-crimson transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-crimson transition-colors">Press</a></li>
+                        <li><a href="#" class="hover:text-crimson transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white">Legal</h4>
+                    <ul class="space-y-3 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-crimson transition-colors">Privacy</a></li>
+                        <li><a href="#" class="hover:text-crimson transition-colors">Terms</a></li>
+                        <li><a href="#" class="hover:text-crimson transition-colors">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-crimson/10 text-center text-gray-600 text-sm">
+                <p>&copy; 2026 ZPS Technologies. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+                animateHeroChars();
+            }, 2000);
+        });
+
+        // Custom Cursor
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+
+        document.addEventListener('mousemove', (e) => {
+            cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+            cursorRing.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+        });
+
+        document.querySelectorAll('a, button, input').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+        });
+
+        // GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+        // Hero Character Animation
+        function animateHeroChars() {
+            const title = document.getElementById('hero-title');
+            const text = title.getAttribute('data-text');
+            title.innerHTML = '';
+            text.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.className = 'hero-char';
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                span.style.animationDelay = `${0.5 + i * 0.05}s`;
+                title.appendChild(span);
+            });
+            document.querySelectorAll('.hero-char').forEach(el => el.classList.add('animate'));
+        }
+
+        // Reveal Animations
+        const revealElements = document.querySelectorAll('.reveal-up, .reveal-scale');
+        revealElements.forEach(el => {
+            gsap.fromTo(el,
+                { opacity: 0, y: el.classList.contains('reveal-scale') ? 0 : 80, scale: el.classList.contains('reveal-scale') ? 0.8 : 1 },
+                {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1,
+                    ease: 'power3.out'
+                }
+            );
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            ScrollTrigger.create({
+                trigger: counter,
+                start: 'top 85%',
+                onEnter: () => {
+                    gsap.to(counter, {
+                        duration: 2,
+                        ease: 'power2.out',
+                        onUpdate: () => {
+                            counter.textContent = Math.round(parseFloat(counter.textContent)).toLocaleString();
+                        }
+                    });
+                    const obj = { val: 0 };
+                    gsap.to(obj, {
+                        val: target,
+                        duration: 2,
+                        ease: 'power2.out',
+                        onUpdate: () => {
+                            if (target >= 1000) {
+                                counter.textContent = (obj.val / 1000).toFixed(0) + 'K+';
+                            } else {
+                                counter.textContent = Math.round(obj.val);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-void/90', 'backdrop-blur-lg', 'shadow-lg', 'shadow-crimson/5');
+            } else {
+                navbar.classList.remove('bg-void/90', 'backdrop-blur-lg', 'shadow-lg', 'shadow-crimson/5');
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Three.js Scene
+        const threeCanvas = document.getElementById('three-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: threeCanvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 500;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for (let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.02,
+            color: 0xdc143c,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Floating Geometry
+        const torusGeometry = new THREE.TorusGeometry(1, 0.3, 16, 100);
+        const torusMaterial = new THREE.MeshBasicMaterial({ color: 0xdc143c, wireframe: true, transparent: true, opacity: 0.3 });
+        const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+        torus.position.set(2, 0, -2);
+        scene.add(torus);
+
+        const torusKnotGeometry = new THREE.TorusKnotGeometry(0.8, 0.2, 100, 16);
+        const torusKnotMaterial = new THREE.MeshBasicMaterial({ color: 0xff3b5c, wireframe: true, transparent: true, opacity: 0.2 });
+        const torusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial);
+        torusKnot.position.set(-2, 1, -3);
+        scene.add(torusKnot);
+
+        camera.position.z = 5;
+
+        // Animate Three.js
+        function animateThree() {
+            requestAnimationFrame(animateThree);
+            particlesMesh.rotation.y += 0.0005;
+            particlesMesh.rotation.x += 0.0002;
+            torus.rotation.x += 0.005;
+            torus.rotation.y += 0.005;
+            torusKnot.rotation.x += 0.003;
+            torusKnot.rotation.y += 0.003;
+            renderer.render(scene, camera);
+        }
+        animateThree();
+
+        // Resize Handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // 2D Particle System
+        const particleCanvas = document.getElementById('particle-canvas');
+        const pCtx = particleCanvas.getContext('2d');
+        let pWidth, pHeight, pParticles = [];
+
+        function pResize() {
+            pWidth = particleCanvas.width = window.innerWidth;
+            pHeight = particleCanvas.height = window.innerHeight;
+        }
+
+        class PParticle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * pWidth;
+                this.y = Math.random() * pHeight;
+                this.vx = (Math.random() - 0.5) * 1;
+                this.vy = (Math.random() - 0.5) * 1;
+                this.size = Math.random() * 4 + 1;
+                this.color = Math.random() > 0.5 ? '#dc143c' : '#8b0000';
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > pWidth) this.vx *= -1;
+                if (this.y < 0 || this.y > pHeight) this.vy *= -1;
+            }
+            draw() {
+                pCtx.beginPath();
+                pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                pCtx.fillStyle = this.color;
+                pCtx.globalAlpha = this.opacity;
+                pCtx.fill();
+            }
+        }
+
+        function initPParticles() {
+            pParticles = [];
+            for (let i = 0; i < 80; i++) {
+                pParticles.push(new PParticle());
+            }
+        }
+
+        function animatePParticles() {
+            pCtx.clearRect(0, 0, pWidth, pHeight);
+            for (let i = 0; i < pParticles.length; i++) {
+                for (let j = i + 1; j < pParticles.length; j++) {
+                    const dx = pParticles[i].x - pParticles[j].x;
+                    const dy = pParticles[i].y - pParticles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 200) {
+                        pCtx.strokeStyle = `rgba(220, 20, 60, ${(1 - dist / 200) * 0.1})`;
+                        pCtx.lineWidth = 0.5;
+                        pCtx.beginPath();
+                        pCtx.moveTo(pParticles[i].x, pParticles[i].y);
+                        pCtx.lineTo(pParticles[j].x, pParticles[j].y);
+                        pCtx.stroke();
+                    }
+                }
+            }
+            pParticles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animatePParticles);
+        }
+
+        pResize();
+        initPParticles();
+        animatePParticles();
+        window.addEventListener('resize', () => { pResize(); initPParticles(); });
+
+        // Magnetic Buttons
+        document.querySelectorAll('.magnetic').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
