@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format_text=true]
+
+[ext_resource type="Script" path="res://skill_data.gd" id="1"]
+
+[resource]
+
+class_name = "SkillData"
+skill_name = "Meteor"
+shape = "circle"
+size = Vector3(2, 0.1, 2)
+damage = 30
+effect_range = 3.0
+cast_time = 1.5
+cooldown = 4.0
+speed = 50.0
+skill_poke_type = 2

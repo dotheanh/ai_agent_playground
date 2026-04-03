@@ -1,0 +1,8 @@
+res://ui/HUD.tscn
+res://main.tscn
+res://game_manager.gd
+res://player.gd
+res://damage_helper.gd
+res://damage_popup.gd
+res://Projectile.gd
+res://monster_skill_caster.gd

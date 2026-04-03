@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format_text=true]
+
+[ext_resource type="Script" path="res://configs/monster_config.gd" id="1"]
+
+[resource]
+
+class_name = "MonsterConfig"
+display_name = "Mega Swampert"
+max_hp = 50
+attack_type = 0
+move_speed = 2.5
+melee_cast_range = 2.0
+delay_before_first_cast = 1.0
+rotation_speed = 5.0
+skills = []
+idle_animation = "Idle"
+collision_radius = 0.5
+collision_height = 2.0
+poke_type = 2

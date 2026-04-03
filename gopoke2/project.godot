@@ -11,12 +11,13 @@ config_version=5
 [application]
 
 config/name="GoPoke v2"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GPRuntime="*res://addons/godot-mcp/pilot_runtime.gd"
+GameManagerGlobal="*res://game_manager.gd"
 
 [editor_plugins]
 

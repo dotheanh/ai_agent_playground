@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d324a6uwnf308"]
+
+[node name="HUD" type="CanvasLayer" unique_id=346566858]
+
+[node name="HPBar" type="ProgressBar" parent="." unique_id=1211148944]
+anchors_preset = -1
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 0.9
+
+[node name="Background" type="ColorRect" parent="." unique_id=2064180410]
