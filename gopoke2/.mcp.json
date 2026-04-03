@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "godot-docs": {
+      "type": "http",
+      "url": "http://27.0.15.113:8000/mcp",
+      "headers": {
+        "Authorization": "Bearer key-alice"
+      }
+    },
+    "godot-editor": {
+      "command": "npx",
+      "args": [
+        "godot-mcp-connector"
+      ]
+    }
+  }
+}
