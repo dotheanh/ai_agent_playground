@@ -9,6 +9,7 @@ function App() {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [currentEvent, setCurrentEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
+  const [viewMode, setViewMode] = useState<'timeline' | 'detail'>('timeline');
 
   // Load events data
   useEffect(() => {
@@ -24,7 +25,14 @@ function App() {
       });
   }, []);
 
-  // Find current event based on real time
+  // Custom event selection handler for mobile
+  const handleSelectEvent = useCallback((event: Event) => {
+    setSelectedEvent(event);
+    // On mobile, switch to detail view when selecting an event
+    if (window.innerWidth < 1024) {
+      setViewMode('detail');
+    }
+  }, []);
   const findCurrentEvent = useCallback(() => {
     const now = new Date();
     const currentDate = now.toISOString().split('T')[0];
@@ -104,19 +112,45 @@ function App() {
       <Header />
       
       <main className="flex-1 flex flex-col lg:flex-row overflow-hidden relative z-10">
+        {/* Mobile: Tab-based navigation */}
+        <div className="lg:hidden">
+          <div className="flex border-b border-cyan-500/20 bg-ocean-dark/80 backdrop-blur-sm">
+            <button
+              onClick={() => setViewMode('timeline')}
+              className={`flex-1 py-3 px-4 text-center transition-colors ${
+                viewMode === 'timeline' ? 'text-cyan-400 border-b-2 border-cyan-400' : 'text-cream/60'
+              }`}
+            >
+              <span className="text-sm font-medium">Lịch trình</span>
+            </button>
+            <button
+              onClick={() => setViewMode('detail')}
+              className={`flex-1 py-3 px-4 text-center transition-colors ${
+                viewMode === 'detail' ? 'text-cyan-400 border-b-2 border-cyan-400' : 'text-cream/60'
+              }`}
+            >
+              <span className="text-sm font-medium">Chi tiết</span>
+            </button>
+          </div>
+        </div>
+
         {/* Left Column - Timeline */}
-        <div className="w-full lg:w-5/12 xl:w-1/3 h-[50vh] lg:h-[calc(100vh-80px)] overflow-y-auto">
-          <Timeline 
+        <div className={`w-full lg:w-5/12 xl:w-1/3 h-[50vh] lg:h-[calc(100vh-80px)] overflow-y-auto ${
+          viewMode === 'detail' ? 'hidden lg:block' : 'block'
+        }`}>
+          <Timeline
             events={events}
             selectedEvent={selectedEvent}
             currentEvent={currentEvent}
-            onSelectEvent={setSelectedEvent}
+            onSelectEvent={handleSelectEvent}
           />
         </div>
-        
+
         {/* Right Column - Detail Panel */}
-        <div className="w-full lg:w-7/12 xl:w-2/3 h-[50vh] lg:h-[calc(100vh-80px)] overflow-y-auto p-4 lg:p-6">
-          <DetailPanel 
+        <div className={`w-full lg:w-7/12 xl:w-2/3 h-[50vh] lg:h-[calc(100vh-80px)] overflow-y-auto p-4 lg:p-6 ${
+          viewMode === 'timeline' ? 'hidden lg:block' : 'block'
+        }`}>
+          <DetailPanel
             event={selectedEvent}
             isCurrent={selectedEvent?.id === currentEvent?.id}
           />

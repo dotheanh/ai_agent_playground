@@ -25,6 +25,14 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
   // Ensure currentImageIndex is valid for current event
   const safeImageIndex = event ? Math.min(currentImageIndex, event.images.length - 1 || 0) : 0;
 
+  // Format time display
+  const formatTime = (start: string, end: string) => {
+    if (end === 'TỐI' || end === 'KHUYA') {
+      return `${start} → ${end}`;
+    }
+    return `${start} - ${end}`;
+  };
+
   if (!event) {
     return (
       <div className="h-full flex items-center justify-center">
@@ -136,12 +144,32 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
       {/* Current Event Badge */}
       {isCurrent && (
         <div className="mb-4 flex items-center gap-2">
-          <span className="px-3 py-1 bg-coral text-white text-sm rounded-full font-medium animate-pulse flex items-center gap-1">
+          <span className="px-3 py-1.5 lg:px-3 lg:py-1 bg-coral text-white text-sm rounded-full font-medium animate-pulse flex items-center gap-1.5">
             <span className="w-2 h-2 bg-white rounded-full"></span>
             Đang diễn ra
           </span>
         </div>
       )}
+
+      {/* Time and Location */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 lg:gap-4 mb-4 lg:mb-6">
+        <div className="flex items-center gap-2 text-cyan-400">
+          <span className="text-sm lg:text-base font-medium">
+            {formatTime(event.startTime, event.endTime)}
+          </span>
+        </div>
+        {event.mapLink && (
+          <a
+            href={event.mapLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-cream/70 hover:text-cyan-400 transition-colors group touch-manipulation"
+          >
+            <MapPin className="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <span className="text-sm underline">Xem bản đồ</span>
+          </a>
+        )}
+      </div>
 
       {/* Image Carousel */}
       {event.images.length > 0 && (
@@ -160,15 +188,15 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
             <>
               <button
                 onClick={prevImage}
-                className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-colors"
+                className="absolute left-2 lg:left-2 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-10 lg:h-10 rounded-full bg-black/50 hover:bg-black/70 active:bg-black/80 flex items-center justify-center text-white transition-colors touch-manipulation"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-6 h-6 lg:w-6 lg:h-6" />
               </button>
               <button
                 onClick={nextImage}
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-colors"
+                className="absolute right-2 lg:right-2 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-10 lg:h-10 rounded-full bg-black/50 hover:bg-black/70 active:bg-black/80 flex items-center justify-center text-white transition-colors touch-manipulation"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-6 h-6 lg:w-6 lg:h-6" />
               </button>
               
               {/* Image indicators */}
@@ -177,7 +205,7 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
+                    className={`w-3 h-3 lg:w-2 lg:h-2 rounded-full transition-colors touch-manipulation ${
                       idx === safeImageIndex ? 'bg-cyan-400' : 'bg-white/50'
                     }`}
                   />
@@ -196,16 +224,16 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
       )}
 
       {/* Event Title */}
-      <h2 className="text-2xl lg:text-3xl font-bold text-cream mb-4">
+      <h2 className="text-xl lg:text-2xl xl:text-3xl font-bold text-cream mb-3 lg:mb-4 leading-tight">
         {event.title}
       </h2>
 
       {/* Description */}
       {event.fullDescription && event.fullDescription !== 'nan' && (
-        <div className="glass-card p-4 mb-4">
+        <div className="glass-card p-4 lg:p-4 mb-4 lg:mb-4">
           <div className="flex items-center gap-2 mb-3">
-            <Info className="w-5 h-5 text-cyan-400" />
-            <h3 className="text-cream font-semibold">Mô tả</h3>
+            <Info className="w-4 h-4 lg:w-5 lg:h-5 text-cyan-400" />
+            <h3 className="text-sm lg:text-base text-cream font-semibold">Mô tả</h3>
           </div>
           <div className="space-y-1">
             {formatDescription(event.fullDescription)}
@@ -215,10 +243,10 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
 
       {/* Notes */}
       {event.notes && event.notes !== 'nan' && (
-        <div className="glass-card p-4 mb-4">
+        <div className="glass-card p-4 lg:p-4 mb-4 lg:mb-4">
           <div className="flex items-center gap-2 mb-3">
-            <FileText className="w-5 h-5 text-cyan-400" />
-            <h3 className="text-cream font-semibold">Ghi chú</h3>
+            <FileText className="w-4 h-4 lg:w-5 lg:h-5 text-cyan-400" />
+            <h3 className="text-sm lg:text-base text-cream font-semibold">Ghi chú</h3>
           </div>
           <div className="space-y-1">
             {formatNotes(event.notes)}
@@ -228,12 +256,12 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
 
       {/* External Links Section */}
       {(event.externalLinks && event.externalLinks.length > 0) || mapLinks.length > 0 ? (
-        <div className="glass-card p-4">
+        <div className="glass-card p-4 lg:p-4">
           <div className="flex items-center gap-2 mb-3">
-            <ExternalLink className="w-5 h-5 text-cyan-400" />
-            <h3 className="text-cream font-semibold">Liên kết</h3>
+            <ExternalLink className="w-4 h-4 lg:w-5 lg:h-5 text-cyan-400" />
+            <h3 className="text-sm lg:text-base text-cream font-semibold">Liên kết</h3>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col gap-2">
             {/* Map Links */}
             {mapLinks.map((link, idx) => (
               <a
@@ -241,7 +269,7 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="map-link"
+                className="map-link touch-manipulation"
               >
                 <MapPin className="w-4 h-4" />
                 Google Maps {mapLinks.length > 1 ? idx + 1 : ''}
@@ -257,7 +285,7 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="website-link"
+                    className="website-link touch-manipulation"
                   >
                     <Globe className="w-4 h-4" />
                     {link.label}
@@ -271,7 +299,7 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="facebook-link"
+                    className="facebook-link touch-manipulation"
                   >
                     <Facebook className="w-4 h-4" />
                     {link.label}
@@ -285,7 +313,7 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="airbnb-link"
+                    className="airbnb-link touch-manipulation"
                   >
                     <Home className="w-4 h-4" />
                     {link.label}

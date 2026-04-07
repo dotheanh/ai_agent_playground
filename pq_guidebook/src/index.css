@@ -184,8 +184,24 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--ocean-light);
+/* Mobile optimizations */
+@media (max-width: 1023px) {
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Improve button tap targets */
+  button, a[role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better text readability on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
 }
 
 /* Timeline styles */

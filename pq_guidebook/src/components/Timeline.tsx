@@ -78,10 +78,10 @@ const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: Timeli
   }, [currentEvent]);
 
   return (
-    <div className="p-4 lg:p-6" ref={timelineRef}>
-      <h2 className="text-xl font-bold text-cream mb-6 flex items-center gap-2">
-        <span className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
-          <span className="text-white text-sm">📅</span>
+    <div className="p-3 lg:p-6" ref={timelineRef}>
+      <h2 className="text-lg lg:text-xl font-bold text-cream mb-4 lg:mb-6 flex items-center gap-2">
+        <span className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+          <span className="text-white text-xs lg:text-sm">📅</span>
         </span>
         Lịch Trình
       </h2>
@@ -121,28 +121,29 @@ const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: Timeli
                     onClick={() => onSelectEvent(event)}
                   >
                     <div className={`
-                      glass-card p-3 hover-lift cursor-pointer transition-all duration-300
+                      glass-card p-4 lg:p-3 hover-lift cursor-pointer transition-all duration-300
                       ${isSelected ? 'ring-2 ring-cyan-400 shadow-lg shadow-cyan-400/20' : ''}
                       ${isCurrent ? 'ring-2 ring-coral shadow-lg shadow-coral/20' : ''}
+                      min-h-[80px] lg:min-h-[60px] flex flex-col justify-center
                     `}>
                       {/* Time */}
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="time-display text-sm">
+                      <div className="flex items-center gap-2 mb-2 lg:mb-2">
+                        <span className="time-display text-sm lg:text-sm">
                           {formatTime(event.startTime, event.endTime)}
                         </span>
                         {isCurrent && (
-                          <span className="px-2 py-0.5 bg-coral text-white text-xs rounded-full font-medium animate-pulse">
+                          <span className="px-2 py-1 lg:px-2 lg:py-0.5 bg-coral text-white text-xs rounded-full font-medium animate-pulse">
                             Đang diễn ra
                           </span>
                         )}
                       </div>
 
                       {/* Title with icon */}
-                      <div className="flex items-start gap-2">
-                        <span className="mt-0.5 text-cyan-400">
+                      <div className="flex items-start gap-3 lg:gap-2">
+                        <span className="mt-0.5 lg:mt-0.5 text-cyan-400 flex-shrink-0">
                           {getEventIcon(event.title)}
                         </span>
-                        <h3 className="text-cream text-sm font-medium leading-tight line-clamp-2">
+                        <h3 className="text-sm lg:text-sm font-medium leading-tight line-clamp-2 flex-1">
                           {event.title}
                         </h3>
                       </div>
