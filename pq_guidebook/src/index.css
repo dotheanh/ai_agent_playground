@@ -196,6 +196,12 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 44px;
     min-width: 44px;
   }
+
+  /* Allow smaller carousel indicator dots */
+  .carousel-container button.indicator-button {
+    min-height: 0;
+    min-width: 0;
+  }
   
   /* Better text readability on mobile */
   body {

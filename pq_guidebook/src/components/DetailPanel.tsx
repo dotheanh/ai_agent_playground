@@ -220,12 +220,12 @@ const DetailPanel = ({ event, isCurrent, events, onSelectEvent }: DetailPanelPro
               </button>
               
               {/* Image indicators */}
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
                 {event.images.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full transition-colors touch-manipulation ${
+                    className={`w-1 h-1 lg:w-2 lg:h-2 rounded-full transition-colors touch-manipulation ${
                       idx === safeImageIndex ? 'bg-cyan-400' : 'bg-white/50'
                     }`}
                   />
