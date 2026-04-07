@@ -27,6 +27,8 @@ export interface TimelineProps {
 export interface DetailPanelProps {
   event: Event | null;
   isCurrent: boolean;
+  events: Event[];
+  onSelectEvent: (event: Event) => void;
 }
 
 export interface HeaderProps {

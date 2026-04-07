@@ -63,9 +63,12 @@ const Header = () => {
         </div>
 
         {/* Right - Location */}
-        <div className="flex items-center gap-2 text-cream/70">
-          <MapPin className="w-3 h-3 lg:w-4 lg:h-4 text-cyan-400" />
-          <span className="text-xs lg:text-sm hidden md:inline">Phú Quốc, Việt Nam</span>
+        <div className="flex flex-col items-end text-cream/70">
+          <div className="flex items-center gap-2">
+            <MapPin className="w-3 h-3 lg:w-4 lg:h-4 text-cyan-400" />
+            <span className="text-xs lg:text-sm">Việt Nam</span>
+          </div>
+          <span className="text-xs text-cyan-400/80">#mlace</span>
         </div>
       </div>
     </header>

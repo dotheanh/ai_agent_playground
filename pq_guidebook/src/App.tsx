@@ -153,6 +153,8 @@ function App() {
           <DetailPanel
             event={selectedEvent}
             isCurrent={selectedEvent?.id === currentEvent?.id}
+            events={events}
+            onSelectEvent={handleSelectEvent}
           />
         </div>
       </main>

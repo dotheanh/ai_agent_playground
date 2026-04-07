@@ -11,10 +11,11 @@ import {
   Globe,
   Facebook,
   Home,
-  Video
+  Video,
+  ArrowRight
 } from 'lucide-react';
 
-const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
+const DetailPanel = ({ event, isCurrent, events, onSelectEvent }: DetailPanelProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Reset image index when event changes
@@ -32,6 +33,25 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
     }
     return `${start} - ${end}`;
   };
+
+  // Find next event
+  const getNextEvent = () => {
+    if (!event || !events.length) return null;
+    
+    // Sort events by date and time
+    const sortedEvents = [...events].sort((a, b) => {
+      const dateA = new Date(`${a.date}T${a.startTime}`);
+      const dateB = new Date(`${b.date}T${b.startTime}`);
+      return dateA.getTime() - dateB.getTime();
+    });
+    
+    const currentIndex = sortedEvents.findIndex(e => e.id === event.id);
+    if (currentIndex === -1 || currentIndex === sortedEvents.length - 1) return null;
+    
+    return sortedEvents[currentIndex + 1];
+  };
+
+  const nextEvent = getNextEvent();
 
   if (!event) {
     return (
@@ -205,7 +225,7 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`w-3 h-3 lg:w-2 lg:h-2 rounded-full transition-colors touch-manipulation ${
+                    className={`w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full transition-colors touch-manipulation ${
                       idx === safeImageIndex ? 'bg-cyan-400' : 'bg-white/50'
                     }`}
                   />
@@ -350,6 +370,21 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
           </div>
         </div>
       ) : null}
+
+      {/* Next Event Button - Mobile Only */}
+      {nextEvent && (
+        <div className="lg:hidden mt-6">
+          <button
+            onClick={() => onSelectEvent(nextEvent)}
+            className="w-full glass-card p-4 hover-lift transition-all duration-300 touch-manipulation flex items-center justify-center gap-3 group"
+          >
+            <span className="text-sm lg:text-base text-cream font-medium">
+              Tiếp theo: {nextEvent.title}
+            </span>
+            <ArrowRight className="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
