@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { DetailPanelProps } from '../types';
 import { 
   MapPin, 
@@ -16,6 +16,14 @@ import {
 
 const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Reset image index when event changes
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [event?.id]);
+
+  // Ensure currentImageIndex is valid for current event
+  const safeImageIndex = event ? Math.min(currentImageIndex, event.images.length - 1 || 0) : 0;
 
   if (!event) {
     return (
@@ -139,7 +147,7 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
       {event.images.length > 0 && (
         <div className="carousel-container mb-6 aspect-video bg-ocean-dark/50">
           <img
-            src={event.images[currentImageIndex]}
+            src={event.images[safeImageIndex]}
             alt={event.title}
             className="w-full h-full object-cover"
             onError={(e) => {
@@ -170,7 +178,7 @@ const DetailPanel = ({ event, isCurrent }: DetailPanelProps) => {
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
                     className={`w-2 h-2 rounded-full transition-colors ${
-                      idx === currentImageIndex ? 'bg-cyan-400' : 'bg-white/50'
+                      idx === safeImageIndex ? 'bg-cyan-400' : 'bg-white/50'
                     }`}
                   />
                 ))}
