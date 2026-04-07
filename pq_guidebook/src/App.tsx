@@ -135,7 +135,7 @@ function App() {
         </div>
 
         {/* Left Column - Timeline */}
-        <div className={`w-full lg:w-5/12 xl:w-1/3 h-[50vh] lg:h-[calc(100vh-80px)] overflow-y-auto ${
+        <div className={`w-full lg:w-5/12 xl:w-1/3 h-[100vh] lg:h-[calc(100vh-80px)] overflow-y-auto ${
           viewMode === 'detail' ? 'hidden lg:block' : 'block'
         }`}>
           <Timeline
@@ -147,7 +147,7 @@ function App() {
         </div>
 
         {/* Right Column - Detail Panel */}
-        <div className={`w-full lg:w-7/12 xl:w-2/3 h-[50vh] lg:h-[calc(100vh-80px)] overflow-y-auto p-4 lg:p-6 ${
+        <div className={`w-full lg:w-7/12 xl:w-2/3 h-[100vh] lg:h-[calc(100vh-80px)] overflow-y-auto p-4 lg:p-6 ${
           viewMode === 'timeline' ? 'hidden lg:block' : 'block'
         }`}>
           <DetailPanel

@@ -94,8 +94,8 @@ const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: Timeli
           
           return (
             <div key={date} className="mb-6">
-              {/* Date Header */}
-              <div className="flex items-center gap-3 mb-4 ml-2">
+              {/* Date Header - Breakline on mobile */}
+              <div className="flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-3 mb-4 ml-2">
                 <span className="date-badge">
                   {dateInfo.dayName}
                 </span>

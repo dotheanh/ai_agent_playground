@@ -33,7 +33,7 @@ const Header = () => {
     <header className="h-16 lg:h-20 glass-card border-b border-cyan-500/20 sticky top-0 z-50">
       <div className="h-full max-w-full px-3 lg:px-8 flex items-center justify-between">
         {/* Left - Clock and Date */}
-        <div className="flex items-center gap-2 lg:gap-8">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
           {/* Real-time Clock */}
           <div className="flex items-center gap-2">
             <Clock className="w-4 h-4 lg:w-5 lg:h-5 text-cyan-400" />
