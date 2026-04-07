@@ -11,3 +11,4 @@
 .DS_Store
 .worktrees/
 .worktrees/
+pq_guidebook/node_modules
