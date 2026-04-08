@@ -48,9 +48,26 @@ export interface ExpenseItem {
   person: string;
   count: number;
   perPerson: number;
+  // Member participation (columns F-L)
+  binh?: boolean;
+  nhi?: boolean;
+  tan?: boolean;
+  thuan?: boolean;
+  trieu?: boolean;
+  theAnh?: boolean;
+  vy?: boolean;
+}
+
+export interface MemberSummary {
+  name: string;
+  toPay: number; // Số tiền cuối phải trả
+  fundContribution: number; // Số tiền đóng quỹ
+  advancePayment: number; // Số tiền đã chi/ứng trước
+  totalExpense: number; // Tổng chi phí
 }
 
 export interface ExpenseData {
   items: ExpenseItem[];
   total: number;
+  members: MemberSummary[];
 }
