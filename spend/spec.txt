@@ -1,0 +1,911 @@
+Làm phần mềm tính chi phí chuyến đi
+
+
+Tài liệu đặc tả kỹ thuật (Functional Spec) cho phần mềm quản lý chi tiêu nhóm, scope chỉ tính năng + logic, không bàn UI/UX.
+
+Core Features & Business Logic
+
+
+---
+
+1. Tổng quan hệ thống
+
+1.1 Mục tiêu
+
+Hệ thống hỗ trợ quản lý quỹ chung cho nhóm đi du lịch, giúp:
+
+ghi nhận các khoản chi tiêu phát sinh
+
+ghi nhận các khoản đóng quỹ (nạp tiền vào quỹ)
+
+tính toán công nợ giữa các thành viên và quỹ
+
+đảm bảo minh bạch: ai đã đóng bao nhiêu, ai đang nợ bao nhiêu, quỹ đang dư/thiếu bao nhiêu
+
+
+1.2 Đối tượng sử dụng
+
+Thành viên trong nhóm du lịch (có thể là người ghi chép hoặc tất cả cùng ghi)
+
+
+
+---
+
+2. Khái niệm & định nghĩa dữ liệu cốt lõi
+
+2.1 Thành viên (Member)
+
+Một thành viên trong nhóm.
+
+Thuộc tính:
+
+memberId
+
+name
+
+
+2.2 Quỹ (Fund)
+
+Quỹ được xem như một “thực thể đặc biệt”, tương tự 1 tài khoản trung gian.
+
+Thuộc tính:
+
+fundId (mặc định chỉ có 1 quỹ cho mỗi chuyến)
+
+balance (số dư hiện tại)
+
+
+2.3 Chuyến đi / Nhóm (Trip/Group)
+
+Một chuyến du lịch có nhiều thành viên và 1 quỹ chung.
+
+Thuộc tính:
+
+tripId
+
+name
+
+members[]
+
+
+
+---
+
+3. Nguyên tắc kế toán nội bộ (Accounting Model)
+
+Hệ thống sử dụng mô hình double-entry logic đơn giản dựa trên việc ghi nhận:
+
+Quỹ là trung gian thanh toán.
+
+Mỗi thành viên có thể:
+
+đóng tiền vào quỹ (làm tăng quỹ)
+
+hưởng lợi từ chi tiêu (tạo nghĩa vụ trả tiền)
+
+tạm ứng thay quỹ (coi như quỹ đang nợ lại thành viên đó)
+
+
+
+3.1 Các khái niệm công nợ
+
+Hệ thống cần theo dõi 2 dạng nghĩa vụ:
+
+Member -> Fund: thành viên nợ quỹ (do hưởng dịch vụ nhưng chưa đóng đủ)
+
+Fund -> Member: quỹ nợ thành viên (do thành viên ứng tiền thay quỹ)
+
+
+Kết quả cuối cùng cần trả ra được:
+
+Quỹ còn bao nhiêu tiền mặt
+
+Ai đang nợ quỹ bao nhiêu
+
+Quỹ đang nợ ai bao nhiêu
+
+
+
+---
+
+4. Chức năng cốt lõi
+
+4.1 Thêm giao dịch chi tiêu (Add Expense Transaction)
+
+4.1.1 Mục đích
+
+Ghi nhận một khoản chi tiêu phát sinh trong chuyến đi.
+
+Ví dụ:
+
+ăn uống
+
+vé tham quan
+
+thuê xe
+
+mua đồ chung
+
+
+4.1.2 Input dữ liệu
+
+Giao dịch gồm:
+
+amount (giá trị giao dịch, số dương)
+
+description (nội dung)
+
+paidBy (người chi trả):
+
+có thể là Member
+
+hoặc là "Fund" (chi trực tiếp từ quỹ)
+
+
+participants[] danh sách người thụ hưởng
+
+splitType
+
+EQUAL (mặc định)
+
+CUSTOM (chia không đều)
+
+
+customSplit[] (chỉ có nếu splitType = CUSTOM)
+
+mỗi phần tử gồm {memberId, shareAmount}
+
+tổng shareAmount bắt buộc bằng amount
+
+
+
+4.1.3 Validation rules
+
+amount > 0
+
+participants không được rỗng
+
+nếu splitType = EQUAL
+
+mỗi người share = amount / n
+
+nếu có số lẻ thì cần quy định rounding rule (mục này sẽ đặc tả riêng)
+
+
+nếu splitType = CUSTOM
+
+tổng customSplit phải đúng bằng amount
+
+chỉ được custom cho những member nằm trong participants
+
+
+
+4.1.4 Business logic (tính công nợ)
+
+Một giao dịch chi tiêu luôn được quy về mô hình:
+
+Quỹ đã chi ra amount
+
+Những người tham gia phải trả lại quỹ theo phần share của họ
+
+
+=> về bản chất: Participants nợ Fund
+
+Trường hợp A: paidBy = Fund
+
+Hệ thống ghi nhận:
+
+Quỹ giảm amount
+
+Mỗi participant tăng công nợ shareAmount (nợ quỹ)
+
+
+Trường hợp B: paidBy = Member X
+
+Về bản chất, Member X đã ứng tiền thay quỹ.
+
+Hệ thống phải tách thành 2 bước logic:
+
+Step 1: X đóng quỹ amount
+
+Fund tăng amount
+
+Fund nợ lại X amount
+
+
+Step 2: Quỹ chi amount cho giao dịch
+
+Fund giảm amount
+
+Participants nợ quỹ theo share
+
+
+👉 Kết quả tổng hợp:
+
+Participants nợ quỹ
+
+Quỹ nợ X số tiền X đã ứng trừ đi phần X cũng là người hưởng (nếu X nằm trong participants)
+
+
+
+---
+
+4.2 Thêm lệnh đóng quỹ (Add Fund Contribution)
+
+4.2.1 Mục đích
+
+Ghi nhận thành viên nạp tiền vào quỹ.
+
+4.2.2 Input dữ liệu
+
+contributors[]: danh sách người đóng
+
+amountPerContributor hoặc customAmount[]
+
+hỗ trợ chọn nhiều người cùng lúc
+
+
+description (optional)
+
+timestamp
+
+
+4.2.3 Validation rules
+
+danh sách contributors không rỗng
+
+mỗi amount phải > 0
+
+
+4.2.4 Business logic
+
+Khi Member A đóng quỹ số tiền X:
+
+Fund balance tăng X
+
+Giảm nghĩa vụ Member A nợ Fund (nếu A đang nợ)
+
+Nếu A không nợ hoặc đóng dư, phần dư được tính là:
+
+Fund đang nợ A (tương đương A đang “cho quỹ mượn”)
+
+
+
+Tóm lại đóng quỹ là hành động điều chỉnh công nợ giữa Fund và Member.
+
+
+---
+
+5. Quy tắc quan trọng: Tất cả đều quy về Ledger Entries
+
+Để đảm bảo minh bạch và dễ tính toán, hệ thống không nên chỉ lưu “giao dịch tổng”, mà phải sinh ra các dòng ledger.
+
+5.1 LedgerEntry (bút toán)
+
+Mỗi giao dịch khi ghi vào hệ thống sẽ sinh ra nhiều ledger entries.
+
+Một entry gồm:
+
+entryId
+
+tripId
+
+type (EXPENSE / CONTRIBUTION / ADJUSTMENT)
+
+fromEntity (MemberId hoặc Fund)
+
+toEntity (MemberId hoặc Fund)
+
+amount
+
+referenceTransactionId
+
+
+5.2 Nguyên tắc sinh ledger cho Expense
+
+Ví dụ giao dịch: amount = 100k
+
+Case 1: paidBy = Fund
+
+Fund -> Merchant (hoặc placeholder) : -100k (có thể bỏ merchant và chỉ giảm quỹ)
+
+Participant_i -> Fund : share_i
+
+
+Case 2: paidBy = Vy
+
+Sinh ledger:
+
+1. Fund -> Vy : 100k (Fund nợ Vy vì Vy ứng)
+
+
+2. Participant_i -> Fund : share_i
+
+
+
+Cách này giúp hệ thống luôn tính ra:
+
+ai nợ quỹ
+
+quỹ nợ ai
+
+
+
+---
+
+6. Ví dụ minh hoạ theo đúng usecase
+
+6.1 Ví dụ 1: Vy ứng mua kem 100k chia đều 10 người
+
+amount = 100k
+
+paidBy = Vy
+
+participants = 10 người
+
+split equal => mỗi người 10k
+
+
+Ledger:
+
+Fund nợ Vy 100k
+
+mỗi participant nợ Fund 10k
+
+
+Nếu Vy là participant:
+
+Vy cũng nợ Fund 10k
+
+
+Net:
+
+Fund nợ Vy: 100k - 10k = 90k
+
+9 người còn lại nợ Fund 10k
+
+
+6.2 Ví dụ 2: Vy mua kem xịn cho Vy + Thế Anh (30k/cây)
+
+amount = 100k
+participants = 10 người
+custom split:
+
+Vy: 30k
+
+Thế Anh: 30k
+
+8 người còn lại chia đều 40k => 5k/người
+
+
+Ledger:
+
+Fund nợ Vy 100k
+
+Vy nợ Fund 30k
+
+Thế Anh nợ Fund 30k
+
+8 người khác nợ Fund 5k/người
+
+
+Net:
+
+Fund nợ Vy: 100k - 30k = 70k
+
+
+
+---
+
+7. Kết luận phần nền tảng
+
+Từ 2 chức năng bạn đưa ra, hệ thống cần đảm bảo 3 điều:
+
+1. Expense luôn tạo nghĩa vụ participants trả quỹ
+
+
+2. PaidBy là Member nghĩa là Member cho quỹ vay tiền
+
+
+3. Contribution là hành động trả nợ quỹ hoặc cho quỹ vay thêm
+
+
+---
+
+
+8. Quy tắc làm tròn khi chia tiền (Rounding Rule)
+
+8.1 Vấn đề
+
+Khi chia đều amount / n, có thể phát sinh số lẻ (vd 100k chia 3).
+
+8.2 Quy tắc đề xuất
+
+Hệ thống dùng đơn vị nhỏ nhất là 1 đồng.
+
+Khi chia đều:
+
+baseShare = floor(amount / n)
+
+remainder = amount - baseShare*n
+
+
+Phân bổ phần dư:
+
+cộng thêm 1 đồng cho remainder người đầu tiên trong danh sách participants (theo thứ tự hiển thị hoặc theo thứ tự thêm vào)
+
+
+Ví dụ:
+
+100 chia 3
+
+baseShare = 33
+
+remainder = 1 → người 1: 34, người 2: 33, người 3: 33
+
+
+8.3 Yêu cầu hệ thống
+
+Luôn đảm bảo tổng shareAmount = amount
+
+Cách phân bổ dư phải deterministic (cố định, không thay đổi theo lần load)
+
+
+
+---
+
+9. Chỉnh sửa giao dịch (Edit Transaction)
+
+9.1 Mục đích
+
+Cho phép sửa thông tin giao dịch đã tạo nếu nhập sai.
+
+9.2 Các trường có thể sửa
+
+amount
+
+description
+
+paidBy
+
+participants
+
+splitType
+
+customSplit
+
+
+9.3 Logic xử lý
+
+Hệ thống không nên sửa trực tiếp ledger cũ kiểu “update in place” vì dễ mất minh bạch.
+
+Cách đề xuất (chuẩn sổ sách):
+
+Khi edit transaction:
+
+tạo một phiên bản mới của transaction (versioning)
+
+ledger cũ được đánh dấu isReversed = true
+
+sinh ledger mới tương ứng với dữ liệu mới
+
+
+9.4 Validation
+
+edit không được làm mất cân bằng quỹ (ví dụ dẫn tới fund balance âm nếu hệ thống có rule không cho âm)
+
+customSplit phải đúng tổng
+
+
+
+---
+
+10. Xoá giao dịch (Delete Transaction)
+
+10.1 Mục đích
+
+Xoá giao dịch nhập nhầm.
+
+10.2 Logic xử lý
+
+Không xoá hard delete.
+
+Khi delete:
+
+transaction chuyển trạng thái DELETED
+
+toàn bộ ledger liên quan được reverse hoặc đánh dấu inactive
+
+
+10.3 Yêu cầu
+
+dữ liệu vẫn tồn tại để audit
+
+báo cáo công nợ không tính các transaction bị deleted
+
+
+
+---
+
+11. Tính toán số dư quỹ và công nợ
+
+11.1 Các chỉ số cần hiển thị (core outputs)
+
+Fund Balance
+
+Số tiền quỹ hiện có.
+
+Tính bằng tổng:
+
+các khoản đóng quỹ
+
+trừ các khoản chi từ quỹ
+
+
+Member Balance (Net)
+
+Mỗi thành viên sẽ có trạng thái:
+
+đang nợ quỹ bao nhiêu
+
+hay quỹ đang nợ lại bao nhiêu
+
+
+11.2 Quy tắc net công nợ
+
+Với mỗi member, tính:
+
+debtToFund: tổng các khoản member phải trả quỹ (từ share của expense)
+
+fundDebtToMember: tổng các khoản quỹ nợ member (do member ứng trước hoặc đóng dư)
+
+
+Net:
+
+Nếu debtToFund > fundDebtToMember → member nợ quỹ
+
+Nếu fundDebtToMember > debtToFund → quỹ nợ member
+
+
+11.3 Output yêu cầu
+
+Hệ thống cần trả được bảng:
+
+Member	Paid/Contributed	Benefit/Spent	Net
+
+Vy	...	...	Fund owes Vy ...
+
+
+(Logic tính Paid/Benefit sẽ dựa trên ledger)
+
+
+---
+
+12. Chức năng Settlement (Chốt sổ / Kết toán)
+
+12.1 Mục đích
+
+Khi chuyến đi kết thúc, cần đưa ra hướng dẫn “ai trả ai bao nhiêu” để tất cả về 0.
+
+12.2 Input
+
+toàn bộ ledger của trip
+
+
+12.3 Output
+
+Danh sách lệnh chuyển tiền tối ưu:
+
+Ví dụ:
+
+A trả B 200k
+
+C trả B 100k
+
+
+12.4 Quy tắc đề xuất
+
+Settlement dựa trên net:
+
+những người net âm = người nợ
+
+những người net dương = người được nhận
+
+
+Thuật toán:
+
+sắp xếp nhóm nợ và nhóm nhận
+
+match lần lượt cho tới khi tất cả về 0
+
+
+12.5 Yêu cầu
+
+số giao dịch settlement nên tối thiểu (không bắt buộc tối ưu tuyệt đối, chỉ cần hợp lý)
+
+settlement chỉ là gợi ý, không bắt buộc phải đúng y chang
+
+
+
+---
+
+13. Thêm thành viên / Xoá thành viên
+
+13.1 Thêm thành viên
+
+Cho phép thêm thành viên bất kỳ lúc nào.
+
+Rule:
+
+member mới không ảnh hưởng giao dịch cũ
+
+chỉ tham gia giao dịch từ thời điểm được chọn vào participants
+
+
+13.2 Xoá thành viên
+
+Không cho phép xoá nếu:
+
+member đã tham gia bất kỳ transaction nào
+
+
+Thay vì xoá:
+
+chuyển trạng thái INACTIVE
+
+
+Member inactive:
+
+không được chọn trong transaction mới
+
+vẫn tồn tại trong báo cáo để tính công nợ cũ
+
+
+
+---
+
+14. Chức năng quản lý quỹ nâng cao
+
+14.1 Manual Adjustment (Điều chỉnh thủ công)
+
+Mục đích: xử lý các trường hợp đặc biệt như:
+
+nhập sai số tiền trước đó nhưng không muốn edit
+
+phát sinh tiền lời, tiền tip, tiền trả lại
+
+
+Input:
+
+amount
+
+fromEntity
+
+toEntity
+
+description
+
+
+Ví dụ:
+
+Quỹ nhặt được 50k (bonus) → Adjustment: External → Fund
+
+Quỹ bị mất 20k → Fund → External
+
+
+Hệ thống nên có entity đặc biệt "External".
+
+
+---
+
+15. Phân loại giao dịch (Category/Tag)
+
+15.1 Mục đích
+
+Giúp thống kê theo loại chi tiêu.
+
+Category ví dụ:
+
+Ăn uống
+
+Di chuyển
+
+Vé tham quan
+
+Khách sạn
+
+Mua sắm
+
+Khác
+
+
+Input thêm:
+
+categoryId (optional)
+
+
+
+---
+
+16. Tìm kiếm và lọc dữ liệu (Search & Filter)
+
+Hệ thống cần hỗ trợ lọc theo:
+
+khoảng thời gian
+
+category
+
+người chi trả
+
+người tham gia
+
+giá trị min/max
+
+keyword trong description
+
+
+
+---
+
+17. Báo cáo & thống kê (Reports)
+
+17.1 Báo cáo tổng quan quỹ
+
+tổng đóng quỹ
+
+tổng chi
+
+số dư hiện tại
+
+
+17.2 Báo cáo theo thành viên
+
+tổng số tiền đã ứng/đã đóng
+
+tổng số tiền hưởng lợi (tổng share)
+
+net nợ hoặc được nhận
+
+
+17.3 Báo cáo theo category
+
+tổng chi theo category
+
+tỷ trọng %
+
+
+17.4 Báo cáo theo ngày
+
+tổng chi mỗi ngày
+
+highlight ngày chi cao bất thường
+
+
+
+---
+
+18. Import / Export dữ liệu
+
+18.1 Export
+
+Cho phép export ra:
+
+Excel (xlsx)
+
+CSV
+
+
+Bao gồm:
+
+danh sách transaction
+
+ledger entries (optional)
+
+summary report
+
+
+18.2 Import
+
+Cho phép import từ Excel template. Rule:
+
+validate toàn bộ trước khi ghi DB
+
+nếu lỗi thì báo lỗi chi tiết từng dòng
+
+
+
+---
+
+19. Multi-currency (tuỳ chọn)
+
+19.1 Mục đích
+
+Du lịch nước ngoài có thể chi nhiều loại tiền.
+
+19.2 Rule đơn giản
+
+Mỗi transaction có:
+
+currency (VND, THB, USD,…)
+
+exchangeRateToBase (tỷ giá về base currency)
+
+baseAmount
+
+
+Hệ thống báo cáo theo base currency.
+
+Nếu không cần, có thể bỏ scope.
+
+
+---
+
+20. Audit log (Lịch sử thay đổi)
+
+20.1 Mục đích
+
+Biết ai đã sửa/xoá gì để tránh tranh cãi.
+
+20.2 Log ghi nhận
+
+userId
+
+action (CREATE/EDIT/DELETE)
+
+timestamp
+
+oldData/newData
+
+
+
+---
+
+21. Các edge cases quan trọng
+
+21.1 Transaction có participant trùng nhau
+
+Không cho phép.
+
+21.2 amount = 0 hoặc âm
+
+Không cho phép.
+
+21.3 Custom split sai tổng
+
+Không cho phép lưu.
+
+21.4 PaidBy là Fund nhưng Fund balance âm
+
+Tuỳ rule:
+
+Option A: cho phép âm (quỹ âm nghĩa là đang thiếu tiền)
+
+Option B: không cho phép âm, bắt buộc đóng quỹ trước
+
+
+Khuyến nghị: cho phép âm, vì thực tế nhóm có thể chi trước đóng sau.
+
+21.5 Một người vừa là paidBy vừa là participant
+
+Hoàn toàn hợp lệ, net sẽ tự cân bằng.
+
+
+---
+
+22. Tóm tắt mô hình logic bắt buộc
+
+Hệ thống cần đảm bảo:
+
+Expense luôn tạo ra nghĩa vụ participants trả quỹ
+
+Contribution luôn làm tăng balance quỹ và giảm nghĩa vụ member nợ quỹ
+
+PaidBy member trong expense tương đương:
+
+member cho quỹ vay
+
+quỹ chi ra ngay lập tức
+
+
+Tất cả đều phải truy vết được qua ledger
+
