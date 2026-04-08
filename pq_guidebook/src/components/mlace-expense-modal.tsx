@@ -218,12 +218,12 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                         <TableCell className="text-right text-cyan-400 text-lg font-bold lg:hidden">
                           {formatShort(data.total)}
                         </TableCell>
+                        {/* Desktop: Tổng cộng label spans first 6 columns */}
+                        <TableCell colSpan={6} className="text-right pr-4 text-cyan-300 hidden lg:table-cell">TỔNG CỘNG:</TableCell>
                         {/* Desktop: Total amount */}
                         <TableCell className="text-right text-cyan-400 text-lg font-bold hidden lg:table-cell">
                           {formatVND(data.total)}
                         </TableCell>
-                        {/* Desktop: Tổng cộng label spans first 6 columns */}
-                        <TableCell colSpan={6} className="text-right pr-4 text-cyan-300 hidden lg:table-cell">TỔNG CỘNG:</TableCell>
                         {/* Desktop: Empty cells for member columns */}
                         {MEMBER_NAMES.map((name) => (
                           <TableCell key={name} className="hidden lg:table-cell"></TableCell>

@@ -128,10 +128,11 @@ export function formatVND(amount: number): string {
 }
 
 export function formatShort(amount: number): string {
-  // Format to thousands with "k" suffix (e.g., 50000 -> "50k")
+  // Format to thousands with "k" suffix and dot separator (e.g., 6741000 -> "6.741k")
   if (amount >= 1000) {
     const thousands = Math.round(amount / 1000);
-    return `${thousands}k`;
+    const formatted = thousands.toLocaleString('vi-VN').replace(/\./g, '.');
+    return `${formatted}k`;
   }
   return amount.toString();
 }
