@@ -15,26 +15,25 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
   }
 
   const json = JSON.parse(jsonMatch[1]);
-  const cols = json.table.cols;
   const rows = json.table.rows;
 
-  // Find column indices
-  const descIdx = cols.findIndex((c: any) => c.label === 'Nội dung chi');
-  const amountIdx = cols.findIndex((c: any) => c.label === 'Số tiền');
-  const personIdx = cols.findIndex((c: any) => c.label === 'Người chi');
-  const countIdx = cols.findIndex((c: any) => c.label === 'Số người');
-  const perPersonIdx = cols.findIndex((c: any) => c.label === 'Tiền/người');
+  // Column indices (fixed based on sheet structure: A=0, B=1, C=2, D=3, E=4)
+  const DESC_IDX = 0; // Column A: Nội dung chi
+  const AMOUNT_IDX = 1; // Column B: Số tiền
+  const PERSON_IDX = 2; // Column C: Người chi
+  const COUNT_IDX = 3; // Column D: Số người
+  const PER_PERSON_IDX = 4; // Column E: Tiền/người
 
   // Parse rows into expense items
   const items: any[] = [];
   let total = 0;
 
   rows.forEach((row: any) => {
-    const description = row.c[descIdx]?.v || '';
-    const amount = row.c[amountIdx]?.v || 0;
-    const person = row.c[personIdx]?.v || '';
-    const count = row.c[countIdx]?.v || 0;
-    const perPerson = row.c[perPersonIdx]?.v || 0;
+    const description = row.c[DESC_IDX]?.v || '';
+    const amount = row.c[AMOUNT_IDX]?.v || 0;
+    const person = row.c[PERSON_IDX]?.v || '';
+    const count = row.c[COUNT_IDX]?.v || 0;
+    const perPerson = row.c[PER_PERSON_IDX]?.v || 0;
 
     // Skip header row and empty rows
     if (description && amount) {
