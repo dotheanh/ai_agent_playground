@@ -46,7 +46,7 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
   // Row 1: "Số tiền cuối phải trả của mỗi người"
   // Row 2: "Số tiền đóng quỹ"
   // Row 3: "Số tiền đã chi/ứng trước"
-  // Row 4: "Tổng chi phí"
+  // Row 4: "Chi phí"
   const memberData: Record<string, { toPay?: number; fund?: number; advance?: number; total?: number }> = {};
   MEMBER_NAMES.forEach(name => { memberData[name] = {}; });
 

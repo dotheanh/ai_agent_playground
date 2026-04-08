@@ -63,7 +63,7 @@ export interface MemberSummary {
   toPay: number; // Số tiền cuối phải trả
   fundContribution: number; // Số tiền đóng quỹ
   advancePayment: number; // Số tiền đã chi/ứng trước
-  totalExpense: number; // Tổng chi phí
+  totalExpense: number; // Chi phí
 }
 
 export interface ExpenseData {

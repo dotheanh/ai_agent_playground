@@ -98,10 +98,14 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
           .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #475569;
           }
-          /* Hide vertical scrollbar by default, show on hover for mobile */
+          /* Hide vertical scrollbar by default, show on scroll for mobile */
           @media (max-width: 768px) {
             .custom-scrollbar-y::-webkit-scrollbar-thumb {
               background: transparent;
+              transition: background 0.3s;
+            }
+            .custom-scrollbar-y:active::-webkit-scrollbar-thumb {
+              background: #334155;
             }
             .custom-scrollbar-y:hover::-webkit-scrollbar-thumb {
               background: #334155;
@@ -148,32 +152,26 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                       {data.items.map((item) => (
                         <React.Fragment key={item.stt}>
                           <TableRow
-                            className={`lg:hover:bg-gray-800/50 ${expandedRows.has(item.stt) ? 'bg-cyan-900' : ''}`}
-                            onClick={(e) => {
-                              // Only enable click-to-expand on mobile (not on desktop)
-                              if (window.innerWidth < 1024) {
-                                e.stopPropagation();
-                                toggleRow(item.stt);
-                              }
-                            }}
+                            className={`cursor-pointer lg:cursor-default lg:hover:bg-gray-800/50 ${expandedRows.has(item.stt) ? 'bg-cyan-900' : ''}`}
+                            onClick={() => toggleRow(item.stt)}
                           >
-                            <TableCell className="font-medium text-gray-400 lg:cursor-default cursor-pointer">{item.stt}</TableCell>
+                            <TableCell className="font-medium text-gray-400">{item.stt}</TableCell>
                             <TableCell
-                              className="text-gray-200 lg:cursor-default cursor-pointer"
+                              className="text-gray-200"
                               title={item.description}
                             >
                               {/* Mobile: truncate to 15 chars, Desktop: full text */}
                               <span className="block lg:hidden">{truncateText(item.description, 15)}</span>
                               <span className="hidden lg:inline">{item.description}</span>
                             </TableCell>
-                            <TableCell className="text-right font-semibold text-cyan-400 lg:cursor-default cursor-pointer">
+                            <TableCell className="text-right font-semibold text-cyan-400">
                               {/* Mobile: use formatShort, Desktop: use formatVND */}
                               <span className="block lg:hidden">{formatShort(item.amount)}</span>
                               <span className="hidden lg:inline">{formatVND(item.amount)}</span>
                             </TableCell>
-                            <TableCell className="text-gray-300 hidden md:table-cell lg:cursor-default cursor-pointer">{item.person}</TableCell>
-                            <TableCell className="text-right text-gray-400 hidden md:table-cell lg:cursor-default cursor-pointer">{item.count}</TableCell>
-                            <TableCell className="text-right text-gray-400 hidden md:table-cell lg:cursor-default cursor-pointer">
+                            <TableCell className="text-gray-300 hidden md:table-cell">{item.person}</TableCell>
+                            <TableCell className="text-right text-gray-400 hidden md:table-cell">{item.count}</TableCell>
+                            <TableCell className="text-right text-gray-400 hidden md:table-cell">
                               {/* Mobile: use formatShort, Desktop: use formatVND */}
                               <span className="block lg:hidden">{formatShort(item.perPerson)}</span>
                               <span className="hidden lg:inline">{formatVND(item.perPerson)}</span>
@@ -247,7 +245,7 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                         <TableHead className="text-right text-cyan-300">Dư nợ</TableHead>
                         <TableHead className="text-right text-cyan-300 hidden sm:table-cell">Số tiền đóng quỹ</TableHead>
                         <TableHead className="text-right text-cyan-300 hidden sm:table-cell">Số tiền đã chi/ứng trước</TableHead>
-                        <TableHead className="text-right text-cyan-300">Tổng chi phí</TableHead>
+                        <TableHead className="text-right text-cyan-300">Chi phí</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -255,8 +253,8 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                         <TableRow key={member.name} className={idx % 2 === 0 ? 'bg-gray-800/30' : ''}>
                           <TableCell className="font-semibold text-cyan-300">{member.name}</TableCell>
                           <TableCell className="text-right text-gray-200">
-                            {/* Mobile: formatShort, Desktop: formatVND */}
-                            <span className="block lg:hidden">{formatShort(member.toPay)}</span>
+                            {/* Mobile: formatShort with abs, Desktop: formatVND */}
+                            <span className="block lg:hidden">{formatShort(Math.abs(member.toPay))}</span>
                             <span className="hidden lg:inline">{formatVND(member.toPay)}</span>
                           </TableCell>
                           <TableCell className="text-right text-gray-400 hidden sm:table-cell">
