@@ -80,7 +80,7 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="w-full !max-w-[85vw] max-h-[90vh] overflow-hidden flex flex-col bg-gray-900 border-cyan-500/30" showCloseButton>
+      <DialogContent className="w-full !max-w-[85vw] max-h-[90vh] overflow-hidden flex flex-col bg-gray-900 border-cyan-500/30 mobile-zoom-in" showCloseButton>
         <DialogHeader>
           <DialogTitle className="text-xl text-cyan-400">📊 Chi tiêu team #mlace</DialogTitle>
         </DialogHeader>
@@ -112,6 +112,20 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
             }
             .custom-scrollbar-y:hover::-webkit-scrollbar-thumb {
               background: #334155;
+            }
+            /* Zoom in from top-right corner on mobile */
+            .mobile-zoom-in[data-state="open"] {
+              animation: zoomInFromTopRight 0.3s ease-out;
+            }
+            @keyframes zoomInFromTopRight {
+              from {
+                opacity: 0;
+                transform: translate(50%, -50%) scale(0.9) translate(100px, -100px);
+              }
+              to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+              }
             }
           }
         `}</style>
@@ -258,8 +272,8 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                         <TableRow key={member.name} className={idx % 2 === 0 ? 'bg-gray-800/30' : ''}>
                           <TableCell className="font-semibold text-cyan-300">{member.name}</TableCell>
                           <TableCell className="text-right text-gray-200">
-                            {/* Mobile: formatShort with abs, Desktop: formatVND */}
-                            <span className="block lg:hidden">{formatShort(Math.abs(member.toPay))}</span>
+                            {/* Mobile: formatShort, Desktop: formatVND */}
+                            <span className="block lg:hidden">{formatShort(member.toPay)}</span>
                             <span className="hidden lg:inline">{formatVND(member.toPay)}</span>
                           </TableCell>
                           <TableCell className="text-right text-gray-400 hidden sm:table-cell">
