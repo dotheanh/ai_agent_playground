@@ -48,14 +48,14 @@ export interface ExpenseItem {
   person: string;
   count: number;
   perPerson: number;
-  // Member participation (columns F-L)
-  binh?: boolean;
-  nhi?: boolean;
-  tan?: boolean;
-  thuan?: boolean;
-  trieu?: boolean;
-  theAnh?: boolean;
-  vy?: boolean;
+  // Member participation (columns F-L) - can be boolean or number
+  binh?: boolean | number;
+  nhi?: boolean | number;
+  tan?: boolean | number;
+  thuan?: boolean | number;
+  trieu?: boolean | number;
+  theAnh?: boolean | number;
+  vy?: boolean | number;
 }
 
 export interface MemberSummary {

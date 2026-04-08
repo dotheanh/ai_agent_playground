@@ -61,14 +61,22 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
         perPerson: row.c[COL.PER_PERSON]?.v || 0,
       };
 
-      // Parse member participation
-      item.binh = row.c[COL.BINH]?.v === true;
-      item.nhi = row.c[COL.NHI]?.v === true;
-      item.tan = row.c[COL.TAN]?.v === true;
-      item.thuan = row.c[COL.THUAN]?.v === true;
-      item.trieu = row.c[COL.TRIEU]?.v === true;
-      item.theAnh = row.c[COL.THE_ANH]?.v === true;
-      item.vy = row.c[COL.VY]?.v === true;
+      // Parse member participation (can be boolean or number)
+      const binhVal = row.c[COL.BINH]?.v;
+      const nhiVal = row.c[COL.NHI]?.v;
+      const tanVal = row.c[COL.TAN]?.v;
+      const thuanVal = row.c[COL.THUAN]?.v;
+      const trieuVal = row.c[COL.TRIEU]?.v;
+      const theAnhVal = row.c[COL.THE_ANH]?.v;
+      const vyVal = row.c[COL.VY]?.v;
+
+      item.binh = binhVal !== undefined && binhVal !== null ? binhVal : false;
+      item.nhi = nhiVal !== undefined && nhiVal !== null ? nhiVal : false;
+      item.tan = tanVal !== undefined && tanVal !== null ? tanVal : false;
+      item.thuan = thuanVal !== undefined && thuanVal !== null ? thuanVal : false;
+      item.trieu = trieuVal !== undefined && trieuVal !== null ? trieuVal : false;
+      item.theAnh = theAnhVal !== undefined && theAnhVal !== null ? theAnhVal : false;
+      item.vy = vyVal !== undefined && vyVal !== null ? vyVal : false;
 
       items.push(item);
       total += amount;
@@ -118,4 +126,13 @@ export function formatVND(amount: number): string {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
   }).format(amount);
+}
+
+export function formatShort(amount: number): string {
+  // Format to thousands with "k" suffix (e.g., 50000 -> "50k")
+  if (amount >= 1000) {
+    const thousands = Math.round(amount / 1000);
+    return `${thousands}k`;
+  }
+  return amount.toString();
 }

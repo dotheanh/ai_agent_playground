@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useExpenseData } from '@/hooks/use-expense-data';
-import { formatVND } from '@/lib/google-sheets-expense-fetcher';
+import { formatVND, formatShort } from '@/lib/google-sheets-expense-fetcher';
 import { Loader2 } from 'lucide-react';
 import { Check, X } from 'lucide-react';
 
@@ -29,12 +29,15 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
     }
   }, [open, data, fetchData]);
 
-  const getParticipationCell = (value?: boolean) => {
+  const getParticipationCell = (value?: boolean | number) => {
     if (value === true) {
       return <Check className="w-4 h-4 text-green-500" />;
     }
     if (value === false) {
       return <X className="w-4 h-4 text-gray-500" />;
+    }
+    if (typeof value === 'number' && value !== 0) {
+      return <span className="text-cyan-400 font-medium">{formatShort(value)}</span>;
     }
     return <span className="text-gray-500">-</span>;
   };
