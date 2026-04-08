@@ -142,11 +142,15 @@ export function formatVND(amount: number): string {
 }
 
 export function formatShort(amount: number): string {
+  // Handle negative numbers
+  const isNegative = amount < 0;
+  const absAmount = Math.abs(amount);
+
   // Format to thousands with "k" suffix and dot separator (e.g., 6741000 -> "6.741k")
-  if (amount >= 1000) {
-    const thousands = Math.round(amount / 1000);
+  if (absAmount >= 1000) {
+    const thousands = Math.round(absAmount / 1000);
     const formatted = thousands.toLocaleString('vi-VN').replace(/\./g, '.');
-    return `${formatted}k`;
+    return `${isNegative ? '-' : ''}${formatted}k`;
   }
   return amount.toString();
 }
