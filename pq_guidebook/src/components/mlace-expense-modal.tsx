@@ -55,6 +55,20 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
     return <span className="text-gray-500">-</span>;
   };
 
+  // Mobile-specific: show perPerson amount if true, X if false
+  const getMobileParticipationCell = (value?: boolean | number, perPerson?: number) => {
+    if (value === true && perPerson !== undefined) {
+      return <span className="text-cyan-400 font-medium">{formatShort(perPerson)}</span>;
+    }
+    if (value === false) {
+      return <X className="w-4 h-4 text-gray-500" />;
+    }
+    if (typeof value === 'number' && value !== 0) {
+      return <span className="text-cyan-400 font-medium">{formatShort(value)}</span>;
+    }
+    return <span className="text-gray-500">-</span>;
+  };
+
   // Truncate description to 15 chars for mobile
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
@@ -134,7 +148,7 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                       {data.items.map((item) => (
                         <React.Fragment key={item.stt}>
                           <TableRow
-                            className={`lg:hover:bg-gray-800/50 ${expandedRows.has(item.stt) ? 'bg-cyan-950/30' : ''}`}
+                            className={`lg:hover:bg-gray-800/50 ${expandedRows.has(item.stt) ? 'bg-cyan-900' : ''}`}
                             onClick={(e) => {
                               // Only enable click-to-expand on mobile (not on desktop)
                               if (window.innerWidth < 1024) {
@@ -153,12 +167,16 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                               <span className="hidden lg:inline">{item.description}</span>
                             </TableCell>
                             <TableCell className="text-right font-semibold text-cyan-400 lg:cursor-default cursor-pointer">
-                              {formatVND(item.amount)}
+                              {/* Mobile: use formatShort, Desktop: use formatVND */}
+                              <span className="block lg:hidden">{formatShort(item.amount)}</span>
+                              <span className="hidden lg:inline">{formatVND(item.amount)}</span>
                             </TableCell>
                             <TableCell className="text-gray-300 hidden md:table-cell lg:cursor-default cursor-pointer">{item.person}</TableCell>
                             <TableCell className="text-right text-gray-400 hidden md:table-cell lg:cursor-default cursor-pointer">{item.count}</TableCell>
                             <TableCell className="text-right text-gray-400 hidden md:table-cell lg:cursor-default cursor-pointer">
-                              {formatVND(item.perPerson)}
+                              {/* Mobile: use formatShort, Desktop: use formatVND */}
+                              <span className="block lg:hidden">{formatShort(item.perPerson)}</span>
+                              <span className="hidden lg:inline">{formatVND(item.perPerson)}</span>
                             </TableCell>
                             {/* Desktop: Show all member participation - each in separate cell */}
                             {MEMBER_KEYS.map((key, idx) => {
@@ -184,8 +202,8 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                                         <div></div>
                                         {/* Name in description column */}
                                         <span className="text-gray-400">{MEMBER_NAMES[idx]}</span>
-                                        {/* Amount aligned with "Số tiền" column */}
-                                        <span className="text-cyan-400 text-right">{getParticipationCell(value)}</span>
+                                        {/* Amount aligned with "Số tiền" column - use perPerson if true */}
+                                        <span className="text-right">{getMobileParticipationCell(value, item.perPerson)}</span>
                                       </div>
                                     );
                                   })}
@@ -200,14 +218,14 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                         <TableCell colSpan={2} className="text-right pr-4 text-cyan-300 lg:hidden">TỔNG CỘNG:</TableCell>
                         {/* Mobile: Total amount */}
                         <TableCell className="text-right text-cyan-400 text-lg font-bold lg:hidden">
-                          {formatVND(data.total)}
+                          {formatShort(data.total)}
                         </TableCell>
-                        {/* Desktop: Tổng cộng label spans first 6 columns */}
-                        <TableCell colSpan={6} className="text-right pr-4 text-cyan-300 hidden lg:table-cell">TỔNG CỘNG:</TableCell>
                         {/* Desktop: Total amount */}
                         <TableCell className="text-right text-cyan-400 text-lg font-bold hidden lg:table-cell">
                           {formatVND(data.total)}
                         </TableCell>
+                        {/* Desktop: Tổng cộng label spans first 6 columns */}
+                        <TableCell colSpan={6} className="text-right pr-4 text-cyan-300 hidden lg:table-cell">TỔNG CỘNG:</TableCell>
                         {/* Desktop: Empty cells for member columns */}
                         {MEMBER_NAMES.map((name) => (
                           <TableCell key={name} className="hidden lg:table-cell"></TableCell>
@@ -226,7 +244,7 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                     <TableHeader>
                       <TableRow className="bg-cyan-950/50 hover:bg-cyan-950/50">
                         <TableHead className="text-cyan-300 min-w-[100px]">Thành viên</TableHead>
-                        <TableHead className="text-right text-cyan-300">Số tiền cuối phải trả</TableHead>
+                        <TableHead className="text-right text-cyan-300">Dư nợ</TableHead>
                         <TableHead className="text-right text-cyan-300 hidden sm:table-cell">Số tiền đóng quỹ</TableHead>
                         <TableHead className="text-right text-cyan-300 hidden sm:table-cell">Số tiền đã chi/ứng trước</TableHead>
                         <TableHead className="text-right text-cyan-300">Tổng chi phí</TableHead>
@@ -236,10 +254,23 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                       {data.members.map((member, idx) => (
                         <TableRow key={member.name} className={idx % 2 === 0 ? 'bg-gray-800/30' : ''}>
                           <TableCell className="font-semibold text-cyan-300">{member.name}</TableCell>
-                          <TableCell className="text-right text-gray-200">{formatVND(member.toPay)}</TableCell>
-                          <TableCell className="text-right text-gray-400 hidden sm:table-cell">{formatVND(member.fundContribution)}</TableCell>
-                          <TableCell className="text-right text-gray-400 hidden sm:table-cell">{formatVND(member.advancePayment)}</TableCell>
-                          <TableCell className="text-right font-semibold text-cyan-400">{formatVND(member.totalExpense)}</TableCell>
+                          <TableCell className="text-right text-gray-200">
+                            {/* Mobile: formatShort, Desktop: formatVND */}
+                            <span className="block lg:hidden">{formatShort(member.toPay)}</span>
+                            <span className="hidden lg:inline">{formatVND(member.toPay)}</span>
+                          </TableCell>
+                          <TableCell className="text-right text-gray-400 hidden sm:table-cell">
+                            <span className="block lg:hidden">{formatShort(member.fundContribution)}</span>
+                            <span className="hidden lg:inline">{formatVND(member.fundContribution)}</span>
+                          </TableCell>
+                          <TableCell className="text-right text-gray-400 hidden sm:table-cell">
+                            <span className="block lg:hidden">{formatShort(member.advancePayment)}</span>
+                            <span className="hidden lg:inline">{formatVND(member.advancePayment)}</span>
+                          </TableCell>
+                          <TableCell className="text-right font-semibold text-cyan-400">
+                            <span className="block lg:hidden">{formatShort(member.totalExpense)}</span>
+                            <span className="hidden lg:inline">{formatVND(member.totalExpense)}</span>
+                          </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
