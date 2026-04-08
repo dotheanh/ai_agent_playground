@@ -11,16 +11,13 @@ const COL = {
   PERSON: 2, // C: Người chi
   COUNT: 3, // D: Số người
   PER_PERSON: 4, // E: Tiền/người
-  BINH: 5, // F: Bình (number)
-  NHI: 6, // G: Nhi (boolean)
-  TAN: 7, // H: Tân (boolean)
-  THUAN: 8, // I: Thuận (boolean)
-  TRIEU: 9, // J: Triển (boolean)
-  THE_ANH: 10, // K: Thế Anh (number)
-  VY: 11, // L: Vy (boolean)
-  SUMMARY_LABEL: 12, // M: Label tổng hợp
-  UNUSED_N: 13, // N
-  SUMMARY_VALUE: 14, // O: Giá trị tổng hợp
+  BINH: 5, // F: Bình
+  NHI: 6, // G: Nhi
+  TAN: 7, // H: Tân
+  THUAN: 8, // I: Thuận
+  TRIEU: 9, // J: Triển
+  THE_ANH: 10, // K: Thế Anh
+  VY: 11, // L: Vy
 };
 
 const MEMBER_NAMES = ['Bình', 'Nhi', 'Tân', 'Thuận', 'Triển', 'Thế Anh', 'Vy'];
@@ -89,17 +86,18 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
       const summaryType = rowIndex - 1; // 0=toPay, 1=fund, 2=advance, 3=total
 
       // Parse all columns F-L (indices 5-11) for summary data
-      for (let colIdx = 5; colIdx <= 11; colIdx++) {
-        const memberName = MEMBER_NAMES[colIdx - 5];
+      // Handle both boolean and number values generically
+      for (let colIdx = COL.BINH; colIdx <= COL.VY; colIdx++) {
+        const memberName = MEMBER_NAMES[colIdx - COL.BINH];
         const cellValue = row.c[colIdx]?.v;
 
-        // Store any value that exists (number, boolean, or string)
-        if (cellValue !== undefined && cellValue !== null) {
+        // Only store number values for summary (skip booleans)
+        if (cellValue !== undefined && cellValue !== null && typeof cellValue === 'number') {
           switch (summaryType) {
-            case 0: memberData[memberName].toPay = cellValue as number; break;
-            case 1: memberData[memberName].fund = cellValue as number; break;
-            case 2: memberData[memberName].advance = cellValue as number; break;
-            case 3: memberData[memberName].total = cellValue as number; break;
+            case 0: memberData[memberName].toPay = cellValue; break;
+            case 1: memberData[memberName].fund = cellValue; break;
+            case 2: memberData[memberName].advance = cellValue; break;
+            case 3: memberData[memberName].total = cellValue; break;
           }
         }
       }
