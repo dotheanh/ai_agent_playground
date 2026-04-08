@@ -183,8 +183,10 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                             {MEMBER_KEYS.map((key, idx) => {
                               const value = (item as unknown as Record<string, boolean | number>)[key];
                               return (
-                                <TableCell key={key} className="text-center hidden lg:table-cell flex items-center justify-center" title={MEMBER_NAMES[idx]}>
-                                  {getParticipationCell(value)}
+                                <TableCell key={key} className="text-center hidden lg:table-cell" title={MEMBER_NAMES[idx]}>
+                                  <div className="flex items-center justify-center h-full">
+                                    {getParticipationCell(value)}
+                                  </div>
                                 </TableCell>
                               );
                             })}
