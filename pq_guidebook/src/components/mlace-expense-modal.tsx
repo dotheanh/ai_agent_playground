@@ -178,19 +178,25 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                           {expandedRows.has(item.stt) && (
                             <TableRow className="bg-gray-800/50">
                               <TableCell colSpan={8} className="p-0">
-                                <div className="p-3 border-t border-gray-700">
-                                  {/* Member details - one per row */}
-                                  <div className="space-y-1">
-                                    {MEMBER_KEYS.map((key, idx) => {
-                                      const value = (item as any)[key];
-                                      return (
-                                        <div key={key} className="flex justify-between items-center py-1">
+                                <div className="border-t border-gray-700">
+                                  {/* Member details - one per row, aligned with table columns */}
+                                  {MEMBER_KEYS.map((key, idx) => {
+                                    const value = (item as unknown as Record<string, boolean | number>)[key];
+                                    return (
+                                      <div key={key} className="flex items-center py-2">
+                                        {/* Empty space for STT column */}
+                                        <div className="w-8 flex-shrink-0"></div>
+                                        {/* Name takes up description space */}
+                                        <div className="flex-1 pr-4">
                                           <span className="text-gray-400">{MEMBER_NAMES[idx]}</span>
+                                        </div>
+                                        {/* Amount aligned with "Số tiền" column */}
+                                        <div className="text-right flex-shrink-0 min-w-[80px]">
                                           <span className="text-cyan-400">{getParticipationCell(value)}</span>
                                         </div>
-                                      );
-                                    })}
-                                  </div>
+                                      </div>
+                                    );
+                                  })}
                                 </div>
                               </TableCell>
                             </TableRow>
