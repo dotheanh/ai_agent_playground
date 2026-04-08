@@ -24,16 +24,6 @@ const COL = {
 };
 
 const MEMBER_NAMES = ['Bình', 'Nhi', 'Tân', 'Thuận', 'Triển', 'Thế Anh', 'Vy'];
-// Member column indices for summary data (F-L = indices 5-11)
-const MEMBER_COL_MAP = {
-  'Bình': COL.BINH, // F (number)
-  'Nhi': COL.NHI, // G (boolean)
-  'Tân': COL.TAN, // H (boolean)
-  'Thuận': COL.THUAN, // I (boolean)
-  'Triển': COL.TRIEU, // J (boolean)
-  'Thế Anh': COL.THE_ANH, // K (number)
-  'Vy': COL.VY, // L (boolean)
-};
 
 export async function fetchExpenseData(): Promise<ExpenseData> {
   const response = await fetch(URL);
@@ -98,20 +88,21 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
       // Summary rows (rows 1-4): parse data from columns F-L for all members
       const summaryType = rowIndex - 1; // 0=toPay, 1=fund, 2=advance, 3=total
 
-      MEMBER_NAMES.forEach((name) => {
-        const colIdx = (MEMBER_COL_MAP as any)[name];
+      // Parse all columns F-L (indices 5-11) for summary data
+      for (let colIdx = 5; colIdx <= 11; colIdx++) {
+        const memberName = MEMBER_NAMES[colIdx - 5];
         const cellValue = row.c[colIdx]?.v;
 
-        // Only store if value exists and is a number
-        if (cellValue !== undefined && cellValue !== null && typeof cellValue === 'number') {
+        // Store any value that exists (number, boolean, or string)
+        if (cellValue !== undefined && cellValue !== null) {
           switch (summaryType) {
-            case 0: memberData[name].toPay = cellValue; break;
-            case 1: memberData[name].fund = cellValue; break;
-            case 2: memberData[name].advance = cellValue; break;
-            case 3: memberData[name].total = cellValue; break;
+            case 0: memberData[memberName].toPay = cellValue as number; break;
+            case 1: memberData[memberName].fund = cellValue as number; break;
+            case 2: memberData[memberName].advance = cellValue as number; break;
+            case 3: memberData[memberName].total = cellValue as number; break;
           }
         }
-      });
+      }
     }
   });
 
