@@ -26,6 +26,8 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
   const response = await fetch(URL);
   const text = await response.text();
 
+  console.log('Google Sheets Raw Response:', text);
+
   // Parse Google Sheets JSON response (wrapped in callback)
   const jsonMatch = text.match(/google\.visualization\.Query\.setResponse\((.*)\)/);
   if (!jsonMatch) {
@@ -33,6 +35,7 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
   }
 
   const json = JSON.parse(jsonMatch[1]);
+  console.log('Google Sheets Parsed JSON:', JSON.stringify(json, null, 2));
   const rows = json.table.rows;
 
   // Parse expense items (rows with description and amount in column B)
