@@ -156,16 +156,15 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                             <TableCell className="text-right text-gray-400 hidden md:table-cell cursor-pointer lg:cursor-default">
                               {formatVND(item.perPerson)}
                             </TableCell>
-                            {/* Desktop: Show all member participation */}
-                            <TableCell className="text-center hidden lg:table-cell">
-                              <div className="flex justify-center gap-1">
-                                {MEMBER_KEYS.map((key) => (
-                                  <span key={key} className="inline-block" title={MEMBER_NAMES[MEMBER_KEYS.indexOf(key)]}>
-                                    {getParticipationCell((item as any)[key])}
-                                  </span>
-                                ))}
-                              </div>
-                            </TableCell>
+                            {/* Desktop: Show all member participation - each in separate cell */}
+                            {MEMBER_KEYS.map((key, idx) => {
+                              const value = (item as unknown as Record<string, boolean | number>)[key];
+                              return (
+                                <TableCell key={key} className="text-center hidden lg:table-cell" title={MEMBER_NAMES[idx]}>
+                                  {getParticipationCell(value)}
+                                </TableCell>
+                              );
+                            })}
                             {/* Mobile: Show expand arrow */}
                             <TableCell className="text-center lg:hidden">
                               {expandedRows.has(item.stt) ? (
@@ -180,11 +179,6 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                             <TableRow className="bg-gray-800/50">
                               <TableCell colSpan={8} className="p-0">
                                 <div className="p-3 border-t border-gray-700">
-                                  {/* Full description on expand */}
-                                  <div className="mb-3 pb-2 border-b border-gray-700">
-                                    <span className="text-gray-400 text-sm">Nội dung: </span>
-                                    <span className="text-gray-200">{item.description}</span>
-                                  </div>
                                   {/* Member details - one per row */}
                                   <div className="space-y-1">
                                     {MEMBER_KEYS.map((key, idx) => {
@@ -209,8 +203,8 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                           {formatVND(data.total)}
                         </TableCell>
                         {/* Desktop: Empty cells for member columns */}
-                        {MEMBER_NAMES.map(() => (
-                          <TableCell key={Math.random()} className="hidden lg:table-cell"></TableCell>
+                        {MEMBER_NAMES.map((name) => (
+                          <TableCell key={name} className="hidden lg:table-cell"></TableCell>
                         ))}
                         <TableCell className="lg:hidden"></TableCell>
                       </TableRow>
