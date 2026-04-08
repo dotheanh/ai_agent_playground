@@ -88,18 +88,32 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
       const summaryType = rowIndex - 1; // 0=toPay, 1=fund, 2=advance, 3=total
 
       // Parse all columns F-L (indices 5-11) for summary data
-      // Handle both boolean and number values generically
+      // Handle both number and string-formatted numbers (e.g., "-630.128")
       for (let colIdx = COL.BINH; colIdx <= COL.VY; colIdx++) {
         const memberName = MEMBER_NAMES[colIdx - COL.BINH];
         const cellValue = row.c[colIdx]?.v;
 
-        // Only store number values for summary (skip booleans)
-        if (cellValue !== undefined && cellValue !== null && typeof cellValue === 'number') {
+        // Parse value - can be number or string (e.g., "-630.128")
+        let numericValue: number | null = null;
+
+        if (typeof cellValue === 'number') {
+          // Already a number
+          numericValue = cellValue;
+        } else if (typeof cellValue === 'string' && cellValue.trim() !== '') {
+          // String formatted number (e.g., "-630.128" or "1.020.767")
+          // Remove dots and parse
+          const cleaned = cellValue.replace(/\./g, '').replace(/,/g, '');
+          numericValue = parseFloat(cleaned);
+          if (isNaN(numericValue)) numericValue = null;
+        }
+
+        // Store if we got a valid number
+        if (numericValue !== null) {
           switch (summaryType) {
-            case 0: memberData[memberName].toPay = cellValue; break;
-            case 1: memberData[memberName].fund = cellValue; break;
-            case 2: memberData[memberName].advance = cellValue; break;
-            case 3: memberData[memberName].total = cellValue; break;
+            case 0: memberData[memberName].toPay = numericValue; break;
+            case 1: memberData[memberName].fund = numericValue; break;
+            case 2: memberData[memberName].advance = numericValue; break;
+            case 3: memberData[memberName].total = numericValue; break;
           }
         }
       }
