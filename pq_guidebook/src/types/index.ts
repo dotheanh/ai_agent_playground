@@ -39,3 +39,18 @@ export interface ImageCarouselProps {
   images: string[];
   title: string;
 }
+
+// MLACE Expense Modal Types
+export interface ExpenseItem {
+  stt: number;
+  description: string;
+  amount: number;
+  person: string;
+  count: number;
+  perPerson: number;
+}
+
+export interface ExpenseData {
+  items: ExpenseItem[];
+  total: number;
+}

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { MapPin, Calendar, Clock } from 'lucide-react';
+import { MapPin, Calendar, Clock, TrendingUp } from 'lucide-react';
+import { MLACEExpenseModal } from './mlace-expense-modal';
 
 const Header = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -30,48 +32,59 @@ const Header = () => {
   };
 
   return (
-    <header className="h-16 lg:h-20 glass-card border-b border-cyan-500/20 sticky top-0 z-50">
-      <div className="h-full max-w-full px-3 lg:px-8 flex items-center justify-between">
-        {/* Left - Clock and Date */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
-          {/* Real-time Clock */}
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 lg:w-5 lg:h-5 text-cyan-400" />
-            <span className="clock-display hidden sm:inline text-sm lg:text-base">
-              {formatTime(currentTime)}
-            </span>
-            <span className="text-sm lg:text-lg font-mono font-bold text-cyan-400 sm:hidden">
-              {currentTime.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false })}
-            </span>
-          </div>
-          
-          {/* Current Date */}
-          <div className="flex items-center gap-2 text-cream/80">
-            <Calendar className="w-3 h-3 lg:w-4 lg:h-4" />
-            <span className="text-xs lg:text-sm font-medium">
-              {formatDate(currentTime)}
-            </span>
-          </div>
-        </div>
+    <>
+      <header className="h-16 lg:h-20 glass-card border-b border-cyan-500/20 sticky top-0 z-50">
+        <div className="h-full max-w-full px-3 lg:px-8 flex items-center justify-between">
+          {/* Left - Clock and Date */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
+            {/* Real-time Clock */}
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 lg:w-5 lg:h-5 text-cyan-400" />
+              <span className="clock-display hidden sm:inline text-sm lg:text-base">
+                {formatTime(currentTime)}
+              </span>
+              <span className="text-sm lg:text-lg font-mono font-bold text-cyan-400 sm:hidden">
+                {currentTime.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false })}
+              </span>
+            </div>
 
-        {/* Center - Title */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 text-center">
-          <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Phú Quốc Trip
-          </h1>
-          <p className="text-xs text-cream/60 hidden sm:block">09 - 11/04/2026</p>
-        </div>
-
-        {/* Right - Location */}
-        <div className="flex flex-col items-end text-cream/70">
-          <div className="flex items-center gap-2">
-            <MapPin className="w-3 h-3 lg:w-4 lg:h-4 text-cyan-400" />
-            <span className="text-xs lg:text-sm">Việt Nam</span>
+            {/* Current Date */}
+            <div className="flex items-center gap-2 text-cream/80">
+              <Calendar className="w-3 h-3 lg:w-4 lg:h-4" />
+              <span className="text-xs lg:text-sm font-medium">
+                {formatDate(currentTime)}
+              </span>
+            </div>
           </div>
-          <span className="text-xs text-cyan-400/80">#mlace</span>
+
+          {/* Center - Title */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 text-center">
+            <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Phú Quốc Trip
+            </h1>
+            <p className="text-xs text-cream/60 hidden sm:block">09 - 11/04/2026</p>
+          </div>
+
+          {/* Right - Location */}
+          <div className="flex flex-col items-end text-cream/70">
+            <div className="flex items-center gap-2">
+              <MapPin className="w-3 h-3 lg:w-4 lg:h-4 text-cyan-400" />
+              <span className="text-xs lg:text-sm">Việt Nam</span>
+            </div>
+            <button
+              onClick={() => setModalOpen(true)}
+              className="group flex items-center gap-1 text-xs text-cyan-400/80 hover:text-cyan-400 transition-colors"
+              title="Xem chi tiêu team"
+            >
+              <TrendingUp className="w-3 h-3 group-hover:scale-110 transition-transform" />
+              <span className="font-mono">#mlace</span>
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      <MLACEExpenseModal open={modalOpen} onOpenChange={setModalOpen} />
+    </>
   );
 };
 
