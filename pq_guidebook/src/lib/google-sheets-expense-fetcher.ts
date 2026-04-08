@@ -1,7 +1,7 @@
 import type { ExpenseData, MemberSummary } from '@/types';
 
 const SHEET_ID = '1tMQ7wqwdHHxScqjKj9ssKJ2gq-cdJBPhPLZltH_YJs0';
-const GID = '1945875745';
+const GID = '1759569996';
 const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
 
 // Column indices (fixed based on sheet structure - 20 columns A-T)
@@ -65,22 +65,21 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
         perPerson: row.c[COL.PER_PERSON]?.v || 0,
       };
 
-      // Parse member participation (can be boolean or number)
-      const binhVal = row.c[COL.BINH]?.v;
-      const nhiVal = row.c[COL.NHI]?.v;
-      const tanVal = row.c[COL.TAN]?.v;
-      const thuanVal = row.c[COL.THUAN]?.v;
-      const trieuVal = row.c[COL.TRIEU]?.v;
-      const theAnhVal = row.c[COL.THE_ANH]?.v;
-      const vyVal = row.c[COL.VY]?.v;
+      // Parse member participation (new format: "x" = true, null/empty = false, number = actual amount)
+      const parseMemberValue = (val: unknown): boolean | number => {
+        if (val === null || val === undefined || val === '') return false;
+        if (val === 'x' || val === 'X') return true;
+        if (typeof val === 'number') return val;
+        return false;
+      };
 
-      item.binh = binhVal !== undefined && binhVal !== null ? binhVal : false;
-      item.nhi = nhiVal !== undefined && nhiVal !== null ? nhiVal : false;
-      item.tan = tanVal !== undefined && tanVal !== null ? tanVal : false;
-      item.thuan = thuanVal !== undefined && thuanVal !== null ? thuanVal : false;
-      item.trieu = trieuVal !== undefined && trieuVal !== null ? trieuVal : false;
-      item.theAnh = theAnhVal !== undefined && theAnhVal !== null ? theAnhVal : false;
-      item.vy = vyVal !== undefined && vyVal !== null ? vyVal : false;
+      item.binh = parseMemberValue(row.c[COL.BINH]?.v);
+      item.nhi = parseMemberValue(row.c[COL.NHI]?.v);
+      item.tan = parseMemberValue(row.c[COL.TAN]?.v);
+      item.thuan = parseMemberValue(row.c[COL.THUAN]?.v);
+      item.trieu = parseMemberValue(row.c[COL.TRIEU]?.v);
+      item.theAnh = parseMemberValue(row.c[COL.THE_ANH]?.v);
+      item.vy = parseMemberValue(row.c[COL.VY]?.v);
 
       items.push(item);
       total += amount;
