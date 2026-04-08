@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { useExpenseData } from '@/hooks/use-expense-data';
 import { formatVND, formatShort } from '@/lib/google-sheets-expense-fetcher';
 import { Loader2 } from 'lucide-react';
-import { Check, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 
 interface MLACEExpenseModalProps {
   open: boolean;
@@ -119,7 +119,7 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                     <TableHeader>
                       <TableRow className="bg-cyan-950/50 hover:bg-cyan-950/50">
                         <TableHead className="w-12 text-cyan-300">STT</TableHead>
-                        <TableHead className="text-cyan-300 min-w-[200px]">Nội dung chi</TableHead>
+                        <TableHead className="text-cyan-300 min-w-[120px]">Nội dung chi</TableHead>
                         <TableHead className="text-right text-cyan-300">Số tiền</TableHead>
                         <TableHead className="text-cyan-300 hidden md:table-cell">Người chi</TableHead>
                         <TableHead className="text-right text-cyan-300 hidden md:table-cell">Số người</TableHead>
@@ -128,32 +128,36 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                         {MEMBER_NAMES.map(member => (
                           <TableHead key={member} className="text-center text-cyan-300 hidden lg:table-cell">{member}</TableHead>
                         ))}
-                        {/* Mobile: Show expand button */}
-                        <TableHead className="w-12 lg:hidden"></TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {data.items.map((item) => (
                         <React.Fragment key={item.stt}>
                           <TableRow
-                            className={`hover:bg-gray-800/50 ${expandedRows.has(item.stt) ? 'bg-gray-800/30' : ''}`}
-                            onClick={() => toggleRow(item.stt)}
+                            className={`lg:hover:bg-gray-800/50 ${expandedRows.has(item.stt) ? 'bg-cyan-950/30' : ''}`}
+                            onClick={(e) => {
+                              // Only enable click-to-expand on mobile (not on desktop)
+                              if (window.innerWidth < 1024) {
+                                e.stopPropagation();
+                                toggleRow(item.stt);
+                              }
+                            }}
                           >
-                            <TableCell className="font-medium text-gray-400 cursor-pointer lg:cursor-default">{item.stt}</TableCell>
+                            <TableCell className="font-medium text-gray-400 lg:cursor-default cursor-pointer">{item.stt}</TableCell>
                             <TableCell
-                              className="text-gray-200 cursor-pointer lg:cursor-default"
+                              className="text-gray-200 lg:cursor-default cursor-pointer"
                               title={item.description}
                             >
                               {/* Mobile: truncate to 15 chars, Desktop: full text */}
                               <span className="block lg:hidden">{truncateText(item.description, 15)}</span>
                               <span className="hidden lg:inline">{item.description}</span>
                             </TableCell>
-                            <TableCell className="text-right font-semibold text-cyan-400 cursor-pointer lg:cursor-default">
+                            <TableCell className="text-right font-semibold text-cyan-400 lg:cursor-default cursor-pointer">
                               {formatVND(item.amount)}
                             </TableCell>
-                            <TableCell className="text-gray-300 hidden md:table-cell cursor-pointer lg:cursor-default">{item.person}</TableCell>
-                            <TableCell className="text-right text-gray-400 hidden md:table-cell cursor-pointer lg:cursor-default">{item.count}</TableCell>
-                            <TableCell className="text-right text-gray-400 hidden md:table-cell cursor-pointer lg:cursor-default">
+                            <TableCell className="text-gray-300 hidden md:table-cell lg:cursor-default cursor-pointer">{item.person}</TableCell>
+                            <TableCell className="text-right text-gray-400 hidden md:table-cell lg:cursor-default cursor-pointer">{item.count}</TableCell>
+                            <TableCell className="text-right text-gray-400 hidden md:table-cell lg:cursor-default cursor-pointer">
                               {formatVND(item.perPerson)}
                             </TableCell>
                             {/* Desktop: Show all member participation - each in separate cell */}
@@ -165,14 +169,6 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                                 </TableCell>
                               );
                             })}
-                            {/* Mobile: Show expand arrow */}
-                            <TableCell className="text-center lg:hidden">
-                              {expandedRows.has(item.stt) ? (
-                                <ChevronUp className="w-4 h-4 text-cyan-400 mx-auto" />
-                              ) : (
-                                <ChevronDown className="w-4 h-4 text-cyan-400 mx-auto" />
-                              )}
-                            </TableCell>
                           </TableRow>
                           {/* Mobile: Expanded row with member details */}
                           {expandedRows.has(item.stt) && (
