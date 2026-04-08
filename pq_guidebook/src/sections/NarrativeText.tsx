@@ -128,7 +128,7 @@ const NarrativeText = () => {
         <div className="space-y-8 md:space-y-10">
           <p
             ref={line1Ref}
-            className="font-display text-headline text-kaleo-earth"
+            className="font-sans text-headline text-kaleo-earth"
             style={{ willChange: 'transform, opacity' }}
           >
             {narrativeTextConfig.line1}
@@ -136,7 +136,7 @@ const NarrativeText = () => {
 
           <p
             ref={line2Ref}
-            className="font-display text-subheadline text-kaleo-earth/80 italic max-w-2xl mx-auto"
+            className="font-sans text-subheadline text-kaleo-earth/80 italic max-w-2xl mx-auto"
             style={{ willChange: 'transform, opacity' }}
           >
             {narrativeTextConfig.line2}

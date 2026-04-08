@@ -170,7 +170,7 @@ const Footer = () => {
           >
             {/* Left Column - CTA */}
             <div className="lg:col-span-5">
-              <h2 className="font-display text-headline text-kaleo-cream">
+              <h2 className="font-sans text-headline text-kaleo-cream">
                 {footerConfig.heading}
               </h2>
               <p className="font-body text-sm text-kaleo-cream/60 mt-6 max-w-md leading-relaxed">
@@ -277,10 +277,9 @@ const Footer = () => {
                   y="50%"
                   dominantBaseline="middle"
                   textAnchor="middle"
-                  className="font-display"
+                  className="font-sans"
                   style={{
                     fontSize: '72px',
-                    fontFamily: 'Cormorant Garamond, serif',
                     letterSpacing: '0.05em'
                   }}
                 >

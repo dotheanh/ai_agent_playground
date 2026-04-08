@@ -94,7 +94,7 @@ const BreathSection = () => {
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <h2
                 ref={textRef}
-                className="font-display text-display text-kaleo-cream tracking-tight"
+                className="font-sans text-display text-kaleo-cream tracking-tight"
                 style={{
                   willChange: 'transform, opacity',
                   textShadow: '0 4px 30px rgba(0,0,0,0.3)'

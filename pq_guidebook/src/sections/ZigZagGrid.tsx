@@ -101,7 +101,7 @@ const GridItem = ({
         <span className="font-body text-xs uppercase tracking-[0.2em] text-kaleo-terracotta">
           {item.subtitle}
         </span>
-        <h3 className="font-display text-headline text-kaleo-earth mt-3">
+        <h3 className="font-sans text-headline text-kaleo-earth mt-3">
           {item.title}
         </h3>
         <p className="font-body text-sm md:text-base text-kaleo-earth/70 leading-relaxed mt-6">

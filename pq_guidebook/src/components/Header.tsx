@@ -56,7 +56,7 @@ const Header = () => {
 
         {/* Center - Title */}
         <div className="absolute left-1/2 transform -translate-x-1/2 text-center">
-          <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent" style={{ fontFamily: "'Playfair Display', serif" }}>
             Phú Quốc Trip
           </h1>
           <p className="text-xs text-cream/60 hidden sm:block">09 - 11/04/2026</p>

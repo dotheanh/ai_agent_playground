@@ -85,7 +85,7 @@ const CardStack = () => {
     >
       {/* Section Header */}
       <div className="absolute top-0 left-0 right-0 py-12 md:py-16 text-center z-10">
-        <h2 className="font-display text-headline text-kaleo-earth">
+        <h2 className="font-sans text-headline text-kaleo-earth">
           {cardStackConfig.sectionTitle}
         </h2>
         <p className="font-body text-sm text-kaleo-terracotta uppercase tracking-[0.2em] mt-4">
@@ -123,7 +123,7 @@ const CardStack = () => {
 
                 {/* Card Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <h3 className="font-display text-2xl md:text-3xl text-kaleo-cream mb-2">
+                  <h3 className="font-sans text-2xl md:text-3xl text-kaleo-cream mb-2">
                     {card.title}
                   </h3>
                   <p className="font-body text-sm text-kaleo-cream/70">

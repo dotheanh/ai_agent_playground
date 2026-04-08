@@ -126,7 +126,7 @@ const Hero = () => {
         {/* Main Title */}
         <h1
           ref={titleRef}
-          className="font-display text-kaleo-cream text-display tracking-tight select-none"
+          className="font-sans text-kaleo-cream text-display tracking-tight select-none"
           style={{
             textShadow: '0 4px 30px rgba(0,0,0,0.3)',
             willChange: 'transform, opacity'
