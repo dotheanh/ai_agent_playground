@@ -4,23 +4,36 @@ const SHEET_ID = '1tMQ7wqwdHHxScqjKj9ssKJ2gq-cdJBPhPLZltH_YJs0';
 const GID = '1945875745';
 const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
 
-// Column indices (fixed based on sheet structure)
+// Column indices (fixed based on sheet structure - 20 columns A-T)
 const COL = {
   DESC: 0, // A: Nội dung chi
   AMOUNT: 1, // B: Số tiền
   PERSON: 2, // C: Người chi
   COUNT: 3, // D: Số người
   PER_PERSON: 4, // E: Tiền/người
-  BINH: 5, // F: Bình
-  NHI: 6, // G: Nhi
-  TAN: 7, // H: Tân
-  THUAN: 8, // I: Thuận
-  TRIEU: 9, // J: Triển
-  THE_ANH: 10, // K: Thế Anh
-  VY: 11, // L: Vy
+  BINH: 5, // F: Bình (number)
+  NHI: 6, // G: Nhi (boolean)
+  TAN: 7, // H: Tân (boolean)
+  THUAN: 8, // I: Thuận (boolean)
+  TRIEU: 9, // J: Triển (boolean)
+  THE_ANH: 10, // K: Thế Anh (number)
+  VY: 11, // L: Vy (boolean)
+  SUMMARY_LABEL: 12, // M: Label tổng hợp
+  UNUSED_N: 13, // N
+  SUMMARY_VALUE: 14, // O: Giá trị tổng hợp
 };
 
 const MEMBER_NAMES = ['Bình', 'Nhi', 'Tân', 'Thuận', 'Triển', 'Thế Anh', 'Vy'];
+// Member column indices for summary data (F-L = indices 5-11)
+const MEMBER_COL_MAP = {
+  'Bình': COL.BINH, // F (number)
+  'Nhi': COL.NHI, // G (boolean)
+  'Tân': COL.TAN, // H (boolean)
+  'Thuận': COL.THUAN, // I (boolean)
+  'Triển': COL.TRIEU, // J (boolean)
+  'Thế Anh': COL.THE_ANH, // K (number)
+  'Vy': COL.VY, // L (boolean)
+};
 
 export async function fetchExpenseData(): Promise<ExpenseData> {
   const response = await fetch(URL);
@@ -39,19 +52,15 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
   const items: any[] = [];
   let total = 0;
 
-  // Parse member summary data from summary rows (rows without description but with values in F or K)
-  // Summary section structure:
-  // Row 0: "Số tiền cuối phải trả của mỗi người" -> F=Bình, K=Thế Anh
-  // Row 1: "Số tiền đóng quỹ" -> K only
-  // Row 2: "Số tiền đã chi/ứng trước" -> F=Bình, K=Thế Anh
-  // Row 3: "Tổng chi phí" -> F=Bình, K=Thế Anh
+  // Parse member summary data from rows 1-4 (summary section)
+  // Row 1: "Số tiền cuối phải trả của mỗi người"
+  // Row 2: "Số tiền đóng quỹ"
+  // Row 3: "Số tiền đã chi/ứng trước"
+  // Row 4: "Tổng chi phí"
   const memberData: Record<string, { toPay?: number; fund?: number; advance?: number; total?: number }> = {};
   MEMBER_NAMES.forEach(name => { memberData[name] = {}; });
 
-  // Track which summary row we're on (0=toPay, 1=fund, 2=advance, 3=total)
-  let summaryRowIndex = 0;
-
-  rows.forEach((row: any) => {
+  rows.forEach((row: any, rowIndex: number) => {
     const description = row.c[COL.DESC]?.v || '';
     const amount = row.c[COL.AMOUNT]?.v || 0;
 
@@ -85,34 +94,24 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
 
       items.push(item);
       total += amount;
-    } else {
-      // This is a summary row (no description, check for values in F or K)
-      const binhVal = row.c[COL.BINH]?.v;
-      const theAnhVal = row.c[COL.THE_ANH]?.v;
+    } else if (rowIndex >= 1 && rowIndex <= 4) {
+      // Summary rows (rows 1-4): parse data from columns F-L for all members
+      const summaryType = rowIndex - 1; // 0=toPay, 1=fund, 2=advance, 3=total
 
-      // Check if this row has any summary data
-      if (binhVal !== undefined && binhVal !== null) {
-        switch (summaryRowIndex) {
-          case 0: memberData['Bình'].toPay = binhVal; break;
-          case 1: memberData['Bình'].fund = binhVal; break;
-          case 2: memberData['Bình'].advance = binhVal; break;
-          case 3: memberData['Bình'].total = binhVal; break;
+      MEMBER_NAMES.forEach((name) => {
+        const colIdx = (MEMBER_COL_MAP as any)[name];
+        const cellValue = row.c[colIdx]?.v;
+
+        // Only store if value exists and is a number
+        if (cellValue !== undefined && cellValue !== null && typeof cellValue === 'number') {
+          switch (summaryType) {
+            case 0: memberData[name].toPay = cellValue; break;
+            case 1: memberData[name].fund = cellValue; break;
+            case 2: memberData[name].advance = cellValue; break;
+            case 3: memberData[name].total = cellValue; break;
+          }
         }
-      }
-
-      if (theAnhVal !== undefined && theAnhVal !== null) {
-        switch (summaryRowIndex) {
-          case 0: memberData['Thế Anh'].toPay = theAnhVal; break;
-          case 1: memberData['Thế Anh'].fund = theAnhVal; break;
-          case 2: memberData['Thế Anh'].advance = theAnhVal; break;
-          case 3: memberData['Thế Anh'].total = theAnhVal; break;
-        }
-      }
-
-      // Increment summary row index if we found any data
-      if (binhVal !== undefined || theAnhVal !== undefined) {
-        summaryRowIndex++;
-      }
+      });
     }
   });
 
