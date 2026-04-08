@@ -28,6 +28,9 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
     if (open && !data) {
       fetchData();
     }
+    if (open && data) {
+      console.log('MLACE Expense Data:', JSON.stringify(data, null, 2));
+    }
   }, [open, data, fetchData]);
 
   const toggleRow = (stt: number) => {
