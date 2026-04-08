@@ -179,17 +179,13 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                                   {MEMBER_KEYS.map((key, idx) => {
                                     const value = (item as unknown as Record<string, boolean | number>)[key];
                                     return (
-                                      <div key={key} className="flex items-center py-2">
-                                        {/* Empty space for STT column */}
-                                        <div className="w-8 flex-shrink-0"></div>
-                                        {/* Name takes up description space */}
-                                        <div className="flex-1 pr-4">
-                                          <span className="text-gray-400">{MEMBER_NAMES[idx]}</span>
-                                        </div>
+                                      <div key={key} className="grid grid-cols-[32px_1fr_auto] items-center py-2 px-3 gap-2">
+                                        {/* Empty space for STT column (matches w-8 = 32px) */}
+                                        <div></div>
+                                        {/* Name in description column */}
+                                        <span className="text-gray-400">{MEMBER_NAMES[idx]}</span>
                                         {/* Amount aligned with "Số tiền" column */}
-                                        <div className="text-right flex-shrink-0 min-w-[80px]">
-                                          <span className="text-cyan-400">{getParticipationCell(value)}</span>
-                                        </div>
+                                        <span className="text-cyan-400 text-right">{getParticipationCell(value)}</span>
                                       </div>
                                     );
                                   })}
@@ -200,15 +196,22 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
                         </React.Fragment>
                       ))}
                       <TableRow className="bg-cyan-950/50 font-bold">
-                        <TableCell colSpan={3} className="text-right pr-4 text-cyan-300">TỔNG CỘNG:</TableCell>
-                        <TableCell className="text-right text-cyan-400 text-lg font-bold col-span-full md:col-span-1">
+                        {/* Mobile: Tổng cộng label in first 2 columns (STT + Nội dung) */}
+                        <TableCell colSpan={2} className="text-right pr-4 text-cyan-300 lg:hidden">TỔNG CỘNG:</TableCell>
+                        {/* Mobile: Total amount */}
+                        <TableCell className="text-right text-cyan-400 text-lg font-bold lg:hidden">
+                          {formatVND(data.total)}
+                        </TableCell>
+                        {/* Desktop: Tổng cộng label spans first 6 columns */}
+                        <TableCell colSpan={6} className="text-right pr-4 text-cyan-300 hidden lg:table-cell">TỔNG CỘNG:</TableCell>
+                        {/* Desktop: Total amount */}
+                        <TableCell className="text-right text-cyan-400 text-lg font-bold hidden lg:table-cell">
                           {formatVND(data.total)}
                         </TableCell>
                         {/* Desktop: Empty cells for member columns */}
                         {MEMBER_NAMES.map((name) => (
                           <TableCell key={name} className="hidden lg:table-cell"></TableCell>
                         ))}
-                        <TableCell className="lg:hidden"></TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
