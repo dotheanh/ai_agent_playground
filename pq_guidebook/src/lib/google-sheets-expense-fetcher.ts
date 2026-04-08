@@ -18,12 +18,9 @@ const COL = {
   TRIEU: 9, // J: Triển
   THE_ANH: 10, // K: Thế Anh
   VY: 11, // L: Vy
-  SUMMARY_LABEL: 12, // M: Label tổng hợp
-  SUMMARY_VALUE: 14, // O: Giá trị tổng hợp
 };
 
 const MEMBER_NAMES = ['Bình', 'Nhi', 'Tân', 'Thuận', 'Triển', 'Thế Anh', 'Vy'];
-const MEMBER_COL_INDEXES = [COL.BINH, COL.NHI, COL.TAN, COL.THUAN, COL.TRIEU, COL.THE_ANH, COL.VY];
 
 export async function fetchExpenseData(): Promise<ExpenseData> {
   const response = await fetch(URL);
@@ -38,19 +35,27 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
   const json = JSON.parse(jsonMatch[1]);
   const rows = json.table.rows;
 
-  // Parse expense items (rows with description and amount)
+  // Parse expense items (rows with description and amount in column B)
   const items: any[] = [];
   let total = 0;
 
-  // Parse member summary data
+  // Parse member summary data from summary rows (rows without description but with values in F or K)
+  // Summary section structure:
+  // Row 0: "Số tiền cuối phải trả của mỗi người" -> F=Bình, K=Thế Anh
+  // Row 1: "Số tiền đóng quỹ" -> K only
+  // Row 2: "Số tiền đã chi/ứng trước" -> F=Bình, K=Thế Anh
+  // Row 3: "Tổng chi phí" -> F=Bình, K=Thế Anh
   const memberData: Record<string, { toPay?: number; fund?: number; advance?: number; total?: number }> = {};
   MEMBER_NAMES.forEach(name => { memberData[name] = {}; });
+
+  // Track which summary row we're on (0=toPay, 1=fund, 2=advance, 3=total)
+  let summaryRowIndex = 0;
 
   rows.forEach((row: any) => {
     const description = row.c[COL.DESC]?.v || '';
     const amount = row.c[COL.AMOUNT]?.v || 0;
 
-    // Check if this is an expense item row
+    // Check if this is an expense item row (has both description and amount)
     if (description && amount) {
       const item: any = {
         stt: items.length + 1,
@@ -80,30 +85,34 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
 
       items.push(item);
       total += amount;
-    }
+    } else {
+      // This is a summary row (no description, check for values in F or K)
+      const binhVal = row.c[COL.BINH]?.v;
+      const theAnhVal = row.c[COL.THE_ANH]?.v;
 
-    // Check if this is a summary row (has label in column M)
-    const summaryLabel = row.c[COL.SUMMARY_LABEL]?.v || '';
-    const summaryValue = row.c[COL.SUMMARY_VALUE]?.v;
-
-    if (summaryLabel && summaryValue !== undefined) {
-      // This is a summary row, need to find which member column this value belongs to
-      // The summary section has labels in column M and values spread across member columns
-      MEMBER_NAMES.forEach((name, idx) => {
-        const memberColIdx = MEMBER_COL_INDEXES[idx];
-        const memberValue = row.c[memberColIdx]?.v;
-        if (memberValue !== undefined && memberValue !== null) {
-          if (summaryLabel.includes('phải trả')) {
-            memberData[name].toPay = memberValue;
-          } else if (summaryLabel.includes('đóng quỹ')) {
-            memberData[name].fund = memberValue;
-          } else if (summaryLabel.includes('đã chi/ứng trước')) {
-            memberData[name].advance = memberValue;
-          } else if (summaryLabel.includes('Tổng chi phí')) {
-            memberData[name].total = memberValue;
-          }
+      // Check if this row has any summary data
+      if (binhVal !== undefined && binhVal !== null) {
+        switch (summaryRowIndex) {
+          case 0: memberData['Bình'].toPay = binhVal; break;
+          case 1: memberData['Bình'].fund = binhVal; break;
+          case 2: memberData['Bình'].advance = binhVal; break;
+          case 3: memberData['Bình'].total = binhVal; break;
         }
-      });
+      }
+
+      if (theAnhVal !== undefined && theAnhVal !== null) {
+        switch (summaryRowIndex) {
+          case 0: memberData['Thế Anh'].toPay = theAnhVal; break;
+          case 1: memberData['Thế Anh'].fund = theAnhVal; break;
+          case 2: memberData['Thế Anh'].advance = theAnhVal; break;
+          case 3: memberData['Thế Anh'].total = theAnhVal; break;
+        }
+      }
+
+      // Increment summary row index if we found any data
+      if (binhVal !== undefined || theAnhVal !== undefined) {
+        summaryRowIndex++;
+      }
     }
   });
 
