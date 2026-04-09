@@ -58,15 +58,17 @@ export function MLACEExpenseModal({ open, onOpenChange }: MLACEExpenseModalProps
     return <span className="text-gray-500">-</span>;
   };
 
-  // Mobile-specific: show perPerson amount if true, X if false
+  // Mobile-specific: show share count * perPerson if share count, exact amount if >= 1000
   const getMobileParticipationCell = (value?: boolean | number, perPerson?: number) => {
-    if (value === true && perPerson !== undefined) {
-      return <span className="text-cyan-400 font-medium">{formatShort(perPerson)}</span>;
-    }
     if (value === false) {
       return <X className="w-4 h-4 text-gray-500" />;
     }
     if (typeof value === 'number' && value !== 0) {
+      if (perPerson !== undefined && value < 1000) {
+        // Share count: multiply by perPerson
+        return <span className="text-cyan-400 font-medium">{formatShort(value * perPerson)}</span>;
+      }
+      // Exact amount (>= 1000)
       return <span className="text-cyan-400 font-medium">{formatShort(value)}</span>;
     }
     return <span className="text-gray-500">-</span>;

@@ -65,11 +65,14 @@ export async function fetchExpenseData(): Promise<ExpenseData> {
         perPerson: row.c[COL.PER_PERSON]?.v || 0,
       };
 
-      // Parse member participation (new format: "x" = true, null/empty = false, number = actual amount)
+      // Parse member participation (new format:
+      // - null/empty/0 = false (no share)
+      // - number < 1000 = share count (1 = 1 phần, 2 = 2 phần)
+      // - number >= 1000 = exact amount
       const parseMemberValue = (val: unknown): boolean | number => {
-        if (val === null || val === undefined || val === '') return false;
-        if (val === 'x' || val === 'X') return true;
-        if (typeof val === 'number') return val;
+        if (val === null || val === undefined || val === '' || val === 0) return false;
+        if (val === 'x' || val === 'X') return 1; // "x" = 1 phần
+        if (typeof val === 'number') return val; // số phần (<1000) hoặc số tiền (>=1000)
         return false;
       };
 
