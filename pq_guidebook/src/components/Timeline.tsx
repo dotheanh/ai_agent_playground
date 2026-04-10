@@ -99,13 +99,16 @@ const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: Timeli
     return `${start} - ${end}`;
   };
 
-  // Scroll to current event only on initial mount
+  // Scroll to current event on mount and when currentEvent changes
   useEffect(() => {
-    if (currentNodeRef.current && timelineRef.current && !hasScrolledRef.current) {
-      hasScrolledRef.current = true;
-      currentNodeRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (currentEvent && currentNodeRef.current && timelineRef.current && !hasScrolledRef.current) {
+      // Delay slightly to ensure DOM is fully rendered
+      setTimeout(() => {
+        currentNodeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        hasScrolledRef.current = true;
+      }, 100);
     }
-  }, []);
+  }, [currentEvent]);
 
   return (
     <div className="p-3 lg:p-6" ref={timelineRef}>
@@ -152,13 +155,18 @@ const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: Timeli
                     `}
                     onClick={() => onSelectEvent(event)}
                   >
-                    <div className={`
-                      glass-card p-4 lg:p-3 hover-lift cursor-pointer transition-all duration-300
-                      ${isCurrent ? 'ring-2 ring-coral shadow-lg shadow-coral/30 bg-coral/10 border border-coral/30' : ''}
-                      ${isSelected && !isCurrent ? 'ring-2 ring-cyan-400 shadow-lg shadow-cyan-400/20' : ''}
-                      ${!isCurrent && isSelected ? '' : ''}
-                      min-h-[80px] lg:min-h-[60px] flex flex-col justify-center
-                    `}>
+                    <div 
+                      className={`
+                        glass-card p-4 lg:p-3 hover-lift cursor-pointer transition-all duration-300
+                        ${isSelected && !isCurrent ? 'ring-2 ring-cyan-400 shadow-lg shadow-cyan-400/20' : ''}
+                        min-h-[80px] lg:min-h-[60px] flex flex-col justify-center
+                      `}
+                      style={isCurrent ? { 
+                        backgroundColor: 'rgb(74 100 152 / 50%)',
+                        boxShadow: '0 20px 25px -5px rgb(239 68 68 / 0.6)',
+                        border: '1px solid rgb(239 68 68 / 0.7)'
+                      } : undefined}
+                    >
                       {/* Time */}
                       <div className="flex items-center gap-2 mb-2 lg:mb-2">
                         <span className="time-display text-sm lg:text-sm">
