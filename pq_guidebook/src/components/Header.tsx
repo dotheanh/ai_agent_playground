@@ -13,7 +13,7 @@ const Header = () => {
   }, []);
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('vi-VN', {
+    return date.toLocaleTimeString(undefined, {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   const formatDate = (date: Date) => {
-    return date.toLocaleDateString('vi-VN', {
+    return date.toLocaleDateString(undefined, {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'

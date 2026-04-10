@@ -225,7 +225,7 @@ const DetailPanel = ({ event, isCurrent, events, onSelectEvent }: DetailPanelPro
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`w-1 h-1 lg:w-2 lg:h-2 rounded-full transition-colors touch-manipulation ${
+                    className={`indicator-button w-1 h-1 lg:w-2 lg:h-2 rounded-full transition-colors touch-manipulation ${
                       idx === safeImageIndex ? 'bg-cyan-400' : 'bg-white/50'
                     }`}
                   />

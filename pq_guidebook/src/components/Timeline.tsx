@@ -20,6 +20,35 @@ import {
 const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: TimelineProps) => {
   const timelineRef = useRef<HTMLDivElement>(null);
   const currentNodeRef = useRef<HTMLDivElement>(null);
+  const hasScrolledRef = useRef(false);
+
+  // Convert time string to minutes
+  const timeToMinutes = (timeStr: string): number | null => {
+    if (!timeStr || timeStr === 'TỐI' || timeStr === 'KHUYA') return null;
+    const match = timeStr.match(/(\d{1,2}):(\d{2})/);
+    if (match) {
+      return parseInt(match[1]) * 60 + parseInt(match[2]);
+    }
+    return null;
+  };
+
+  // Check if event is in the past
+  const isPastEvent = (event: typeof events[0]) => {
+    const now = new Date();
+    const currentDate = now.toISOString().split('T')[0];
+    const currentTime = now.getHours() * 60 + now.getMinutes();
+
+    // Event is on different date (past or future)
+    if (event.date !== currentDate) {
+      return event.date < currentDate;
+    }
+
+    // Same day - check if event has ended
+    const endMinutes = timeToMinutes(event.endTime);
+    if (endMinutes === null) return false; // TỐI/KHUYA events never considered past
+    
+    return currentTime >= endMinutes;
+  };
 
   // Group events by date
   const groupedEvents = useMemo(() => {
@@ -70,12 +99,13 @@ const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: Timeli
     return `${start} - ${end}`;
   };
 
-  // Scroll to current event
+  // Scroll to current event only on initial mount
   useEffect(() => {
-    if (currentNodeRef.current && timelineRef.current) {
+    if (currentNodeRef.current && timelineRef.current && !hasScrolledRef.current) {
+      hasScrolledRef.current = true;
       currentNodeRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-  }, [currentEvent]);
+  }, []);
 
   return (
     <div className="p-3 lg:p-6" ref={timelineRef}>
@@ -108,6 +138,7 @@ const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: Timeli
               {dayEvents.map((event) => {
                 const isSelected = selectedEvent?.id === event.id;
                 const isCurrent = currentEvent?.id === event.id;
+                const isPast = isPastEvent(event);
                 
                 return (
                   <div
@@ -117,13 +148,15 @@ const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: Timeli
                       timeline-node 
                       ${isSelected ? 'active' : ''} 
                       ${isCurrent ? 'current' : ''}
+                      ${isPast ? 'opacity-45' : ''}
                     `}
                     onClick={() => onSelectEvent(event)}
                   >
                     <div className={`
                       glass-card p-4 lg:p-3 hover-lift cursor-pointer transition-all duration-300
-                      ${isSelected ? 'ring-2 ring-cyan-400 shadow-lg shadow-cyan-400/20' : ''}
-                      ${isCurrent ? 'ring-2 ring-coral shadow-lg shadow-coral/20' : ''}
+                      ${isCurrent ? 'ring-2 ring-coral shadow-lg shadow-coral/30 bg-coral/10 border border-coral/30' : ''}
+                      ${isSelected && !isCurrent ? 'ring-2 ring-cyan-400 shadow-lg shadow-cyan-400/20' : ''}
+                      ${!isCurrent && isSelected ? '' : ''}
                       min-h-[80px] lg:min-h-[60px] flex flex-col justify-center
                     `}>
                       {/* Time */}
@@ -155,16 +188,6 @@ const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: Timeli
           );
         })}
 
-        {/* Current Time Marker */}
-        {currentEvent && (
-          <div 
-            className="current-time-marker"
-            style={{ top: '0' }}
-            title="Thời điểm hiện tại"
-          >
-            NOW
-          </div>
-        )}
       </div>
     </div>
   );
