@@ -161,14 +161,14 @@ Events are stored in `public/events-data.json` with structure:
 
 ### Key Characteristics
 - **Device-aware**: Uses device clock for current time detection
-- **Cross-day events**: Events with undefined end time extend to next event
+- **Cross-day events**: Events with undefined end time extend to the start of the next timeline event, even across midnight
 - **Time formatting**: Device locale for display, 24-hour format for logic
 - **Update interval**: Checks current event every minute
 
 ### Special Time Values
-- `TỐI` - Evening (opens time-based duration)
-- `KHUYA` - Night (opens time-based duration)
-- `HẾT ĐÊM` - End of night (opens time-based duration)
+- `TỐI` - Evening (ends at next event start)
+- `KHUYA` - Night (ends at next event start)
+- `HẾT ĐÊM` - End of night (ends at next event start or 23:59 when final)
 
 See [TIME_LOGIC.md](./TIME_LOGIC.md) for detailed explanation.
 

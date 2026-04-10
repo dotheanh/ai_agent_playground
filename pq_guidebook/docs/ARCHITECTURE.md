@@ -264,14 +264,11 @@ If endTime is defined (normal event):
   endMinutes = parse(endTime)
 
 If endTime is TỐI/KHUYA/HẾT ĐÊM:
-  Find next event in sorted timeline
-  If next event same day:
-    endMinutes = startTime of next event
+  Find the next event in the sorted timeline
+  If a next event exists:
+    endDateTime = start datetime of next event, even across day boundary
   Else:
-    endMinutes = 1440 (end of current day)
-    
-If no next event exists:
-  endMinutes = 1440 (end of day)
+    endDateTime = 23:59:59 of this event's date
 ```
 
 ## 🚀 Performance Optimizations

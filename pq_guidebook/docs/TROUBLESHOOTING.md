@@ -429,9 +429,9 @@ console.log({
 3. **Check special time values**
    ```typescript
    // These are special markers for end times
-   "endTime": "TỐI"        // Evening (extends to next day)
-   "endTime": "KHUYA"      // Late night (extends to end of day)
-   "endTime": "HẾT ĐÊM"    // End of night (extends to end of day)
+   "endTime": "TỐI"        // Evening (ends at the next event start)
+   "endTime": "KHUYA"      // Late night (ends at the next event start)
+   "endTime": "HẾT ĐÊM"    // End of night (ends at the next event start or 23:59 if final)
    
    // See TIME_LOGIC.md for complete explanation
    ```

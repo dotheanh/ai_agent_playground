@@ -50,27 +50,25 @@ const timeToMinutes = (timeStr: string): number | null => {
 
 ```
 1. Get current device time
-   currentTime = now.getHours() * 60 + now.getMinutes()
+   now = new Date()
    currentDate = now.toISOString().split('T')[0]
 
-2. Filter events for current date
-   events.filter(e => e.date === currentDate)
+2. Consider the full sorted timeline across dates
+   do not filter events by currentDate before matching
 
 3. For each event, determine duration:
    a) If endTime is parseable:
       duration = parse(endTime)
    
    b) If endTime is special (TỐI/KHUYA/HẾT ĐÊM):
-      - Find next event in timeline
-      - If next event same day:
-          duration = startTime of next event
-      - If next event different day:
-          duration = 1440 (end of day)
-      - If no next event:
-          duration = 1440 (end of day)
+      - Find the next event in the sorted timeline
+      - If a next event exists:
+          duration = startTime of next event, even if it is on a later date
+      - If no next event exists:
+          duration = 23:59:59 of this event's date
 
-4. Check if current time falls in this event:
-   return currentTime >= startMinutes && currentTime < endMinutes
+4. Check if current time falls in this event interval:
+   return now >= startDateTime && now < endDateTime
 ```
 
 ### Code Implementation
@@ -78,45 +76,29 @@ const timeToMinutes = (timeStr: string): number | null => {
 ```typescript
 const findCurrentEvent = useCallback(() => {
   const now = new Date();
-  const currentDate = now.toISOString().split('T')[0];
-  const currentTime = now.getHours() * 60 + now.getMinutes();
 
   const sortedEvents = [...events].sort((a, b) => {
-    const dateA = new Date(`${a.date}T${a.startTime}`).getTime();
-    const dateB = new Date(`${b.date}T${b.startTime}`).getTime();
-    return dateA - dateB;
+    return new Date(`${a.date}T${a.startTime}`).getTime() - new Date(`${b.date}T${b.startTime}`).getTime();
   });
 
-  const event = events.find(e => {
-    if (e.date !== currentDate) return false;
-    
-    const startMinutes = timeToMinutes(e.startTime);
-    if (startMinutes === null) return false;
-    
-    let endMinutes = timeToMinutes(e.endTime);
-    
-    // Handle undefined end times
-    if (endMinutes === null) {
-      const currentEventIndex = sortedEvents.findIndex(ev => ev.id === e.id);
-      if (currentEventIndex !== -1 && currentEventIndex < sortedEvents.length - 1) {
-        const nextEvent = sortedEvents[currentEventIndex + 1];
-        const nextStartMinutes = timeToMinutes(nextEvent.startTime);
-        
-        if (nextStartMinutes !== null) {
-          if (nextEvent.date === e.date) {
-            endMinutes = nextStartMinutes;      // Same day
-          } else {
-            endMinutes = 24 * 60;               // Different day
-          }
-        }
-      } else {
-        endMinutes = 24 * 60;                   // No next event
+  const event = events.find((eventItem) => {
+    const startDateTime = parseDateTime(eventItem.date, eventItem.startTime);
+    if (!startDateTime) return false;
+
+    let endDateTime = parseDateTime(eventItem.date, eventItem.endTime);
+    if (!endDateTime) {
+      const currentEventIndex = sortedEvents.findIndex(ev => ev.id === eventItem.id);
+      const nextEvent = sortedEvents[currentEventIndex + 1];
+      if (nextEvent) {
+        endDateTime = parseDateTime(nextEvent.date, nextEvent.startTime);
       }
     }
-    
-    return endMinutes !== null && 
-           currentTime >= startMinutes && 
-           currentTime < endMinutes;
+
+    if (!endDateTime) {
+      endDateTime = new Date(`${eventItem.date}T23:59:59`);
+    }
+
+    return now >= startDateTime && now < endDateTime;
   });
 
   setCurrentEvent(event || null);
@@ -128,19 +110,19 @@ const findCurrentEvent = useCallback(() => {
 ### TỐI (Evening)
 - **Meaning:** Event duration not strictly defined
 - **Expected usage:** Evening activities (dinner, free exploration)
-- **Behavior:** Extends to next event or end of day
+- **Behavior:** Extends to the start of the next timeline event, even if that event is on the next day
 - **Example:** Event from 19:35 - TỐI → Extends to 05:00 (next day's first event)
 
 ### KHUYA (Night)
 - **Meaning:** Late night, duration uncertain
 - **Expected usage:** Late-night transportation, arrival times
-- **Behavior:** Extends to next event or end of day
+- **Behavior:** Extends to the start of the next timeline event, even if that event is on the next day
 - **Example:** Event from 22:00 - KHUYA → Extends to 05:00 next day
 
 ### HẾT ĐÊM (End of Night)
 - **Meaning:** Activity that ends late/early morning
 - **Expected usage:** Overnight events, late-night parties
-- **Behavior:** Extends to end of day (last event typically has this)
+- **Behavior:** Extends to the start of the next timeline event if one exists, otherwise 23:59:59 of the event date
 - **Example:** Event from 18:00 - HẾT ĐÊM (no next event) → Extends to 23:59
 
 ## 🔄 Cross-Day Event Handling
@@ -167,13 +149,13 @@ const findCurrentEvent = useCallback(() => {
 
 **Logic:**
 1. Event id=1 has undefined end time (TỐI)
-2. Next event in timeline is id=2 (05:00, different day)
-3. Duration calculated: 19:35 (1175 min) → 23:59 (1440 min)
-4. Event only matches if:
-   - currentDate = 2026-04-09
-   - currentTime >= 1175 && currentTime < 1440
+2. Next event in timeline is id=2 (05:00, next day)
+3. Duration is calculated as:
+   - start = 2026-04-09 19:35
+   - end = 2026-04-10 05:00 (start of next event)
+4. Event matches if current time is between 19:35 on April 9 and 05:00 on April 10
 
-**Result:** Event occupies rest of April 9th evening
+**Result:** Event spans from April 9 evening into early April 10 morning
 
 ### Scenario 2: Multiple Events Same Day
 
@@ -208,11 +190,12 @@ const findCurrentEvent = useCallback(() => {
 **Logic for id=14 (22:00 - KHUYA):**
 1. endTime is KHUYA (undefined)
 2. Find next event: id=15 (2026-04-11 05:00)
-3. Next event is different day → endMinutes = 1440
-4. Duration: 22:00 (1320 min) → 23:59 (1440 min)
-5. Also matches at 23:00, 23:59, but NOT at 05:00 next day
+3. Duration is now:
+   - start = 2026-04-10 22:00
+   - end = 2026-04-11 05:00
+4. Event matches for late night on April 10 and early morning on April 11
 
-**Result:** Event ends at midnight, not extended to next day
+**Result:** Event extends across midnight into the next day until 05:00 next morning
 
 ### Scenario 3: Last Event (No Next Event)
 
