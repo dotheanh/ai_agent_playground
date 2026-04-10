@@ -22,32 +22,54 @@ const Timeline = ({ events, selectedEvent, currentEvent, onSelectEvent }: Timeli
   const currentNodeRef = useRef<HTMLDivElement>(null);
   const hasScrolledRef = useRef(false);
 
-  // Convert time string to minutes
-  const timeToMinutes = (timeStr: string): number | null => {
-    if (!timeStr || timeStr === 'TỐI' || timeStr === 'KHUYA') return null;
+  const parseDateTime = (dateStr: string, timeStr: string): Date | null => {
     const match = timeStr.match(/(\d{1,2}):(\d{2})/);
-    if (match) {
-      return parseInt(match[1]) * 60 + parseInt(match[2]);
+    if (!match) return null;
+    const hour = match[1].padStart(2, '0');
+    const minute = match[2];
+    return new Date(`${dateStr}T${hour}:${minute}`);
+  };
+
+  const sortedEvents = useMemo(() => {
+    return [...events].sort((a, b) => {
+      const dateA = new Date(`${a.date}T${a.startTime}`).getTime();
+      const dateB = new Date(`${b.date}T${b.startTime}`).getTime();
+      return dateA - dateB;
+    });
+  }, [events]);
+
+  const getEventInterval = (event: typeof events[0]) => {
+    const startDateTime = parseDateTime(event.date, event.startTime);
+    if (!startDateTime) return null;
+
+    let endDateTime = parseDateTime(event.date, event.endTime);
+    if (!endDateTime) {
+      const currentEventIndex = sortedEvents.findIndex(ev => ev.id === event.id);
+      if (currentEventIndex !== -1 && currentEventIndex < sortedEvents.length - 1) {
+        const nextEvent = sortedEvents[currentEventIndex + 1];
+        const nextStart = parseDateTime(nextEvent.date, nextEvent.startTime);
+        if (nextStart) {
+          endDateTime = nextStart;
+        }
+      }
     }
-    return null;
+
+    if (!endDateTime) {
+      endDateTime = new Date(`${event.date}T23:59:59`);
+    }
+
+    return { startDateTime, endDateTime };
   };
 
   // Check if event is in the past
   const isPastEvent = (event: typeof events[0]) => {
     const now = new Date();
-    const currentDate = now.toISOString().split('T')[0];
-    const currentTime = now.getHours() * 60 + now.getMinutes();
-
-    // Event is on different date (past or future)
-    if (event.date !== currentDate) {
+    const interval = getEventInterval(event);
+    if (!interval) {
+      const currentDate = now.toISOString().split('T')[0];
       return event.date < currentDate;
     }
-
-    // Same day - check if event has ended
-    const endMinutes = timeToMinutes(event.endTime);
-    if (endMinutes === null) return false; // TỐI/KHUYA events never considered past
-    
-    return currentTime >= endMinutes;
+    return now >= interval.endDateTime;
   };
 
   // Group events by date

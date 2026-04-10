@@ -33,51 +33,82 @@ function App() {
       setViewMode('detail');
     }
   }, []);
+  const parseDateTime = (dateStr: string, timeStr: string): Date | null => {
+    const match = timeStr.match(/(\d{1,2}):(\d{2})/);
+    if (!match) return null;
+    const hour = match[1].padStart(2, '0');
+    const minute = match[2];
+    return new Date(`${dateStr}T${hour}:${minute}`);
+  };
+
   const findCurrentEvent = useCallback(() => {
     const now = new Date();
-    const currentDate = now.toISOString().split('T')[0];
-    const currentTime = now.getHours() * 60 + now.getMinutes();
+
+    // Sort events by date + time
+    const sortedEvents = [...events].sort((a, b) => {
+      const dateA = new Date(`${a.date}T${a.startTime}`).getTime();
+      const dateB = new Date(`${b.date}T${b.startTime}`).getTime();
+      return dateA - dateB;
+    });
+
+    const getEventInterval = (event: Event) => {
+      const startDateTime = parseDateTime(event.date, event.startTime);
+      if (!startDateTime) return null;
+
+      let endDateTime = parseDateTime(event.date, event.endTime);
+
+      if (!endDateTime) {
+        const currentEventIndex = sortedEvents.findIndex(ev => ev.id === event.id);
+        if (currentEventIndex !== -1 && currentEventIndex < sortedEvents.length - 1) {
+          const nextEvent = sortedEvents[currentEventIndex + 1];
+          const nextStart = parseDateTime(nextEvent.date, nextEvent.startTime);
+          if (nextStart) {
+            endDateTime = nextStart;
+          }
+        }
+      }
+
+      if (!endDateTime) {
+        endDateTime = new Date(`${event.date}T23:59:59`);
+      }
+
+      return { startDateTime, endDateTime };
+    };
 
     const event = events.find(e => {
-      if (e.date !== currentDate) return false;
-      
-      const startMinutes = timeToMinutes(e.startTime);
-      const endMinutes = timeToMinutes(e.endTime);
-      
-      if (startMinutes === null) return false;
-      if (endMinutes === null) return currentTime >= startMinutes;
-      
-      return currentTime >= startMinutes && currentTime < endMinutes;
+      const interval = getEventInterval(e);
+      if (!interval) return false;
+      return now >= interval.startDateTime && now < interval.endDateTime;
     });
 
     setCurrentEvent(event || null);
-    
-    // Auto-select current event if none selected
+
     if (event && !selectedEvent) {
       setSelectedEvent(event);
     }
   }, [events, selectedEvent]);
 
-  // Convert time string to minutes
-  const timeToMinutes = (timeStr: string): number | null => {
-    if (!timeStr || timeStr === 'TỐI' || timeStr === 'KHUYA') return null;
-    
-    const match = timeStr.match(/(\d{1,2}):(\d{2})/);
-    if (match) {
-      return parseInt(match[1]) * 60 + parseInt(match[2]);
-    }
-    return null;
-  };
-
-  // Update current event every minute
+  // Update current event every 5 seconds for better responsiveness
   useEffect(() => {
     if (events.length === 0) return;
-    
+
     findCurrentEvent();
-    const interval = setInterval(findCurrentEvent, 60000);
-    
+    const interval = setInterval(findCurrentEvent, 5000); // 5000ms = 5 seconds
+
     return () => clearInterval(interval);
   }, [events, findCurrentEvent]);
+
+  // Also update when window becomes visible (user switches back to tab)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        findCurrentEvent(); // Update immediately when user returns to tab
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [findCurrentEvent]);
 
   if (loading) {
     return (
