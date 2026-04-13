@@ -117,6 +117,207 @@
                 font-size: 0.8em;
             }
         }
+
+        /* Report Cards Section */
+        .reports-section {
+            padding: 20px 0;
+        }
+        .reports-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .report-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .report-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        .report-card .date {
+            color: white;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .report-card .highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .report-card .highlight {
+            text-align: center;
+        }
+        .report-card .highlight-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8em;
+            margin-bottom: 5px;
+        }
+        .report-card .highlight-value {
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .report-card .score {
+            color: #ffd700;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+            border-radius: 20px;
+            max-width: 1200px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px 20px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .modal-header .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        .modal-header .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .modal-header h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+        }
+        .modal-header .sub-header {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 1.1em;
+        }
+        .modal-header .metric {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .modal-header .metric-label {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+        .modal-header .metric-value {
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+        .modal-header .metric-value.score {
+            color: #ffd700;
+        }
+        .modal-body {
+            padding: 30px;
+        }
+        .modal-columns {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+        .modal-column {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .modal-column h4 {
+            color: #667eea;
+            margin: 0 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .modal-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .modal-row:last-child {
+            border-bottom: none;
+        }
+        .modal-row .label {
+            color: #666;
+            font-size: 0.85em;
+        }
+        .modal-row .value {
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 1400px) {
+            .modal-columns {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 1000px) {
+            .modal-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
@@ -144,10 +345,22 @@
             </div>
         </div>
 
-        <div class="card">
-            <h3>📋 Lịch sử đo</h3>
-            <div style="overflow-x: auto;">
-                <table id="dataTable"></table>
+        <div class="reports-section">
+            <h3>📊 Danh sách báo cáo</h3>
+            <div class="reports-grid" id="reportsGrid"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+                <h2 id="modalTitle">Báo cáo InBody</h2>
+                <div class="sub-header" id="modalSubHeader"></div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-columns" id="modalColumns"></div>
             </div>
         </div>
     </div>
@@ -185,7 +398,6 @@
             const latest = rows[0];
             const previous = rows[1] || {};
 
-            // Keys match JSON format exactly (no space before parenthesis)
             const metrics = [
                 { key: 'Cân nặng(kg)', label: 'Cân nặng', unit: 'kg', better: 'lower' },
                 { key: 'BMI(kg/m²)', label: 'BMI', unit: '', better: 'lower' },
@@ -213,6 +425,40 @@
                 }
 
                 return '<div class="card"><h3>' + m.label + '</h3><div class="value">' + current + '<span class="unit">' + m.unit + '</span></div>' + changeHtml + '</div>';
+            }).join('');
+        }
+
+        function renderReportsGrid(rows) {
+            const grid = document.getElementById('reportsGrid');
+
+            grid.innerHTML = rows.map(function(row, idx) {
+                const score = row['Điểm InBody'] || '-';
+                const weight = row['Cân nặng(kg)'] || '-';
+                const fat = row['Tỷ lệ mỡ cơ thể(%)'] || '-';
+                const bmi = row['BMI(kg/m²)'] || '-';
+                const date = formatDate(row['ngày']);
+
+                return '<div class="report-card" onclick="openModal(' + idx + ')">' +
+                    '<div class="date">📅 ' + date + '</div>' +
+                    '<div class="highlights">' +
+                        '<div class="highlight">' +
+                            '<div class="highlight-label">Điểm InBody</div>' +
+                            '<div class="highlight-value score">' + score + '</div>' +
+                        '</div>' +
+                        '<div class="highlight">' +
+                            '<div class="highlight-label">Cân nặng</div>' +
+                            '<div class="highlight-value">' + weight + ' kg</div>' +
+                        '</div>' +
+                        '<div class="highlight">' +
+                            '<div class="highlight-label">% Mỡ</div>' +
+                            '<div class="highlight-value">' + fat + '</div>' +
+                        '</div>' +
+                        '<div class="highlight">' +
+                            '<div class="highlight-label">BMI</div>' +
+                            '<div class="highlight-value">' + bmi + '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
             }).join('');
         }
 
@@ -253,7 +499,6 @@
         }
 
         function renderCharts(rows) {
-            // Helper to get value with fallback
             const getVal = function(r, key) {
                 const val = r[key];
                 return val === '-' ? null : parseFloat(val);
@@ -356,8 +601,156 @@
             });
         }
 
+        // Modal Functions
+        function openModal(rowIndex) {
+            const rows = window.currentRows || [];
+            const row = rows[rowIndex];
+            if (!row) return;
+
+            const date = formatDate(row['ngày']);
+            const score = row['Điểm InBody'] || '-';
+            const weight = row['Cân nặng(kg)'] || '-';
+            const bmi = row['BMI(kg/m²)'] || '-';
+            const fat = row['Tỷ lệ mỡ cơ thể(%)'] || '-';
+            const muscle = row['Khối lượng cơ xương(kg)'] || '-';
+            const bmr = row['Tỷ lệ trao đổi chất cơ bản(kcal)'] || '-';
+            const waist = row['Vòng eo(cm)'] || '-';
+            const visceral = row['Mức độ chất béo nội tạng(Level)'] || '-';
+            const water = row['Lượng nước trong cơ thể(L)'] || '-';
+            const intracellular = row['Nước nội bào(L)'] || '-';
+            const extracellular = row['Nước ngoại bào(L)'] || '-';
+            const ecwRatio = row['Tỷ lệ ECW'] || '-';
+
+            const armRightMuscle = row['Khối lượng cơ ở cánh tay phải(kg)'] || '-';
+            const armRightFat = row['Mỡ ở cánh tay phải(kg)'] || '-';
+            const armLeftMuscle = row['Khối lượng cơ ở cánh tay trái(kg)'] || '-';
+            const armLeftFat = row['Mỡ ở cánh tay trái(kg)'] || '-';
+            const torsoMuscle = row['Khối lượng cơ ở thân mình(kg)'] || '-';
+            const torsoFat = row['Mỡ ở thân mình(kg)'] || '-';
+            const legRightMuscle = row['Khối lượng cơ ở chân phải(kg)'] || '-';
+            const legRightFat = row['Khối lượng mỡ ở chân phải(kg)'] || '-';
+            const legLeftMuscle = row['Khối lượng cơ ở chân trái(kg)'] || '-';
+            const legLeftFat = row['Khối lượng mỡ ở chân trái(kg)'] || '-';
+
+            const ecwRightArm = row['Cánh tay phải Tỷ lệ ECW'] || '-';
+            const ecwLeftArm = row['Cánh tay trái Tỷ lệ ECW'] || '-';
+            const ecwTorso = row['Thân hình Tỷ lệ ECW'] || '-';
+            const ecwRightLeg = row['Chân phải Tỷ lệ ECW'] || '-';
+            const ecwLeftLeg = row['Chân trái Tỷ lệ ECW'] || '-';
+
+            const upperLower = row['Trên-Dưới'] || '-';
+            const upper = row['Phần trên'] || '-';
+            const lower = row['Phần dưới'] || '-';
+            const legLevel = row['Mức độ cơ chân(Level)'] || '-';
+            const calfMuscle = row['Khối lượng cơ bắp chân(kg)'] || '-';
+            const protein = row['Protein(kg)'] || '-';
+            const mineral = row['Khoáng chất(kg)'] || '-';
+            const boneMineral = row['Hàm lượng khoáng trong xương(kg)'] || '-';
+            const cellMass = row['Khối lượng tế bào cơ thể(kg)'] || '-';
+            const sbm = row['Chỉ số khối cơ xương(kg/m²)'] || '-';
+            const phaseAngle = row['Góc pha toàn bộ cơ thể(°)'] || '-';
+
+            // Modal Header
+            document.getElementById('modalTitle').textContent = '📊 Báo cáo InBody';
+            document.getElementById('modalSubHeader').innerHTML =
+                '<div class="metric"><span class="metric-label">Ngày đo</span><span class="metric-value">' + date + '</span></div>' +
+                '<div class="metric"><span class="metric-label">Điểm InBody</span><span class="metric-value score">' + score + '</span></div>' +
+                '<div class="metric"><span class="metric-label">Cân nặng</span><span class="metric-value">' + weight + ' kg</span></div>' +
+                '<div class="metric"><span class="metric-label">BMI</span><span class="metric-value">' + bmi + '</span></div>';
+
+            // Modal Columns
+            const columns = document.getElementById('modalColumns');
+
+            columns.innerHTML =
+                // Column 1: Body Composition
+                '<div class="modal-column"><h4>Tổng quan</h4>' +
+                    '<div class="modal-row"><span class="label">Tỷ lệ mỡ cơ thể</span><span class="value">' + fat + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Khối lượng cơ xương</span><span class="value">' + muscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">BMR</span><span class="value">' + bmr + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Vòng eo</span><span class="value">' + waist + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Mỡ nội tạng</span><span class="value">' + visceral + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Lượng nước</span><span class="value">' + water + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Nội bào</span><span class="value">' + intracellular + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Ngoại bào</span><span class="value">' + extracellular + '</span></div>' +
+                    '<div class="modal-row"><span class="label">ECW/TBW</span><span class="value">' + ecwRatio + '</span></div>' +
+                '</div>' +
+
+                // Column 2: Muscle-Fat Analysis
+                '<div class="modal-column"><h4>Phân tích cơ-béo</h4>' +
+                    '<div class="modal-row"><span class="label">Tay phải - Cơ</span><span class="value">' + armRightMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Tay phải - Mỡ</span><span class="value">' + armRightFat + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Tay trái - Cơ</span><span class="value">' + armLeftMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Tay trái - Mỡ</span><span class="value">' + armLeftFat + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Thân mình - Cơ</span><span class="value">' + torsoMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Thân mình - Mỡ</span><span class="value">' + torsoFat + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Chân phải - Cơ</span><span class="value">' + legRightMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Chân phải - Mỡ</span><span class="value">' + legRightFat + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Chân trái - Cơ</span><span class="value">' + legLeftMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Chân trái - Mỡ</span><span class="value">' + legLeftFat + '</span></div>' +
+                '</div>' +
+
+                // Column 3: Segmental Lean Analysis
+                '<div class="modal-column"><h4>Phân tích đoạn thân</h4>' +
+                    '<div class="modal-row"><span class="label">Tay trái - Cơ</span><span class="value">' + armLeftMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Tay trái - Mỡ</span><span class="value">' + armLeftFat + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Thân - Cơ</span><span class="value">' + torsoMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Thân - Mỡ</span><span class="value">' + torsoFat + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Chân trái - Cơ</span><span class="value">' + legLeftMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Chân trái - Mỡ</span><span class="value">' + legLeftFat + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Tay phải - Cơ</span><span class="value">' + armRightMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Tay phải - Mỡ</span><span class="value">' + armRightFat + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Chân phải - Cơ</span><span class="value">' + legRightMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Chân phải - Mỡ</span><span class="value">' + legRightFat + '</span></div>' +
+                '</div>' +
+
+                // Column 4: Water Analysis
+                '<div class="modal-column"><h4>Nội tiết</h4>' +
+                    '<div class="modal-row"><span class="label">Trên-Dưới</span><span class="value">' + upperLower + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Phần trên</span><span class="value">' + upper + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Phần dưới</span><span class="value">' + lower + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Cơ chân (Level)</span><span class="value">' + legLevel + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Cơ bắp chân</span><span class="value">' + calfMuscle + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Protein</span><span class="value">' + protein + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Khoáng chất</span><span class="value">' + mineral + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Khoáng xương</span><span class="value">' + boneMineral + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Tế bào cơ thể</span><span class="value">' + cellMass + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Cơ xương/m²</span><span class="value">' + sbm + '</span></div>' +
+                    '<div class="modal-row"><span class="label">Góc pha</span><span class="value">' + phaseAngle + '</span></div>' +
+                '</div>' +
+
+                // Column 5: Health Assessment
+                '<div class="modal-column"><h4>Đánh giá sức khỏe</h4>' +
+                    '<div class="modal-row"><span class="label">ECW Tay trái</span><span class="value">' + ecwLeftArm + '</span></div>' +
+                    '<div class="modal-row"><span class="label">ECW Thân</span><span class="value">' + ecwTorso + '</span></div>' +
+                    '<div class="modal-row"><span class="label">ECW Chân trái</span><span class="value">' + ecwLeftLeg + '</span></div>' +
+                    '<div class="modal-row"><span class="label">ECW Tay phải</span><span class="value">' + ecwRightArm + '</span></div>' +
+                    '<div class="modal-row"><span class="label">ECW Chân phải</span><span class="value">' + ecwRightLeg + '</span></div>' +
+                '</div>';
+
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal on overlay click
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
         async function init() {
             const rows = await loadJSON();
+            window.currentRows = rows;
 
             if (rows.length === 0) {
                 document.body.innerHTML += '<div style="text-align:center;color:white;margin-top:50px;"><h2>⚠️ Không tìm thấy file JSON</h2><p>Vui lòng chạy lệnh trước khi mở web:</p><code style="background:#fff3;padding:10px;border-radius:8px;margin-top:20px;display:inline-block;">python parse_csv.py</code></div>';
@@ -365,7 +758,7 @@
             }
 
             renderDashboard(rows);
-            renderTable(rows);
+            renderReportsGrid(rows);
             renderCharts(rows);
         }
 
