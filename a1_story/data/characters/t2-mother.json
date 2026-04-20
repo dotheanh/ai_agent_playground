@@ -1,0 +1,76 @@
+{
+  "id": "t2_mother",
+  "name": "[Cần bổ sung tên]",
+  "role": "supporting",
+  "isMale": false,
+
+  "basic": {
+    "occupation": "Bác sĩ, Nhà khoa học",
+    "maritalStatus": "đã lập gia đình với chính trị gia"
+  },
+
+  "appearance": {
+    "note": "Cần bổ sung chi tiết ngoại hình"
+  },
+
+  "personality": {
+    "core": ["thông minh", "ambitious", "có moral compass"],
+    "strengths": ["giỏi nghiên cứu khoa học", "bác sĩ tài ba"],
+    "weaknesses": ["bị cuốn vào dự án đen"],
+    "values": ["khoa học", "tiến bộ"],
+    "moralBoundaries": []
+  },
+
+  "role": {
+    "official": "Bác sĩ và nhà khoa học hàng đầu",
+    "secret": [
+      "Người tham gia vào quá trình nhân bản vô tính A*",
+      "Người chế tạo ra loại thuốc độc ức chế cơ thể của A1"
+    ],
+    "note": "Mẹ của T2 âm thầm tham gia vào dự án nhân bản của các chính trị gia"
+  },
+
+  "inventions": [
+    {
+      "id": "suppression_drug",
+      "name": "[Cần bổ sung tên thuốc]",
+      "purpose": "Ức chế cơ thể và sức mạnh của A1",
+      "reason": "Phát hiện tư tưởng độc tài khó kiểm soát của A1",
+      "effect": "A1 bề ngoài giống như người bình thường, sức mạnh bị ức chế"
+    }
+  ],
+
+  "participation": {
+    "project": "Nhân bản vô tính A*",
+    "roleInProject": "Nhà khoa học tham gia nghiên cứu và thực hiện quá trình nhân bản",
+    "note": "Có thể bị ép buộc hoặc tự nguyện tham gia - cần bổ sung sau"
+  },
+
+  "family": {
+    "daughter": {
+      "id": "t2",
+      "name": "Nguyễn Thị Minh Thư (T2)",
+      "relationship": "Con gái duy nhất"
+    },
+    "husband": {
+      "id": "t2_father",
+      "name": "[Cần bổ sung tên]",
+      "role": "Chính trị gia",
+      "affiliation": "Thuộc quyền điều khiển của vương quốc Đô"
+    }
+  },
+
+  "storyFlags": {
+    "secretRevealed": false,
+    "involvementLevel": "high"
+  },
+
+  "relationships": {
+    "t2": {
+      "id": "t2",
+      "type": "daughter",
+      "status": "complicated",
+      "note": "Khi T2 khám phá sự thật về mẹ mình, mối quan hệ sẽ trở nên phức tạp"
+    }
+  }
+}

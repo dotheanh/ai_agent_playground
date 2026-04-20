@@ -1,0 +1,96 @@
+{
+  "id": "a1",
+  "name": "Nguyễn Văn A",
+  "alias": "A1",
+  "role": "protagonist",
+  "isMale": true,
+
+  "basic": {
+    "birthday": "1999-12-03",
+    "age": 27,
+    "occupation": "Game Developer",
+    "maritalStatus": "single"
+  },
+
+  "appearance": {
+    "note": "Cần bổ sung chi tiết ngoại hình. Bề ngoài giống như người bình thường (do bị tiêm thuốc ức chế)"
+  },
+
+  "personality": {
+    "core": ["thông minh", "nghiêm khắc", "nội tâm sâu", "có nguyên tắc"],
+    "strengths": ["giỏi lập trình", "phân tích logic", "kiểm soát bản thân", "năng lực thể chất vượt trội (bị ức chế)"],
+    "weaknesses": ["mắc kẹt trong quá khứ", "khó mở lòng", "tự trừng phạt", "bị ức chế bởi thuốc"],
+    "values": ["công lý", "trách nhiệm", "sự thật"],
+    "moralBoundaries": ["không gây hại cho người vô tội"]
+  },
+
+  "backstory": {
+    "summary": "Có quá khứ phức tạp, từng có mối quan hệ sai lầm. Đang sám hối và muốn sống ngay thẳng.",
+    "formerRelationship": {
+      "id": "nyc_cu",
+      "description": "Người yêu cũ - A1 vẫn còn chấp niệm, muốn níu kéo dù đã chia tay"
+    },
+    "currentPhase": "Sống ẩn danh trong xã hội loài người, đang trong giai đoạn sám hối"
+  },
+
+  "species": {
+    "name": "Người Đô",
+    "description": "Một dân tộc riêng biệt, đến vùng đất này từ thời tiền sử, có sức mạnh và công nghệ vượt xa nhân loại.",
+    "origin": "Đến vùng đất phía Nam từ thời tiền sử (thực chất là do A* du hành thời gian về lập quốc). Chọn sống dưới lòng đất để tránh chiến tranh, tập trung phát triển công nghệ.",
+    "abilities": [
+      "Sức mạnh thể chất vượt trội so với con người (nhưng bị ức chế bởi thuốc)",
+      "Có thể đánh bại nhiều đối thủ cùng lúc",
+      "Trí tuệ cao, khả năng phân tích vượt trội"
+    ]
+  },
+
+  "secretIdentity": {
+    "isClone": true,
+    "isBelievedToBeOriginal": true,
+    "note": "Các nhà chính trị vẫn tưởng A1 là bản thể gốc của A*",
+    "originalId": "a_star",
+    "originalName": "A*",
+    "origin": "Vương quốc Đô dưới lòng đất, song song với nhân loại suốt hàng ngàn năm",
+    "purpose": "Tai mắt để theo dõi và đánh giá nhân loại cho A* mô phỏng và thao túng",
+    "siblings": ["A2", "A3", "A4", "A5", "A6", "A7"],
+    "hintDialogue": "ta không phải con người, ta là một chủng loài bề trên"
+  },
+
+  "suppression": {
+    "drugName": "[Cần bổ sung tên thuốc]",
+    "inventor": "Mẹ của T2 - bác sĩ, nhà khoa học",
+    "reason": "Phát hiện tư tưởng độc tài khó kiểm soát của A1",
+    "effect": "Tiêm thuốc khắc chế cơ thể => bề ngoài giống như người bình thường, sức mạnh bị ức chế",
+    "note": "Nhờ thuốc này mà A1 không thể hiện hết sức mạnh thật của Người Thượng"
+  },
+
+  "inGamePersona": {
+    "projectName": "Model A1",
+    "description": "Phát minh ra Model A1 - thực chất là output từ bộ não sinh học khổng lồ dưới lòng đất, được A* điều khiển"
+  },
+
+  "storyFlags": {
+    "trust": 0,
+    "guilt": 0,
+    "redemptionProgress": 0,
+    "identityRevealed": false,
+    "exAwareness": 0,
+    "suppressionActive": true
+  },
+
+  "relationships": {
+    "nyc_cu": {
+      "id": "nyc_cu",
+      "name": "[Cần bổ sung tên]",
+      "type": "ex",
+      "status": "chia_tay",
+      "note": "A1 vẫn muốn níu kéo"
+    },
+    "t2": {
+      "id": "t2",
+      "type": "loveInterest",
+      "status": "unknown",
+      "note": "T2 theo đuổi A1, nhưng A1 chưa thể mở lòng"
+    }
+  }
+}

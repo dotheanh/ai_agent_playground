@@ -1,0 +1,142 @@
+{
+  "id": "t2",
+  "name": "Nguyễn Thị Minh Thư",
+  "alias": "T2",
+  "role": "protagonist",
+  "isMale": false,
+
+  "basic": {
+    "birthday": "2000-01-01",
+    "age": 18,
+    "occupationPreIncident": "Học sinh / Sinh viên",
+    "familyBackground": "Con gái duy nhất của gia đình chính trị gia giàu có ở Thủ Đô",
+    "maritalStatus": "single"
+  },
+
+  "appearance": {
+    "note": "Cần bổ sung chi tiết ngoại hình"
+  },
+
+  "personality": {
+    "core": ["thông minh", "kiên trì", "dũng cảm", "có ambition", "phức tạp"],
+    "strengths": ["nhanh nhạy", "học hỏi giỏi", "quyết đoán", "gen art talent"],
+    "weaknesses": ["có toan tính chính trị"],
+    "values": ["công bằng", "chân lý", "tự do"],
+    "moralBoundaries": []
+  },
+
+  "backstory": {
+    "incidentAge": 18,
+    "incident": "Đột quỵ, chẩn đoán là người thực vật tại bệnh viện",
+    "truth": "Hồn lìa khỏi xác, phiêu bạt khắp thế giới như bóng ma trong nhiều năm",
+    "resurrection": "Sau khi 'nhập hồn về xác', T2 tỉnh dậy"
+  },
+
+  "abilities": {
+    "fromSpiritState": [
+      "ĐỌC SUY NGHĨ của người khác",
+      "ĐIỀU KHIỂN SUY NGHĨ của người khác",
+      "DỊCH CHUYỂN GIỮA KHÔNG GIAN (teleport)",
+      "NHÌN THẤY mọi thứ trên thế giới khi ở trạng thái linh hồn"
+    ]
+  },
+
+  "spiritState": {
+    "isCorporeal": false,
+    "canInteractWithWorld": false,
+    "canReadThoughts": true,
+    "canControlThoughts": true,
+    "canTeleport": true,
+    "canSeePhysicalWorld": true,
+    "canBeSeenByOthers": false
+  },
+
+  "leadership": {
+    "style": "Quyền lực MỀM",
+    "description": "Chân thành, giỏi giang, được dân chúng tin yêu",
+    "note": "Cai trị bằng chính nghĩa và lòng tin của dân"
+  },
+
+  "plotAmbiguity": {
+    "note": "T2 là NGƯỜI TỐT hay PHẢN DIỆN ÂM THẦM? Đây là bí ẩn không ai biết.",
+    "scenario1": "T2 là phản diện - nhân cơ hội A1 bị bắn để cài đặt và điều khiển bộ não của A*",
+    "scenario2": "T2 là người tốt - dùng chính nghĩa để cân bằng với A*, bề ngoài là tình nhân nhưng không ai biết âm mưu thật"
+  },
+
+  "relationshipWithAStar": {
+    "status": "tinh_nhan_sau_khi_a1_chet",
+    "description": "Bề ngoài là tình nhân (sau khi A1 bị bắn chết và A* xuất hiện), nhưng không ai biết được ai đang có âm mưu gì",
+    "note": "A* và T2 là 2 thế lực SIÊU VIỆT ĐỐI TRỌNG nhau"
+  },
+
+  "family": {
+    "father": {
+      "id": "t2_father",
+      "name": "[Cần bổ sung tên]",
+      "role": "Chính trị gia",
+      "description": "Một chính trị gia quyền lực",
+      "affiliation": "Thuộc quyền điều khiển của vương quốc Đô"
+    },
+    "mother": {
+      "id": "t2_mother",
+      "name": "[Cần bổ sung tên]",
+      "role": "Bác sĩ, Nhà khoa học",
+      "description": "Nhà khoa học hàng đầu",
+      "secretRole": "Người tham gia vào quá trình nhân bản vô tính A*",
+      "invention": "Người chế tạo ra loại thuốc độc ức chế cơ thể của A1",
+      "note": "Mẹ T2 âm thầm tham gia vào dự án nhân bản của chính trị gia, đồng thời phát triển thuốc ức chế để kiểm soát A1 khi phát hiện tư tưởng độc tài của hắn"
+    }
+  },
+
+  "coverIdentity": {
+    "job": "Artist thực tập",
+    "purpose": "Tiếp cận và tìm hiểu danh tính thật của A1",
+    "note": "Giả làm thực tập sinh ở công ty A1 đang làm"
+  },
+
+  "inGamePersona": {
+    "projectName": "Model T2",
+    "description": "Phát minh Model T2 gen art, thành công trong sự nghiệp"
+  },
+
+  "politicalCareer": {
+    "startingPoint": "Sau biến cố chính trị",
+    "positions": ["phó thủ tướng", "thủ tướng"],
+    "note": "Phát huy tài năng, thăng tiến nhanh chóng"
+  },
+
+  "sevenDays": {
+    "note": "Khi A1 bị bắn, T2 chăm sóc anh 7 ngày 7 đêm, mưa bão. Tàu chiến nước lạ âm mưu tấn công nhưng bị bão cuốn trôi."
+  },
+
+  "storyFlags": {
+    "awarenessLevel": 0,
+    "connectionWithA1": 0,
+    "loveProgress": 0,
+    "hasRevealedSecret": false,
+    "knowsAboutSuppressionDrug": false,
+    "isVillain": "unknown",
+    "controledAStar": false
+  },
+
+  "relationships": {
+    "a1": {
+      "id": "a1",
+      "type": "loveInterest",
+      "status": "theo_doi",
+      "note": "T2 phát sinh tình cảm, chủ động theo đuổi A1. Sau này A1 bị bắn."
+    },
+    "a_star": {
+      "id": "a_star",
+      "type": "tinh_nhan",
+      "status": "sau_khi_a1_chet",
+      "note": "Sau khi A1 chết, T2 và A* trở thành tình nhân. Nhưng không ai biết ai đang có âm mưu gì."
+    },
+    "mother": {
+      "id": "t2_mother",
+      "type": "mother",
+      "status": "complicated",
+      "note": "Mẹ T2 tham gia nhân bản A* và chế tạo thuốc ức chế A1 - mối quan hệ phức tạp khi T2 khám phá sự thật"
+    }
+  }
+}

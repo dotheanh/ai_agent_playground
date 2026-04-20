@@ -1,0 +1,133 @@
+{
+  "id": "a_star",
+  "name": "A*",
+  "alias": "A-Star",
+  "role": "antagonist",
+  "isMale": true,
+
+  "basic": {
+    "age": "Hàng ngàn năm (thực chất là người du hành thời gian)",
+    "occupation": "Người kế vị và là vị vua CUỐI CÙNG trị vì vương quốc Đô",
+    "maritalStatus": "tinh_nhan_cua_t2_sau_khi_a1_chet"
+  },
+
+  "appearance": {
+    "note": "Cần bổ sung - sống dưới lòng đất, có thể có ngoại hình khác người"
+  },
+
+  "personality": {
+    "core": ["thao túng", "quyết đoán", "bảo vệ nhân loại", "độc tài", "cực kỳ thông minh"],
+    "strengths": ["kiểm soát hoàn toàn", "lập kế hoạch dài hạn", "sức mạnh thể chất vượt trội"],
+    "weaknesses": ["tư tưởng độc tài khó kiểm soát"],
+    "values": ["bảo vệ nhân loại", "sự thống trị để thống nhất"],
+    "moralBoundaries": []
+  },
+
+  "origin": {
+    "twist": "A* chính là ÔNG TỔ của dòng tộc - người du hành thời gian từ tương lai về quá khứ để lập quốc",
+    "note": "Closed time loop paradox: A* du hành về thời tiền sử và trở thành chính mình"
+  },
+
+  "kingdom": {
+    "name": "Đô",
+    "description": "Đế quốc ngầm cực kỳ mạnh tồn tại từ thời cổ đại, không hiện diện trên bản đồ",
+    "location": "Dưới lòng đất khắp nơi",
+    "founder": "A* (người du hành thời gian từ tương lai)",
+    "rulingSystem": "Phân quyền bằng bạo lực và sức mạnh. Muốn nối ngôi hoàng đế phải chiến thắng đời hoàng đế trước qua Lễ Chiến Đấu.",
+    "history": {
+      "emperorCount": "12 đời hoàng đế",
+      "note": "A* là vị vua CUỐI CÙNG"
+    },
+    "colonies": "Hệ thống thuộc địa ngầm khắp nơi trên thế giới",
+    "worldRecognition": "Các cường quốc lớn trên thế giới biết và rất kính nể vương quốc Đô"
+  },
+
+  "species": {
+    "name": "Người Đô",
+    "description": "Một dân tộc riêng biệt, đến vùng đất này từ thời tiền sử, có sức mạnh và công nghệ vượt xa nhân loại hiện tại",
+    "abilities": [
+      "Sức mạnh thể chất vượt trội",
+      "Trí tuệ cao",
+      "Tuổi thọ cực kỳ dài",
+      "Công nghệ du hành thời gian"
+    ]
+  },
+
+  "abilities": {
+    "core": [
+      "ĐIỀU KHIỂN THỜI GIAN",
+      "TÍNH TOÁN TRƯỚC TƯƠNG LAI (rất thông minh, có thể dự đoán sự kiện)"
+    ],
+    "simulation": "Với dữ liệu A1 lấy được trong quá trình 'vi hành' ở nhân loại, A* có thể MÔ PHỎNG và TÍNH TOÁN CHÍNH XÁC HÀNH VI của loài người",
+    "note": "A* biết trước nhiều sự kiện sẽ xảy ra nhờ năng lực tính toán và mô phỏng"
+  },
+
+  "mission": {
+    "purpose": "Hiểu về nhân loại và dẫn dắt nhân loại bằng chủ nghĩa độc tài",
+    "goal": "THỐNG TRỊ nhân loại nhưng KHÔNG PHẢI để bóc lột - mà là để CÙNG HỢP LỰC CHỐNG LẠI THẾ LỰC NGOẠI HÀNH TINH",
+    "note": "A* không phải kẻ xấu thuần túy - hắn có mục đích cao cả nhưng dùng phương pháp độc tài"
+  },
+
+  "leadership": {
+    "style": "Quyền lực CỨNG",
+    "description": "Ngông cuồng, tự xưng hoàng đế, cai trị bằng bạo lực và quân đội",
+    "publicPerception": "Dân chúng nghĩ hắn bị điên (vì không biết về vương quốc Đô)",
+    "note": "Thật ra được các cường quốc kính nể"
+  },
+
+  "backstory": {
+    "grandfather": {
+      "id": "emperor_12",
+      "name": "[Cần bổ sung tên]",
+      "role": "Hoàng đế thứ 12",
+      "description": "Càng về sau càng tha hóa, bóc lột thuộc địa và ưa bạo lực"
+    },
+    "father": {
+      "id": "a_star_father",
+      "name": "[Cần bổ sung tên]",
+      "role": "Con của Hoàng đế thứ 12",
+      "description": "Đi theo chính nghĩa, không làm Lễ Chiến Đấu để nối ngôi cha mà chọn hòa bình. Hỗ trợ cách mạng đánh bại đế chế của chính cha mình."
+    },
+    "origin": "Sinh ra sau khi cha mình (con của Hoàng đế) đánh bại đế chế của ông nội"
+  },
+
+  "clones": {
+    "totalCount": 7,
+    "list": ["A* gốc", "A1", "A2", "A3", "A4", "A5", "A6", "A7"],
+    "note": "Chính trị gia nhân bản 6 bản, nhưng có kẻ đã nhân bản tận 7 bản",
+    "originalClone": {
+      "status": "Được bí mật đưa về buồng nuôi dưỡng",
+      "note": "Các nhà chính trị vẫn tưởng A1 là bản thể gốc"
+    },
+    "controlMethod": "Tất cả thể xác đều được điều khiển bởi cùng 1 bộ não",
+    "brainOrigin": "Bộ não khổng lồ nuôi cấy dưới lòng đất từ tế bào gốc của A*, chính là thứ tạo ra 'model A1' - không phải AI LLM nào cả"
+  },
+
+  "infiltration": {
+    "note": "A2-A7 hoạt động trong bộ máy nhà nước trên mặt đất, trở thành nhà khoa học, cố vấn, chính trị gia, tham mưu - những người âm thầm đứng sau tất cả sự phát triển của đất nước",
+    "spies": "Nhiều quan chức chính phủ, lãnh đạo, tài phiệt đều thuộc quyền điều khiển của vương quốc Đô"
+  },
+
+  "relationshipWithT2": {
+    "status": "tinh_nhan",
+    "description": "Sau khi A1 bị bắn chết, A* xuất hiện và trở thành tình nhân của T2",
+    "note": "A* và T2 là 2 thế lực SIÊU VIỆT ĐỐI TRỌNG nhau. Bề ngoài là tình nhân, nhưng không ai biết được ai đang có âm mưu gì."
+  },
+
+  "storyFlags": {
+    "identityRevealed": false,
+    "isControlling": true,
+    "isFounder": true,
+    "isTimeTraveler": true,
+    "isControlledByT2": "unknown"
+  },
+
+  "relationships": {
+    "t2": {
+      "id": "t2",
+      "type": "tinh_nhan",
+      "status": "sau_khi_a1_chet",
+      "note": "A* và T2 là 2 thế lực đối trọng. Bề ngoài là tình nhân. Không ai biết ai có âm mưu gì."
+    }
+  }
+}

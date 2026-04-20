@@ -1,0 +1,206 @@
+{
+  "title": "[Cần đặt tên - Tạm thời chưa có]",
+  "genre": ["sci-fi", "psychological", "thriller", "romance"],
+  "perspective": "third_person_spirit_t2",
+  "setting": "Thủ Đô (thay thế cho Hà Nội)",
+
+  "warnings": [
+    "Bạo lực (đánh nhau, nứt xương)",
+    "Nội dung chính trị (nhạy cảm)"
+  ],
+
+  "speciesLore": {
+    "name": "Người Đô",
+    "description": "Một nhánh tiến hóa khác của loài người, đến vùng đất này trước nhân loại.",
+    "origin": "Đến vùng đất phía Nam trước, chọn sống dưới lòng đất để tránh chiến tranh, tập trung phát triển công nghệ.",
+    "abilities": [
+      "Sức mạnh thể chất vượt trội so với con người",
+      "Có thể đánh bại nhiều đối thủ cùng lúc (ví dụ: 5 tên côn đồ)",
+      "Trí tuệ cao, khả năng phân tích vượt trội"
+    ],
+    "note": "Nguồn gốc và lịch sử chi tiết sẽ được mô tả ở phần sau"
+  },
+
+  "plotSpine": {
+    "mainQuestion": "A1 là ai? T2 sẽ khám phá sự thật về A1 như thế nào?",
+    "antagonist": "A* - kẻ điều khiển A1 và các bản sao",
+    "tension": "Tình cảm T2 vs Sự thật về A1"
+  },
+
+  "acts": [
+    {
+      "act": 1,
+      "name": "Sự kiện đồn công an",
+      "summary": "T2 (ở trạng thái linh hồn) quan sát vụ việc Nguyễn Văn A đánh 5 tên côn đồ. T2 thấy được mọi thứ và đọc suy nghĩ mọi người.",
+      "scenes": [
+        {
+          "scene": 1,
+          "title": "Mở đầu",
+          "location": "Đồn công an",
+          "description": "Cảnh sát lướt TikTok, nghe tin tức về vụ đánh nhau. Thanh niên bị 5 tên côn đồ tấn công (2 xe máy, 1 xe kẹp 3ng) do xích mích giao thông, đáp trả khiến 5 người nhập viện với đòn đánh mạnh làm nứt xương."
+        },
+        {
+          "scene": 2,
+          "title": "Lấy lời khai",
+          "choices": [
+            {
+              "id": "choice_01",
+              "label": "Lấy lời khai Nguyễn Văn A",
+              "outcome": "A nói ẩn ý rằng mình không phải con người, gia đình thậm chí từng giết người. T2 (linh hồn) nghe được suy nghĩ của A.",
+              "effect": {
+                "t2.awarenessLevel": "+1",
+                "t2.connectionWithA1": "+1"
+              }
+            },
+            {
+              "id": "choice_02",
+              "label": "Lấy lời khai 5 tên côn đồ ở bệnh viện",
+              "outcome": "Nghe chúng kể bị phản công ra sao, giọng điệu thô tục. T2 thấy sự hối hận trong suy nghĩ một tên côn đồ.",
+              "effect": {
+                "t2.awarenessLevel": "+0",
+                "a1.trust": "+0"
+              }
+            }
+          ]
+        },
+        {
+          "scene": 3,
+          "title": "Xem lại video",
+          "choices": [
+            {
+              "id": "choice_02a",
+              "label": "Xem lại video lấy lời khai bên còn lại",
+              "outcome": "Xem video, thấy chi tiết hơn về lời khai."
+            },
+            {
+              "id": "choice_02b",
+              "label": "Bỏ qua",
+              "outcome": "Không xem, chuyển sang cảnh tiếp theo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "act": 2,
+      "name": "Lệnh thả người",
+      "summary": "Có lệnh từ cấp trên yêu cầu thả A, xóa tài liệu điều tra. Cảnh sát nghi ngờ.",
+      "scenes": [
+        {
+          "scene": 4,
+          "title": "Lệnh bí mật",
+          "description": "Thả tự do A, xóa hết biên bản. Hòa giải bồi thường. Xóa tin tức trên MXH, sửa narrative thành 'xích mích nhỏ, không ai bị thương nghiêm trọng'.",
+          "note": "T2 quan sát và thắc mắc - ai có quyền lực lớn đến mức này?"
+        },
+        {
+          "scene": 5,
+          "title": "Gặp A1",
+          "description": "Cảnh sát buổi tối chạy bộ, vô tình gặp A. 2 người trò chuyện. A tiếp tục nói mình không phải con người, là một chủng loài bề trên.",
+          "hintForeshadow": "Đây là hint về thân phận thật của A1 - T2 bắt đầu nghi ngờ."
+        }
+      ]
+    },
+    {
+      "act": 3,
+      "name": "T2 trở về",
+      "summary": "T2 được nhập hồn về xác, tỉnh dậy. Bắt đầu hành trình tìm hiểu A1.",
+      "scenes": [
+        {
+          "scene": 6,
+          "title": "Hồi sinh",
+          "description": "T2 nhập hồn về xác, tỉnh dậy sau nhiều năm trong trạng thái thực vật."
+        },
+        {
+          "scene": 7,
+          "title": "Mục tiêu mới",
+          "description": "T2 quyết định tìm hiểu danh tính thật của A1. Giả làm artist thực tập ở công ty A1."
+        }
+      ]
+    },
+    {
+      "act": 4,
+      "name": "Làm quen",
+      "summary": "T2 tiếp cận A1, phát sinh tình cảm. A1 vẫn thương nyc cũ.",
+      "scenes": [
+        {
+          "scene": 8,
+          "title": "Tiếp cận",
+          "description": "T2 làm quen với A1 với vai trò thực tập sinh."
+        },
+        {
+          "scene": 9,
+          "title": "Tình cảm",
+          "description": "T2 phát sinh tình cảm với A1, bắt đầu theo đuổi."
+        },
+        {
+          "scene": 10,
+          "title": "Rào cản",
+          "description": "A1 vẫn còn thương nyc cũ, khó mở lòng, vẫn muốn níu kéo nyc. T2 gặp khó khăn trong việc tiếp cận."
+        }
+      ]
+    },
+    {
+      "act": 5,
+      "name": "Sự nghiệp",
+      "summary": "Cả hai thành công trong sự nghiệp. A1 phát minh Model A1, T2 phát minh Model T2 gen art.",
+      "scenes": [
+        {
+          "scene": 11,
+          "title": "Thành công",
+          "description": "A1 thành công với Model A1. T2 thành công với Model T2 gen art."
+        }
+      ]
+    },
+    {
+      "act": 6,
+      "name": "Biến cố chính trị",
+      "summary": "Biến cố lớn về chính trị xảy ra. A1 bị kỷ luật, cách chức. T2 thăng tiến.",
+      "scenes": [
+        {
+          "scene": 12,
+          "title": "Sụp đổ",
+          "description": "A1 đột ngột bị kỷ luật chính trị, cách chức mọi chức vụ trong đảng vì vi phạm đạo đức."
+        },
+        {
+          "scene": 13,
+          "title": "Thăng tiến",
+          "description": "T2 phát huy tài năng, trở thành phó thủ tướng rồi thủ tướng."
+        }
+      ]
+    },
+    {
+      "act": 7,
+      "name": "Sự thật hé lộ",
+      "summary": "Mọi chuyện dần hé lộ. A1 thực chất là bản nhân bản của A*, một nhánh tiến hóa khác của loài người - Người Đô.",
+      "scenes": [
+        {
+          "scene": 14,
+          "title": "Reveal",
+          "description": "A1 thực chất là người nhân bản. Bản gốc là A*, kế vị vương quốc dưới lòng đất. Người Thượng đến vùng đất này trước nhân loại, chọn sống dưới lòng đất để tránh chiến tranh và tập trung phát triển công nghệ.",
+          "majorReveal": "A1 là tai mắt để theo dõi và đánh giá nhân loại, cho A* mô phỏng hóa và thao túng."
+        },
+        {
+          "scene": 15,
+          "title": "Bí mật lớn",
+          "description": "Ngoài A1 còn có A2, A3, A4... tất cả được nhân bản. Nhưng tất cả thể xác đều được điều khiển bởi cùng 1 bộ não.",
+          "majorReveal": "Bộ não khổng lồ nuôi cấy dưới lòng đất từ tế bào gốc của A* chính là thứ tạo ra 'model A1', không phải AI LLM nào cả. Đó là một bộ não sinh học."
+        }
+      ]
+    }
+  ],
+
+  "endings": {
+    "good": {
+      "description": "TBD - Anh tự viết"
+    },
+    "bad": {
+      "description": "TBD - Anh tự viết"
+    },
+    "neutral": {
+      "description": "TBD - Anh tự viết"
+    },
+    "secret": {
+      "description": "TBD - Anh tự viết"
+    }
+  }
+}

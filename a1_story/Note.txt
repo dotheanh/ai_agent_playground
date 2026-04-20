@@ -1,0 +1,214 @@
+Ok. Trước khi bắt đầu viết **truyện dạng lựa chọn (interactive / branching story)**, bạn nên chuẩn bị và lưu ý mấy điểm sau để tránh viết xong rồi bị rối hoặc phải đập đi làm lại.
+
+---
+
+## 1. Những yếu tố cần tránh (rất hay làm truyện bị fail)
+
+### Tránh “lựa chọn giả”
+
+Tức là option A/B nhưng đi đâu cũng ra cùng một kết quả, chỉ khác 1-2 câu thoại. Người đọc sẽ mất niềm tin ngay.
+
+### Tránh nhánh quá nhiều, quá sớm
+
+Đừng cho người đọc chọn liên tục ngay từ đầu. Nếu phân nhánh quá mạnh từ chapter 1, bạn sẽ **bị nổ số lượng nội dung** và tự chết vì không quản nổi.
+
+### Tránh nhân vật hành xử trái tính cách chỉ để hợp plot
+
+Nhánh khác nhau nhưng nhân vật vẫn phải có logic nhất quán.
+
+### Tránh nhồi thông tin thế giới quá dài (info dump)
+
+Interactive story cần nhịp nhanh, vì người đọc phải tương tác.
+
+### Tránh twist “vô lý”
+
+Twist ổn nhưng phải có dấu hiệu gợi trước (foreshadow), nếu không sẽ bị cảm giác như tác giả bịa.
+
+---
+
+## 2. Lời từ chối trách nhiệm (Disclaimer)
+
+Bạn nên có đoạn này ở đầu truyện, nhất là nếu có yếu tố nhạy cảm (bạo lực, tình dục, tâm lý, chính trị, tôn giáo...).
+
+Ví dụ ý chính nên có:
+
+* Đây là **tác phẩm hư cấu**
+* Mọi nhân vật/sự kiện tương đồng chỉ là trùng hợp
+* Không cổ súy bạo lực/tự hại/phân biệt đối xử
+* Có cảnh 18+ hoặc cảnh nhạy cảm thì phải ghi rõ cảnh báo nội dung
+
+*(Bạn có thể viết ngắn thôi, nhưng phải rõ.)*
+
+---
+
+## 3. Dùng tên giả, không đề cập địa danh thật
+
+Đúng. Nhưng thêm lưu ý:
+
+* Không chỉ địa danh, mà **cả trường học, công ty, bệnh viện, quán café nổi tiếng** cũng nên đổi tên.
+* Nếu muốn “cảm giác Việt Nam” thì dùng kiểu: “một thành phố ven biển”, “một khu chung cư cũ”, “một trường đại học kỹ thuật lớn”.
+
+---
+
+## 4. Sketch model nhân vật trước (Character Sheet)
+
+Cái này bắt buộc nếu bạn muốn truyện không bị loạn.
+
+Mỗi nhân vật nên có:
+
+* Tên / biệt danh
+* Tuổi, ngoại hình, giọng nói
+* Tính cách cốt lõi (3-5 từ khóa)
+* Điểm mạnh / điểm yếu
+* Mục tiêu cá nhân
+* Nỗi sợ / trauma / bí mật
+* Quan hệ với nhân vật khác
+* Giới hạn đạo đức (họ sẽ không bao giờ làm gì?)
+
+Cái này giúp bạn viết nhánh nào cũng “đúng người”.
+
+---
+
+## 5. Lập “xương sống truyện” trước khi phân nhánh
+
+Bạn nên có 1 tuyến chính gọi là:
+**Main spine / Canon route**
+
+Tuyến này trả lời:
+
+* Nhân vật chính muốn gì?
+* Trở ngại lớn nhất là gì?
+* Cao trào ở đâu?
+* Kết thúc dự kiến ra sao?
+
+Sau đó mới cho lựa chọn A/B để “bẻ” tuyến này.
+
+---
+
+## 6. Thiết kế lựa chọn sao cho có ý nghĩa
+
+Mỗi lựa chọn nên thuộc 1 trong các loại sau:
+
+* **Moral choice**: đúng/sai, tốt/xấu
+* **Risk choice**: an toàn/liều
+* **Relationship choice**: tin ai, đứng về phe nào
+* **Information choice**: hỏi thêm / bỏ qua
+* **Strategic choice**: kế hoạch A/B
+
+Nếu lựa chọn không thuộc loại nào, thường nó chỉ là “trang trí”.
+
+---
+
+## 7. Chuẩn bị hệ thống biến (flags / stats)
+
+Interactive story mạnh nhất khi có “hậu quả”.
+
+Ví dụ:
+
+* Trust(Hà) +1
+* Suspicion +1
+* Courage -1
+* Money -20
+* Knowledge: unlocked
+
+Chỉ cần vài biến thôi, đừng quá nhiều.
+
+---
+
+## 8. Chuẩn bị sơ đồ nhánh (Branch Map)
+
+Không cần vẽ đẹp, nhưng phải có:
+
+* Điểm chọn (choice node)
+* Nhánh dẫn tới đâu
+* Nhánh nào quay lại tuyến chính
+* Nhánh nào dẫn tới ending riêng
+
+Nếu không có sơ đồ, viết tới giữa sẽ rối 100%.
+
+---
+
+## 9. Quy tắc “quay về tuyến chính”
+
+Để tránh nổ nội dung, bạn nên dùng kỹ thuật:
+
+**Branch → Scene khác nhau → Merge lại một điểm chung**
+
+Tức là lựa chọn khác nhau tạo cảm giác khác, nhưng sau 1-2 cảnh sẽ quay lại cùng một trục sự kiện chính.
+
+---
+
+## 10. Cảnh báo nội dung (Content warning)
+
+Nếu truyện có:
+
+* bạo lực
+* máu me
+* quấy rối
+* tự hại
+* tình dục
+* chất kích thích
+* trauma tâm lý
+
+Thì nên ghi rõ ngay đầu chapter hoặc đầu truyện.
+
+---
+
+## 11. Tránh mô tả quá giống người thật
+
+Nếu truyện lấy cảm hứng từ đời thực:
+
+* Đừng giữ nguyên nghề + ngoại hình + tính cách + bối cảnh cùng lúc
+* Thay đổi ít nhất 2-3 yếu tố lớn để tránh “ai cũng nhận ra”
+
+---
+
+## 12. Giữ giọng kể và tense nhất quán
+
+Ví dụ bạn chọn:
+
+* ngôi thứ nhất (“tôi”)
+* hoặc ngôi thứ hai (“bạn” kiểu game)
+* hoặc ngôi thứ ba
+
+Đã chọn thì cố giữ xuyên suốt, đặc biệt trong nhánh rẽ.
+
+---
+
+## 13. Định nghĩa tone ngay từ đầu
+
+Truyện của bạn là:
+
+* hài?
+* drama?
+* thriller?
+* romance?
+* psychological?
+
+Tone quyết định cách viết thoại, nhịp truyện, và mức độ “đen tối” cho phép.
+
+---
+
+## 14. Chuẩn bị Ending Plan (cực quan trọng)
+
+Bạn nên xác định trước:
+
+* Good ending
+* Bad ending
+* Neutral ending
+* Secret ending (nếu có)
+
+Và điều kiện mở từng ending.
+
+Nếu không, truyện dễ bị “đuối” và kết thúc cụt.
+
+---
+
+Nếu bạn muốn, tôi có thể viết cho bạn 1 **template chuẩn** gồm:
+
+* Disclaimer mẫu
+* Character sheet mẫu
+* Plot spine mẫu
+* Branch map mẫu
+
+để bạn điền vào là viết được luôn.
