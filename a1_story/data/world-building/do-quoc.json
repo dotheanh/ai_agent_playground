@@ -1,6 +1,6 @@
 {
   "id": "vuong_quoc_do",
-  "name": "Vương quốc Đô",
+  "name": "Đế quốc Đô",
   "description": "Đế quốc ngầm tồn tại dưới lòng đất từ thời cổ đại, song song với nhân loại trên mặt đất",
 
   "location": {
@@ -32,7 +32,7 @@
   },
 
   "reproduction": {
-    "maleOnly": "Vương quốc Đô chỉ toàn đàn ông nắm giữ quyền lực",
+    "maleOnly": "Đế quốc Đô chỉ toàn đàn ông nắm giữ quyền lực",
     "marriage": "Người Đô kết hôn với phụ nữ loài người",
     "offspring": "Đứa con sinh ra LUÔN LUÔN chỉ có nam",
     "childSize": "Những đứa trẻ Người Đô quá to lớn so với cơ thể mẹ",
@@ -64,7 +64,7 @@
 
   "ideologyComparison": {
     "aStar": {
-      "description": "Lý tưởng độc tài của A* tuân theo quy tắc 'kẻ mạnh nhất lãnh đạo tất cả' của vương quốc Đô",
+      "description": "Lý tưởng độc tài của A* tuân theo quy tắc 'kẻ mạnh nhất lãnh đạo tất cả' của đế quốc Đô",
       "note": "A* vẫn CÒN GIỮ ĐƯỢC TÍNH CHÍNH NGHĨA của bản thân, dù cách thức thực hiện có phần CỰC ĐOAN",
       "purpose": "Thống trị nhân loại để CÙNG HỢP LỰC CHỐNG ngoài hành tinh"
     },
@@ -83,7 +83,7 @@
   "compromiseWithHumans": {
     "description": "ĐOẠN THỎA HIỆP giữa loài người với Hoàng đế Đô",
     "humanSacrifice": {
-      "history": "Các đời Hoàng đế của vương quốc Đô suốt hàng ngàn năm qua LUÔN yêu cầu các nước chư hầu HIẾN TẾ NGƯỜI cho vương quốc Đô ĂN THỊT",
+      "history": "Các đời Hoàng đế của đế quốc Đô suốt hàng ngàn năm qua LUÔN yêu cầu các nước chư hầu HIẾN TẾ NGƯỜI cho đế quốc Đô ĂN THỊT",
       "purpose": "Ăn thịt người là nghi lễ và nguồn thức ăn của Người Đô"
     },
     "warIncitement": {
@@ -101,7 +101,7 @@
     "victory": "CHÍNH A* mới là người đánh bại ông nội (Hoàng đế thứ 12) từ khi còn nhỏ",
     "crownAge": "A* sẽ trở thành TÂN HOÀNG ĐẾ (Hoàng đế thứ 13) khi đủ 27 TUỔI",
     "cannibalismBan": {
-      "action": "A* lập tức BAN HÀNH LUẬT CẤM ĂN THỊT NGƯỜI khắp vương quốc Đô ngay sau khi chiến thắng (khi cậu còn nhỏ)",
+      "action": "A* lập tức BAN HÀNH LUẬT CẤM ĂN THỊT NGƯỜI khắp đế quốc Đô ngay sau khi chiến thắng (khi cậu còn nhỏ)",
       "impact": "Đây là lý do Hoàng đế đồng ý để chính phủ TIÊM THUỐC KHẮC CHẾ lên A* nhằm tránh hậu họa bị tranh ngôi"
     }
   },
@@ -113,7 +113,7 @@
   },
 
   "ancestorCuto": {
-    "identity": "NGƯỜI SÁNG LẬP vương quốc Đô - CHÍNH LÀ A*!!!",
+    "identity": "NGƯỜI SÁNG LẬP đế quốc Đô - CHÍNH LÀ A*!!!",
     "appearance": "Chỉ xuất hiện từ TRÊN CAO mỗi khi làm lễ công nhận",
     "identityHidden": "CHƯA TỪNG AI thật sự nhìn thấy mặt cụ tổ",
     "onlyWitness": "Chỉ có con trai cụ tổ từng nhìn thấy (hàng ngàn năm trước)",
@@ -125,7 +125,7 @@
   "timeLoopParadox": {
     "explanation": "A* từ tương lai du hành về thời tiền sử để lập quốc, trở thành vua đầu tiên và cũng là vị trí mà sau này hắn sẽ nắm giữ",
     "closedLoop": "Đây là CLOSED TIME LOOP PARADOX: A* đi tàu máy thời gian về quá khứ, trở thành chính mình",
-    "pastMission": "A* đã từng cố lãnh đạo loài người và vương quốc Đô cùng đoàn kết chống lại các thế lực ngoài hành tinh nhưng THẤT BẠI",
+    "pastMission": "A* đã từng cố lãnh đạo loài người và đế quốc Đô cùng đoàn kết chống lại các thế lực ngoài hành tinh nhưng THẤT BẠI",
     "finalMoment": "Vào giây phút cuối cùng trước khi thế giới diệt vong, A* đã thực hiện BƯỚC NHẢY VỌT THỜI GIAN quay trở về quá khứ và TRỞ THÀNH CỤ TỔ",
     "ancestorConnection": {
       "voluntary": "Con trai cụ tổ được TỰ NGUYỆN truyền ngôi",
@@ -142,8 +142,8 @@
   },
 
   "worldRecognition": {
-    "public": "Dân chúng nghĩ A1 bị điên (vì không biết về sự tồn tại của vương quốc Đô)",
-    "reality": "Các cường quốc lớn trên thế giới BIẾT và rất KÍNH NỂ vương quốc Đô"
+    "public": "Dân chúng nghĩ A1 bị điên (vì không biết về sự tồn tại của đế quốc Đô)",
+    "reality": "Các cường quốc lớn trên thế giới BIẾT và rất KÍNH NỂ đế quốc Đô"
   },
 
   "relatedCharacters": ["a_star", "a1", "a2", "a3", "a4", "a5", "a6", "a7"]

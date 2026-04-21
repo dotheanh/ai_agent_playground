@@ -54,7 +54,7 @@
       "genTheft": "Mẹ T2 tiếp xúc với xác mẹ A* và lấy được mẫu gen tiến hóa của A*"
     },
     "aStarBodyHiding": {
-      "description": "Mẹ của T2 chính là người đã CHE GIẤU cơ thể gốc A* với cả chính phủ lẫn vương quốc Đô",
+      "description": "Mẹ của T2 chính là người đã CHE GIẤU cơ thể gốc A* với cả chính phủ lẫn đế quốc Đô",
       "location": "Cơ thể A* vẫn còn trong buồng nuôi suốt nhiều năm qua",
       "role": "Mẹ T2 nghiên cứu và chăm sóc cho cơ thể gốc A*",
       "release": "Đến ngày A1 chết thì chính bà đã THẢ A* RA để thay thế"
@@ -81,7 +81,7 @@
       "id": "t2_father",
       "name": "[Cần bổ sung tên]",
       "role": "Chính trị gia",
-      "affiliation": "Thuộc quyền điều khiển của vương quốc Đô"
+      "affiliation": "Thuộc quyền điều khiển của đế quốc Đô"
     }
   },
 

@@ -8,7 +8,7 @@
   "basic": {
     "age": "Rất già (đã ra nước ngoài hàng trăm năm)",
     "status": "TỰ XƯNG HOÀNG ĐẾ LÂM THỜI sau khi A* đánh bại ông từ năm 10 tuổi",
-    "occupation": "Hoàng đế (lâm thời) của vương quốc Đô",
+    "occupation": "Hoàng đế (lâm thời) của đế quốc Đô",
     "maritalStatus": "đã có con"
   },
 
@@ -25,7 +25,7 @@
   },
 
   "backstory": {
-    "title": "Hoàng đế thứ 12 của vương quốc Đô",
+    "title": "Hoàng đế thứ 12 của đế quốc Đô",
     "description": "Càng về sau càng tha hóa, bóc lột thuộc địa và ưa bạo lực. Từ khi A* đánh bại ông từ năm 10 tuổi, ông lấy lý do A* còn nhỏ để TẠM HOÃN truyền ngôi và tự xưng Hoàng đế Lâm Thời.",
     "afterDefeat": "Ông đã ra nước ngoài từ hàng trăm năm, trở nên rất già (người Đô sống bên ngoài sẽ lão hóa bình thường)",
     "reasonForExile": "Sau khi A* đánh bại và cấm ăn thịt người, ông không còn đất sống trong Đô"

@@ -8,7 +8,7 @@
   "basic": {
     "age": "Hàng ngàn năm (thực chất là người du hành thời gian)",
     "ageToCrown": 27,
-    "occupation": "Người kế vị và là vị vua CUỐI CÙNG trị vì vương quốc Đô, tự xưng Hoàng đế",
+    "occupation": "Người kế vị và là vị vua CUỐI CÙNG trị vì đế quốc Đô, tự xưng Hoàng đế",
     "party": "Đảng Đại Việt Anh - Đảng độc tài",
     "maritalStatus": "tinh_nhan_cua_t2_sau_khi_a1_chet"
   },
@@ -41,7 +41,7 @@
       "note": "A* là vị vua CUỐI CÙNG"
     },
     "colonies": "Hệ thống thuộc địa ngầm khắp nơi trên thế giới",
-    "worldRecognition": "Các cường quốc lớn trên thế giới biết và rất kính nể vương quốc Đô"
+    "worldRecognition": "Các cường quốc lớn trên thế giới biết và rất kính nể đế quốc Đô"
   },
 
   "species": {
@@ -73,7 +73,7 @@
   "leadership": {
     "style": "Quyền lực CỨNG",
     "description": "Ngông cuồng, tự xưng hoàng đế, cai trị bằng bạo lực và quân đội",
-    "publicPerception": "Dân chúng nghĩ hắn bị điên (vì không biết về vương quốc Đô)",
+    "publicPerception": "Dân chúng nghĩ hắn bị điên (vì không biết về đế quốc Đô)",
     "note": "Thật ra được các cường quốc kính nể"
   },
 
@@ -103,7 +103,7 @@
       "temporaryEmperorAgree": "Hoàng đế lâm thời ĐỒNG TÌNH vì SỢ A* quá mạnh sẽ đe dọa đế chế của mình"
     },
     "cannibalismBan": {
-      "action": "A* lập tức BAN HÀNH LUẬT CẤM ĂN THỊT NGƯỜI khắp vương quốc Đô ngay sau khi chiến thắng (khi cậu còn nhỏ)",
+      "action": "A* lập tức BAN HÀNH LUẬT CẤM ĂN THỊT NGƯỜI khắp đế quốc Đô ngay sau khi chiến thắng (khi cậu còn nhỏ)",
       "reason": "Đây là lý do hoàng đế chấp nhận để cho chính phủ TIÊM THUỐC KHẮC CHẾ lên A* để TRÁNH HẬU HỌA bị tranh ngôi"
     }
   },
@@ -131,7 +131,7 @@
 
   "infiltration": {
     "note": "A2-A7 hoạt động trong bộ máy nhà nước trên mặt đất, trở thành nhà khoa học, cố vấn, chính trị gia, tham mưu - những người âm thầm đứng sau tất cả sự phát triển của đất nước",
-    "spies": "Nhiều quan chức chính phủ, lãnh đạo, tài phiệt đều thuộc quyền điều khiển của vương quốc Đô"
+    "spies": "Nhiều quan chức chính phủ, lãnh đạo, tài phiệt đều thuộc quyền điều khiển của đế quốc Đô"
   },
 
   "relationshipWithT2": {
