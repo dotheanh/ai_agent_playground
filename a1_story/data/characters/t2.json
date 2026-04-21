@@ -8,6 +8,8 @@
   "basic": {
     "birthday": "2000-01-01",
     "age": 18,
+    "origin": "Thủ Đô (miền Bắc)",
+    "accent": "GIỌNG BẮC - toàn bộ lời thoại nói với giọng miền Bắc",
     "occupationPreIncident": "Học sinh / Sinh viên",
     "familyBackground": "Con gái duy nhất của gia đình chính trị gia giàu có ở Thủ Đô",
     "maritalStatus": "single"
@@ -22,6 +24,11 @@
     "strengths": ["nhanh nhạy", "học hỏi giỏi", "quyết đoán", "gen art talent"],
     "weaknesses": ["có toan tính chính trị"],
     "values": ["công bằng", "chân lý", "tự do"],
+    "beliefs": {
+      "spiritualism": "TIN VÀO TÂM LINH, MA QUỶ. Có lẽ trong lúc du hành khắp thế giới thì T2 đã nhìn thấy điều gì đó.",
+      "note": "Trái ngược với A1 - người luôn tin vào khoa học và lý tính"
+    },
+    "debates": "Hai người đôi khi có những cuộc TRINH LUẬN với nhau về tâm linh vs khoa học",
     "moralBoundaries": []
   },
 
@@ -66,20 +73,25 @@
   "relationshipWithAStar": {
     "status": "tinh_nhan_sau_khi_a1_chet",
     "description": "Bề ngoài là tình nhân (sau khi A1 bị bắn chết và A* xuất hiện), nhưng không ai biết được ai đang có âm mưu gì",
-    "note": "A* và T2 là 2 thế lực SIÊU VIỆT ĐỐI TRỌNG nhau"
+    "note": "A* và T2 là 2 thế lực SIÊU VIỆT ĐỐI TRỌNG nhau",
+    "dynamic": {
+      "表面": "Bề ngoài thì hai người nhìn có vẻ ĐỐI ĐẦU nhau",
+      "thucChat": "Nhưng thật ra là tạo ra tình thế TRÊN ĐE DƯỚI BÚA, CÙNG NHAU kiểm soát và cai trị",
+      "ambiguity": "Không biết ai là chính nghĩa, tốt xấu. Thậm chí có thể là cả hai cùng tốt hoặc cả hai cùng xấu."
+    }
   },
 
   "family": {
     "father": {
       "id": "t2_father",
-      "name": "[Cần bổ sung tên]",
+      "name": "Sơn",
       "role": "Chính trị gia",
       "description": "Một chính trị gia quyền lực",
       "affiliation": "Thuộc quyền điều khiển của vương quốc Đô"
     },
     "mother": {
       "id": "t2_mother",
-      "name": "[Cần bổ sung tên]",
+      "name": "Thủy",
       "role": "Bác sĩ, Nhà khoa học",
       "description": "Nhà khoa học hàng đầu",
       "secretRole": "Người tham gia vào quá trình nhân bản vô tính A*",
@@ -97,6 +109,25 @@
   "inGamePersona": {
     "projectName": "Model T2",
     "description": "Phát minh Model T2 gen art, thành công trong sự nghiệp"
+  },
+
+  "geneticEnhancement": {
+    "origin": "T2 là người đã được CẢI TẠO GEN, chọn lọc từ những gen đặc biệt nhất của A*",
+    "method": "Mẹ của T2 ngay từ khi mang thai đã đưa con mình vào buồng nuôi, cải tạo lại gen dựa trên chính những gen của A*",
+    "comparison": {
+      "aStar": "A* mạnh do BẨM SINH",
+      "t2": "T2 cũng có năng lực tương tự nhờ CAN THIỆP NHÂN TẠO"
+    },
+    "moralQuestion": "Câu hỏi đặt ra: Có nên can thiệp gen không? Làm vậy có khiến mẹ T2 trở thành người xấu không?"
+  },
+
+  "politicalManipulation": {
+    "a1AffairRumor": {
+      "description": "CHÍNH T2 là người đã ĐƯA RA THÔNG TIN về việc A1 ngoại tình sau lưng nyc cũ",
+      "consequence": "Dẫn tới việc A1 bị KỶ LUẬT và CÁCH CHỨC khỏi Đảng",
+      "motive": "Muốn TRANH GIÀNH VỊ TRÍ chính trị - sau đó T2 đã được THĂNG CHỨC",
+      "timing": "Trong lúc A1 thất vọng vì bị kỷ luật, T2 ở bên cạnh an ủi, chăm sóc và dần dần CHIẾM ĐƯỢC TÌNH CẢM của A1"
+    }
   },
 
   "politicalCareer": {

@@ -1,13 +1,15 @@
 {
   "id": "a_star",
-  "name": "A*",
-  "alias": "A-Star",
+  "name": "Đô Đại Việt Anh",
+  "alias": "A*, Đại Việt Anh",
   "role": "antagonist",
   "isMale": true,
 
   "basic": {
     "age": "Hàng ngàn năm (thực chất là người du hành thời gian)",
-    "occupation": "Người kế vị và là vị vua CUỐI CÙNG trị vì vương quốc Đô",
+    "ageToCrown": 27,
+    "occupation": "Người kế vị và là vị vua CUỐI CÙNG trị vì vương quốc Đô, tự xưng Hoàng đế",
+    "party": "Đảng Đại Việt Anh - Đảng độc tài",
     "maritalStatus": "tinh_nhan_cua_t2_sau_khi_a1_chet"
   },
 
@@ -80,15 +82,24 @@
       "id": "emperor_12",
       "name": "[Cần bổ sung tên]",
       "role": "Hoàng đế thứ 12",
-      "description": "Càng về sau càng tha hóa, bóc lột thuộc địa và ưa bạo lực"
+      "description": "Càng về sau càng tha hóa, bóc lột thuộc địa và ưa bạo lực. Là người đứng sau giới lãnh đạo nước TÂY, khơi mào chiến tranh để có cớ ăn thịt người. Là PHẢN DIỆN LỚN của toàn bộ câu chuyện.",
+      "villainRole": "Chính ông này đem quân xâm lược nước NAM trong cuộc chiến tranh thứ hai"
     },
     "father": {
       "id": "a_star_father",
       "name": "[Cần bổ sung tên]",
       "role": "Con của Hoàng đế thứ 12",
-      "description": "Đi theo chính nghĩa, không làm Lễ Chiến Đấu để nối ngôi cha mà chọn hòa bình. Hỗ trợ cách mạng đánh bại đế chế của chính cha mình."
+      "description": "TỪ CHỐI thực hiện Lễ Chiến Đấu với cha mình (Hoàng đế) để được truyền ngôi. THAY VÀO ĐÓ đứng về phía LOÀI NGƯỜI để chống lại Hoàng đế."
     },
-    "origin": "Sinh ra sau khi cha mình (con của Hoàng đế) đánh bại đế chế của ông nội"
+    "origin": "Sinh ra trong giai đoạn cha mình đứng về phía nhân loại chống lại hoàng đế",
+    "earlyVictory": {
+      "description": "CHÍNH A* mới là người đã ĐÁNH BẠI ÔNG NỘI (Hoàng đế thứ 12) từ khi còn nhỏ",
+      "crownAge": "A* sẽ trở thành TÂN HOÀNG ĐẾ (Hoàng đế thứ 13) khi đủ 27 tuổi"
+    },
+    "cannibalismBan": {
+      "action": "A* lập tức BAN HÀNH LUẬT CẤM ĂN THỊT NGƯỜI khắp vương quốc Đô ngay sau khi chiến thắng (khi cậu còn nhỏ)",
+      "reason": "Đây là lý do hoàng đế chấp nhận để cho chính phủ TIÊM THUỐC KHẮC CHẾ lên A* để TRÁNH HẬU HỌA bị tranh ngôi"
+    }
   },
 
   "clones": {
@@ -100,7 +111,16 @@
       "note": "Các nhà chính trị vẫn tưởng A1 là bản thể gốc"
     },
     "controlMethod": "Tất cả thể xác đều được điều khiển bởi cùng 1 bộ não",
-    "brainOrigin": "Bộ não khổng lồ nuôi cấy dưới lòng đất từ tế bào gốc của A*, chính là thứ tạo ra 'model A1' - không phải AI LLM nào cả"
+    "brainOrigin": "Bộ não khổng lồ nuôi cấy dưới lòng đất từ tế bào gốc của A*, chính là thứ tạo ra 'model A1' - không phải AI LLM nào cả",
+    "roles": {
+      "A1": "Lập trình viên game (bi kỷ luật và cách chức, tạo đảng Đại Việt Anh)",
+      "A2": "Cố vấn chính trị cấp cao",
+      "A3": "Quân sự, chiến đấu, vũ khí",
+      "A4": "Kinh tế",
+      "A5": "Khoa học",
+      "A6": "Công nghệ",
+      "A7": "Lãnh đạo công an"
+    }
   },
 
   "infiltration": {
@@ -113,6 +133,8 @@
     "description": "Sau khi A1 (bản sao) bị ám sát và chết, A* (bản gốc) xuất hiện thay thế và trở thành tình nhân của T2",
     "note": "A* và T2 là 2 thế lực SIÊU VIỆT ĐỐI TRỌNG nhau. Bề ngoài là tình nhân, nhưng không ai biết được ai đang có âm mưu gì."
   },
+
+  "worldBuildingRef": "Xem chi tiết tại: data/world-building/vuong-quoc-do.json",
 
   "storyFlags": {
     "identityRevealed": false,
