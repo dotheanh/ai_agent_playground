@@ -4,14 +4,14 @@
                                    ACT 1: SỰ KIỆN ĐỒN CÔNG AN
 ================================================================================
 
-Mở đầu câu chuyện tại một đồn công an. Các cán bộ lướt TikTok và nghe tin
-tức về một vụ ẩu đả. Do xích mích giao thông giữa 5 tên côn đồ và 1 chàng thanh niên trẻ dẫn đến đánh nhau. 5 tên côn đồ vây đánh chàng thanh niên, nhưng ko ngờ lại bị đáp trả dữ dội khiến cả 5 tên đều phải nhập viện với những chấn thương nghiêm trọng.
+Mở đầu câu chuyện tại một đồn công an. Các cán bộ công an trước giờ làm việc đang lướt TikTok và nghe tin tức về một vụ ẩu đả. Do xích mích giao thông giữa 5 tên côn đồ và 1 chàng thanh niên trẻ dẫn đến đánh nhau. 5 tên côn đồ vây đánh chàng thanh niên, nhưng ko ngờ lại bị đáp trả dữ dội khiến cả 5 tên đều phải nhập viện với những chấn thương nghiêm trọng.
 
-Một cán bộ công an bước vào phòng thẩm vấn. Trùng hợp thay, người được lấy lời khai lại chính là chàng thanh niên đã tấn công 5 tên côn đồ. Ban đầu ng công an cũng lấy thông tin như bình thường, và ng thanh niên tự nhận tên của mình là Nguyễn Văn A. ng công an khá bất ngờ vì nghe nó ko giống như một cái tên thật, nhưng sau khi kiểm tra giấy tờ thì cũng xác nhận được đó là tên của chàng thanh niên trong giấy tờ.
+Một cán bộ công an bước vào phòng lấy lời khai. Trùng hợp thay, người được lấy lời khai lúc này lại chính là chàng thanh niên trên clip tiktok vừa rồi, ng đã một mình đánh lại cả 5 tên côn đồ. Ban đầu ng công an cũng lấy thông tin như bình thường, và ng thanh niên tự nhận tên của mình là Nguyễn Văn A. ng công an khá bất ngờ vì nghe nó ko giống như một cái tên thật, nhưng sau khi kiểm tra giấy tờ thì cũng xác nhận được đó là tên của chàng thanh niên trong giấy tờ. Chàng thanh niên nói rằng anh công an có thể gọi tôi là An cũng được vì mọi người toàn gọi như thế. Sau đó anh công an kiểm tra giấy tờ của chàng thanh niên và tra cứu dữ liệu trên hệ thống thì biết được một số thông tin của anh ấy. Anh công an quay trở lại phòng lấy lời khai và xác nhận một số thông tin. Người thanh niên đó đang là lập trình viên tại một công ty game có tiếng. Mẹ của anh ấy đã mất trong lúc hạ sinh ra anh, còn cha thì cũng đã mất tích từ trước cả khi anh được ra đời. Khi nói về những thông tin này thì người công an cũng tỏ ra khá đáng tiếc thi thể nhắc tới những chuyện đau buồn. Nhưng người thanh niên lại tỏ vẻ khá bình thản và xác nhận thông tin đó.
 
+Sau đó thì công an bắt đầu lấy lời khai của anh thanh niên về sự việc đã xảy ra
 [Nội dung lời khai của chàng thanh niên là khi đang dừng đèn đỏ trên đường ... thì có nhóm thanh niên húc vào từ phía sau. chúng đi 2 xe, 1 chiếc tống 3. ko những ko xin lỗi mà còn chửi mắng. ban đầu A đã xin lỗi và im lặng rời đi, nhưng lại bị đuổi theo gây hấn và tấn công => A đánh lại, nghĩ là mình phòng vệ chính đáng. nhưng ra tay quá mạnh nên cả đám côn đồ nhập viện]
 
-Sau khi lấy lời khai khớp vs kết quả điều tra, cán bộ công an bổ sung rằng đám côn đồ đó đã nằm trong danh sách theo dõi của quận từ lâu vì có tiền án. Thế nhưng hành động ra tay của A lại quá mạnh, cần phải xác minh pháp y xem có còn nằm trong ngưỡng phòng vệ chính đáng hay ko. Cán bộ cũng tỏ ra rất khâm phục khí phách của A và hỏi rằng anh có từng học võ hay thi đấu ko mà khỏe tới vậy.
+Sau khi lấy lời khai khớp vs kết quả điều tra, cán bộ công an bổ sung rằng đám côn đồ đó đã nằm trong danh sách theo dõi của quận từ lâu vì có tiền án. Thế nhưng hành động ra tay của A lại quá mạnh, cần phải xác minh pháp y xem có còn nằm trong ngưỡng phòng vệ chính đáng hay ko. Nhưng rồi cán bộ cũng tỏ ra rất khâm phục khí phách của A và hỏi rằng anh có từng học võ hay thi đấu ko mà khỏe tới vậy.
 
 Lúc này, A bắt đầu đổi sang giọng điệu bí hiểm. A nói rằng, thật ra tôi ko phải con người. cán bộ nghe vậy thì cũng chỉ nghĩ là A đang nói đùa. Sau đó, A lại nói rằng, ngày xưa ông của tôi đã từng giết rất nhiều người. Cán bộ nghe vậy thì sượng lại một chút, nhưng rồi cũng vui vẻ cười và nói rằng có phải ngày xưa ông của cậu từng đi lính trong chiến tranh và diệt nhiều quân địch ko. A chỉ mỉm cười nhẹ đầy ẩn ý.
 
@@ -19,20 +19,26 @@ Lúc này, A bắt đầu đổi sang giọng điệu bí hiểm. A nói rằng,
                               ACT 2: LỆNH THẢ NGƯỜI
 ================================================================================
 
-Sau đó, có một lệnh bí mật từ cấp trên yêu cầu:
+Sau khi ng cảnh sát rời khỏi phòng lấy lời khai thì lại bất ngờ nhận được một mệnh lệnh bí mật từ cấp trên yêu cầu:
 
   - Thả tự do Nguyễn Văn A
   - Xóa hết tài liệu biên bản điều tra
-  - Hòa giải bồi thường
-  - Xóa sạch tin tức trên mạng xã hội, sửa narrative thành "xích mích nhỏ,
-    không ai bị thương nghiêm trọng, đã hòa giải"
+  - thông báo rằng bên bị đánh đã nhận được số tiền bồi thường và đồng ý hòa giải
+  
 
-Cảnh sát rất lấy làm lạ trước động thái này. Ai có quyền lực lớn đến mức
-này?
+Cảnh sát rất lấy làm lạ trước động thái này. Ai có quyền lực lớn đến mức này? Vừa có khả năng ngăn chặn mọi thông tin, lại vừa sẵn sàng vung tiền để hòa giải với những kẻ mà lẽ ra phải là người có tội
 
-Một buổi tối, khi cảnh sát đi chạy bộ, vô tình gặp A. Hai người trò chuyện.
-A tiếp tục nói rằng mình không phải con người, mà là một chủng loài bề trên.
-Đây là hint đầu tiên về thân phận thật của A1 mà T2 (linh hồn) ghi nhận.
+Thậm chí sau khi người cảnh sát xem lại đoạn video đưa tin đánh nhau trên TikTok thì nhận ra đoạn video đó đã bị xóa mất, thay vào đó chỉ có những dòng tin tức ngắn gọn về chỉ có một số thanh niên có xung đột nhỏ vì giao thông nhưng không có ai bị thương tích nghiêm trọng và đã được hòa giải. Trong lòng người cảnh sát có vô vàn Câu hỏi khó giải đáp
+
+Đến buổi tối khi người cảnh sát đó chạy bộ bên bờ hồ thì trong đầu vẫn còn ngập tràn những câu hỏi về sự việc vừa xảy ra hôm nay. Trước giờ rất hiếm khi nào có những mệnh lệnh như thế này Rốt cuộc thì người thanh niên đó là ai mà cấp trên lại phải ra lệnh xóa sạch mọi thông tin liên quan đến vụ án này. Những câu nói của người thanh niên đó về chuyện người đó không phải là một con người và gia đình của hắn đã từng giết người có phải là sự thật hay không
+
+Bất ngờ thì người cảnh sát lại gặp lại chàng thanh niên đó trong lúc chạy bộ. Sau khi Chào hỏi xã giao thì An lại tiếp tục nói rằng mình không phải con người, mà là một chủng loài thượng đẳng bề trên. Người cảnh sát nghe vậy thì vẫn tỏ ra rất khó hiểu. Sau đó thì An lại bắt đầu nói
+
+"suốt hàng ngàn năm qua, loài người đã luôn nghĩ mình là kẻ đứng đầu của chuỗi thức ăn, là giống loài thượng đẳng nhất trên trái đất này. Loài người cứ thế nghiễm nhiên cho mình cái quyền được khai thác toàn bộ tài nguyên trên trái đất, kiểm soát, tiêu diệt và ăn thịt bất cứ loại sinh vật nào mà mình muốn...
+[Đoạn này mở rộng thêm chút Để cho thấy con người đã lộng hành với các loài sinh vật khác như thế nào] 
+Rồi An hỏi người cảnh sát rằng nếu như đến một ngày nhưng lại nhận ra còn một chủng lòai khác ở bên trên mình, xem mình như một lời xin vật tầm thường và có đủ quyền uy để thống trị toàn bộ loài người thì chuyện gì sẽ xảy ra
+
+[Đây là hint đầu tiên về thân phận thật của A1 mà T2 (linh hồn) ghi nhận.]
 
 ================================================================================
                               ACT 3: T2 TRỞ VỀ
