@@ -130,6 +130,17 @@
     }
   },
 
+  "memoryManipulation": {
+    "note": "ÂM MƯU ĐEN TỐI NHẤT của T2",
+    "action": "Dùng năng lực CAN THIỆP và ĐIỀU KHIỂN SUY NGHĨ để XÓA KÝ ỨC về Vy khỏi A*",
+    "trigger": "Ngay sau khi A1 bị bắn và A* quay về thay thế",
+    "purpose": "ĐỘC CHIẾM tình cảm của A* - T2 không muốn A* nhớ về người cũ",
+    "irony": "Vy VẪN CÒN SỐNG bình thường ngoài kia, nhưng A* hoàn toàn quên cô ấy",
+    "result": "A* mất hoàn toàn ký ức về Vy, T2 trở thành người phụ nữ DUY NHẤT trong ký ức của hắn",
+    "morality": "Đây là hành động XÁM ĐEN trong nhân cách T2 - dùng năng lực để thao túng cảm xúc người khác",
+    "irony": "T2 yêu A* thật lòng, nhưng cách cô ấy giữ tình yêu đó lại là bẩn thỉu"
+  },
+
   "politicalCareer": {
     "startingPoint": "Sau biến cố chính trị",
     "positions": ["phó thủ tướng", "thủ tướng"],

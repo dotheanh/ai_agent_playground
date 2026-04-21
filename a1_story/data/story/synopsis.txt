@@ -357,6 +357,35 @@ REVEAL 13: A* ĐÁNH BẠI ÔNG NỘI VÀ CẤM ĂN THỊT
   NGAY SAU KHI chiến thắng, A* đã BAN HÀNH LUẬT CẤM ĂN THỊT NGƯỜI khắp
   vương quốc Đô.
 
+REVEAL 14: T2 XÓA KÝ ỨC VỀ VY - ÂM MƯU ĐEN TỐI NHẤT
+  Sự khác biệt DUY NHẤT giữa A1 và A*: A1 đã PHÁT SINH TÌNH CẢM THẬT SỰ
+  với người yêu cũ (Vy). Đây là điều mà A* (bản gốc) không có.
+
+  LÝ DO CHIA TAY:
+  - A1 đã từng LỪA DỐI và NGOẠI TÌNH sau lưng Vy trong lúc 2 ng còn quen nhau
+  - Vy phát hiện và chia tay
+  - A1 ân hận, cố gắng NÍU KÉO nhưng Vy không quay lại
+
+  HÀNH ĐỘNG CỦA T2:
+  NGAY SAU KHI A1 bị bắn và A* quay về thay thế, T2 đã DÙNG NĂNG LỰC
+  CAN THIỆP và ĐIỀU KHIỂN SUY NGHĨ của mình để XÓA HOÀN TOÀN KÝ ỨC
+  về Vy khỏi A*.
+
+  MỤC ĐÍCH CỦA T2:
+  - ĐỘC CHIẾM tình cảm của A* - không muốn A* nhớ về người cũ
+  - T2 trở thành người phụ nữ DUY NHẤT trong ký ức của A*
+
+  IRONY BI THẢM:
+  - Vy VẪN CÒN SỐNG bình thường ngoài kia
+  - A* hoàn toàn QUÊN VY - đối với hắn, Vy chưa từng tồn tại
+  - Nhưng A1 đã chết vì bảo vệ Vy trong vụ ám sát
+  - T2 yêu A* THẬT LÒNG, nhưng cách cô giữ tình yêu đó lại là BẨN THỈU
+  - Đây là hành động XÁM ĐEN trong nhân cách T2
+
+  KẾT QUẢ: Sau khi A* thay thế A1, hắn MẤT HOÀN TOÀN KÝ ỨC về Vy.
+  Tất cả những gì A1 cảm nhận được về Vy - tình yêu, sự day dứt, nỗi
+  đau, cả cái chết vì bảo vệ cô ấy - đều biến mất khỏi A*.
+
 ================================================================================
                         WORLD BUILDING: VƯƠNG QUỐC ĐÔ
 ================================================================================

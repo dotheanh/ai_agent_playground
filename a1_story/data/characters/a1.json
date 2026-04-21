@@ -39,8 +39,8 @@
       }
     },
     "formerRelationship": {
-      "id": "nyc_cu",
-      "description": "Người yêu cũ - A1 vẫn còn chấp niệm, muốn níu kéo dù đã chia tay"
+      "id": "vy",
+      "description": "Người yêu cũ - A1 đã từng lừa dối và ngoại tình sau lưng Vy, khiến cô phát hiện và chia tay. A1 ân hận, vẫn còn chấp niệm, muốn níu kéo dù đã chia tay."
     },
     "currentPhase": "Sống ẩn danh trong xã hội loài người, đang trong giai đoạn sám hối"
   },
@@ -67,7 +67,12 @@
     "purpose": "Tai mắt để theo dõi và đánh giá nhân loại cho A* mô phỏng và thao túng",
     "siblings": ["A2", "A3", "A4", "A5", "A6", "A7"],
     "hintDialogue": "ta không phải con người, ta là một chủng loài bề trên",
-    "death": "An bị ám sát (bắn) khi bảo vệ người yêu cũ. A1 chết đi và A* (bản gốc) xuất hiện thay thế."
+    "death": "An bị ám sát (bắn) khi bảo vệ người yêu cũ. A1 chết đi và A* (bản gốc) xuất hiện thay thế.",
+    "uniqueTrait": {
+      "description": "A1 vẫn THÔNG MINH như A* - việc bị ức chế thể chất KHÔNG khiến hắn kém đi",
+      "note": "A1 là thân xác dưới quyền chỉ huy của bộ não A*, chỉ là hành xử GIỐNG CON NGƯỜI BÌNH THƯỜNG để thu thập dữ liệu về loài người",
+      "onlyDifference": "ĐIỂM KHÁC BIỆT DUY NHẤT giữa A1 và A*: A1 đã PHÁT SINH TÌNH CẢM THẬT SỰ với người yêu cũ (Vy)"
+    }
   },
 
   "suppression": {
@@ -93,18 +98,23 @@
   },
 
   "relationships": {
-    "nyc_cu": {
-      "id": "nyc_cu",
-      "name": "[Cần bổ sung tên]",
+    "vy": {
+      "id": "vy",
+      "name": "Vy",
       "type": "ex",
       "status": "chia_tay",
-      "note": "A1 vẫn muốn níu kéo"
+      "note": "Người yêu cũ - ĐIỂM KHÁC BIỆT DUY NHẤT giữa A1 và A*. A1 đã THẬT SỰ yêu Vy. Hắn luôn muốn níu kéo, mắc kẹt trong quá khứ.",
+      "memoryLoss": {
+        "description": "Khi A* quay về thay thế A1, hắn MẤT HOÀN TOÀN KÝ ỨC về Vy",
+        "reason": "T2 đã âm thầm dùng năng lực CAN THIỆP SUY NGHĨ để XÓA ký ức này"
+      },
+      "deathConnection": "An bị bắn khi BẢO VỆ Vy - đây là hành động của A1 thật, không phải A*"
     },
     "t2": {
       "id": "t2",
       "type": "loveInterest",
       "status": "unknown",
-      "note": "T2 theo đuổi A1, nhưng A1 chưa thể mở lòng"
+      "note": "T2 theo đuổi A1, nhưng A1 chưa thể mở lòng vì vẫn thương Vy"
     }
   }
 }
