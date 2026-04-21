@@ -130,7 +130,7 @@
       "id": "a_star",
       "type": "tinh_nhan",
       "status": "sau_khi_a1_chet",
-      "note": "Sau khi A1 chết, T2 và A* trở thành tình nhân. Nhưng không ai biết ai đang có âm mưu gì."
+      "note": "Sau khi A1 (bản sao) bị ám sát chết, A* (bản gốc) xuất hiện thay thế và T2 trở thành tình nhân của hắn. Không ai biết ai đang có âm mưu gì."
     },
     "mother": {
       "id": "t2_mother",

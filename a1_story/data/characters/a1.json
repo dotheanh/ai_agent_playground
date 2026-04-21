@@ -2,6 +2,8 @@
   "id": "a1",
   "name": "Nguyễn Văn A",
   "alias": "A1",
+  "nickname": "An",
+  "nicknameNote": "Những người quen xung quanh đều gọi anh là An vì dễ gọi. An là tên thường gọi, A1 là tên khi bắt đầu thể hiện quyền lực hoàng đế nước Đô với cả thế giới.",
   "role": "protagonist",
   "isMale": true,
 
@@ -26,6 +28,16 @@
 
   "backstory": {
     "summary": "Có quá khứ phức tạp, từng có mối quan hệ sai lầm. Đang sám hối và muốn sống ngay thẳng.",
+    "family": {
+      "father": {
+        "status": "mất tích",
+        "note": "Cha của An mất tích từ trước khi An ra đời - không ai biết ở đâu, sống hay đã chết"
+      },
+      "mother": {
+        "status": "đã mất",
+        "note": "Mẹ của An mất trong lúc hạ sinh An - sinh con xong thì qua đời"
+      }
+    },
     "formerRelationship": {
       "id": "nyc_cu",
       "description": "Người yêu cũ - A1 vẫn còn chấp niệm, muốn níu kéo dù đã chia tay"
@@ -46,6 +58,7 @@
 
   "secretIdentity": {
     "isClone": true,
+    "cloneOf": "A*",
     "isBelievedToBeOriginal": true,
     "note": "Các nhà chính trị vẫn tưởng A1 là bản thể gốc của A*",
     "originalId": "a_star",
@@ -53,7 +66,8 @@
     "origin": "Vương quốc Đô dưới lòng đất, song song với nhân loại suốt hàng ngàn năm",
     "purpose": "Tai mắt để theo dõi và đánh giá nhân loại cho A* mô phỏng và thao túng",
     "siblings": ["A2", "A3", "A4", "A5", "A6", "A7"],
-    "hintDialogue": "ta không phải con người, ta là một chủng loài bề trên"
+    "hintDialogue": "ta không phải con người, ta là một chủng loài bề trên",
+    "death": "An bị ám sát (bắn) khi bảo vệ người yêu cũ. A1 chết đi và A* (bản gốc) xuất hiện thay thế."
   },
 
   "suppression": {

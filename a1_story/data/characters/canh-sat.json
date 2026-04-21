@@ -1,0 +1,61 @@
+{
+  "id": "canh_sat",
+  "name": "[Cần bổ sung tên]",
+  "alias": "Anh/cậu",
+  "role": "supporting",
+  "isMale": true,
+
+  "basic": {
+    "occupation": "Cảnh sát",
+    "age": 27,
+    "ageNote": "Khá trẻ, trạc tuổi An",
+    "maritalStatus": "single"
+  },
+
+  "appearance": {
+    "note": "Cần bổ sung chi tiết ngoại hình"
+  },
+
+  "personality": {
+    "core": ["ngay thẳng", "chính trực", "nghiêm túc", "có hiểu biết rộng"],
+    "strengths": ["trung thực", "quan sát tốt", "phân tích logic", "kiến thức đa lĩnh vực"],
+    "weaknesses": [],
+    "values": ["công lý", "sự thật", "trách nhiệm"],
+    "moralBoundaries": ["không bao giờ nhận hối lộ", "bảo vệ người vô tội"]
+  },
+
+  "role": {
+    "official": "Cảnh sát tại đồn công an - người đầu tiên tiếp xúc với vụ việc của A1",
+    "description": "Người tham gia lấy lời khai A1, người nhận ra có điều bất thường về vụ việc"
+  },
+
+  "keyScenes": [
+    {
+      "scene": "act_1_scene_2",
+      "description": "Lấy lời khai Nguyễn Văn A tại đồn công an"
+    },
+    {
+      "scene": "act_2_scene_4",
+      "description": "Nhận lệnh bí mật thả A và xóa hồ sơ, rất nghi ngờ"
+    },
+    {
+      "scene": "act_2_scene_5",
+      "description": "Gặp A khi chạy bộ buổi tối, trò chuyện"
+    }
+  ],
+
+  "storyFlags": {
+    "suspicionLevel": 0,
+    "knowsAboutA1": true,
+    "knowsAboutConspiracy": false
+  },
+
+  "relationships": {
+    "a1": {
+      "id": "a1",
+      "type": "quan_sat",
+      "status": "tuong_tu",
+      "note": "Cảnh sát quan sát A với sự tò mò và nghi ngờ"
+    }
+  }
+}

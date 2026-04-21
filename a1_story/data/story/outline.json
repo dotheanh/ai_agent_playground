@@ -31,7 +31,7 @@
     {
       "act": 1,
       "name": "Sự kiện đồn công an",
-      "summary": "T2 (ở trạng thái linh hồn) quan sát vụ việc Nguyễn Văn A đánh 5 tên côn đồ. T2 thấy được mọi thứ và đọc suy nghĩ mọi người.",
+      "summary": "T2 (ở trạng thái linh hồn) quan sát vụ việc Nguyễn Văn A (An) đánh 5 tên côn đồ. T2 thấy được mọi thứ và đọc suy nghĩ mọi người.",
       "scenes": [
         {
           "scene": 1,
@@ -45,7 +45,7 @@
           "choices": [
             {
               "id": "choice_01",
-              "label": "Lấy lời khai Nguyễn Văn A",
+              "label": "Lấy lời khai Nguyễn Văn A (An)",
               "outcome": "A nói ẩn ý rằng mình không phải con người, gia đình thậm chí từng giết người. T2 (linh hồn) nghe được suy nghĩ của A.",
               "effect": {
                 "t2.awarenessLevel": "+1",

@@ -2,6 +2,23 @@
                               SYNOPSIS - TRUYỆN CHƯA ĐẶT TÊN
 ================================================================================
 
+NHÂN VẬT CHÍNH:
+
+- Nguyễn Văn A (gọi là An / A1): Nam chính. Mẹ mất khi sinh anh, cha
+  mất tích từ trước khi anh ra đời. Những người quen đều gọi anh là An
+  vì dễ gọi. An là tên thường gọi, A1 là tên khi bắt đầu thể hiện quyền
+  lực hoàng đế nước Đô với cả thế giới. An vốn là bản sao nhân bản vô
+  tính của A*. Là lập trình viên game, có quá khứ phức tạp, đang trong
+  giai đoạn sám hối.
+
+- T2 (Nguyễn Thị Minh Thư): Nữ chính. Con gái chính trị gia, từng "chết"
+  ở tuổi 18, hồn phiêu bạt nhiều năm với năng lực đọc và điều khiển suy nghĩ.
+
+- Cảnh sát: Người đàn ông trẻ, trạc tuổi An, ngay thẳng, chính trực,
+  nghiêm túc, có hiểu biết rộng. Người đầu tiên tiếp xúc với vụ việc
+  của An.
+
+================================================================================
 BỐI CẢNH THẾ GIỚI:
 Vương quốc Đô tồn tại dưới lòng đất từ thời cổ đại, song song với nhân loại
 trên mặt đất. Đô là đế quốc của Người Đô - những cư dân
@@ -239,7 +256,7 @@ KỊCH BẢN 2: T2 là NGƯỜI TỐT
   vượt trội, dùng CHÍNH NGHĨA để CÂN BẰNG với A*.
 
   => T2 và A* là hai thế lực SIÊU VIỆT ĐỐI TRỌNG nhau.
-  => Họ bề ngoài là tình nhân (giai đoạn sau khi A1 chết và A* xuất hiện),
+  => Họ bề ngoài là tình nhân (giai đoạn sau khi A1 bị ám sát chết và A* xuất hiện thay thế),
      nhưng không ai biết được sự thật rằng ai đang có âm mưu gì.
 
 ĐIỀU BÍ ẨN: Ai đang thao túng ai?
