@@ -55,6 +55,28 @@
     "coronationRitual": {
       "challenge": "Phải đánh bại hoàng đế hiện tại bằng NGHI LỄ CHIẾN ĐẤU",
       "recognition": "Sau đó phải được CỤ TỔ làm LỄ CÔNG NHẬN thì mới trở thành hoàng đế"
+    },
+    "coreBelief": {
+      "description": "Người Đô LUÔN QUAN NIỆM rằng kẻ MẠNH NHẤT là kẻ có thể LÃNH ĐẠO TẤT CẢ",
+      "loyalty": "Một khi đã trở thành hoàng đế, tất cả thần dân đều LUÔN TRUNG THÀNH và TUÂN THEO hoàng đế tuyệt đối"
+    }
+  },
+
+  "ideologyComparison": {
+    "aStar": {
+      "description": "Lý tưởng độc tài của A* tuân theo quy tắc 'kẻ mạnh nhất lãnh đạo tất cả' của vương quốc Đô",
+      "note": "A* vẫn CÒN GIỮ ĐƯỢC TÍNH CHÍNH NGHĨA của bản thân, dù cách thức thực hiện có phần CỰC ĐOAN",
+      "purpose": "Thống trị nhân loại để CÙNG HỢP LỰC CHỐNG ngoài hành tinh"
+    },
+    "fatherOfAStar": {
+      "description": "Cha của A* đi theo CHỦ NGHĨA TỰ DO, BÌNH ĐẲNG và HÒA BÌNH - TRÁI NGƯỢC hoàn toàn với văn hóa Đô",
+      "action": "Từ chối Lễ Chiến Đấu, đứng về phía nhân loại chống lại hoàng đế",
+      "note": "Có thể xem là 'phiên bản lý tưởng' mà A* muốn trở thành nhưng không thể"
+    },
+    "grandfather": {
+      "description": "Hoàng đế (ông nội) đại diện cho sự THA HÓA của quyền lực tuyệt đối",
+      "action": "Bóc lột, ăn thịt người, khơi mào chiến tranh",
+      "note": "Khác A* ở chỗ hoàng đế không còn giữ được tính chính nghĩa"
     }
   },
 

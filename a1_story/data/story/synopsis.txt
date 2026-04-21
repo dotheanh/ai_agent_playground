@@ -20,6 +20,20 @@ NHÂN VẬT CHÍNH:
   nghiêm túc, có hiểu biết rộng. Người đầu tiên tiếp xúc với vụ việc
   của An.
 
+- Hoàng đế lâm thời (ông nội A*): PHẢN DIỆN LỚN. Hoàng đế thứ 12 của
+  Đô. Càng về sau càng tha hóa, bóc lột thuộc địa và ưa bạo lực. Đứng
+  sau giới lãnh đạo nước TÂY, khơi mào chiến tranh để có cớ ĂN THỊT
+  NGƯỜI. Đem quân xâm lược nước NAM trong cuộc chiến tranh thứ hai.
+  Sau khi A* đánh bại ông từ năm 10 tuổi, ông tự xưng Hoàng đế Lâm Thời
+  với lý do A* còn nhỏ. Đồng tình tiêm thuốc khắc chế lên A* vì sợ A*
+  quá mạnh đe dọa đế chế.
+
+- Cha của A*: Người theo CHỦ NGHĨA TỰ DO, BÌNH ĐẲNG và HÒA BÌNH - TRÁI
+  NGƯỢC hoàn toàn với văn hóa Đô. TỪ CHỐI Lễ Chiến Đấu với cha mình
+  (Hoàng đế) để được truyền ngôi. THAY VÀO ĐÓ đứng về phía LOÀI NGƯỜI
+  để chống lại Hoàng đế. Có thể xem là "phiên bản lý tưởng" mà A* muốn
+  trở thành nhưng không thể.
+
 ================================================================================
 BỐI CẢNH THẾ GIỚI:
 Vương quốc Đô tồn tại dưới lòng đất từ thời cổ đại, song song với nhân loại
@@ -331,12 +345,17 @@ REVEAL 13: A* ĐÁNH BẠI ÔNG NỘI VÀ CẤM ĂN THỊT
   để được truyền ngôi. THAY VÀO ĐÓ, ông đứng về phía LOÀI NGƯỜI để
   chống lại Hoàng đế.
 
-  CHÍNH A* mới là người đánh bại ông nội (Hoàng đế) từ khi còn nhỏ.
-  Cậu sẽ trở thành Hoàng đế thứ 13 khi đủ 27 tuổi.
+  CHÍNH A* đánh bại ông nội từ năm 10 TUỔI. Do A* còn quá nhỏ, ông nội
+  lấy lý do đó để TẠM HOÃN truyền ngôi và tự xưng HOÀNG ĐẾ LÂM THỜI.
+
+  VIỆC TIÊM THUỐC KHẮC CHẾ diễn ra NGAY SAU đó:
+  - Chính phủ lập luận: A* quá HIẾU CHIẾN và HUNG BẠO, có thể đe dọa
+    cả nhân loại
+  - Hoàng đế lâm thời ĐỒNG TÌNH vì SỢ A* quá mạnh sẽ đe dọa đế chế
+  - Cha A* - số phận sau đó sẽ được phát triển trong phần nội dung tới
 
   NGAY SAU KHI chiến thắng, A* đã BAN HÀNH LUẬT CẤM ĂN THỊT NGƯỜI khắp
-  vương quốc Đô. ĐÓ LÀ LÝ DO hoàng đế đồng ý để chính phủ TIÊM THUỐC
-  KHẮC CHẾ lên A* nhằm tránh hậu họa bị tranh ngôi.
+  vương quốc Đô.
 
 ================================================================================
                         WORLD BUILDING: VƯƠNG QUỐC ĐÔ
@@ -405,6 +424,31 @@ VỀ A* VÀ CỤ TỔ:
 VỀ HOÀNG ĐẾ HIỆN TẠI (ÔNG NỘI A*):
   - Đã ra nước ngoài từ hàng trăm năm nên rất GIÀ
   - Các vị cựu hoàng đế trước đó vẫn trông rất trẻ (vì sống trong Đô)
+
+QUAN NIỆM CỦA NGƯỜI ĐÔ:
+  Người Đô LUÔN QUAN NIỆM rằng kẻ MẠNH NHẤT là kẻ có thể LÃNH ĐẠO TẤT CẢ.
+  Một khi đã trở thành hoàng đế, tất cả thần dân đều LUÔN TRUNG THÀNH
+  và TUÂN THEO hoàng đế tuyệt đối.
+
+SO SÁNH IDEOLOGY - BA THẾ HỆ:
+
+  A* (CHÁU):
+    - TUÂN THEO quy tắc "kẻ mạnh lãnh đạo" của Đô
+    - Vẫn CÒN GIỮ ĐƯỢC TÍNH CHÍNH NGHĨA của bản thân
+    - Cách thức: CỰC ĐOAN, độc tài
+    - Mục đích: Thống trị nhân loại để CÙNG HỢP LỰC CHỐNG ngoài hành tinh
+
+  CHA A* (BỐ):
+    - PHỦ NHẬN hoàn toàn quy tắc của Đô
+    - Theo CHỦ NGHĨA TỰ DO, BÌNH ĐẲNG, HÒA BÌNH
+    - Cách thức: Từ chối bạo lực, đứng về phía nhân loại
+    - Có thể xem là "NGƯỜI LÝ TƯỞNG" - phiên bản A* muốn trở thành nhưng KHÔNG THỂ
+
+  HOÀNG ĐẾ (ÔNG NỘI):
+    - TUÂN THEO triệt để quy tắc của Đô (kẻ mạnh lãnh đạo)
+    - Đã THA HÓA hoàn toàn, KHÔNG còn giữ tính chính nghĩa
+    - Cách thức: Bóc lột, ăn thịt người, khơi mào chiến tranh
+    - Đại diện cho sự QUAN THẦN của quyền lực tuyệt đối
 
 ================================================================================
                                 NĂNG LỰC ĐẶC BIỆT

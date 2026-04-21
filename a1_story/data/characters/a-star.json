@@ -93,8 +93,14 @@
     },
     "origin": "Sinh ra trong giai đoạn cha mình đứng về phía nhân loại chống lại hoàng đế",
     "earlyVictory": {
-      "description": "CHÍNH A* mới là người đã ĐÁNH BẠI ÔNG NỘI (Hoàng đế thứ 12) từ khi còn nhỏ",
+      "description": "CHÍNH A* mới là người đã ĐÁNH BẠI ÔNG NỘI (Hoàng đế thứ 12) từ năm 10 TUỔI",
+      "temporaryEmperor": "Do A* còn quá nhỏ, ông nội lấy lý do đó để TẠM HOÃN việc truyền ngôi và tự xưng HOÀNG ĐẾ LÂM THỜI",
       "crownAge": "A* sẽ trở thành TÂN HOÀNG ĐẾ (Hoàng đế thứ 13) khi đủ 27 tuổi"
+    },
+    "suppressionDrug": {
+      "timing": "Việc tiêm thuốc khắc chế diễn ra NGAY SAU khi A* đánh bại ông nội",
+      "governmentArgument": "A* quá HIẾU CHIẾN và HUNG BẠO, có thể đe dọa cả nhân loại",
+      "temporaryEmperorAgree": "Hoàng đế lâm thời ĐỒNG TÌNH vì SỢ A* quá mạnh sẽ đe dọa đế chế của mình"
     },
     "cannibalismBan": {
       "action": "A* lập tức BAN HÀNH LUẬT CẤM ĂN THỊT NGƯỜI khắp vương quốc Đô ngay sau khi chiến thắng (khi cậu còn nhỏ)",
