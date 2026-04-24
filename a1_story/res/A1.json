@@ -2756,9 +2756,9 @@
           },
           {
             "type": "play_sfx",
-            "id": "VATwnIddwB4NmHe584mxz",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6911.mp3",
-            "volume": 1
+            "volume": 1,
+            "id": "VATwnIddwB4NmHe584mxz"
           },
           {
             "type": "wait",
@@ -3008,10 +3008,10 @@
           },
           {
             "type": "play_bgm",
-            "id": "hwu09yObGX4by5DsjzzUs",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6892.mp3",
             "loop": true,
-            "volume": 0.8
+            "volume": 0.8,
+            "id": "hwu09yObGX4by5DsjzzUs"
           },
           {
             "type": "background_change",
@@ -3023,9 +3023,9 @@
           },
           {
             "type": "play_sfx",
-            "id": "S5csqQEaVylGooGGxdMql",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6909.mp3",
-            "volume": 1
+            "volume": 1,
+            "id": "S5csqQEaVylGooGGxdMql"
           },
           {
             "type": "screen_effect",
@@ -3067,9 +3067,9 @@
           },
           {
             "type": "play_sfx",
-            "id": "3dXx9cG4z8V5Os7Xy2r0z",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6910.mp3",
-            "volume": 1
+            "volume": 1,
+            "id": "3dXx9cG4z8V5Os7Xy2r0z"
           },
           {
             "type": "character_show",
@@ -3102,7 +3102,7 @@
           {
             "type": "dialogue",
             "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "text": "Cái gì?! Cô nói thật chứ? Con bé... con bé đã thực sự tỉnh lại sau 8 năm sao?",
+            "text": "Cái gì?! Cô nói thật chứ? Con bé... con bé thực sự đã tỉnh lại rồi sao?",
             "id": "Bom-q0TrJr0Y0abRNL4ZY"
           },
           {
@@ -3259,7 +3259,7 @@
           {
             "type": "dialogue",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Có... tôi thấy...",
+            "text": "Dạ có... cháu có thấy ạ...",
             "id": "J080deD8Q78agMnySI75E"
           },
           {
@@ -3279,7 +3279,7 @@
           {
             "type": "dialogue",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Tên tôi... là {{nu9}}... Còn ông Sơn... là bố của tôi... đúng không?",
+            "text": "Tên cháu... là {{nu9}}... Còn Sơn... là tên bố của cháu... đúng không ạ?",
             "id": "SNxz7eyrDeMipB3Gez6t_"
           },
           {
@@ -3303,220 +3303,217 @@
           },
           {
             "type": "play_sfx",
-            "id": "kjpQ4k4LcCkw4wwwtnb__",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6914.mp3",
-            "volume": 1
+            "volume": 1,
+            "id": "kjpQ4k4LcCkw4wwwtnb__"
           },
           {
             "type": "narration",
-            "id": "narr_door_open_sound",
-            "text": "*Cạch* - Cánh cửa phòng bật mở đầy bất ngờ."
+            "text": "*Cạch* - Cánh cửa phòng bật mở đầy bất ngờ.",
+            "id": "narr_door_open_sound"
           },
           {
             "type": "narration",
-            "id": "narr_son_appears_2",
-            "text": "Một người đàn ông trung niên với gương mặt hốc hác, hơi thở dồn dập đứng khựng lại ở cửa. Đó chính là ông Sơn."
+            "text": "Một người đàn ông trung niên với gương mặt hốc hác, hơi thở dồn dập đứng khựng lại ở cửa. Đó chính là ông Sơn.",
+            "id": "narr_son_appears_2"
           },
           {
             "type": "character_hide",
-            "id": "qDaq4eoj8QZRCx9A-2UoU",
             "characterId": "GqxXarVNucCntk1C0Ismj",
-            "position": "center",
-            "duration": 300
+            "duration": 300,
+            "id": "qDaq4eoj8QZRCx9A-2UoU"
           },
           {
             "type": "character_hide",
-            "id": "uz4P93Mmdi9sY329SC2YR",
             "characterId": "XgjWbCGI_aaXWaOyDdE61",
-            "position": "center",
-            "duration": 300
+            "duration": 300,
+            "id": "uz4P93Mmdi9sY329SC2YR"
           },
           {
             "type": "character_show",
-            "id": "show_son_emotional_2",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "left",
+            "expressionId": "happy",
+            "duration": 500,
+            "flipX": false,
+            "id": "show_son_emotional_2"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "{{nu9}}... Có phải là con không? Bố... bố không nằm mơ chứ?",
+            "id": "dial_son_shocked_2"
+          },
+          {
+            "type": "character_express",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "happy",
+            "duration": 300,
+            "id": "express_nu9_happy_2"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Bố... Con đây... Con đã về rồi đây...",
+            "id": "dial_nu9_respond_son_2"
+          },
+          {
+            "type": "character_move",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "center",
+            "duration": 800,
+            "id": "move_son_hug_2"
+          },
+          {
+            "type": "character_express",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "expressionId": "gKxKYFtWSg9RXRwBLQQ8U",
+            "duration": 300,
+            "id": "express_son_calm_down"
+          },
+          {
+            "type": "narration",
+            "text": "Ông Sơn lao đến, đôi tay run rẩy ôm chặt lấy con gái mình vào lòng. Tám năm ròng rã, tám năm đằng đẵng chờ đợi một phép màu, cuối cùng ngày này cũng đã đến.",
+            "id": "narr_hug_scene_2"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Tạ ơn trời phật... Cuối cùng con cũng tỉnh lại rồi... Bố xin lỗi, bố đã quá vô tâm với con...",
+            "id": "dial_son_crying_2"
+          },
+          {
+            "type": "character_express",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "sad",
+            "duration": 300,
+            "id": "express_nu9_reflective"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Đừng nói vậy mà bố… Năm đó là do con học hành quá sức, lại thức khuya liên tục nên mới xảy ra chuyện. Nhưng bây giờ con tỉnh rồi, con ổn mà. Con hứa… con sẽ không làm bố lo lắng nữa đâu.",
+            "id": "dial_nu9_reassurance_2"
+          },
+          {
+            "type": "narration",
+            "text": "Trong căn phòng nhỏ, những giọt nước mắt hạnh phúc vẫn lặng lẽ rơi không ngừng. Với {{nu9}}, khoảnh khắc này không chỉ là tỉnh lại… mà là một lần tái sinh. Từ đây, một cuộc đời mới thật sự bắt đầu với cô gái trẻ.",
+            "id": "narr_ending_reunion_2"
+          },
+          {
+            "type": "character_express",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "expressionId": "neutral",
+            "duration": 200,
+            "id": "4IXZlHMZ_TxDRDWgeRMe8"
+          },
+          {
+            "type": "character_move",
             "characterId": "JkuHBljTR4th0RQdUeZMA",
             "position": "left",
             "duration": 500,
-            "expressionId": "happy",
-            "flipX": false
+            "id": "IIconleL77lgnnYE1qevn"
           },
           {
             "type": "dialogue",
-            "id": "dial_son_shocked_2",
             "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "text": "{{nu9}}... Có phải là con không? Bố... bố không nằm mơ chứ?"
-          },
-          {
-            "type": "character_express",
-            "id": "express_nu9_happy_2",
-            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "expressionId": "happy",
-            "duration": 300
+            "text": "Tám năm qua... đối với bố nó như một cơn ác mộng dài vô tận. Còn con... con có cảm nhận được gì không? Con đã trải qua những gì trong suốt thời gian đó?",
+            "id": "dial_son_ask_experience"
           },
           {
             "type": "dialogue",
-            "id": "dial_nu9_respond_son_2",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Bố... Con đây... Con đã về rồi đây..."
+            "text": "Con đã mơ một giấc mơ rất dài, bố ạ... Một giấc mơ chân thực đến mức con không nghĩ mình đang hôn mê.",
+            "id": "dial_nu9_long_dream_1"
           },
           {
-            "type": "character_move",
-            "id": "move_son_hug_2",
-            "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "position": "center",
-            "duration": 800
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Trong giấc mơ đó, con đã đi tới rất nhiều nơi, nhìn thấy rất nhiều chuyện mà trước đây con chưa từng được biết.",
+            "id": "dial_nu9_long_dream_2"
           },
           {
-            "type": "character_express",
-            "id": "express_son_calm_down",
-            "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "expressionId": "gKxKYFtWSg9RXRwBLQQ8U",
-            "duration": 300
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Và quan trọng nhất... con đã biết được rất nhiều sự thật, những sự thật mà có lẽ con không bao giờ tưởng tượng nổi.",
+            "id": "dial_nu9_long_dream_3"
           },
           {
             "type": "narration",
-            "id": "narr_hug_scene_2",
-            "text": "Ông Sơn lao đến, đôi tay run rẩy ôm chặt lấy con gái mình vào lòng. Tám năm ròng rã, tám năm đằng đẵng chờ đợi một phép màu, cuối cùng ngày này cũng đã đến."
+            "text": "Ánh mắt của {{nu9}} trở nên sâu thẳm, như thể cô vẫn còn đang mang theo những bí mật từ thế giới của giấc mơ đó trở về.",
+            "id": "narr_mystery_setup_1"
           },
           {
             "type": "dialogue",
-            "id": "dial_son_crying_2",
             "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "text": "Tạ ơn trời phật... Cuối cùng con cũng tỉnh lại rồi... Bố xin lỗi, bố đã quá vô tâm với con..."
+            "text": "Con tỉnh lại lúc này cũng tốt… Thế giới đang bước vào thời kỳ hỗn loạn. Chiến sự ở nhiều nơi leo thang, và áp lực từ nghị trường khiến bố gần như kiệt sức.",
+            "id": "dial_son_politics_1"
           },
           {
             "type": "character_express",
-            "id": "express_nu9_reflective",
-            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "expressionId": "sad",
-            "duration": 300
-          },
-          {
-            "type": "dialogue",
-            "id": "dial_nu9_reassurance_2",
-            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Đừng nói vậy mà bố… Năm đó là do con học hành quá sức, lại thức khuya liên tục nên mới xảy ra chuyện. Nhưng bây giờ con tỉnh rồi, con ổn mà. Con hứa… con sẽ không làm bố lo lắng nữa đâu."
-          },
-          {
-            "type": "narration",
-            "id": "narr_ending_reunion_2",
-            "text": "Trong căn phòng nhỏ, những giọt nước mắt hạnh phúc vẫn lặng lẽ rơi không ngừng. Với {{nu9}}, khoảnh khắc này không chỉ là tỉnh lại… mà là một lần tái sinh. Từ đây, một cuộc đời mới thật sự bắt đầu với cô gái trẻ."
-          },
-          {
-            "type": "character_express",
-            "id": "4IXZlHMZ_TxDRDWgeRMe8",
-            "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "position": "center",
-            "duration": 200,
-            "expressionId": "neutral"
-          },
-          {
-            "type": "character_move",
-            "id": "IIconleL77lgnnYE1qevn",
-            "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "position": "left",
-            "duration": 500
-          },
-          {
-            "type": "dialogue",
-            "id": "dial_son_ask_experience",
-            "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "text": "8 năm qua... đối với bố nó như một cơn ác mộng dài vô tận. Còn con... con có cảm nhận được gì không? Con đã trải qua những gì trong suốt thời gian đó?"
-          },
-          {
-            "type": "dialogue",
-            "id": "dial_nu9_long_dream_1",
-            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Con đã mơ một giấc mơ rất dài, bố ạ... Một giấc mơ thực đến mức con không nghĩ mình đang hôn mê."
-          },
-          {
-            "type": "dialogue",
-            "id": "dial_nu9_long_dream_2",
-            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Trong giấc mơ đó, con đã đi tới rất nhiều nơi, nhìn thấy rất nhiều chuyện mà trước đây con chưa từng được biết."
-          },
-          {
-            "type": "dialogue",
-            "id": "dial_nu9_long_dream_3",
-            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Và quan trọng nhất... con đã biết được rất nhiều sự thật, những sự thật mà có lẽ con không bao giờ tưởng tượng nổi."
-          },
-          {
-            "type": "narration",
-            "id": "narr_mystery_setup_1",
-            "text": "Ánh mắt của {{nu9}} trở nên sâu thẳm, như thể cô vẫn còn đang mang theo những bí mật từ thế giới của giấc mơ đó trở về."
-          },
-          {
-            "type": "dialogue",
-            "id": "dial_son_politics_1",
-            "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "text": "Con tỉnh lại lúc này cũng tốt… Thế giới đang bước vào thời kỳ hỗn loạn. Chiến sự ở nhiều nơi leo thang, và áp lực từ nghị trường khiến bố gần như kiệt sức."
-          },
-          {
-            "type": "character_express",
-            "id": "express_nu9_serious_1",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
             "expressionId": "neutral",
-            "duration": 300
+            "duration": 300,
+            "id": "express_nu9_serious_1"
           },
           {
             "type": "dialogue",
-            "id": "dial_nu9_question_war_1",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Bố... có phải nước Tây vừa mới nổ súng tấn công nước Bắc không bố?"
+            "text": "Bố... có phải nước Tây vừa mới nổ súng tấn công nước Bắc không bố?",
+            "id": "dial_nu9_question_war_1"
           },
           {
             "type": "character_express",
-            "id": "express_son_shocked_politics_1",
             "characterId": "JkuHBljTR4th0RQdUeZMA",
             "expressionId": "angry",
-            "duration": 300
+            "duration": 300,
+            "id": "express_son_shocked_politics_1"
           },
           {
             "type": "dialogue",
-            "id": "dial_son_confirm_war_1",
             "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "text": "Sao... sao con biết? Chuyện này chỉ vừa mới xảy ra và tin tức vẫn còn đang bị phong tỏa chặt chẽ để tránh hỗn loạn mà?"
+            "text": "Sao... sao con biết? Chuyện này chỉ vừa mới xảy ra, tin tức vẫn còn đang bị phong tỏa chặt chẽ để tránh hỗn loạn mà?",
+            "id": "dial_son_confirm_war_1"
           },
           {
             "type": "character_express",
-            "id": "express_nu9_shocked_realization_1",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
             "expressionId": "sad",
-            "duration": 300
+            "duration": 300,
+            "id": "express_nu9_shocked_realization_1"
           },
           {
             "type": "narration",
-            "id": "narr_nu9_shock_realization_1",
-            "text": "Sống lưng {{nu9}} lạnh toát. Cảm giác bàng hoàng bao trùm lấy tâm trí cô."
+            "text": "Sống lưng {{nu9}} lạnh toát. Cảm giác bàng hoàng bao trùm lấy tâm trí cô.",
+            "id": "narr_nu9_shock_realization_1"
           },
           {
             "type": "dialogue",
-            "id": "dial_nu9_internal_thought_1",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "*** Vậy ra... tất cả không phải là mơ. Những gì mình thấy... từng cảnh tượng đó đều là thật. ***"
+            "text": "** Vậy ra... tất cả không phải là mơ. Những gì mình thấy... từng cảnh tượng đó đều là thật. **",
+            "id": "dial_nu9_internal_thought_1"
           },
           {
             "type": "narration",
-            "id": "narr_nu9_philosophical_realization_1",
-            "text": "{{nu9}} nhận ra mình chưa từng rời khỏi thế giới này. Suốt 8 năm qua, linh hồn cô không hề ngủ say, nó chỉ được quan sát thực tại qua một lăng kính khác, một góc nhìn toàn cảnh mà người thường không thể chạm tới."
+            "text": "{{nu9}} nhận ra mình chưa từng rời khỏi thế giới này. Suốt 8 năm qua, linh hồn cô không hề ngủ say, nó chỉ được quan sát thực tại qua một lăng kính khác, một góc nhìn toàn cảnh mà người thường không thể chạm tới.",
+            "id": "narr_nu9_philosophical_realization_1"
           },
           {
             "type": "dialogue",
-            "id": "T5MOGQhLwo1gvtfZv6ovt",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Bố ơi... Có lẽ, con phải đi vào miền Nam... Con đã biết được rất nhiều chuyện ở đó..."
+            "text": "Bố ơi... Có lẽ, con phải đi vào miền Nam... Con đã biết được rất nhiều chuyện ở đó...",
+            "id": "T5MOGQhLwo1gvtfZv6ovt"
           },
           {
             "type": "screen_effect",
-            "id": "ZlNMwloZzrgl595VpssYI",
             "effect": {
               "type": "tint",
               "color": "#000000",
               "opacity": 1,
               "duration": 1000,
               "direction": "in"
-            }
+            },
+            "id": "ZlNMwloZzrgl595VpssYI"
           }
         ],
         "meta": {
@@ -3527,6 +3524,7 @@
         }
       },
       {
+        "id": "c0At4zAlRdtQny2TcMxU9",
         "title": "Disclaimer",
         "nodes": [
           {
@@ -3535,20 +3533,20 @@
           },
           {
             "type": "background_change",
-            "id": "81Lu8obW9LTxgdbw2JJN_",
             "visual": {
               "type": "image",
               "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6913.png"
-            }
+            },
+            "id": "81Lu8obW9LTxgdbw2JJN_"
           },
           {
             "type": "narration",
-            "id": "8wVs0dXQRPD5L_vQQyTi5",
-            "text": "⚠️ CẢNH BÁO NỘI DUNG\n\nCâu chuyện này hoàn toàn chỉ là tác phẩm giả tưởng.\nMọi nhân vật, sự kiện, địa điểm và tổ chức đều hoàn toàn hư cấu. Nếu có sự trùng hợp ngẫu nhiên với thực tế, đó không phải là cố ý và không dựa trên bất kỳ nguyên mẫu có thật nào.\nTác phẩm có chứa các yếu tố rùng rợn, giật gân, cùng những tình tiết mang tính tâm lý nặng, có thể gây tranh cãi, khó chịu hoặc ám ảnh đối với một số người đọc.\nĐộc giả vui lòng cân nhắc trước khi tiếp tục theo dõi, đặc biệt nếu bạn nhạy cảm với các nội dung căng thẳng, u ám hoặc tiêu cực."
+            "text": "⚠️ CẢNH BÁO NỘI DUNG\n\nCâu chuyện này hoàn toàn chỉ là tác phẩm giả tưởng.\nMọi nhân vật, sự kiện, địa điểm và tổ chức đều hoàn toàn hư cấu. Nếu có sự trùng hợp ngẫu nhiên với thực tế, đó không phải là cố ý và không dựa trên bất kỳ nguyên mẫu có thật nào.\nTác phẩm có chứa các yếu tố rùng rợn, giật gân, cùng những tình tiết mang tính tâm lý nặng, có thể gây tranh cãi, khó chịu hoặc ám ảnh đối với một số người đọc.\nĐộc giả vui lòng cân nhắc trước khi tiếp tục theo dõi, đặc biệt nếu bạn nhạy cảm với các nội dung căng thẳng, u ám hoặc tiêu cực.",
+            "id": "8wVs0dXQRPD5L_vQQyTi5"
           },
           {
             "type": "choice",
-            "id": "RG2tsecnIjqTFLSGv0mCb",
+            "prompt": "Truyện có nội dung 16+",
             "options": [
               {
                 "text": "Tôi đã sẵn sàng, bắt đầu thôi",
@@ -3559,10 +3557,9 @@
                 "target": "oxD-qk5mHsQEmbSTEcgwr"
               }
             ],
-            "prompt": "Truyện có nội dung 16+"
+            "id": "RG2tsecnIjqTFLSGv0mCb"
           }
         ],
-        "id": "c0At4zAlRdtQny2TcMxU9",
         "meta": {
           "mapPosition": {
             "x": -200,
@@ -3571,6 +3568,7 @@
         }
       },
       {
+        "id": "oxD-qk5mHsQEmbSTEcgwr",
         "title": "Exit Scene",
         "nodes": [
           {
@@ -3582,7 +3580,6 @@
             "id": "SrFyyc4kXtQOJ487ptz4x"
           }
         ],
-        "id": "oxD-qk5mHsQEmbSTEcgwr",
         "meta": {
           "mapPosition": {
             "x": -400,
