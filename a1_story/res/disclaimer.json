@@ -1,0 +1,17 @@
+{
+  "disclaimer": {
+    "enabled": true,
+    "content": {
+      "title": "⚠️ CẢNH BÁO NỘI DUNG",
+      "body": "Câu chuyện này chỉ là tác phẩm giả tưởng.\n\nMọi nhân vật, sự kiện, địa điểm và tổ chức đều hoàn toàn hư cấu. Nếu có sự trùng hợp ngẫu nhiên với thực tế, đó không phải là cố ý và không dựa trên bất kỳ nguyên mẫu có thật nào.",
+      "warning_elements": [
+        "Bạo lực, đánh đập",
+        "Rùng rợn, giật gân",
+        "Tâm lý căng thẳng, áp lực"
+      ],
+      "age_rating": "16+",
+      "cta_continue": "Tôi đã sẵn sàng, bắt đầu thôi",
+      "cta_exit": "Tôi chưa sẵn sàng, thoát game"
+    }
+  }
+}

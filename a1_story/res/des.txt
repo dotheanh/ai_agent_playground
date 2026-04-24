@@ -2,9 +2,7 @@
 
 [short]
 
-Nếu bạn phát hiện ra mình đang bị thống trị bởi một giống loài thượng đẳng?
-
-Câu chuyện này không kể về một anh hùng cứu rỗi thế giới. Nó kể về khoảnh khắc bản sắc bắt đầu sụp đổ, khi niềm tin biến thành hoài nghi, khi lý tưởng bị xé nát bởi sự thật. Nó là những cuộc đấu tranh tư tưởng phức tạp, những cuộc chiến quyền lực diễn ra trong im lặng, những âm mưu được dệt bằng tham vọng và sợ hãi . Ai cũng tin rằng mình đang làm điều đúng. Thế nhưng, bài toán này không bao giờ có một đáp án chính xác.
+Nếu bạn phát hiện ra mình đang bị thống trị bởi một giống loài thượng đẳng? Câu chuyện này không kể về một anh hùng cứu rỗi thế giới. Nó kể về khoảnh khắc bản sắc bắt đầu sụp đổ, khi niềm tin biến thành hoài nghi, khi lý tưởng bị xé nát bởi sự thật. Nó là những cuộc đấu tranh tư tưởng phức tạp, những cuộc chiến quyền lực diễn ra trong im lặng, những âm mưu được dệt bằng tham vọng và sợ hãi . Ai cũng tin rằng mình đang làm điều đúng. Thế nhưng, bài toán này không bao giờ có một đáp án chính xác.
 
 
 [full]

@@ -1,0 +1,3614 @@
+{
+  "id": "s5qPklt-F5v8iuJ2ajj3p",
+  "version": "1.3.0",
+  "format": "visual_novel",
+  "metadata": {
+    "title": "A1",
+    "author": "",
+    "genres": [
+      3,
+      7,
+      1
+    ],
+    "sourceLanguage": "vi",
+    "allowRemix": false,
+    "isPremiumStory": false
+  },
+  "config": {
+    "display": {
+      "resolution": {
+        "width": 1280,
+        "height": 720
+      },
+      "orientation": "landscape",
+      "forceOrientation": true,
+      "scaleMode": "fill"
+    },
+    "playback": {
+      "typewriterSpeed": 30,
+      "textSize": 24,
+      "autoAdvanceDelay": 3000,
+      "advanceTriggers": [
+        "tap-anywhere",
+        "keyboard"
+      ]
+    }
+  },
+  "theme": {
+    "basePreset": "minimalist",
+    "tokens": {},
+    "components": {
+      "dialogue": {
+        "position": "bottom",
+        "nameTag": {
+          "visible": true,
+          "position": "above-box",
+          "fontSize": 32,
+          "fontWeight": 700,
+          "useCharacterColor": true,
+          "color": "#ffffff",
+          "strokeColor": "#808080",
+          "fontFamily": "Noto Sans, sans-serif",
+          "offsetY": 40
+        },
+        "bg": "#000000",
+        "border": "rgba(0, 0, 0, 0)",
+        "textColor": "#ffffff",
+        "textFontSize": 26,
+        "textFontFamily": "Open Sans, sans-serif"
+      },
+      "narration": {
+        "position": "center",
+        "fontSize": 16,
+        "fontStyle": "italic",
+        "color": "#ffffff",
+        "bg": "#000000",
+        "bgGradient": "#2b2b2b",
+        "border": "rgba(0, 0, 0, 0)",
+        "fontFamily": "Lora, serif"
+      },
+      "choices": {
+        "layout": "vertical",
+        "maxVisible": 6,
+        "animation": "fade",
+        "bg": "#000000",
+        "border": "#111827",
+        "textColor": "#ffffff",
+        "textFontSize": 18,
+        "textFontFamily": "Noto Sans, sans-serif",
+        "promptBg": "rgba(0, 0, 0, 0.5)",
+        "promptColor": "#ffffff",
+        "promptFontFamily": "Lora, serif"
+      },
+      "titleScreen": {
+        "layout": "left-aligned",
+        "menuItems": [
+          "New Game",
+          "Continue",
+          "Settings"
+        ],
+        "titleColor": "#ff0000",
+        "titleStrokeColor": "rgba(0, 0, 0, 0.85)",
+        "titleStrokeWidth": 35,
+        "titleFontSize": 64,
+        "buttonBg": "#000000",
+        "buttonColor": "#ffffff"
+      }
+    }
+  },
+  "assets": {
+    "4W0R9x5CgQtQaKQwQRmEQ": {
+      "id": "4W0R9x5CgQtQaKQwQRmEQ",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_20/6562.png",
+      "name": "bg-A-modern-office-at-night-with-",
+      "category": "background"
+    },
+    "4iA2i7D88MK2GaFemthB0": {
+      "id": "4iA2i7D88MK2GaFemthB0",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6617.png",
+      "name": "An-default",
+      "category": "sprite"
+    },
+    "1I7x7jyTM2P7Od5nCvwGq": {
+      "id": "1I7x7jyTM2P7Od5nCvwGq",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6618.png",
+      "name": "C-nh-s-t-default",
+      "category": "sprite"
+    },
+    "t7AzGhAT3WTmITuGRZ9-e": {
+      "id": "t7AzGhAT3WTmITuGRZ9-e",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6619.png",
+      "name": "C-nh-s-t-sad",
+      "category": "sprite"
+    },
+    "ZU2Q6zTiufZ8exEAHtjPb": {
+      "id": "ZU2Q6zTiufZ8exEAHtjPb",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6620.png",
+      "name": "An-happy",
+      "category": "sprite"
+    },
+    "VOaoXxTIcTLhQXDxt1HzI": {
+      "id": "VOaoXxTIcTLhQXDxt1HzI",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6621.png",
+      "name": "An-sad",
+      "category": "sprite"
+    },
+    "EYqQObcvPaQ95qkRuaiub": {
+      "id": "EYqQObcvPaQ95qkRuaiub",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6622.png",
+      "name": "C-nh-s-t-happy",
+      "category": "sprite"
+    },
+    "pZvvJXQb3aI-7-NHa8UaN": {
+      "id": "pZvvJXQb3aI-7-NHa8UaN",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6623.png",
+      "name": "C-nh-s-t-angry",
+      "category": "sprite"
+    },
+    "8f-hLcYBWgCPaqWwO3yPj": {
+      "id": "8f-hLcYBWgCPaqWwO3yPj",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6624.png",
+      "name": "An-angry",
+      "category": "sprite"
+    },
+    "QWBMWrIUsUZQhBcHMAFEA": {
+      "id": "QWBMWrIUsUZQhBcHMAFEA",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6626.png",
+      "name": "An-vui",
+      "category": "sprite"
+    },
+    "lwhlK611ZmNU0SjnGfEjm": {
+      "id": "lwhlK611ZmNU0SjnGfEjm",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6627.png",
+      "name": "An-gi-n",
+      "category": "sprite"
+    },
+    "C1mTbgj2NKqNF1gnOdnvb": {
+      "id": "C1mTbgj2NKqNF1gnOdnvb",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6628.png",
+      "name": "An-bu-n",
+      "category": "sprite"
+    },
+    "HosykcGPSm3NkSm5B_qPr": {
+      "id": "HosykcGPSm3NkSm5B_qPr",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6665.png",
+      "name": "bg-A-city-intersection-at-early-m",
+      "category": "background"
+    },
+    "qk3kDzCiHqTodXtIlFf2-": {
+      "id": "qk3kDzCiHqTodXtIlFf2-",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6666.png",
+      "name": "bg-A-bustling-urban-street-in-Sai",
+      "category": "background"
+    },
+    "gQbgTVQLbtL0jomabPwJl": {
+      "id": "gQbgTVQLbtL0jomabPwJl",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6667.png",
+      "name": "bg-A-modern-urban-highway-with-mu",
+      "category": "background"
+    },
+    "SFGQanopygArhkmfPFzTM": {
+      "id": "SFGQanopygArhkmfPFzTM",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6678.png",
+      "name": "bg-A-busy-urban-intersection-with",
+      "category": "background"
+    },
+    "B504Y330qwUtjJmL4NDTt": {
+      "id": "B504Y330qwUtjJmL4NDTt",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6679.png",
+      "name": "bg-A-busy-urban-intersection-from",
+      "category": "background"
+    },
+    "xBo_ov2c2GJwYhBofGp01": {
+      "id": "xBo_ov2c2GJwYhBofGp01",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6680.png",
+      "name": "bg-A-modern-urban-roadside-scene-",
+      "category": "background"
+    },
+    "8ZA14faTBqJUBDgnqbkns": {
+      "id": "8ZA14faTBqJUBDgnqbkns",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6690.png",
+      "name": "bg-A-modern-urban-roadside-with-a",
+      "category": "background"
+    },
+    "DdcGmkhYcHgSG11xIvLpX": {
+      "id": "DdcGmkhYcHgSG11xIvLpX",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6691.png",
+      "name": "bg-A-modern-urban-roadside-with-a",
+      "category": "background"
+    },
+    "5ySWUzehQ_5uRSL6O5xib": {
+      "id": "5ySWUzehQ_5uRSL6O5xib",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6692.png",
+      "name": "bg-A-modern-urban-roadside-with-a",
+      "category": "background"
+    },
+    "LHLLHMoGiobfsg8FWACE6": {
+      "id": "LHLLHMoGiobfsg8FWACE6",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6699.png",
+      "name": "bg-Close-up-shot-of-a-smartphone-",
+      "category": "background"
+    },
+    "a5_jcfPFf1TJ2Z6dApA_A": {
+      "id": "a5_jcfPFf1TJ2Z6dApA_A",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6700.png",
+      "name": "bg-A-close-up-shot-of-a-smartphon",
+      "category": "background"
+    },
+    "_9vllBQue6dqO62oMl-p4": {
+      "id": "_9vllBQue6dqO62oMl-p4",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6701.png",
+      "name": "bg-A-group-of-five-Vietnamese-pol",
+      "category": "background"
+    },
+    "AytSKfbKZpHmtzA-sQoDe": {
+      "id": "AytSKfbKZpHmtzA-sQoDe",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png",
+      "name": "bg-A-group-of-five-Vietnamese-pol",
+      "category": "background"
+    },
+    "tNUmmPBUxgMIW3uk8Qyaj": {
+      "id": "tNUmmPBUxgMIW3uk8Qyaj",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6715.png",
+      "name": "bg-A-bright-hospital-room--cinema",
+      "category": "background"
+    },
+    "ddIbh-vqm82Fd_uZt97tx": {
+      "id": "ddIbh-vqm82Fd_uZt97tx",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6716.png",
+      "name": "Giang-h--1-injured",
+      "category": "sprite"
+    },
+    "_607juCzlE2URu7otkgoS": {
+      "id": "_607juCzlE2URu7otkgoS",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6717.png",
+      "name": "--i-ca-giang-h--injured",
+      "category": "sprite"
+    },
+    "Gi7mETIe-8nHLlO-8LNe9": {
+      "id": "Gi7mETIe-8nHLlO-8LNe9",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6718.png",
+      "name": "Giang-h--2-injured",
+      "category": "sprite"
+    },
+    "rKWLsswrXWnti6RTVVdnR": {
+      "id": "rKWLsswrXWnti6RTVVdnR",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6724.png",
+      "name": "bg-An-interrogation-room-in-a-pol",
+      "category": "background"
+    },
+    "PAB2G8Z5FcR7yfFDMwFKI": {
+      "id": "PAB2G8Z5FcR7yfFDMwFKI",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_22/6739.png",
+      "name": "C-nh-s-t-2-shocked",
+      "category": "sprite"
+    },
+    "FNQSLDT5Qbf7nSzTTIpW6": {
+      "id": "FNQSLDT5Qbf7nSzTTIpW6",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_22/6740.png",
+      "name": "C-nh-s-t-shocked",
+      "category": "sprite"
+    },
+    "JDtbXweFZBR_5AxxnR0V2": {
+      "id": "JDtbXweFZBR_5AxxnR0V2",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_22/6768.png",
+      "name": "C-nh-s-t-sportswear",
+      "category": "sprite"
+    },
+    "bU9nc6Sv4Al2MPaOjtMbf": {
+      "id": "bU9nc6Sv4Al2MPaOjtMbf",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_22/6769.png",
+      "name": "bg-A-quiet--deserted-lakeshore-at",
+      "category": "background"
+    },
+    "YkyF_NKLySsbg5AgDyadW": {
+      "id": "YkyF_NKLySsbg5AgDyadW",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_22/6771.png",
+      "name": "Nam9-sportswear",
+      "category": "sprite"
+    },
+    "01w2E344QG-eOVTny1zhq": {
+      "id": "01w2E344QG-eOVTny1zhq",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_22/6804.png",
+      "name": "bg-A-luxurious--high-end-classic-",
+      "category": "background"
+    },
+    "9KIjJlnACzxpcg0WjbadN": {
+      "id": "9KIjJlnACzxpcg0WjbadN",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_22/6805.png",
+      "name": "bg-A-luxurious-and-spacious-priva",
+      "category": "background"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6714.mp3": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6714.mp3",
+      "type": "audio/mpeg",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6714.mp3",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6714.mp3",
+      "category": "bgm"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6679.png": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6679.png",
+      "type": "image/png",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6679.png",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6679.png",
+      "category": "background"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6694.mp3": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6694.mp3",
+      "type": "audio/mpeg",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6694.mp3",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6694.mp3",
+      "category": "sfx"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6695.mp3": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6695.mp3",
+      "type": "audio/mpeg",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6695.mp3",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6695.mp3",
+      "category": "sfx"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6680.png": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6680.png",
+      "type": "image/png",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6680.png",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6680.png",
+      "category": "background"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6696.mp3": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6696.mp3",
+      "type": "audio/mpeg",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6696.mp3",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6696.mp3",
+      "category": "sfx"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6697.mp3": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6697.mp3",
+      "type": "audio/mpeg",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6697.mp3",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6697.mp3",
+      "category": "sfx"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_22/6748.mp3": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_22/6748.mp3",
+      "type": "audio/mpeg",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_22/6748.mp3",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_22/6748.mp3",
+      "category": "sfx"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6692.png": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6692.png",
+      "type": "image/png",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6692.png",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6692.png",
+      "category": "background"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6698.mp3": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6698.mp3",
+      "type": "audio/mpeg",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6698.mp3",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6698.mp3",
+      "category": "sfx"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6700.png": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6700.png",
+      "type": "image/png",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6700.png",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6700.png",
+      "category": "background"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png",
+      "type": "image/png",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png",
+      "category": "background"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_22/6774.mp3": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_22/6774.mp3",
+      "type": "audio/mpeg",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_22/6774.mp3",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_22/6774.mp3",
+      "category": "bgm"
+    },
+    "https://story.zingplay.com/asset/1251238196/2026_4_22/6780.png": {
+      "id": "https://story.zingplay.com/asset/1251238196/2026_4_22/6780.png",
+      "type": "image/png",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_22/6780.png",
+      "name": "https://story.zingplay.com/asset/1251238196/2026_4_22/6780.png",
+      "category": "background"
+    }
+  },
+  "characters": {
+    "Y1iXGGLm7hXHWm9MD04A-": {
+      "id": "Y1iXGGLm7hXHWm9MD04A-",
+      "name": "Nam9",
+      "color": "#4A90E2",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6686.png",
+            "offset": {
+              "x": 1,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6687.png"
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6688.png"
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6689.png"
+          }
+        },
+        {
+          "id": "sportswear_an",
+          "name": "sportswear",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6779.png",
+            "offset": {
+              "x": 0,
+              "y": 8
+            }
+          }
+        },
+        {
+          "id": "0l10LO83t0XTsBX6DnM9v",
+          "name": "angry2",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6907.png"
+          }
+        }
+      ]
+    },
+    "CanhSatVN_Tre": {
+      "id": "CanhSatVN_Tre",
+      "name": "Cảnh sát",
+      "color": "#2E7D32",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6649.png",
+            "offset": {
+              "x": -13,
+              "y": -18
+            }
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6650.png",
+            "offset": {
+              "x": 11,
+              "y": -16
+            }
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6651.png",
+            "offset": {
+              "x": -8,
+              "y": 11
+            }
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6652.png",
+            "offset": {
+              "x": 22,
+              "y": 11
+            }
+          }
+        },
+        {
+          "id": "shocked",
+          "name": "shocked",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6746.png",
+            "scale": 0.7,
+            "offset": {
+              "x": 0,
+              "y": -72
+            }
+          }
+        },
+        {
+          "id": "sportswear",
+          "name": "sportswear",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6770.png"
+          }
+        }
+      ]
+    },
+    "GiangHo1": {
+      "id": "GiangHo1",
+      "name": "Giang hồ 1",
+      "color": "#000000",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6722.png",
+            "offset": {
+              "x": -1,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6654.png"
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6655.png"
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6681.png"
+          }
+        },
+        {
+          "id": "fZ4Mqdnjo0psFefzpsQk7",
+          "name": "injured",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6723.png"
+          }
+        },
+        {
+          "id": "injured",
+          "name": "injured",
+          "visual": {
+            "type": "image",
+            "assetId": ""
+          }
+        }
+      ]
+    },
+    "GiangHo2": {
+      "id": "GiangHo2",
+      "name": "Đại ca giang hồ",
+      "color": "#000000",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6657.png",
+            "offset": {
+              "x": 100,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6658.png"
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6660.png"
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6659.png"
+          }
+        },
+        {
+          "id": "MBsWdjqmEglVBJaDNWASy",
+          "name": "injured",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6720.png",
+            "offset": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "injured",
+          "name": "injured",
+          "visual": {
+            "type": "image",
+            "assetId": ""
+          }
+        }
+      ]
+    },
+    "GiangHo3": {
+      "id": "GiangHo3",
+      "name": "Giang hồ 2",
+      "color": "#000000",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6661.png",
+            "offset": {
+              "x": -98,
+              "y": 12
+            }
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6662.png"
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6664.png"
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6663.png"
+          }
+        },
+        {
+          "id": "y2yz5OZTU05FSxYWiQvNT",
+          "name": "injured",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6721.png"
+          }
+        }
+      ]
+    },
+    "TruongDon_CongAn": {
+      "id": "TruongDon_CongAn",
+      "name": "Trưởng đồn công an",
+      "color": "#1B5E20",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6704.png"
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6705.png"
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6706.png",
+            "offset": {
+              "x": -11,
+              "y": 14
+            }
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6703.png"
+          }
+        }
+      ]
+    },
+    "CanhSat_2": {
+      "id": "CanhSat_2",
+      "name": "Cảnh sát 2",
+      "color": "#388E3C",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6712.png"
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6709.png"
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6710.png"
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6711.png"
+          }
+        },
+        {
+          "id": "shocked",
+          "name": "shocked",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6747.png",
+            "scale": 0.7,
+            "offset": {
+              "x": 0,
+              "y": -83
+            }
+          }
+        }
+      ]
+    },
+    "XgjWbCGI_aaXWaOyDdE61": {
+      "id": "XgjWbCGI_aaXWaOyDdE61",
+      "name": "Bác sĩ",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6798.png"
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6799.png",
+            "offset": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6791.png"
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6792.png"
+          }
+        }
+      ]
+    },
+    "GqxXarVNucCntk1C0Ismj": {
+      "id": "GqxXarVNucCntk1C0Ismj",
+      "name": "Y tá",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6796.png"
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6797.png"
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6794.png"
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6795.png"
+          }
+        }
+      ]
+    },
+    "JkuHBljTR4th0RQdUeZMA": {
+      "id": "JkuHBljTR4th0RQdUeZMA",
+      "name": "Ông Sơn",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6800.png"
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6801.png",
+            "offset": {
+              "x": 7,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6802.png",
+            "offset": {
+              "x": 0,
+              "y": 21
+            }
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6803.png",
+            "offset": {
+              "x": 6,
+              "y": 19
+            }
+          }
+        },
+        {
+          "id": "gKxKYFtWSg9RXRwBLQQ8U",
+          "name": "hug",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6887.png",
+            "scale": 1.3,
+            "offset": {
+              "x": 0,
+              "y": 66
+            }
+          }
+        }
+      ]
+    },
+    "c_-gdV9YZ6QqLB3PCuJ6F": {
+      "id": "c_-gdV9YZ6QqLB3PCuJ6F",
+      "name": "Nu9",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "neutral",
+          "name": "neutral",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6807.png",
+            "offset": {
+              "x": 1,
+              "y": 1
+            }
+          }
+        },
+        {
+          "id": "happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6809.png",
+            "offset": {
+              "x": 8,
+              "y": 0
+            }
+          }
+        },
+        {
+          "id": "sad",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6883.png",
+            "offset": {
+              "x": 0,
+              "y": 3
+            }
+          }
+        },
+        {
+          "id": "angry",
+          "name": "angry",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6806.png"
+          }
+        }
+      ]
+    }
+  },
+  "content": {
+    "entry": "c0At4zAlRdtQny2TcMxU9",
+    "scenes": [
+      {
+        "id": "L7kyIFQD4ajHaMKgjxXZO",
+        "title": "Khởi đầu mới",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "3SvVHDJ4bwIdddNmQ8yom"
+          },
+          {
+            "type": "play_bgm",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6714.mp3",
+            "loop": true,
+            "volume": 0.1,
+            "id": "u5jljiCfOewNTOsvKFjw8"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6679.png"
+            },
+            "id": "Hu1iRrXW0JJPWdUKWNHbT"
+          },
+          {
+            "type": "narration",
+            "text": "Một buổi sáng sớm, đường sá chật kín xe cộ...",
+            "id": "JML8D3Gno-rMZ2gxeMhSH"
+          },
+          {
+            "type": "character_show",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "center",
+            "expressionId": "happy",
+            "transition": {
+              "type": "fade",
+              "duration": 100,
+              "easing": "ease-in-out"
+            },
+            "duration": 300,
+            "flipX": true,
+            "id": "fgHa10rwpzUuTN_Zx0re3"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": true,
+            "id": "Cswhlcxn0QOetxpdb6rNd"
+          },
+          {
+            "type": "narration",
+            "text": "Một chàng thanh niên đang kiên nhẫn đứng chờ đèn đỏ, giữa dòng xe cộ đông đúc.",
+            "id": "MoeVJsQrwWIs76kHLk6tX"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6694.mp3",
+            "volume": 1,
+            "id": "hp7tf_tL2f7owTgum9VkU"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "XaVVpYhv1HODZ0nAJshwW"
+          },
+          {
+            "type": "narration",
+            "text": "Bất thình lình, tiếng còi inh ỏi vang lên. Một chiếc ô tô lao tới từ phía sau.",
+            "id": "4KTATECZ3QOsrTwHUXILJ"
+          },
+          {
+            "type": "character_express",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "expressionId": "angry",
+            "duration": 200,
+            "id": "_DwokEQ2KslgCtGHlwH-K"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6695.mp3",
+            "volume": 1,
+            "id": "dkLxF01MB6x6JUd_tMulz"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "shake",
+              "intensity": 5,
+              "duration": 500,
+              "direction": "both",
+              "decay": true
+            },
+            "id": "nJ_RO-UnzgNTVU4MZiqW8"
+          },
+          {
+            "type": "narration",
+            "text": "ẦMMM! Cú va chạm mạnh khiến chàng thanh niên loạng choạng, suýt ngã khỏi xe.",
+            "id": "deOWBq9TNNl3GOQmppg8o"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6680.png"
+            },
+            "id": "e5q9XwKVoRpnFHfU3c5LH"
+          },
+          {
+            "type": "character_move",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "right",
+            "transition": {
+              "type": "fade",
+              "duration": 300,
+              "easing": "ease-in-out"
+            },
+            "duration": 300,
+            "id": "NZDE9u7LARZKrgOBGK8f3"
+          },
+          {
+            "type": "character_show",
+            "characterId": "GiangHo1",
+            "position": "left",
+            "expressionId": "angry",
+            "transition": {
+              "type": "slide",
+              "duration": 300,
+              "easing": "ease-in-out"
+            },
+            "duration": 300,
+            "flipX": false,
+            "id": "ty7JbTJGOY5n5jsah0Ycg"
+          },
+          {
+            "type": "character_express",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "expressionId": "neutral",
+            "duration": 200,
+            "id": "2tZf6C9tey5pjWeqhFAbu"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo1",
+            "expressionId": "angry",
+            "text": "Mày điếc hả?! Sao nghe tao bấm còi mà không tránh ra?!",
+            "id": "KuTCO9wLVxO7BNaiQ7Wcd"
+          },
+          {
+            "type": "character_express",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "expressionId": "sad",
+            "duration": 200,
+            "id": "-kQiJ0BH58SLQaarrPfPs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "expressionId": "sad",
+            "text": "Dạ... nhưng đèn đỏ rồi mà...",
+            "id": "AJUQzNLlBuks84Q72E78I"
+          },
+          {
+            "type": "character_show",
+            "characterId": "GiangHo2",
+            "position": "far-left",
+            "expressionId": "angry",
+            "transition": {
+              "type": "slide",
+              "duration": 300,
+              "easing": "ease-in-out"
+            },
+            "duration": 300,
+            "flipX": false,
+            "id": "0VzgWeZrXNKoZqQYwS9se"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo2",
+            "expressionId": "angry",
+            "text": "Mày có biết xe của tao giá bao nhiêu không? Chiếc xe ghẻ của mày làm trầy xe tao rồi!",
+            "id": "wWUd4PV17BnUVCqU_cEng"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6696.mp3",
+            "volume": 1,
+            "id": "84rHZry1QP_vQ0EgXoCA9"
+          },
+          {
+            "type": "character_show",
+            "characterId": "GiangHo3",
+            "position": "center-left",
+            "expressionId": "angry",
+            "transition": {
+              "type": "slide",
+              "duration": 300,
+              "easing": "ease-in-out"
+            },
+            "duration": 300,
+            "flipX": false,
+            "id": "ZPrhEel9nSM3C9thMNvks"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 200,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "rmZW8PoaWLSE1q2i7t1xb"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "shake",
+              "intensity": 5,
+              "duration": 500,
+              "direction": "both",
+              "decay": true
+            },
+            "id": "M1oBwMlYYQD9dFMrsY6jJ"
+          },
+          {
+            "type": "narration",
+            "text": "BÀM! Một tên đàn em lao tới đấm thẳng vào mặt chàng thanh niên.",
+            "id": "PiA02jg6Seuedv3i_pKVb"
+          },
+          {
+            "type": "character_express",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "expressionId": "neutral",
+            "duration": 500,
+            "id": "dED7LNHXlDjRPCMlD7cQ3"
+          },
+          {
+            "type": "narration",
+            "text": "Chàng thanh niên vẫn đứng vững. Anh từ từ quay mặt lại, ánh mắt lúc này chỉ còn lại sự lạnh lẽo đến đáng sợ.",
+            "id": "nQ1aPsme8jPMp84kbo4nl"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6697.mp3",
+            "volume": 1,
+            "id": "qzXEHTNf5GZq3CqcVfNvc"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 200,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "m8psZ9jbehdQIH8_NzQU_"
+          },
+          {
+            "type": "narration",
+            "text": "Cả ba tên côn đồ cùng lao vào tấn công chàng thanh niên.",
+            "id": "HFlu2oaozfRYMrdgiq9d6"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6748.mp3",
+            "volume": 1,
+            "id": "mZGEEwp3H3sBCAQK4fUCt",
+            "label": "gao"
+          },
+          {
+            "type": "character_express",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "expressionId": "0l10LO83t0XTsBX6DnM9v",
+            "duration": 200,
+            "id": "i_9qr47MKSKbbvFEqVeHH"
+          },
+          {
+            "type": "narration",
+            "text": "Nhưng ngay giây sau, một tiếng gầm vang lên. Chàng thanh niên bất ngờ phản công như một con mãnh thú bị đánh thức.",
+            "id": "AkEcIi_vQbhgZ8OSec-i9"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "shake",
+              "intensity": 5,
+              "duration": 500,
+              "direction": "both",
+              "decay": true
+            },
+            "id": "lDftDVzanAqal91DxQa6c"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "DYe0ihe8J_GYglQG0iWwU"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 4,
+              "duration": 400,
+              "direction": "in"
+            },
+            "id": "B2lgnjjVk-nx9ajEhaBbB"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "GiangHo2",
+            "duration": 100,
+            "id": "d1ak2ILHrs531SQiPXB6_"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "GiangHo3",
+            "duration": 100,
+            "id": "9C4VtZcbGvDZ_XGZltub7"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "GiangHo1",
+            "duration": 100,
+            "id": "HV1Vr448_EyBvBdLRBuNq"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "duration": 300,
+            "id": "Xr81WOrGpkxlhSb_TIJGf"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6692.png"
+            },
+            "id": "pmLsB4wYztFYV3ry-5ylB"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6698.mp3",
+            "volume": 1,
+            "id": "znzb0LQc5cEOnoZTHwjUU"
+          },
+          {
+            "type": "narration",
+            "text": "Tiếng xương gãy vang lên khô khốc. Nắm đấm của chàng thanh niên thấm đẫm máu. Những kẻ ngã xuống không ngừng rên rỉ đau đớn.",
+            "id": "bccUZ1fSSCxlaHTjKRKsH"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo1",
+            "text": "Mày... Mày là thằng nào?",
+            "id": "cpRknrUOOoLScUpNthLc5"
+          },
+          {
+            "type": "input",
+            "prompt": "Hãy nhập tên cho nam chính:",
+            "variable": "nam9",
+            "placeholder": "Tên nam chính",
+            "maxLength": 10,
+            "id": "bWsDoPYJ9VBwD2l4ge7wK"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Tao là {{nam9}}",
+            "id": "70UogUTiW6Yr7eSN6nPlp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo2",
+            "text": "Mày... mày nhớ mặt tụi tao!",
+            "id": "-y_tiJT_fIflNQP0W5FRl"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "DoWktDtIm4HFBEZR-GfbX"
+          },
+          {
+            "type": "goto",
+            "target": "7ggbaqJxR7DYQdg9C3NwZ",
+            "id": "SEL7LuXC7ifS9ldpeAD2-"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      {
+        "id": "7ggbaqJxR7DYQdg9C3NwZ",
+        "title": "Chap 1: Đồn công an",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "iY3EthLiwZEUTulq4FlT4"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6700.png"
+            },
+            "id": "AcciBOraoKODSJB4y_QrS"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": true,
+            "id": "-Mryji1DkWtHQILzpQvq5"
+          },
+          {
+            "type": "narration",
+            "text": "\"Sáng sớm nay, tại tuyến đường trung tâm đã xảy ra vụ ẩu đả nghiêm trọng giữa một thanh niên trẻ và nhóm giang hồ cộm cán.\"",
+            "id": "UO0elaNtsk9NAg-shOehu"
+          },
+          {
+            "type": "narration",
+            "text": "\"Nguyên nhân ban đầu được xác định là do mâu thuẫn sau va chạm giao thông. Hiện tại, ba người trong nhóm giang hồ đã được đưa đi cấp cứu trong tình trạng chấn thương nặng.\"",
+            "id": "-if0S1NOqbstbQ1sRpEYf"
+          },
+          {
+            "type": "narration",
+            "text": "\"Riêng người thanh niên hiện đang có mặt tại trụ sở công an để lấy lời khai phục vụ công tác điều tra.\"",
+            "id": "cFzS2xdeWPdb_iuxQNYV7"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png"
+            },
+            "id": "BGEQRHNMk-XXoa6D2D3eT"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Thằng này khỏe dữ vậy? Một mình nó cân 3 thằng luôn kìa!",
+            "id": "gBo1pS1plrKBvnplrjKqa"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Nhìn nó thư sinh thế kia mà đánh ác thật.",
+            "id": "dbRXzh5_vE1g2rdyf_cIR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Mấy tên bị đánh là băng của lão Hùng Chợ Cá đây mà. Mới được ra trại tuần trước mà nay lại đi gây sự rồi.",
+            "id": "3dNqdlm1L6nJ0dMw4rmkF"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TruongDon_CongAn",
+            "position": "left",
+            "expressionId": "neutral",
+            "duration": 300,
+            "flipX": false,
+            "id": "FtGlypiC-oJNxBo7Fdqw8"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "Sắp tới giờ làm việc rồi, các cậu đừng ồn ào nữa. \"Nhân vật chính\" ở ngay đây rồi.",
+            "id": "u85KPUtyCTe8W1jLvK_D1"
+          },
+          {
+            "type": "character_show",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "far-left",
+            "expressionId": "sad",
+            "duration": 300,
+            "flipX": false,
+            "id": "kcjKbSnXwJIp6kGgOk7Hr"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "Cậu Đạt với Tuấn chuẩn bị chia nhau ra đi lấy lời khai cho tôi nhé",
+            "id": "PnkJe7a6Z2hxHQUeqQyFD"
+          },
+          {
+            "type": "character_show",
+            "characterId": "CanhSat_2",
+            "position": "center-right",
+            "expressionId": "neutral",
+            "duration": 300,
+            "flipX": false,
+            "id": "fmq4APT7PgggAXzBAp1fI"
+          },
+          {
+            "type": "character_show",
+            "characterId": "CanhSatVN_Tre",
+            "position": "right",
+            "expressionId": "neutral",
+            "duration": 300,
+            "flipX": false,
+            "id": "KEIiJYydi1p5x-JZI7rJB"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Vâng ạ",
+            "id": "r2sE5sp4jePRODN8wS2j2"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "TruongDon_CongAn",
+            "duration": 100,
+            "id": "hhtAc5Sfsic4oUa_1wq2W"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "duration": 100,
+            "id": "Pb0jMWaKwRlpXjTBh0V-j"
+          },
+          {
+            "type": "character_move",
+            "characterId": "CanhSat_2",
+            "position": "left",
+            "duration": 500,
+            "id": "EdGpH4xEco2M9EKQI2_hv"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSat_2",
+            "text": "Bây giờ cậu muốn đi lấy lời khai của ai? Tớ sẽ đi lấy của bên còn lại!",
+            "id": "dJIa19oXbwA6FsUfn4Obd"
+          },
+          {
+            "type": "choice",
+            "prompt": "Bạn muốn bắt đầu điều tra từ đâu?",
+            "options": [
+              {
+                "text": "Lấy lời khai của {{nam9}}",
+                "target": "9F56RQkVB7UR7LLq6l4JF"
+              },
+              {
+                "text": "Lấy lời khai của mấy tên giang hồ",
+                "target": "SQqgjXOjSGeObZZrpKBRd"
+              }
+            ],
+            "id": "MDpUhXtaRNAd5q1E86tzt"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 200,
+            "y": 200
+          }
+        }
+      },
+      {
+        "id": "9F56RQkVB7UR7LLq6l4JF",
+        "title": "Lời khai của An",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "m_TtiuZ3wpQa2KwbWAUNA"
+          },
+          {
+            "type": "stage_reset",
+            "id": "oBVR6Og28KjygCDibSYmF"
+          },
+          {
+            "type": "set_variable",
+            "variable": "an_statement",
+            "op": {
+              "op": "set",
+              "value": 1
+            },
+            "scope": "story",
+            "id": "hWl9jvagESH31fc_Fz7SR",
+            "label": "an_statement"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "rKWLsswrXWnti6RTVVdnR"
+            },
+            "id": "0tGR7rr0E-VdryN6QCDRY"
+          },
+          {
+            "type": "character_show",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "far-left",
+            "expressionId": "neutral",
+            "transition": {
+              "type": "fade",
+              "duration": 500,
+              "easing": "ease-in-out"
+            },
+            "duration": 500,
+            "flipX": false,
+            "id": "I0eMYakzLrBPyVGt3t5zr"
+          },
+          {
+            "type": "narration",
+            "text": "Bên trong phòng thẩm vấn, không gian trở nên ngột ngạt và tĩnh lặng. Cậu thanh niên ngồi đó, chiếc sơ mi trắng hơi xộc xệch sau cuộc ẩu đả, nhưng điều kỳ lạ là trên cơ thể anh dường như không có lấy một vết trầy xước.",
+            "id": "zzhriSsfla3623MVBObLU"
+          },
+          {
+            "type": "character_show",
+            "characterId": "CanhSatVN_Tre",
+            "position": "far-right",
+            "expressionId": "neutral",
+            "transition": {
+              "type": "slide",
+              "duration": 500,
+              "easing": "ease-in-out"
+            },
+            "duration": 500,
+            "flipX": true,
+            "id": "XOhCtLPLzk0saXLu3rRea"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Bây giờ tôi sẽ bắt đầu lấy lời khai của cậu. Toàn bộ nội dung buổi làm việc hôm nay sẽ được ghi hình và ghi âm lại để làm bằng chứng trước tòa. Cậu hiểu chứ?",
+            "id": "Lm8KHNnqeIdz5noDeHKqu"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Dạ.",
+            "id": "AF0NAIaQldCJeC1K0J0eD"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Tốt. Chúng ta bắt đầu thôi. Tên của cậu là gì?",
+            "id": "nxWRwuOf8xe9VEsKsM4pI"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "{{nam9}} ạ.",
+            "id": "5Ye1b0Cm2jblvzuSNb2V1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "neutral",
+            "text": "Cho tôi xem giấy tờ tùy thân của cậu đi.",
+            "id": "Ty2Zg8o_JfbIdCo1RRPKs"
+          },
+          {
+            "type": "narration",
+            "text": "Cậu thanh niên lặng lẽ lấy thẻ căn cước từ trong ví ra, đặt lên bàn. Viên cảnh sát cầm lấy, nhíu mày nhìn tấm thẻ rồi quay sang máy tính để tra cứu lại thông tin trên hệ thống quốc gia.",
+            "id": "mndn5cR19v2tzi1OicFH-"
+          },
+          {
+            "type": "narration",
+            "text": "Sau một hồi kiểm tra kỹ lưỡng, viên cảnh sát quay lại nhìn cậu thanh niên với vẻ mặt suy tư.",
+            "id": "NG6fXOEjI5xovRBA6HCKC"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "neutral",
+            "text": "Được rồi, {{nam9}}. Trong hồ sơ của cậu... phần thông tin gia đình để trống khá nhiều. Cậu có người thân nào không?",
+            "id": "nxNLUmglvYDRGrIjM9kFR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "expressionId": "sad",
+            "text": "Em... không... em mồ côi từ lúc mới đẻ ạ...",
+            "id": "7CuzPryhJL_V2lkn5txwq"
+          },
+          {
+            "type": "narration",
+            "text": "Viên cảnh sát thoáng chút bối rối trước nỗi buồn trên mặt người thanh niên trẻ. Anh vội vã lật trang sổ tiếp theo để xua tan bầu không khí ngượng ngùng.",
+            "id": "L4X0rrAwQ1m1wrTnhHWz-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "À... cậu là lập trình viên ở công ty game à?",
+            "id": "yWh48jJXlW8b0VmLbjvSA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Dạ đúng rồi",
+            "id": "9IlvzqHiCt__Ao8TsIStO"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "neutral",
+            "text": "Được rồi, bây giờ cậu hãy thuật lại chi tiết toàn bộ sự việc xảy ra sáng nay cho tôi nghe. Bắt đầu từ lúc cậu dừng xe ở ngã tư đó.",
+            "id": "m0Bx0qT31L0o_H93BQ69c"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} bắt đầu kể lại chi tiết sự việc, từ lúc dừng đèn đỏ cho đến khi bị nhóm giang hồ vây đánh và anh đã đáp trả lại. Anh khai báo một cách rành mạch, không hề giấu diếm bất cứ tình tiết nào.",
+            "id": "Jmu1yrW7QmTR4T1HSFo7c"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "neutral",
+            "text": "Tôi đã ghi nhận tường trình của cậu. Tuy nhiên, cậu có biết hậu quả của vụ việc này nghiêm trọng thế nào không?",
+            "id": "6JF5wNFxLXu-A2SntkRSs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Cả ba tên đó đều đang phải cấp cứu. Kết quả sơ bộ cho thấy bọn chúng đều bị gãy xương sườn, xương đòn, thậm chí có người còn bị chấn thương sọ não.",
+            "id": "bGHohn95t64RVHEOCvWPU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "angry",
+            "text": "Dù bọn chúng có gây sự trước, nhưng với thương tích nghiêm trọng như thế này, tôi e rằng cậu đã vượt quá giới hạn phòng vệ chính đáng rồi.",
+            "id": "Ut954wsdwKXmcFT2HfwaC"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Chúng tôi sẽ cần phải tiến hành giám định thương tật và điều tra thêm để xác định tội danh cụ thể cho cả hai bên. Cậu nên chuẩn bị tinh thần đi.",
+            "id": "0Rjt62L-HgU7nwsj0pRtT"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "neutral",
+            "text": "Nhưng nói thật... tôi vẫn không tài nào hiểu nổi. Cậu trông thư sinh thế này, làm sao có thể đánh gục ba tên to xác đó vậy? Sức mạnh của cậu thật sự quá đáng kinh ngạc.",
+            "id": "kFeelTe60j0uEFEfxTRVR"
+          },
+          {
+            "type": "character_express",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "expressionId": "happy",
+            "duration": 300,
+            "id": "WKE2yvPbQoocjNhVOrG-v"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Tại vì... em không phải con người!",
+            "id": "5GyU7gthzFbo3mAanRD-D"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 200,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "pWcY6LMnu3M6l5v2kp7GJ"
+          },
+          {
+            "type": "wait",
+            "duration": 600,
+            "fixed": true,
+            "id": "_Rce7vSgh-TH2I3Rfy35T"
+          },
+          {
+            "type": "narration",
+            "text": "Viên cảnh sát sững người. Câu nói đó thốt ra từ miệng {{nam9}} với một nụ cười, nhưng không hiểu sao nó lại mang đến một cảm giác rợn người, hoàn toàn không giống một lời nói đùa bình thường.",
+            "id": "Fi1E8ECNrO9NxXtddI5OW"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "angry",
+            "text": "Cậu... cậu vừa nói cái gì?",
+            "id": "8c0PL_XXMGVzYPAO7_xs1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "expressionId": "happy",
+            "text": "Haha, em giỡn á! Tại dạo này em mới đi tập gym với học mấy bài võ tự vệ trên mạng thôi!",
+            "id": "6MdgktJGfZX1YKvhYaN5u"
+          },
+          {
+            "type": "narration",
+            "text": "Viên cảnh sát nhíu mày, gương mặt đầy vẻ suy tư và hoài nghi về những lời {{nam9}} vừa nói. Anh im lặng một lúc lâu rồi đứng dậy, ra hiệu kết thúc buổi thẩm vấn.",
+            "id": "_RrRfpNz7CUvyqoi5UA3E"
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "variable": "giangho_statement",
+              "operator": ">",
+              "value": "0"
+            },
+            "then": "VRAXy20ysIQLRIbzULZx1",
+            "else": "Hlp5_FgQUTPvIDIfiGSrs",
+            "id": "TxpdHFdplDTrCxlxF1dc3"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 600,
+            "y": 200
+          }
+        }
+      },
+      {
+        "id": "SQqgjXOjSGeObZZrpKBRd",
+        "title": "Lời khai của Giang hồ",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "hBirxM1MWfoUs9hFj4PaV"
+          },
+          {
+            "type": "stage_reset",
+            "id": "cztK8qkFGAoNC8m4SiSrq"
+          },
+          {
+            "type": "set_variable",
+            "variable": "giangho_statement",
+            "op": {
+              "op": "set",
+              "value": 1
+            },
+            "scope": "story",
+            "id": "tqSqGh8F4o-3iYJXkQJ5M",
+            "label": "giangho_statement"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "tNUmmPBUxgMIW3uk8Qyaj"
+            },
+            "id": "SF1qkjZc8Y0EZyH9C5UXS"
+          },
+          {
+            "type": "narration",
+            "text": "Tại bệnh viện khu vực, mùi thuốc khử trùng nồng nặc bao trùm căn phòng cấp cứu. Thật khó tin khi ba gã đàn ông lực lưỡng này lại thảm hại đến thế.",
+            "id": "izndJIC3KBJsVDdxXbK_j"
+          },
+          {
+            "type": "character_show",
+            "characterId": "GiangHo3",
+            "position": "center-left",
+            "expressionId": "y2yz5OZTU05FSxYWiQvNT",
+            "transition": {
+              "type": "fade",
+              "duration": 500,
+              "easing": "ease-in-out"
+            },
+            "duration": 500,
+            "flipX": false,
+            "id": "8bSRflYPkFB1RnnJDV3tZ"
+          },
+          {
+            "type": "character_show",
+            "characterId": "GiangHo1",
+            "position": "far-left",
+            "expressionId": "fZ4Mqdnjo0psFefzpsQk7",
+            "transition": {
+              "type": "fade",
+              "duration": 500,
+              "easing": "ease-in-out"
+            },
+            "duration": 500,
+            "flipX": false,
+            "id": "XYJ_A93-HODWC8gdIePYB"
+          },
+          {
+            "type": "character_show",
+            "characterId": "GiangHo2",
+            "position": "left",
+            "expressionId": "MBsWdjqmEglVBJaDNWASy",
+            "transition": {
+              "type": "fade",
+              "duration": 500,
+              "easing": "ease-in-out"
+            },
+            "duration": 500,
+            "flipX": false,
+            "id": "VN9UWPXGnWhPjDyfPNsOu"
+          },
+          {
+            "type": "character_show",
+            "characterId": "CanhSatVN_Tre",
+            "position": "right",
+            "expressionId": "neutral",
+            "transition": {
+              "type": "slide",
+              "duration": 500,
+              "easing": "ease-in-out"
+            },
+            "duration": 500,
+            "flipX": true,
+            "id": "0ZME0cNQRaEXj87qRHvs0"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Các anh trông cũng... ổn đấy chứ nhỉ? Nào, ai là người cầm lái, khai báo trung thực xem chuyện gì đã xảy ra.",
+            "id": "dBOfrwx8-ZTTt2kIKTk2U"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo2",
+            "expressionId": "injured",
+            "text": "Ổn cái gì mà ổn! Thằng đó... nó không phải là người! Nó là quái vật! Đau... đau quá...",
+            "id": "EkJ7gKkhlzE4h9eMsepnR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo1",
+            "expressionId": "injured",
+            "text": "Tôi chưa kịp nhìn thấy nó ra tay thế nào... chỉ thấy trời đất quay cuồng rồi tỉnh dậy ở đây luôn. Cảnh sát, anh phải bắt nó, nó là kẻ giết người!",
+            "id": "bFCBNO3-r5RVO_JSgIW5W"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "angry",
+            "text": "Giết người? Trong video tôi thấy các anh lao vào đánh người ta trước cơ mà? Giờ thì khai thật đi, đừng có lấp liếm.",
+            "id": "_MtpJyzzVCy9zYxWqqJGZ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo2",
+            "expressionId": "injured",
+            "text": "Cán bộ... cán bộ không biết lúc đó đâu. Tụi tui đấm đá nó túi bụi. Thằng đó lúc đầu yếu xìu, chỉ biết ôm đầu chịu trận.",
+            "id": "d3RYRwTj1-KCfr9zv0brO"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo2",
+            "expressionId": "injured",
+            "text": "Đến khi thấy nó nằm gục xuống đường, máu me đầy mặt, tụi tui đã định rời đi rồi...",
+            "id": "79Xy1PZF5j0XpzKQ1pjPZ"
+          },
+          {
+            "type": "narration",
+            "text": "Tên đại ca rùng mình, đôi mắt hiện rõ vẻ kinh hãi khi nhớ lại khoảnh khắc đó. Giọng hắn bắt đầu run rẩy.",
+            "id": "IoEV3ZxTDlqU_xa35Zj4M"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 200,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "tKdI7iiZ0xDet1R-goHZj"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo2",
+            "expressionId": "injured",
+            "text": "Nhưng đột nhiên... nó gầm lên một tiếng! Tiếng gầm đó... trời ơi, nó không giống tiếng người chút nào!",
+            "id": "CnK2EMN047Y3gG8c8KMtV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo2",
+            "expressionId": "injured",
+            "text": "Tụi tui quay lại thì thấy nó đã đứng dậy. Đôi mắt nó... nó đỏ ngầu như quỷ dữ vậy! Rồi nó lao vào... nhanh tới mức tụi tui không kịp phản ứng gì hết...",
+            "id": "TS4_d0kZsrop180rjetA9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "neutral",
+            "text": "Đỏ ngầu? Anh có chắc là mình không xỉn quá rồi nhìn nhầm không?",
+            "id": "56big4wH1O67aRk3YJUCE"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GiangHo2",
+            "expressionId": "injured",
+            "text": "Nhìn nhầm làm sao được! Tôi thề với cán bộ, đôi mắt đó sẽ ám ảnh tôi suốt đời! Nó... nó muốn giết tụi tui thiệt mà! Thằng đó không phải con người!",
+            "id": "8Tj_80Sn2nAY6DOphDbof"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "neutral",
+            "text": "** Đỏ ngầu... sức mạnh bất thường... Chẳng lẽ cậu ta đang phê thuốc sao? Chỉ có chất kích thích mạnh mới làm con người ta trở nên điên cuồng như vậy. Có lẽ cần phải đưa cậu ta đi xét nghiệm chất cấm. **",
+            "id": "EHDQAS3krAOfpEZjwkVGT"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Được rồi, tôi đã ghi nhận lời khai của mọi người. Các anh cứ nằm đây mà tịnh dưỡng đi.",
+            "id": "IWQarHI0ZrTnoWGUjtxiw"
+          },
+          {
+            "type": "narration",
+            "text": "Anh cảnh sát trẻ gấp sổ ghi chép lại, bước ra khỏi phòng bệnh với vẻ mặt đăm chiêu.",
+            "id": "AF_L6jrxLLaTPjVioPdB0"
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "variable": "an_statement",
+              "operator": ">",
+              "value": "0"
+            },
+            "then": "VRAXy20ysIQLRIbzULZx1",
+            "else": "Hlp5_FgQUTPvIDIfiGSrs",
+            "id": "ZMVX4vMBwPJ-e1Cwb9RH3"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 400,
+            "y": 400
+          }
+        }
+      },
+      {
+        "id": "Hlp5_FgQUTPvIDIfiGSrs",
+        "title": "Báo cáo tại đồn công an",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "lXL1ijefNKB-qwrpNcKeF"
+          },
+          {
+            "type": "stage_reset",
+            "id": "m1NGtyQp3Ogr0nQh5aa-W"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png"
+            },
+            "id": "rErHeVkyRuH52Q_UZfuvN"
+          },
+          {
+            "type": "character_show",
+            "characterId": "CanhSat_2",
+            "position": "left",
+            "expressionId": "neutral",
+            "duration": 300,
+            "flipX": false,
+            "id": "-Tg-0KiulNPL26JAjcYl1"
+          },
+          {
+            "type": "character_show",
+            "characterId": "CanhSatVN_Tre",
+            "position": "right",
+            "expressionId": "neutral",
+            "transition": {
+              "type": "fade",
+              "duration": 300,
+              "easing": "ease-in-out"
+            },
+            "duration": 300,
+            "flipX": true,
+            "id": "12e68BHtrQ_u9QfiOEFcy"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Câu biết Thủ trưởng ở đâu rồi không?",
+            "id": "IokONr-tU7abYZ-PGjgiR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Thủ trưởng đang nghe điện thoại từ cấp trên, coi bộ có vẻ quan trọng lắm. Chúng ta đợi một lúc nữa vậy.",
+            "id": "wG5g253krT3vDS92lynNU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Cậu lấy lời khai bên đó sao rồi? Có gì đặc biệt không?",
+            "id": "U4K5dJHiZgVZqf3A2ctHS"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSat_2",
+            "text": "Tường trình sự việc cũng giống như camera đã ghi lại thôi, nhưng cái cậu thanh niên tên {{nam9}} đó có gì kỳ lạ lắm. Cậu muốn xem thử video lấy lời khai bên tôi không?",
+            "id": "S_krbc8mLtujwJjA5IoIY"
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "variable": "an_statement",
+              "operator": ">",
+              "value": "0"
+            },
+            "then": "KUJNRTsARAcASFiujYdyS",
+            "else": "Dpl8uBgHddwGu56JqRbfF",
+            "id": "KSWi4ziyiLIMGhhNWESgG"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 1000,
+            "y": 500
+          }
+        }
+      },
+      {
+        "id": "KUJNRTsARAcASFiujYdyS",
+        "title": "Báo cáo tại đồn công an (đã gặp An)",
+        "nodes": [
+          {
+            "type": "choice",
+            "prompt": "Xem video lời khai của đám giang hồ?",
+            "options": [
+              {
+                "text": "Xem",
+                "target": "SQqgjXOjSGeObZZrpKBRd"
+              },
+              {
+                "text": "Bỏ qua",
+                "target": "VRAXy20ysIQLRIbzULZx1"
+              }
+            ],
+            "id": "AKNK89ajTfq3ul0aZqnBP"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 600
+          }
+        }
+      },
+      {
+        "id": "Dpl8uBgHddwGu56JqRbfF",
+        "title": "Báo cáo tại đồn công an (đã gặp GiangHo)",
+        "nodes": [
+          {
+            "type": "choice",
+            "prompt": "Xem video lời khai của cậu thanh niên?",
+            "options": [
+              {
+                "text": "Xem",
+                "target": "9F56RQkVB7UR7LLq6l4JF"
+              },
+              {
+                "text": "Bỏ qua",
+                "target": "VRAXy20ysIQLRIbzULZx1"
+              }
+            ],
+            "id": "nPzKiSCeFP9hHWCpZSHvl"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 1200,
+            "y": 600
+          }
+        }
+      },
+      {
+        "id": "VRAXy20ysIQLRIbzULZx1",
+        "title": "Báo cáo tại đồn công an Final",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "kwaYUs8DF8SkJWp_D1z1M"
+          },
+          {
+            "type": "stage_reset",
+            "id": "_MJB_BW0VuskheVc2Jo1l"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png"
+            },
+            "id": "skjfDwL3LP4TVDAy62aUj"
+          },
+          {
+            "type": "character_show",
+            "characterId": "CanhSat_2",
+            "position": "left",
+            "expressionId": "neutral",
+            "duration": 300,
+            "flipX": false,
+            "id": "zHskQxepWWqPbNS5Gz5lX"
+          },
+          {
+            "type": "character_show",
+            "characterId": "CanhSatVN_Tre",
+            "position": "right",
+            "expressionId": "neutral",
+            "duration": 300,
+            "flipX": true,
+            "id": "tiWpcmgFm5oRDSLIjYsPw"
+          },
+          {
+            "type": "wait",
+            "duration": 500,
+            "fixed": false,
+            "id": "acZqBpQtnz_hM0O42MvTj"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TruongDon_CongAn",
+            "position": "center",
+            "expressionId": "neutral",
+            "transition": {
+              "type": "slide",
+              "duration": 500,
+              "easing": "ease-in-out"
+            },
+            "duration": 500,
+            "flipX": false,
+            "id": "10kGmHabAtUlSLZ3c-9P7"
+          },
+          {
+            "type": "narration",
+            "text": "Ngài Thủ trưởng quay trở lại bàn làm việc sau một cuộc điện thoại dài, vẻ mặt ngập tràn suy tư.",
+            "id": "EYt4xgNspnNQm9u2pF904"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Báo cáo Thủ trưởng, chúng em vừa hoàn thành việc lấy lời khai. Đối tượng {{nam9}} này thật sự có rất nhiều điểm bất thường, chúng em nghi ngờ...",
+            "id": "QHwJUawtU_VqrulFhbIRa"
+          },
+          {
+            "type": "character_express",
+            "characterId": "TruongDon_CongAn",
+            "expressionId": "sad",
+            "duration": 300,
+            "id": "UW1kXqTbBeyXjZllXvTUs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "Đủ rồi. Cậu không cần báo cáo thêm nữa.",
+            "id": "lnocllHKnOz0Piz0hpVk-"
+          },
+          {
+            "type": "narration",
+            "text": "Vị Thủ trưởng cắt ngang với một vẻ mặt nặng nề. Bầu không khí căng thẳng bao trùm lấy văn phòng.",
+            "id": "ypTjuEGATrkM8U1UGns5S"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "Tôi vừa nhận được chỉ thị từ cấp trên. Ngay bây giờ, hãy thả tự do cho {{nam9}}.",
+            "id": "SVA9k0HQlSCwG2dB_hlXp"
+          },
+          {
+            "type": "character_express",
+            "characterId": "CanhSat_2",
+            "expressionId": "shocked",
+            "duration": 200,
+            "id": "kAUZMjJ-9sgZWCrfOMm3Z"
+          },
+          {
+            "type": "character_express",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "shocked",
+            "duration": 200,
+            "id": "mDQnfQ5IowGb2vVSH41o-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "Mọi tài liệu, bằng chứng, lời khai, biên bản điều tra từ sáng đến giờ liên quan đến cậu ta... tiêu hủy hết cho tôi.",
+            "id": "Fu9vUz1V_4VZbxX2UR2EY"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "Lập hồ sơ kết thúc vụ việc theo hướng hòa giải dân sự. Ghi rõ: Phía bị hại đã nhận bồi thường thỏa đáng và tự nguyện xin không truy cứu trách nhiệm hình sự. Tuyệt đối không để phát sinh thêm khiếu nại hay thắc mắc nào sau này.",
+            "id": "VAoxVkeQ_LOPnu_JVJ8Me"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "expressionId": "angry",
+            "text": "Nhưng thưa Thủ trưởng, đối tượng {{nam9}} có rất nhiều điểm rất bất thường, em nghi ngờ là...",
+            "id": "AyXMWIIMt0f0flupCTwQe"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "expressionId": "sad",
+            "text": "Đây là lệnh! Đừng hỏi thêm gì nữa. Tất cả giải tán, quay về vị trí làm việc đi!",
+            "id": "RVCq_eypDVFDiHrRdBbyJ"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "TruongDon_CongAn",
+            "duration": 300,
+            "id": "1kuDRIBJFwfwHRx6y8iOs"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "CanhSat_2",
+            "duration": 300,
+            "id": "Zjt0aBw5HkE_XBipEbjHM"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "W9NFt8BYz-iL4V2RS6dkj"
+          },
+          {
+            "type": "character_move",
+            "characterId": "CanhSatVN_Tre",
+            "position": "far-right",
+            "duration": 500,
+            "id": "b76UXw4QGrUCimhhPerfh"
+          },
+          {
+            "type": "narration",
+            "text": "Sự im lặng đáng sợ bao trùm lấy trụ sở công an. Anh cảnh sát trẻ bàng hoàng nhìn vị Thủ trưởng của mình, người vốn nổi tiếng là chính trực, nay lại phải ra một chỉ thị khó hiểu như vậy. Thân thế của {{nam9}}... xem ra không hề bình thường.",
+            "id": "AwS4tGxa-lDexZnVxYpjQ"
+          },
+          {
+            "type": "goto",
+            "target": "4ftHvrRKKV9q5w7hTczyD",
+            "id": "vb4YiwbXm-Nl1psatDlJx"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 900
+          }
+        }
+      },
+      {
+        "id": "4ftHvrRKKV9q5w7hTczyD",
+        "title": "Gặp lại An",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "R4sYJXvjQn7uxPH5V7xkb"
+          },
+          {
+            "type": "stop_bgm",
+            "fadeOut": 100,
+            "id": "CO7P2lqdpiNKV3sR9oENM"
+          },
+          {
+            "type": "play_bgm",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6774.mp3",
+            "loop": true,
+            "volume": 0.1,
+            "fadeIn": 100,
+            "id": "Fb6uODLKeambeTji19f94"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "bU9nc6Sv4Al2MPaOjtMbf"
+            },
+            "id": "e2tLE1iHX79vrjZBWTdSf"
+          },
+          {
+            "type": "narration",
+            "text": "Đêm đã về khuya. Bên bờ hồ vắng vẻ, những ánh đèn đường hắt hiu xuống mặt nước tĩnh lặng. Không gian im lìm, chỉ còn tiếng bước chân chạy bộ đều đặn.",
+            "id": "iTt78cq6QF2K1IeKDGzQD"
+          },
+          {
+            "type": "character_show",
+            "characterId": "CanhSatVN_Tre",
+            "position": "center",
+            "expressionId": "sportswear",
+            "transition": {
+              "type": "fade",
+              "duration": 500,
+              "easing": "ease-in-out"
+            },
+            "duration": 500,
+            "flipX": false,
+            "id": "uHHtNN_7aYRwJDa2tGuI8"
+          },
+          {
+            "type": "narration",
+            "text": "Anh cảnh sát trẻ trong bộ đồ thể thao đang chạy bộ, mồ hôi nhễ nhại. Nhưng tâm trí anh lại không ngừng suy nghĩ về những chuyện sáng nay.",
+            "id": "ic6WeMEPgGJCrfIJSpWxO"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "** Tại sao Thủ trưởng lại ra lệnh thả cậu ta nhanh đến thế? Xóa sạch mọi dấu vết... chuyện này chưa từng có tiền lệ ở đồn mình. **",
+            "id": "Ghplw4NNE40yZ_kT7OqOB"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "** Làm sao một người như {{nam9}} có thể đánh bại được 3 gã đàn ông cao to như vậy... Và cả ánh mắt đỏ ngầu của cậu ta lúc đó nữa. \"Không phải con người\"... Lời nói đó rốt cuộc là đùa hay thật? **",
+            "id": "DlC4Lzz1uXPV3bHHdXbyg"
+          },
+          {
+            "type": "narration",
+            "text": "Những câu hỏi không có lời giải cứ lẩn quẩn trong đầu anh cảnh sát như một mê cung không lối thoát. Anh không nhận ra rằng, từ phía sau lưng, một bóng người đang tiến lại gần...",
+            "id": "lGYR6xFXspx_5uNH9qccP"
+          },
+          {
+            "type": "character_move",
+            "characterId": "CanhSatVN_Tre",
+            "position": "left",
+            "duration": 500,
+            "id": "5-NctD4Ix3cQnuI6RIjde"
+          },
+          {
+            "type": "character_show",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "right",
+            "expressionId": "sportswear_an",
+            "transition": {
+              "type": "slide",
+              "duration": 500,
+              "easing": "ease-in-out"
+            },
+            "duration": 500,
+            "flipX": false,
+            "id": "YcxK14ZiHAvBBBGafUrCs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Hé lô anh!",
+            "id": "yzGDjAHgAZkjVbZiBYcgz"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Cậu... là {{nam9}} đó hả?",
+            "id": "y6TCDXmP9-EqsjpqKe6ar"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Là em nè. Sao nhìn anh đăm chiêu quá vậy?",
+            "id": "NJ4Q9cBqREhUuEa1_I-bI"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "À... tôi đang nghĩ về chuyện lúc sáng. Cậu làm sao mà... ở đây được?",
+            "id": "_5B6M9r_82Xt1G1pTnvya"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Thì em đã nói rồi mà... Em không phải là con người!",
+            "id": "k3cC8mYBU98Enb_u9NUGa"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "CanhSatVN_Tre",
+            "text": "Ý của cậu... là sao?",
+            "id": "R_wYS5vV-VBKB7NScUTWY"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "CanhSatVN_Tre",
+            "duration": 300,
+            "id": "HptEbtW0Nefzp71oFubj4"
+          },
+          {
+            "type": "character_move",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "center",
+            "duration": 600,
+            "id": "KBo-QAzo2sBFcH9ekKEoR"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} không trả lời ngay. Anh tiến lại gần bờ hồ rồi nhìn ra xa xăm. Một cơn gió đêm thổi qua, làm mặt nước xao động, phản chiếu ánh trăng vỡ vụn. Không gian rơi vào một khoảng lặng đầy suy tư trước khi anh bắt đầu lên tiếng.",
+            "id": "transition_pause_lake"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "PCSlyUL7ws8dfWe_tO6_a"
+          },
+          {
+            "type": "narration",
+            "text": "Suốt hàng ngàn năm qua, loài người luôn tự xem mình là kẻ đứng trên đỉnh chuỗi thức ăn — giống loài thượng đẳng nhất của Trái Đất. Và cũng từ cái niềm tin kiêu ngạo ấy, con người nghiễm nhiên trao cho bản thân “đặc quyền” được chiếm đoạt mọi thứ: khai thác tài nguyên không giới hạn, bóc lột đất đai, phá nát trật tự của thiên nhiên, rồi tự cho mình quyền kiểm soát sự sống của tất cả các loài sinh vật khác.",
+            "id": "qlDIcZSSsraymMQmZbqVx"
+          },
+          {
+            "type": "narration",
+            "text": "Họ dựng nhà trên rừng, cày nát thảo nguyên, lấp biển để mở rộng lãnh thổ. Họ săn bắn không chỉ để tồn tại, mà để thỏa mãn thú vui, để khoe chiến tích, để trưng bày một cái đầu thú vô tri trên tường như biểu tượng của quyền lực. Những sinh vật từng là bá chủ của rừng sâu cũng phải chạy trốn trước tiếng súng. Những đàn thú từng lang thang tự do cũng bị dồn vào chuồng trại, bị gắn thẻ, bị cắt sừng, bị đóng dấu lên da thịt như một món hàng.",
+            "id": "WgwhU3mRsFKtS5zNZvYco"
+          },
+          {
+            "type": "narration",
+            "text": "Con người không chỉ giết để ăn. Họ giết để lấy da, lấy ngà, lấy lông, lấy xương. Họ giết để làm thuốc, làm trang sức, làm đồ trang trí. Họ bắt nhốt những loài chim chỉ để nghe tiếng hót trong một chiếc lồng sắt. Họ tước đoạt tự do của những sinh vật biển, nhốt chúng trong bể kính, ép chúng biểu diễn cho tiếng vỗ tay của đám đông.",
+            "id": "vfvv0ptDanh6kBMGCoGM2"
+          },
+          {
+            "type": "narration",
+            "text": "Và khi một loài vật trở nên phiền toái, khi nó “xâm phạm” thứ mà con người tự nhận là lãnh thổ của mình, họ sẵn sàng tiêu diệt cả một quần thể, gọi đó là “kiểm soát”. Khi một giống loài suy giảm, họ thờ ơ gọi đó là “quy luật tự nhiên”, dù chính bàn tay họ mới là thứ đã đẩy nó đến bờ tuyệt chủng.",
+            "id": "mxVtoQQgCJoQVMRYkTtS1"
+          },
+          {
+            "type": "narration",
+            "text": "Cứ thế, loài người sống như thể Trái Đất này thuộc về họ. Như thể mọi sinh vật khác chỉ là công cụ để phục vụ tham vọng của họ.",
+            "id": "27Y2XuQEIjBf75GW2FpBk"
+          },
+          {
+            "type": "narration",
+            "text": "Con người vẫn luôn tin rằng mình là kẻ đứng trên đỉnh chuỗi thức ăn. Họ gọi đó là “vị thế tự nhiên”. Họ gọi đó là “quyền của kẻ mạnh”.",
+            "id": "iMFKcxpF9VUdmuoBluedc"
+          },
+          {
+            "type": "narration",
+            "text": "Thế nhưng, chuyện gì sẽ xảy ra nếu như loài người phát hiện ra rằng trên đầu mình vẫn còn một tầng cao hơn nữa — một giống loài đã tiến hóa trước họ hàng chục ngàn năm, một giống loài thượng đẳng đến mức coi con người chẳng khác gì những sinh vật thấp kém mà họ từng chà đạp…",
+            "id": "LJ7VcDBYh_dC6YSSAMC13"
+          },
+          {
+            "type": "narration",
+            "text": "Đối với họ, mọi thứ mà loài người từng hãnh diện gọi là “văn minh”, là \"công nghệ\", chỉ là một trò hề.",
+            "id": "SCN19NzIZ4vKKxFLAnX4Q"
+          },
+          {
+            "type": "narration",
+            "text": "Đối với họ, con người chỉ là một loại tài nguyên sống. Chăm chỉ xây dựng thế giới, và cuối cùng cũng chỉ để cho họ \"thu hoạch\".",
+            "id": "EQCA1BCOW4_avAMtyAT-e"
+          },
+          {
+            "type": "narration",
+            "text": "Suốt hàng ngàn năm, loài người xây dựng đế chế, lập nên tôn giáo, dựng nên luật pháp, tự cho mình là trung tâm của vũ trụ… mà không hề hay biết rằng tất cả chỉ là một cái chuồng nuôi nhốt được trang trí tinh vi. Những cuộc chiến tranh, những cuộc di cư, những thời kỳ đói kém, những chu kỳ của nền kinh tế, thậm chí cả sự thịnh vượng bất thường của một vài vùng đất… đôi khi không phải là lịch sử tự nhiên.",
+            "id": "I3QmvwKS7LV2x9VjfJu2i"
+          },
+          {
+            "type": "narration",
+            "text": "Cứ mỗi khi đến lúc có thể \"thu hoạch\", họ sẽ âm thầm ra tay. Không ồn ào. Không cần đổ máu hàng loạt. Không cần chinh phạt. Họ chỉ cần gieo một tín hiệu nhỏ vào bóng tối, và loài người sẽ tự động làm phần còn lại, dâng lên những thứ mà họ muốn.",
+            "id": "D7Aa_k35eewjXNknA9Qbt"
+          },
+          {
+            "type": "narration",
+            "text": "Những bộ lạc cổ xưa từng quỳ gối trước thần linh trên trời.\nNhưng thứ họ thờ phụng… chưa bao giờ là thần.",
+            "id": "Cf74h89m8DXZO82xJP8fg"
+          },
+          {
+            "type": "narration",
+            "text": "Con người thời hiện đại mắc kẹt trong vòng xoáy tiền bạc và công việc, kiệt sức chạy theo những tham vọng không bao giờ có điểm dừng.\nNhưng thứ họ đang phục vụ… chưa bao giờ là chính họ.",
+            "id": "1u-7QBgGX2to6bwtygRuU"
+          },
+          {
+            "type": "narration",
+            "text": "Thế nhưng, giống loài đó không thu hoạch con người vì thiếu thốn. Họ làm vậy, vì đó là thú vui.",
+            "id": "3g1J4qD2Kjw8N7-NdVtL-"
+          },
+          {
+            "type": "narration",
+            "text": "Giống như cách loài người nhốt chim trong lồng để nghe hót. Giống như cách loài người nuôi gia súc để giết thịt. Giống như cách loài người săn thú rừng để thưởng thức một bữa ăn “cao cấp”.",
+            "id": "J15cXPN6Nk-dFk1UimfZ7"
+          },
+          {
+            "type": "narration",
+            "text": "Trong những đại sảnh xa hoa của họ, THỊT NGƯỜI không phải là thứ ăn để no. Mà là món ăn tao nhã. Một loại đặc sản được tuyển chọn kỹ lưỡng, được “nuôi” bằng cả một nền văn minh. ",
+            "id": "6-l_IZNKDpMMoNdBMoA6T"
+          },
+          {
+            "type": "narration",
+            "text": "Họ thưởng thức thịt người với vẻ điềm nhiên của kẻ thượng đẳng — dao bạc lướt nhẹ qua từng thớ thịt được chế biến cầu kỳ. Rồi họ ung dung nâng ly rượu vang, nhấp một ngụm như thể đó chỉ là một bữa tối tao nhã.",
+            "id": "uBZiXh-45Nlz-vsT0XVvM"
+          },
+          {
+            "type": "narration",
+            "text": "Với họ, CON NGƯỜI… chẳng khác gì một loại gia súc biết nói.",
+            "id": "YFvMjPOqj2BzvZNfPPpAs"
+          },
+          {
+            "type": "narration",
+            "text": "Thứ khiến loài người tự hào — trí tuệ, cảm xúc, nghệ thuật, khát vọng tự do — trong mắt họ chỉ càng làm cho “món ăn” thêm phần thú vị. Một giống loài càng vùng vẫy, càng biết đau đớn, càng biết sợ hãi… thì càng đáng để nuôi dưỡng lâu hơn.",
+            "id": "9ijoEVhPxF-6HVvjzBdyF"
+          },
+          {
+            "type": "narration",
+            "text": "Bởi vì đối với kẻ thống trị thật sự…\n\nĐiều tuyệt vời nhất không phải là giết một con mồi.\n\nMà là khiến con mồi tự tin rằng mình chưa từng bị săn.",
+            "id": "iosj370qmfc42T3CXkV2b"
+          },
+          {
+            "type": "goto",
+            "target": "0a4omxpfl03VhB40xxVag",
+            "id": "4jZDLZleoBza5sX5rnoah"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 1100
+          }
+        }
+      },
+      {
+        "id": "0a4omxpfl03VhB40xxVag",
+        "title": "T2 Thức tỉnh",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "wPCvRZ_IQgMc8m1NQhU3c"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 100,
+              "direction": "in"
+            },
+            "id": "2jY6mkFOVm6DgSkaZlrBN"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6780.png"
+            },
+            "id": "Zh307qx_nAnTM8ONp-yYr"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": true,
+            "id": "NUs7gcQWF-aoH6YoqjR6Y"
+          },
+          {
+            "type": "narration",
+            "text": "...................................................................................................",
+            "id": "5tTxlhv_eA-6WtmAuLKPm"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 4,
+              "duration": 400,
+              "direction": "in"
+            },
+            "id": "SazKi1fhKhkBa1iElZ2Ae"
+          },
+          {
+            "type": "play_sfx",
+            "id": "VATwnIddwB4NmHe584mxz",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6911.mp3",
+            "volume": 1
+          },
+          {
+            "type": "wait",
+            "duration": 2000,
+            "fixed": true,
+            "id": "LY-uZ5QkSIdK5RyQqZ8kG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Ơ... Bác sĩ... Hình như em vừa thấy mí mắt cô ấy chuyển động...",
+            "id": "0uoDJTwSa_V7QfLLFRhcE"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Em chắc không đấy?",
+            "id": "GlusGuOkZZjXSuBjsMCRu"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Dạ... em chắc. Em nhìn thấy rõ mà Bác sĩ.",
+            "id": "GX3Y6zvJKlSGUaYxdJA5E"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Đừng nói linh tinh. Chúng ta đã theo dõi cô ấy suốt 8 năm rồi.",
+            "id": "76gjNcZsslAOS9QFte1i5"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Không ạ, lần này khác. Nó giật thật mà.",
+            "id": "SvvQBLyPHykvM5BJS4aiM"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Im lặng. Để tôi kiểm tra.",
+            "id": "zj5TrV_SemBR8oZLzu20J"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "shake",
+              "intensity": 5,
+              "duration": 500,
+              "direction": "both",
+              "decay": true
+            },
+            "id": "A5NCCNFqITdI1ThZVh3PH"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 4,
+              "duration": 100,
+              "direction": "in"
+            },
+            "id": "J74rqAy7fczNAIuh8XpbJ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Trời ơi... bác sĩ, mắt cô ấy lại chuyển động rồi kìa!",
+            "id": "fdMzrhistsfnLQ8_bc4-Q"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Ừ... tôi thấy rồi.",
+            "id": "skn66soH9MWxXCfKwBuq1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Có phải... có phải cô ấy đã tỉnh lại không ạ?",
+            "id": "ieMsS3w3xCWWvUQXxDiuU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Chưa kết luận được. Đèn pin.",
+            "id": "Xc3_9RcVV6DS5Kx9_b-NB"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Dạ đây ạ.",
+            "id": "zI8R8wA7ID6WjsW-_M4Kp"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 200,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "r4-0I2QAacGC43-qqMZNy"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 400,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "383SGnvCboVfoZq26xYBt"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 4,
+              "duration": 100,
+              "direction": "in"
+            },
+            "id": "bQiPGQI1sgkCqZmzXO4Mk"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Phản xạ đồng tử... có.",
+            "id": "H2nLOKMwPwzVmluUI6LZG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Đo lại nhịp tim, huyết áp ngay.",
+            "id": "ABX1DNrGqzahf9Z0FpTeW"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Vâng ạ!",
+            "id": "bfo01pujaVu51dBWjRllS"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Chuẩn bị máy hút đờm. Cẩn thận sặc.",
+            "id": "XejnikS_Sj0YeJdxXINeO"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Vâng!",
+            "id": "sBWzlBAjI5pDsbVjRIdh_"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": true,
+            "id": "aLxuzh9otwAlWPxG5Nh74"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "shake",
+              "intensity": 5,
+              "duration": 500,
+              "direction": "both",
+              "decay": true
+            },
+            "id": "FkPH6tTMO9-PFMxw-mcFD"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 4,
+              "duration": 100,
+              "direction": "in"
+            },
+            "id": "5UXwdk6ZcchYysGy6KzqX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Bác sĩ... mí mắt cô ấy... cô ấy đang mở!",
+            "id": "_FiaLv_T0NwI56pICd2mi"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Cô ấy sắp tỉnh dậy rồi. Bình tĩnh. Không được làm ồn.",
+            "id": "MeJydkUPiGb5PNuA-w46Y"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 3000,
+              "direction": "in"
+            },
+            "id": "_nU9RrI9jI9B4zyNeYiqV"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "IVSFAYq1H-yPvfESMpzWL"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Gọi cho ông Sơn. Ngay.",
+            "id": "vPFks94gtNjxSiV_c9rug"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Dạ! Để em gọi!",
+            "id": "5vwVZRG_YHkd4olxSOxDg"
+          },
+          {
+            "type": "goto",
+            "target": "Hup9i-IZ-93UoOhd2L096",
+            "id": "woRE1MuBEAnPfS34jEs3N"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 1300
+          }
+        }
+      },
+      {
+        "id": "Hup9i-IZ-93UoOhd2L096",
+        "title": "Gọi bác Sơn",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "z5WYITOlvPnyUfbdZrcmA"
+          },
+          {
+            "type": "play_bgm",
+            "id": "hwu09yObGX4by5DsjzzUs",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6892.mp3",
+            "loop": true,
+            "volume": 0.8
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "01w2E344QG-eOVTny1zhq"
+            },
+            "id": "EAzbPaLiwELCNUe9gA4Je"
+          },
+          {
+            "type": "play_sfx",
+            "id": "S5csqQEaVylGooGGxdMql",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6909.mp3",
+            "volume": 1
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 200,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "tlh3XjLEATRENrqdeKM3O"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 200,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "PJjKvon-UolIqxF2bi_9H"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 200,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "wixUyDCtq-FMMLsDS2mnN"
+          },
+          {
+            "type": "narration",
+            "text": "[Tiếng chuông điện thoại rung liên hồi trên mặt bàn gỗ gụ sang trọng]",
+            "id": "d8U-1K4uaOY81nNju4HX5"
+          },
+          {
+            "type": "play_sfx",
+            "id": "3dXx9cG4z8V5Os7Xy2r0z",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6910.mp3",
+            "volume": 1
+          },
+          {
+            "type": "character_show",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "center",
+            "expressionId": "neutral",
+            "duration": 500,
+            "flipX": false,
+            "id": "lmPG0QWR7NAjC2s632mKp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Tôi nghe đây. Có chuyện gì mà gọi vào giờ này?",
+            "id": "mlloTXWomP7zybPca4T1V"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "(Giọng run rẩy qua điện thoại) Thưa ông... là... là cô chủ ạ! Cô ấy vừa mới tỉnh lại!",
+            "id": "FZkrphBw9yD5qbt7YGf84"
+          },
+          {
+            "type": "character_express",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "expressionId": "happy",
+            "duration": 300,
+            "id": "yXYGYtDvosaPjZnbmertV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Cái gì?! Cô nói thật chứ? Con bé... con bé đã thực sự tỉnh lại sau 8 năm sao?",
+            "id": "Bom-q0TrJr0Y0abRNL4ZY"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Dạ thật thưa ông! Bác sĩ đang kiểm tra các chỉ số, nhưng cô ấy đã mở mắt và có phản ứng với ánh sáng rồi ạ!",
+            "id": "zm6eyFcRxLAvdJXSZFFji"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Tốt... tốt quá rồi... Cuối cùng thì trời cao cũng có mắt.",
+            "id": "cSDyoevJh2Ft1xbuvQwf-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Bảo bác sĩ làm tất cả những gì có thể! Tôi sẽ về nhà ngay. Đừng rời mắt khỏi con bé một giây nào!",
+            "id": "h7YoQ1iiCP06J1ZXUgc_U"
+          },
+          {
+            "type": "narration",
+            "text": "Ông Sơn cúp máy, đôi bàn tay vốn luôn vững vàng trên chính trường giờ đây khẽ run rẩy vì xúc động. 8 năm ròng rã hy vọng, cuối cùng phép màu đã đến với cô con gái yêu quý của ông.",
+            "id": "H1eBMFvKWsVMRWCu5KQ0a"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "duration": 100,
+            "id": "IgZIfkdmJa23jPPcFLS9w"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "EslBuYS7qJCBut9rgBsHs"
+          },
+          {
+            "type": "goto",
+            "target": "gHBJMKJQO0Ym2JJlPwuPZ",
+            "id": "wYeKD8Fp28jkDeqE5eanb"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 1500
+          }
+        }
+      },
+      {
+        "id": "gHBJMKJQO0Ym2JJlPwuPZ",
+        "title": "T2 Tỉnh Dậy",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "O-y_9jBpbZNOYBK_a88t1"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 50,
+              "direction": "in"
+            },
+            "id": "ldVh-AYeWSHnKqsRqrR1T"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "9KIjJlnACzxpcg0WjbadN"
+            },
+            "id": "BqjInV9oFqNv5uChrn58i"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "center",
+            "expressionId": "neutral",
+            "duration": 100,
+            "flipX": false,
+            "id": "h-o8lD-dBO37tX1RnA6Hr"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 1000,
+              "direction": "out"
+            },
+            "id": "8yZThBdhQrBQ5GAbOEmWr"
+          },
+          {
+            "type": "narration",
+            "text": "Ánh sáng mặt trời len lỏi qua khe rèm, cô gái trẻ khẽ nhíu mày. Sau 8 năm chìm trong bóng tối, thế giới xung quanh cô giờ đây thật lạ lẫm.",
+            "id": "MBe2sP4gDdd-qoa0akE_3"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Đây... đây là đâu?",
+            "id": "udABdyojcGaLtjC3FhDv8"
+          },
+          {
+            "type": "character_show",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "position": "left",
+            "expressionId": "neutral",
+            "duration": 500,
+            "flipX": false,
+            "id": "F-3VM-bD4lN1Sz5VzdI0a"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Cô tỉnh rồi sao? Đừng cố quá sức, cô vừa mới tỉnh lại sau một giấc ngủ rất dài đấy.",
+            "id": "ollu25DXyE_iHwf5yx0r6"
+          },
+          {
+            "type": "character_show",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "position": "right",
+            "expressionId": "happy",
+            "duration": 300,
+            "flipX": false,
+            "id": "ZZg6Ktx49HP7r7euTIW1k"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Cô chủ tỉnh rồi! Thật là phép màu! Để em lấy chút nước cho cô nhé.",
+            "id": "shi4hc4w4pQ76O1VRvtKv"
+          },
+          {
+            "type": "character_move",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "position": "far-right",
+            "duration": 500,
+            "id": "VJEePz7ZczynbKdtSZehy"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Cô chủ hãy nhìn vào ngón tay tôi. Cô có thấy nó di chuyển không?",
+            "id": "ti_RrzquzP-87mY92pIk0"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Có... tôi thấy...",
+            "id": "J080deD8Q78agMnySI75E"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Tốt lắm. Cô có nhớ tên mình là gì không? Và cô có biết ông Sơn là ai không?",
+            "id": "ZDcPBGZKr-2O-0TFzxmM3"
+          },
+          {
+            "type": "input",
+            "prompt": "Nhập tên cho nữ chính:",
+            "variable": "nu9",
+            "placeholder": "Tên nữ chính",
+            "maxLength": 20,
+            "id": "vLkT7xCllvl1GSJADU9dO"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Tên tôi... là {{nu9}}... Còn ông Sơn... là bố của tôi... đúng không?",
+            "id": "SNxz7eyrDeMipB3Gez6t_"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "text": "Chính xác. Trí nhớ của cô có vẻ vẫn ổn định. Đây là một tín hiệu cực kỳ đáng mừng.",
+            "id": "LSXdjwTOEABJchhKBJ7L5"
+          },
+          {
+            "type": "character_move",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "position": "right",
+            "duration": 500,
+            "id": "UdR64XvsVnfYUsXDUqQa4"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "text": "Ông Sơn đang trên đường tới đây rồi ạ. Cô nghỉ ngơi một chút đi, mọi chuyện đã ổn rồi.",
+            "id": "e7j4G9Tf8xRnKCOhV-Owa"
+          },
+          {
+            "type": "play_sfx",
+            "id": "kjpQ4k4LcCkw4wwwtnb__",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6914.mp3",
+            "volume": 1
+          },
+          {
+            "type": "narration",
+            "id": "narr_door_open_sound",
+            "text": "*Cạch* - Cánh cửa phòng bật mở đầy bất ngờ."
+          },
+          {
+            "type": "narration",
+            "id": "narr_son_appears_2",
+            "text": "Một người đàn ông trung niên với gương mặt hốc hác, hơi thở dồn dập đứng khựng lại ở cửa. Đó chính là ông Sơn."
+          },
+          {
+            "type": "character_hide",
+            "id": "qDaq4eoj8QZRCx9A-2UoU",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "position": "center",
+            "duration": 300
+          },
+          {
+            "type": "character_hide",
+            "id": "uz4P93Mmdi9sY329SC2YR",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "position": "center",
+            "duration": 300
+          },
+          {
+            "type": "character_show",
+            "id": "show_son_emotional_2",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "left",
+            "duration": 500,
+            "expressionId": "happy",
+            "flipX": false
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_son_shocked_2",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "{{nu9}}... Có phải là con không? Bố... bố không nằm mơ chứ?"
+          },
+          {
+            "type": "character_express",
+            "id": "express_nu9_happy_2",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "happy",
+            "duration": 300
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_respond_son_2",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Bố... Con đây... Con đã về rồi đây..."
+          },
+          {
+            "type": "character_move",
+            "id": "move_son_hug_2",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "center",
+            "duration": 800
+          },
+          {
+            "type": "character_express",
+            "id": "express_son_calm_down",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "expressionId": "gKxKYFtWSg9RXRwBLQQ8U",
+            "duration": 300
+          },
+          {
+            "type": "narration",
+            "id": "narr_hug_scene_2",
+            "text": "Ông Sơn lao đến, đôi tay run rẩy ôm chặt lấy con gái mình vào lòng. Tám năm ròng rã, tám năm đằng đẵng chờ đợi một phép màu, cuối cùng ngày này cũng đã đến."
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_son_crying_2",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Tạ ơn trời phật... Cuối cùng con cũng tỉnh lại rồi... Bố xin lỗi, bố đã quá vô tâm với con..."
+          },
+          {
+            "type": "character_express",
+            "id": "express_nu9_reflective",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "sad",
+            "duration": 300
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_reassurance_2",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Đừng nói vậy mà bố… Năm đó là do con học hành quá sức, lại thức khuya liên tục nên mới xảy ra chuyện. Nhưng bây giờ con tỉnh rồi, con ổn mà. Con hứa… con sẽ không làm bố lo lắng nữa đâu."
+          },
+          {
+            "type": "narration",
+            "id": "narr_ending_reunion_2",
+            "text": "Trong căn phòng nhỏ, những giọt nước mắt hạnh phúc vẫn lặng lẽ rơi không ngừng. Với {{nu9}}, khoảnh khắc này không chỉ là tỉnh lại… mà là một lần tái sinh. Từ đây, một cuộc đời mới thật sự bắt đầu với cô gái trẻ."
+          },
+          {
+            "type": "character_express",
+            "id": "4IXZlHMZ_TxDRDWgeRMe8",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "center",
+            "duration": 200,
+            "expressionId": "neutral"
+          },
+          {
+            "type": "character_move",
+            "id": "IIconleL77lgnnYE1qevn",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "left",
+            "duration": 500
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_son_ask_experience",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "8 năm qua... đối với bố nó như một cơn ác mộng dài vô tận. Còn con... con có cảm nhận được gì không? Con đã trải qua những gì trong suốt thời gian đó?"
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_long_dream_1",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Con đã mơ một giấc mơ rất dài, bố ạ... Một giấc mơ thực đến mức con không nghĩ mình đang hôn mê."
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_long_dream_2",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Trong giấc mơ đó, con đã đi tới rất nhiều nơi, nhìn thấy rất nhiều chuyện mà trước đây con chưa từng được biết."
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_long_dream_3",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Và quan trọng nhất... con đã biết được rất nhiều sự thật, những sự thật mà có lẽ con không bao giờ tưởng tượng nổi."
+          },
+          {
+            "type": "narration",
+            "id": "narr_mystery_setup_1",
+            "text": "Ánh mắt của {{nu9}} trở nên sâu thẳm, như thể cô vẫn còn đang mang theo những bí mật từ thế giới của giấc mơ đó trở về."
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_son_politics_1",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Con tỉnh lại lúc này cũng tốt… Thế giới đang bước vào thời kỳ hỗn loạn. Chiến sự ở nhiều nơi leo thang, và áp lực từ nghị trường khiến bố gần như kiệt sức."
+          },
+          {
+            "type": "character_express",
+            "id": "express_nu9_serious_1",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "neutral",
+            "duration": 300
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_question_war_1",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Bố... có phải nước Tây vừa mới nổ súng tấn công nước Bắc không bố?"
+          },
+          {
+            "type": "character_express",
+            "id": "express_son_shocked_politics_1",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "expressionId": "angry",
+            "duration": 300
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_son_confirm_war_1",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Sao... sao con biết? Chuyện này chỉ vừa mới xảy ra và tin tức vẫn còn đang bị phong tỏa chặt chẽ để tránh hỗn loạn mà?"
+          },
+          {
+            "type": "character_express",
+            "id": "express_nu9_shocked_realization_1",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "sad",
+            "duration": 300
+          },
+          {
+            "type": "narration",
+            "id": "narr_nu9_shock_realization_1",
+            "text": "Sống lưng {{nu9}} lạnh toát. Cảm giác bàng hoàng bao trùm lấy tâm trí cô."
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_internal_thought_1",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "*** Vậy ra... tất cả không phải là mơ. Những gì mình thấy... từng cảnh tượng đó đều là thật. ***"
+          },
+          {
+            "type": "narration",
+            "id": "narr_nu9_philosophical_realization_1",
+            "text": "{{nu9}} nhận ra mình chưa từng rời khỏi thế giới này. Suốt 8 năm qua, linh hồn cô không hề ngủ say, nó chỉ được quan sát thực tại qua một lăng kính khác, một góc nhìn toàn cảnh mà người thường không thể chạm tới."
+          },
+          {
+            "type": "dialogue",
+            "id": "T5MOGQhLwo1gvtfZv6ovt",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Bố ơi... Có lẽ, con phải đi vào miền Nam... Con đã biết được rất nhiều chuyện ở đó..."
+          },
+          {
+            "type": "screen_effect",
+            "id": "ZlNMwloZzrgl595VpssYI",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 1000,
+              "direction": "in"
+            }
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 1700
+          }
+        }
+      },
+      {
+        "title": "Disclaimer",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "0jZPzjR7J3Qd3nEWu4GcT"
+          },
+          {
+            "type": "background_change",
+            "id": "81Lu8obW9LTxgdbw2JJN_",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6913.png"
+            }
+          },
+          {
+            "type": "narration",
+            "id": "8wVs0dXQRPD5L_vQQyTi5",
+            "text": "⚠️ CẢNH BÁO NỘI DUNG\n\nCâu chuyện này hoàn toàn chỉ là tác phẩm giả tưởng.\nMọi nhân vật, sự kiện, địa điểm và tổ chức đều hoàn toàn hư cấu. Nếu có sự trùng hợp ngẫu nhiên với thực tế, đó không phải là cố ý và không dựa trên bất kỳ nguyên mẫu có thật nào.\nTác phẩm có chứa các yếu tố rùng rợn, giật gân, cùng những tình tiết mang tính tâm lý nặng, có thể gây tranh cãi, khó chịu hoặc ám ảnh đối với một số người đọc.\nĐộc giả vui lòng cân nhắc trước khi tiếp tục theo dõi, đặc biệt nếu bạn nhạy cảm với các nội dung căng thẳng, u ám hoặc tiêu cực."
+          },
+          {
+            "type": "choice",
+            "id": "RG2tsecnIjqTFLSGv0mCb",
+            "options": [
+              {
+                "text": "Tôi đã sẵn sàng, bắt đầu thôi",
+                "target": "L7kyIFQD4ajHaMKgjxXZO"
+              },
+              {
+                "text": "Tôi chưa sẵn sàng, thoát game",
+                "target": "oxD-qk5mHsQEmbSTEcgwr"
+              }
+            ],
+            "prompt": "Truyện có nội dung 16+"
+          }
+        ],
+        "id": "c0At4zAlRdtQny2TcMxU9",
+        "meta": {
+          "mapPosition": {
+            "x": -200,
+            "y": -200
+          }
+        }
+      },
+      {
+        "title": "Exit Scene",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "knvc_l6iw2MMFJO1TRb6X"
+          },
+          {
+            "type": "end",
+            "id": "SrFyyc4kXtQOJ487ptz4x"
+          }
+        ],
+        "id": "oxD-qk5mHsQEmbSTEcgwr",
+        "meta": {
+          "mapPosition": {
+            "x": -400,
+            "y": 0
+          }
+        }
+      }
+    ],
+    "variables": {
+      "an_statement": {
+        "type": "number",
+        "default": 0
+      },
+      "giangho_statement": {
+        "type": "number",
+        "default": 0
+      },
+      "nam9": {
+        "type": "string",
+        "default": "An"
+      },
+      "nu9": {
+        "type": "string",
+        "default": "Thư"
+      }
+    },
+    "persistentVariables": {}
+  }
+}
