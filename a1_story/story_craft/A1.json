@@ -1,6 +1,6 @@
 {
-  "id": "P8KJktpqtoRKS2joL43w9",
-  "version": "1.2.0",
+  "id": "s5qPklt-F5v8iuJ2ajj3p",
+  "version": "1.3.0",
   "format": "visual_novel",
   "metadata": {
     "title": "A1",
@@ -467,7 +467,7 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6686.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6686.png",
             "offset": {
               "x": 1,
               "y": 0
@@ -479,7 +479,7 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6687.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6687.png"
           }
         },
         {
@@ -487,7 +487,7 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6688.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6688.png"
           }
         },
         {
@@ -495,7 +495,7 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6689.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6689.png"
           }
         },
         {
@@ -503,7 +503,7 @@
           "name": "sportswear",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6779.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6779.png",
             "offset": {
               "x": 0,
               "y": 8
@@ -523,7 +523,7 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6649.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6649.png",
             "offset": {
               "x": -13,
               "y": -18
@@ -535,7 +535,7 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6650.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6650.png",
             "offset": {
               "x": 11,
               "y": -16
@@ -547,7 +547,7 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6651.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6651.png",
             "offset": {
               "x": -8,
               "y": 11
@@ -559,7 +559,7 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6652.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6652.png",
             "offset": {
               "x": 22,
               "y": 11
@@ -571,7 +571,7 @@
           "name": "shocked",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6746.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6746.png",
             "scale": 0.7,
             "offset": {
               "x": 0,
@@ -584,7 +584,7 @@
           "name": "sportswear",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6770.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6770.png"
           }
         }
       ]
@@ -600,7 +600,7 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6722.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6722.png",
             "offset": {
               "x": -1,
               "y": 0
@@ -612,7 +612,7 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6654.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6654.png"
           }
         },
         {
@@ -620,7 +620,7 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6655.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6655.png"
           }
         },
         {
@@ -628,7 +628,7 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6681.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6681.png"
           }
         },
         {
@@ -636,7 +636,7 @@
           "name": "injured",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6723.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6723.png"
           }
         },
         {
@@ -644,7 +644,7 @@
           "name": "injured",
           "visual": {
             "type": "image",
-            "asset": ""
+            "assetId": ""
           }
         }
       ]
@@ -660,7 +660,7 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6657.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6657.png",
             "offset": {
               "x": 100,
               "y": 0
@@ -672,7 +672,7 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6658.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6658.png"
           }
         },
         {
@@ -680,7 +680,7 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6660.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6660.png"
           }
         },
         {
@@ -688,7 +688,7 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6659.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6659.png"
           }
         },
         {
@@ -696,7 +696,7 @@
           "name": "injured",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6720.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6720.png",
             "offset": {
               "x": 0,
               "y": 0
@@ -708,7 +708,7 @@
           "name": "injured",
           "visual": {
             "type": "image",
-            "asset": ""
+            "assetId": ""
           }
         }
       ]
@@ -724,7 +724,7 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6661.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6661.png",
             "offset": {
               "x": -98,
               "y": 12
@@ -736,7 +736,7 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6662.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6662.png"
           }
         },
         {
@@ -744,7 +744,7 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6664.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6664.png"
           }
         },
         {
@@ -752,7 +752,7 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6663.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6663.png"
           }
         },
         {
@@ -760,7 +760,7 @@
           "name": "injured",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6721.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6721.png"
           }
         }
       ]
@@ -776,7 +776,7 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6704.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6704.png"
           }
         },
         {
@@ -784,7 +784,7 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6705.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6705.png"
           }
         },
         {
@@ -792,7 +792,7 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6706.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6706.png",
             "offset": {
               "x": -11,
               "y": 14
@@ -804,7 +804,7 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6703.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6703.png"
           }
         }
       ]
@@ -820,7 +820,7 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6712.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6712.png"
           }
         },
         {
@@ -828,7 +828,7 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6709.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6709.png"
           }
         },
         {
@@ -836,7 +836,7 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6710.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6710.png"
           }
         },
         {
@@ -844,7 +844,7 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6711.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6711.png"
           }
         },
         {
@@ -852,7 +852,7 @@
           "name": "shocked",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6747.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6747.png",
             "scale": 0.7,
             "offset": {
               "x": 0,
@@ -872,7 +872,7 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6798.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6798.png"
           }
         },
         {
@@ -880,7 +880,7 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6799.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6799.png",
             "offset": {
               "x": 0,
               "y": 0
@@ -892,7 +892,7 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6791.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6791.png"
           }
         },
         {
@@ -900,7 +900,7 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6792.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6792.png"
           }
         }
       ]
@@ -915,7 +915,7 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6796.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6796.png"
           }
         },
         {
@@ -923,7 +923,7 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6797.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6797.png"
           }
         },
         {
@@ -931,7 +931,7 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6794.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6794.png"
           }
         },
         {
@@ -939,14 +939,14 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6795.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6795.png"
           }
         }
       ]
     },
     "JkuHBljTR4th0RQdUeZMA": {
       "id": "JkuHBljTR4th0RQdUeZMA",
-      "name": "Bác Sơn",
+      "name": "Ông Sơn",
       "scale": 1,
       "expressions": [
         {
@@ -954,7 +954,7 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6800.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6800.png"
           }
         },
         {
@@ -962,7 +962,7 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6801.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6801.png",
             "offset": {
               "x": 7,
               "y": 0
@@ -974,10 +974,10 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6802.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6802.png",
             "offset": {
               "x": 0,
-              "y": 12
+              "y": 21
             }
           }
         },
@@ -986,10 +986,23 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6803.png",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6803.png",
             "offset": {
               "x": 6,
-              "y": 8
+              "y": 19
+            }
+          }
+        },
+        {
+          "id": "gKxKYFtWSg9RXRwBLQQ8U",
+          "name": "hug",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6887.png",
+            "scale": 1.3,
+            "offset": {
+              "x": 0,
+              "y": 66
             }
           }
         }
@@ -997,7 +1010,7 @@
     },
     "c_-gdV9YZ6QqLB3PCuJ6F": {
       "id": "c_-gdV9YZ6QqLB3PCuJ6F",
-      "name": "T2",
+      "name": "Nu9",
       "scale": 1,
       "expressions": [
         {
@@ -1005,7 +1018,11 @@
           "name": "neutral",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6807.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6807.png",
+            "offset": {
+              "x": 1,
+              "y": 1
+            }
           }
         },
         {
@@ -1013,7 +1030,11 @@
           "name": "happy",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6809.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6809.png",
+            "offset": {
+              "x": 8,
+              "y": 0
+            }
           }
         },
         {
@@ -1021,7 +1042,11 @@
           "name": "sad",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6808.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6883.png",
+            "offset": {
+              "x": 0,
+              "y": 3
+            }
           }
         },
         {
@@ -1029,7 +1054,7 @@
           "name": "angry",
           "visual": {
             "type": "image",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6806.png"
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6806.png"
           }
         }
       ]
@@ -1043,21 +1068,21 @@
         "title": "Khởi đầu mới",
         "nodes": [
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "3SvVHDJ4bwIdddNmQ8yom"
           },
           {
             "type": "play_bgm",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6714.mp3",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6714.mp3",
             "loop": true,
             "volume": 0.1,
             "id": "u5jljiCfOewNTOsvKFjw8"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6679.png"
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6679.png"
             },
             "id": "Hu1iRrXW0JJPWdUKWNHbT"
           },
@@ -1067,7 +1092,7 @@
             "id": "JML8D3Gno-rMZ2gxeMhSH"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "position": "center",
             "expressionId": "happy",
@@ -1093,7 +1118,7 @@
           },
           {
             "type": "play_sfx",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6694.mp3",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6694.mp3",
             "volume": 1,
             "id": "hp7tf_tL2f7owTgum9VkU"
           },
@@ -1114,7 +1139,7 @@
             "id": "4KTATECZ3QOsrTwHUXILJ"
           },
           {
-            "type": "express",
+            "type": "character_express",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "expressionId": "angry",
             "duration": 200,
@@ -1122,7 +1147,7 @@
           },
           {
             "type": "play_sfx",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6695.mp3",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6695.mp3",
             "volume": 1,
             "id": "dkLxF01MB6x6JUd_tMulz"
           },
@@ -1143,15 +1168,15 @@
             "id": "deOWBq9TNNl3GOQmppg8o"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6680.png"
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6680.png"
             },
             "id": "e5q9XwKVoRpnFHfU3c5LH"
           },
           {
-            "type": "move_char",
+            "type": "character_move",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "position": "right",
             "transition": {
@@ -1163,7 +1188,7 @@
             "id": "NZDE9u7LARZKrgOBGK8f3"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "GiangHo1",
             "position": "left",
             "expressionId": "angry",
@@ -1177,7 +1202,7 @@
             "id": "ty7JbTJGOY5n5jsah0Ycg"
           },
           {
-            "type": "express",
+            "type": "character_express",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "expressionId": "neutral",
             "duration": 200,
@@ -1191,7 +1216,7 @@
             "id": "KuTCO9wLVxO7BNaiQ7Wcd"
           },
           {
-            "type": "express",
+            "type": "character_express",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "expressionId": "sad",
             "duration": 200,
@@ -1205,7 +1230,7 @@
             "id": "AJUQzNLlBuks84Q72E78I"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "GiangHo2",
             "position": "far-left",
             "expressionId": "angry",
@@ -1227,12 +1252,12 @@
           },
           {
             "type": "play_sfx",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6696.mp3",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6696.mp3",
             "volume": 1,
             "id": "84rHZry1QP_vQ0EgXoCA9"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "GiangHo3",
             "position": "center-left",
             "expressionId": "angry",
@@ -1273,7 +1298,7 @@
             "id": "PiA02jg6Seuedv3i_pKVb"
           },
           {
-            "type": "express",
+            "type": "character_express",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "expressionId": "neutral",
             "duration": 500,
@@ -1286,7 +1311,7 @@
           },
           {
             "type": "play_sfx",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6697.mp3",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6697.mp3",
             "volume": 1,
             "id": "qzXEHTNf5GZq3CqcVfNvc"
           },
@@ -1308,13 +1333,13 @@
           },
           {
             "type": "play_sfx",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6748.mp3",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6748.mp3",
             "volume": 1,
             "id": "mZGEEwp3H3sBCAQK4fUCt",
             "label": "gao"
           },
           {
-            "type": "express",
+            "type": "character_express",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "expressionId": "angry",
             "duration": 200,
@@ -1358,40 +1383,40 @@
             "id": "B2lgnjjVk-nx9ajEhaBbB"
           },
           {
-            "type": "hide_char",
+            "type": "character_hide",
             "characterId": "GiangHo2",
             "duration": 100,
             "id": "d1ak2ILHrs531SQiPXB6_"
           },
           {
-            "type": "hide_char",
+            "type": "character_hide",
             "characterId": "GiangHo3",
             "duration": 100,
             "id": "9C4VtZcbGvDZ_XGZltub7"
           },
           {
-            "type": "hide_char",
+            "type": "character_hide",
             "characterId": "GiangHo1",
             "duration": 100,
             "id": "HV1Vr448_EyBvBdLRBuNq"
           },
           {
-            "type": "hide_char",
+            "type": "character_hide",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "duration": 300,
             "id": "Xr81WOrGpkxlhSb_TIJGf"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6692.png"
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6692.png"
             },
             "id": "pmLsB4wYztFYV3ry-5ylB"
           },
           {
             "type": "play_sfx",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6698.mp3",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6698.mp3",
             "volume": 1,
             "id": "znzb0LQc5cEOnoZTHwjUU"
           },
@@ -1455,14 +1480,14 @@
         "title": "Chap 1: Đồn công an",
         "nodes": [
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "iY3EthLiwZEUTulq4FlT4"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6700.png"
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6700.png"
             },
             "id": "AcciBOraoKODSJB4y_QrS"
           },
@@ -1488,10 +1513,10 @@
             "id": "cFzS2xdeWPdb_iuxQNYV7"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png"
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png"
             },
             "id": "BGEQRHNMk-XXoa6D2D3eT"
           },
@@ -1514,7 +1539,7 @@
             "id": "3dNqdlm1L6nJ0dMw4rmkF"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "TruongDon_CongAn",
             "position": "left",
             "expressionId": "neutral",
@@ -1529,7 +1554,7 @@
             "id": "u85KPUtyCTe8W1jLvK_D1"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "position": "far-left",
             "expressionId": "sad",
@@ -1544,7 +1569,7 @@
             "id": "PnkJe7a6Z2hxHQUeqQyFD"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "CanhSat_2",
             "position": "center-right",
             "expressionId": "neutral",
@@ -1553,7 +1578,7 @@
             "id": "fmq4APT7PgggAXzBAp1fI"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "CanhSatVN_Tre",
             "position": "right",
             "expressionId": "neutral",
@@ -1568,19 +1593,19 @@
             "id": "r2sE5sp4jePRODN8wS2j2"
           },
           {
-            "type": "hide_char",
+            "type": "character_hide",
             "characterId": "TruongDon_CongAn",
             "duration": 100,
             "id": "hhtAc5Sfsic4oUa_1wq2W"
           },
           {
-            "type": "hide_char",
+            "type": "character_hide",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "duration": 100,
             "id": "Pb0jMWaKwRlpXjTBh0V-j"
           },
           {
-            "type": "move_char",
+            "type": "character_move",
             "characterId": "CanhSat_2",
             "position": "left",
             "duration": 500,
@@ -1620,11 +1645,11 @@
         "title": "Lời khai của An",
         "nodes": [
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "m_TtiuZ3wpQa2KwbWAUNA"
           },
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "oBVR6Og28KjygCDibSYmF"
           },
           {
@@ -1639,15 +1664,15 @@
             "label": "an_statement"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "rKWLsswrXWnti6RTVVdnR"
+              "assetId": "rKWLsswrXWnti6RTVVdnR"
             },
             "id": "0tGR7rr0E-VdryN6QCDRY"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "position": "far-left",
             "expressionId": "neutral",
@@ -1666,7 +1691,7 @@
             "id": "zzhriSsfla3623MVBObLU"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "CanhSatVN_Tre",
             "position": "far-right",
             "expressionId": "neutral",
@@ -1797,7 +1822,7 @@
             "id": "kFeelTe60j0uEFEfxTRVR"
           },
           {
-            "type": "express",
+            "type": "character_express",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "expressionId": "happy",
             "duration": 300,
@@ -1874,11 +1899,11 @@
         "title": "Lời khai của Giang hồ",
         "nodes": [
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "hBirxM1MWfoUs9hFj4PaV"
           },
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "cztK8qkFGAoNC8m4SiSrq"
           },
           {
@@ -1893,10 +1918,10 @@
             "label": "giangho_statement"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "tNUmmPBUxgMIW3uk8Qyaj"
+              "assetId": "tNUmmPBUxgMIW3uk8Qyaj"
             },
             "id": "SF1qkjZc8Y0EZyH9C5UXS"
           },
@@ -1906,7 +1931,7 @@
             "id": "izndJIC3KBJsVDdxXbK_j"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "GiangHo3",
             "position": "center-left",
             "expressionId": "y2yz5OZTU05FSxYWiQvNT",
@@ -1920,7 +1945,7 @@
             "id": "8bSRflYPkFB1RnnJDV3tZ"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "GiangHo1",
             "position": "far-left",
             "expressionId": "fZ4Mqdnjo0psFefzpsQk7",
@@ -1934,7 +1959,7 @@
             "id": "XYJ_A93-HODWC8gdIePYB"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "GiangHo2",
             "position": "left",
             "expressionId": "MBsWdjqmEglVBJaDNWASy",
@@ -1948,7 +1973,7 @@
             "id": "VN9UWPXGnWhPjDyfPNsOu"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "CanhSatVN_Tre",
             "position": "right",
             "expressionId": "neutral",
@@ -2088,23 +2113,23 @@
         "title": "Báo cáo tại đồn công an",
         "nodes": [
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "lXL1ijefNKB-qwrpNcKeF"
           },
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "m1NGtyQp3Ogr0nQh5aa-W"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png"
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png"
             },
             "id": "rErHeVkyRuH52Q_UZfuvN"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "CanhSat_2",
             "position": "left",
             "expressionId": "neutral",
@@ -2113,7 +2138,7 @@
             "id": "-Tg-0KiulNPL26JAjcYl1"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "CanhSatVN_Tre",
             "position": "right",
             "expressionId": "neutral",
@@ -2228,23 +2253,23 @@
         "title": "Báo cáo tại đồn công an Final",
         "nodes": [
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "kwaYUs8DF8SkJWp_D1z1M"
           },
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "_MJB_BW0VuskheVc2Jo1l"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png"
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6702.png"
             },
             "id": "skjfDwL3LP4TVDAy62aUj"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "CanhSat_2",
             "position": "left",
             "expressionId": "neutral",
@@ -2253,7 +2278,7 @@
             "id": "zHskQxepWWqPbNS5Gz5lX"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "CanhSatVN_Tre",
             "position": "right",
             "expressionId": "neutral",
@@ -2268,7 +2293,7 @@
             "id": "acZqBpQtnz_hM0O42MvTj"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "TruongDon_CongAn",
             "position": "center",
             "expressionId": "neutral",
@@ -2293,7 +2318,7 @@
             "id": "QHwJUawtU_VqrulFhbIRa"
           },
           {
-            "type": "express",
+            "type": "character_express",
             "characterId": "TruongDon_CongAn",
             "expressionId": "sad",
             "duration": 300,
@@ -2317,14 +2342,14 @@
             "id": "SVA9k0HQlSCwG2dB_hlXp"
           },
           {
-            "type": "express",
+            "type": "character_express",
             "characterId": "CanhSat_2",
             "expressionId": "shocked",
             "duration": 200,
             "id": "kAUZMjJ-9sgZWCrfOMm3Z"
           },
           {
-            "type": "express",
+            "type": "character_express",
             "characterId": "CanhSatVN_Tre",
             "expressionId": "shocked",
             "duration": 200,
@@ -2357,13 +2382,13 @@
             "id": "RVCq_eypDVFDiHrRdBbyJ"
           },
           {
-            "type": "hide_char",
+            "type": "character_hide",
             "characterId": "TruongDon_CongAn",
             "duration": 300,
             "id": "1kuDRIBJFwfwHRx6y8iOs"
           },
           {
-            "type": "hide_char",
+            "type": "character_hide",
             "characterId": "CanhSat_2",
             "duration": 300,
             "id": "Zjt0aBw5HkE_XBipEbjHM"
@@ -2380,7 +2405,7 @@
             "id": "W9NFt8BYz-iL4V2RS6dkj"
           },
           {
-            "type": "move_char",
+            "type": "character_move",
             "characterId": "CanhSatVN_Tre",
             "position": "far-right",
             "duration": 500,
@@ -2409,7 +2434,7 @@
         "title": "Gặp lại An",
         "nodes": [
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "R4sYJXvjQn7uxPH5V7xkb"
           },
           {
@@ -2419,17 +2444,17 @@
           },
           {
             "type": "play_bgm",
-            "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6774.mp3",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6774.mp3",
             "loop": true,
             "volume": 0.1,
             "fadeIn": 100,
             "id": "Fb6uODLKeambeTji19f94"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "bU9nc6Sv4Al2MPaOjtMbf"
+              "assetId": "bU9nc6Sv4Al2MPaOjtMbf"
             },
             "id": "e2tLE1iHX79vrjZBWTdSf"
           },
@@ -2439,7 +2464,7 @@
             "id": "iTt78cq6QF2K1IeKDGzQD"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "CanhSatVN_Tre",
             "position": "center",
             "expressionId": "sportswear",
@@ -2475,14 +2500,14 @@
             "id": "lGYR6xFXspx_5uNH9qccP"
           },
           {
-            "type": "move_char",
+            "type": "character_move",
             "characterId": "CanhSatVN_Tre",
             "position": "left",
             "duration": 500,
             "id": "5-NctD4Ix3cQnuI6RIjde"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "position": "right",
             "expressionId": "sportswear_an",
@@ -2532,13 +2557,13 @@
             "id": "R_wYS5vV-VBKB7NScUTWY"
           },
           {
-            "type": "hide_char",
+            "type": "character_hide",
             "characterId": "CanhSatVN_Tre",
             "duration": 300,
             "id": "HptEbtW0Nefzp71oFubj4"
           },
           {
-            "type": "move_char",
+            "type": "character_move",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "position": "center",
             "duration": 600,
@@ -2678,7 +2703,7 @@
         "title": "T2 Thức tỉnh",
         "nodes": [
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "wPCvRZ_IQgMc8m1NQhU3c"
           },
           {
@@ -2693,10 +2718,10 @@
             "id": "2jY6mkFOVm6DgSkaZlrBN"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "https://story.zingplay.com/asset/1251238196/2026_4_22/6780.png"
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_22/6780.png"
             },
             "id": "Zh307qx_nAnTM8ONp-yYr"
           },
@@ -2927,7 +2952,7 @@
             "id": "_nU9RrI9jI9B4zyNeYiqV"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "color",
               "color": "#000000"
@@ -2964,14 +2989,14 @@
         "title": "Gọi bác Sơn",
         "nodes": [
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "z5WYITOlvPnyUfbdZrcmA"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "01w2E344QG-eOVTny1zhq"
+              "assetId": "01w2E344QG-eOVTny1zhq"
             },
             "id": "EAzbPaLiwELCNUe9gA4Je"
           },
@@ -3014,7 +3039,7 @@
             "id": "d8U-1K4uaOY81nNju4HX5"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "JkuHBljTR4th0RQdUeZMA",
             "position": "center",
             "expressionId": "neutral",
@@ -3035,7 +3060,7 @@
             "id": "FZkrphBw9yD5qbt7YGf84"
           },
           {
-            "type": "express",
+            "type": "character_express",
             "characterId": "JkuHBljTR4th0RQdUeZMA",
             "expressionId": "happy",
             "duration": 300,
@@ -3071,15 +3096,23 @@
             "id": "H1eBMFvKWsVMRWCu5KQ0a"
           },
           {
-            "type": "screen_effect",
-            "effect": {
-              "type": "tint",
-              "color": "#000000",
-              "opacity": 1,
-              "duration": 2000,
-              "direction": "in"
+            "type": "character_hide",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "duration": 100,
+            "id": "IgZIfkdmJa23jPPcFLS9w"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
             },
-            "id": "br1N-eoKifbMbIYKB9nAw"
+            "id": "EslBuYS7qJCBut9rgBsHs"
+          },
+          {
+            "type": "goto",
+            "target": "gHBJMKJQO0Ym2JJlPwuPZ",
+            "id": "wYeKD8Fp28jkDeqE5eanb"
           }
         ],
         "meta": {
@@ -3094,43 +3127,61 @@
         "title": "T2 Tỉnh Dậy",
         "nodes": [
           {
-            "type": "reset_stage",
+            "type": "stage_reset",
             "id": "O-y_9jBpbZNOYBK_a88t1"
           },
           {
-            "type": "reset_stage",
-            "id": "uL9StqXLnphQLjkkWjNug"
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 50,
+              "direction": "in"
+            },
+            "id": "ldVh-AYeWSHnKqsRqrR1T"
           },
           {
-            "type": "bg_change",
+            "type": "background_change",
             "visual": {
               "type": "image",
-              "asset": "9KIjJlnACzxpcg0WjbadN"
+              "assetId": "9KIjJlnACzxpcg0WjbadN"
             },
             "id": "BqjInV9oFqNv5uChrn58i"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
             "position": "center",
             "expressionId": "neutral",
-            "duration": 1000,
+            "duration": 100,
             "flipX": false,
             "id": "h-o8lD-dBO37tX1RnA6Hr"
           },
           {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 1000,
+              "direction": "out"
+            },
+            "id": "8yZThBdhQrBQ5GAbOEmWr"
+          },
+          {
             "type": "narration",
-            "text": "Ánh sáng mặt trời len lỏi qua khe rèm, T2 khẽ nhíu mày. Sau 8 năm chìm trong bóng tối, thế giới xung quanh cô giờ đây thật lạ lẫm.",
+            "text": "Ánh sáng mặt trời len lỏi qua khe rèm, cô gái trẻ khẽ nhíu mày. Sau 8 năm chìm trong bóng tối, thế giới xung quanh cô giờ đây thật lạ lẫm.",
             "id": "MBe2sP4gDdd-qoa0akE_3"
           },
           {
             "type": "dialogue",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "(Thì thầm, giọng khàn đặc) Đây... đây là đâu?",
+            "text": "Đây... đây là đâu?",
             "id": "udABdyojcGaLtjC3FhDv8"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "XgjWbCGI_aaXWaOyDdE61",
             "position": "left",
             "expressionId": "neutral",
@@ -3145,11 +3196,11 @@
             "id": "ollu25DXyE_iHwf5yx0r6"
           },
           {
-            "type": "show_char",
+            "type": "character_show",
             "characterId": "GqxXarVNucCntk1C0Ismj",
             "position": "right",
             "expressionId": "happy",
-            "duration": 500,
+            "duration": 300,
             "flipX": false,
             "id": "ZZg6Ktx49HP7r7euTIW1k"
           },
@@ -3160,9 +3211,16 @@
             "id": "shi4hc4w4pQ76O1VRvtKv"
           },
           {
+            "type": "character_move",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "position": "far-right",
+            "duration": 500,
+            "id": "VJEePz7ZczynbKdtSZehy"
+          },
+          {
             "type": "dialogue",
             "characterId": "XgjWbCGI_aaXWaOyDdE61",
-            "text": "Cô T2, hãy nhìn vào ngón tay tôi. Cô có thấy nó di chuyển không?",
+            "text": "Cô chủ hãy nhìn vào ngón tay tôi. Cô có thấy nó di chuyển không?",
             "id": "ti_RrzquzP-87mY92pIk0"
           },
           {
@@ -3178,16 +3236,17 @@
             "id": "ZDcPBGZKr-2O-0TFzxmM3"
           },
           {
-            "type": "express",
-            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "expressionId": "sad",
-            "duration": 300,
-            "id": "fjIEiKN3o6BeZTtyKv5-C"
+            "type": "input",
+            "prompt": "Nhập tên cho nữ chính:",
+            "variable": "nu9",
+            "placeholder": "Tên nữ chính",
+            "maxLength": 20,
+            "id": "vLkT7xCllvl1GSJADU9dO"
           },
           {
             "type": "dialogue",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Tên tôi... là T2... Còn ông Sơn... là ba tôi... đúng không?",
+            "text": "Tên tôi... là {{nu9}}... Còn ông Sơn... là bố của tôi... đúng không?",
             "id": "SNxz7eyrDeMipB3Gez6t_"
           },
           {
@@ -3197,12 +3256,236 @@
             "id": "LSXdjwTOEABJchhKBJ7L5"
           },
           {
+            "type": "character_move",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "position": "right",
+            "duration": 500,
+            "id": "UdR64XvsVnfYUsXDUqQa4"
+          },
+          {
             "type": "dialogue",
             "characterId": "GqxXarVNucCntk1C0Ismj",
-            "text": "Ông Sơn đang trên đường tới đây rồi ạ. Cô nghỉ ngơi một chút đi, mọi chuyện ổn rồi.",
+            "text": "Ông Sơn đang trên đường tới đây rồi ạ. Cô nghỉ ngơi một chút đi, mọi chuyện đã ổn rồi.",
             "id": "e7j4G9Tf8xRnKCOhV-Owa"
+          },
+          {
+            "type": "narration",
+            "id": "narr_door_open_sound",
+            "text": "*Cạch* - Cánh cửa phòng bật mở đầy bất ngờ."
+          },
+          {
+            "type": "narration",
+            "id": "narr_son_appears_2",
+            "text": "Một người đàn ông trung niên với gương mặt hốc hác, hơi thở dồn dập đứng khựng lại ở cửa. Đó chính là ông Sơn."
+          },
+          {
+            "type": "character_hide",
+            "id": "qDaq4eoj8QZRCx9A-2UoU",
+            "characterId": "GqxXarVNucCntk1C0Ismj",
+            "position": "center",
+            "duration": 300
+          },
+          {
+            "type": "character_hide",
+            "id": "uz4P93Mmdi9sY329SC2YR",
+            "characterId": "XgjWbCGI_aaXWaOyDdE61",
+            "position": "center",
+            "duration": 300
+          },
+          {
+            "type": "character_show",
+            "id": "show_son_emotional_2",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "left",
+            "duration": 500,
+            "expressionId": "happy",
+            "flipX": false
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_son_shocked_2",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "{{nu9}}... Có phải là con không? Bố... bố không nằm mơ chứ?"
+          },
+          {
+            "type": "character_express",
+            "id": "express_nu9_happy_2",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "happy",
+            "duration": 300
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_respond_son_2",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Bố... Con đây... Con đã về rồi đây..."
+          },
+          {
+            "type": "character_move",
+            "id": "move_son_hug_2",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "center",
+            "duration": 800
+          },
+          {
+            "type": "character_express",
+            "id": "express_son_calm_down",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "expressionId": "gKxKYFtWSg9RXRwBLQQ8U",
+            "duration": 300
+          },
+          {
+            "type": "narration",
+            "id": "narr_hug_scene_2",
+            "text": "Ông Sơn lao đến, đôi tay run rẩy ôm chặt lấy con gái mình vào lòng. Tám năm ròng rã, tám năm đằng đẵng chờ đợi một phép màu, cuối cùng ngày này cũng đã đến."
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_son_crying_2",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Tạ ơn trời phật... Cuối cùng con cũng tỉnh lại rồi... Bố xin lỗi, bố đã quá vô tâm với con..."
+          },
+          {
+            "type": "character_express",
+            "id": "express_nu9_reflective",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "sad",
+            "duration": 300
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_reassurance_2",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Đừng nói vậy mà bố… Năm đó là do con học hành quá sức, lại thức khuya liên tục nên mới xảy ra chuyện. Nhưng bây giờ con tỉnh rồi, con ổn mà. Con hứa… con sẽ không làm bố lo lắng nữa đâu."
+          },
+          {
+            "type": "narration",
+            "id": "narr_ending_reunion_2",
+            "text": "Trong căn phòng nhỏ, những giọt nước mắt hạnh phúc vẫn lặng lẽ rơi không ngừng. Với {{nu9}}, khoảnh khắc này không chỉ là tỉnh lại… mà là một lần tái sinh. Từ đây, một cuộc đời mới thật sự bắt đầu với cô gái trẻ."
+          },
+          {
+            "type": "character_express",
+            "id": "4IXZlHMZ_TxDRDWgeRMe8",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "center",
+            "duration": 200,
+            "expressionId": "neutral"
+          },
+          {
+            "type": "character_move",
+            "id": "IIconleL77lgnnYE1qevn",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "left",
+            "duration": 500
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_son_ask_experience",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "8 năm qua... đối với bố nó như một cơn ác mộng dài vô tận. Còn con... con có cảm nhận được gì không? Con đã trải qua những gì trong suốt thời gian đó?"
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_long_dream_1",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Con đã mơ một giấc mơ rất dài, bố ạ... Một giấc mơ thực đến mức con không nghĩ mình đang hôn mê."
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_long_dream_2",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Trong giấc mơ đó, con đã đi tới rất nhiều nơi, nhìn thấy rất nhiều chuyện mà trước đây con chưa từng được biết."
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_long_dream_3",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Và quan trọng nhất... con đã biết được rất nhiều sự thật, những sự thật mà có lẽ con không bao giờ tưởng tượng nổi."
+          },
+          {
+            "type": "narration",
+            "id": "narr_mystery_setup_1",
+            "text": "Ánh mắt của {{nu9}} trở nên sâu thẳm, như thể cô vẫn còn đang mang theo những bí mật từ thế giới của giấc mơ đó trở về."
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_son_politics_1",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Con tỉnh lại lúc này cũng tốt… Thế giới đang bước vào thời kỳ hỗn loạn. Chiến sự ở nhiều nơi leo thang, và áp lực từ nghị trường khiến bố gần như kiệt sức."
+          },
+          {
+            "type": "character_express",
+            "id": "express_nu9_serious_1",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "neutral",
+            "duration": 300
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_question_war_1",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Bố... có phải nước Tây vừa mới nổ súng tấn công nước Bắc không bố?"
+          },
+          {
+            "type": "character_express",
+            "id": "express_son_shocked_politics_1",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "expressionId": "angry",
+            "duration": 300
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_son_confirm_war_1",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Sao... sao con biết? Chuyện này chỉ vừa mới xảy ra và tin tức vẫn còn đang bị phong tỏa chặt chẽ để tránh hỗn loạn mà?"
+          },
+          {
+            "type": "character_express",
+            "id": "express_nu9_shocked_realization_1",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "sad",
+            "duration": 300
+          },
+          {
+            "type": "narration",
+            "id": "narr_nu9_shock_realization_1",
+            "text": "Sống lưng {{nu9}} lạnh toát. Cảm giác bàng hoàng bao trùm lấy tâm trí cô."
+          },
+          {
+            "type": "dialogue",
+            "id": "dial_nu9_internal_thought_1",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "*** Vậy ra... tất cả không phải là mơ. Những gì mình thấy... từng cảnh tượng đó đều là thật. ***"
+          },
+          {
+            "type": "narration",
+            "id": "narr_nu9_philosophical_realization_1",
+            "text": "{{nu9}} nhận ra mình chưa từng rời khỏi thế giới này. Suốt 8 năm qua, linh hồn cô không hề ngủ say, nó chỉ được quan sát thực tại qua một lăng kính khác, một góc nhìn toàn cảnh mà người thường không thể chạm tới."
+          },
+          {
+            "type": "dialogue",
+            "id": "T5MOGQhLwo1gvtfZv6ovt",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Bố ơi... Có lẽ, con phải đi vào miền Nam... Con đã biết được rất nhiều chuyện ở đó..."
+          },
+          {
+            "type": "screen_effect",
+            "id": "ZlNMwloZzrgl595VpssYI",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 1000,
+              "direction": "in"
+            }
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 1700
+          }
+        }
       }
     ],
     "variables": {
@@ -3217,6 +3500,10 @@
       "nam9": {
         "type": "string",
         "default": "An"
+      },
+      "nu9": {
+        "type": "string",
+        "default": "Thư"
       }
     },
     "persistentVariables": {}
