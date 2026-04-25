@@ -4,12 +4,6 @@
 
 NHÂN VẬT CHÍNH:
 
-- Nguyễn Văn A (gọi là An / A1): Nam chính. Mẹ mất khi sinh anh, cha
-  mất tích từ trước khi anh ra đời. Những người quen đều gọi anh là An
-  vì dễ gọi. An là tên thường gọi, A1 là tên khi bắt đầu thể hiện quyền
-  lực hoàng đế nước Đô với cả thế giới. An vốn là bản sao nhân bản vô
-  tính của A*. Là lập trình viên game, có quá khứ phức tạp, đang trong
-  giai đoạn sám hối.
 
 - T2 (Nguyễn Thị Minh Thư): Nữ chính. Con gái chính trị gia Sơn và bác sĩ
   Thủy ở Thủ Đô. T2 nói GIỌNG BẮC. Cô TIN VÀO TÂM LINH, MA QUỶ - có lẽ
@@ -38,27 +32,15 @@ NHÂN VẬT CHÍNH:
 BỐI CẢNH THẾ GIỚI:
 
 
-
-
-MỤC ĐÍCH CỦA A*:
-A* muốn hiểu về nhân loại và dẫn dắt nhân loại bằng CHỦ NGHĨA ĐỘC TÀI.
-Nhưng KHÔNG PHẢI để bóc lột - mà là để CÙNG HỢP LỰC CHỐNG LẠI THẾ LỰC
-NGOẠI HÀNH TINH đe dọa Trái Đất.
-
-SAU KHI TRỞ VỀ:
-Sau khi An chết và A* quay về, hắn lấy tên thật là ĐÔ ĐẠI VIỆT ANH, tự
-xưng mình là Hoàng đế của nước Đô. A* lập ra ĐẢNG ĐẠI VIỆT ANH - một
-đảng độc tài.
+Nước mình: Nam Quốc
+Bắc Quốc: Thế lực hùng mạnh, từng nhiều lần chiến tranh xâm lược Nam quốc, là đối thủ đáng gờm trước đây
+Tây Quốc: Do K12 khai phá, thôn tính bành trước, xâm lược các quốc đảo phía đông và cả Nam Quốc
+Đông Đảo quốc: nhóm các đảo quốc trên biển đông, nhỏ bé và kém phát triển, là chư hầu của Tây Quốc
 
 BỐI CẢNH CHIẾN TRANH:
 Câu chuyện diễn ra ở nước NAM. Lịch sử từng trải qua:
   - Chiến tranh thứ nhất: Bị nước BẮC xâm lược hàng trăm năm
   - Chiến tranh thứ hai (gần đây): Bị nước TÂY xâm lược
-
-PHẢN DIỆN LỚN:
-Hoàng đế hiện tại của Đô (ông nội A*) chính là người đứng sau giới lãnh
-đạo nước TÂY, cũng là người đem quân xâm lược nước NAM trong cuộc chiến
-tranh thứ hai. Hắn khơi mào chiến tranh để có cớ ĂN THỊT NGƯỜI.
 
 VÙNG MIỀN:
   - Người thường gọi: miền Bắc (Thủ Đô), Trung, Nam
@@ -81,88 +63,6 @@ VÙNG MIỀN:
     - Vẻ ngoài lương thiện, nhân từ
 
 
-
-
-
-================================================================================
-                              ACT 7: SỰ THẬT HÉ LỘ
-================================================================================
-
-
-  Nhưng tất cả thể xác đều được điều khiển bởi cùng một bộ não - bộ não
-  sinh học khổng lồ được nuôi cấy dưới lòng đất từ tế bào gốc của A*.
-
-  "Model A1" mà A1 tạo ra thực chất không phải AI LLM nào cả - đó là output
-  từ bộ não sinh học này.
-
-
-
-
-
-
-REVEAL 11: T2 LÀ NGƯỜI PHÁ HỦY SỰ NGHIỆP CỦA A1 (PLOT TWIST)
-  CHÍNH T2 là người đã ĐƯA RA THÔNG TIN về việc A1 ngoại tình sau lưng
-  nyc cũ, dẫn tới việc A1 bị KỶ LUẬT và CÁCH CHỨC khỏi Đảng.
-
-  ĐỘNG CƠ CỦA T2:
-  - Muốn TRANH GIÀNH VỊ TRÍ chính trị
-  - Sau đó T2 đã được THĂNG CHỨC
-
-  TRONG LÚC A1 thất vọng vì bị kỷ luật, T2 ở bên cạnh an ủi, chăm sóc
-  và dần dần CHIẾM ĐƯỢC TÌNH CẢM của A1.
-
-REVEAL 12: THỎA HIỆP VÀ ĂN THỊT NGƯỜI
-  Các đời Hoàng đế Đô suốt hàng ngàn năm LUÔN yêu cầu các nước chư hầu
-  HIẾN TẾ NGƯỜI để ĂN THỊT. Hoàng đế hiện tại (ông nội A*) chính là
-  người KHƠI MÀO chiến tranh nước Tây để có cớ ăn thịt.
-
-
-
-  LÝ DO CHIA TAY:
-  - A1 đã từng LỪA DỐI và NGOẠI TÌNH sau lưng Vy trong lúc 2 ng còn quen nhau
-  - Vy phát hiện và chia tay
-  - A1 ân hận, cố gắng NÍU KÉO nhưng Vy không quay lại
-
-  HÀNH ĐỘNG CỦA T2:
-  NGAY SAU KHI A1 bị bắn và A* quay về thay thế, T2 đã DÙNG NĂNG LỰC
-  CAN THIỆP và ĐIỀU KHIỂN SUY NGHĨ của mình để XÓA HOÀN TOÀN KÝ ỨC
-  về Vy khỏi A*.
-
-  MỤC ĐÍCH CỦA T2:
-  - ĐỘC CHIẾM tình cảm của A* - không muốn A* nhớ về người cũ
-  - T2 trở thành người phụ nữ DUY NHẤT trong ký ức của A*
-
-  IRONY BI THẢM:
-  - Vy VẪN CÒN SỐNG bình thường ngoài kia
-  - A* hoàn toàn QUÊN VY - đối với hắn, Vy chưa từng tồn tại
-  - Nhưng A1 đã chết vì bảo vệ Vy trong vụ ám sát
-  - T2 yêu A* THẬT LÒNG, nhưng cách cô giữ tình yêu đó lại là BẨN THỈU
-  - Đây là hành động XÁM ĐEN trong nhân cách T2
-
-  KẾT QUẢ: Sau khi A* thay thế A1, hắn MẤT HOÀN TOÀN KÝ ỨC về Vy.
-  Tất cả những gì A1 cảm nhận được về Vy - tình yêu, sự day dứt, nỗi
-  đau, cả cái chết vì bảo vệ cô ấy - đều biến mất khỏi A*.
-
-================================================================================
-                        WORLD BUILDING: VƯƠNG QUỐC ĐÔ
-================================================================================
-
-
-
-
-
-CỤ TỔ:
-  - Chỉ xuất hiện từ TRÊN CAO mỗi khi làm lễ công nhận
-  - CHƯA TỪNG AI thật sự nhìn thấy mặt cụ tổ
-  - Chỉ có con trai cụ tổ từng nhìn thấy (hàng ngàn năm trước)
-  - Hiện sống ẨN DẬT trong tòa tháp trên đỉnh núi
-  - Tòa tháp đó là CÔNG TRÌNH DUY NHẤT nằm trên mặt đất của người Đô
-  - CHƯA TỪNG CÓ AI đánh bại được cụ tổ
-
-
-VỀ HOÀNG ĐẾ HIỆN TẠI (ÔNG NỘI A*):
-  - Đã ra nước ngoài từ hàng trăm năm nên rất GIÀ
-  - Các vị cựu hoàng đế trước đó vẫn trông rất trẻ (vì sống trong Đô)
 
 
 SO SÁNH IDEOLOGY - BA THẾ HỆ:
@@ -201,6 +101,7 @@ T2 có những năng lực đặc biệt:
 A* - VỊ VUA CUỐI CÙNG:
   - ĐIỀU KHIỂN THỜI GIAN
   - TÍNH TOÁN TRƯỚC TƯƠNG LAI (rất thông minh)
+  - Biết được mọi sự thật
   - MÔ PHỎNG HÀNH VI LOÀI NGƯỜI dựa trên dữ liệu A1 lấy được trong quá
     trình "vi hành"
 
@@ -232,46 +133,3 @@ KỊCH BẢN 2: T2 là NGƯỜI TỐT
      nhưng không ai biết được sự thật rằng ai đang có âm mưu gì.
 
 ĐIỀU BÍ ẨN: Ai đang thao túng ai?
-
-================================================================================
-                                   ENDINGS
-================================================================================
-
-[ENDINGS - Để Anh viết chi tiết]
-
-  - Good Ending:     TBD
-  - Bad Ending:      TBD
-  - Neutral Ending:  TBD
-  - Secret Ending:   TBD
-
-================================================================================
-                              NHỮNG MỐI QUAN HỆ
-================================================================================
-
-
-
-A* <-> T2 (sau khi A1 chết):
-  Hai thế lực siêu việt đối trọng. Bề ngoài nhìn có vẻ ĐỐI ĐẦU nhau,
-  nhưng thật ra là tạo ra tình thế TRÊN ĐE DƯỚI BÚA, CÙNG NHAU kiểm
-  soát và cai trị. Không ai biết ai là chính nghĩa, tốt xấu. Thậm chí
-  có thể là cả hai cùng tốt hoặc cả hai cùng xấu.
-
-T2 <-> A1 (khi A1 còn sống):
-  T2 TIN VÀO TÂM LINH, MA QUỶ. A1 luôn TIN VÀO KHOA HỌC VÀ LÝ TÍNH.
-  Hai người đôi khi TRINH LUẬN với nhau.
-
-A* <-> Nhân loại:
-  A* muốn thống trị nhân loại (độc tài) để chuẩn bị chống lại THẾ LỰC
-  NGOẠI HÀNH TINH.
-
-================================================================================
-                                   CONTENT WARNING
-================================================================================
-
-Câu chuyện này chứa:
-  - Bạo lực (đánh nhau, nứt xương, bắn nhau)
-  - Nội dung chính trị (nhạy cảm)
-  - Yếu tố thời gian (du hành thời gian)
-  - Yếu tố ngoại hành tinh (aliens)
-
-================================================================================
