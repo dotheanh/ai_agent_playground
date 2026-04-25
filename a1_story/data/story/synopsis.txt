@@ -36,16 +36,9 @@ NHÂN VẬT CHÍNH:
 
 ================================================================================
 BỐI CẢNH THẾ GIỚI:
-Đế quốc Đô tồn tại dưới lòng đất từ thời cổ đại, song song với nhân loại
-trên mặt đất. Đô là đế quốc của Người Đô - những cư dân
-đến vùng đất này từ thời tiền sử, có sức mạnh và công nghệ vượt xa nhân loại.
 
-Nguồn gốc thực sự: Người sáng lập đế quốc Đô chính là một NGƯỜI DU HÀNH
-THỜI GIAN từ tương lai. Và A* - vị vua cuối cùng của Đô - chính là người
-đó. (Closed time loop paradox)
 
-Phân quyền trong Đô được xác định bằng bạo lực và sức mạnh. Muốn nối ngôi
-hoàng đế phải chiến thắng qua Lễ Chiến Đấu. Đã qua 12 đời hoàng đế.
+
 
 MỤC ĐÍCH CỦA A*:
 A* muốn hiểu về nhân loại và dẫn dắt nhân loại bằng CHỦ NGHĨA ĐỘC TÀI.
@@ -72,116 +65,8 @@ VÙNG MIỀN:
   - Người Đô gọi: MIỀN TRONG và MIỀN NGOÀI (họ ở giữa, không tự xem
     mình là một phần của nước NAM)
 
-CLONES VÀ VAI TRÒ:
-  - A1: Lập trình viên game, tạo đảng Đại Việt Anh
-  - A2: Cố vấn chính trị cấp cao
-  - A3: Quân sự, chiến đấu, vũ khí
-  - A4: Kinh tế
-  - A5: Khoa học
-  - A6: Công nghệ
-  - A7: Lãnh đạo công an
 
-================================================================================
-                                   ACT 1: SỰ KIỆN ĐỒN CÔNG AN
-================================================================================
 
-Mở đầu câu chuyện tại một đồn công an. Các cán bộ lướt TikTok và nghe tin
-tức về một vụ đánh nhau: một thanh niên bị 5 tên côn đồ tấn công (đi 2 xe
-máy, 1 xe kẹp 3 người) do xích mích giao thông. Thanh niên đáp trả khiến
-cả 5 kẻ côn đồ nhập viện với những đòn đánh mạnh làm nứt xương.
-
-[CHOICE 1] Lựa chọn đầu tiên:
-
-  - Lấy lời khai Nguyễn Văn A (tại đồn công an)
-    A ẩn ý nói rằng mình không phải con người, gia đình mình thậm chí từng
-    giết người. Trong lúc này, một linh hồn đang quan sát - đó là T2, con gái
-    duy nhất của gia đình chính trị gia, đang ở trạng thái linh hồn phiêu bạt
-    khắp thế giới sau khi bị đột quỵ năm 18 tuổi. T2 nghe được suy nghĩ của A.
-
-  - Lấy lời khai 5 tên côn đồ (tại bệnh viện)
-    Nghe chúng kể bị phản công ra sao với giọng điệu thô tục. T2 thấy được
-    sự hối hận trong suy nghĩ của một tên côn đồ.
-
-[CHOICE 2] Sau khi lấy lời khai:
-
-  - Xem lại video ghi hình đoạn lấy lời khai của bên còn lại
-  - Bỏ qua, không xem
-
-================================================================================
-                              ACT 2: LỆNH THẢ NGƯỜI
-================================================================================
-
-Sau đó, có một lệnh bí mật từ cấp trên yêu cầu:
-
-  - Thả tự do Nguyễn Văn A
-  - Xóa hết tài liệu biên bản điều tra
-  - Hòa giải bồi thường
-  - Xóa sạch tin tức trên mạng xã hội, sửa narrative thành "xích mích nhỏ,
-    không ai bị thương nghiêm trọng, đã hòa giải"
-
-Cảnh sát rất lấy làm lạ trước động thái này. Ai có quyền lực lớn đến mức
-này?
-
-Một buổi tối, khi cảnh sát đi chạy bộ, vô tình gặp A. Hai người trò chuyện.
-A tiếp tục nói rằng mình không phải con người, mà là một chủng loài bề trên.
-Đây là hint đầu tiên về thân phận thật của A1 mà T2 (linh hồn) ghi nhận.
-
-================================================================================
-                              ACT 3: T2 TRỞ VỀ
-================================================================================
-
-Một thời gian sau, T2 được "nhập hồn về xác" - linh hồn trở về với cơ thể.
-Cô tỉnh dậy sau nhiều năm trong trạng thái thực vật tại bệnh viện.
-
-Từ ký ức khi là linh hồn, T2 nhớ về A1 - người cô quan sát được từ đồn
-công an. Quyết định tìm hiểu danh tính thật của A1.
-
-Để tiếp cận, T2 giả làm một artist thực tập ở công ty game mà A1 đang làm.
-
-================================================================================
-                              ACT 4: LÀM QUEN
-================================================================================
-
-T2 làm quen với A1 với vai trò thực tập sinh. Dần dần, T2 phát sinh tình
-cảm với A1 và bắt đầu chủ động theo đuổi.
-
-Tuy nhiên, A1 vẫn còn thương nhớ người yêu cũ. Anh mắc kẹt trong quá khứ,
-chấp niệm về những sai lầm từng làm với người yêu cũ, khó mở lòng và vẫn
-muốn níu kéo cô ấy.
-
-T2 gặp khó khăn trong việc tiếp cận A1 vì rào cản này.
-
-================================================================================
-                              ACT 5: SỰ NGHIỆP
-================================================================================
-
-Thời gian trôi qua, cả hai đều thành công trong sự nghiệp:
-
-  - A1 phát triển Model A1 - một hệ thống AI. Thực chất đây là output từ
-    bộ não sinh học khổng lồ của đế quốc Đô, được điều khiển bởi A*.
-    Không ai biết sự thật này.
-
-  - T2 phát triển Model T2 - hệ thống gen art. Cô trở thành một nghệ sĩ
-    và nhà khoa học thành công.
-
-================================================================================
-                            ACT 6: BIẾN CỐ CHÍNH TRỊ
-================================================================================
-
-Khi A1 bị công bố cách chức, mọi người mới biết được thân phận thật của
-anh ấy - một người siêu việt với những bản thể clone trong bộ máy chính
-quyền.
-
-SAI TRẬN: A1 lập quốc gia riêng
-Sau đó, A1 bắt đầu tuyên bố đế quốc Đô như một quốc gia riêng, có tiếng vang trên thế giới.
-A1 tự nhận mình là lãnh đạo của đế quốc Đô
-Mọi người bắt đầu sốc. A1 tỏ ra rất NGÔNG CUỒNG trong giai đoạn này.
-Nhưng có cái hay là A1 lên mxh đọc chính xác số xổ số và biểu đồ giá BTC
-
-  - Dân chúng nghĩ hắn bị điên (vì họ không biết về sự tồn tại của vương
-    quốc Đô, chỉ thấy hắn tự xưng)
-  - NHƯNG thật ra các cường quốc lớn trên thế giới điều biết và rất KÍNH
-    NỂ đế quốc Đô
 
 ĐỐI LẬP: Hai lãnh đạo, hai phong cách
 
@@ -195,29 +80,10 @@ Nhưng có cái hay là A1 lên mxh đọc chính xác số xổ số và biểu
     - Được dân chúng tin yêu
     - Vẻ ngoài lương thiện, nhân từ
 
-BIẾN CỐ: A1 bị bắn
-Sau đó trên trang web lộ ra video nói về sàn đấu ngầm của giới lãnh đạo các nước
-Võ sĩ đại diện lên chiến đấu để giành quyền lực cho quốc gia
-Đối thủ là những sản phẩm thí nghiệm đột biến
-A1 đánh bại cả nước Tây và nước Bắc giành quyền lực cho nước Nam
-
-Ngay sau đó A1 bị ám sát bởi một đám người áo đen trong lúc gặp nyc. A1 bế nyc chạy tới ngân hàng nhà nước, để cho nyc vào trong an toàn và ở lại chiến đấu với đám khủng bố. nhưng bởi một kẻ bấn ẩn bắn tỉa từ xa
-
-Ngay trong lúc A1 chết thì nước Bắc xâm lược lật lọng quy ước
-
-Mọi nghi ngờ đổ dồn lên nước Bắc là ng đứng sau âm mưu ám sát
-
-T2 vào bệnh viện chăm sóc A1. Cô khóc 7 ngày 7 đêm. Mưa bão kinh hoàng.
-
-Trong lúc đó, tàu chiến của nước lạ âm mưu tấn công nhân cơ hội này,
-nhưng tất cả đều bị bão cuốn trôi - như thể có ai đó đang bảo vệ.
-
-[CHOICE 3] Trong 7 ngày đó, T2 ở bên giường bệnh của A1:
-  TBD - Anh viết chi tiết
 
 
-Khi A1 chết ngta mới biết quyền lực thật sự của đế quốc Đô khi lãnh đạo các nước lần lượt tới thăm
-Sau 7 ngày A1 tim ngừng đập
+
+
 
 Cũng là lúc A* xuất hiện
 A* dậy nói ko phải do nước Bắc (hint ng bắn dùng chính loại súng xuyên tường mà A thường dùng)
@@ -225,18 +91,16 @@ A* lên bình đạm cùng T2
 A* cho sát nhập đế quốc Đô vào nước Nam, trở thành Thành phố Đô
 Tuyên bố người Đô từ nay là một dân tộc của nước Nam
 
+Tặng lại đội tàu bay
+diễn binh tàu bay có thể bay ra ngoài vũ trụ
 
 ================================================================================
                               ACT 7: SỰ THẬT HÉ LỘ
 ================================================================================
 
-Mọi chuyện dần hé lộ. T2, giờ đã là thủ tướng, bắt đầu điều tra về A1 và
-phát hiện ra sự thật kinh hoàng:
 
 REVEAL 1: A1 là người nhân bản
-  A1 thực chất là một bản nhân bản vô tính của A*, người kế vị đế quốc
-  Đô dưới lòng đất. A1 được gửi lên mặt đất để làm "tai mắt" - theo dõi và
-  đánh giá nhân loại, cho A* mô phỏng hóa và thao túng.
+  A1 thực chất là một bản nhân bản vô tính của A*
 
 REVEAL 2: Bộ não sinh học
   Ngoài A1, còn có A2, A3, A4... A7 được nhân bản. Tất cả đều được các
@@ -340,22 +204,9 @@ REVEAL 12: THỎA HIỆP VÀ ĂN THỊT NGƯỜI
   HIẾN TẾ NGƯỜI để ĂN THỊT. Hoàng đế hiện tại (ông nội A*) chính là
   người KHƠI MÀO chiến tranh nước Tây để có cớ ăn thịt.
 
-REVEAL 13: A* ĐÁNH BẠI ÔNG NỘI VÀ CẤM ĂN THỊT
-  CHA CỦA A* đã TỪ CHỐI thực hiện Lễ Chiến Đấu với Hoàng đế (cha mình)
-  để được truyền ngôi. THAY VÀO ĐÓ, ông đứng về phía LOÀI NGƯỜI để
-  chống lại Hoàng đế.
 
-  CHÍNH A* đánh bại ông nội từ năm 10 TUỔI. Do A* còn quá nhỏ, ông nội
-  lấy lý do đó để TẠM HOÃN truyền ngôi và tự xưng HOÀNG ĐẾ LÂM THỜI.
 
-  VIỆC TIÊM THUỐC KHẮC CHẾ diễn ra NGAY SAU đó:
-  - Chính phủ lập luận: A* quá HIẾU CHIẾN và HUNG BẠO, có thể đe dọa
-    cả nhân loại
-  - Hoàng đế lâm thời ĐỒNG TÌNH vì SỢ A* quá mạnh sẽ đe dọa đế chế
-  - Cha A* - số phận sau đó sẽ được phát triển trong phần nội dung tới
 
-  NGAY SAU KHI chiến thắng, A* đã BAN HÀNH LUẬT CẤM ĂN THỊT NGƯỜI khắp
-  đế quốc Đô.
 
 REVEAL 14: T2 XÓA KÝ ỨC VỀ VY - ÂM MƯU ĐEN TỐI NHẤT
   Sự khác biệt DUY NHẤT giữa A1 và A*: A1 đã PHÁT SINH TÌNH CẢM THẬT SỰ
@@ -390,46 +241,9 @@ REVEAL 14: T2 XÓA KÝ ỨC VỀ VY - ÂM MƯU ĐEN TỐI NHẤT
                         WORLD BUILDING: VƯƠNG QUỐC ĐÔ
 ================================================================================
 
-VỊ TRÍ VÀ KIẾN TRÚC:
-Đế quốc Đô được xây dựng bên trong những dãy núi cao ở MIỀN TRUNG,
-gọi là núi Đô. Người Đô đào hầm trong núi, xây dựng hệ thống hang độ
-giống như tổ kiến. Ngoài ra còn đào đường hầm dẫn thẳng ra lòng biển sâu,
-xây dựng căn cứ quân sự trong một hòn đảo có thể nổi lên hoặc chìm xuống
-ở giữa đại dương.
 
-THẬT RA: Cụ tổ quyết định làm như vậy không phải để tránh loài người,
-mà để tránh khỏi sự QUAN SÁT CỦA CÁC THẾ LỰC BÊN NGOÀI VŨ TRỤ.
 
-NGOẠI HÌNH NGƯỜI ĐÔ:
-Vì có mã gen tiến hóa hơn loài người hàng chục ngàn năm, người Đô có
-bộ gen CAO LỚN VƯỢT TRỘI và trí tuệ tuyệt vời:
-  - Người Đô thường CAO KHOẢNG 2M
-  - Dân số đế quốc: ~10,000 người
-  - Đội vệ binh: 100 người, cao TRUNG BÌNH 2.5-3M
-  - Đặc biệt: 2 người SONG SINH là cận vệ hoàng đế, CAO TỚI 5M
 
-SINH SẢN VÀ MẶT TỐI:
-Đế quốc Đô chỉ toàn đàn ông nắm giữ quyền lực. Người Đô kết hôn
-với phụ nữ loài người. Đứa con sinh ra LUÔN LUÔN chỉ có nam.
-
-Sự thật đau lòng:
-  - Thai kỳ kéo dài khoảng 3 NĂM
-  - Những đứa trẻ Người Đô quá to lớn so với cơ thể mẹ
-  - Phụ nữ mang thai sẽ bị XÉ RÁCH CƠ THỂ từ bên trong
-  - NGƯỜI MẸ NÀO CŨNG SẼ CHẾT trong quá trình mang thai
-  - Cơ thể vẫn cung cấp dinh dưỡng cho tới khi trẻ có nhận thức
-  - Bác sĩ MỔ XÁC người mẹ để lấy đứa trẻ ra
-
-=> ĐÂY LÀ LÝ DO mẹ của An chết trong lúc hạ sinh.
-
-TUỔI THỌ VÀ BẤT TỬ:
-  - Sống TRONG đế quốc Đô: KHÔNG BỊ LÃO HÓA, sống tới hàng ngàn năm
-  - Sống BÊN NGOÀI: bị lão hóa như người bình thường
-  - TRỞ THÀNH HOÀNG ĐẾ (sau khi được cụ tổ công nhận): BẤT TỬ
-
-NGHI LỄ LÊN NGÔI:
-  - Phải đánh bại hoàng đế hiện tại bằng NGHI LỄ CHIẾN ĐẤU
-  - Sau đó phải được CỤ TỔ làm LỄ CÔNG NHẬN thì mới trở thành hoàng đế
 
 CỤ TỔ:
   - Chỉ xuất hiện từ TRÊN CAO mỗi khi làm lễ công nhận
@@ -454,10 +268,6 @@ VỀ HOÀNG ĐẾ HIỆN TẠI (ÔNG NỘI A*):
   - Đã ra nước ngoài từ hàng trăm năm nên rất GIÀ
   - Các vị cựu hoàng đế trước đó vẫn trông rất trẻ (vì sống trong Đô)
 
-QUAN NIỆM CỦA NGƯỜI ĐÔ:
-  Người Đô LUÔN QUAN NIỆM rằng kẻ MẠNH NHẤT là kẻ có thể LÃNH ĐẠO TẤT CẢ.
-  Một khi đã trở thành hoàng đế, tất cả thần dân đều LUÔN TRUNG THÀNH
-  và TUÂN THEO hoàng đế tuyệt đối.
 
 SO SÁNH IDEOLOGY - BA THẾ HỆ:
 
@@ -542,9 +352,6 @@ KỊCH BẢN 2: T2 là NGƯỜI TỐT
                               NHỮNG MỐI QUAN HỆ
 ================================================================================
 
-A1 <-> T2:
-  T2 theo đuổi A1, nhưng A1 vẫn thương nyc cũ, khó mở lòng.
-  Sau khi sự thật hé lộ, mối quan hệ sẽ phát triển theo hướng nào?
 
 A1 <-> Người yêu cũ:
   A1 vẫn chấp niệm, muốn níu kéo. Vì bảo vệ cô ấy mà A1 bị bắn.
