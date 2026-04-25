@@ -482,9 +482,9 @@ Nam chính hỏi tại sao nữ chính lại vào tận miền Nam mà k làm vi
 
 Flashback lại ký ức
 Cảnh họp quốc hội
-Ngta xem băng ghi hình A1
+Ngta xem băng ghi hình A1 đánh nhau vs đám giang hồ
 Nói vs nhau là thuốc ức chế được tiêm lên ng A1 có vẻ đang dần mất đi hiệu lực
-Giao nhiệm vụ cho T2
+Giao nhiệm vụ cho T2 theo giõi A1
 Trong phòng họp hôm đó có cả A2 (k rõ mặt, chỉ có tên đại biểu trên bàn)
 
 
@@ -510,6 +510,8 @@ Ng đánh ở đấu trường là A2
 cảnh đấu trường của A2 bị leak
 
 Sau đó trên trang web lộ ra video nói về sàn đấu ngầm của giới lãnh đạo các nước
+Đấu trường là do hoàng đế Đô tổ chức
+Để thỏa mãn sở thích
 Võ sĩ đại diện lên chiến đấu để giành quyền lực cho quốc gia
 Đối thủ là những sản phẩm thí nghiệm đột biến
 A2 đánh bại cả nước Tây và nước Bắc giành quyền lực cho nước Nam
@@ -556,12 +558,6 @@ xét thấy A1 có tính cách cực đoan và thô bạo nên chính phủ đã
 A1 bị một nữ bác sĩ tiêm thuốc ức chế (cũng là ng đã nhân bản anh)
 
 
-A1 nổi tiếng
-Tin tức A1 ngoại tình lan truyền khắp mxh (bắt chước vụ viruss)
-mọi ng ném đá, nói là nên loại bỏ luôn khỏi xã hội
-A1 đau khổ, T2 an ủi, nói đạo lý thao túng bênh vực A1, nói rằng mọi ng đối xử quá khắt khe vs anh
-A1 vực lại tinh thần
-
 ================================================================================
                               Sự trỗi dậy của A1
 ================================================================================
@@ -571,8 +567,12 @@ A1 vực lại tinh thần
 => A1 đọc chính xác sổ số, giá BTC
 gây bão truyền thông
 thu hút sự chú ý
-gặp bất cứ ai cũng đều nói rõ ra được tên tuổi thông tin cá nhân
-nhận rằng mình có năng lực nhìn thấy mọi thứ (nhờ các photon chuyển động, phản xạ, bắt photon suy ra quỹ đạo suy ra mọi thứ)
+có thể mô phỏng chính xác hành vi từng con người
+A1 nổi tiếng
+có ng nghi ngờ, ném đá, nói là nên loại bỏ luôn khỏi xã hội, ko tin đó là 1 ng ưu tú
+A1 đau khổ, T2 an ủi, nói đạo lý thao túng bênh vực A1, nói rằng mọi ng đối xử quá khắt khe vs anh
+A1 vực lại tinh thần
+
 
 ================================================================================
                               MODEL AI
@@ -632,6 +632,13 @@ A1 tỏ ra rất NGÔNG CUỒNG trong giai đoạn này.
     quốc Đô, chỉ thấy hắn tự xưng)
 
 _ chính phủ nước nam im lặng quan sát
+=> cuộc họp kín, chính phủ nước Nam đề phương án tiêu diệt vĩnh viễn A*
+T2 phản đối quyết liệt
+A2 nhìn thấy T2 phản đối, trong lòng suy nghĩ, hỏi T2 nghĩ gì
+T2 nói => A2 suy ngẫm rồi hỏi
+"Cô đã thật sự phải lòng cậu ta rồi đúng ko?"
+T2 ngượng ngùng im lặng
+A2 âm thầm quan sát và đánh giá
 
 ================================================================================
                               Hoàng đế lâm thời
@@ -851,7 +858,8 @@ Khi bị tiêu diệt thì tất cả chết hết
 => mọi ng tự hỏi tại sao phải giả vờ như vậy, phải chăng là muốn chơi đùa với nhân loại
 nghe câu đó thì T2 flashback lại lúc ở phòng họp kín nhận nhiệm vụ vào miền nam giám sát A1
 Trong phòng họp có A2 nhìn cô chằm chằm (lần này show rõ mặt A2)
-
+Nhớ lại lúc T2 bảo vệ A1 trước mặt hội đồng, rồi A2 hỏi cô phải lòng hắn à
+T2 ngượng ngùng xấu hổ
 
 
 nước Bắc bắn tên lửa
@@ -1113,13 +1121,20 @@ T2 làm chính trị, thăng tiến rất nhanh
 có ông lớn sàm sỡ, nu9 trừng mắt, một lúc sau ng đó nhảy lầu chết
 camera ghi lại ng đó tự sát, có lẽ là do áp lực
 
-
 => hint: nữ chính có khả năng điều khiển nhận thức của ng khác
+
+** cảnh lãng mạn
+T2 hỏi tại sao A* lại yêu mình
+Bộ não của A* có thể mô phỏng chính xác hành vi từng con người
+Nhưng T2 là biến số phá hỏng giả lập
+Anh muốn kiểm soát được mọi thứ, kể cả em
+
+Vừa lạnh lùng thực dụng, nhưng T2 lại mỉm cười như biết đó chỉ là lời nói đùa
 
 nữ chính đi chơi vs nam 9, lướt qua nyc
 nữ chính khựng lại, quay sang hỏi nam9
 "Cô gái đó trông quen lắm, hình như đã gặp ở đâu rồi thì phải"
-"Cô gái đó tên là {{nyc}}, là một nhân viên ngân hàng, người này chưa từng gặp qua"
+Anh ko nhớ, người này anh chưa từng gặp qua
 nu9 mỉm cười hạnh phúc
 => hint tiếp là nu9 đã xóa hết ký ức của nam9 về nyc
 hoặc là phần ký ức đó chỉ tồn tại với A1, và mãi mãi mất đi kể từ khi A1 ko còn
@@ -1188,7 +1203,7 @@ Nguyên nhân A* muốn lãnh đạo loài ng cũng là để chống ng ngoài 
 _ chế tạo thuốc từ huyết thanh vô địch của mình cho nhân loại => thật ra, trong đó có chứa vector chỉnh sửa gen CRISPR => những ng từng tiêm thuốc sẽ được chỉnh sửa lại gen để trở thành một cơ thể mới của A*, phục vụ âm mưu độc tài của mình
 
   - Cha A* đi đâu? số phận sau đó sẽ được phát triển trong phần nội dung tới
-
+_ T2 thách đấu A*, một bên súng một bên kiếm
 
 ?? viên cảnh sát suy luận xem đêm đó ai là ng bắn hạ A1 => điều tra ra kế hoạch lớn hơn
 
