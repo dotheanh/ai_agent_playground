@@ -84,29 +84,10 @@ VÙNG MIỀN:
 
 
 
-
-Cũng là lúc A* xuất hiện
-A* dậy nói ko phải do nước Bắc (hint ng bắn dùng chính loại súng xuyên tường mà A thường dùng)
-A* lên bình đạm cùng T2
-A* cho sát nhập đế quốc Đô vào nước Nam, trở thành Thành phố Đô
-Tuyên bố người Đô từ nay là một dân tộc của nước Nam
-
-Tặng lại đội tàu bay
-diễn binh tàu bay có thể bay ra ngoài vũ trụ
-
 ================================================================================
                               ACT 7: SỰ THẬT HÉ LỘ
 ================================================================================
 
-
-REVEAL 1: A1 là người nhân bản
-  A1 thực chất là một bản nhân bản vô tính của A*
-
-REVEAL 2: Bộ não sinh học
-  Ngoài A1, còn có A2, A3, A4... A7 được nhân bản. Tất cả đều được các
-  nhà chính trị sử dụng trong bộ máy nhà nước, trở thành nhà khoa học, cố
-  vấn, chính trị gia - những người âm thầm đứng sau mọi sự phát triển của
-  đất nước.
 
   Nhưng tất cả thể xác đều được điều khiển bởi cùng một bộ não - bộ não
   sinh học khổng lồ được nuôi cấy dưới lòng đất từ tế bào gốc của A*.
@@ -114,79 +95,10 @@ REVEAL 2: Bộ não sinh học
   "Model A1" mà A1 tạo ra thực chất không phải AI LLM nào cả - đó là output
   từ bộ não sinh học này.
 
-REVEAL 3: Thuốc ức chế
-  Các nhà chính trị phát hiện tư tưởng độc tài khó kiểm soát của A1 (do bản
-  chất chủng loài), nên đã tiêm thuốc ức chế cơ thể để kiểm soát sức mạnh
-  của anh. Thuốc này do mẹ của T2 - một bác sĩ, nhà khoa học - chế tạo ra.
 
-REVEAL 4: Gia đình T2
-  Mẹ của T2 chính là người tham gia vào quá trình nhân bản A*, đồng thời
-  chế tạo thuốc ức chế A1. Cha của T2 là một chính trị gia quyền lực, thuộc
-  quyền điều khiển của đế quốc Đô.
 
-REVEAL 5: Nguồn gốc A* và sứ mệnh
-  A* được sinh ra bởi người cha - con của Hoàng đế thứ 12. Cha của A* đi
-  theo chính nghĩa, không làm Lễ Chiến Đấu mà chọn hòa bình, hỗ trợ cách
-  mạng đánh bại đế chế của chính ông nội A*.
 
-  A* là vị vua CUỐI CÙNG của đế quốc Đô. Mục đích của hắn là hiểu nhân
-  loại và dẫn dắt nhân loại bằng chủ nghĩa độc tài - KHÔNG PHẢI để bóc lột -
-  mà là để CÙNG HỢP LỰC CHỐNG LẠI THẾ LỰC NGOẠI HÀNH TINH.
 
-REVEAL 6: Bản gốc A* bị giấu
-  Có 7 bản nhân bản (A1-A7), nhưng thực ra bản gốc A* đã được bí mật đưa
-  về buồng nuôi dưỡng. Các nhà chính trị vẫn tưởng A1 là bản thể gốc.
-
-REVEAL 7: NGUYÊN ÔNG TỔ CHÍNH LÀ A* (PLOT TWIST CUỐI CÙNG)
-  Người sáng lập đế quốc Đô - ÔNG TỔ của dòng tộc - chính là A*!!!
-
-  A* từ tương lai du hành về thời tiền sử để lập quốc, trở thành vua đầu
-  tiên và cũng là vị trí mà sau này hắn sẽ nắm giữ. Đây là CLOSED TIME LOOP
-  PARADOX: A* đi tàu máy thời gian về quá khứ, trở thành chính mình.
-
-REVEAL 8: SINH SẢN CỦA NGƯỜI ĐÔ - MẶT TỐI CỦA VƯƠNG QUỐC
-  Đế quốc Đô chỉ toàn đàn ông nắm giữ quyền lực. Người Đô kết hôn với
-  phụ nữ loài người, và đứa con sinh ra LUÔN LUÔN chỉ có nam.
-
-  SỰ THẬT ĐAU LÒNG:
-  Phụ nữ mang thai Người Đô sẽ bị xé rách cơ thể từ bên trong bởi thai
-  nhi quá to lớn. Thai kỳ kéo dài khoảng 3 NĂM. NGƯỜI MẸ NÀO CŨNG SẼ CHẾT
-  trong quá trình mang thai.
-
-  Cơ thể người mẹ vẫn tiếp tục cung cấp dinh dưỡng để duy trì phôi thai
-  cho tới khi đứa trẻ bắt đầu có nhận thức. Khi đứa trẻ đã hoàn thiện,
-  bác sĩ sẽ MỔ XÁC người mẹ để lấy đứa trẻ ra.
-
-  => ĐÂY LÀ LÝ DO mẹ của An chết trong lúc hạ sinh - trên giấy tờ ghi là
-    "mất khi sinh" nhưng thực tế là cơ thể bị thai nhi phá hủy.
-
-REVEAL 9: MẸ T2 - NGƯỜI CHE GIẤU A*
-  Mẹ của T2 chính là người chăm sóc cho mẹ A* khi bà mang thai. Mẹ A*
-  mang thai suốt 3 năm trời. Được 2 năm thì mẹ A* đã chết, chỉ còn cái xác
-  và phôi thai đang hoàn thiện.
-
-  Mẹ T2 tiếp xúc với xác mẹ A* và lấy được mẫu gen tiến hóa của A*.
-
-  Mẹ của T2 chính là người đã CHE GIẤU cơ thể gốc A* với cả chính phủ lẫn
-  đế quốc Đô. Cơ thể A* vẫn còn trong buồng nuôi suốt nhiều năm qua.
-
-  Kể từ sau khi sinh ra T2 và tiêm thuốc khắc chế A1, mẹ T2 cũng mất tích
-  bí ẩn - bà ở trong phòng thí nghiệm để nghiên cứu và chăm sóc cho cơ thể
-  gốc A*.
-
-  => Đến ngày A1 chết thì chính bà đã THẢ A* RA để thay thế.
-
-REVEAL 10: T2 ĐƯỢC CẢI TẠO GEN - CAN THIỆP NHÂN TẠO
-  T2 là người đã được CẢI TẠO GEN, chọn lọc từ những gen đặc biệt nhất
-  của A*. Mẹ của T2 ngay từ khi mang thai đã đưa con mình vào buồng nuôi,
-  cải tạo lại gen dựa trên chính những gen của A*.
-
-  SO SÁNH:
-  - A* mạnh do BẨM SINH
-  - T2 cũng có năng lực tương tự nhờ CAN THIỆP NHÂN TẠO
-
-  CÂU HỎI ĐẶT RA: Có nên can thiệp gen không? Làm vậy có khiến mẹ T2
-  trở thành người xấu không?
 
 REVEAL 11: T2 LÀ NGƯỜI PHÁ HỦY SỰ NGHIỆP CỦA A1 (PLOT TWIST)
   CHÍNH T2 là người đã ĐƯA RA THÔNG TIN về việc A1 ngoại tình sau lưng
@@ -205,12 +117,6 @@ REVEAL 12: THỎA HIỆP VÀ ĂN THỊT NGƯỜI
   người KHƠI MÀO chiến tranh nước Tây để có cớ ăn thịt.
 
 
-
-
-
-REVEAL 14: T2 XÓA KÝ ỨC VỀ VY - ÂM MƯU ĐEN TỐI NHẤT
-  Sự khác biệt DUY NHẤT giữa A1 và A*: A1 đã PHÁT SINH TÌNH CẢM THẬT SỰ
-  với người yêu cũ (Vy). Đây là điều mà A* (bản gốc) không có.
 
   LÝ DO CHIA TAY:
   - A1 đã từng LỪA DỐI và NGOẠI TÌNH sau lưng Vy trong lúc 2 ng còn quen nhau
@@ -253,16 +159,6 @@ CỤ TỔ:
   - Tòa tháp đó là CÔNG TRÌNH DUY NHẤT nằm trên mặt đất của người Đô
   - CHƯA TỪNG CÓ AI đánh bại được cụ tổ
 
-VỀ A* VÀ CỤ TỔ:
-  - Con trai cụ tổ được TỰ NGUYỆN truyền ngôi
-  - Con trai cụ tổ từng cảm thán: "A* có khí chất và sức mạnh RẤT GIỐNG
-    cụ tổ ngày xưa"
-  - => A* CHÍNH LÀ CỤ TỔ!!!
-
-  A* đã từng cố lãnh đạo loài người và đế quốc Đô cùng đoàn kết
-  chống lại các thế lực ngoài hành tinh nhưng THẤT BẠI.
-  Vào giây phút cuối cùng trước khi thế giới diệt vong, A* đã thực hiện
-  BƯỚC NHẢY VỌT THỜI GIAN quay trở về quá khứ và TRỞ THÀNH CỤ TỔ.
 
 VỀ HOÀNG ĐẾ HIỆN TẠI (ÔNG NỘI A*):
   - Đã ra nước ngoài từ hàng trăm năm nên rất GIÀ
@@ -353,15 +249,6 @@ KỊCH BẢN 2: T2 là NGƯỜI TỐT
 ================================================================================
 
 
-A1 <-> Người yêu cũ:
-  A1 vẫn chấp niệm, muốn níu kéo. Vì bảo vệ cô ấy mà A1 bị bắn.
-
-T2 <-> Mẹ T2:
-  Khi T2 biết sự thật về mẹ mình (tham gia nhân bản A*, chế tạo thuốc ức chế),
-  mối quan hệ sẽ trở nên phức tạp.
-
-A1 <-> A*:
-  A1 là bản nhân bản, bị A* điều khiển.
 
 A* <-> T2 (sau khi A1 chết):
   Hai thế lực siêu việt đối trọng. Bề ngoài nhìn có vẻ ĐỐI ĐẦU nhau,
