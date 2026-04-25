@@ -1764,8 +1764,13 @@
             "type": "dialogue",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "expressionId": "sad",
-            "text": "Em... không... em mồ côi từ lúc mới đẻ ạ...",
+            "text": "Em... không..",
             "id": "7CuzPryhJL_V2lkn5txwq"
+          },
+          {
+            "type": "narration",
+            "id": "cKLkHT8GK6Ff7YnGPqOpU",
+            "text": "{{nam9}} nghẹn lại, cúi gầm mặt xuống bàn, bàn tay siết nhẹ mép hồ sơ như muốn che đi cảm xúc trong lòng."
           },
           {
             "type": "narration",
@@ -1775,13 +1780,13 @@
           {
             "type": "dialogue",
             "characterId": "CanhSatVN_Tre",
-            "text": "À... cậu là lập trình viên ở công ty game à?",
+            "text": "À... cậu là lập trình viên ở công ty game 2Morepixels đó sao? Cậu cũng giỏi phết đấy nhỉ!",
             "id": "yWh48jJXlW8b0VmLbjvSA"
           },
           {
             "type": "dialogue",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
-            "text": "Dạ đúng rồi",
+            "text": "Dạ vâng ạ.",
             "id": "9IlvzqHiCt__Ao8TsIStO"
           },
           {
@@ -2685,7 +2690,7 @@
           },
           {
             "type": "narration",
-            "text": "Thứ khiến loài người tự hào — trí tuệ, cảm xúc, nghệ thuật, khát vọng tự do — trong mắt họ chỉ càng làm cho “món ăn” thêm phần thú vị. Một giống loài càng vùng vẫy, càng biết đau đớn, càng biết sợ hãi… thì càng đáng để nuôi dưỡng lâu hơn.",
+            "text": "Thứ khiến loài người tự hào — trí tuệ, tài năng, quyền lực, cảm xúc, nghệ thuật, khát vọng tự do — trong mắt họ chỉ càng làm cho “món ăn” thêm phần thú vị. Một giống loài càng vùng vẫy, càng biết đau đớn, càng biết sợ hãi… thì càng đáng được nuôi dưỡng lâu hơn, để tạo ra những món ăn thượng hạng và đẳng cấp.",
             "id": "9ijoEVhPxF-6HVvjzBdyF"
           },
           {
