@@ -1769,8 +1769,8 @@
           },
           {
             "type": "narration",
-            "id": "cKLkHT8GK6Ff7YnGPqOpU",
-            "text": "{{nam9}} nghẹn lại, cúi gầm mặt xuống bàn, bàn tay siết nhẹ mép hồ sơ như muốn che đi cảm xúc trong lòng."
+            "text": "{{nam9}} nghẹn lại, cúi gầm mặt xuống bàn, bàn tay siết nhẹ mép hồ sơ như muốn che đi cảm xúc trong lòng.",
+            "id": "cKLkHT8GK6Ff7YnGPqOpU"
           },
           {
             "type": "narration",
@@ -3464,7 +3464,7 @@
           {
             "type": "dialogue",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Bố... có phải nước Tây vừa mới nổ súng tấn công nước Bắc không bố?",
+            "text": "Bố ơi... có phải Tây Tân Quốc vừa mới nổ súng tấn công Bắc Thiên Quốc không bố?",
             "id": "dial_nu9_question_war_1"
           },
           {
