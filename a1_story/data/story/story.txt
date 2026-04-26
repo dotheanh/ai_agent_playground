@@ -323,13 +323,11 @@ Sống lưng {{nu9}} lạnh toát. Cảm giác bàng hoàng bao trùm lấy tâm
 
 
 ================================================================================
-                              CHAP 1: MỐI QUAN HỆ BẮT ĐẦU
+                              CHAP 1: Sự xuất hiện của {{nu9}}
 ================================================================================
 
 
-================================================================================
-                              ACT 1: T2 XUẤT HIỆN
-================================================================================
+Ảnh bìa minh họa là hình {{nu9}} đang dõi đôi mắt nhìn xuống cả thành phố
 
 
 Một sáng thứ Hai đầu tuần, ánh nắng dịu dàng len qua những ô cửa kính lớn của tòa nhà văn phòng, rải những vệt sáng dài trên nền gỗ bóng loáng. Trụ sở công ty game 2MorePixels sắp bước vào giờ làm việc, bầu không khí trở nên sôi nổi hơn hẳn. Khắp tầng lầu vang lên tiếng gõ phím lách cách, xen lẫn những lời bàn tán xôn xao.
@@ -385,13 +383,13 @@ Mọi người cười ồ lên.
 {{nam9}} buông đũa, vội vàng đính chính:
 "Em cũng có người yêu rồi nha!"
 
-"Đâu?" - Mọi người đồng thanh.
-
-{{nam9}} không trả lời ngay. Ánh mắt lướt xuống bàn một thoáng, rồi lại ngẩng lên, giọng chắc nịch hơn bình thường:
+Ánh mắt {{nam9}} lướt xuống bàn một thoáng, rồi lại ngẩng lên, giọng chắc nịch hơn bình thường:
 
 "Tối nay em chuẩn bị đi chơi với người yêu đây nè!"
 
-Không ai hỏi gì thêm, chỉ có vài tiếng "ồ" kéo dài xen lẫn tiếng cười khúc khích.
+Cả bàn cùng "ồ" lên lên một tiếng, xen lẫn tiếng cười khúc khích.
+
+Một đồng nghiệp khác nhảy vào giải vây: "Haha, {{nam9}} nói thật đó, tối chủ nhật nào tui rủ ổng đi nhậu ổng cũng nói mình bận đi chơi với người yêu hết trơn!"
 
 ---------------------------------------
 
@@ -433,45 +431,191 @@ Thế nhưng, {{nam9}} chỉ khẽ liếc qua một cái rồi lại tiếp tụ
 
 
 
+---------------------------------------
+
+Ngày mới
+Nữ chính làm việc rất tốt, dựng hình 3D rất đẹp, lại còn thành thục sử dụng AI để gen art
+vẽ đẹp, hội chị em artist vây quanh trầm trồ khen ngợi
+
+nữ chính mỉm cười cám ơn
+
+flashback lại cảnh nữ chính nhớ lại rằng trong suốt 8 năm mình bị hôn mê sâu, trong trạng thái linh hồn thì bản thân đã từng đi rất nhiều nơi để học hỏi nhiều thứ,
+kỹ thuật vẽ cũng là một trong những thứ cô rất thích học.
+sau khi bình phục lại thì chỉ sau vài ngày luyện tập là đã có thể thành thục sử dụng các công cụ để vẽ
+
+nam9 vẫn một mài ngồi code, đưa mắt lên nhìn mọi ng vây quanh nu9, trong đầu thầm nghĩ điều gì đó
+
+--------------------------------------- mời đi ăn tiệc chào mừng
+
+Đến tối t6, mọi người rủ nhau rằng tối chủ nhật cả công ty sẽ ngồi lại ăn một bữa tiệc để chào mừng nu9.
+Ai cũng hớn hở đồng ý
+nu9 cũng tỏ ra rất hào hứng
+
+thế nhưng nam9 lại dứt khoát từ chối, lạnh lùng khẳng định rằng tối chủ nhật này mình bận rồi
+
+Một nam đồng nghiệp khác lại trêu: "Cậu lại đi chơi với cô ngyeu của cậu chứ gì?"
+
+Nam chính cúi đầu xuống, thoáng ngập ngừng
+"Dạ... đúng rồi ạ, tối chủ nhật em có hẹn..."
+
+Nữ chính ở ngay đó cũng nghe được, nhìn nam chính rồi khẽ nở một nụ cười
+(nụ cười kiểu biết nam9 chưa có ngyeu mà nói dối)
+
+
+--------------------------------------- cảnh nam9 níu kéo nyc
+
+Tối chủ nhật
+
+Nam9 mở điện thoại lên, thấy hình mọi ng chụp ảnh ăn uống vui vẻ, trong đó có cả nu9
+
+thông báo tin nhắn mới hiện lên từ một cô gái tên Vy:
+"Anh về đi ạ, hôm nay em mệt"
+
+Đôi mắt nam chính buồn bã
+
+Show full đoạn chat trên điện thoại:
+
+"Thứ năm 19h: Anh đang chờ ở dưới nhà em nè, xuống gặp anh chút nhé
+Thứ năm 20h30: Anh xin lỗi em nhiều lắm
+Thứ năm 22h45: Em ngủ ngon nhé
+Thứ sáu 18h15: Hôm nay em có gì vui ko?
+Thứ bảy 7h: Chào buổi sáng em nhé
+Hôm nay 18h: Anh tới nhà em rồi nè, đi ăn Sashimi với anh ko?"
+
+Vy trả lời tin nhắn lúc 19h30: "Anh về đi ạ, hôm nay em mệt"
+
+Nam9 đang soạn tin nhắn mới: "Anh xin lỗi..."
+
+Đoạn này force dừng mấy giây cho user đọc tn
+
+Zoom out cảnh ban đêm, nam9 đang đứng tựa lưng lên chiếc xe máy, đối diện một căn nhà, ngước nhìn lên tầng 2 nơi một căn phòng đang sáng đèn
+
+Nam9 hoài niệm trước đây anh và Vy đã từng luôn luôn dành buổi tối chủ nhật để hẹn hò với nhau, vậy mà giờ đây tất cả chỉ còn là dĩ vãng. nam9 tỏ ra đau khổ
+
+khung hình dừng lại một lúc
+
+chuyển sang khung hình tương tự, nhưng đèn phòng đã tắt
+
+Điện thoại lại báo có tin nhắn mới
+
+"Hơn 10 giờ tối rồi, anh về nghỉ ngơi đi ạ. Tụi mình đã chia tay được nửa năm rồi, anh đừng đến chờ em mãi như vậy nữa. Em sẽ không gặp lại anh nữa đâu. Em không bao giờ tha thứ được cho anh, sau tất cả những gì anh đã làm với em. Lúc anh lừa dối em, anh có nghĩ tới hậu quả ngày hôm nay không?"
+
+"Anh xin lỗi... Anh biết mình đã sai rồi, trong lòng anh bây giờ hối hận lắm... Anh vẫn còn thương em nhiều lắm..."
+
+Nam9 typing tiếp:
+"Em tha thứ cho anh được không?"
+
+Nhưng rồi anh lại xóa đi dòng tin nhắn đó. Bởi lẽ, chính anh cũng chưa từng tha thứ cho bản thân mình.
+
+Điện thoại nam9 nhận được lời mời kết bạn mới từ nu9
+nam9 dứt khoát bấm từ chối
+
+[sau này có thể thêm option rẽ nhánh]
+
+---------------------------------------
+
+
+Chuyển cảnh, ngày đầu tuần, cả team dự án Khai Giới đang họp kế hoạch phát triển tính năng mới
+nam9 tập trung ghi chép, còn nu9 ngồi đối diện nam9 say mê ngắm nhìn
+
+sếp hỏi ai có ý kiến gì mới ko
+Nu9 đề xuất tính năng cho ng dùng tự custome ngoại hình nhân vật,... (insert phân tích nghe chuyên nghiệp)
+phát biểu xong nu9 kiêu hãnh quay xuống nhìn mọi ng
+mọi ng vỗ tay tán thưởng, còn nam9 chỉ hờ hững nhìn nu9 chằm chằm
+
+
+Nu9 thầm nghĩ tại sao {{nam9}} lại khác biệt như vậy
+
+** Trong trạng thái linh hồn, mình đã đi chu du khắp cả Nam Long Quốc **
+
+* show lại ảnh nền minh họa cảnh nu9 nhìn xuống cả thành phố *
+
+** Mình đã đọc đc suy nghĩ của tất cả mn, biết được tất cả những chuyện xấu xa bí mật nhất của nhân loại **
+
+* show ảnh minh họa những chuyện xấu xa
+
+** vậy mà, mình lại chưa từng đọc được suy nghĩ của người này. **
+
+* show lại cảnh nam9 đang ngồi đối diện nu9
+
+** Vì tò mò nên mình đã theo dõi cuộc sống của anh ta suốt 4 năm nay rồi. mỗi ngày anh ta chỉ ăn uống, làm việc, hẹn hò,...  giống hệt như một con người bình thường. Thật kỳ lạ. Rốt cuộc thì năng lực của anh ta mạnh mẽ đến đâu cơ chứ... Hay là anh ta đang ấp ủ âm mưu gì... **
+
+
+---------------------------------------
+
+Tám giờ tối, nam9 vẫn còn tăng ca
+
+Nu9 mua đồ ăn mang tới, ngượng ngùng nói:
+"Hôm nay anh vất vả rồi, anh nghỉ ngơi ăn uống một chút đi..."
+
+Nam9 lạnh lùng từ chối, nói rằng mình ko đói
+
+Nu9 hơi xấu hổ, quay mặt rời đi
+
+Nam9 quay mặt nhìn theo, trầm ngâm một chút, rồi lại tiếp tục tập trung làm việc
+
+
+---------------------------------------
+
+chuyển cảnh, buổi sáng sớm, nam9 đang chạy bộ
+
+nu9 bất ngờ xuất hiện bên cạnh, hỏi han
+
+nam9 vẫn lạnh lùng
+
+
+---------------------------------------
+
+chạy bộ xong, nam9 quay lại bàn làm việc thì thấy 1 hộp cơm kèm với giấy ghi chú
+nu9 đã tự tay nấu bữa sáng cho nam9
+
+lần này, {{nam9}} lại nhận lấy và ăn ngon lành
+khẽ rơi lệ xúc động
+nam9 nghĩ thầm trong đầu, đây là lần đầu tiên trong đời có một cô gái chủ động nấu ăn cho mình
+
+nu9 ngồi ở bàn làm việc đối diện, thấy nam9 ăn thì khẽ mỉm cười hạnh phúc
+
+---------------------------------------
+
+tới cảnh ăn trưa, nu9 đang ngồi cùng với hội chị em
+bất ngờ reo lên rằng nam9 đã chấp nhận lời mời kết bạn fb của mình
+
+mọi ng xung quanh chọc ghẹo rằng nu9 có vẻ rất mê anh chàng đó
+có ng lại nói rằng nghe đồn nam9 đã có ng yêu rồi, tối chủ nhật nào cũng đi chơi vs ngyeu
+ng khác lại cãi rằng ko phải đâu, suốt nửa năm nay buổi tối chủ nhật nào cậu ta cũng vác cái bộ dạng sầu não tới quán phở nhà tớ vào lúc 10h đêm. nếu thật sự đang hẹn hò thì ai mà lại đi ăn tối vào cái giờ đó
+
+nu9 khẽ mỉm cười, nói rằng mọi người không hiểu được đâu
+
+* insert ảnh mình họa cảnh lúc còn là linh hồn thì cô đã từng nhìn thấy nam9 hẹn hò với Vy
+
+
 
 ================================================================================
-                              ACT 3: 
+                              Chap 2: Những bí mật
 ================================================================================
+A* ở cty, thấy T2 vẽ đẹp (hình cô gái cầm song kiếm là nhân vật game)
+A* khen đẹp
 
-Nữ chính làm việc rất tốt
-flashback lại đã nhiều mấy năm trời đi học hỏi
+A* ngồi vẽ gì đó
+Đeo tai nghe nghe postcast về thuyết âm mưu có những thế lực ngầm thống trị thao túng thế giới
+Hình mô phỏng chân dung ng thống trị là một ông lão cao lớn ngồi trên ngai vương
+=> ng đó kết luận rằng đây chỉ là giả thuyết
 
-chuyển cảnh
-tiệc chào mừng
-nam 9 nói phải đi chơi vs ngyeu
-nữ chính ở gần đó nghe được
-khẽ mỉm cười
+A* vẽ xong, thấy trên tờ giấy là hình con rồng
 
-{{nam9}} tới nhà nyc
-níu kéo
-đứng chờ
-reveal sự thật là {{nam9}} đã từng ngoại tình
-cắn rứt, sám hối
-đó là lý do phớt lờ nu9
--------------------
+Flashback lại cảnh dc ông nội dạy lúc nhỏ
+Ông nội nhìn rất giống ng trong ảnh minh họa
+Ông nội mặc áo vest kiểu phương tây
+Bối cảnh những ng còn lại mặc áo lụa như trên thiên đình
 
+Ông nội dẫn A* ra căn cứ Long Đảo dưới đáy biển
+Giới thiệu về 4 nước, xem bản đồ
 
-Dần dần, T2 phát sinh tình
-cảm với A1 và bắt đầu chủ động theo đuổi.
-
-Tuy nhiên, A1 vẫn còn thương nhớ người yêu cũ. Anh mắc kẹt trong quá khứ,
-chấp niệm về những sai lầm từng làm với người yêu cũ, khó mở lòng và vẫn
-muốn níu kéo cô ấy.
-
-T2 gặp khó khăn trong việc tiếp cận A1 vì rào cản này.
-
-
-Nu9 thầm nghĩ
-Trong trạng thái linh hồn cô ấy đã đọc đc suy nghĩ của tất cả mn, từ những chuyện xấu xa bí mật nhất
-Ngoài trừ nam9
-Điều này thật lạ
-đó là lý do mà cô đã bám theo và theo dõi A1 suốt nhiều năm
-
+Truyền thuyết về Nam Long
+Ng xưa từng thấy rồng
+Quốc gia là một bán đảo (?) vừa dài vừa uốn lượn như rồng
+Trưng bày xác một con rồng
+Nêu ra mâu thuẫn là k có thời đại nào có thể sản sinh ra một sinh vật to lớn và có bộ gen khác biệt như vậy
 
 ================================================================================
                               KẾ HOẠCH BÍ MẬT CỦA T2
@@ -681,7 +825,7 @@ ko phải vì đạo đức, mà đơn giản là vì A* thích cảm giác cai 
                               A1 hồi tưởng về cha
 ================================================================================
 
-A1 nghỉ làm
+A1 nghỉ làm để tránh bị bàn tán
 T2 vẫn ở bên cạnh A1
 Chỉ có T2 là tỏ ra tin tưởng A1
 (nhớ lại cảnh lúc cô tỉnh dậy và nói vs bố về A1 mà mình đã quan sát, bố cô quyết định kể lại về Đế Quốc Đô và các bản sao)
@@ -1192,6 +1336,8 @@ hoặc là phần ký ức đó chỉ tồn tại với A1, và mãi mãi mất 
 ================================================================================
 
 
+!! • sau này con rồng có thể là tiền đề cho câu chuyện về sinh vật ngoài hành tinh
+
 Cảnh cuối cùng là A* đứng trước bối cảnh thế giới diệt vong
 Người cha của A* bất ngờ liên lạc lại. người cha thật ra đã lang thang trong vũ trụ từ lâu
 Tìm và xây dựng hành tinh mới
@@ -1210,7 +1356,7 @@ THỜI GIAN từ tương lai. Và A* - vị vua cuối cùng của Đô - chính
 
 
 A1 có năng lực dịch chuyển thời gian, nhưng rất ít khi dùng
-Vì một khi đã dịch chuyển thì tức là tạo rẽ nhánh
+Vì một khi đã dịch chuyển thì tức là tạo rẽ nhánh dòng thời gian
 Mình sẽ biến mất ở 1 thế giới để tới 1 thế giới khác
 Cứ như vậy, tất cả bản thể của A* đều đồng loạt shift đi
 Sẽ có 1 thế giới đầu tiên, nơi k còn A*, và một thế giới tận cùng, nơi có cùng lúc 2 bản thể A* tồn tại
