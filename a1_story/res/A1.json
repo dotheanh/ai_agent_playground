@@ -1073,7 +1073,7 @@
     "scenes": [
       {
         "id": "L7kyIFQD4ajHaMKgjxXZO",
-        "title": "Khởi đầu mới",
+        "title": "C0 A1 Khởi đầu mới",
         "nodes": [
           {
             "type": "stage_reset",
@@ -1485,7 +1485,7 @@
       },
       {
         "id": "7ggbaqJxR7DYQdg9C3NwZ",
-        "title": "Chap 1: Đồn công an",
+        "title": "C0 A2 Đồn công an",
         "nodes": [
           {
             "type": "stage_reset",
@@ -1650,7 +1650,7 @@
       },
       {
         "id": "9F56RQkVB7UR7LLq6l4JF",
-        "title": "Lời khai của An",
+        "title": "C0 A3 1 Lời khai của An",
         "nodes": [
           {
             "type": "stage_reset",
@@ -1909,7 +1909,7 @@
       },
       {
         "id": "SQqgjXOjSGeObZZrpKBRd",
-        "title": "Lời khai của Giang hồ",
+        "title": "C0 A3 2 Lời khai của Giang hồ",
         "nodes": [
           {
             "type": "stage_reset",
@@ -2123,7 +2123,7 @@
       },
       {
         "id": "Hlp5_FgQUTPvIDIfiGSrs",
-        "title": "Báo cáo tại đồn công an",
+        "title": "C0 A4 Báo cáo tại đồn công an",
         "nodes": [
           {
             "type": "stage_reset",
@@ -2209,7 +2209,7 @@
       },
       {
         "id": "KUJNRTsARAcASFiujYdyS",
-        "title": "Báo cáo tại đồn công an (đã gặp An)",
+        "title": "C0 A4 1 Báo cáo tại đồn công an (đã gặp An)",
         "nodes": [
           {
             "type": "choice",
@@ -2236,7 +2236,7 @@
       },
       {
         "id": "Dpl8uBgHddwGu56JqRbfF",
-        "title": "Báo cáo tại đồn công an (đã gặp GiangHo)",
+        "title": "C0 A4 2 Báo cáo tại đồn công an (đã gặp GiangHo)",
         "nodes": [
           {
             "type": "choice",
@@ -2263,7 +2263,7 @@
       },
       {
         "id": "VRAXy20ysIQLRIbzULZx1",
-        "title": "Báo cáo tại đồn công an Final",
+        "title": "C0 A5 Báo cáo tại đồn công an Final",
         "nodes": [
           {
             "type": "stage_reset",
@@ -2444,7 +2444,7 @@
       },
       {
         "id": "4ftHvrRKKV9q5w7hTczyD",
-        "title": "Gặp lại An",
+        "title": "C0 A6 Gặp lại An",
         "nodes": [
           {
             "type": "stage_reset",
@@ -2713,7 +2713,7 @@
       },
       {
         "id": "0a4omxpfl03VhB40xxVag",
-        "title": "T2 Thức tỉnh",
+        "title": "C0 A7 T2 Thức tỉnh",
         "nodes": [
           {
             "type": "stage_reset",
@@ -3005,7 +3005,7 @@
       },
       {
         "id": "Hup9i-IZ-93UoOhd2L096",
-        "title": "Gọi bác Sơn",
+        "title": "C0 A8 Gọi bác Sơn",
         "nodes": [
           {
             "type": "stage_reset",
@@ -3162,7 +3162,7 @@
       },
       {
         "id": "gHBJMKJQO0Ym2JJlPwuPZ",
-        "title": "T2 Tỉnh Dậy",
+        "title": "C0 A9 T2 Tỉnh Dậy",
         "nodes": [
           {
             "type": "stage_reset",
@@ -3629,6 +3629,11 @@
             "id": "52BtiZcGc7wSEx0zAoJ7d",
             "duration": 1000,
             "fixed": false
+          },
+          {
+            "type": "goto",
+            "id": "UUnPl0Bbf7DBG-b49hwfF",
+            "target": "juvy6zRP5P7apjnRLeiKx"
           }
         ],
         "id": "3xop6e4ewRCFafaTaI0NI",
@@ -3636,6 +3641,22 @@
           "mapPosition": {
             "x": 800,
             "y": 1900
+          }
+        }
+      },
+      {
+        "title": "C1 A1 Sự xuất hiện của T2",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "yij71LJeOrRptG5uKVXNw"
+          }
+        ],
+        "id": "juvy6zRP5P7apjnRLeiKx",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 2100
           }
         }
       }
