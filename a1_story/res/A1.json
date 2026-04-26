@@ -3519,6 +3519,11 @@
               "direction": "in"
             },
             "id": "ZlNMwloZzrgl595VpssYI"
+          },
+          {
+            "type": "goto",
+            "id": "bh5I45C3MdbUm-6ml1mRA",
+            "target": "3xop6e4ewRCFafaTaI0NI"
           }
         ],
         "meta": {
@@ -3589,6 +3594,48 @@
           "mapPosition": {
             "x": -400,
             "y": 0
+          }
+        }
+      },
+      {
+        "title": "CHAP 1: Sự xuất hiện của {{nu9}}",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "NhozI_wtaTTsyHhtxcNdp"
+          },
+          {
+            "type": "background_change",
+            "id": "lIvTFyiw1AoZtUMDSsoNq",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_26/7005.png"
+            }
+          },
+          {
+            "type": "wait",
+            "id": "C4gi2-T0r7xF6Luy5Xvkf",
+            "duration": 2000,
+            "fixed": true
+          },
+          {
+            "type": "show_text",
+            "id": "Pwhd9eFyk9H6X2TQfna-j",
+            "text": "CHAP 1: Sự xuất hiện của {{nu9}}",
+            "position": "center"
+          },
+          {
+            "type": "wait",
+            "id": "52BtiZcGc7wSEx0zAoJ7d",
+            "duration": 1000,
+            "fixed": false
+          }
+        ],
+        "id": "3xop6e4ewRCFafaTaI0NI",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 1900
           }
         }
       }
