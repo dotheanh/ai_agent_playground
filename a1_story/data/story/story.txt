@@ -334,43 +334,43 @@ Một sáng thứ Hai đầu tuần, ánh nắng dịu dàng len qua những ô 
 
 Bốn chàng lập trình viên đang tụm lại ở khu vực pantry, trên tay mỗi người là một ly cà phê nóng hổi.
 
-"Mấy sếp còn nhớ cái video đánh lộn ở khu mình hồi tuần trước không? Có sếp nào hóng hớt được gì không?"
+"Mấy ông còn nhớ cái video đánh lộn ở khu mình hồi tuần trước không? Cả tuần nay có ai hóng hớt được gì không?"
 
-"Cái video đó bị xóa nhanh thiệt, mới đăng lên buổi sáng mà tới trưa đã mất tiêu, tìm quài không thấy đâu. Báo mạng với mấy group tin tức cũng đồng loạt xóa bài luôn rồi."
+"Cái video đó bị xóa nhanh thiệt, mới đăng lên buổi sáng mà tới trưa đã mất tiêu, tìm hoài không thấy đâu. Báo mạng với mấy group tin tức cũng đồng loạt xóa bài luôn rồi."
 
 "Nghe nói đám giang hồ là băng của ông Hùng Chợ Cá đó, còn cậu thanh niên kia thì nhìn giống thằng {{nam9}} team mình lắm nha!"
 
-"Ờ ha, sếp nói em mới để ý. Hèn chi hôm đó em đi ngang qua hiện trường, nhìn người đó cứ thấy quen quen. Hình như sáng hôm đó {{nam9}} cũng nghỉ làm đúng không?"
+"Ờ ha, anh nói em mới để ý. Hèn chi hôm đó em đi ngang qua hiện trường, nhìn người đó cứ thấy quen quen. Hình như sáng hôm đó {{nam9}} cũng nghỉ làm đúng không?"
 
-"Sáng hôm đó xe em bị bể bánh mà anh!" - {{nam9}} cất giọng giải thích - "Em è cổ dắt bộ tới mấy cây số rồi mệt quá nên phải xin nghỉ làm luôn đó. Cỡ như em mà bị đấm một cái chắc là xỉu luôn tại chỗ chứ đừng nói là đánh trả lại, haha."
+"Sáng hôm đó xe em bị bể bánh mà anh!" - {{nam9}} đang ngồi ở bàn làm việc cũng vội vàng quay sang thanh minh - "Em è cổ dắt bộ tới mấy cây số rồi mệt quá nên phải xin nghỉ làm luôn đó. Cỡ như em mà bị đấm một cái chắc là xỉu luôn tại chỗ chứ đừng nói là đánh trả lại, haha."
 
-{{nam9}} cười xòa, rồi nhanh chóng mang ly cà phê nóng hổi về bàn làm việc của mình. Trong khi đó, ba anh chàng còn lại vẫn tiếp tục bàn tán sôi nổi.
+{{nam9}} cười xòa, rồi nhanh chóng quay lại màn hình máy tính. Trong khi đó, ba anh chàng còn lại vẫn tiếp tục bàn tán sôi nổi.
 
-"Thôi bỏ qua vụ đó đi, chắc là 'chìm xuồng' luôn rồi. Nhưng mà nghe nói hôm nay công ty mình có người mới hả mấy sếp?"
+"Thôi bỏ qua vụ đó đi, chắc là 'chìm xuồng' luôn rồi. Nhưng mà nghe nói hôm nay công ty mình có người mới hả mấy anh?"
 
-"Ừ, hình như sáng nay có bé artist mới vào thực tập ở team mình."
+"Ừ, hình như sáng nay có bạn artist mới vào thực tập ở team mình."
 
 ---------------------------------------
 
 Bầu không khí buổi sáng tại công ty 2MorePixels càng lúc càng rộn ràng hơn khi mọi người tụ lại thành vòng tròn xung quanh một cô gái trẻ.
 
-{{nu9}} đứng thẳng lưng giữa đám đông, một nụ cười tự tin rạng rỡ trên môi. Cô sở hữu gương mặt nhỏ nhắn, làn da trắng mịn cùng đôi mắt to long lanh đầy cuốn hút. Mái tóc đen dài óng ả buông tự nhiên, uốn nhẹ ở phần đuôi, càng khiến cô trông tươi tắn và nổi bật. Trên người cô là chiếc áo hai dây trắng đơn giản, khoác ngoài một lớp áo voan mỏng nhẹ, phối cùng chân váy ngắn màu be, tạo nên dáng vẻ thanh lịch nhưng vẫn rất đáng yêu.
+{{nu9}} đứng thẳng lưng giữa đám đông, một nụ cười tự tin rạng rỡ trên môi. Cô sở hữu gương mặt nhỏ nhắn, làn da trắng mịn cùng đôi mắt to long lanh đầy cuốn hút. Mái tóc đen dài óng ả buông tự nhiên, uốn nhẹ ở phần đuôi, càng khiến cô trông tươi tắn và nổi bật. Trên người cô là chiếc áo sơ mi voan màu trắng, phối cùng chân váy bút chì màu đen, tạo nên dáng vẻ thanh lịch nhưng vẫn rất đáng yêu.
 
 "Dạ, em chào mọi người..." - {{nu9}} lên tiếng, giọng trong trẻo nhưng đầy khí chất - "Em tên là {{nu9}}, sinh năm 2006, vừa tốt nghiệp chuyên ngành Digital Art tại Học viện Mỹ thuật Nghệ thuật Sáng tạo ạ. Từ nay em sẽ thực tập tại công ty mình ở vị trí 3D artist, rất mong được mọi người giúp đỡ ạ!"
 
 Đám đông xung quanh đồng loạt "ồ" lên, những tiếng xì xào bàn tán lập tức lan khắp khu vực, xen lẫn vài tiếng cười khẽ và ánh mắt tò mò đổ dồn về phía {{nu9}}.
 
-"Trường đó khó vô lắm á!" - Một nữ nhân viên cất tiếng - "Nhỏ em họ tui học ở đó, nghe nói tỷ lệ chọi cao khủng khiếp."
+"Trường đó khó vô lắm á!" - Một nữ nhân viên cất tiếng - "Nhỏ em họ của chị học ở đó, nghe nói tỷ lệ chọi cao khủng khiếp."
 
 "Sinh năm 2006 mà đã tốt nghiệp rồi á hả?" - Một đồng nghiệp khác trầm trồ - "Mới có 20 tuổi mà đã 'gia nhập thị trường lao động' rồi!"
 
-"Chòi oi cưng ơi, da của cưng trắng mà muốn phát sáng lun dzay nè... nhìn cưng dống như nữ sinh cấp 3 dị ớ!"
+"Công nhận bé {{nu9}} này da trắng ghê. Nhìn mặt dễ thương như vầy, không nói chắc chị tưởng là nữ sinh cấp 3 luôn á..."
 
 Trong lúc mọi người đang hào hứng vây quanh cô để hỏi han, {{nu9}} bất giác đưa mắt nhìn về phía dãy bàn ở góc phòng. Nơi đó, {{nam9}} vẫn đang tập trung làm việc. Đôi mắt anh dán chặt vào màn hình laptop, ngón tay vẫn gõ đều trên bàn phím, dường như không mảy may quan tâm đến cô.
 
 ---------------------------------------
 
-Giờ ăn trưa. Tại canteen của công ty, tiếng nói chuyện, tiếng muỗng đũa chạm nhau và tiếng cười đùa xen lẫn tạo thành một bầu không khí ồn ào quen thuộc. Ở một góc bàn dài, nhóm đồng nghiệp nam ngồi tụ lại với nhau, vừa ăn vừa bàn tán về cô nàng thực tập sinh mới đến.
+Giờ ăn trưa. Tại canteen của công ty, tiếng nói chuyện, tiếng muỗng đũa chạm nhau và tiếng cười đùa xen lẫn tạo thành một bầu không khí ồn ào quen thuộc. Ở một góc bàn, nhóm đồng nghiệp nam ngồi tụ lại với nhau, vừa ăn vừa bàn tán về cô nàng thực tập sinh mới đến.
 
 "Ê, bên kia có phải bạn {{nu9}} mới vô không? Nhìn dễ thương thật." - một người lên tiếng.
 
@@ -407,7 +407,7 @@ Tại bàn nữ. {{nu9}} đang ngồi ăn trưa cùng với hội chị em.
 
 {{nu9}} khẽ gật đầu, ánh mắt lén nhìn về phía bàn của nhóm nam ở đối diện.
 
-"Chị cho em hỏi... cái anh ngồi ở trong góc bàn bên kia tên là gì vậy ạ?" - {{nu9}} khẽ nghiêng đầu về phía {{nam9}}.
+"Chị cho em hỏi... cái anh mặc áo đen, ngồi ở bàn bên kia tên là gì vậy ạ?" - {{nu9}} khẽ nghiêng đầu về phía {{nam9}}.
 
 Cả hội con gái cùng nhìn theo, rồi quay lại cười khúc khích.
 
@@ -831,6 +831,9 @@ Chỉ có T2 là tỏ ra tin tưởng A1
 (nhớ lại cảnh lúc cô tỉnh dậy và nói vs bố về A1 mà mình đã quan sát, bố cô quyết định kể lại về Đế Quốc Đô và các bản sao)
 
 Đang trò chuyện thì bố của T2 gọi điện hỏi thăm
+Ở đầu dây bên kia, ông bố đang vệ sinh con mắt giả, miệng vẫn nói rằng mình rất ổn, rồi gắn mắt lại
+(ngầm thể hiện ông cũng thuộc giới tinh hoa và bị hoàng đế Đô lấy đi một bên mắt)
+
 A1 chạnh lòng, nói rằng có một ng bố chăm sóc cho mình thật tốt
 A1 hỏi thăm bố làm công việc gì, T2 nói là chính trị gia
 mẹ thì là Giáo sư, Tiến sĩ, Bác sĩ, nhưng bà ấy suốt ngày chỉ ở phòng thí nghiệm, đã rất lâu r chưa dc gặp lại mẹ
