@@ -378,7 +378,7 @@ Giờ ăn trưa. Tại canteen của công ty, tiếng nói chuyện, tiếng mu
 
 "Mấy anh em mình có vợ cả rồi, ở đây còn mỗi thằng {{nam9}} là độc thân thôi. Bao nhiêu trọng trách giao hết cho chú đấy nhé, đừng làm tụi anh thất vọng!"
 
-Mọi người cười ồ lên.
+Mọi người đồng loạt cười ồ lên.
 
 {{nam9}} buông đũa, vội vàng đính chính:
 "Em cũng có người yêu rồi nha!"
@@ -389,7 +389,7 @@ Mọi người cười ồ lên.
 
 Cả bàn cùng "ồ" lên lên một tiếng, xen lẫn tiếng cười khúc khích.
 
-Một đồng nghiệp khác nhảy vào giải vây: "Haha, {{nam9}} nói thật đó, tối chủ nhật nào tui rủ ổng đi nhậu ổng cũng nói mình bận đi chơi với người yêu hết trơn!"
+Một đồng nghiệp khác nhảy vào giải vây: "Haha, {{nam9}} nói thật đó, tối chủ nhật nào em rủ ổng đi nhậu ổng cũng nói mình bận đi chơi với người yêu hết trơn!"
 
 ---------------------------------------
 
@@ -407,23 +407,23 @@ Tại bàn nữ. {{nu9}} đang ngồi ăn trưa cùng với hội chị em.
 
 {{nu9}} khẽ gật đầu, ánh mắt lén nhìn về phía bàn của nhóm nam ở đối diện.
 
-"Chị cho em hỏi... cái anh mặc áo đen, ngồi ở bàn bên kia tên là gì vậy ạ?" - {{nu9}} khẽ nghiêng đầu về phía {{nam9}}.
+"Các chị cho em hỏi... anh mặc áo đen ngồi bàn bên kia tên là gì vậy ạ?" - {{nu9}} khẽ nghiêng đầu về phía {{nam9}}.
 
 Cả hội con gái cùng nhìn theo, rồi quay lại cười khúc khích.
 
 "À, anh đó là {{nam9}}. Con nhỏ này 'khóa mục tiêu' nhanh ghê ta."
 
-"Anh ấy là người như thế nào vậy ạ?" - {{nu9}} tò mò hỏi.
+"Anh ấy... là người như thế nào vậy ạ?" - {{nu9}} tò mò hỏi.
 
 "Thì... cũng tốt tính. Nhưng mà tính cách có phần hơi lập dị. Chị thấy anh ấy hơi khó gần, ít khi hòa nhập với mọi người."
 
 "Vâng ạ..." - {{nu9}} đáp, nhưng ánh mắt vẫn dán chặt về phía chàng trai ấy.
 
----------------------------------------
+--------------------------------------- C1 A5
 
 Buổi chiều hôm đó, sếp Thắng – PM của dự án Khai Giới – trực tiếp dẫn {{nu9}} đến bàn làm việc mới, vừa đi vừa giới thiệu ngắn gọn về công việc và team.
 
-"Đây là bàn làm việc của em, có gì chưa quen thì cứ hỏi mọi người, ai cũng sẵn sàng hỗ trợ nhé." - sếp Thắng dừng lại, chỉ tay về phía chỗ ngồi mới của {{nu9}}. Vị trí đó ở ngay đối diện bàn làm việc của {{nam9}}, vừa đủ gần để cả hai nhìn thấy nhau mỗi khi ngẩng lên.
+"Kể từ nay thì {{nu9}} sẽ tham gia dự án Khai Giới của chúng ta. Đây là bàn làm việc của em, có gì chưa quen thì cứ hỏi mọi người, ai cũng sẵn sàng hỗ trợ nhé." - sếp Thắng dừng lại, chỉ tay về phía chỗ ngồi mới của {{nu9}}. Vị trí đó ở ngay đối diện bàn làm việc của {{nam9}}, vừa đủ gần để cả hai nhìn thấy nhau mỗi khi ngẩng lên.
 
 Ngay khi sếp Thắng vừa rời đi, những người đồng nghiệp xung quanh lập tức vây quanh {{nu9}}. Người thì hỏi han, người thì hướng dẫn cách setup máy tính, bầu không khí trở nên rộn ràng hẳn lên.
 
@@ -431,7 +431,7 @@ Thế nhưng, {{nam9}} chỉ khẽ liếc qua một cái rồi lại tiếp tụ
 
 
 
----------------------------------------
+--------------------------------------- C1 A6
 
 Ngày mới
 Nữ chính làm việc rất tốt, dựng hình 3D rất đẹp, lại còn thành thục sử dụng AI để gen art
