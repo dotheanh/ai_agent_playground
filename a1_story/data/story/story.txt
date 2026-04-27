@@ -515,8 +515,7 @@ Vy:
 
 Nhìn thấy dòng thông báo mới hiện lên, ánh mắt {{nam9}} chợt chùng xuống.
 
-
-— show hình đoạn chat —
+Đoạn chat trên điện thoại:
 
 Thứ năm 19h
 Anh đang chờ ở dưới nhà em nè, xuống gặp anh chút nhé
@@ -536,32 +535,22 @@ Anh về đi ạ, hôm nay em mệt.
 
 Tin nhắn đang soạn dở, chưa được gửi đi: "Anh xin lỗi..."
 
-**** Đoạn này force dừng mấy giây cho user đọc tn
-
-— Zoom out cảnh ban đêm —
-
 {{nam9}} đứng tựa người lên chiếc xe máy, lặng im trước một căn nhà. Anh ngước nhìn lên tầng hai, nơi một ô cửa sổ vẫn đang sáng đèn...
 
 Trong lòng {{nam9}}, những tối chủ nhật từng quen thuộc dần hiện lên. Anh đợi dưới hiên nhà, cô bước xuống, cả hai cùng đi ăn uống, dạo phố, cười nói suốt cả buổi tối.
 
 Rồi tất cả dần tan vào dĩ vãng. Chỉ còn lại một khoảng lặng không thể lấp đầy.
 
-**** khung hình dừng lại một lúc
-**** chuyển sang khung hình tương tự, nhưng đèn phòng đã tắt
+Khi đêm muộn, ánh đèn phòng đã tắt. Điện thoại {{nam9}} lại báo có tin nhắn mới.
 
-Điện thoại {{nam9}} lại báo có tin nhắn mới. ** rung rung các kiểu
-
-**** chèn hình tin nhắn *phụ đề nội dung tin nhắn
 Vy:
 "Hơn 10 giờ tối rồi, anh về nghỉ ngơi đi ạ. Tụi mình đã chia tay được nửa năm rồi, anh đừng đến chờ em mãi như vậy nữa. Em sẽ không gặp lại anh nữa đâu. Em không bao giờ tha thứ được cho anh, sau tất cả những gì anh đã làm với em. Lúc anh lừa dối em, anh có nghĩ tới hậu quả ngày hôm nay không?"
 
-**** chèn hình tin nhắn *phụ đề nội dung tin nhắn
 {{nam9}}:
 "Anh xin lỗi… Anh biết mình đã sai rồi, trong lòng anh bây giờ hối hận lắm… Anh vẫn còn thương em nhiều lắm…"
 Tin nhắn đang soạn dở, chưa được gửi đi: "Em tha thứ cho anh được không?"
 
-**** chèn hình xóa tin nhắn đang soạn *phụ đề xóa tin nhắn
-Có lẽ, chính {{nam9}} cũng chưa từng tha thứ cho bản thân mình.
+Dòng tin nhắn cuối cùng đã bị xóa đi... Có lẽ, chính {{nam9}} cũng chưa từng tha thứ cho bản thân mình.
 
 Một thông báo khác hiện lên.
 

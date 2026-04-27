@@ -576,7 +576,7 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7046.png",
-            "scale": 0.9,
+            "scale": 0.8,
             "offset": {
               "x": 0,
               "y": -28
@@ -589,11 +589,20 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7056.png",
-            "scale": 0.9,
+            "scale": 0.8,
             "offset": {
               "x": 0,
               "y": -4
             }
+          }
+        },
+        {
+          "id": "_BTSAN-ozLUBNu6raYbVA",
+          "name": "sad-2",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7130.png",
+            "scale": 0.8
           }
         }
       ]
@@ -1376,6 +1385,70 @@
               "x": 0,
               "y": -100
             }
+          }
+        },
+        {
+          "id": "BLry3BWP7OfXFqvqq8J4d",
+          "name": "typing 1",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7132.png",
+            "scale": 0.3,
+            "offset": {
+              "x": 0,
+              "y": -100
+            }
+          }
+        },
+        {
+          "id": "4eJorWnSPvn42cZlT6Xom",
+          "name": "typing 2",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7133.png",
+            "scale": 0.3,
+            "offset": {
+              "x": 0,
+              "y": -100
+            }
+          }
+        },
+        {
+          "id": "d7by_bGzTo8QbZrycq36N",
+          "name": "friend req",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7134.png",
+            "scale": 0.6,
+            "offset": {
+              "x": 0,
+              "y": -100
+            }
+          }
+        }
+      ]
+    },
+    "IC9ZNlBvYBKga3HL2CXZi": {
+      "id": "IC9ZNlBvYBKga3HL2CXZi",
+      "name": "Vy",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "ahuGfzRW1EYNaw3ASJITe",
+          "name": "default",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7128.png",
+            "scale": 0.8
+          }
+        },
+        {
+          "id": "IEZ-CgW7u_wU2NpDKWxcL",
+          "name": "sad",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7129.png",
+            "scale": 0.8
           }
         }
       ]
@@ -5029,6 +5102,12 @@
             "id": "VkgyEgP1u06ZFvTt28Z8L"
           },
           {
+            "type": "wait",
+            "id": "W6f3ugc7J-DEvFluLL71Y",
+            "duration": 1000,
+            "fixed": false
+          },
+          {
             "type": "narration",
             "text": "Giữa con hẻm vắng, {{nam9}} mở điện thoại lên.",
             "id": "Y94GOCvSx6zi9X0LsRsEo"
@@ -5082,14 +5161,257 @@
           },
           {
             "type": "wait",
-            "id": "I7FmYWfpd3pqu1f3cDw4L",
-            "duration": 500,
-            "fixed": true
+            "duration": 1000,
+            "fixed": true,
+            "id": "I7FmYWfpd3pqu1f3cDw4L"
           },
           {
             "type": "narration",
-            "id": "DFR6ALiZ_ii-DP1D04Vm9",
-            "text": "Nhìn thấy dòng thông báo mới hiện lên, ánh mắt {{nam9}} chợt chùng xuống."
+            "text": "Nhìn thấy dòng thông báo mới hiện lên, ánh mắt {{nam9}} chợt chùng xuống.",
+            "id": "DFR6ALiZ_ii-DP1D04Vm9"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "KlhZx2B14dfoUynsZ8YH3",
+            "duration": 300,
+            "id": "VNab_3nCFZcTC6so3h2Ov"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7125.png"
+            },
+            "id": "_j4nYtLSUdxrhBWyfRUw4"
+          },
+          {
+            "type": "wait",
+            "duration": 3000,
+            "fixed": false,
+            "id": "Pfm5hzOmqHbTbJOCJRjc9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Haizz...",
+            "id": "Y7NParXUpbpqo6JVTEhPp"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7126.png"
+            },
+            "id": "Hub1jW21ex_v7lQ2MeXF_"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} đứng tựa người lên chiếc xe máy, lặng im trước một căn nhà. Anh ngước nhìn lên tầng hai, nơi một ô cửa sổ vẫn đang sáng đèn...",
+            "id": "f6xoHZWiQZsIgk3kDq5h2"
+          },
+          {
+            "type": "narration",
+            "text": "Trong lòng {{nam9}}, những tối chủ nhật từng quen thuộc dần hiện lên. Anh đợi dưới hiên nhà, cô bước xuống, cả hai cùng đi ăn uống, dạo phố, cười nói suốt cả buổi tối.",
+            "id": "tU3vfpkVWArMpGx0CVpn9"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": true,
+            "id": "2N3Hu4hNmxx5goqOwQcPd"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 1000,
+              "direction": "in"
+            },
+            "id": "hJeDQ6vF-1Vol0q8x_VcN"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7127.png"
+            },
+            "id": "lE-RzRp74hfChiGZYxz9F"
+          },
+          {
+            "type": "narration",
+            "text": "Rồi tất cả dần tan vào dĩ vãng. Chỉ còn lại một khoảng lặng không thể lấp đầy.",
+            "id": "DT3dFhwlXRPjtEN_88t-5"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": true,
+            "id": "hP4l3YPd8FJFahZ5LQa7r"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6909.mp3",
+            "volume": 1,
+            "id": "F2K6beU3U_YgAfESufjx_"
+          },
+          {
+            "type": "narration",
+            "text": "Một tin nhắn mới lại được gửi đến...",
+            "id": "_d6lE8pafAeWjhcr4Z4ZJ"
+          },
+          {
+            "type": "character_show",
+            "characterId": "IC9ZNlBvYBKga3HL2CXZi",
+            "position": "right",
+            "expressionId": "IEZ-CgW7u_wU2NpDKWxcL",
+            "duration": 300,
+            "flipX": false,
+            "id": "NMfty-FoAzZWmvR_hKGma"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "IC9ZNlBvYBKga3HL2CXZi",
+            "text": "Hơn 10 giờ tối rồi, anh về nghỉ ngơi đi ạ.",
+            "id": "mq0scdJ_ysGpylv1i0cM1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "IC9ZNlBvYBKga3HL2CXZi",
+            "text": "Tụi mình đã chia tay được nửa năm rồi, anh đừng đến chờ em mãi như vậy nữa. Em sẽ không gặp lại anh nữa đâu.",
+            "id": "sJS5jeN4rxpV2oNv0ecd3"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "IC9ZNlBvYBKga3HL2CXZi",
+            "text": "Em không bao giờ tha thứ được cho anh, sau tất cả những gì anh đã làm với em. Lúc anh lừa dối em, anh có nghĩ tới hậu quả ngày hôm nay không?",
+            "id": "KXw7nKaceQYopEJ35TKxp"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "IC9ZNlBvYBKga3HL2CXZi",
+            "duration": 300,
+            "id": "1uEsLPsDMAt5aZdBpqU5n"
+          },
+          {
+            "type": "character_show",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "left",
+            "expressionId": "_BTSAN-ozLUBNu6raYbVA",
+            "duration": 300,
+            "flipX": false,
+            "id": "XiQi6mfp2UT3VJ_GxErw3"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Anh xin lỗi… Anh biết mình đã sai rồi, trong lòng anh bây giờ hối hận lắm…",
+            "id": "08VEGFT328OuH1Td2R7-X"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Anh vẫn còn thương em nhiều lắm…",
+            "id": "_Gkxju96DJ7tQ9berwGY9"
+          },
+          {
+            "type": "character_hide",
+            "id": "et2QDQlXlkcrrkON27HTh",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "center",
+            "duration": 300
+          },
+          {
+            "type": "character_show",
+            "characterId": "KlhZx2B14dfoUynsZ8YH3",
+            "position": "center",
+            "expressionId": "BLry3BWP7OfXFqvqq8J4d",
+            "duration": 300,
+            "flipX": false,
+            "id": "28ziLHSjIc8YVfAToRMME"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Em tha thứ cho anh được không?",
+            "id": "JDcDQcA4JLbXRzuNLAeDc"
+          },
+          {
+            "type": "wait",
+            "id": "OQWr4q5DwVEtGdHb2Tvx5",
+            "duration": 500,
+            "fixed": false
+          },
+          {
+            "type": "character_express",
+            "characterId": "KlhZx2B14dfoUynsZ8YH3",
+            "expressionId": "4eJorWnSPvn42cZlT6Xom",
+            "duration": 200,
+            "id": "ljpjufSb4SUdWGtW1R6Vm"
+          },
+          {
+            "type": "wait",
+            "id": "6pVIDLCjNPv0iaYec2rDt",
+            "duration": 500,
+            "fixed": false
+          },
+          {
+            "type": "dialogue",
+            "id": "JxfH5fqniJC1nRPkIwPzI",
+            "characterId": "",
+            "text": "Dòng tin nhắn cuối cùng đã bị xóa đi..."
+          },
+          {
+            "type": "character_hide",
+            "id": "tR96fiUVuDiy27ETf48pW",
+            "characterId": "KlhZx2B14dfoUynsZ8YH3",
+            "duration": 300,
+            "position": "center"
+          },
+          {
+            "type": "narration",
+            "text": "Có lẽ, chính {{nam9}} cũng chưa từng tha thứ cho bản thân mình.",
+            "id": "Jwf04nygbvqWgaYy5VgmR"
+          },
+          {
+            "type": "play_sfx",
+            "id": "IOF9_IWpVdLfiUIQwghOy",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6909.mp3",
+            "volume": 1
+          },
+          {
+            "type": "character_show",
+            "id": "OofkRyRcbwX1IOPq9Izc8",
+            "characterId": "KlhZx2B14dfoUynsZ8YH3",
+            "position": "center",
+            "duration": 300,
+            "expressionId": "d7by_bGzTo8QbZrycq36N"
+          },
+          {
+            "type": "dialogue",
+            "id": "R23RsOKg8MWbs-ZMXlufY",
+            "characterId": "",
+            "text": "Một thông báo khác hiện lên."
+          },
+          {
+            "type": "dialogue",
+            "id": "7emKjUplFnaeRWj8jrJgp",
+            "characterId": "",
+            "text": "{{nu9}} đã gửi lời mời kết bạn."
+          },
+          {
+            "type": "character_hide",
+            "id": "53nnYYDSCoNCyiVhzSxWS",
+            "characterId": "KlhZx2B14dfoUynsZ8YH3",
+            "position": "center",
+            "duration": 300
+          },
+          {
+            "type": "dialogue",
+            "id": "7LLaBpDpnWX-glQH-_fp1",
+            "characterId": "",
+            "text": "Ngón tay {{nam9}} dừng lại một nhịp… rồi dứt khoát bấm từ chối."
           },
           {
             "type": "stage_reset",
