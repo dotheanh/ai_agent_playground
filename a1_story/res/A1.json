@@ -1059,11 +1059,11 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7087.png",
+            "scale": 0.8,
             "offset": {
               "x": 0,
               "y": 0
-            },
-            "scale": 0.8
+            }
           }
         },
         {
@@ -1072,11 +1072,11 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7088.png",
+            "scale": 0.8,
             "offset": {
               "x": 0,
               "y": 0
-            },
-            "scale": 0.8
+            }
           }
         },
         {
@@ -1085,11 +1085,11 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7089.png",
+            "scale": 0.8,
             "offset": {
               "x": 0,
               "y": 0
-            },
-            "scale": 0.8
+            }
           }
         },
         {
@@ -1118,11 +1118,11 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7082.png",
+            "scale": 0.8,
             "offset": {
               "x": 0,
               "y": -43
-            },
-            "scale": 0.8
+            }
           }
         },
         {
@@ -1131,11 +1131,11 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7083.png",
+            "scale": 0.8,
             "offset": {
               "x": -1,
               "y": -44
-            },
-            "scale": 0.8
+            }
           }
         },
         {
@@ -1144,11 +1144,11 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7084.png",
+            "scale": 0.8,
             "offset": {
               "x": 0,
               "y": -44
-            },
-            "scale": 0.8
+            }
           }
         },
         {
@@ -1206,6 +1206,15 @@
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7049.png",
             "scale": 0.9
+          }
+        },
+        {
+          "id": "_z-FqqMgA2Gp-w7iUAneX",
+          "name": "smile",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7120.png",
+            "scale": 0.8
           }
         }
       ]
@@ -1350,6 +1359,26 @@
           }
         }
       ]
+    },
+    "KlhZx2B14dfoUynsZ8YH3": {
+      "id": "KlhZx2B14dfoUynsZ8YH3",
+      "name": "Objects",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "9FZiaNXf2RBP5sCUGIOv0",
+          "name": "message",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7124.png",
+            "scale": 1,
+            "offset": {
+              "x": 0,
+              "y": -100
+            }
+          }
+        }
+      ]
     }
   },
   "content": {
@@ -1365,7 +1394,7 @@
           },
           {
             "type": "play_bgm",
-            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6714.mp3",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7121.mp3",
             "loop": true,
             "volume": 0.1,
             "id": "u5jljiCfOewNTOsvKFjw8"
@@ -2725,22 +2754,22 @@
           },
           {
             "type": "screen_effect",
-            "id": "z-MXwx6Mv3a4a2Z5JWhdz",
             "effect": {
               "type": "tint",
               "color": "#000000",
               "opacity": 1,
               "duration": 500,
               "direction": "in"
-            }
+            },
+            "id": "z-MXwx6Mv3a4a2Z5JWhdz"
           },
           {
             "type": "background_change",
-            "id": "WOeCX-76SEfQNLQcFczYa",
             "visual": {
               "type": "color",
               "color": "#000000"
-            }
+            },
+            "id": "WOeCX-76SEfQNLQcFczYa"
           },
           {
             "type": "goto",
@@ -3947,6 +3976,13 @@
             "id": "lIvTFyiw1AoZtUMDSsoNq"
           },
           {
+            "type": "play_bgm",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7122.mp3",
+            "loop": true,
+            "volume": 1,
+            "id": "H5Vp8wkYx2W5fMa7_yag7"
+          },
+          {
             "type": "wait",
             "duration": 2000,
             "fixed": true,
@@ -4319,7 +4355,7 @@
           {
             "type": "character_show",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "position": "far-left",
+            "position": "left",
             "expressionId": "QKvTFcXD-JRXUYSFeo4eq",
             "duration": 300,
             "flipX": false,
@@ -4910,6 +4946,11 @@
               "color": "#000000"
             },
             "id": "ApyC-adBcVrOi7IaZkO0R"
+          },
+          {
+            "type": "goto",
+            "target": "AEwGJVjbpjZ0WeaHtdZsz",
+            "id": "c4sG6bjLcc86c62bZnKuf"
           }
         ],
         "meta": {
@@ -4920,12 +4961,12 @@
         }
       },
       {
-        "id": "PAW8uJ2qUySmWssFClS1r",
+        "id": "m0iDygVYOIbTuEOqYy_Nw",
         "title": "Scene Template",
         "nodes": [
           {
             "type": "stage_reset",
-            "id": "ljbVZb4UZ9QZ-ferpnAcx"
+            "id": "JQoMiA8VNcmBY83qmuA8Z"
           },
           {
             "type": "background_change",
@@ -4933,11 +4974,11 @@
               "type": "image",
               "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_20/6562.png"
             },
-            "id": "T5j-CTFPGMH-B86Q40ht1"
+            "id": "QBTBdHPIcXbGVtpXb38LQ"
           },
           {
             "type": "stage_reset",
-            "id": "paZg4125nly75POnQYnib"
+            "id": "1l_JoU8zx03ynMku8rLte"
           },
           {
             "type": "screen_effect",
@@ -4948,7 +4989,7 @@
               "duration": 300,
               "direction": "in"
             },
-            "id": "roeeK9xAHb80TV-dUOZhd"
+            "id": "hqVrl9IhVKxOvHVzOElNz"
           },
           {
             "type": "background_change",
@@ -4956,13 +4997,587 @@
               "type": "color",
               "color": "#000000"
             },
-            "id": "KpFB7wnf-RIwki7eVZMWk"
+            "id": "A8S1tY6Y6Lmd5Z-9qv1-i"
           }
         ],
         "meta": {
           "mapPosition": {
             "x": 1400,
-            "y": 2800
+            "y": 3100
+          }
+        }
+      },
+      {
+        "id": "1dCO5LUFAzA6GSoBOUeva",
+        "title": "C1 A8 Níu kéo Vy",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "0D-9aVfE2B8RcOrbkzMiz"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7123.png"
+            },
+            "id": "8WwIR6fsFa8-i2FQ4aIng"
+          },
+          {
+            "type": "narration",
+            "text": "Tối chủ nhật.",
+            "id": "VkgyEgP1u06ZFvTt28Z8L"
+          },
+          {
+            "type": "narration",
+            "text": "Giữa con hẻm vắng, {{nam9}} mở điện thoại lên.",
+            "id": "Y94GOCvSx6zi9X0LsRsEo"
+          },
+          {
+            "type": "narration",
+            "text": "Trên màn hình là bức ảnh mọi người trong công ty đang cùng nhau ăn uống, cười nói rộn ràng.",
+            "id": "MyJkScxayGJVTcTZ55PY6"
+          },
+          {
+            "type": "narration",
+            "text": "Ở giữa khung hình, {{nu9}} cũng đang mỉm cười rất tươi.",
+            "id": "j88xtp0S9VjGlDWSPA_Io"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6909.mp3",
+            "volume": 1,
+            "id": "poErsu77d4pbmuNgnCEOU"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 200,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "wjuFpidGiMKCQPIP_8mvj"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "flash",
+              "color": "#FFFFFF",
+              "duration": 200,
+              "opacity": 0.8,
+              "count": 1
+            },
+            "id": "AKKl_iBkWIKJoCnIF4jl0"
+          },
+          {
+            "type": "character_show",
+            "characterId": "KlhZx2B14dfoUynsZ8YH3",
+            "position": "center",
+            "expressionId": "9FZiaNXf2RBP5sCUGIOv0",
+            "duration": 300,
+            "flipX": false,
+            "id": "Aa6dsR7BqY0YBqIvq8UVG"
+          },
+          {
+            "type": "wait",
+            "id": "I7FmYWfpd3pqu1f3cDw4L",
+            "duration": 500,
+            "fixed": true
+          },
+          {
+            "type": "narration",
+            "id": "DFR6ALiZ_ii-DP1D04Vm9",
+            "text": "Nhìn thấy dòng thông báo mới hiện lên, ánh mắt {{nam9}} chợt chùng xuống."
+          },
+          {
+            "type": "stage_reset",
+            "id": "iT-BeuxJPeB2neSTLWx3e"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "9xM6Bt5bIckHKFCQyvVq1"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "jkVNu1k1aXykWpt5yIDd4"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 3500
+          }
+        }
+      },
+      {
+        "id": "Bf0cMQxqRVbVmcjBwhGaY",
+        "title": "C1 A7 Thông báo tiệc chào mừng",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "tjt38mkOI0osJ4rwJm7gT"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7119.png"
+            },
+            "id": "iH_QBFNBM_y7dE6zl6R_G"
+          },
+          {
+            "type": "narration",
+            "text": "Tối thứ sáu, sau một tuần làm việc vất vả, sếp Thắng gọi mọi người lại rồi thông báo",
+            "id": "UBvpQT85djm67C6bDQ3F8"
+          },
+          {
+            "type": "character_show",
+            "characterId": "sep_thang",
+            "position": "center",
+            "expressionId": "sep_thang_happy",
+            "duration": 300,
+            "flipX": false,
+            "id": "DAxmGXxJa0T-3jaj4d8nZ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "sep_thang",
+            "text": "Tối chủ nhật này cả team mình làm một bữa tiệc nhỏ chào mừng {{nu9}} nhé!",
+            "id": "DihB-GtpmwSJPf39AUptp"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "sep_thang",
+            "duration": 300,
+            "id": "KRRO-kYu59u0z65cqVTSL"
+          },
+          {
+            "type": "character_show",
+            "characterId": "9hyb1aeE3kNqjOcLsfunJ",
+            "position": "far-left",
+            "expressionId": "xNX3ySvT8Eh2z4zX1MaMP",
+            "duration": 100,
+            "flipX": false,
+            "id": "4CwFEnlXk7Bl49cuHBF8e"
+          },
+          {
+            "type": "character_show",
+            "characterId": "gno0vi24FzeM7OhUVnbqn",
+            "position": "center-left",
+            "expressionId": "lnBC3qxlQtpuyhfGkjFVc",
+            "duration": 100,
+            "flipX": false,
+            "id": "uD2l-8wli2Xco2p-ehNR3"
+          },
+          {
+            "type": "character_show",
+            "characterId": "C0YaEpvMqP1nyBmPyH-5E",
+            "position": "center-right",
+            "expressionId": "IgK_4zoy7EPvHulH44WWr",
+            "duration": 100,
+            "flipX": false,
+            "id": "L-we4olxtA44rwDL5m_kw"
+          },
+          {
+            "type": "character_show",
+            "characterId": "7MB6bKwZIZ6TESqlfIgX7",
+            "position": "far-right",
+            "expressionId": "tlxVpnWRm6LpBzQs7jzVp",
+            "duration": 100,
+            "flipX": false,
+            "id": "XLbIOAkf-1TnpdznqjuUZ"
+          },
+          {
+            "type": "narration",
+            "text": "Mọi người đều phấn khởi hưởng ứng. Cả văn phòng trở nên xôn xao, người bàn ăn gì, người chọn địa điểm, bầu không khí rôm rả hẳn lên như thể tiệc đã bắt đầu.",
+            "id": "rsHEYViFo383RiTw0csb4"
+          },
+          {
+            "type": "stage_reset",
+            "id": "BOKeaqf84ZcnA1hj04nXD"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "center",
+            "expressionId": "Kwer_ZPoptdFi7V3xqW9J",
+            "duration": 300,
+            "flipX": false,
+            "id": "xksRASFxA1Dpqsxssby_c"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} cũng cười rất vui, phấn khởi quay sang nhìn {{nam9}} với ánh mắt mong chờ.",
+            "id": "3HNplZdUgR256Tny2j6nr"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7044.png"
+            },
+            "id": "YDGC3_bjCx6raGpZhqXMV"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "duration": 300,
+            "id": "bNBIxozlq5lVMQ-rNRnr4"
+          },
+          {
+            "type": "character_show",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "center",
+            "expressionId": "TGLIdSCL6HKOl9x4TMqGD",
+            "duration": 300,
+            "flipX": false,
+            "id": "X-0EscObnS16v-pACZlM3"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Tối chủ nhật em bận mất rồi.",
+            "id": "nW4FL1TgmGYetWBr7swPT"
+          },
+          {
+            "type": "character_show",
+            "characterId": "SVRylJ9m7761bRXdR0Xdk",
+            "position": "left",
+            "expressionId": "I179JWxJjJVtTySoHGMe8",
+            "duration": 300,
+            "flipX": false,
+            "id": "q5idlhDL6NSx4jri0Ck8I"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "SVRylJ9m7761bRXdR0Xdk",
+            "text": "Ông lại đi chơi với người yêu chứ gì?",
+            "id": "PhE4xMShYlDfE4RB-jSoo"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "SVRylJ9m7761bRXdR0Xdk",
+            "duration": 300,
+            "id": "jHw2ownX0ZHrLpl6JfTzM"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} cúi đầu, thoáng ngập ngừng rồi nói với mọi người:",
+            "id": "l1teGrCJzqiMFdNAy5RA4"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Dạ… đúng rồi, tối đó em có hẹn…",
+            "id": "TGOp-Ak6I-GPOKzjZ15zk"
+          },
+          {
+            "type": "stage_reset",
+            "id": "7YpwpT1QgG8OOug4V9LCU"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "left",
+            "expressionId": "_z-FqqMgA2Gp-w7iUAneX",
+            "duration": 300,
+            "flipX": false,
+            "id": "62XcH0JEyWKUnaPhzibs5"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} nhìn anh một lúc, rồi khẽ mỉm cười — nụ cười rất nhẹ, thoáng cong nơi khóe môi.",
+            "id": "Ce8eQLhuytb7WQv14u7Fz"
+          },
+          {
+            "type": "stage_reset",
+            "id": "mA9-4IrDLyasLqUPL8rGn"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "K63lmRhFJ8DzntiUjsBV8"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "XZiH3rnQIb4NtLrZIHzAJ"
+          },
+          {
+            "type": "goto",
+            "target": "1dCO5LUFAzA6GSoBOUeva",
+            "id": "Cwa7mHOSo-V_CwFPKVD4Q"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 3300
+          }
+        }
+      },
+      {
+        "id": "AEwGJVjbpjZ0WeaHtdZsz",
+        "title": "C1 A6 Tài năng của T2",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "sW5naYfO8OCjzFR3aZa5S"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7117.png"
+            },
+            "id": "-wJP1CnV4NY7v9ZkWbCoe"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} ngồi vào bàn làm việc, đôi tay thoăn thoắt di chuyển với sự tập trung cao độ, từng thao tác dứt khoát và chính xác như đã được luyện tập từ rất lâu.",
+            "id": "peR82pAI3HvDgDIZ_Hw48"
+          },
+          {
+            "type": "narration",
+            "text": "Trên màn hình, những khối hình thô sơ ban đầu dần được cô hoàn thiện - từ block dáng, sculpt khối cho đến tối ưu topology và trau chuốt các chi tiết nhỏ.",
+            "id": "huqxzvhje2i4vJK3mK9so"
+          },
+          {
+            "type": "narration",
+            "text": "Từng đường nét của nhân vật 3D hiện lên rõ ràng hơn qua từng thao tác, tạo thành một tổng thể hoàn chỉnh, vừa chắc khối vừa có hồn.",
+            "id": "gEvWwplMbX0eu_JDuwA6C"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} còn dùng AI để mở rộng ý tưởng, thử nghiệm nhiều hướng tạo hình khác nhau. Sau đó, cô chọn lọc những gì phù hợp nhất, tinh chỉnh lại bằng kỹ năng của mình để giữ được sự nhất quán và chất lượng cao cho toàn bộ sản phẩm.",
+            "id": "t-vH7iGVfx8cZ9Zv2Rhy-"
+          },
+          {
+            "type": "narration",
+            "text": "Dần dần, màn hình của {{nu9}} bắt đầu thu hút sự chú ý của những artist xung quanh. Một vài người ghé lại quan sát, rồi thêm vài người nữa nhập vào, tạo thành một nhóm nhỏ đứng phía sau.",
+            "id": "l4ON463hbY-BDlCwrhbJY"
+          },
+          {
+            "type": "character_show",
+            "characterId": "_LsndQZ8MpxAeBdeDs3rv",
+            "position": "right",
+            "expressionId": "cnkncZ_SaGjh10JVqfwqP",
+            "duration": 300,
+            "flipX": false,
+            "id": "y5oITxrpcSbsz5oziDfUy"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "_LsndQZ8MpxAeBdeDs3rv",
+            "text": "Trời, em mới tốt nghiệp mà tay nghề đã tới mức này rồi sao?",
+            "id": "4UC1J2Wdadv28JGblqreB"
+          },
+          {
+            "type": "character_show",
+            "characterId": "nSHBTtIpCBAs2DxuTbSFw",
+            "position": "left",
+            "expressionId": "aCEGrNz3kcfauM5CaSR6T",
+            "duration": 300,
+            "flipX": false,
+            "id": "ROS3piIOO553j00R9rb-W"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "nSHBTtIpCBAs2DxuTbSFw",
+            "text": "Cái form mặt này clean thật, nhìn rất có hồn.",
+            "id": "DDYqriDsWtVWK2MEWEw9D"
+          },
+          {
+            "type": "character_show",
+            "characterId": "gno0vi24FzeM7OhUVnbqn",
+            "position": "center",
+            "expressionId": "lnBC3qxlQtpuyhfGkjFVc",
+            "duration": 300,
+            "flipX": false,
+            "id": "u12S5M_2Z7S-hsuIOM7Jp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gno0vi24FzeM7OhUVnbqn",
+            "text": "Lighting set kiểu này nhìn cinematic ghê…",
+            "id": "-ptRuFyz53Og0pwzOfhi3"
+          },
+          {
+            "type": "narration",
+            "text": "Những lời khen xen lẫn sự ngạc nhiên vang lên liên tục. Có người nghiêng đầu quan sát kỹ hơn, có người tranh thủ ghi nhớ lại cách cô xử lý chi tiết.",
+            "id": "6JKhzjAh2vibXZPl-cRLq"
+          },
+          {
+            "type": "stage_reset",
+            "id": "o0AztR_jdbxty6vYjV2Kb"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "center",
+            "expressionId": "07bJwjyDp4fskxO4kQCq6",
+            "duration": 300,
+            "flipX": false,
+            "id": "f1u91SOOG6jvpAsRNF7Fy"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} ngượng ngùng cảm ơn trước những lời khen có cánh của đồng nghiệp.",
+            "id": "1COC9siWLk-LJNdGtgheb"
+          },
+          {
+            "type": "narration",
+            "text": "Cô khẽ mỉm cười, rồi ánh mắt chợt lắng lại, xa xăm trong thoáng chốc như đang chạm vào những ký ức cũ.",
+            "id": "u-PPhZIlGTuLPKYGDYC-s"
+          },
+          {
+            "type": "stage_reset",
+            "id": "pbmbMbMzgjKFhiwtR3bD9"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 7,
+              "duration": 400,
+              "direction": "in"
+            },
+            "id": "twtEJpSxIu37jilAKgdve"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7115.png"
+            },
+            "id": "FdHnCAYCBLSinaB1E2z6M"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 7,
+              "duration": 400,
+              "direction": "out"
+            },
+            "id": "Fo9mBTq-BPhtdcY2QYTed"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "** Trong suốt 8 năm hôn mê sâu, ý thức của tôi tách rời khỏi cơ thể, lang thang khắp nơi và lặng lẽ quan sát thế giới rộng lớn. **",
+            "id": "3jMvuWWVVB_EwcGFkyBvx"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "** Mọi điều tôi chứng kiến đều được khắc sâu vào tiềm thức, đặc biệt là hội họa và các kỹ thuật dựng hình - thứ đã dần trở thành niềm say mê của tôi trong suốt những tháng ngày vô định ấy. **",
+            "id": "qz1FmPXNOr2FSWPtWkeQb"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "** Vì vậy, khi tỉnh lại, chỉ sau vài ngày luyện tập thì tôi đã nhanh chóng làm chủ các công cụ, thao tác thuần thục như thể đã quen từ rất lâu. **",
+            "id": "IRzIJshw13WTWc3xk8yrr"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 7,
+              "duration": 400,
+              "direction": "in"
+            },
+            "id": "KUWZ49friFstSi2mFcMYU"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7118.png"
+            },
+            "id": "t1-u26zRjihZnNJtl9lAd"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 7,
+              "duration": 400,
+              "direction": "out"
+            },
+            "id": "BPXe_zwRaGNJENHCMU26L"
+          },
+          {
+            "type": "narration",
+            "text": "Trong khi đó, {{nam9}} vẫn đang miệt mài viết code.",
+            "id": "ShcOa7hq8uTdLnOb3FtpX"
+          },
+          {
+            "type": "narration",
+            "text": "Thỉnh thoảng, anh đưa mắt nhìn {{nu9}} đang được mọi người vây quanh.",
+            "id": "drG_QSwBucL_EqP1DIQY_"
+          },
+          {
+            "type": "narration",
+            "text": "Dường như trong đầu anh đang thầm suy tư điều gì đó...",
+            "id": "QZYnmQ_NLT0svFNQ3NYEG"
+          },
+          {
+            "type": "stage_reset",
+            "id": "tm1Zrzm8p1Ck9HazAl3NJ"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "XN8enUFJw3nckPwzIc_P-"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "v6fffF7abAN0GSxLkKv5Y"
+          },
+          {
+            "type": "goto",
+            "target": "Bf0cMQxqRVbVmcjBwhGaY",
+            "id": "SGsxJ88gGk_MO1etzrzl1"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 3100
           }
         }
       }
