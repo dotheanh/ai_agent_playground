@@ -1,0 +1,29 @@
+Viết lại đoạn truyện từ dàn ý tôi cung cấp theo phong cách sau:
+
+Văn phong tự nhiên, gọn gàng, không dài dòng, không giải thích thừa.
+Triển khai đủ ý, mạch truyện trôi chảy, đọc như light novel / kịch bản anime.
+Ưu tiên miêu tả hành động, biểu cảm, không nói thẳng suy nghĩ hay ẩn ý.
+Những chi tiết cảm xúc (như ánh mắt, nụ cười, ngập ngừng…) phải tinh tế, gợi chứ không nói toẹt.
+Không dùng các câu kiểu giải thích như: “như thể đang nghĩ rằng…”, “biết rõ rằng…”.
+Đối thoại phải tự nhiên, đúng ngữ cảnh công sở, không gượng.
+Giữ nhịp câu ngắn – vừa, dễ đọc.
+Có thể dùng xuống dòng để tạo nhịp (giống kịch bản).
+🎬 Cách trình bày:
+Có thể dùng:
+chuyển cảnh (ví dụ: “— chuyển cảnh —” hoặc “Flashback:”)
+ngắt đoạn bằng *** nếu cần
+Không thêm bình luận ngoài truyện.
+Không tự ý thêm tình tiết ngoài dàn ý (trừ khi để làm mượt).
+❗ Quy tắc quan trọng:
+“Show, don’t tell” (chỉ thể hiện, không giải thích).
+Miêu tả kiểu:
+❌ Sai: “cô biết anh đang nói dối”
+✅ Đúng: “cô khẽ mỉm cười — nụ cười rất nhẹ, thoáng cong nơi khóe môi”
+Giữ đúng tone nhân vật (lạnh lùng, ngập ngừng, tinh tế…).
+📌 Input:
+
+Tôi sẽ gửi dàn ý dạng ngắn, gạch đầu dòng hoặc đoạn thô.
+
+📌 Output:
+
+Một đoạn truyện hoàn chỉnh, đúng phong cách trên.

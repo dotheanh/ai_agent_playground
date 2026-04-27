@@ -433,82 +433,145 @@ Thế nhưng, {{nam9}} chỉ khẽ liếc qua một cái rồi lại tiếp tụ
 
 --------------------------------------- C1 A6
 
-Ngày mới
-Nữ chính làm việc rất tốt, dựng hình 3D rất đẹp, lại còn thành thục sử dụng AI để gen art
-vẽ đẹp, hội chị em artist vây quanh trầm trồ khen ngợi
 
-nữ chính mỉm cười cám ơn
+*** chèn ảnh minh họa nữ chính ngồi vẽ
 
-flashback lại cảnh nữ chính nhớ lại rằng trong suốt 8 năm mình bị hôn mê sâu, trong trạng thái linh hồn thì bản thân đã từng đi rất nhiều nơi để học hỏi nhiều thứ,
-kỹ thuật vẽ cũng là một trong những thứ cô rất thích học.
-sau khi bình phục lại thì chỉ sau vài ngày luyện tập là đã có thể thành thục sử dụng các công cụ để vẽ
 
-nam9 vẫn một mài ngồi code, đưa mắt lên nhìn mọi ng vây quanh nu9, trong đầu thầm nghĩ điều gì đó
+Một ngày mới bắt đầu, {{nu9}} ngồi vào bàn làm việc, đôi tay thoăn thoắt di chuyển với sự tập trung cao độ, từng thao tác dứt khoát và chính xác như đã được luyện tập từ rất lâu.
+
+Trên màn hình, những khối hình thô sơ ban đầu dần được cô hoàn thiện - từ block dáng, sculpt khối cho đến tối ưu topology và trau chuốt các chi tiết nhỏ.
+
+Từng đường nét của nhân vật 3D hiện lên rõ ràng hơn qua từng thao tác, tạo thành một tổng thể hoàn chỉnh, vừa chắc khối vừa có hồn.
+
+{{nu9}} còn dùng AI để mở rộng ý tưởng, thử nghiệm nhiều hướng tạo hình khác nhau. Sau đó, cô chọn lọc những gì phù hợp nhất, tinh chỉnh lại bằng kỹ năng của mình để giữ được sự nhất quán và chất lượng cao cho toàn bộ sản phẩm.
+
+Dần dần, màn hình của {{nu9}} bắt đầu thu hút sự chú ý của những artist xung quanh. Một vài người ghé lại quan sát, rồi thêm vài người nữa nhập vào, tạo thành một nhóm nhỏ đứng phía sau.
+
+"Trời, em mới tốt nghiệp mà tay nghề đã tới mức này rồi sao?" - một artist già dặn kinh nghiệm thốt lên.
+
+"Cái form mặt này clean thật, nhìn rất có hồn." - một artist khác nhận xét.
+
+"Lighting set kiểu này nhìn cinematic ghê…"
+
+Những lời khen xen lẫn sự ngạc nhiên vang lên liên tục. Có người nghiêng đầu quan sát kỹ hơn, có người tranh thủ ghi nhớ lại cách cô xử lý chi tiết.
+
+{{nu9}} ngượng ngùng cảm ơn trước những lời khen có cánh của đồng nghiệp. Cô khẽ mỉm cười, rồi ánh mắt chợt lắng lại, xa xăm trong thoáng chốc như đang chạm vào những ký ức cũ.
+
+
+***
+
+!!! ảnh minh họa: https://chatgpt.com/c/69eedbd4-1e90-8321-a64f-f2cee0958af4
+
+Flashback:
+
+Trong suốt 8 năm hôn mê sâu, ý thức của {{nu9}} tách rời khỏi cơ thể, lang thang khắp nơi và lặng lẽ quan sát thế giới rộng lớn.
+
+Mọi điều cô chứng kiến đều được khắc sâu vào tiềm thức, đặc biệt là kỹ thuật vẽ - thứ đã dần trở thành niềm say mê của {{nu9}} trong suốt những tháng ngày vô định ấy.
+
+Vì vậy, khi tỉnh lại, chỉ sau vài ngày luyện tập thì {{nu9}} đã nhanh chóng làm chủ các công cụ, thao tác thuần thục như thể đã quen từ rất lâu.
+
+***
+
+*** chèn ảnh minh họa
+
+Trong khi đó, {{nam9}} vẫn đang miệt mài viết code. Thỉnh thoảng, anh đưa mắt nhìn {{nu9}} đang được mọi người vây quanh. Dường như trong đầu anh đang thầm suy tư điều gì đó...
 
 --------------------------------------- mời đi ăn tiệc chào mừng
 
-Đến tối t6, mọi người rủ nhau rằng tối chủ nhật cả công ty sẽ ngồi lại ăn một bữa tiệc để chào mừng nu9.
-Ai cũng hớn hở đồng ý
-nu9 cũng tỏ ra rất hào hứng
+Tối thứ sáu, sau một tuần làm việc vất vả, sếp Thắng gọi mọi người lại rồi thông báo:
+“Tối chủ nhật này cả công ty mình làm một bữa tiệc nhỏ chào mừng {{nu9}} nhé!”
 
-thế nhưng nam9 lại dứt khoát từ chối, lạnh lùng khẳng định rằng tối chủ nhật này mình bận rồi
+— ẩn hình sếp Thắng, show hình đồng nghiệp nam nữ lên như đang nói chuyện —
 
-Một nam đồng nghiệp khác lại trêu: "Cậu lại đi chơi với cô ngyeu của cậu chứ gì?"
+Tất cả mọi người đều phấn khởi hưởng ứng. Cả văn phòng trở nên xôn xao, người bàn ăn gì, người chọn địa điểm, bầu không khí rôm rả hẳn lên như thể tiệc đã bắt đầu.
 
-Nam chính cúi đầu xuống, thoáng ngập ngừng
-"Dạ... đúng rồi ạ, tối chủ nhật em có hẹn..."
+— ẩn hình mọi người, show hình nữ chính —
 
-Nữ chính ở ngay đó cũng nghe được, nhìn nam chính rồi khẽ nở một nụ cười
-(nụ cười kiểu biết nam9 chưa có ngyeu mà nói dối)
+{{nu9}} cũng cười rất vui, phấn khởi quay sang nhìn {{nam9}} với ánh mắt mong chờ.
+
+— chuyển cảnh: {{nam9}} ngồi một mình ở bàn làm việc (dùng ảnh cũ) —
+
+"Tối chủ nhật em bận mất rồi." – {{nam9}} trả lời.
+
+Một nam đồng nghiệp trêu ngay:
+"Cậu lại đi chơi với người yêu chứ gì?"
+
+{{nam9}} cúi đầu, thoáng ngập ngừng rồi đáp:
+"Dạ… đúng rồi, tối đó em có hẹn…"
+
+{{nu9}} đứng gần đó cũng nghe thấy. Cô nhìn anh một lúc, rồi khẽ mỉm cười — nụ cười rất nhẹ, thoáng cong nơi khóe môi.
 
 
 --------------------------------------- cảnh nam9 níu kéo nyc
 
-Tối chủ nhật
+Tối chủ nhật.
 
-Nam9 mở điện thoại lên, thấy hình mọi ng chụp ảnh ăn uống vui vẻ, trong đó có cả nu9
+— show hình mọi người ăn uống vui vẻ trên điện thoại —
 
-thông báo tin nhắn mới hiện lên từ một cô gái tên Vy:
-"Anh về đi ạ, hôm nay em mệt"
+{{nam9}} mở điện thoại lên. Trên màn hình là bức ảnh mọi người trong công ty đang tụ tập ăn uống, cười nói rộn ràng. Ở giữa khung hình, {{nu9}} cũng đang mỉm cười rất tươi.
 
-Đôi mắt nam chính buồn bã
+Một thông báo tin nhắn mới hiện lên.
 
-Show full đoạn chat trên điện thoại:
+** cho hiện cái thông báo tin nhắn như một character đè lên background
 
-"Thứ năm 19h: Anh đang chờ ở dưới nhà em nè, xuống gặp anh chút nhé
-Thứ năm 20h30: Anh xin lỗi em nhiều lắm
-Thứ năm 22h45: Em ngủ ngon nhé
-Thứ sáu 18h15: Hôm nay em có gì vui ko?
-Thứ bảy 7h: Chào buổi sáng em nhé
-Hôm nay 18h: Anh tới nhà em rồi nè, đi ăn Sashimi với anh ko?"
+Vy:
+"Anh về đi ạ, hôm nay em mệt."
 
-Vy trả lời tin nhắn lúc 19h30: "Anh về đi ạ, hôm nay em mệt"
+Ánh mắt {{nam9}} buồn bã. Anh mở đoạn chat với Vy lên.
 
-Nam9 đang soạn tin nhắn mới: "Anh xin lỗi..."
 
-Đoạn này force dừng mấy giây cho user đọc tn
+— show hình đoạn chat —
 
-Zoom out cảnh ban đêm, nam9 đang đứng tựa lưng lên chiếc xe máy, đối diện một căn nhà, ngước nhìn lên tầng 2 nơi một căn phòng đang sáng đèn
+Thứ năm 19h
+Anh đang chờ ở dưới nhà em nè, xuống gặp anh chút nhé
+Thứ năm 20h30
+Anh xin lỗi em nhiều lắm
+Thứ năm 22h45
+Em ngủ ngon nhé
+Thứ sáu 18h15
+Hôm nay em có gì vui ko?
+Thứ bảy 7h
+Chào buổi sáng em nhé
+Hôm nay 18h
+Anh tới nhà em rồi nè, đi ăn Sashimi với anh ko?
 
-Nam9 hoài niệm trước đây anh và Vy đã từng luôn luôn dành buổi tối chủ nhật để hẹn hò với nhau, vậy mà giờ đây tất cả chỉ còn là dĩ vãng. nam9 tỏ ra đau khổ
+Hôm nay 19h30 – Vy
+Anh về đi ạ, hôm nay em mệt.
 
-khung hình dừng lại một lúc
+Tin nhắn đang soạn dở, chưa được gửi đi: "Anh xin lỗi..."
 
-chuyển sang khung hình tương tự, nhưng đèn phòng đã tắt
+**** Đoạn này force dừng mấy giây cho user đọc tn
 
-Điện thoại lại báo có tin nhắn mới
+— Zoom out cảnh ban đêm —
 
+{{nam9}} đứng tựa người lên chiếc xe máy, lặng im trước một căn nhà. Anh ngước nhìn lên tầng hai, nơi một ô cửa sổ vẫn đang sáng đèn...
+
+Trong lòng {{nam9}}, những tối chủ nhật từng quen thuộc dần hiện lên. Anh đợi dưới hiên nhà, cô bước xuống, cả hai cùng đi ăn uống, dạo phố, cười nói suốt cả buổi tối.
+
+Rồi tất cả dần tan vào dĩ vãng. Chỉ còn lại một khoảng lặng không thể lấp đầy.
+
+**** khung hình dừng lại một lúc
+**** chuyển sang khung hình tương tự, nhưng đèn phòng đã tắt
+
+Điện thoại {{nam9}} lại báo có tin nhắn mới. ** rung rung các kiểu
+
+**** chèn hình tin nhắn *phụ đề nội dung tin nhắn
+Vy:
 "Hơn 10 giờ tối rồi, anh về nghỉ ngơi đi ạ. Tụi mình đã chia tay được nửa năm rồi, anh đừng đến chờ em mãi như vậy nữa. Em sẽ không gặp lại anh nữa đâu. Em không bao giờ tha thứ được cho anh, sau tất cả những gì anh đã làm với em. Lúc anh lừa dối em, anh có nghĩ tới hậu quả ngày hôm nay không?"
 
-"Anh xin lỗi... Anh biết mình đã sai rồi, trong lòng anh bây giờ hối hận lắm... Anh vẫn còn thương em nhiều lắm..."
+**** chèn hình tin nhắn *phụ đề nội dung tin nhắn
+{{nam9}}:
+"Anh xin lỗi… Anh biết mình đã sai rồi, trong lòng anh bây giờ hối hận lắm… Anh vẫn còn thương em nhiều lắm…"
+Tin nhắn đang soạn dở, chưa được gửi đi: "Em tha thứ cho anh được không?"
 
-Nam9 typing tiếp:
-"Em tha thứ cho anh được không?"
+**** chèn hình xóa tin nhắn đang soạn *phụ đề xóa tin nhắn
+Có lẽ, chính {{nam9}} cũng chưa từng tha thứ cho bản thân mình.
 
-Nhưng rồi anh lại xóa đi dòng tin nhắn đó. Bởi lẽ, chính anh cũng chưa từng tha thứ cho bản thân mình.
+Một thông báo khác hiện lên.
 
-Điện thoại nam9 nhận được lời mời kết bạn mới từ nu9
-nam9 dứt khoát bấm từ chối
+{{nu9}} đã gửi lời mời kết bạn.
+
+Ngón tay dừng lại một nhịp… rồi dứt khoát bấm từ chối.
 
 [sau này có thể thêm option rẽ nhánh]
 
@@ -568,12 +631,14 @@ nam9 vẫn lạnh lùng
 
 chạy bộ xong, nam9 quay lại bàn làm việc thì thấy 1 hộp cơm kèm với giấy ghi chú
 nu9 đã tự tay nấu bữa sáng cho nam9
-
-lần này, {{nam9}} lại nhận lấy và ăn ngon lành
 khẽ rơi lệ xúc động
 nam9 nghĩ thầm trong đầu, đây là lần đầu tiên trong đời có một cô gái chủ động nấu ăn cho mình
-
+lần này, {{nam9}} lại nhận lấy và ăn ngon lành
+đúng món cơm tấm sườn trứng chàng trai thích
 nu9 ngồi ở bàn làm việc đối diện, thấy nam9 ăn thì khẽ mỉm cười hạnh phúc
+Ảnh minh họa cô gái thấy chàng trai ăn cơm tấm 1m
+
+
 
 ---------------------------------------
 
@@ -655,13 +720,18 @@ Cảnh đấu trường có cảnh báo trước, lựa chọn xem hay k xem
 
 Ng đánh ở đấu trường là A2
 cảnh đấu trường của A2 bị leak
-
 Sau đó trên trang web lộ ra video nói về sàn đấu ngầm của giới lãnh đạo các nước
-Đấu trường là do hoàng đế Đô tổ chức
-Để thỏa mãn sở thích
+
+Cảnh đấu trường
+Trước khi thi đấu phải tuyên bố mình k phải ng và chịu mọi hậu quả kể cả cái chết
+4 nguyên thủ 4 nước ngồi 4 hướng của sàn đấu hình tròn
+A2 chiến thắng vô địch
+Nhìn lên ghế vip sau cửa kính bên trên như nhìn ai đó, ánh mắt kiêu ngạo như muốn chứng minh bản thân
+
 Võ sĩ đại diện lên chiến đấu để giành quyền lực cho quốc gia
 Đối thủ là những sản phẩm thí nghiệm đột biến
 A2 đánh bại cả Tây Tân Quốc và Bắc Thiên Quốc giành quyền lực cho Nam Long Quốc
+A2 chấp ngta ra đòn trước, đánh trả gạ gục (nhưng ko giết hay tổn thương quá mạnh, chỉ gây bất tỉnh thôi)
 Yêu cầu Tây Tân Quốc và Bắc Thiên Quốc phải bồi thường chiến phí cho những cuộc chiến tranh xâm lược?? (hay gì đó)
 
 ================================================================================
@@ -808,6 +878,7 @@ A* vừa đánh bại hoàng đế lập tức thay đổi lá cờ
 cờ cũ 6 sao (giống cờ Do thái 2 hình tam giác trắng đen ghép lại)
 cờ mới là biểu tượng A
 A* lập tức ban hành điều luật cấm giết người
+Thể hiện thiện chí muốn bắt tay vs loài ng
 ko phải vì đạo đức, mà đơn giản là vì A* thích cảm giác cai trị hơn là tàn sát
 ông vốn dĩ là ng rất thích ăn thịt ng cũng thấy khó chịu
 ông nội lấy lý  Do A* còn quá nhỏ đó để TẠM HOÃN truyền ngôi và tự xưng HOÀNG ĐẾ LÂM THỜI.
@@ -934,14 +1005,29 @@ Bình phẩm là tim hơi ngấy
 Lần sau bầu cử nhớ tìm ông tổng thống nào khỏe mạnh một chút
 Nhà khoa học đại tài
 Bị khoét 1 phần não để ăn
-Những ng mẫu, idol nổi tiếng thon thả
-Cứ béo lên một chút là bị hút mỡ ra
 Bại liệt ngồi xe lăn
-
-Lóc từng miếng thịt sống
-Đắp thịt nhân tạo vào để ng đó sống tiếp
 Vừa thưởng thức vừa thể hiện sự thống trị
+Ăn xong may lại cho họ sống tiếp
 Đối với họ, việc "món ăn" đó phải chịu đựng nỗi đau đớn và nhục nhã đó mà tiếp tục sống, tiếp tục cúi đầu trước họ, và tiếp tục được đứng trên đỉnh của nhân loại, mới chính là nghệ thuật
+
+Kể từ khi trở thành hoàng đế, tôi đã cấm giết người
+Nhưng điều đó vẫn ko thể ngăn được ông ta tìm kiếm thú vui khác để thỏa mãn mình
+Ông ta muốn sưu tập các bộ phận của giới tinh hoa rồi để cho họ sống tiếp với nỗi nhục nhã khi đã mất đi niềm kiêu hãnh
+
+Bộ não của ng thông minh nhất
+Mắt của ng sáng suốt nhất (hint về ông Sơn - cha của T2)
+Tim của ng cứng rắn nhất
+Bộ xương của người mạnh nhất
+
+Chuyển cảnh về lúc A2 là ng vô địch đấu trường
+A2 nhìn theo mấy ng bị đánh bại, thương tật đầy mình
+Nghĩ trong lòng, ít nhất thì họ cũng được sống tiếp
+
+Rồi A2 nhìn lên ghế vip trên đầu
+Ông nội chính là ng đứng trên khán đài vip nhìn xuống
+Sau đó A2 hỏi ông
+Thế lần này ông có định lóc xương cháu k?
+
 
 
 Ng cảnh sát bàng hoàng, cố nuốt hết thông tin. rồi hỏi, tại sao anh lại dám thừa nhận những sự thật này với tôi, dù gì tôi cũng là một cảnh sát kia mà
@@ -1153,7 +1239,7 @@ nay A1 đã chết, trong tay ông đã có toàn quyền lãnh đạo, lại đ
                               Thực tế tàn khốc
 ================================================================================
 Hoàng đế lâm thời khống chế tất cả
-Hiện tại luật cấm ăn thịt ng trong hiến pháp của A1 còn hiệu lực
+Hiện tại luật cấm giết ng trong hiến pháp của A1 còn hiệu lực
 Chờ đủ 7 ngày kể từ khi A1 chết để chính thức trở thành hoàng đế
 Giết thịt
 

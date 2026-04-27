@@ -62,9 +62,8 @@
         "fontSize": 16,
         "fontStyle": "italic",
         "color": "#ffffff",
-        "bg": "#000000",
-        "bgGradient": "#2b2b2b",
-        "border": "rgba(0, 0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0.6)",
+        "border": "#000000",
         "fontFamily": "Lora, serif"
       },
       "choices": {
@@ -1977,7 +1976,7 @@
           {
             "type": "character_show",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
-            "position": "far-left",
+            "position": "left",
             "expressionId": "neutral",
             "transition": {
               "type": "fade",
@@ -2182,6 +2181,10 @@
             "type": "narration",
             "text": "Viên cảnh sát nhíu mày, gương mặt đầy vẻ suy tư và hoài nghi về những lời {{nam9}} vừa nói. Anh im lặng một lúc lâu rồi đứng dậy, ra hiệu kết thúc buổi thẩm vấn.",
             "id": "_RrRfpNz7CUvyqoi5UA3E"
+          },
+          {
+            "type": "stage_reset",
+            "id": "AZD_RCYXh764ztuR3zYkP"
           },
           {
             "type": "conditional",
@@ -2398,6 +2401,10 @@
             "id": "AF_L6jrxLLaTPjVioPdB0"
           },
           {
+            "type": "stage_reset",
+            "id": "KBXGJXWa8vBUa_6lt8Wwk"
+          },
+          {
             "type": "conditional",
             "condition": {
               "variable": "an_statement",
@@ -2423,10 +2430,6 @@
           {
             "type": "stage_reset",
             "id": "lXL1ijefNKB-qwrpNcKeF"
-          },
-          {
-            "type": "stage_reset",
-            "id": "m1NGtyQp3Ogr0nQh5aa-W"
           },
           {
             "type": "background_change",
@@ -2560,14 +2563,6 @@
         "id": "VRAXy20ysIQLRIbzULZx1",
         "title": "C0 A5 Báo cáo tại đồn công an Final",
         "nodes": [
-          {
-            "type": "stage_reset",
-            "id": "kwaYUs8DF8SkJWp_D1z1M"
-          },
-          {
-            "type": "stage_reset",
-            "id": "_MJB_BW0VuskheVc2Jo1l"
-          },
           {
             "type": "background_change",
             "visual": {
@@ -2723,6 +2718,29 @@
             "type": "narration",
             "text": "Sự im lặng đáng sợ bao trùm lấy trụ sở công an. Anh cảnh sát trẻ bàng hoàng nhìn vị Thủ trưởng của mình, người vốn nổi tiếng là chính trực, nay lại phải ra một chỉ thị khó hiểu như vậy. Thân thế của {{nam9}}... xem ra không hề bình thường.",
             "id": "AwS4tGxa-lDexZnVxYpjQ"
+          },
+          {
+            "type": "stage_reset",
+            "id": "EgcliIdlkiS0ttKpcBp7s"
+          },
+          {
+            "type": "screen_effect",
+            "id": "z-MXwx6Mv3a4a2Z5JWhdz",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 500,
+              "direction": "in"
+            }
+          },
+          {
+            "type": "background_change",
+            "id": "WOeCX-76SEfQNLQcFczYa",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            }
           },
           {
             "type": "goto",
