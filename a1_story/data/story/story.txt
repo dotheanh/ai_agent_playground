@@ -740,7 +740,7 @@ Trên tay {{nam9}}, tờ giấy vẫn còn vương mùi chì mới. Bức vẽ a
                               C2 A2 Tổng quan Thế giới
 ================================================================================
 
-[CĂN CỨ QUÂN SỰ LONG ĐẢO - NĂM 2000]
+[CĂN CỨ QUÂN SỰ LONG ĐẢO - NĂM 2002]
 
 ** Bối cảnh ở căn cứ quân sự Long Đảo, bên dưới đáy biển sâu.
 
@@ -842,65 +842,56 @@ Cô vội vàng cầm bút, phác thảo lại hình ảnh của {{nam9}} — ng
 
 "Vậy... nghĩa là anh ta có thật."
 
-==================
-thấp thoáng bóng hình một ng mặc vest cực kỳ cao lớn, mặt ko lọt vào khung hình (A2)
-ở hàng ghế đầu là thủ tướng của Nam Long Quốc ở chính giữa, bên cạnh có cha của cô, ngoài rìa bên phải là bóng hình cao lớn thấp thoáng trong bóng tối
-
-Trong phòng họp hôm đó có cả A2 (ngồi trong bóng tối, k rõ mặt, chỉ có tên đại biểu trên bàn và ánh mắt đáng sợ trong bóng tối)
-A2 cất tiếng, T2 nhìn thấy và sững người, bối rối hoang mang (kiểu bất ngờ vì nhìn quá giống A1, nhưng trong lòng cũng biết trước đó là bản sao của A1 do bố cô từng kể lại r)
+================================================================================
+                            C2 A5 Họp Quốc hội
+================================================================================
 
 
+********** insert ảnh nền phòng họp
 
-### **[Phòng họp kín – Quốc hội]**
+[QUỐC HỘI - PHIÊN HỌP KÍN BẤT THƯỜNG - NĂM 2026]
 
-Căn phòng họp nằm sâu bên trong khu nghị viện trung ương, được cách ly hoàn toàn với bên ngoài.
+Căn phòng họp nằm sâu trong khu nghị viện trung ương, hoàn toàn cách ly với bên ngoài. Không cửa sổ, không tín hiệu, không thiết bị cá nhân.
 
-Không cửa sổ.
-Không tín hiệu.
-Không thiết bị cá nhân.
+Đó là một hội trường kín quy mô lớn, bố trí theo vòng cung hướng dần về sân khấu trung tâm — nơi mọi ánh nhìn hội tụ.
 
-Tường phủ vật liệu hấp thụ sóng, trần thấp với hệ thống đèn vàng dịu được thiết kế để giảm thiểu phản xạ ánh sáng. Không gian vừa kín, vừa nặng — tạo cảm giác như mọi âm thanh đều bị giữ lại bên trong.
+Ánh sáng vàng dịu được dồn xuống theo từng lớp, phủ kín không gian trong một sắc tối ấm, khiến toàn bộ căn phòng trở nên trầm lắng, nghiêm trang và tách biệt khỏi thế giới bên ngoài.
 
-Ở trung tâm là bàn họp hình bầu dục cỡ lớn, mặt gỗ đen bóng, phản chiếu mờ nhạt ánh đèn phía trên. Mỗi vị trí đều có bảng tên, micro riêng và màn hình cá nhân kết nối trực tiếp với hệ thống nội bộ.
+Đây là nơi dành cho những người đứng trên đỉnh quyền lực, nắm giữ vận mệnh của cả Nam Long Quốc.
 
-Đây là nơi chỉ dành cho những người đứng ở đỉnh cao quyền lực.
+Ở hàng ghế đầu tiên, ngài Thủ tướng ngồi ở vị trí trung tâm. Bên cạnh ông là Ủy viên Sơn - bố của {{nu9}}.
 
-—
-
-Ngài Thủ tướng ngồi ở vị trí trung tâm.
-
-Bên phải là ông Sơn.
-
-Hai bên còn lại là các Ủy viên Bộ Chính trị, bộ trưởng quốc phòng, an ninh, khoa học — những người nắm giữ vận mệnh của cả quốc gia.
-
-—
-
-Ở **hàng ghế thứ hai**, phía sau dãy bàn chính…
-
-{{nu9}} đứng dậy.
-
-Không phải vì lo lắng.
-
-Mà vì đã đến lượt mình.
-
-—
+Ở hàng ghế thứ hai, phía sau dãy bàn chính. {{nu9}} đứng dậy.
 
 Màn hình lớn phía trước bật sáng.
 
 Hồ sơ cá nhân của cô hiện lên, rõ ràng, ngắn gọn:
 
-* **Họ tên:** {{nu9}}
-* **Ngày sinh:** 1/1/2000
-* **Nguyên quán:** Thủ Đô
-* **Quốc tịch:** Việt Nam
-* **Trình độ học vấn:**
+********** insert ảnh profile
 
-  * Hoàn thành chương trình phổ thông năm 10 tuổi
-  * Cử nhân kép: Khoa học dữ liệu & Nghệ thuật số (14 tuổi)
-  * Thạc sĩ Chính sách công & Phân tích chiến lược (16 tuổi)
-  * Chương trình đào tạo cán bộ nguồn chiến lược cấp cao (đặc cách)
+----------------------
 
-—
+Họ tên: ______
+Ngày sinh: 01/01/2000
+Nguyên quán: Thủ Đô
+Quốc tịch: Nam Long Quốc
+
+Trình độ học vấn:
+  * Hoàn thành chương trình phổ thông (năm 10 tuổi, kết quả xuất sắc)
+  * Cử nhân kép: Khoa học dữ liệu & Tâm lý học chính trị (tốt nghiệp năm 14 tuổi, loại xuất sắc)
+  * Thạc sĩ: Chính sách công & Phân tích chiến lược (tốt nghiệp năm 16 tuổi, loại xuất sắc, thuộc nhóm đánh giá cao nhất khóa)
+  * Được đặc cách đưa vào diện quy hoạch và đào tạo cán bộ nguồn chiến lược cấp cao
+
+Đã hoàn thành các chương trình đào tạo chuyên biệt:
+  * Phân tích tình báo chiến lược & mô hình dự báo địa chính trị
+  * Điều hành và kiểm soát khủng hoảng trong điều kiện đặc biệt
+  * Nghiệp vụ an ninh quốc gia & ứng phó xung đột phi đối xứng
+
+Kinh nghiệm nội bộ:
+  * Tham gia nhóm nghiên cứu và mô phỏng chính sách cấp trung ương (vai trò phân tích & xây dựng kịch bản chiến lược)
+
+
+----------------------
 
 Ngài Thủ tướng khẽ gật đầu, giọng trầm và rõ ràng vang lên:
 
@@ -908,41 +899,21 @@ Ngài Thủ tướng khẽ gật đầu, giọng trầm và rõ ràng vang lên:
 
 Ông nhìn về phía {{nu9}}.
 
-"Cá nhân này đã hoàn thành toàn bộ chương trình giáo dục phổ thông từ năm 10 tuổi, sau đó tiếp tục theo học các chương trình đào tạo chuyên sâu về khoa học dữ liệu, nghệ thuật số và phân tích chiến lược ở cấp độ cao nhất."
+"Đồng chí {{nu9}} đã hoàn thành chương trình giáo dục phổ thông ở độ tuổi 10, sau đó tiếp tục theo học các chương trình đào tạo chuyên sâu về khoa học dữ liệu, tâm lý học chính trị và phân tích chiến lược ở cấp độ cao."
+"Đồng thời, đồng chí đã hoàn tất chương trình đào tạo cán bộ nguồn chiến lược ở độ tuổi 16 theo cơ chế đặc cách - một trường hợp chưa từng ghi nhận tiền lệ trong hệ thống."
+"Trước thời điểm xảy ra sự cố cách đây 8 năm, {{nu9}} đã được đưa vào danh sách xem xét bổ nhiệm vào vị trí trong bộ máy điều hành cấp trung ương, với định hướng tham gia công tác phân tích và hoạch định chính sách chiến lược."
+"Trong suốt 8 năm qua, mặc dù cơ thể không duy trì trạng thái hoạt động..."
+"...nhưng các đánh giá chuyên môn cho thấy năng lực nhận thức, phân tích và xử lý thông tin của cá nhân này không những không suy giảm..."
+"...mà còn ghi nhận xu hướng phát triển vượt ngoài mọi chuẩn đánh giá hiện hành."
+"Với những yếu tố trên, Bộ Chính trị đã thống nhất cho phép đồng chí {{nu9}} tiếp cận hồ sơ tối mật cấp S và tham gia phiên họp hôm nay, với mật danh: T2."
 
-Một vị Ủy viên lật tài liệu trước mặt, bổ sung:
+Không gian rơi vào im lặng tuyệt đối, chỉ còn lại những ánh nhìn sắc lạnh và đầy tính thẩm định.
 
-"Đồng thời, cô ấy đã hoàn tất chương trình đào tạo cán bộ nguồn chiến lược trước năm 16 tuổi — một trường hợp đặc cách chưa từng có tiền lệ."
+================================================================================
+                            C2 A6 Họp Quốc hội (2)
+================================================================================
 
-Ngài Thủ tướng tiếp lời, giọng điềm tĩnh nhưng mang trọng lượng:
-
-"Trước thời điểm xảy ra sự cố 8 năm trước, {{nu9}} đã nằm trong danh sách đề xuất xem xét bổ nhiệm vào vị trí trong bộ máy điều hành cấp trung ương."
-
-Một khoảng dừng ngắn.
-
-Ánh mắt ông trở nên sâu hơn.
-
-"Trong suốt 8 năm qua, mặc dù cơ thể không hoạt động, nhưng các đánh giá chuyên môn cho thấy năng lực nhận thức, phân tích và xử lý thông tin của cá nhân này không những không suy giảm… mà còn có dấu hiệu phát triển vượt chuẩn thông thường."
-
-Ông kết luận:
-
-"Với những yếu tố trên, Bộ Chính trị đã thống nhất cho phép {{nu9}} tiếp cận hồ sơ tối mật cấp S và tham gia phiên họp hôm nay, với mật danh: T2."
-
-—
-
-Cả căn phòng im lặng.
-
-Không có tiếng xì xào.
-
-Chỉ có những ánh mắt đánh giá.
-
----
-
-### **[Chiếu video A1]**
-
-Màn hình chuyển cảnh.
-
-Đoạn video từ hiện trường buổi sáng.
+Màn hình lớn trình chiếu lại đoạn video từ hiện trường cuộc ẩu đả giữa {{nam9}} và nhóm giang hồ.
 
 {{nam9}} đứng giữa ngã tư.
 
@@ -1190,6 +1161,7 @@ Mà là… nhận diện.
 
 Đoạn cuối họp kín xong A2 đặt tay lên vai T2 động viên
 A2 cao vút khỏi khung hình, ko thấy dc mặt
+T2 nhìn thấy và sững người, bối rối hoang mang (kiểu bất ngờ vì nhìn quá giống A1, nhưng trong lòng cũng biết trước đó là bản sao của A1 do bố cô từng kể lại r)
 
 ================================================================================
                               GIẢI BÓNG CHUYỀN
@@ -1212,8 +1184,9 @@ cảnh đấu trường của A2 bị leak
 Sau đó trên trang web lộ ra video nói về sàn đấu ngầm của giới lãnh đạo các nước
 
 Cảnh đấu trường
-Đấu trường chiến đấu cực đoan vì danh dự quốc gia
 Trước khi thi đấu phải tuyên bố mình k phải ng và chịu mọi hậu quả kể cả cái chết
+Đấu trường chiến đấu cực đoan vì danh dự quốc gia, vì sự thịnh vượng của dân tộc
+Thề chiến đấu vì danh dự quốc gia dân tộc vạn tuế muôn năm
 4 nguyên thủ 4 nước ngồi 4 hướng của sàn đấu hình tròn
 (thủ tướng của Nam Long Quốc ngồi cạnh A2)
 A2 chiến thắng vô địch
@@ -1254,6 +1227,7 @@ Sự thật được công bố:
 Cha của A1 là chiến sĩ tình báo, điệp viên ngầm có công lớn với  cách mạng  chống Tây Tân Quốc
 Ngta nghiên cứu thấy ông có bộ gen đặc biệt
 Khi sinh con quyết định nhân bản
+Ý tưởng nhân bản A1 do chính cha của A1 đề xuất, với mục tiêu xây dựng phát triển Nam Long Quốc
 A1 chính là bản gốc
 6 bản sao nhân bản vô tính
 do một nữ bác sĩ nhân bản vô tính
@@ -1522,6 +1496,7 @@ Chuyển cảnh về lúc A2 là ng vô địch đấu trường
 A2 nhìn theo mấy ng bị đánh bại, thương tật đầy mình
 Nghĩ trong lòng, ít nhất thì họ cũng được sống tiếp
 
+A2 giơ tay lên trời, hô vang châm biếm, ta chiến đấu vì niềm vui của Đế quốc Đô và sở thích của quý ngài Hoàng Đế
 Rồi A2 nhìn lên ghế vip trên đầu
 Ông nội chính là ng đứng trên khán đài vip nhìn xuống
 Sau đó A2 hỏi ông
@@ -1574,11 +1549,14 @@ A1 đi cafe với nyc để nói lời xin lỗi và tạm biệt
 bị nhóm ng áo đen tấn công
 A1 bế nyc chạy tới ngân hàng nhà nước, để cho nyc vào trong an toàn và ở lại chiến đấu với đám khủng bố.
 T2 mang đôi cánh bay tới, rút kiếm chém đạn
+Nữ9 chém mấy tên ám sát xong ms biết chúng là robot
+
 nhưng một kẻ bí ẩn đã bắn tỉa A1 từ xa
 viên đạn xuyên qua đầu
 găm sâu xuống lòng đất hàng chục mét
 T2 bất lực đau khổ nhìn theo kẻ đó, thấy hắn mặc bộ áo đen trùm kín người
 
+A1 bị hạ xong có cảnh trên màn hình buồng lái tàu vũ trụ chiếu lại cảnh đó (hint về cha của A1 đang ở ngoài vũ trụ) - ko có thuyết minh gì thêm
 
 ================================================================================
                               T2 chăm sóc cho A1
@@ -1866,6 +1844,10 @@ Mẹ T2 gặp lại con gái
   đế quốc Đô. Cơ thể A* vẫn còn trong buồng nuôi suốt nhiều năm qua.
 
 Bà kể rằng, mình chính là ng đã nhân bản vô tính A*, bí mật giữ lại bản gốc, và làm nhiệm vụ nuôi dưỡng thân xác A* suốt thời gian qua
+
+Mẹ T2, lúc đó khoảng 35t
+Những bộ gen siêu chiến binh thì ta đã tiếp xúc rất nhiều trong cả chục năm qua rồi
+Nhưng để tiếp cận một bộ gen hoàn hảo như thế này thì có lẽ đây là cơ hội duy nhất trong cuộc đời ta
 
 
   Kể từ sau khi sinh ra T2 và tiêm thuốc khắc chế A1, mẹ T2 cũng mất tích
