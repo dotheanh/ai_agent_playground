@@ -1483,6 +1483,54 @@
               "y": 0
             }
           }
+        },
+        {
+          "id": "LlIK_7HQBbXFH2wHWzip9",
+          "name": "boss",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7155.png"
+          }
+        },
+        {
+          "id": "PuAxEAUH8FkSWdVqH751p",
+          "name": "dragon",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7163.png"
+          }
+        },
+        {
+          "id": "mIcrmQBcsbaWdCq8rwBSD",
+          "name": "long-skeleton",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7162.png"
+          }
+        },
+        {
+          "id": "fauPRDqb5R2LZf_ybJgi8",
+          "name": "bacthienquoc",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7164.png"
+          }
+        },
+        {
+          "id": "0lno7Wle2xy6eEVbs2vVC",
+          "name": "taytanquoc",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7165.png"
+          }
+        },
+        {
+          "id": "AZoOeRuz66VXUWzjhLGrp",
+          "name": "dongdaolienquoc",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7166.png"
+          }
         }
       ]
     },
@@ -1514,6 +1562,52 @@
             "offset": {
               "x": 100,
               "y": 0
+            }
+          }
+        }
+      ]
+    },
+    "529yqNxmTedAHDuaaniwa": {
+      "id": "529yqNxmTedAHDuaaniwa",
+      "name": "K12",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "WkylhAz3iCbipMuiGiEJg",
+          "name": "default",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7157.png",
+            "scale": 1.2,
+            "offset": {
+              "x": 0,
+              "y": 100
+            }
+          }
+        },
+        {
+          "id": "uW0ymRq4e4IITUnTJU481",
+          "name": "grandfather",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7158.png",
+            "scale": 1.3,
+            "offset": {
+              "x": 0,
+              "y": 57
+            }
+          }
+        },
+        {
+          "id": "IoL-zxLdV7t4y_-5M9Oeu",
+          "name": "small",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7157.png",
+            "scale": 0.6,
+            "offset": {
+              "x": 75,
+              "y": -100
             }
           }
         }
@@ -4176,6 +4270,83 @@
         }
       },
       {
+        "id": "8yLZ2XODQHBtQw-_TRVfk",
+        "title": "CHAP 2: Những bí mật",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "KQtrNz03tCRf5e-p06Yaw"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7151.png"
+            },
+            "id": "memMPPvcT5dktMqWtNMYP"
+          },
+          {
+            "type": "stop_bgm",
+            "id": "jYrOFJ2I-_7AF1tz43HsV"
+          },
+          {
+            "type": "play_bgm",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7122.mp3",
+            "loop": true,
+            "volume": 0.21,
+            "id": "CYuYJNJ1I0-dS-GXftFn7"
+          },
+          {
+            "type": "wait",
+            "duration": 2000,
+            "fixed": true,
+            "id": "AmtGg21DBTSwCa6N3Kf8t"
+          },
+          {
+            "type": "show_text",
+            "text": "CHAP 2: Những bí mật",
+            "position": "center",
+            "id": "C8ReLZ9LpDVQVPUbWBja0"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": false,
+            "id": "dggBfFTwGhRXignr0opik"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "TUvojEIHQlsvDwhKK3_Wp"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "vvu4gVc-3EZz4PsGPRGgQ"
+          },
+          {
+            "type": "goto",
+            "target": "7WOuVIm0ICA9qLAUgieap",
+            "id": "LK8_ZFfUIUZsMQXTFmUzW"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 4700
+          }
+        }
+      },
+      {
         "id": "juvy6zRP5P7apjnRLeiKx",
         "title": "C1 A1 Văn phòng 2morepixels",
         "nodes": [
@@ -5305,7 +5476,751 @@
         "meta": {
           "mapPosition": {
             "x": 1200,
-            "y": 4300
+            "y": 5400
+          }
+        }
+      },
+      {
+        "id": "9Uaj8vHivByuiDqlehhkv",
+        "title": "C2 A4 Kế hoạch bí mật của T2",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 5500
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "V4YwWNFgLL_LnOKVl8kSH"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_20/6562.png"
+            },
+            "id": "A4rx9-IcBy27nX6NO0yBr"
+          },
+          {
+            "type": "stage_reset",
+            "id": "wwIK9mhUT07SJAGaWr5qf"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "y9MReWzsIyWtr5GB3z766"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "Y1fzUCT-mGGM9jNHCnSz7"
+          }
+        ]
+      },
+      {
+        "id": "VHXEgnLxx_zQccAe7eFXG",
+        "title": "C2 A3 Lời nói dối",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 5300
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "iOOIMTibcKnpKyOo37vW6"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7143.png"
+            },
+            "id": "UgI0u-VyzvrfQsqJGA5Sq"
+          },
+          {
+            "type": "narration",
+            "id": "jS00wYvAt6fM_a4eeyZJK",
+            "text": "Buổi tối, tại văn phòng của 2MorePixels."
+          },
+          {
+            "type": "character_show",
+            "id": "tjciy_SuXVwP5X-zwpVjd",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "left",
+            "duration": 300,
+            "expressionId": "QKvTFcXD-JRXUYSFeo4eq"
+          },
+          {
+            "type": "dialogue",
+            "id": "OYMRZ9Pkx_OvT502qPgN9",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Hôm nay anh {{nam9}} lại tăng ca à?"
+          },
+          {
+            "type": "character_show",
+            "id": "6-7qnGVosnqBpsNZseVJk",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "right",
+            "duration": 300,
+            "expressionId": "ZoEshiwSgnTk_vQ06IKqm"
+          },
+          {
+            "type": "dialogue",
+            "id": "dAJ6GENDVVkzQ28sO1Fh_",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Ừ..."
+          },
+          {
+            "type": "dialogue",
+            "id": "YWJbSJGkven5ydUX5tsuv",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Anh có vẻ đam mê làm game quá nhỉ?"
+          },
+          {
+            "type": "dialogue",
+            "id": "nka35_yxH0wBTYdDVOlXh",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Cũng không hẳn. Anh đam mê kiếm tiền."
+          },
+          {
+            "type": "character_express",
+            "id": "GS3inudHuC__Vx_8cW2-Z",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "center",
+            "duration": 200,
+            "expressionId": "_z-FqqMgA2Gp-w7iUAneX"
+          },
+          {
+            "type": "narration",
+            "id": "AblNVRCUSpk-bGbATewUu",
+            "text": "{{nu9}} bật cười."
+          },
+          {
+            "type": "dialogue",
+            "id": "W02QQeVuvxF0spOz4Z05G",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Hình như quê của em không phải ở đây nhỉ?"
+          },
+          {
+            "type": "dialogue",
+            "id": "vGN-eKq5hJQqmS-yuu10Q",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Vâng ạ, nhà của em ở Thủ Đô."
+          },
+          {
+            "type": "dialogue",
+            "id": "-8BmP138Ui3bpaWk0cTw4",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Tại sao em lại quyết định vào tận miền Nam này để làm việc?"
+          },
+          {
+            "type": "dialogue",
+            "id": "uS_7fj3tpdkwXUt0xu9KM",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Em muốn đi để trải nghiệm và khám phá ạ."
+          },
+          {
+            "type": "narration",
+            "id": "ZN2GHSOOUXjRI5UJsifN8",
+            "text": "{{nu9}} mỉm cười, nhắc lại câu trả lời đó thêm một lần nữa."
+          },
+          {
+            "type": "narration",
+            "id": "NdoHmSBugCtsmA5KAYn78",
+            "text": "{{nam9}} không nói gì, ánh mắt dừng lại trên cô lâu hơn bình thường, sâu và khó đoán, khiến nụ cười của cô thoáng chững lại."
+          },
+          {
+            "type": "stage_reset",
+            "id": "4l2ZbcWEU-MBrJXGaknKX"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "BPUaC2a8GpH1MD2OXt_1u"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "uvYyyWS0NInl9dcgr_gV_"
+          },
+          {
+            "type": "goto",
+            "id": "UJ551YWZD0n2IAEKfQzP_",
+            "target": "9Uaj8vHivByuiDqlehhkv"
+          }
+        ]
+      },
+      {
+        "id": "3oZtYagBEZ8E9Wp_yLWrh",
+        "title": "C2 A2 Tổng quan Thế giới",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "wpySSE0cdH19Pi-1uLJsX"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7156.png"
+            },
+            "id": "_SeBSRglolLETGZk79CTx"
+          },
+          {
+            "type": "narration",
+            "text": "[CĂN CỨ QUÂN SỰ LONG ĐẢO - NĂM 2000]",
+            "id": "ZFuwMKvcMozZUPcU66oJK"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": false,
+            "id": "3drVV7kJCpI_UMQFlfVqD"
+          },
+          {
+            "type": "character_show",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "position": "center",
+            "expressionId": "uW0ymRq4e4IITUnTJU481",
+            "duration": 300,
+            "flipX": false,
+            "id": "ray3yILy6shuuLDKUD_4g"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Đây là lần đầu tiên cháu đến nơi này nhỉ?",
+            "id": "lqA0nDAnKKGMaiINo4RfW"
+          },
+          {
+            "type": "narration",
+            "text": "Ông nội của {{nam9}} dịu dàng hỏi.",
+            "id": "H5RAk_aa1pp6knmQEWWVZ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Năm nay cháu đã 3 tuổi rồi... Có lẽ ta nên dạy cho cháu một vài điều.",
+            "id": "A4kM45tQlg8yTtBUvW3QO"
+          },
+          {
+            "type": "character_express",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "expressionId": "WkylhAz3iCbipMuiGiEJg",
+            "duration": 200,
+            "id": "r1sOyStMtu_eFqT_N4ygr"
+          },
+          {
+            "type": "narration",
+            "text": "Là Hoàng Đế của Đô Quốc, ông mang khí chất của một người đứng trên đỉnh cao quyền lực — trầm tĩnh, lạnh lùng nhưng không cần phô trương.",
+            "id": "QgDahC3dpz2hyaKP4ppmQ"
+          },
+          {
+            "type": "narration",
+            "text": "Ánh mắt ông sâu và sắc, như nhìn thấu mọi suy nghĩ của người đối diện. Từng cử chỉ đều chậm rãi, chuẩn xác, toát ra sự kiểm soát tuyệt đối.",
+            "id": "-k-_TN0xqtkxzH0Yky4NN"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Nơi đây là Long Đảo, căn cứ quân sự lớn nhất của Đô Quốc chúng ta.",
+            "id": "i9sFlcKwX5Q-G9mZ6BMJY"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7159.png"
+            },
+            "id": "dCLcc7jKYWDoEZgbhZnHl"
+          },
+          {
+            "type": "character_express",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "expressionId": "IoL-zxLdV7t4y_-5M9Oeu",
+            "duration": 200,
+            "id": "jf_R-0_CdW6Jf2a_mbBmd"
+          },
+          {
+            "type": "character_move",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "position": {
+              "x": 86,
+              "y": 61
+            },
+            "duration": 500,
+            "id": "rrL-s-fq85u04t-K9rYdh"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Ngoài Đô Quốc chúng ta thì trên thế giới còn 4 quốc gia lớn khác: Nam Long Quốc, Bắc Thiên Quốc, Tây Tân Quốc, và Đông Đảo Liên Quốc.",
+            "id": "CdIGLs1ycpZl3PAONs4We"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Nam Long Quốc là một bán đảo lớn ở phía nam, có đường bờ biển rất dài, uốn lượn như hình một con rồng.",
+            "id": "0XX4AS6OObJ1d6QK7Wyji"
+          },
+          {
+            "type": "character_show",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "position": "center",
+            "expressionId": "PuAxEAUH8FkSWdVqH751p",
+            "duration": 300,
+            "flipX": false,
+            "id": "w93MFmz5i4XvfxXyA0OBE"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Cái tên Nam Long còn bắt nguồn từ những truyền thuyết về loài rồng ở biển sâu, đã gắn liền với vùng đất này từ hàng ngàn năm trước.",
+            "id": "Wup3Z3B507_U3DMfqF4Fn"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Đã có một giai đoạn, những sinh vật ấy liên tục xuất hiện và tấn công người dân ở trên bờ. Không phải một, mà là nhiều lần — đủ để cả một quốc gia ghi khắc nó vào trong lịch sử.",
+            "id": "1i3USonWzWelAAy3_wEZT"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Ngay tại khu vực Long Đảo này, người ta từng phát hiện hóa thạch của loài rồng khổng lồ cổ đại.",
+            "id": "wdXnl1Ywx0kiZvh2rJ39y"
+          },
+          {
+            "type": "character_express",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "expressionId": "mIcrmQBcsbaWdCq8rwBSD",
+            "duration": 200,
+            "id": "SYpphqAyh3OvFTdCAVfhx"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Đó là lý do Đế quốc Đô của chúng ta đặt căn cứ tại đây. Vừa phục vụ mục đích quân sự, vừa để nghiên cứu về loài rồng.",
+            "id": "FYsq4Uqa_QC3h4aGo1jaS"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Thế nhưng, cho đến hiện tại, người Đô chúng ta vẫn chưa tìm thấy bất kỳ bằng chứng nào cho thấy loài rồng còn tồn tại.",
+            "id": "StFhDx52Vfqyap1G-zwcR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Có lẽ... chúng đã tuyệt diệt, hoặc đang ngủ yên dưới đáy đại dương sâu thẳm...",
+            "id": "aEUdg25oyvHzke6DO345i"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "duration": 300,
+            "id": "yE5iI7PjYl73O3GN7piGX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Ở phía bên kia của dãy núi, chính là Bắc Thiên Quốc.",
+            "id": "a6muWxmAIztULC3bfJRcR"
+          },
+          {
+            "type": "character_show",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "position": "center",
+            "expressionId": "fauPRDqb5R2LZf_ybJgi8",
+            "duration": 300,
+            "flipX": false,
+            "id": "9EG9uEG0CkOLrbIh4hqM8"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Vùng đất này, băng tuyết bao phủ quanh năm, những dãy núi cao nối tiếp nhau.",
+            "id": "l_lkdo0JNGCzniITJhq4d"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Chữ 'Thiên' trong tên của họ, có ý nghĩa là 'Bầu trời'.",
+            "id": "kSyRWPl1iUCEdIzJINQvY"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Đó là cách họ gọi vùng đất của mình - một vùng cao nguyên rộng lớn, nơi con người đứng ở ranh giới giữa đất và trời.",
+            "id": "2u2fAFoKFlZD_HU4_AMWi"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "duration": 300,
+            "id": "Rj5VeXqrHSGZWvAfJGKh-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Tây Tân Quốc nằm ở một lục địa tách biệt về phía tây, một vùng đất rộng lớn với điều kiện tự nhiên gần như hoàn hảo.",
+            "id": "Ks0DwBKUkouIHcYbXSVPT"
+          },
+          {
+            "type": "character_show",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "position": "center",
+            "expressionId": "0lno7Wle2xy6eEVbs2vVC",
+            "duration": 300,
+            "flipX": false,
+            "id": "3hj8Lnzj40kxB6h2AN1VZ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Khí hậu ôn hòa, tài nguyên dồi dào... là nền tảng để nơi đó phát triển vượt bậc.",
+            "id": "uw5wp1HuMA06csSajUtna"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Chính ta là người đã đặt chân đến vùng đất ấy từ 300 năm trước, khai phá nó, thống nhất những thế lực rời rạc... và dựng nên một đế chế hoàn toàn mới.",
+            "id": "CKMs7rLPgkr_7cB_Rr-_r"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Một quốc gia hiện đại... giàu có, rộng lớn và hùng mạnh bậc nhất thế giới.",
+            "id": "D6y6KaoH5y0PHU6SNe7Ax"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "duration": 300,
+            "id": "gmK9Bw3ATHNKv5riMs_nA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Ở ngoài khơi xa của vùng biển phía đông, chính là Đông Đảo Liên Quốc.",
+            "id": "cImJ4S24rDh0UX-2QoxMe"
+          },
+          {
+            "type": "character_show",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "position": "center",
+            "expressionId": "AZoOeRuz66VXUWzjhLGrp",
+            "duration": 300,
+            "flipX": false,
+            "id": "bqaIFF5UeX7sCbVtlZcmW"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Đó là tên gọi chung cho một liên minh được tạo thành từ những quốc đảo nhỏ bé và yếu ớt, nằm rải rác trên biển.",
+            "id": "fMd1D_ETCAQee9_zvIAd-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Trước đây... chúng tồn tại rời rạc, tranh chấp lẫn nhau, không có bất kỳ trật tự nào.",
+            "id": "CaTGfgWXk5JvL-043A9tF"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Cho đến khi đế chế của ta đặt chân tới.",
+            "id": "83YbHde2fq2_royGw6BcA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Từng hòn đảo một... lần lượt bị khuất phục.",
+            "id": "9g_RCZwrrUpiqFaO3RgJm"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "text": "Giờ đây, toàn bộ Đông Đảo Liên Quốc đã trở thành thuộc địa của chúng ta.",
+            "id": "HUPxe_YoAXRnWwMXqb56A"
+          },
+          {
+            "type": "stage_reset",
+            "id": "n3liSFOsq59cfUY0P44PY"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "5BUw_Y1fgsySBmVzCF0y6"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "HD8CgeTNtujacT027hago"
+          },
+          {
+            "type": "goto",
+            "id": "RJoiDyGg5-NgPxohA6PLM",
+            "target": "VHXEgnLxx_zQccAe7eFXG"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 5100
+          }
+        }
+      },
+      {
+        "id": "7WOuVIm0ICA9qLAUgieap",
+        "title": "C2 A1 Bức vẽ",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "X3UYD4qYG-o5klmlar9fa"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7152.png"
+            },
+            "id": "Evl6Lt4L3EVJraYlRBj1_"
+          },
+          {
+            "type": "narration",
+            "text": "Ở công ty, {{nam9}} bắt gặp {{nu9}} đang chăm chú dựng nhân vật cho game Khai Giới.",
+            "id": "fk2JQL1MvRUzLEd35FTpO"
+          },
+          {
+            "type": "narration",
+            "text": "Ánh sáng từ màn hình hắt lên gương mặt cô, vừa tập trung vừa có chút căng thẳng.",
+            "id": "QY1BGvanSjGRaNkGCngwe"
+          },
+          {
+            "type": "narration",
+            "text": "Anh dừng lại phía sau {{nu9}}, lặng lẽ quan sát. Từng chi tiết của nhân vật được cô trau chuốt rất tỉ mỉ.",
+            "id": "6y6Hacg-agSnOM_YZ5WEv"
+          },
+          {
+            "type": "character_show",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "left",
+            "expressionId": "lsXVfwBCXvE07HdbEak6k",
+            "duration": 300,
+            "flipX": false,
+            "id": "ti4VQpJgaqtRBoh56BIZK"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Đẹp đó!",
+            "id": "afvwimgCNdVxEbWqDyV51"
+          },
+          {
+            "type": "narration",
+            "text": "Lời khen bất ngờ từ {{nam9}} khiến {{nu9}} giật mình. Cô quay sang, thoáng bối rối.",
+            "id": "U1RCjXfa91rWXE2SzA6bu"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "center",
+            "expressionId": "07bJwjyDp4fskxO4kQCq6",
+            "duration": 300,
+            "flipX": false,
+            "id": "hLAkfeV9xo8ur3Wkun3wn"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "À... Em cảm ơn anh ạ...",
+            "id": "Xi1q0Fw3Wm273cRtF3Yos"
+          },
+          {
+            "type": "narration",
+            "text": "Gương mặt cô ửng nhẹ, ánh mắt lúng túng rồi lại vội vàng quay về phía màn hình như để che đi sự ngượng ngùng.",
+            "id": "cdIf-2hRespT2odPTJsJl"
+          },
+          {
+            "type": "stage_reset",
+            "id": "ezXyUwA2eTicPoUrV6I8a"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 7,
+              "duration": 400,
+              "direction": "in"
+            },
+            "id": "frpDmF0okRfC_HE4N0RFw"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7153.png"
+            },
+            "id": "lZMdddx-CwB8mq7BsWFHs"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 7,
+              "duration": 400,
+              "direction": "out"
+            },
+            "id": "iU2XQtCI7_X6-JZN_mzSd"
+          },
+          {
+            "type": "narration",
+            "text": "Tối hôm đó, {{nam9}} ngồi một mình trong phòng, ánh đèn vàng hắt xuống bàn vẽ.",
+            "id": "iZVDHQbPwnMXelqcHSs5y"
+          },
+          {
+            "type": "narration",
+            "text": "Cây bút trong tay anh di chuyển liên tục, từng nét phác thảo hiện ra đầy tập trung và say mê.",
+            "id": "-MZJipLGJ-btmnTKkAooq"
+          },
+          {
+            "type": "narration",
+            "text": "Anh vừa vẽ vừa nghe một podcast về những thuyết âm mưu - nơi người ta đang thảo luận về các thế lực ngầm đứng sau, âm thầm thao túng cả thế giới.",
+            "id": "6UysVjnGGO4TQmOfgMcut"
+          },
+          {
+            "type": "narration",
+            "text": "Giọng người dẫn trầm xuống, chậm rãi như thì thầm ngay bên tai:",
+            "id": "nrT0MIjKiTG2sxSHeddA_"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ Bạn có bao giờ tự hỏi… những quyết định lớn của thế giới này… thật sự do ai đưa ra không? ]",
+            "id": "KYYm7-4xnYyQBr8-XmotL"
+          },
+          {
+            "type": "character_show",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "position": "right",
+            "expressionId": "LlIK_7HQBbXFH2wHWzip9",
+            "duration": 300,
+            "flipX": false,
+            "id": "bQMM_Y0hXDDRKTbLMTd7t"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ Có những người tin rằng, đằng sau các chính phủ, các tập đoàn khổng lồ… là một tầng lớp quyền lực vô hình. Họ không xuất hiện trước công chúng, không để lại dấu vết… nhưng lại có khả năng định hướng cả dòng chảy lịch sử. ]",
+            "id": "WP8SNoNIAMgkp-PtfKIFw"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ Từ khủng hoảng kinh tế… chiến tranh… cho đến những bước ngoặt công nghệ… liệu tất cả chỉ là ngẫu nhiên? Hay đã được sắp đặt từ trước? ]",
+            "id": "wM12VU9B9spKEAN4UeDgQ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ Tuy nhiên, cần phải nói rõ… tất cả những điều trên vẫn chỉ là giả thuyết. Hiện tại vẫn chưa có bằng chứng xác thực nào chứng minh sự tồn tại của những thế lực ngầm như vậy. ]",
+            "id": "pPQZyRV_XOmo_IDurdj3H"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "duration": 300,
+            "id": "mQWEyqgRfXcJyJnaEpRBF"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7154.png"
+            },
+            "id": "9X9LV9P0_K4-NELBk0lET"
+          },
+          {
+            "type": "narration",
+            "text": "Trên tay {{nam9}}, tờ giấy vẫn còn vương mùi chì mới.",
+            "id": "HrRop4Xu5QzDI9OvREzTX"
+          },
+          {
+            "type": "wait",
+            "duration": 3000,
+            "fixed": false,
+            "id": "FIJkLvouQNbL0NWeDPGFD"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nam9}} khẽ xoay cổ tay, ngắm nhìn tác phẩm của mình trong im lặng.",
+            "id": "SYEe36HNV2izyiKsC5KZb"
+          },
+          {
+            "type": "stage_reset",
+            "id": "TV16MKwoewAxR0tnp1i2k"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "xFpHs-DfllecqLTJNWuvn"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "f444PScyoLneskAVmuuBW"
+          },
+          {
+            "type": "goto",
+            "target": "3oZtYagBEZ8E9Wp_yLWrh",
+            "id": "VOpCZgKwHQXeP7Wmoizyl"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 4900
           }
         }
       },
@@ -5467,9 +6382,9 @@
           },
           {
             "type": "dialogue",
-            "id": "WZ14fQsSLJQruQzNEn75o",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "** Tôi đã chờ đợi khoảnh khắc này... rất lâu rồi. **"
+            "text": "** Tôi đã chờ đợi khoảnh khắc này... rất lâu rồi. **",
+            "id": "WZ14fQsSLJQruQzNEn75o"
           },
           {
             "type": "wait",
@@ -5499,6 +6414,11 @@
               "color": "#000000"
             },
             "id": "4C9j-HLbYaxr5HVtE_WN5"
+          },
+          {
+            "type": "goto",
+            "target": "8yLZ2XODQHBtQw-_TRVfk",
+            "id": "45bOZVUljHL3ChevFMPSt"
           }
         ],
         "meta": {
