@@ -628,7 +628,7 @@ Phía sau, {{nu9}} vừa chạy vừa cố rút ngắn khoảng cách. Nhịp ch
 
 Nhận được câu trả lời ngắn gọn của {{nam9}}, {{nu9}} hơi khựng lại một nhịp, nhưng vẫn không bỏ cuộc. Cô hít sâu, cố giữ giọng tự nhiên:
 
-"Thế... anh ăn sáng chưa? Em..."
+"Thế... anh ăn sáng chưa? Em có..."
 
 "Không cần." - {{nam9}} cắt ngang, giọng lạnh tanh.
 
@@ -637,41 +637,74 @@ Anh không nhìn cô, cũng không có ý định kéo dài cuộc trò chuyện
 {{nu9}} im lặng vài giây, nhịp chạy dần chậm lại. Cô nhìn theo bóng lưng {{nam9}}, từng bước xa dần khỏi mình...
 
 
----------------------------------------
-
-chạy bộ xong, nam9 quay lại bàn làm việc thì thấy 1 hộp cơm kèm với giấy ghi chú
-nu9 đã tự tay nấu bữa sáng cho nam9
-khẽ rơi lệ xúc động
-nam9 nghĩ thầm trong đầu, đây là lần đầu tiên trong đời có một cô gái chủ động nấu ăn cho mình
-lần này, {{nam9}} lại nhận lấy và ăn ngon lành
-đúng món cơm tấm sườn trứng chàng trai thích
-nu9 ngồi ở bàn làm việc đối diện, thấy nam9 ăn thì khẽ mỉm cười hạnh phúc
-Ảnh minh họa cô gái thấy chàng trai ăn cơm tấm 1m
+--------------------------------------- C1 A12 Bữa ăn sáng
 
 
+Chạy bộ xong, {{nam9}} trở lại bàn làm việc. Vừa kéo ghế ra, anh chợt khựng lại.
+Ngay ngắn trên mặt bàn là một hộp cơm bento nhỏ gọn.
+Nắp hộp trong suốt để lộ phần cơm trắng dẻo, bên cạnh là miếng sườn nướng vàng óng, viền cháy xém nhẹ, phủ lớp nước sốt sánh bóng. Một quả trứng ốp la lòng đào nằm gọn bên cạnh, lòng đỏ vẫn còn hơi sóng sánh. Góc còn lại là vài lát dưa leo, cà chua được cắt tỉa gọn gàng, thêm chút hành mỡ xanh rắc lên trên.
+Tất cả được sắp xếp chỉn chu, tinh tế, thể hiện rõ sự khéo léo và chăm chút của người nấu.
 
----------------------------------------
+Bên cạnh hộp cơm là một mảnh giấy ghi chú nhỏ, nét chữ nắn nót:
+"Em tự nấu đó... Anh không được bỏ bữa sáng nữa. Chạy bộ xong nhớ ăn nhé, để bụng đói không tốt đâu."
 
-tới cảnh ăn trưa, nu9 đang ngồi cùng với hội chị em
-bất ngờ reo lên rằng nam9 đã chấp nhận lời mời kết bạn fb của mình
+Ánh mắt {{nam9}} khẽ chững lại. Một cảm giác lạ lẫm dâng lên, khiến mắt anh bỗng rưng rưng.
 
-mọi ng xung quanh chọc ghẹo rằng nu9 có vẻ rất mê anh chàng đó
-có ng lại nói rằng nghe đồn nam9 đã có ng yêu rồi, tối chủ nhật nào cũng đi chơi vs ngyeu
-ng khác lại cãi rằng ko phải đâu, suốt nửa năm nay buổi tối chủ nhật nào cậu ta cũng vác cái bộ dạng sầu não tới quán phở nhà tớ vào lúc 10h đêm. nếu thật sự đang hẹn hò thì ai mà lại đi ăn tối vào cái giờ đó
+** Đây là lần đầu tiên... có một người con gái chủ động nấu ăn cho mình... **
 
-nu9 khẽ mỉm cười, nói rằng mọi người không hiểu được đâu
+Anh trầm ngâm một lúc, rồi chậm rãi mở hộp cơm. Không còn vẻ lạnh lùng thường ngày, {{nam9}} cầm đũa lên, gắp một miếng.
+Vị sườn đậm đà, mềm vừa phải, quyện với trứng béo nhẹ và cơm nóng... tất cả hòa vào nhau một cách hoàn hảo.
 
-* insert ảnh mình họa cảnh lúc còn là linh hồn thì cô đã từng nhìn thấy nam9 hẹn hò với Vy
+** Ngon quá... đúng là món cơm tấm sườn trứng mình thích... **
+
+Lần này, {{nam9}} không từ chối nữa. Anh ăn rất tự nhiên, từng miếng một, chậm rãi để cảm nhận trọn vẹn hương vị, như thể đã lâu lắm rồi mới thật sự được ăn một bữa ngon.
+
+Ở bàn làm việc đối diện, {{nu9}} lặng lẽ quan sát. Khi thấy {{nam9}} đã thật sự ăn, ánh mắt cô dịu lại, khóe môi khẽ cong lên, nở ra một nụ cười nhẹ nhàng mà hạnh phúc.
+
+** Hì, chắc chắn là ngon rồi ♡♡♡ **
 
 
+
+--------------------------------------- C1 A13 Kết nối
+
+Giờ ăn trưa, {{nu9}} ngồi cùng hội chị em quen thuộc, bầu không khí vẫn rôm rả như mọi khi.
+
+* Tiếng rung thông báo mới
+{{nu9}} chợt nhìn xuống điện thoại, rồi reo lên đầy phấn khích:
+
+"Ôi... Anh ấy chấp nhận lời mời kết bạn của em rồi!"
+
+"Ôi trời, mới accept Facebook thôi mà đã vui đến vậy rồi à? Phải làm giá lên chứ em!" - một chị gái lên tiếng.
+"Nhìn cái mặt là biết mê người ta lắm luôn rồi đó."
+"Chị nghe đồn là anh ấy có người yêu rồi đó. Tối chủ nhật nào cũng đi chơi với người yêu..."
+"Chắc không phải đâu!" - một người khác lập tức chen vào - "Suốt nửa năm nay, tối Chủ nhật nào cậu ta cũng đến quán phở nhà tớ lúc 10 giờ đêm, bộ dạng thì sầu não, bệ rạc. Nếu đang hẹn hò thật thì ai lại đi ăn vào giờ đó?"
+"Thật à? Nghe cũng có lý..."
+
+Một cô bạn khác nhún vai, liếc nhìn {{nu9}}:
+"Nhưng mà nói thật nhé, so với em thì nhìn anh ấy cũng đâu có gì đặc biệt. Tính cách lại còn khó gần nữa. Sao em lại quyết tâm theo đuổi thế?"
+
+Bầu không khí thoáng chững lại.
+
+{{nu9}} khẽ mỉm cười. Cô không vội trả lời ngay, chỉ nhẹ nhàng đặt điện thoại xuống, ánh mắt dịu đi một chút.
+
+"Mọi người... không hiểu được đâu ạ."
+
+** Tôi đã chờ đợi khoảnh khắc này... rất lâu rồi. **
+
+
+
+=================================================================================================================
+                                              Chap 2: Những bí mật
+                                              * ảnh bìa là Đế Quốc Đô
+=================================================================================================================
 
 ================================================================================
-                              Chap 2: Những bí mật
+                              Đế Quốc Đô
 ================================================================================
 A* ở cty, thấy T2 vẽ đẹp (hình cô gái cầm song kiếm là nhân vật game)
 A* khen đẹp
 
-A* ngồi vẽ gì đó
+buổi tối A* ngồi vẽ gì đó
 Đeo tai nghe nghe postcast về thuyết âm mưu có những thế lực ngầm thống trị thao túng thế giới
 Hình mô phỏng chân dung ng thống trị là một ông lão cao lớn ngồi trên ngai vương
 => ng đó kết luận rằng đây chỉ là giả thuyết
@@ -692,6 +725,7 @@ Quốc gia là một bán đảo (?) vừa dài vừa uốn lượn như rồng
 Trưng bày xác một con rồng
 Nêu ra mâu thuẫn là k có thời đại nào có thể sản sinh ra một sinh vật to lớn và có bộ gen khác biệt như vậy
 
+
 ================================================================================
                               KẾ HOẠCH BÍ MẬT CỦA T2
 ================================================================================
@@ -700,17 +734,27 @@ Nữ chính bám theo nam chính như ng theo đuổi
 Nam chính vs nữ chính ngồi nchuyen vs nhau
 Nam chính hỏi tại sao nữ chính lại vào tận miền Nam mà k làm việc ở Thủ Đô
 
+Nữ chính lại nói dối là do mình muốn khám phá
+
 Flashback lại ký ức
-Cảnh họp quốc hội
+Lúc {{nu9}} vừa biết giấc mơ đó là thế giới thực
+{{nu9}} lập tức xin giấy bút vẽ lại gương mặt A1 để ghi nhớ, bố nhìn thấy, sửng sốt hỏi làm sao con biết ng này
+Đó là bí mật quốc gia
+Mở màn cho cảnh ông bố giải thích cho con gái về A1 (chưa nói cụ thể về A1 và các bản sao ở đây ở đây)
+nhắc lại câu "bố ơi con phải vào miền nam..."
+
+Cảnh họp quốc hội, không gian hơi tối
+{{nu9}} được mn gọi với mật danh T2
+thấp thoáng bóng hình một ng mặc vest cực kỳ cao lớn, mặt ko lọt vào khung hình (A2)
+ở hàng ghế đầu là thủ tướng của Nam Long Quốc ở chính giữa, bên cạnh có cha của cô, ngoài rìa bên phải là bóng hình cao lớn thấp thoáng trong bóng tối
+
 Ngta xem băng ghi hình A1 đánh nhau vs đám giang hồ
 Nói vs nhau là thuốc ức chế được tiêm lên ng A1 có vẻ đang dần mất đi hiệu lực
 Lý do nu9 muốn vào Nam vì phát hiện nam9 đã có dấu hiệu hết tác dụng thuốc, cần phải theo dõi chặt chẽ từng hành động
 Giao nhiệm vụ cho T2 theo giõi A1
-Trong phòng họp hôm đó có cả A2 (ngồi trong bóng tối, k rõ mặt, chỉ có tên đại biểu trên bàn)
+Trong phòng họp hôm đó có cả A2 (ngồi trong bóng tối, k rõ mặt, chỉ có tên đại biểu trên bàn và ánh mắt đáng sợ trong bóng tối)
 A2 cất tiếng, T2 nhìn thấy và sững người, bối rối hoang mang (kiểu bất ngờ vì nhìn quá giống A1, nhưng trong lòng cũng biết trước đó là bản sao của A1 do bố cô từng kể lại r)
 
-
-Nữ chính lại nói dối là do mình muốn khám phá
 
 ================================================================================
                               GIẢI BÓNG CHUYỀN
@@ -733,8 +777,10 @@ cảnh đấu trường của A2 bị leak
 Sau đó trên trang web lộ ra video nói về sàn đấu ngầm của giới lãnh đạo các nước
 
 Cảnh đấu trường
+Đấu trường chiến đấu cực đoan vì danh dự quốc gia
 Trước khi thi đấu phải tuyên bố mình k phải ng và chịu mọi hậu quả kể cả cái chết
 4 nguyên thủ 4 nước ngồi 4 hướng của sàn đấu hình tròn
+(thủ tướng của Nam Long Quốc ngồi cạnh A2)
 A2 chiến thắng vô địch
 Nhìn lên ghế vip sau cửa kính bên trên như nhìn ai đó, ánh mắt kiêu ngạo như muốn chứng minh bản thân
 
@@ -951,6 +997,7 @@ Cha A* yêu 1 cô gái loài ng nhiều năm
 Cho tới khi mẹ của A* mang thai anh
 
 * insert lời mẹ của A* nói đầy cảm động để hi sinh bản thân cho thế hệ sau *
+chúng ta rồi cũng sẽ phải ly biệt thôi. anh dù ko ở Đô Quốc thì vẫn có thể sống tiếp hàng trăm năm nữa... nhưng em thì chỉ là một con người thôi. em sắp k thể sinh con được nữa rồi
 
 A1 nghẹn lại
 
@@ -1037,6 +1084,7 @@ Rồi A2 nhìn lên ghế vip trên đầu
 Ông nội chính là ng đứng trên khán đài vip nhìn xuống
 Sau đó A2 hỏi ông
 Thế lần này ông có định lóc xương cháu k?
+Hay là đưa cháu vào phòng thí nghiệm nghiên cứ DNA để tạo thế hệ đấu sĩ sau
 
 
 
@@ -1065,6 +1113,10 @@ mọi ng rất bất ngờ, ko ai hiểu tại sao
 
 Chuyển cảnh qua A2
 => A2 trầm tư suy nghĩ. Ngày đó đã sắp đến rồi. việc để cho T2 tiếp tục nhiệm vụ theo dõi và tiếp cận mục tiêu có thể chỉ khiến cô ấy bị liên lụy và gặp nguy hiểm
+
+===========================================================================================================
+                              Chap 3
+===========================================================================================================
 
 ================================================================================
                               A1 bị bắn
@@ -1200,8 +1252,15 @@ Hoàng đế K12 có ng vợ đầu tiên, yêu thật lòng nên ko muốn sinh
 Mà yêu thương và chung sống
 Nhưng Bắc Thiên Quốc sau khi bị vương quốc Đô tấn công thì lại nghĩ là do Nam Long Quốc làm, quyết định kéo quân xâm lược Nam Long Quốc
 Ng vợ là nữ tướng cưỡi voi
-Quân địch giết chết ng vợ
-Cả vương quốc ăn no thịt người từ cuộc chiến
+
+K12 kêu gọi Đô Quốc điều binh giúp đỡ
+Hoàng đế bấy giờ nhắc ông k dc can thiệp chuyện loài ng
+Đừng để liên lụy đến Đô Quốc
+Chúng ta tập trung phát triển khoa học công nghệ hàng ngàn năm qua, quân đội chỉ có 100 người
+(Hint trước giờ toàn hỗ trợ bằng vũ khí)
+
+cuối cùng Quân địch giết chết ng vợ
+Cả vương quốc ăn no thịt người từ cuộc chiến, nhận triều cống do Bắc Thiên Quốc dâng lên
 Hoàng đế K12 im lặng
 Nuôi hận với Bắc Thiên Quốc
 Tới khi Bắc Thiên Quốc tấn công Nam Long Quốc thì ngta ms nhận ra Bắc Thiên Quốc đã phát triển quá mạnh
@@ -1283,6 +1342,10 @@ A* bất ngờ xuất hiện, cơ thể to lớn. Xoa nhẹ lên đầu T2 rồi
 Sau đó A* ôm trọn T2 vào lòng, nước mắt lăn dài trên gương mặt T2
 
 bình minh lên, mưa tạnh dần sau 7 ngày ròng rã
+
+===========================================================================================================
+                              Chap 4
+===========================================================================================================
 
 ================================================================================
                               Bí mật của A*
@@ -1374,7 +1437,8 @@ Mẹ của T2 chính là người chăm sóc cho mẹ A* khi bà mang thai. Mẹ
 Mẹ T2 tiếp xúc với xác mẹ A* và lấy được mẫu gen tiến hóa của A*.
 
 Mẹ của T2 ngay từ khi mang thai đã đưa con mình vào buồng nuôi,
-cải tạo lại gen dựa trên chính những gen của A*.
+trước đây bà chính là ng thực hiện cải tạo gen để tạo ra những chiến binh đấu trường của Nam Long Quốc
+Giờ đây bà cải tạo lại gen cho con gái mình dựa trên chính những gen của A*.
 T2 là người đã được CẢI TẠO GEN, chọn lọc từ những gen đặc biệt nhất
 của A*. 
 
@@ -1429,6 +1493,9 @@ hoặc là phần ký ức đó chỉ tồn tại với A1, và mãi mãi mất 
   Tất cả những gì A1 cảm nhận được về Vy - tình yêu, sự day dứt, nỗi
   đau, cả cái chết vì bảo vệ cô ấy - đều biến mất khỏi A*.
 
+===========================================================================================================
+                              Chap X
+===========================================================================================================
 
 ================================================================================
                               Tận thế
@@ -1507,6 +1574,7 @@ _ chế tạo thuốc từ huyết thanh vô địch của mình cho nhân loạ
 
 _ T2 cũng có phép thuật, T2 chính là ng điều khiển mây mưa khi Bắc Thiên Quốc xâm lược biển đông
 _ T2 thách đấu A*, một bên súng một bên kiếm
+_ Tại sao lại là T2? tại vì cô có ng chị song sinh T1, là một thí nghiệm thất bại
 
 ?? viên cảnh sát suy luận xem đêm đó ai là ng bắn hạ A1 => điều tra ra kế hoạch lớn hơn
 

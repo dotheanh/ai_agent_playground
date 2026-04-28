@@ -4504,7 +4504,10 @@
           {
             "type": "character_show",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "position": "left",
+            "position": {
+              "x": 16,
+              "y": 80
+            },
             "expressionId": "QKvTFcXD-JRXUYSFeo4eq",
             "duration": 300,
             "flipX": false,
@@ -5013,7 +5016,10 @@
           {
             "type": "character_show",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "position": "left",
+            "position": {
+              "x": 16,
+              "y": 80
+            },
             "expressionId": "Kwer_ZPoptdFi7V3xqW9J",
             "duration": 300,
             "flipX": false,
@@ -5046,13 +5052,6 @@
             "characterId": "sep_thang",
             "duration": 300,
             "id": "kYCcgLxjc6DmQUt1YIEb0"
-          },
-          {
-            "type": "character_move",
-            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "position": "far-left",
-            "duration": 500,
-            "id": "jV2Gluro5lxPwCPwc6T52"
           },
           {
             "type": "narration",
@@ -5111,7 +5110,7 @@
       },
       {
         "id": "m0iDygVYOIbTuEOqYy_Nw",
-        "title": "Scene Template",
+        "title": "C1 A12 Bữa ăn sáng",
         "nodes": [
           {
             "type": "stage_reset",
@@ -5121,9 +5120,111 @@
             "type": "background_change",
             "visual": {
               "type": "image",
-              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_20/6562.png"
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7147.png"
             },
             "id": "QBTBdHPIcXbGVtpXb38LQ"
+          },
+          {
+            "type": "narration",
+            "text": "Chạy bộ xong, {{nam9}} trở lại bàn làm việc. Vừa kéo ghế ra, anh chợt khựng lại.",
+            "id": "Jec28m9uqFNZQRFjlXa3R"
+          },
+          {
+            "type": "narration",
+            "text": "Ngay ngắn trên mặt bàn là một hộp cơm bento nhỏ gọn.",
+            "id": "9URUWxCd7MxhTF-60DxbZ"
+          },
+          {
+            "type": "wait",
+            "duration": 3000,
+            "fixed": false,
+            "id": "h3UcmsW0qCLIJ7sM6EtXn"
+          },
+          {
+            "type": "narration",
+            "text": "Nắp hộp trong suốt để lộ phần cơm trắng dẻo, bên cạnh là miếng sườn nướng vàng óng, viền cháy xém nhẹ, phủ lớp nước sốt sánh bóng. Một quả trứng ốp la lòng đào nằm gọn bên cạnh, lòng đỏ vẫn còn hơi sóng sánh. Góc còn lại là vài lát dưa leo, cà chua được cắt tỉa gọn gàng, thêm chút hành mỡ xanh rắc lên trên.",
+            "id": "wPZysdLYrMkg7sjKJLmle"
+          },
+          {
+            "type": "narration",
+            "text": "Tất cả được sắp xếp chỉn chu, tinh tế, thể hiện rõ sự khéo léo và chăm chút của người nấu.",
+            "id": "KgTdX2lxVZBZvaU8Ixit3"
+          },
+          {
+            "type": "narration",
+            "text": "Bên cạnh hộp cơm là một mảnh giấy ghi chú nhỏ, nét chữ nắn nót:",
+            "id": "AX7GgChgWLjm8D6-_vGfo"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "\"Em tự nấu đó... Anh không được bỏ bữa sáng nữa. Chạy bộ xong nhớ ăn nhé, để bụng đói không tốt đâu.\"",
+            "id": "ZVYrD9eMFvuvvsXm3qfEx"
+          },
+          {
+            "type": "narration",
+            "text": "Ánh mắt {{nam9}} khẽ chững lại. Một cảm giác lạ lẫm dâng lên, khiến mắt anh bỗng rưng rưng.",
+            "id": "aCGLyeXKlyN9jwciRzEOs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "** Đây là lần đầu tiên... có một người con gái chủ động nấu ăn cho mình... **",
+            "id": "W3TqCt8Bd4_57boDPmhwB"
+          },
+          {
+            "type": "narration",
+            "text": "Anh trầm ngâm một lúc, rồi chậm rãi mở hộp cơm. Không còn vẻ lạnh lùng thường ngày, {{nam9}} cầm đũa lên, gắp một miếng.",
+            "id": "5uEFUgws_S5VLchHmRD_r"
+          },
+          {
+            "type": "narration",
+            "text": "Vị sườn đậm đà, mềm vừa phải, quyện với trứng béo nhẹ và cơm nóng... tất cả hòa vào nhau một cách hoàn hảo.",
+            "id": "hajJDE4qublFG7uka81Kz"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "** Ngon quá... đúng là món cơm tấm sườn trứng mình thích... **",
+            "id": "Yge2_iH7yfSA59D_dSl-Z"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7148.png"
+            },
+            "id": "lVHgLfPcO8l8i0RWhF9_n"
+          },
+          {
+            "type": "narration",
+            "text": "Lần này, {{nam9}} không từ chối nữa. Anh ăn rất tự nhiên, từng miếng một, chậm rãi để cảm nhận trọn vẹn hương vị, như thể đã lâu lắm rồi mới thật sự được ăn một bữa ngon.",
+            "id": "rg03Iup7OWqOwqegXXu4c"
+          },
+          {
+            "type": "narration",
+            "text": "Ở bàn làm việc đối diện, {{nu9}} lặng lẽ quan sát. Khi thấy {{nam9}} đã thật sự ăn, ánh mắt cô dịu lại, khóe môi khẽ cong lên, nở ra một nụ cười nhẹ nhàng mà hạnh phúc.",
+            "id": "ZvGWqVhcc0lBQmRuaChnY"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "** Hì, chắc chắn là ngon rồi ♡♡♡ **",
+            "id": "OPQTrTLfY-N0TFEdcTZov"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7149.png"
+            },
+            "id": "HX4zqRJiG35kGvLzyQsDe"
+          },
+          {
+            "type": "wait",
+            "duration": 4000,
+            "fixed": false,
+            "id": "hbfzGx0c9HCEqiswo1Hdy"
           },
           {
             "type": "stage_reset",
@@ -5147,12 +5248,263 @@
               "color": "#000000"
             },
             "id": "A8S1tY6Y6Lmd5Z-9qv1-i"
+          },
+          {
+            "type": "goto",
+            "target": "x2HuuIdJm7Y4GEjKHEcUj",
+            "id": "6IYve7_3tlrUYwMeoHvq1"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 4300
+          }
+        }
+      },
+      {
+        "id": "TTng4SZ6_4VLsDlcm6P3W",
+        "title": "Scene Template (Copy)",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "SSXGvH3tcyJXf4Zq0Rd0O"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_20/6562.png"
+            },
+            "id": "waUsFfW61BdCSBs8akcON"
+          },
+          {
+            "type": "stage_reset",
+            "id": "QJkg9EsXgcINZW0Pyr4nz"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "WiAtwhCFT6oKItYVKBnIx"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "RhepSrxqzKC1p3aoyprUC"
           }
         ],
         "meta": {
           "mapPosition": {
             "x": 1200,
-            "y": 4100
+            "y": 4300
+          }
+        }
+      },
+      {
+        "id": "x2HuuIdJm7Y4GEjKHEcUj",
+        "title": "C1 A13 Kết nối",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "56m4QMRleUadD_k0FkP-y"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7048.png"
+            },
+            "id": "MX78tFEVhXalAMNb0ppxK"
+          },
+          {
+            "type": "narration",
+            "text": "Giờ ăn trưa, {{nu9}} ngồi cùng hội chị em quen thuộc, bầu không khí vẫn rôm rả như mọi khi.",
+            "id": "azTTDz2ewdHOdCVPyexqN"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_24/6909.mp3",
+            "volume": 1,
+            "id": "G8HZVfMYQSE6bJ0WfhV9r"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} chợt nhìn xuống điện thoại, rồi reo lên đầy phấn khích:",
+            "id": "joreEXEi1uVFCaTSdzzwy"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "center",
+            "expressionId": "QKvTFcXD-JRXUYSFeo4eq",
+            "duration": 300,
+            "flipX": false,
+            "id": "Lto-wXUuBYDOgWxy5HXdr"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Ôi... Anh ấy chấp nhận lời mời kết bạn của em rồi!",
+            "id": "2n8WImiMPEXpOGkMuIoiJ"
+          },
+          {
+            "type": "character_show",
+            "characterId": "_LsndQZ8MpxAeBdeDs3rv",
+            "position": "right",
+            "expressionId": "cnkncZ_SaGjh10JVqfwqP",
+            "duration": 300,
+            "flipX": false,
+            "id": "yac38W7EdRNJpT6yYlDOd"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "_LsndQZ8MpxAeBdeDs3rv",
+            "text": "Ôi trời, mới accept Facebook thôi mà đã vui đến vậy rồi à? Phải làm giá lên chứ em!",
+            "id": "MUQCHaEKA51Wk4nwOrpUD"
+          },
+          {
+            "type": "character_show",
+            "characterId": "gno0vi24FzeM7OhUVnbqn",
+            "position": "left",
+            "expressionId": "lnBC3qxlQtpuyhfGkjFVc",
+            "duration": 300,
+            "flipX": false,
+            "id": "alUN0dw1bkZyK9EOQvp3Z"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gno0vi24FzeM7OhUVnbqn",
+            "text": "Nhìn cái mặt là biết mê người ta lắm luôn rồi đó.",
+            "id": "b8xyUr1zMEMrng0jj8_yK"
+          },
+          {
+            "type": "character_show",
+            "characterId": "nSHBTtIpCBAs2DxuTbSFw",
+            "position": "far-left",
+            "expressionId": "aCEGrNz3kcfauM5CaSR6T",
+            "duration": 300,
+            "flipX": false,
+            "id": "J4VhwW7Y7HEpDBR4YLu8L"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "nSHBTtIpCBAs2DxuTbSFw",
+            "text": "Chị nghe đồn là anh ấy có người yêu rồi đó. Tối chủ nhật nào cũng đi chơi với người yêu...",
+            "id": "obD8p6cjr-M_P5h31qb8E"
+          },
+          {
+            "type": "character_show",
+            "characterId": "7MB6bKwZIZ6TESqlfIgX7",
+            "position": {
+              "x": 91,
+              "y": 81
+            },
+            "expressionId": "tlxVpnWRm6LpBzQs7jzVp",
+            "duration": 300,
+            "flipX": false,
+            "id": "R0NBwbib_Iaa62BK1-An2"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "7MB6bKwZIZ6TESqlfIgX7",
+            "text": "Chắc không phải đâu!",
+            "id": "sxHd4aQM221EnMw6wMWPh"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "7MB6bKwZIZ6TESqlfIgX7",
+            "text": "Suốt nửa năm nay, tối Chủ nhật nào cậu ta cũng đến quán phở nhà tớ lúc 10 giờ đêm, bộ dạng thì sầu não, bệ rạc. Nếu đang hẹn hò thật thì ai lại đi ăn vào giờ đó?",
+            "id": "Z9BTGr5rKUVWX9uaLtXrJ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "nSHBTtIpCBAs2DxuTbSFw",
+            "text": "Thật à? Nghe cũng có lý...",
+            "id": "7ciiJZPa2ObMCQZo3RkI5"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "_LsndQZ8MpxAeBdeDs3rv",
+            "text": "Nhưng mà nói thật nhé, so với em thì nhìn anh ấy cũng đâu có gì đặc biệt. Tính cách lại còn khó gần nữa. Sao em lại quyết tâm theo đuổi thế?",
+            "id": "ozt5UjLcekW6Qc-0lL8gv"
+          },
+          {
+            "type": "narration",
+            "text": "Bầu không khí thoáng chững lại.",
+            "id": "c4KZFvRXX9l-OdAlXTC9O"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} khẽ mỉm cười. Cô không vội trả lời ngay, chỉ nhẹ nhàng đặt điện thoại xuống, ánh mắt dịu đi một chút.",
+            "id": "KogGyZ73HHuliur1uiDWG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Mọi người... không hiểu được đâu ạ.",
+            "id": "JVE0IszGI78Db5P_gtPyG"
+          },
+          {
+            "type": "stage_reset",
+            "id": "1eMUAUdH1fuUdSCVcuhQA"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7150.png"
+            },
+            "id": "yT6fgN4Yy5-6F1W668byM"
+          },
+          {
+            "type": "dialogue",
+            "id": "WZ14fQsSLJQruQzNEn75o",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "** Tôi đã chờ đợi khoảnh khắc này... rất lâu rồi. **"
+          },
+          {
+            "type": "wait",
+            "duration": 4000,
+            "fixed": false,
+            "id": "w5_honYH6CTVHJ8xNrUvA"
+          },
+          {
+            "type": "stage_reset",
+            "id": "BpuDnKHB806SrkXwv66vj"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "2eYA8KkbruX3NIeKoThGq"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "4C9j-HLbYaxr5HVtE_WN5"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 4500
           }
         }
       },
@@ -5191,63 +5543,63 @@
           },
           {
             "type": "narration",
-            "id": "a9KRRo5Y0YxyeSHHr5k7E",
-            "text": "Phía sau, {{nu9}} vừa chạy vừa cố rút ngắn khoảng cách. Nhịp chân cô nhanh hơn hẳn, hơi thở bắt đầu trở nên gấp gáp."
+            "text": "Phía sau, {{nu9}} vừa chạy vừa cố rút ngắn khoảng cách. Nhịp chân cô nhanh hơn hẳn, hơi thở bắt đầu trở nên gấp gáp.",
+            "id": "a9KRRo5Y0YxyeSHHr5k7E"
           },
           {
             "type": "dialogue",
-            "id": "LbOxSQ79KBJoHJkPz90pm",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Chào… chào buổi sáng…"
+            "text": "Chào… chào buổi sáng…",
+            "id": "LbOxSQ79KBJoHJkPz90pm"
           },
           {
             "type": "narration",
-            "id": "ObvPa7sXYNOitjay-C9nX",
-            "text": "{{nu9}} nói với giọng hơi đứt quãng, một tay đặt lên ngực để ổn định nhịp thở."
+            "text": "{{nu9}} nói với giọng hơi đứt quãng, một tay đặt lên ngực để ổn định nhịp thở.",
+            "id": "ObvPa7sXYNOitjay-C9nX"
           },
           {
             "type": "narration",
-            "id": "GJx5Po-zgCZqhsidgUZ90",
-            "text": "{{nam9}} chỉ khẽ liếc sang, ánh mắt thoáng qua rồi lại nhìn thẳng phía trước, bước chân không hề chậm lại."
+            "text": "{{nam9}} chỉ khẽ liếc sang, ánh mắt thoáng qua rồi lại nhìn thẳng phía trước, bước chân không hề chậm lại.",
+            "id": "GJx5Po-zgCZqhsidgUZ90"
           },
           {
             "type": "dialogue",
-            "id": "X731lG1yl-ls6u6oYB-Gt",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Anh… hay chạy bộ ở đây à?"
+            "text": "Anh… hay chạy bộ ở đây à?",
+            "id": "X731lG1yl-ls6u6oYB-Gt"
           },
           {
             "type": "dialogue",
-            "id": "KOam335dX_6lLrAlGH6pY",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
-            "text": "Ừ."
+            "text": "Ừ.",
+            "id": "KOam335dX_6lLrAlGH6pY"
           },
           {
             "type": "narration",
-            "id": "tyMJGR8jAiRIeAY7q4HEb",
-            "text": "Nhận được câu trả lời ngắn gọn của {{nam9}}, {{nu9}} hơi khựng lại một nhịp, nhưng vẫn không bỏ cuộc. Cô hít sâu, cố giữ giọng tự nhiên:"
+            "text": "Nhận được câu trả lời ngắn gọn của {{nam9}}, {{nu9}} hơi khựng lại một nhịp, nhưng vẫn không bỏ cuộc. Cô hít sâu, cố giữ giọng tự nhiên:",
+            "id": "tyMJGR8jAiRIeAY7q4HEb"
           },
           {
             "type": "dialogue",
-            "id": "gfdc6qusi_gS6Lk3UaW31",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Thế... anh ăn sáng chưa? Em..."
+            "text": "Thế... anh ăn sáng chưa? Em có...",
+            "id": "gfdc6qusi_gS6Lk3UaW31"
           },
           {
             "type": "dialogue",
-            "id": "9MaeE01v3JSOgfz20u57V",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
-            "text": "Không cần."
+            "text": "Không cần.",
+            "id": "9MaeE01v3JSOgfz20u57V"
           },
           {
             "type": "narration",
-            "id": "ONuwPd0tuWfaA3ZdaxrAe",
-            "text": "Anh không nhìn cô, cũng không có ý định kéo dài cuộc trò chuyện. Chỉ một câu nói, như dựng lên một khoảng cách rõ ràng giữa hai người."
+            "text": "Anh không nhìn cô, cũng không có ý định kéo dài cuộc trò chuyện. Chỉ một câu nói, như dựng lên một khoảng cách rõ ràng giữa hai người.",
+            "id": "ONuwPd0tuWfaA3ZdaxrAe"
           },
           {
             "type": "narration",
-            "id": "wwEw5PNE3kmaGyw8dWqwT",
-            "text": "{{nu9}} im lặng vài giây, nhịp chạy dần chậm lại. Cô nhìn theo bóng lưng {{nam9}}, từng bước xa dần khỏi mình..."
+            "text": "{{nu9}} im lặng vài giây, nhịp chạy dần chậm lại. Cô nhìn theo bóng lưng {{nam9}}, từng bước xa dần khỏi mình...",
+            "id": "wwEw5PNE3kmaGyw8dWqwT"
           },
           {
             "type": "stage_reset",
@@ -5271,6 +5623,11 @@
               "color": "#000000"
             },
             "id": "swN6i1NwehWWMplVeW6UA"
+          },
+          {
+            "type": "goto",
+            "target": "m0iDygVYOIbTuEOqYy_Nw",
+            "id": "r016rE39RmgACLpp_JDQL"
           }
         ],
         "meta": {
