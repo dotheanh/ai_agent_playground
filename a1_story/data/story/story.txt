@@ -805,7 +805,7 @@ Buổi tối, tại văn phòng của 2MorePixels.
 
 {{nu9}} bật cười.
 
-"Hình như quê của em không phải ở đây nhỉ?" - {{nam9}} hỏi.
+"Ừm... Hình như quê của em không phải ở đây nhỉ?" - {{nam9}} hỏi.
 
 "Vâng ạ, nhà của em ở Thủ Đô."
 
@@ -821,13 +821,28 @@ Buổi tối, tại văn phòng của 2MorePixels.
 ================================================================================
 
 
-Flashback lại ký ức
-Lúc {{nu9}} vừa biết giấc mơ đó là thế giới thực
-{{nu9}} lập tức xin giấy bút vẽ lại gương mặt A1 để ghi nhớ, bố nhìn thấy, sửng sốt hỏi làm sao con biết ng này
-Đó là bí mật quốc gia
-Mở màn cho cảnh ông bố giải thích cho con gái về A1 (chưa nói cụ thể về A1 và các bản sao ở đây ở đây)
-nhắc lại câu "bố ơi con phải vào miền nam..."
+Flashback lại lúc {{nu9}} mới vừa tỉnh dậy
 
+** Vậy ra... tất cả không phải là mơ. Những gì mình thấy... từng cảnh tượng đó đều là thật. **
+
+"Bố ơi, bố tìm giúp con tờ giấy trắng với ạ!"
+
+"Để làm gì vậy con?" - ông Sơn bối rối.
+
+{{nu9}} sợ rằng ký ức về giấc mơ ấy sẽ tan biến bất cứ lúc nào.
+Cô vội vàng cầm bút, phác thảo lại hình ảnh của {{nam9}} — người đã hiện diện trong thế giới mộng tưởng ấy của cô suốt hàng năm trời.
+
+"Đây... đây là... làm sao con biết người này hả {{nu9}}???" - ông Sơn hoảng hốt.
+
+"Đây là một người con đã nhìn thấy trong giấc mơ... Bố cũng biết anh ấy ạ?"
+
+"Cậu ta... cậu ta... không phải người mà con nên biết đến..."
+
+Ánh mắt {{nu9}} không hề dao động.
+
+"Vậy... nghĩa là anh ta có thật."
+
+==================
 Cảnh họp quốc hội, không gian hơi tối
 {{nu9}} được mn gọi với mật danh T2
 thấp thoáng bóng hình một ng mặc vest cực kỳ cao lớn, mặt ko lọt vào khung hình (A2)

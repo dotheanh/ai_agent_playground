@@ -4121,6 +4121,185 @@
         }
       },
       {
+        "id": "Q_QWgUuT7CciMD6lXw1xD",
+        "title": "C2 A4 Kế hoạch bí mật của T2",
+        "nodes": [
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 10,
+              "duration": 400,
+              "direction": "in"
+            },
+            "id": "L-8jQRFc8rfM6WL2jlKyl"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7081.png"
+            },
+            "id": "c7c3UpXyehD6tqZLWE6xQ"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "blur",
+              "intensity": 10,
+              "duration": 1000,
+              "direction": "out"
+            },
+            "id": "aqtp3eUyU-FVZkfvVhlru"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "center",
+            "expressionId": "angry",
+            "duration": 100,
+            "flipX": false,
+            "id": "AhOVLmPwq4oO0fRHb2ivt"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "right",
+            "expressionId": "angry",
+            "duration": 300,
+            "flipX": false,
+            "id": "g2xcbnLmZ4Acc8D9LfO8f"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "** Vậy ra... tất cả không phải là mơ. Những gì mình thấy... từng cảnh tượng đó đều là thật. **",
+            "id": "9jJ7TJ5OiWTrnH3pzJbQv"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Bố ơi, bố tìm giúp con tờ giấy trắng với ạ!",
+            "id": "q8rSBnGbcaLZ3Rdssg2m-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Để làm gì vậy con?",
+            "id": "dRl9_8DXvgkcLT3gc_jjd"
+          },
+          {
+            "type": "stage_reset",
+            "id": "DbQgk8k8uLt9JmhydRd4A"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7167.png"
+            },
+            "id": "BaY4psvmVGZX6FnTequSi"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} sợ rằng ký ức về giấc mơ ấy sẽ tan biến bất cứ lúc nào.",
+            "id": "BIAabEhhhPyaEw-wfcr_5"
+          },
+          {
+            "type": "narration",
+            "text": "Cô vội vàng cầm bút, phác thảo lại hình ảnh của {{nam9}} — người đã hiện diện trong thế giới mộng tưởng ấy của cô suốt hàng năm trời.",
+            "id": "vz4gkf_v5hctKTS4Oy66c"
+          },
+          {
+            "type": "wait",
+            "duration": 2000,
+            "fixed": true,
+            "id": "C_wcGncJPiEv0tUeJqpNX"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "left",
+            "expressionId": "angry",
+            "duration": 300,
+            "flipX": false,
+            "id": "wbR_dh-dj7pQ__rsQRpxd"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Đây... đây là... làm sao con biết người này hả {{nu9}}???",
+            "id": "jL3oVttvVHB8tD5cw2t1J"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "center",
+            "expressionId": "angry",
+            "duration": 100,
+            "flipX": false,
+            "id": "5YPsLB5rDjxGDO68mk7tA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Đây là một người con đã nhìn thấy trong giấc mơ... Bố cũng biết anh ấy ạ?",
+            "id": "Vr7mZTH_W8cd9jnXzCW99"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Cậu ta... cậu ta... không phải người mà con nên biết đến...",
+            "id": "9PVauLArnhZqEX9tgWYP6"
+          },
+          {
+            "type": "narration",
+            "id": "kZ85X1YapSFh8PrhDyTXy",
+            "text": "Ánh mắt {{nu9}} không hề dao động."
+          },
+          {
+            "type": "dialogue",
+            "id": "RsHOC2vpf2BZwgtIwxukM",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Vậy... nghĩa là anh ta có thật."
+          },
+          {
+            "type": "narration",
+            "text": "...................................................................................................",
+            "id": "VSMw3f2sdr3AqVU0xeJYi"
+          },
+          {
+            "type": "stage_reset",
+            "id": "d5575jA0zilWOcvEmiEbV"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 1000,
+              "direction": "in"
+            },
+            "id": "3jPzcReafpL6DUj4BqXNY"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "s4c1iobL5Mb0Nssp7ZK7y"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 5500
+          }
+        }
+      },
+      {
         "id": "c0At4zAlRdtQny2TcMxU9",
         "title": "Disclaimer",
         "nodes": [
@@ -5481,61 +5660,8 @@
         }
       },
       {
-        "id": "9Uaj8vHivByuiDqlehhkv",
-        "title": "C2 A4 Kế hoạch bí mật của T2",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 5500
-          }
-        },
-        "nodes": [
-          {
-            "type": "stage_reset",
-            "id": "V4YwWNFgLL_LnOKVl8kSH"
-          },
-          {
-            "type": "background_change",
-            "visual": {
-              "type": "image",
-              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_20/6562.png"
-            },
-            "id": "A4rx9-IcBy27nX6NO0yBr"
-          },
-          {
-            "type": "stage_reset",
-            "id": "wwIK9mhUT07SJAGaWr5qf"
-          },
-          {
-            "type": "screen_effect",
-            "effect": {
-              "type": "tint",
-              "color": "#000000",
-              "opacity": 1,
-              "duration": 300,
-              "direction": "in"
-            },
-            "id": "y9MReWzsIyWtr5GB3z766"
-          },
-          {
-            "type": "background_change",
-            "visual": {
-              "type": "color",
-              "color": "#000000"
-            },
-            "id": "Y1fzUCT-mGGM9jNHCnSz7"
-          }
-        ]
-      },
-      {
         "id": "VHXEgnLxx_zQccAe7eFXG",
         "title": "C2 A3 Lời nói dối",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 5300
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -5551,95 +5677,96 @@
           },
           {
             "type": "narration",
-            "id": "jS00wYvAt6fM_a4eeyZJK",
-            "text": "Buổi tối, tại văn phòng của 2MorePixels."
+            "text": "Buổi tối, tại văn phòng của 2MorePixels.",
+            "id": "jS00wYvAt6fM_a4eeyZJK"
           },
           {
             "type": "character_show",
-            "id": "tjciy_SuXVwP5X-zwpVjd",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
             "position": "left",
+            "expressionId": "QKvTFcXD-JRXUYSFeo4eq",
             "duration": 300,
-            "expressionId": "QKvTFcXD-JRXUYSFeo4eq"
+            "flipX": false,
+            "id": "tjciy_SuXVwP5X-zwpVjd"
           },
           {
             "type": "dialogue",
-            "id": "OYMRZ9Pkx_OvT502qPgN9",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Hôm nay anh {{nam9}} lại tăng ca à?"
+            "text": "Hôm nay anh {{nam9}} lại tăng ca à?",
+            "id": "OYMRZ9Pkx_OvT502qPgN9"
           },
           {
             "type": "character_show",
-            "id": "6-7qnGVosnqBpsNZseVJk",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
             "position": "right",
+            "expressionId": "ZoEshiwSgnTk_vQ06IKqm",
             "duration": 300,
-            "expressionId": "ZoEshiwSgnTk_vQ06IKqm"
+            "flipX": false,
+            "id": "6-7qnGVosnqBpsNZseVJk"
           },
           {
             "type": "dialogue",
-            "id": "dAJ6GENDVVkzQ28sO1Fh_",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
-            "text": "Ừ..."
+            "text": "Ừ...",
+            "id": "dAJ6GENDVVkzQ28sO1Fh_"
           },
           {
             "type": "dialogue",
-            "id": "YWJbSJGkven5ydUX5tsuv",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Anh có vẻ đam mê làm game quá nhỉ?"
+            "text": "Anh có vẻ đam mê làm game quá nhỉ?",
+            "id": "YWJbSJGkven5ydUX5tsuv"
           },
           {
             "type": "dialogue",
-            "id": "nka35_yxH0wBTYdDVOlXh",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
-            "text": "Cũng không hẳn. Anh đam mê kiếm tiền."
+            "text": "Cũng không hẳn. Anh đam mê kiếm tiền.",
+            "id": "nka35_yxH0wBTYdDVOlXh"
           },
           {
             "type": "character_express",
-            "id": "GS3inudHuC__Vx_8cW2-Z",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "position": "center",
+            "expressionId": "_z-FqqMgA2Gp-w7iUAneX",
             "duration": 200,
-            "expressionId": "_z-FqqMgA2Gp-w7iUAneX"
+            "id": "GS3inudHuC__Vx_8cW2-Z"
           },
           {
             "type": "narration",
-            "id": "AblNVRCUSpk-bGbATewUu",
-            "text": "{{nu9}} bật cười."
+            "text": "{{nu9}} bật cười.",
+            "id": "AblNVRCUSpk-bGbATewUu"
           },
           {
             "type": "dialogue",
-            "id": "W02QQeVuvxF0spOz4Z05G",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
-            "text": "Hình như quê của em không phải ở đây nhỉ?"
+            "text": "Ừm... Hình như quê của em không phải ở đây nhỉ?",
+            "id": "W02QQeVuvxF0spOz4Z05G"
           },
           {
             "type": "dialogue",
-            "id": "vGN-eKq5hJQqmS-yuu10Q",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Vâng ạ, nhà của em ở Thủ Đô."
+            "text": "Vâng ạ, nhà của em ở Thủ Đô.",
+            "id": "vGN-eKq5hJQqmS-yuu10Q"
           },
           {
             "type": "dialogue",
-            "id": "-8BmP138Ui3bpaWk0cTw4",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
-            "text": "Tại sao em lại quyết định vào tận miền Nam này để làm việc?"
+            "text": "Tại sao em lại quyết định vào tận miền Nam này để làm việc?",
+            "id": "-8BmP138Ui3bpaWk0cTw4"
           },
           {
             "type": "dialogue",
-            "id": "uS_7fj3tpdkwXUt0xu9KM",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Em muốn đi để trải nghiệm và khám phá ạ."
+            "text": "Em muốn đi để trải nghiệm và khám phá ạ.",
+            "id": "uS_7fj3tpdkwXUt0xu9KM"
           },
           {
             "type": "narration",
-            "id": "ZN2GHSOOUXjRI5UJsifN8",
-            "text": "{{nu9}} mỉm cười, nhắc lại câu trả lời đó thêm một lần nữa."
+            "text": "{{nu9}} mỉm cười, nhắc lại câu trả lời đó thêm một lần nữa.",
+            "id": "ZN2GHSOOUXjRI5UJsifN8"
           },
           {
             "type": "narration",
-            "id": "NdoHmSBugCtsmA5KAYn78",
-            "text": "{{nam9}} không nói gì, ánh mắt dừng lại trên cô lâu hơn bình thường, sâu và khó đoán, khiến nụ cười của cô thoáng chững lại."
+            "text": "{{nam9}} không nói gì, ánh mắt dừng lại trên cô lâu hơn bình thường, sâu và khó đoán, khiến nụ cười của cô thoáng chững lại.",
+            "id": "NdoHmSBugCtsmA5KAYn78"
           },
           {
             "type": "stage_reset",
@@ -5648,13 +5775,12 @@
           {
             "type": "screen_effect",
             "effect": {
-              "type": "tint",
-              "color": "#000000",
-              "opacity": 1,
-              "duration": 300,
+              "type": "blur",
+              "intensity": 7,
+              "duration": 400,
               "direction": "in"
             },
-            "id": "BPUaC2a8GpH1MD2OXt_1u"
+            "id": "QmMa_h4W00sAqYxE3w2nE"
           },
           {
             "type": "background_change",
@@ -5662,14 +5788,20 @@
               "type": "color",
               "color": "#000000"
             },
-            "id": "uvYyyWS0NInl9dcgr_gV_"
+            "id": "CaZIVEoLDcRlJJkey7G_V"
           },
           {
             "type": "goto",
-            "id": "UJ551YWZD0n2IAEKfQzP_",
-            "target": "9Uaj8vHivByuiDqlehhkv"
+            "target": "Q_QWgUuT7CciMD6lXw1xD",
+            "id": "UJ551YWZD0n2IAEKfQzP_"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 5300
+          }
+        }
       },
       {
         "id": "3oZtYagBEZ8E9Wp_yLWrh",
@@ -5990,8 +6122,8 @@
           },
           {
             "type": "goto",
-            "id": "RJoiDyGg5-NgPxohA6PLM",
-            "target": "VHXEgnLxx_zQccAe7eFXG"
+            "target": "VHXEgnLxx_zQccAe7eFXG",
+            "id": "RJoiDyGg5-NgPxohA6PLM"
           }
         ],
         "meta": {
