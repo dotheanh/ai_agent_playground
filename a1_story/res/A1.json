@@ -1,6 +1,6 @@
 {
   "id": "s5qPklt-F5v8iuJ2ajj3p",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "format": "visual_novel",
   "metadata": {
     "title": "A1",
@@ -21,8 +21,8 @@
         "height": 720
       },
       "orientation": "landscape",
-      "forceOrientation": true,
-      "scaleMode": "fill"
+      "scaleMode": "fill",
+      "rotationPolicy": "auto"
     },
     "playback": {
       "typewriterSpeed": 30,
@@ -1223,6 +1223,15 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7120.png",
+            "scale": 0.8
+          }
+        },
+        {
+          "id": "sgdOeO3YMUUTWi4oXQfl8",
+          "name": "T2",
+          "visual": {
+            "type": "image",
+            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7228.png",
             "scale": 0.8
           }
         }
@@ -4254,14 +4263,14 @@
           },
           {
             "type": "narration",
-            "id": "kZ85X1YapSFh8PrhDyTXy",
-            "text": "Ánh mắt {{nu9}} không hề dao động."
+            "text": "Ánh mắt {{nu9}} không hề dao động.",
+            "id": "kZ85X1YapSFh8PrhDyTXy"
           },
           {
             "type": "dialogue",
-            "id": "RsHOC2vpf2BZwgtIwxukM",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Vậy... nghĩa là anh ta có thật."
+            "text": "Vậy... nghĩa là anh ta có thật.",
+            "id": "RsHOC2vpf2BZwgtIwxukM"
           },
           {
             "type": "narration",
@@ -4290,6 +4299,11 @@
               "color": "#000000"
             },
             "id": "s4c1iobL5Mb0Nssp7ZK7y"
+          },
+          {
+            "type": "goto",
+            "target": "BL6_H0ZCpjMkpHwvM2_FE",
+            "id": "DUTqahXVHK6-Mq7tNOtr8"
           }
         ],
         "meta": {
@@ -5660,6 +5674,53 @@
         }
       },
       {
+        "id": "BL6_H0ZCpjMkpHwvM2_FE",
+        "title": "C2 A5 Họp Quốc hội",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "Oqz-G5-zj2hIgJZ7RXgg4"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": ""
+            },
+            "id": "hPViGqWxLsQha8R4TM3ek"
+          },
+          {
+            "type": "stage_reset",
+            "id": "uPn8U-Le5HFiKE7fPjzVI"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "R_8-W6JamywLQhMefCviQ"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "zZ0qGrs4a9B1SQkSUo88b"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 5700
+          }
+        }
+      },
+      {
         "id": "VHXEgnLxx_zQccAe7eFXG",
         "title": "C2 A3 Lời nói dối",
         "nodes": [
@@ -5821,7 +5882,7 @@
           },
           {
             "type": "narration",
-            "text": "[CĂN CỨ QUÂN SỰ LONG ĐẢO - NĂM 2000]",
+            "text": "[CĂN CỨ QUÂN SỰ LONG ĐẢO - NĂM 2002]",
             "id": "ZFuwMKvcMozZUPcU66oJK"
           },
           {
