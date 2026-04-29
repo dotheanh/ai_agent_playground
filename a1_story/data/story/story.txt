@@ -143,7 +143,7 @@ Vị Thủ trưởng cắt ngang với một vẻ mặt nặng nề. Bầu khôn
 
 "Đây là lệnh! Đừng hỏi thêm gì nữa. Tất cả giải tán, quay về vị trí làm việc đi!" - Đại tá Dũng quát lớn, giọng điệu ngập tràn sự uất ức.
 
-Sự im lặng đáng sợ bao trùm lấy trụ sở công an. Anh cảnh sát trẻ bàng hoàng nhìn vị Thủ trưởng của mình, người vốn nổi tiếng là chính trực, nay lại phải miễn cưỡng đưa ra một chỉ thị khó hiểu như vậy. Thân thế của {{nam9}}… xem ra không hề bình thường.
+Sự im lặng đáng sợ bao trùm lấy trụ sở công an. Anh cảnh sát trẻ bàng hoàng nhìn Đại tá Dũng, người vốn nổi tiếng là chính trực, nay lại phải miễn cưỡng đưa ra một chỉ thị khó hiểu như vậy. Thân thế của {{nam9}}… xem ra không hề bình thường.
 
 
 ================================================================================
@@ -913,251 +913,149 @@ Không gian rơi vào im lặng tuyệt đối, chỉ còn lại những ánh nh
                             C2 A6 Họp Quốc hội (2)
 ================================================================================
 
-Màn hình lớn trình chiếu lại đoạn video từ hiện trường cuộc ẩu đả giữa {{nam9}} và nhóm giang hồ. Bên dưới có chú thích tiêu đề: bạn tự bịa tiêu đề, đại ý nhắc tới đối tượng A1 - mật danh của {{nam9}}
+Màn hình lớn chiếu lại đoạn video ghi nhận từ hiện trường vụ ẩu đả giữa {{nam9}} và một nhóm giang hồ. Bên dưới khung hình, dòng tiêu đề hiện lên: **“Đối tượng A1 – Dấu hiệu vượt ngưỡng kiểm soát”**.
 
-{{nam9}} đứng hiên ngang. Ba đối tượng nằm gục. Khung hình dừng lại ở khoảnh khắc ánh mắt anh đỏ ngầu.
+{{nam9}} đứng hiên ngang giữa khung cảnh đổ vỡ. Ba đối tượng nằm gục dưới chân. Hình ảnh dừng lại đúng khoảnh khắc ánh mắt anh đỏ ngầu…
 
-"Thuốc ức chế… đã có dấu hiệu mất hiệu lực." - ủy viên Thắng thốt lên.
+“Thuốc ức chế… đã xuất hiện dấu hiệu suy giảm hiệu lực.” — Ủy viên Thắng trầm giọng.
 
-"Theo thiết kế ban đầu, thuốc sẽ duy trì ổn định cho đến khi A1 đạt mốc 27 tuổi — thời điểm được xác định là giai đoạn hoàn thiện và kế thừa vị trí Hoàng đế của Đô Quốc…"
-"Nhưng hiện tại… quá trình suy giảm đang diễn ra sớm hơn dự kiến."
+Ngài Thủ Tướng lên tiếng:
+“Theo thiết kế ban đầu, dược tính của thuốc được đảm bảo duy trì trạng thái ổn định cho đến khi A1 đạt mốc 27 tuổi — thời điểm được xác định là giai đoạn hoàn thiện, đủ điều kiện kế thừa vị trí Hoàng đế của Đô Quốc…”
+“Nhưng hiện tại… quá trình suy giảm đang diễn ra sớm hơn dự kiến.”
+“Chúng ta đã chủ động đề nghị phía Đô Quốc cho phép triển khai liều bổ sung, đồng thời đang tiến hành đàm phán trực tiếp với Hoàng đế Lâm thời…”
+“Nhưng cho đến lúc này… vẫn chưa nhận được bất kỳ phản hồi chính thức nào.”
+“Trong khoảng trống đó… đối tượng có thể chuyển biến theo bất kỳ kịch bản nào — và mọi kịch bản đều kéo theo những hệ quả vượt ngoài năng lực kiểm soát của chúng ta.”
 
-"Không ai có thể dự đoán chính xác… cậu ta sẽ trở thành một biến số như thế nào."
+Ủy viên Sơn tiếp lời:
+“Theo thỏa thuận đã ký kết với Đô Quốc…”
+“Kể từ thời điểm A1 được tiêm thuốc ức chế, đối tượng phải được phép hoạt động tự do trong xã hội loài người, không chịu bất kỳ hình thức kiểm soát công khai nào.”
+“Đây là một ràng buộc bắt buộc.”
+“Nhưng đồng thời… trách nhiệm kiểm soát rủi ro vẫn hoàn toàn thuộc về chúng ta.”
+“Nam Long Quốc chúng ta phải đảm bảo đối tượng luôn nằm trong phạm vi kiểm soát thực tế… đồng thời không được phép tạo ra bất kỳ biểu hiện kiểm soát công khai nào.”
 
----
+Đại tá Dũng kết luận:
+“Trong trường hợp A1 xuất hiện hành vi bất thường, nguy cơ đặt ra không chỉ dừng lại ở an ninh quốc gia…”
+“…mà còn có thể kéo theo một chuỗi leo thang ngoài tầm kiểm soát, đẩy quan hệ giữa nhân loại và Đô Quốc đến ngưỡng xung đột toàn diện.”
 
-### **[Ràng buộc với Đế quốc Đô]**
+-----------------------------------------
 
-Một Ủy viên an ninh lên tiếng:
+“Tôi xin nhận nhiệm vụ.”
 
-"Theo thỏa thuận với Đô Quốc…"
+Giọng nói vang lên từ hàng ghế thứ hai, khiến cả căn phòng chững lại trong thoáng chốc. {{nu9}} đứng thẳng, ánh mắt bình tĩnh, không một dấu hiệu do dự.
 
-"Từ thời điểm A1 được tiêm thuốc ức chế, đối tượng phải được phép hoạt động tự do trong xã hội loài người, không chịu bất kỳ hình thức kiểm soát công khai nào."
+Ông Sơn lập tức quay sang: “Không.” Giọng ông trầm nhưng sắc lạnh. “Con chưa hiểu hết mức độ nguy hiểm của đối tượng này.”
 
-Ngài Thủ tướng khẽ gật đầu.
+“Con hiểu.” — {{nu9}} đáp, dứt khoát. “Con đã có đủ dữ liệu để xây dựng mô hình hành vi của A1.”
 
-"Điều đó đồng nghĩa với việc…"
+Không khí trong phòng khẽ thay đổi. Một vài ánh nhìn chuyển từ hoài nghi sang cân nhắc.
 
-"Chúng ta không thể triển khai bất kỳ biện pháp giám sát lộ liễu nào."
-
-Một khoảng dừng.
-
-"Nhưng đồng thời, chúng ta cũng không thể để đối tượng hoạt động ngoài tầm kiểm soát."
-
-Một người khác tiếp lời:
-
-"Trong trường hợp A1 xuất hiện hành vi bất thường, nguy cơ không chỉ dừng lại ở an ninh quốc gia…"
-
-"…mà còn có thể ảnh hưởng trực tiếp đến cân bằng giữa nhân loại và Đô Quốc."
-
----
-
-### **[T2 đề xuất]**
-
-"Tôi xin nhận nhiệm vụ."
-
-Giọng nói vang lên từ hàng ghế thứ hai.
-
-Cả căn phòng khựng lại.
-
-—
-
-{{nu9}} đứng thẳng.
-
-Ánh mắt bình tĩnh.
-
-Không một chút do dự.
-
-—
-
-Ông Sơn lập tức quay sang:
-
-"Không."
-
-Giọng ông thấp, nhưng sắc.
-
-"Con không hiểu mức độ nguy hiểm của đối tượng này."
-
-—
-
-"Con hiểu."
-
-{{nu9}} đáp lại, dứt khoát.
-
-"Con đã có đủ dữ liệu để xây dựng mô hình hành vi của anh ta."
-
-Một vài ánh mắt trong phòng bắt đầu thay đổi.
-
-—
-
-"Con biết cách anh ta phản ứng trong từng tình huống."
-
-"Biết ngưỡng kích hoạt trạng thái mất kiểm soát."
-
-"Và biết cách tiếp cận mà không gây cảnh giác."
-
+“Con nắm được quy luật phản ứng của đối tượng trong từng tình huống, xác định được ngưỡng kích hoạt trạng thái mất kiểm soát… và quan trọng nhất, con có phương án tiếp cận mà không làm gia tăng mức độ cảnh giác.”
 Cô dừng lại một nhịp, rồi nói rõ ràng:
+“Trong điều kiện hiện tại, lợi thế về ngoại hình và hồ sơ cho phép con tiếp cận đối tượng một cách tự nhiên, duy trì vỏ bọc đủ an toàn để không kích hoạt phản ứng phòng vệ.”
 
-"Với vẻ bề ngoài hiện tại, con là người phù hợp nhất để nhập vai tiếp cận mà không khiến anh ta nghi ngờ."
+Đại tá Dũng lên tiếng, chậm rãi: “Chưa từng có đơn vị nào tiếp cận A1 mà không bị phát hiện.”
 
-—
+Ủy viên Thắng nhìn về phía {{nu9}}: “Nhưng nếu đánh giá của T2 là chính xác… thì đây có thể là cơ hội đầu tiên.”
 
-Một Ủy viên chậm rãi nói:
+Ngài Thủ tướng nhìn thẳng vào cô: “Cô có đảm bảo kiểm soát được tình huống không?”
 
-"Chưa từng có đơn vị nào tiếp cận A1 mà không bị phát hiện."
+“Kiểm soát tuyệt đối là điều bất khả thi trong tình huống này.” - Cô đáp, giọng điềm tĩnh - “Nhưng tôi có đủ năng lực để kiểm soát rủi ro trong ngưỡng chấp nhận được — và ở thời điểm này, tôi là phương án khả thi nhất.”
 
-Một người khác nhìn về phía {{nu9}}:
+Ông Sơn siết chặt tay. “Đây không phải nhiệm vụ trinh sát thông thường. Đây là tiếp cận một thực thể có khả năng phá vỡ toàn bộ hệ thống kiểm soát.”
 
-"Nhưng nếu đúng như những gì T2 trình bày… thì đây là cơ hội đầu tiên."
+{{nu9}} không lùi bước. “Chính vì vậy tôi mới phải tham gia. Nếu chúng ta không thu thập được dữ liệu thực địa về A1 trong giai đoạn hiện tại… thì khi thuốc ức chế hoàn toàn mất hiệu lực, chúng ta sẽ mất đi cơ hội duy nhất để hiểu và kiểm soát đối tượng.”
 
-—
+Cô hạ giọng, nhưng từng từ đều dứt khoát:
 
-Ngài Thủ tướng nhìn thẳng vào cô:
+“Đây là vấn đề an ninh quốc gia… và nếu không hành động ngay lúc này, chúng ta sẽ đánh mất quyền kiểm soát cục diện.”
 
-"Cô có đảm bảo kiểm soát được tình huống không?"
 
-—
-
-"Không."
-
-Câu trả lời đến ngay lập tức.
-
-Không né tránh.
-
-—
-
-"Nhưng tôi có thể đảm bảo…"
-
-"Không ai phù hợp hơn tôi cho nhiệm vụ này."
-
----
-
-### **[Xung đột cha – con]**
-
-Ông Sơn siết chặt tay.
-
-"Đây không phải là một nhiệm vụ trinh sát thông thường."
-
-"Đây là tiếp cận một thực thể có khả năng phá vỡ toàn bộ hệ thống kiểm soát."
-
-Ông nhìn thẳng vào con gái mình.
-
-"Con không được phép tham gia."
-
-—
-
-{{nu9}} không lùi bước.
-
-"Chính vì vậy… con mới phải tham gia."
-
-—
-
-"Nếu chúng ta không có dữ liệu chính xác về A1 trong giai đoạn này…"
-
-"Thì khi thuốc ức chế hoàn toàn mất tác dụng…"
-
-"Chúng ta sẽ không còn cơ hội nữa."
-
-—
-
-Cô nói chậm lại, nhưng từng chữ đều nặng như mệnh lệnh:
-
-"Đây là vấn đề an ninh quốc gia."
-
----
-
-### **[Quyết định]**
+================================================================================
+                            C2 A6 Họp Quốc hội (3)
+================================================================================
+[Quyết định]
 
 Căn phòng rơi vào im lặng.
 
-—
-
-Ngài Thủ tướng lên tiếng:
-
-"Tiến hành biểu quyết."
-
-—
+Ngài Thủ tướng chậm rãi lên tiếng: “Tiến hành biểu quyết.”
 
 "Tán thành."
-
+"Tán thành."
 "Tán thành."
 
-"Tán thành."
+Ông Sơn khẽ nhắm mắt một nhịp, rồi mở ra. Ánh nhìn trở lại trạng thái kiểm soát tuyệt đối. “…Tán thành.”
 
-—
+Ngài Thủ tướng dừng ánh mắt ở {{nu9}}, giọng dứt khoát: “Từ thời điểm này, mật danh T2 chính thức được kích hoạt. Nhiệm vụ: tiếp cận, theo dõi và đánh giá đối tượng A1. Ưu tiên tuyệt đối: duy trì vỏ bọc, không được để lộ dưới bất kỳ hình thức nào.”
 
-Ông Sơn nhắm mắt lại một giây.
+Một khoảng lặng ngắn.
 
-Rồi mở ra.
+“Trường hợp phát sinh tình huống vượt ngoài tầm kiểm soát, lập tức kích hoạt cơ chế can thiệp đặc biệt.”
 
-Giọng ông trầm xuống:
-
-"…Tán thành."
-
----
-
-### **[Kết thúc cảnh]**
-
-"Từ thời điểm này."
-
-Ngài Thủ tướng tuyên bố.
-
-"Mật danh T2 chính thức được kích hoạt."
-
-"Nhiệm vụ: tiếp cận, theo dõi và đánh giá đối tượng A1."
-
-"Ưu tiên tối đa: duy trì vỏ bọc."
-
-"Không được để lộ."
-
-—
-
-Một khoảng dừng ngắn.
-
-"Trong trường hợp cần thiết…"
-
-Ánh mắt ông trở nên lạnh đi.
-
-"Chúng ta sẽ triển khai phương án xử lý cấp cao."
-
-—
-
-Đèn trong phòng dịu xuống.
-
-—
-
-Ở góc tối cuối phòng…
-
-Một bóng người cao lớn ngồi bất động.
-
-Khuôn mặt không lộ rõ.
-
-Chỉ có ánh mắt.
-
-Đang dõi theo {{nu9}}.
-
-Không phải tò mò.
-
-Mà là… nhận diện.
+-----------------------------------
 
 
+********** insert hình A2 đặt tay lên vai nữ chính
 
 
+Cuộc họp kết thúc, mọi người lần lượt rời khỏi phòng trong im lặng. {{nu9}} đang thu gọn xấp hồ sơ trước mặt, chưa kịp quay đi thì một bàn tay đã đặt lên vai cô — nặng nề nhưng vững chãi.
+
+Cô khựng lại. Theo phản xạ, ngước lên. Tầm mắt dừng ở ngang ngực người đó, buộc cô phải ngẩng cao hơn nữa.
+
+Khoảnh khắc ấy…
+
+cô sững lại.
+
+Ánh mắt thoáng dao động, hơi thở khựng đi một nhịp. Không một lời nào được thốt ra.
+
+Bàn tay trên vai siết nhẹ, như một tín hiệu ngắn gọn, rồi buông ra. Người đó quay lưng, bóng dáng cao lớn lặng lẽ rời khỏi vùng sáng.
+
+Cô vẫn đứng đó, trong một khoảnh khắc không chắc mình vừa được động viên cho nhiệm vụ… hay vừa được nhắc nhở về điều gì đó lớn hơn.
 
 
-
-Đoạn cuối họp kín xong A2 đặt tay lên vai T2 động viên
-A2 cao vút khỏi khung hình, ko thấy dc mặt
-T2 nhìn thấy và sững người, bối rối hoang mang (kiểu bất ngờ vì nhìn quá giống A1, nhưng trong lòng cũng biết trước đó là bản sao của A1 do bố cô từng kể lại r)
 
 ================================================================================
-                              GIẢI BÓNG CHUYỀN
+                          C2 A7 Chuẩn bị cho giải Bóng Chuyền
 ================================================================================
-A1 chơi mạnh mẽ, vô địch
-T2 cổ vũ tình tứ
 
-=> phòng họp quốc hội quan sát
-Kết luận thuốc khắc chế sắp hết hiệu lực, cần phải hành động
+Hằng năm, 2MorePixels đều tổ chức giải bóng chuyền nội bộ. Thông báo khởi tranh vừa được gửi xuống, cả văn phòng lập tức sôi nổi hẳn lên.
+
+“Lập team đi, năm nay nhất định phải có cúp.” — một người lên tiếng khởi xướng.
+
+“Đội hình cứ như mọi năm thôi nhỉ.” — người khác tiếp lời.
+
+“Anh Tuấn nghỉ rồi… ai thay vị trí chủ công đây?”
+
+“Để em đánh chủ công.” — {{nam9}} lên tiếng, gần như không cần suy nghĩ.
+
+Cả nhóm khựng lại một nhịp.
+
+“Ơ... Mọi năm cậu chỉ đánh chuyền hai thôi mà?”
+
+"Năm nay thì khác."
+
+{{nam9}} vốn là người ít tham gia các hoạt động tập thể, nhưng lại có niềm đam mê rất lớn với bóng chuyền.
+
+Vì vậy nên khi nghe đến giải đấu, thái độ của anh lập tức thay đổi. Một nguồn năng lượng phấn khích được bật lên, trái ngược hoàn toàn với vẻ trầm tĩnh thường ngày.
+
+Ở phía đối diện, ánh mắt {{nu9}} thoáng trầm xuống, mang theo một nét suy tư kín đáo, rồi lập tức trở về vẻ bình thản như chưa từng có gì xảy ra.
+
+
+
+
+================================================================================
+                          C2 A8 Giải Bóng Chuyền
+================================================================================
+
+Giải bóng chuyền nội bộ bắt đầu trong tiếng cổ vũ dồn dập của khán đài. {{nam9}} vào sân với dáng vẻ bình thường, nhưng ngay từ những pha bóng đầu tiên đã kéo nhịp trận lên cao hơn hẳn. Cú phát bóng đi nhanh và nặng, hàng chắn đối phương chạm tay vẫn bật ra ngoài. Những bước đà gọn, dứt khoát; mỗi lần bật nhảy, độ cao nhỉnh lên từng chút, đủ để người tinh ý nhận ra sự khác biệt. Trên khán đài, {{nu9}} ngồi lẫn trong đám đông, tay cầm điện thoại đặt ở một góc cố định hướng thẳng xuống sân, ống kính giữ trọn khu vực hoạt động của anh. Bề ngoài chỉ là ghi lại những khoảnh khắc đẹp, nhưng góc quay đủ rộng để bao quát toàn bộ chuyển động cần thiết. Cô vỗ tay theo nhịp chung, ánh mắt không rời khỏi {{nam9}}. Trận đầu kết thúc nhanh chóng, đội của anh giành chiến thắng áp đảo, gần như không cho đối phương cơ hội kéo dài pha bóng.
+
+Sang trận thứ hai, cường độ tăng lên rõ rệt. {{nam9}} không còn chỉ là người chơi tốt nhất trên sân, mà trở thành trung tâm tuyệt đối của mọi pha bóng. Những cú đập đi thẳng xuống sàn với lực nặng đến mức bóng bật ngược cao, hàng chắn đối phương nhiều lần không kịp phản ứng. Khoảng cách điểm số bị kéo giãn liên tục, từng pha xử lý dứt điểm nhanh đến mức đối phương chỉ kịp đứng nhìn. Set đấu kết thúc trong thế trắng tuyệt đối, không một điểm danh dự được ghi lại. Ở những khoảnh khắc cuối, ánh mắt anh sậm lại, những tia đỏ mảnh hiện lên nơi khóe mắt rồi biến mất ngay khi anh quay đi, đủ nhanh để phần lớn mọi người không nhận ra.
+
+Giữa giờ nghỉ, {{nu9}} rời khán đài, bước xuống khu vực sân. Cô đưa khăn cho {{nam9}}, nhẹ nhàng lau đi lớp mồ hôi còn đọng trên trán anh, đầu ngón tay khẽ chạm vào làn da vẫn còn nóng. “Người anh nóng quá,” cô nói nhỏ, giọng bình thường như một lời quan tâm. {{nam9}} thoáng ngập ngừng, hơi lùi lại một chút, “Không sao, anh ổn.” Anh tránh ánh nhìn, như thể không quen với sự gần gũi đó. {{nu9}} không rút lui, chỉ giữ khoảng cách vừa đủ, ánh mắt dịu xuống. “Giữ sức một chút đi, còn trận cuối nữa. Đừng đẩy nhanh quá, giữ nhịp thôi.” Cô nói rất khẽ, như đang trêu đùa, nhưng từng từ đều đủ rõ để neo lại. “Anh đang nóng lên rồi đấy, nghỉ một chút cho hạ nhiệt đã.” {{nam9}} không đáp, chỉ khẽ gật đầu, động tác nhỏ nhưng đủ để thấy anh đã tiếp nhận lời nói đó.
+
+Trận chung kết diễn ra sau đó với một nhịp độ khác. {{nam9}} vẫn là người dẫn dắt thế trận, nhưng lực đánh được giữ ở mức vừa đủ, những pha xử lý thiên về kỹ thuật hơn là áp đảo tuyệt đối. Đối phương có cơ hội ghi điểm, trận đấu kéo dài hơn, nhưng ưu thế vẫn không thay đổi. Ở điểm cuối cùng, anh bật nhảy, dứt điểm gọn gàng, không phô lực nhưng vẫn đủ để kết thúc trận đấu. Tiếng cổ vũ bùng lên khi đội anh giành chức vô địch.
+
+Chuyển cảnh. Trong một căn phòng kín, hình ảnh từ camera được chiếu lại trên màn hình lớn. Khung hình ổn định, góc quay bao quát, từng chuyển động của {{nam9}} được tua chậm, dừng lại ở những thời điểm then chốt. Các thông số hiện lên: độ cao bật nhảy, thời gian tiếp đất, tốc độ bóng, nhịp biến thiên lực theo từng pha xử lý. “Góc đặt camera rất chính xác,” một giọng nói vang lên trầm thấp. “Đủ dữ liệu để tái dựng toàn bộ hành vi vận động.” Một người khác gật đầu. “Tiếp cận tự nhiên, không gây cảnh giác. Đối tượng không có dấu hiệu nhận biết.” Ánh mắt trong phòng chuyển về phía màn hình khi đoạn trận thứ hai được phát lại. “Biên độ tăng trưởng vượt dự tính.” Một khoảng lặng ngắn. “Nhưng T2 đã kéo nhịp lại kịp thời. Mức bộc phát được giữ trong ngưỡng cho phép.” Giọng nói tiếp theo rõ ràng hơn, mang theo sự công nhận hiếm thấy. “Xử lý tốt.” Hình ảnh dừng lại ở khoảnh khắc {{nam9}} bật nhảy trong hiệp hai, bóng rời tay với lực vượt chuẩn. “Tuy nhiên…” Người đứng đầu lên tiếng, ánh mắt lạnh xuống. “Thuốc ức chế đang suy giảm nhanh hơn dự kiến.” Cả căn phòng im lặng. “Chuẩn bị phương án cho tình huống xấu nhất.”
+
 
 ================================================================================
                               ĐẤU TRƯỜNG BỊ LỘ
@@ -1213,11 +1111,15 @@ Mọi ng trong công ty cảm thán sao nhìn giống A1 quá, chỉ khác là m
 Sự thật được công bố:
 Cha của A1 là chiến sĩ tình báo, điệp viên ngầm có công lớn với  cách mạng  chống Tây Tân Quốc
 Ngta nghiên cứu thấy ông có bộ gen đặc biệt
-Khi sinh con quyết định nhân bản
+Khi sinh con quyết định nhân bản ngay từ lúc mới sinh ra
 Ý tưởng nhân bản A1 do chính cha của A1 đề xuất, với mục tiêu xây dựng phát triển Nam Long Quốc
 A1 chính là bản gốc
 6 bản sao nhân bản vô tính
 do một nữ bác sĩ nhân bản vô tính
+cả 6 bản sao đó đều lập tức được đưa tới cho chính phủ
+học tập rèn luyện
+trở thành nhân lực cốt cán, cố vấn tối cao ở các ban ngành chính phủ
+
 
 ================================================================================
                               A1 bị tiêm thuốc ức chế

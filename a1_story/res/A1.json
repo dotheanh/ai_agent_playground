@@ -866,7 +866,7 @@
     },
     "TruongDon_CongAn": {
       "id": "TruongDon_CongAn",
-      "name": "Trưởng đồn công an",
+      "name": "Đại tá Dũng",
       "color": "#1B5E20",
       "scale": 1,
       "expressions": [
@@ -2987,7 +2987,7 @@
           },
           {
             "type": "narration",
-            "text": "Sự im lặng đáng sợ bao trùm lấy trụ sở công an. Anh cảnh sát trẻ bàng hoàng nhìn vị Thủ trưởng của mình, người vốn nổi tiếng là chính trực, nay lại phải ra một chỉ thị khó hiểu như vậy. Thân thế của {{nam9}}... xem ra không hề bình thường.",
+            "text": "Sự im lặng đáng sợ bao trùm lấy trụ sở công an. Anh cảnh sát trẻ bàng hoàng nhìn Đại tá Dũng, người vốn nổi tiếng là chính trực, nay lại phải ra một chỉ thị khó hiểu như vậy. Thân thế của {{nam9}}... xem ra không hề bình thường.",
             "id": "AwS4tGxa-lDexZnVxYpjQ"
           },
           {
