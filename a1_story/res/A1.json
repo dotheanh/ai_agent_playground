@@ -480,6 +480,55 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_4_27/7053.png",
       "name": "S-p-Th-ng-angry",
       "category": "sprite"
+    },
+    "yhU6lw6FxhWhrLFMu0Ili": {
+      "id": "yhU6lw6FxhWhrLFMu0Ili",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_28/7227.png",
+      "name": "hopquochoi",
+      "category": "other"
+    },
+    "OmqItZ-YkJbyBWbBe13j6": {
+      "id": "OmqItZ-YkJbyBWbBe13j6",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_29/7292.png",
+      "name": "profile",
+      "category": "other"
+    },
+    "FFGFDdGLXsjtPrRCJe2wX": {
+      "id": "FFGFDdGLXsjtPrRCJe2wX",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_29/7293.png",
+      "name": "ChatGPT Image 22_46_16 28 thg 4, 2026(1)",
+      "category": "other"
+    },
+    "7ovweh_5IE4DmS8FFZMFF": {
+      "id": "7ovweh_5IE4DmS8FFZMFF",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_29/7294.png",
+      "name": "ChatGPT Image 22_46_16 28 thg 4, 2026(1)",
+      "category": "other"
+    },
+    "oGVDw90lETgYZRT1aFJ8R": {
+      "id": "oGVDw90lETgYZRT1aFJ8R",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_29/7295.png",
+      "name": "ChatGPT Image 17_32_14 29 thg 4, 2026",
+      "category": "other"
+    },
+    "PeiAPfvthu9jmJsk2CARf": {
+      "id": "PeiAPfvthu9jmJsk2CARf",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_29/7296.png",
+      "name": "ChatGPT Image 17_39_16 29 thg 4, 2026",
+      "category": "other"
+    },
+    "iCVCTm3_sDMaaG7dm08zO": {
+      "id": "iCVCTm3_sDMaaG7dm08zO",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_26/7021.png",
+      "name": "ChatGPT Image 23_38_50 26 thg 4, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -904,6 +953,15 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_21/6703.png"
+          }
+        },
+        {
+          "id": "GYPK_lMslGLgzNTUlvRcz",
+          "name": "neutrall_small",
+          "visual": {
+            "type": "image",
+            "assetId": "iCVCTm3_sDMaaG7dm08zO",
+            "scale": 0.7
           }
         }
       ]
@@ -1587,7 +1645,7 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7157.png",
-            "scale": 1.2,
+            "scale": 1.1,
             "offset": {
               "x": 0,
               "y": 100
@@ -1603,7 +1661,7 @@
             "scale": 1.3,
             "offset": {
               "x": 0,
-              "y": 57
+              "y": 88
             }
           }
         },
@@ -1613,11 +1671,44 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7157.png",
-            "scale": 0.6,
+            "scale": 0.4,
             "offset": {
               "x": 75,
-              "y": -100
+              "y": -84
             }
+          }
+        }
+      ]
+    },
+    "A3xlgscg_5MPcRVhdvKMm": {
+      "id": "A3xlgscg_5MPcRVhdvKMm",
+      "name": "Thủ Tướng",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "_ig_au8bx7OldCNdc1OqM",
+          "name": "default",
+          "visual": {
+            "type": "image",
+            "assetId": "7ovweh_5IE4DmS8FFZMFF",
+            "scale": 0.8
+          }
+        }
+      ]
+    },
+    "TlVBkP3VfnHvfighf75Vi": {
+      "id": "TlVBkP3VfnHvfighf75Vi",
+      "name": "Ủy viên Thắng",
+      "color": "#2C3E50",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "sep_thang_happy",
+          "name": "happy",
+          "visual": {
+            "type": "image",
+            "assetId": "PeiAPfvthu9jmJsk2CARf",
+            "scale": 0.8
           }
         }
       ]
@@ -1727,7 +1818,7 @@
           },
           {
             "type": "narration",
-            "text": "ẦMMM! Cú va chạm mạnh khiến chàng thanh niên loạng choạng, suýt ngã khỏi xe.",
+            "text": "[b]ẦMMM![/b] Cú va chạm mạnh khiến chàng thanh niên loạng choạng, suýt ngã khỏi xe.",
             "id": "deOWBq9TNNl3GOQmppg8o"
           },
           {
@@ -1857,7 +1948,7 @@
           },
           {
             "type": "narration",
-            "text": "BÀM! Một tên đàn em lao tới đấm thẳng vào mặt chàng thanh niên.",
+            "text": "[shake][b]BÀM![/b][/shake][wait=500] Một tên đàn em lao tới đấm thẳng vào mặt chàng thanh niên.",
             "id": "PiA02jg6Seuedv3i_pKVb"
           },
           {
@@ -5674,6 +5765,211 @@
         }
       },
       {
+        "id": "uyJlsa66FSiAyH7CEMiNQ",
+        "title": "C2 A6 Họp Quốc hội (2)",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "gnRjyYeVWQeMwVAa23Sy2"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "oGVDw90lETgYZRT1aFJ8R"
+            },
+            "id": "iAkEzoqce9PDfIB2lnZh3"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Màn hình lớn chiếu lại đoạn video ghi nhận từ hiện trường vụ ẩu đả giữa {{nam9}} và nhóm giang hồ.",
+            "id": "F-vTg0KBPpmyPQbgfiMAA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Bên dưới khung hình, dòng tiêu đề hiện lên: “Đối tượng [b][color=#FF0000]A1[/color][/b] – Dấu hiệu vượt ngưỡng kiểm soát”.",
+            "id": "iT1TVm6qQSZO2uTzqDvj2"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nam9}} đứng hiên ngang giữa khung cảnh đổ vỡ. Ba đối tượng nằm gục dưới chân. Hình ảnh dừng lại đúng khoảnh khắc ánh mắt anh đỏ ngầu…",
+            "id": "Hag8uZ6C7kekM86nRvkSG"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "yhU6lw6FxhWhrLFMu0Ili"
+            },
+            "id": "kCOM9QFy7QRO2Tmu25OgW"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "position": "left",
+            "expressionId": "sep_thang_happy",
+            "duration": 300,
+            "flipX": false,
+            "id": "eZ1ad_VVEntVNMdla57Z1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "text": "Thuốc ức chế… đã xuất hiện dấu hiệu suy giảm hiệu lực.",
+            "id": "3l1H_23CaKJ9tIba0M_Sk"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "duration": 300,
+            "id": "dtZgzLpRQbGT8TOQh22XS"
+          },
+          {
+            "type": "character_show",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "position": "center",
+            "expressionId": "_ig_au8bx7OldCNdc1OqM",
+            "duration": 300,
+            "flipX": false,
+            "id": "s5HiSds4QHV7FyBmrs1V-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Theo thiết kế ban đầu, dược tính của thuốc được đảm bảo duy trì trạng thái ổn định cho đến khi [b][color=#FF0000]A1[/color][/b] đạt mốc 27 tuổi — thời điểm được xác định là giai đoạn hoàn thiện, đủ điều kiện kế thừa vị trí Hoàng đế của Đô Quốc…",
+            "id": "hswmYVXwV_8PHGdwee8sI"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Nhưng hiện tại… quá trình suy giảm đang diễn ra sớm hơn dự kiến.",
+            "id": "GQOpJ5-Tl5k3Sg7jX6jmu"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Chúng ta đã chủ động đề nghị phía Đô Quốc cho phép triển khai liều bổ sung, đồng thời đang tiến hành đàm phán trực tiếp với Hoàng đế Lâm thời…",
+            "id": "-RtFnG2rAHne5KwRwtpdA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Nhưng cho đến lúc này… vẫn chưa nhận được bất kỳ phản hồi chính thức nào.",
+            "id": "cyvCxo_hFEZimdW2aVghY"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Trong khoảng trống đó… đối tượng có thể chuyển biến theo bất kỳ kịch bản nào — và mọi kịch bản đều kéo theo những hệ quả vượt ngoài năng lực kiểm soát của chúng ta.",
+            "id": "9LMFt5rzdsSBqKqQn74Wl"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "duration": 300,
+            "id": "HA4FAF6sxk9qCJJ7RRCWv"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "right",
+            "expressionId": "neutral",
+            "duration": 300,
+            "flipX": false,
+            "id": "-SiLq2lze7CBd7uzQbilG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Theo thỏa thuận đã ký kết với Đô Quốc…",
+            "id": "KHrO-qnUQH-Kh8D16Wcq1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Kể từ thời điểm [b][color=#FF0000]A1[/color][/b] được tiêm thuốc ức chế, đối tượng phải được phép hoạt động tự do trong xã hội loài người, không chịu bất kỳ hình thức kiểm soát công khai nào.",
+            "id": "Xm4w3-FX5zA8AKGTkZ9k3"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Đây là một ràng buộc bắt buộc.",
+            "id": "Bc41gFh32_ukEOGoKZA5u"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Nhưng đồng thời… trách nhiệm kiểm soát rủi ro vẫn hoàn toàn thuộc về chúng ta.",
+            "id": "wTZmmaBekBrAXFTRfqfk-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Nam Long Quốc chúng ta phải đảm bảo đối tượng luôn nằm trong phạm vi kiểm soát thực tế… đồng thời không được phép tạo ra bất kỳ biểu hiện kiểm soát công khai nào.",
+            "id": "CXYqw06TFDyMHOrmfNSLc"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "duration": 300,
+            "id": "oVvzxXBxZcJH8qO4TG78-"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TruongDon_CongAn",
+            "position": "left",
+            "expressionId": "GYPK_lMslGLgzNTUlvRcz",
+            "duration": 300,
+            "flipX": false,
+            "id": "9XF2-I6ytsKKkXFvXHkjV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "Trong trường hợp [b][color=#FF0000]A1[/color][/b] xuất hiện hành vi bất thường, nguy cơ đặt ra không chỉ dừng lại ở an ninh quốc gia…",
+            "id": "EUp1_AvBCUEe2ssqAQenU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "…mà còn có thể kéo theo một chuỗi leo thang ngoài tầm kiểm soát, đẩy quan hệ giữa nhân loại và Đô Quốc đến ngưỡng xung đột toàn diện.",
+            "id": "WcCOwrpETNEKouCMuKhuS"
+          },
+          {
+            "type": "stage_reset",
+            "id": "SVAxHsgTCaev8TsIiUl1Z"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "6UAMTcjzOmFOMwuTrlZs0"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "fjYtSxdjEbBKnbEuTTi0m"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 5900
+          }
+        }
+      },
+      {
         "id": "BL6_H0ZCpjMkpHwvM2_FE",
         "title": "C2 A5 Họp Quốc hội",
         "nodes": [
@@ -5685,9 +5981,164 @@
             "type": "background_change",
             "visual": {
               "type": "image",
-              "assetId": ""
+              "assetId": "yhU6lw6FxhWhrLFMu0Ili"
             },
             "id": "hPViGqWxLsQha8R4TM3ek"
+          },
+          {
+            "type": "narration",
+            "text": "[QUỐC HỘI - PHIÊN HỌP KÍN BẤT THƯỜNG - NĂM 2026]",
+            "id": "egNUPQaQ9EkDzZYeACvYm"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": true,
+            "id": "epwl2O3Rds7y4SJoTZcGG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Căn phòng họp nằm sâu trong khu nghị viện trung ương, hoàn toàn cách ly với bên ngoài. Không cửa sổ, không tín hiệu, không thiết bị cá nhân.",
+            "id": "rjyF5fC0VwYNBEsiHmLlT"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Đó là một hội trường kín quy mô lớn, bố trí theo vòng cung hướng dần về sân khấu trung tâm — nơi mọi ánh nhìn hội tụ.",
+            "id": "i6JZj-yqqSm0I4_6UCVrA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ánh sáng vàng dịu được dồn xuống theo từng lớp, phủ kín không gian trong một sắc tối ấm, khiến toàn bộ căn phòng trở nên trầm lắng, nghiêm trang và tách biệt khỏi thế giới bên ngoài.",
+            "id": "r7b5z1aq1rF5TsDK61e4t"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Đây là nơi dành cho những người đứng trên đỉnh quyền lực, nắm giữ vận mệnh của cả Nam Long Quốc.",
+            "id": "KIbSq4p_s0YC41zYKyQzj"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ở hàng ghế đầu tiên, ngài Thủ tướng ngồi ở vị trí trung tâm. Bên cạnh ông là Ủy viên Sơn - bố của {{nu9}}.",
+            "id": "4843k5Z2Rp5U4j129uhEu"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ở hàng ghế thứ hai, phía sau dãy bàn chính. {{nu9}} đứng dậy.",
+            "id": "5TVPPTq-ViBwMXDbiS-1R"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Màn hình lớn phía trước bật sáng.",
+            "id": "suvTtpQCZ9v0Sx3OUWrsU"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "OmqItZ-YkJbyBWbBe13j6"
+            },
+            "id": "tHekA7srR2FaQCcwysvPL"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Hồ sơ cá nhân của cô hiện lên, rõ ràng, ngắn gọn.",
+            "id": "wdvWJY-gR_Prx7UkQhyjn"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": false,
+            "id": "-0Izr1_8aQOMJ6nOKKx6n"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ngài Thủ tướng khẽ gật đầu, giọng trầm và rõ ràng vang lên:",
+            "id": "41RKSy5VBgL1qob1LTgiN"
+          },
+          {
+            "type": "character_show",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "position": "center",
+            "expressionId": "_ig_au8bx7OldCNdc1OqM",
+            "duration": 300,
+            "flipX": false,
+            "id": "Mn1y5QsPDvL6mCt1NJhTp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Trước khi đi vào nội dung chính, tôi xin phép giới thiệu một nhân sự đặc biệt.",
+            "id": "tC_BKvjWmA7Pzl3bClXRZ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ông nhìn về phía {{nu9}}.",
+            "id": "4FD4EWaq4ewMUYMRYxMvV"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "yhU6lw6FxhWhrLFMu0Ili"
+            },
+            "id": "eWPSAJomFzaa2GHA3W3cI"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Đồng chí {{nu9}} đã hoàn thành chương trình giáo dục phổ thông ở độ tuổi 10, sau đó tiếp tục theo học các chương trình đào tạo chuyên sâu về khoa học dữ liệu, tâm lý học chính trị và phân tích chiến lược ở cấp độ cao.",
+            "id": "Ftfs1Kd2Q5IcEHd2FOgH_"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Đồng thời, đồng chí đã hoàn tất chương trình đào tạo cán bộ nguồn chiến lược ở độ tuổi 16 theo cơ chế đặc cách - một trường hợp chưa từng ghi nhận tiền lệ trong hệ thống.",
+            "id": "fEyC7ngrWB-Y22pbZBmFQ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Trước thời điểm xảy ra sự cố cách đây 8 năm, {{nu9}} đã được đưa vào danh sách xem xét bổ nhiệm vào vị trí trong bộ máy điều hành cấp trung ương, với định hướng tham gia công tác phân tích và hoạch định chính sách chiến lược.",
+            "id": "0s0CeJvytWSyZiAxFUJKI"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Trong suốt 8 năm qua, mặc dù cơ thể không duy trì trạng thái hoạt động…",
+            "id": "KwFtHvRTM3SzbcBKNjDpD"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "…nhưng các đánh giá chuyên môn cho thấy năng lực nhận thức, phân tích và xử lý thông tin của cá nhân này không những không suy giảm…",
+            "id": "FZbfOpPJ65t5y3g7fFVcA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "…mà còn ghi nhận xu hướng phát triển vượt ngoài mọi chuẩn đánh giá hiện hành.",
+            "id": "a4_cRnn9ZZGH6mJNibfxC"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Với những yếu tố trên, Bộ Chính trị đã thống nhất cho phép đồng chí {{nu9}} tiếp cận hồ sơ tối mật cấp S và tham gia phiên họp hôm nay, với mật danh: [b][color=#0000FF]T2[/color][/b].",
+            "id": "bkvHT697GYS1FfzMEUnsw"
+          },
+          {
+            "type": "narration",
+            "text": "Không gian rơi vào im lặng tuyệt đối, chỉ còn lại những ánh nhìn sắc lạnh và đầy tính thẩm định.",
+            "id": "fzn_tPneAp67ceUxA8oNH"
           },
           {
             "type": "stage_reset",
@@ -5711,6 +6162,11 @@
               "color": "#000000"
             },
             "id": "zZ0qGrs4a9B1SQkSUo88b"
+          },
+          {
+            "type": "goto",
+            "target": "uyJlsa66FSiAyH7CEMiNQ",
+            "id": "6MAReawr1hMz1y9ndFaam"
           }
         ],
         "meta": {
@@ -5959,8 +6415,8 @@
             "type": "character_move",
             "characterId": "529yqNxmTedAHDuaaniwa",
             "position": {
-              "x": 86,
-              "y": 61
+              "x": 81,
+              "y": 58
             },
             "duration": 500,
             "id": "rrL-s-fq85u04t-K9rYdh"

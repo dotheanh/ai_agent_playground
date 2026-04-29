@@ -847,8 +847,6 @@ Cô vội vàng cầm bút, phác thảo lại hình ảnh của {{nam9}} — ng
 ================================================================================
 
 
-********** insert ảnh nền phòng họp
-
 [QUỐC HỘI - PHIÊN HỌP KÍN BẤT THƯỜNG - NĂM 2026]
 
 Căn phòng họp nằm sâu trong khu nghị viện trung ương, hoàn toàn cách ly với bên ngoài. Không cửa sổ, không tín hiệu, không thiết bị cá nhân.
@@ -867,11 +865,10 @@ Màn hình lớn phía trước bật sáng.
 
 Hồ sơ cá nhân của cô hiện lên, rõ ràng, ngắn gọn:
 
-********** insert ảnh profile
 
 ----------------------
 
-Họ tên: ______
+Họ tên: {{nu9}}
 Ngày sinh: 01/01/2000
 Nguyên quán: Thủ Đô
 Quốc tịch: Nam Long Quốc
@@ -913,7 +910,7 @@ Không gian rơi vào im lặng tuyệt đối, chỉ còn lại những ánh nh
                             C2 A6 Họp Quốc hội (2)
 ================================================================================
 
-Màn hình lớn chiếu lại đoạn video ghi nhận từ hiện trường vụ ẩu đả giữa {{nam9}} và một nhóm giang hồ. Bên dưới khung hình, dòng tiêu đề hiện lên: **“Đối tượng A1 – Dấu hiệu vượt ngưỡng kiểm soát”**.
+Màn hình lớn chiếu lại đoạn video ghi nhận từ hiện trường vụ ẩu đả giữa {{nam9}} và nhóm giang hồ. Bên dưới khung hình, dòng tiêu đề hiện lên: “Đối tượng A1 – Dấu hiệu vượt ngưỡng kiểm soát”.
 
 {{nam9}} đứng hiên ngang giữa khung cảnh đổ vỡ. Ba đối tượng nằm gục dưới chân. Hình ảnh dừng lại đúng khoảnh khắc ánh mắt anh đỏ ngầu…
 
