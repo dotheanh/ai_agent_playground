@@ -1059,17 +1059,227 @@ Vì vậy nên khi nghe đến giải đấu, thái độ của anh lập tức 
                           C2 A8 Giải Bóng Chuyền
 ================================================================================
 
-Giải bóng chuyền nội bộ bắt đầu trong tiếng cổ vũ dồn dập của khán đài. {{nam9}} vào sân với dáng vẻ bình thường, nhưng ngay từ những pha bóng đầu tiên đã kéo nhịp trận lên cao hơn hẳn. Cú phát bóng đi nhanh và nặng, hàng chắn đối phương chạm tay vẫn bật ra ngoài. Những bước đà gọn, dứt khoát; mỗi lần bật nhảy, độ cao nhỉnh lên từng chút, đủ để người tinh ý nhận ra sự khác biệt. Trên khán đài, {{nu9}} ngồi lẫn trong đám đông, tay cầm điện thoại đặt ở một góc cố định hướng thẳng xuống sân, ống kính giữ trọn khu vực hoạt động của anh. Bề ngoài chỉ là ghi lại những khoảnh khắc đẹp, nhưng góc quay đủ rộng để bao quát toàn bộ chuyển động cần thiết. Cô vỗ tay theo nhịp chung, ánh mắt không rời khỏi {{nam9}}. Trận đầu kết thúc nhanh chóng, đội của anh giành chiến thắng áp đảo, gần như không cho đối phương cơ hội kéo dài pha bóng.
+Giải bóng chuyền thường niên của công ty 2MorePixels
+đội Khai Giới
 
-Sang trận thứ hai, cường độ tăng lên rõ rệt. {{nam9}} không còn chỉ là người chơi tốt nhất trên sân, mà trở thành trung tâm tuyệt đối của mọi pha bóng. Những cú đập đi thẳng xuống sàn với lực nặng đến mức bóng bật ngược cao, hàng chắn đối phương nhiều lần không kịp phản ứng. Khoảng cách điểm số bị kéo giãn liên tục, từng pha xử lý dứt điểm nhanh đến mức đối phương chỉ kịp đứng nhìn. Set đấu kết thúc trong thế trắng tuyệt đối, không một điểm danh dự được ghi lại. Ở những khoảnh khắc cuối, ánh mắt anh sậm lại, những tia đỏ mảnh hiện lên nơi khóe mắt rồi biến mất ngay khi anh quay đi, đủ nhanh để phần lớn mọi người không nhận ra.
+Giải bóng chuyền nội bộ bắt đầu trong tiếng cổ vũ dồn dập của khán đài. {{nam9}} vào sân với dáng vẻ bình thường, nhưng ngay từ những pha bóng đầu tiên đã kéo nhịp trận lên cao hơn hẳn. Cú phát bóng đi nhanh và nặng, hàng chắn đối phương chạm tay vẫn bật ra ngoài. Những bước đà gọn, dứt khoát; mỗi lần bật nhảy, độ cao nhỉnh lên từng chút, đủ để người tinh ý nhận ra sự khác biệt.
 
-Giữa giờ nghỉ, {{nu9}} rời khán đài, bước xuống khu vực sân. Cô đưa khăn cho {{nam9}}, nhẹ nhàng lau đi lớp mồ hôi còn đọng trên trán anh, đầu ngón tay khẽ chạm vào làn da vẫn còn nóng. “Người anh nóng quá,” cô nói nhỏ, giọng bình thường như một lời quan tâm. {{nam9}} thoáng ngập ngừng, hơi lùi lại một chút, “Không sao, anh ổn.” Anh tránh ánh nhìn, như thể không quen với sự gần gũi đó. {{nu9}} không rút lui, chỉ giữ khoảng cách vừa đủ, ánh mắt dịu xuống. “Giữ sức một chút đi, còn trận cuối nữa. Đừng đẩy nhanh quá, giữ nhịp thôi.” Cô nói rất khẽ, như đang trêu đùa, nhưng từng từ đều đủ rõ để neo lại. “Anh đang nóng lên rồi đấy, nghỉ một chút cho hạ nhiệt đã.” {{nam9}} không đáp, chỉ khẽ gật đầu, động tác nhỏ nhưng đủ để thấy anh đã tiếp nhận lời nói đó.
+Trên khán đài, {{nu9}} ngồi lẫn trong đám đông, đặt điện thoại lên giá đỡ hướng thẳng xuống sân. Góc quay cố định, đủ rộng để giữ trọn toàn bộ phạm vi hoạt động của anh. Cô vỗ tay theo nhịp chung, ánh mắt không rời khỏi {{nam9}}.
 
-**** thêm chi tiết nu9 thấy mắt đỏ quá lo lắng hỏi
+Ngón tay cô lướt qua màn hình như một thói quen vô thức. Một giao diện đơn giản hiện lên trong thoáng chốc — các chỉ số biến thiên theo thời gian thực, biên độ vận động, nhịp tăng lực theo từng pha chạm bóng.
 
-Trận chung kết diễn ra sau đó với một nhịp độ khác. {{nam9}} vẫn là người dẫn dắt thế trận, nhưng lực đánh được giữ ở mức vừa đủ, những pha xử lý thiên về kỹ thuật hơn là áp đảo tuyệt đối. Đối phương có cơ hội ghi điểm, trận đấu kéo dài hơn, nhưng ưu thế vẫn không thay đổi. Ở điểm cuối cùng, anh bật nhảy, dứt điểm gọn gàng, không phô lực nhưng vẫn đủ để kết thúc trận đấu. Tiếng cổ vũ bùng lên khi đội anh giành chức vô địch.
+Ánh mắt cô dừng lại ở một đường cong đang nhích dần lên.
 
-Chuyển cảnh. Trong một căn phòng kín, hình ảnh từ camera được chiếu lại trên màn hình lớn. Khung hình ổn định, góc quay bao quát, từng chuyển động của {{nam9}} được tua chậm, dừng lại ở những thời điểm then chốt. Các thông số hiện lên: độ cao bật nhảy, thời gian tiếp đất, tốc độ bóng, nhịp biến thiên lực theo từng pha xử lý. “Góc đặt camera rất chính xác,” một giọng nói vang lên trầm thấp. “Đủ dữ liệu để tái dựng toàn bộ hành vi vận động.” Một người khác gật đầu. “Tiếp cận tự nhiên, không gây cảnh giác. Đối tượng không có dấu hiệu nhận biết.” Ánh mắt trong phòng chuyển về phía màn hình khi đoạn trận thứ hai được phát lại. “Biên độ tăng trưởng vượt dự tính.” Một khoảng lặng ngắn. “Nhưng T2 đã kéo nhịp lại kịp thời. Mức bộc phát được giữ trong ngưỡng cho phép.” Giọng nói tiếp theo rõ ràng hơn, mang theo sự công nhận hiếm thấy. “Xử lý tốt.” Hình ảnh dừng lại ở khoảnh khắc {{nam9}} bật nhảy trong hiệp hai, bóng rời tay với lực vượt chuẩn. “Tuy nhiên…” Người đứng đầu lên tiếng, ánh mắt lạnh xuống. “Thuốc ức chế đang suy giảm nhanh hơn dự kiến.” Cả căn phòng im lặng. “Chuẩn bị phương án cho tình huống xấu nhất.”
+…vẫn nằm trong khoảng kiểm soát.
+
+Màn hình tắt đi ngay sau đó, như chưa từng được bật.
+
+Trận đầu kết thúc nhanh chóng, đội của anh giành chiến thắng áp đảo.
+
+---
+
+Sang trận thứ hai, cường độ tăng lên rõ rệt. {{nam9}} không còn chỉ là người chơi tốt nhất trên sân, mà trở thành điểm rơi của mọi pha bóng.
+
+Một đường chuyền cao.
+
+Anh lấy đà — nhanh, gọn, gần như không có khoảng trễ.
+
+Bật lên.
+
+Khoảnh khắc tiếp bóng, âm thanh không còn là tiếng “đập” quen thuộc — mà là một tiếng nện khô, nặng, như thể lực không dừng lại ở quả bóng.
+
+Bóng lao xuống.
+
+Người đỡ phía dưới chỉ kịp giơ tay theo bản năng.
+
+Bụp.
+
+Cánh tay anh ta bật ngược lại một góc bất thường. Bóng không nảy lên — nó văng chéo ra ngoài sân như bị hất đi. Người đó khựng lại, sắc mặt trắng bệch, bàn tay còn lại lập tức ôm lấy cẳng tay vừa đỡ. Cả người hơi khuỵu xuống.
+
+Trọng tài thổi còi.
+
+Khán đài ồn ào trong chớp mắt rồi chùng xuống.
+
+Ở dưới sân, người bị đỡ bóng không đứng dậy ngay.
+
+Trận đấu tiếp tục.
+
+Không ai nói ra, nhưng nhịp trận đã lệch.
+
+Một pha khác.
+
+Hàng chắn đối phương dựng lên đủ hai người.
+
+{{nam9}} vẫn bật.
+
+Cú đập lần này không đổi hướng, không né chắn.
+
+Đánh thẳng.
+
+Bóng chạm tay chắn — nhưng thay vì bị giữ lại hay bật nhẹ, nó xuyên qua khoảng tay với một lực nặng đến mức cả hai người chắn đều giật lùi nửa bước trên không.
+
+Khi bóng rơi xuống sàn, âm thanh vang lên nặng và đục, không còn độ “nảy” quen thuộc. Quả bóng lăn đi, để lại trên sàn một vệt ma sát sẫm màu thoáng qua rồi biến mất.
+
+Một người bên kia lưới vô thức siết chặt bàn tay, da tay đỏ rát như vừa bị cọ nóng.
+
+Khoảng cách điểm số bị kéo giãn.
+
+Nhưng thứ thay đổi không phải là tỉ số.
+
+Mà là cách đối phương bắt đầu đứng thấp hơn một chút, tay chậm hơn một nhịp khi bóng hướng về phía {{nam9}}.
+
+Ở những pha cuối, ánh mắt anh sậm lại. Những tia đỏ mảnh lướt qua nơi khóe mắt — lần này rõ hơn, lâu hơn một nhịp.
+
+Trên khán đài, {{nu9}} không nhìn điện thoại. Chỉ một nhịp quan sát là đủ.
+
+…đã chạm ngưỡng cảnh báo thấp.
+
+Màn hình sáng lên trong lòng bàn tay cô — một thông báo ngắn gọn xác nhận điều đó — rồi tắt ngay.
+
+Đội của {{nam9}} giành chiến thắng, bước vào chung kết.
+
+---
+
+Giữa giờ nghỉ, {{nu9}} rời khán đài, bước xuống khu vực sân.
+
+Ánh mắt cô dừng lại trên gương mặt {{nam9}} — sắc đỏ nơi khóe mắt chưa tan hết, nhiệt độ cơ thể vẫn cao hơn mức bình thường.
+
+“Anh ổn chứ?” cô hỏi khẽ, giọng tự nhiên như một câu quan tâm.
+
+{{nam9}} thoáng khựng lại, rồi lắc đầu nhẹ. “Không sao, anh ổn.”
+Nhưng ánh mắt anh thoáng lệch đi một nhịp — đủ để chính anh cũng nhận ra trạng thái của mình.
+
+Cô không nói thêm, chỉ đưa khăn, nhẹ nhàng lau đi lớp mồ hôi trên trán anh. Đầu ngón tay chạm vào làn da vẫn còn nóng.
+
+“Người anh nóng quá,” cô nói nhỏ.
+
+Anh hơi lùi lại một chút, như không quen với khoảng cách đó. “Anh nói rồi, không sao.”
+
+{{nu9}} không rút lui, chỉ giữ khoảng cách vừa đủ. Ánh mắt dịu xuống, giọng vẫn nhẹ như cũ:
+
+“Giữ sức một chút đi, còn trận cuối nữa. Đừng đẩy nhanh quá, giữ nhịp thôi.”
+
+Cô dừng lại một nhịp, rồi nói tiếp, rất khẽ:
+
+“Anh chỉ cần giữ nhịp như set đầu, họ sẽ tự vỡ đội hình.”
+
+Một khoảng lặng ngắn.
+
+“Anh đang nóng lên rồi đấy. Nghỉ một chút cho hạ nhiệt đã.”
+
+{{nam9}} không đáp. Chỉ khẽ gật đầu. Nhưng lần này, ánh mắt anh đã ổn định lại — rõ ràng hơn, có kiểm soát hơn.
+
+---
+Trận chung kết diễn ra sau đó với một nhịp độ khác. {{nam9}} vẫn là người dẫn dắt thế trận, nhưng lực đánh được giữ ở mức vừa đủ. Những pha xử lý chuyển sang thiên về kỹ thuật — góc đánh mở rộng hơn, điểm rơi được kéo giãn, nhịp đập không còn dồn dập mà được chia nhỏ, đều và chính xác.
+
+Bóng không còn lao xuống như búa nện, mà đi theo những quỹ đạo khó chịu — chéo sâu, sát biên, hoặc lướt qua tay chắn với sai số cực nhỏ. Hàng chắn đối phương nhiều lần chạm được bóng, nhưng không giữ được nhịp, buộc phải trả về những đường bóng thiếu ổn định.
+
+Nhịp trận bị kéo chậm lại đúng lúc.
+
+Đối phương bắt đầu có điểm, có những pha cứu bóng kéo dài, nhưng thế trận không đổi. {{nam9}} không còn áp đảo bằng lực — anh điều khiển nhịp.
+
+Mỗi lần bật nhảy, độ cao vẫn ở đó.
+Nhưng điểm rơi được chọn chính xác hơn.
+Mỗi cú chạm bóng đều có mục đích.
+
+Ở những pha bóng dài, anh không dứt điểm ngay — mà kéo thêm một nhịp, buộc hàng thủ đối phương dịch chuyển, lệch vị trí, rồi mới kết thúc.
+
+Khoảng cách điểm số không còn giãn mạnh, nhưng luôn được giữ ở mức an toàn.
+
+Điểm cuối cùng.
+
+Một đường chuyền hai hơi lệch.
+
+{{nam9}} vẫn bật lên.
+
+Không chỉnh nhiều.
+
+Không phô lực.
+
+Cổ tay khẽ xoay.
+
+Bóng đi theo một đường chéo gọn, lướt qua mép tay chắn, rơi đúng khoảng trống phía sau — nơi không ai kịp lùi về.
+
+Chạm sàn.
+
+Âm thanh khô, dứt khoát.
+
+Một nhịp chậm.
+
+Rồi tiếng còi vang lên.
+
+Khán đài bùng nổ.
+
+Tiếng cổ vũ dâng lên thành từng lớp, dội ngược vào sân. Đồng đội lao tới, đập tay, khoác vai, kéo {{nam9}} vào giữa vòng người. Một vài người cười lớn, vài người hét lên không rõ câu chữ.
+
+Ở giữa tất cả, {{nam9}} chỉ đứng đó một nhịp, hơi thở vẫn còn nặng nhưng ánh mắt đã hoàn toàn ổn định lại.
+
+Không còn sắc đỏ.
+
+Chỉ còn lại sự tập trung vừa được tháo xuống.
+
+Ở rìa sân, {{nu9}} đã rời khán đài từ lúc nào.
+
+Cô chen qua đám người, tay cầm điện thoại, ánh mắt sáng lên rõ rệt — khác hẳn vẻ bình tĩnh trước đó.
+
+“Ê, xem cái này nè.”
+
+Cô đưa điện thoại lên trước mặt anh.
+
+Màn hình phát một đoạn clip ngắn — nhịp cắt nhanh, bắt trúng những khoảnh khắc bật nhảy, dứt điểm, góc quay ổn định, chuyển cảnh gọn gàng. Nhạc nền ghép vừa khít từng pha bóng, cao trào rơi đúng những cú kết thúc.
+
+Một đoạn highlight hoàn chỉnh.
+
+“Em vừa cắt luôn lúc nãy,” cô nói, giọng không giấu được chút hào hứng. “Đỉnh chưa?”
+
+{{nam9}} nhìn màn hình, hơi khựng lại một nhịp.
+
+Rồi khẽ cười.
+
+“Em chuẩn bị từ trước à?”
+
+“Đâu,” cô nhún vai, mắt vẫn nhìn anh. “Quay sẵn thôi, tiện tay làm luôn.”
+
+Cô thu điện thoại lại, giọng nhẹ đi một chút:
+
+“Chúc mừng nhé.”
+
+Không khí xung quanh vẫn ồn ào.
+
+Nhưng giữa khoảnh khắc đó, mọi thứ như chậm lại một nhịp — đủ để tách biệt tiếng cười, tiếng nói, và một sự cân bằng vừa được giữ lại đúng lúc.
+---
+
+Chuyển cảnh.
+
+Trong một căn phòng kín, hình ảnh từ camera được chiếu lại trên màn hình lớn. Khung hình ổn định, góc quay bao quát. Từng chuyển động của {{nam9}} được tua chậm, dừng lại ở những thời điểm then chốt.
+
+Các thông số hiện lên: độ cao bật nhảy, thời gian tiếp đất, tốc độ bóng, nhịp biến thiên lực theo từng pha xử lý.
+
+“Góc đặt camera rất chính xác,” một giọng nói trầm thấp vang lên. “Đủ dữ liệu để tái dựng toàn bộ hành vi vận động.”
+
+“Tiếp cận tự nhiên, không gây cảnh giác. Đối tượng không có dấu hiệu nhận biết.”
+
+Đoạn trận thứ hai được phát lại.
+
+“Biên độ tăng trưởng vượt dự tính.”
+“Nếu vượt ngưỡng trong môi trường đông người… hậu quả sẽ không thể khoanh vùng.”
+
+Một khoảng lặng ngắn.
+
+“Nhưng T2 đã kéo nhịp lại kịp thời. Mức bộc phát được giữ trong ngưỡng cho phép.”
+
+“Xử lý tốt.”
+“Trong điều kiện không kiểm soát, mức này đủ để dẫn tới rủi ro gây thương vong hàng loạt.”
+
+Hình ảnh dừng lại ở khoảnh khắc {{nam9}} bật nhảy trong hiệp hai, bóng rời tay với lực vượt chuẩn.
+
+“Tuy nhiên…” người đứng đầu lên tiếng, ánh mắt lạnh xuống.
+“Thuốc ức chế đang suy giảm nhanh hơn dự kiến.”
+
+Cả căn phòng im lặng.
+
+“Chuẩn bị phương án cho tình huống xấu nhất.”
+
 
 
 =================================================================================================================
