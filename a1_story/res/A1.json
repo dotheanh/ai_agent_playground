@@ -529,6 +529,34 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_4_26/7021.png",
       "name": "ChatGPT Image 23_38_50 26 thg 4, 2026",
       "category": "other"
+    },
+    "n9-W_4NDMWY21o6ND9_t3": {
+      "id": "n9-W_4NDMWY21o6ND9_t3",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_30/7348.png",
+      "name": "ChatGPT Image 11_46_37 29 thg 4, 2026",
+      "category": "other"
+    },
+    "1XR6BU3VrNpIrFeNzqJMF": {
+      "id": "1XR6BU3VrNpIrFeNzqJMF",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_30/7349.mp3",
+      "name": "beethoven-symphony-no-7-2nd-movement-246122",
+      "category": "other"
+    },
+    "EFxEM9IWEeXEDzifaYSdV": {
+      "id": "EFxEM9IWEeXEDzifaYSdV",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_30/7350.mp3",
+      "name": "[compress] beethoven-symphony-no-7-2nd-movement-246122",
+      "category": "other"
+    },
+    "LycM1Svq6Q8KusDPkNzQ8": {
+      "id": "LycM1Svq6Q8KusDPkNzQ8",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_30/7351.png",
+      "name": "ChatGPT Image 11_46_31 29 thg 4, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -4319,7 +4347,7 @@
           {
             "type": "character_show",
             "characterId": "JkuHBljTR4th0RQdUeZMA",
-            "position": "left",
+            "position": "right",
             "expressionId": "angry",
             "duration": 300,
             "flipX": false,
@@ -4334,7 +4362,7 @@
           {
             "type": "character_show",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "position": "center",
+            "position": "left",
             "expressionId": "angry",
             "duration": 100,
             "flipX": false,
@@ -4565,7 +4593,7 @@
             "type": "background_change",
             "visual": {
               "type": "image",
-              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7151.png"
+              "assetId": "n9-W_4NDMWY21o6ND9_t3"
             },
             "id": "memMPPvcT5dktMqWtNMYP"
           },
@@ -4575,9 +4603,9 @@
           },
           {
             "type": "play_bgm",
-            "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7122.mp3",
+            "assetId": "EFxEM9IWEeXEDzifaYSdV",
             "loop": true,
-            "volume": 0.21,
+            "volume": 0.41,
             "id": "CYuYJNJ1I0-dS-GXftFn7"
           },
           {
@@ -5760,7 +5788,330 @@
         "meta": {
           "mapPosition": {
             "x": 1200,
-            "y": 5400
+            "y": 5900
+          }
+        }
+      },
+      {
+        "id": "833a1auUJdtMMxtZi6Gno",
+        "title": "C2 A7 Họp Quốc hội (3)",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "uaqRX1p-7Jw-z_wvn_0uE"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "yhU6lw6FxhWhrLFMu0Ili"
+            },
+            "id": "VhuTOCfu6j_Po6oeacXmX"
+          },
+          {
+            "type": "narration",
+            "text": "Cả hội trường chìm trong im lặng.",
+            "id": "ftgxcp4LnlzBDISu1_rQk"
+          },
+          {
+            "type": "character_show",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "position": "center",
+            "expressionId": "_ig_au8bx7OldCNdc1OqM",
+            "duration": 300,
+            "flipX": false,
+            "id": "YFa0EeAZVU0D9yP9eOC-D"
+          },
+          {
+            "type": "narration",
+            "text": "Ngài Thủ tướng chậm rãi lên tiếng:",
+            "id": "6aeHqpzMvT69fxigTF7V2"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Tiến hành biểu quyết.",
+            "id": "c5Psm4DBtZm4r68W9YYNn"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "duration": 300,
+            "id": "3TEquM5iIFnAPOmnvaLMC"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "position": "left",
+            "expressionId": "sep_thang_happy",
+            "duration": 300,
+            "flipX": false,
+            "id": "lZQ0bZVwZoXW7mqtdW-yM"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "text": "Tán thành.",
+            "id": "B3mwrD_NWv_SC5LtsxrGL"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "duration": 300,
+            "id": "Rfzu2-j1Xi4pUhtNkis1g"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TruongDon_CongAn",
+            "position": "center-left",
+            "expressionId": "GYPK_lMslGLgzNTUlvRcz",
+            "duration": 300,
+            "flipX": false,
+            "id": "koLJ8yXoSELQw_ehkHlRL"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "Tán thành.",
+            "id": "OEFcUF4qBPsODSeOpG-87"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "TruongDon_CongAn",
+            "duration": 300,
+            "id": "w2thOizVgUWJN47f41mmF"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "right",
+            "expressionId": "sad",
+            "duration": 300,
+            "flipX": false,
+            "id": "qyzYWJG97_f7pPLfNGfsQ"
+          },
+          {
+            "type": "narration",
+            "text": "Ông Sơn khẽ nhắm mắt một nhịp, rồi mở ra. Ánh nhìn trở lại trạng thái kiểm soát tuyệt đối.",
+            "id": "f6NCFgVnL6bL6pTObC8EP"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Tán thành.",
+            "id": "NEO5KXSkQyWFl66gYX05N"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "duration": 300,
+            "id": "chkiySKUmLziQcXnkj8Oh"
+          },
+          {
+            "type": "character_show",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "position": "center",
+            "expressionId": "_ig_au8bx7OldCNdc1OqM",
+            "duration": 300,
+            "flipX": false,
+            "id": "dBpOOisJ5b2oRBzEN7pP5"
+          },
+          {
+            "type": "narration",
+            "text": "Ngài Thủ tướng dừng ánh mắt ở {{nu9}}, giọng dứt khoát:",
+            "id": "_7vdyCt70_JivBxJvYARa"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Thông qua.[wait=500]\nKể từ thời điểm này, mật danh [b][color=#1560BD]T2[/color][/b] chính thức được kích hoạt.",
+            "id": "LcBSTQeVvm3EN9S9pv9dE"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Nhiệm vụ: tiếp cận, theo dõi và đánh giá đối tượng [b][color=#FF0000]A1[/color][/b].",
+            "id": "23iWJvx2qpX6bsXaI19et"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Ưu tiên tuyệt đối: duy trì vỏ bọc, không được để lộ dưới bất kỳ hình thức nào.",
+            "id": "MCTEU5axI5LE-DWixzyzo"
+          },
+          {
+            "type": "narration",
+            "text": "Một khoảng lặng ngắn.",
+            "id": "nSQTUEy08dRleUgBV1MXd"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Trường hợp phát sinh tình huống vượt ngoài tầm kiểm soát, lập tức kích hoạt cơ chế can thiệp đặc biệt.",
+            "id": "ym0170AJLttg1eICNe7vU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Kể từ ngày mai, [b][color=#1560BD]T2[/color][/b] sẽ lên đường vào miền Nam. Nhiệm vụ triển khai ngay lập tức.",
+            "id": "8l_BvnyzDPSMQkBjCSeix"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "duration": 300,
+            "id": "fXTofnzsak4ogPFAVnec4"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": false,
+            "id": "jm4N3Z49n5PRsWBAzDFlk"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.5,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "O5q4C8iS3drLTssKyNeM8"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "tTHAuyIcrJjgWnxQuAuiR"
+          },
+          {
+            "type": "narration",
+            "text": "Cuộc họp kết thúc, mọi người lần lượt rời khỏi phòng trong im lặng.",
+            "id": "m34BN8dC4xq1LikP7Ent4"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} đang thu gọn xấp hồ sơ trước mặt. Chưa kịp quay đi thì một bàn tay đã đặt lên vai cô — nặng nề nhưng vững chãi.",
+            "id": "inT6_ET7NBfdbGyq143kn"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "LycM1Svq6Q8KusDPkNzQ8"
+            },
+            "id": "H9WeM0G9fr_IlC6kU1c2_"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.5,
+              "duration": 500,
+              "direction": "out"
+            },
+            "id": "s0kA30oaupQ5jnR8u-r3p"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Cô khựng lại. Theo phản xạ, ngước lên.",
+            "id": "LIizOOXtyFQKf2jFvhVey"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Tầm mắt dừng ở ngang ngực người đó, buộc cô phải ngẩng cao hơn nữa.",
+            "id": "flLZS6nb0ba8h12pIlFSV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Khoảnh khắc ấy…",
+            "id": "arAotDGsy5nC70bVKClkv"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "cô sững lại.",
+            "id": "caFPUkz58jdUHO4LrSkhr"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "n9-W_4NDMWY21o6ND9_t3"
+            },
+            "id": "kU9TFKw2SnHfzNQ55PLDF"
+          },
+          {
+            "type": "wait",
+            "duration": 3000,
+            "fixed": false,
+            "id": "9GYd8uMYQzAQoEBtVhCjV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ánh mắt thoáng dao động, hơi thở khựng đi một nhịp. Không một lời nào được thốt ra.",
+            "id": "8edge6yQGylq5n7W58tIC"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Bàn tay trên vai siết nhẹ, như một tín hiệu ngắn gọn, rồi buông ra.",
+            "id": "ABjSmDeVcPJ9Ecs32x4HX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Người đó quay lưng, bóng dáng cao lớn lặng lẽ rời khỏi vùng sáng.",
+            "id": "dtInQNvxyZ3c7STYpKWJv"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nu9}} vẫn đứng đó, trong một khoảnh khắc không chắc mình vừa được động viên cho nhiệm vụ…",
+            "id": "h0K1LByCxLCsSlBdtR29r"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Hay vừa được nhắc nhở về điều gì đó lớn hơn.",
+            "id": "tFe2w1rGV5c-ZivyJJNCp"
+          },
+          {
+            "type": "stage_reset",
+            "id": "9S9VR1VbtNx8Xp-fV_pIe"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "SjpVD4rJA7kd_shIiDIMK"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "PHc0s2_9GQYjylBxmbBkS"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 6100
           }
         }
       },
@@ -5851,7 +6202,7 @@
           {
             "type": "dialogue",
             "characterId": "A3xlgscg_5MPcRVhdvKMm",
-            "text": "Chúng ta đã chủ động đề nghị phía Đô Quốc cho phép triển khai liều bổ sung, đồng thời đang tiến hành đàm phán trực tiếp với Hoàng đế Lâm thời…",
+            "text": "Chúng ta đã chủ động đề nghị phía Đô Quốc cho phép triển khai liều bổ sung, đồng thời tiến hành đàm phán trực tiếp với [b][color=#EFBF04]Đương kim Hoàng đế Nhiếp chính[/color][/b]…",
             "id": "-RtFnG2rAHne5KwRwtpdA"
           },
           {
@@ -5863,7 +6214,7 @@
           {
             "type": "dialogue",
             "characterId": "A3xlgscg_5MPcRVhdvKMm",
-            "text": "Trong khoảng trống đó… đối tượng có thể chuyển biến theo bất kỳ kịch bản nào — và mọi kịch bản đều kéo theo những hệ quả vượt ngoài năng lực kiểm soát của chúng ta.",
+            "text": "Trong khoảng trống đó… đối tượng có thể chuyển biến theo bất kỳ kịch bản nào — và mọi kịch bản đều kéo theo những hệ quả vượt ngoài khả năng kiểm soát của chúng ta.",
             "id": "9LMFt5rzdsSBqKqQn74Wl"
           },
           {
@@ -5939,6 +6290,184 @@
             "id": "WcCOwrpETNEKouCMuKhuS"
           },
           {
+            "type": "character_hide",
+            "characterId": "TruongDon_CongAn",
+            "duration": 300,
+            "id": "co7fmpgHfuG064B_XnFz6"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "center",
+            "expressionId": "sgdOeO3YMUUTWi4oXQfl8",
+            "duration": 300,
+            "flipX": false,
+            "id": "2sMwFIuL3bqNuDDLEpir-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Tôi xin nhận nhiệm vụ.",
+            "id": "RjISZ9OduNVNyDs8EZc7l"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Giọng nói vang lên từ hàng ghế thứ hai, khiến cả căn phòng chững lại trong thoáng chốc. {{nu9}} đứng thẳng, ánh mắt bình tĩnh, không một dấu hiệu do dự.",
+            "id": "c95Fk9-8TVISDEIE1Y8P0"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "right",
+            "expressionId": "angry",
+            "duration": 300,
+            "flipX": false,
+            "id": "VcAyjVFxnDITwzlDl_ifK"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Không.[wait=500]\nCon chưa hiểu hết mức độ nguy hiểm của đối tượng này.",
+            "id": "B3sV9kI5icSlSGB6u6wzt"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Con hiểu.[wait=500]\nCon đã có đủ dữ liệu để xây dựng mô hình hành vi của [b][color=#FF0000]A1[/color][/b].",
+            "id": "lAuYSN5HS4-fSGyEEo3tQ"
+          },
+          {
+            "type": "narration",
+            "text": "Không khí trong phòng khẽ thay đổi. Một vài ánh nhìn chuyển từ hoài nghi sang cân nhắc.",
+            "id": "rtgr0IKAgNFMNA_bTqcnn"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Con nắm được quy luật phản ứng của đối tượng trong từng tình huống, xác định được ngưỡng kích hoạt trạng thái mất kiểm soát… và quan trọng nhất, con có phương án tiếp cận mà không làm gia tăng mức độ cảnh giác.",
+            "id": "4Ba6v_GXoQvigvZPQTWPl"
+          },
+          {
+            "type": "wait",
+            "duration": 500,
+            "fixed": true,
+            "id": "pKFrxpq4BDMaB7SztVr2q"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Trong điều kiện hiện tại, lợi thế về ngoại hình và hồ sơ cho phép con tiếp cận đối tượng một cách tự nhiên, duy trì vỏ bọc đủ an toàn để không kích hoạt phản ứng phòng vệ.",
+            "id": "frYYJZ0CdzyDG8_OWvKtG"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TruongDon_CongAn",
+            "position": "left",
+            "expressionId": "GYPK_lMslGLgzNTUlvRcz",
+            "duration": 300,
+            "flipX": false,
+            "id": "_zSTYdAfTeGAWsyFIq4je"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "Chưa từng có đơn vị nào tiếp cận [b][color=#FF0000]A1[/color][/b] mà không bị phát hiện.",
+            "id": "NXrgg98BgSneZ8i7EVQ_7"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "TruongDon_CongAn",
+            "duration": 300,
+            "id": "np0LkwJYNU4VJKZtD-a_U"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "position": "left",
+            "expressionId": "sep_thang_happy",
+            "duration": 300,
+            "flipX": false,
+            "id": "GuC9g70fG2-pnmRJF2itW"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "text": "Nhưng nếu đánh giá của [b][color=#1560BD]T2[/color][/b] là chính xác… thì đây có thể là cơ hội đầu tiên.",
+            "id": "Id24EbB1YRq01OCt6e4ZB"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "duration": 300,
+            "id": "KOEJ5X3oV-J3jR9CROILF"
+          },
+          {
+            "type": "character_show",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "position": "left",
+            "expressionId": "_ig_au8bx7OldCNdc1OqM",
+            "duration": 300,
+            "flipX": false,
+            "id": "CD4HDoutOO3atvfftScWE"
+          },
+          {
+            "type": "narration",
+            "text": "Ngài Thủ tướng nhìn thẳng vào {{nu9}}",
+            "id": "jq9OGglhY78mC-XHCAzhQ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Cô có đảm bảo kiểm soát được tình huống không?",
+            "id": "mW02rU4P4IEFYBK0-pDD-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Kiểm soát tuyệt đối là điều bất khả thi trong tình huống này.",
+            "id": "bmPnLgC26iosrhq5wWvOs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Nhưng tôi có đủ năng lực để kiểm soát rủi ro trong ngưỡng chấp nhận được — và ở thời điểm này, tôi là phương án khả thi nhất.",
+            "id": "VmvSxZCxGyQsamcLQD8cM"
+          },
+          {
+            "type": "narration",
+            "text": "Ông Sơn siết chặt tay.",
+            "id": "pwapAuPC4mOpHNV_DphL7"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Đây không phải nhiệm vụ trinh sát thông thường. Đây là tiếp cận một thực thể có khả năng phá vỡ toàn bộ hệ thống kiểm soát.",
+            "id": "8H-taFpbrMMRt6N-h57KB"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} không lùi bước.",
+            "id": "2bwrAA2vP4sgt6ftwtmgK"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Chính vì vậy tôi mới phải tham gia. Nếu chúng ta không thu thập được dữ liệu thực địa về [b][color=#FF0000]A1[/color][/b] trong giai đoạn hiện tại… thì khi thuốc ức chế hoàn toàn mất hiệu lực, chúng ta sẽ mất đi cơ hội duy nhất để hiểu và kiểm soát đối tượng.",
+            "id": "6l4we5i_wXVQGG3Fs12Ka"
+          },
+          {
+            "type": "narration",
+            "text": "Cô hạ giọng, nhưng từng từ đều dứt khoát:",
+            "id": "2Lcn_H3P83mDrU5n6RRmy"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Đây là vấn đề an ninh quốc gia… và nếu không hành động ngay lúc này, chúng ta sẽ đánh mất quyền kiểm soát cục diện.",
+            "id": "XXAWXcyn4FeaqsUCIqcJH"
+          },
+          {
             "type": "stage_reset",
             "id": "SVAxHsgTCaev8TsIiUl1Z"
           },
@@ -5960,6 +6489,11 @@
               "color": "#000000"
             },
             "id": "fjYtSxdjEbBKnbEuTTi0m"
+          },
+          {
+            "type": "goto",
+            "target": "833a1auUJdtMMxtZi6Gno",
+            "id": "YH92lZcgv2MTxtBTXRNjK"
           }
         ],
         "meta": {
@@ -5987,7 +6521,7 @@
           },
           {
             "type": "narration",
-            "text": "[QUỐC HỘI - PHIÊN HỌP KÍN BẤT THƯỜNG - NĂM 2026]",
+            "text": "[PHIÊN HỌP KÍN BẤT THƯỜNG – QUỐC HỘI – THỦ ĐÔ – 2026]",
             "id": "egNUPQaQ9EkDzZYeACvYm"
           },
           {
@@ -6023,8 +6557,44 @@
           {
             "type": "dialogue",
             "characterId": "",
-            "text": "Ở hàng ghế đầu tiên, ngài Thủ tướng ngồi ở vị trí trung tâm. Bên cạnh ông là Ủy viên Sơn - bố của {{nu9}}.",
+            "text": "Ở hàng ghế đầu tiên, năm vị trí được bố trí theo một trục thẳng, tách biệt hoàn toàn với phần còn lại của hội trường.",
             "id": "4843k5Z2Rp5U4j129uhEu"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Chính giữa là ngài Thủ tướng Nam Long — dáng ngồi thẳng, hai tay đặt trước mặt, ánh mắt trầm ổn, uy nghiêm, toát lên khí chất của người đã quen với việc đưa ra những quyết định mang tính định đoạt.",
+            "id": "ttyVVMINFZo1yfvOTqZvX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Bên phải ông là Ủy viên Sơn — vẻ ngoài điềm tĩnh, cặp kính khẽ phản chiếu ánh đèn mờ. Gương mặt gần như không biểu lộ cảm xúc, ánh nhìn trầm và kín, toát lên sự thận trọng và nhất quán trong cách nhìn nhận vấn đề.",
+            "id": "kO_qCJkInyXGPVhVl4fm7"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Bên trái ngài Thủ tướng là Đại tá Dũng — quân phục chỉnh tề, vai đeo quân hàm. Từng đường nét trên gương mặt đều cứng rắn, toát lên khí chất của người đã quen với mệnh lệnh và chiến trường.",
+            "id": "zR4CBrxE9iPCW1wpqQsak"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ngoài cùng bên trái là Ủy viên Thắng — phong thái điềm đạm, ánh mắt cởi mở hơn những người còn lại, song vẫn giữ trọn sự chừng mực của vị trí ông đang nắm giữ.",
+            "id": "QG9Wx1ngKhDb4fxGVcitG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ở phía ngoài cùng bên phải… Một thân hình vượt trội hẳn so với phần còn lại, bộ suit tối màu ôm lấy dáng người cao lớn, vai rộng, toát lên áp lực rõ rệt chỉ từ sự hiện diện.",
+            "id": "aWsso1v3uS2mo-zd_d4-k"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trên bàn, tấm biển tên mạ vàng đặt trước mặt — không chức danh, không danh xưng, chỉ vỏn vẹn hai ký tự: [b][color=#FFA500]A2[/color][/b]",
+            "id": "zjhfqHNm2S-9vIZRvuRKn"
           },
           {
             "type": "dialogue",
@@ -6132,7 +6702,7 @@
           {
             "type": "dialogue",
             "characterId": "A3xlgscg_5MPcRVhdvKMm",
-            "text": "Với những yếu tố trên, Bộ Chính trị đã thống nhất cho phép đồng chí {{nu9}} tiếp cận hồ sơ tối mật cấp S và tham gia phiên họp hôm nay, với mật danh: [b][color=#0000FF]T2[/color][/b].",
+            "text": "Với những yếu tố trên, Bộ Chính trị đã thống nhất cho phép đồng chí {{nu9}} tiếp cận hồ sơ tối mật cấp S và tham gia phiên họp hôm nay, với mật danh: [b][color=#1560BD]T2[/color][/b].",
             "id": "bkvHT697GYS1FfzMEUnsw"
           },
           {
@@ -6382,7 +6952,7 @@
           },
           {
             "type": "narration",
-            "text": "Là Hoàng Đế của Đô Quốc, ông mang khí chất của một người đứng trên đỉnh cao quyền lực — trầm tĩnh, lạnh lùng nhưng không cần phô trương.",
+            "text": "Là [b][color=#EFBF04]Hoàng đế[/color][/b] của Đô Quốc, ông mang khí chất của một người đứng trên đỉnh cao quyền lực — trầm tĩnh, lạnh lùng nhưng không cần phô trương.",
             "id": "QgDahC3dpz2hyaKP4ppmQ"
           },
           {
@@ -6932,7 +7502,7 @@
           {
             "type": "dialogue",
             "characterId": "_LsndQZ8MpxAeBdeDs3rv",
-            "text": "Ôi trời, mới accept Facebook thôi mà đã vui đến vậy rồi à? Phải làm giá lên chứ em!",
+            "text": "Ôi trời, em lại gửi lời mời kết bạn thêm lần nữa à? Phải làm giá lên chứ em!",
             "id": "MUQCHaEKA51Wk4nwOrpUD"
           },
           {
@@ -7000,6 +7570,13 @@
             "characterId": "_LsndQZ8MpxAeBdeDs3rv",
             "text": "Nhưng mà nói thật nhé, so với em thì nhìn anh ấy cũng đâu có gì đặc biệt. Tính cách lại còn khó gần nữa. Sao em lại quyết tâm theo đuổi thế?",
             "id": "ozt5UjLcekW6Qc-0lL8gv"
+          },
+          {
+            "type": "character_express",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "expressionId": "07bJwjyDp4fskxO4kQCq6",
+            "duration": 200,
+            "id": "G5ACLDOpGyrlh2te16H3C"
           },
           {
             "type": "narration",
