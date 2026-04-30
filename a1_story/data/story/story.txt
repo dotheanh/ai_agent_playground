@@ -1056,27 +1056,47 @@ Vì vậy nên khi nghe đến giải đấu, thái độ của anh lập tức 
 
 
 ================================================================================
-                          C2 A8 Giải Bóng Chuyền
+                          C2 A9 Giải Bóng Chuyền
 ================================================================================
 
-Giải bóng chuyền thường niên của công ty 2MorePixels
-đội Khai Giới
+Ngày khai mạc giải bóng chuyền thường niên của công ty 2MorePixels.
 
-Giải bóng chuyền nội bộ bắt đầu trong tiếng cổ vũ dồn dập của khán đài. {{nam9}} vào sân với dáng vẻ bình thường, nhưng ngay từ những pha bóng đầu tiên đã kéo nhịp trận lên cao hơn hẳn. Cú phát bóng đi nhanh và nặng, hàng chắn đối phương chạm tay vẫn bật ra ngoài. Những bước đà gọn, dứt khoát; mỗi lần bật nhảy, độ cao nhỉnh lên từng chút, đủ để người tinh ý nhận ra sự khác biệt.
+Đội Khai Giới bước ra sân, trong tiếng hò reo cuồng nhiệt.
 
-Trên khán đài, {{nu9}} ngồi lẫn trong đám đông, đặt điện thoại lên giá đỡ hướng thẳng xuống sân. Góc quay cố định, đủ rộng để giữ trọn toàn bộ phạm vi hoạt động của anh. Cô vỗ tay theo nhịp chung, ánh mắt không rời khỏi {{nam9}}.
+“Khai Giới! Khai Giới!” - những tiếng hô vang vọng khắp một góc khán đài, khiến cho bầu không khí trở nên nóng hơn bao giờ hết.
 
-Ngón tay cô lướt qua màn hình như một thói quen vô thức. Một giao diện đơn giản hiện lên trong thoáng chốc — các chỉ số biến thiên theo thời gian thực, biên độ vận động, nhịp tăng lực theo từng pha chạm bóng.
+Dưới sân, bóng đã được chuyền qua lại. Những cú đập làm nóng tay xen lẫn tiếng giày lướt nhẹ trên mặt sàn.
 
-Ánh mắt cô dừng lại ở một đường cong đang nhích dần lên.
+Hai đội trưởng bước ra giữa sân. Trọng tài tung đồng xu để xác định quyền giao bóng.
 
-…vẫn nằm trong khoảng kiểm soát.
+Đội Khai Giới giành được quyền phát bóng trước.
 
-Màn hình tắt đi ngay sau đó, như chưa từng được bật.
+Tiếng còi khai cuộc vang lên.
 
-Trận đầu kết thúc nhanh chóng, đội của anh giành chiến thắng áp đảo.
+{{nam9}} tung bóng lên cao, lấy đà một nhịp rồi vung tay nện bóng thật dứt khoát.
 
----
+Bóng lao thẳng về cuối sân đối thủ, xuyên qua hàng sau và cắm xuống sát vạch biên.
+Không thăm dò, không sai sót - {{nam9}} đã mở tỉ số cho đội Khai Giới.
+
+Trên khán đài, {{nu9}} đặt điện thoại lên giá đỡ hướng thẳng xuống sân, góc quay vừa đủ để bắt trọn mọi chuyển động của {{nam9}}.
+Xong xuôi, cô trở lại chỗ ngồi, hòa mình vào đám đông và cùng mọi người hô vang cổ vũ cho đội Khai Giới.
+
+Vài phút sau, {{nu9}} lấy ra thêm một chiếc điện thoại khác, cúi nhìn màn hình như một thói quen vô thức.
+Xung quanh hình ảnh của {{nam9}}, những dòng số liệu hiện lên trong thoáng chốc.
+
+Ánh mắt cô dừng lại ở đường cong đang nhích lên.
+
+"…nhịp vận động… vẫn trong ngưỡng kiểm soát."
+
+Màn hình tắt đi rất nhanh. Cô ngẩng lên, tiếp tục hòa vào nhịp cổ vũ như chưa có gì xảy ra.
+
+Trên sân, {{nam9}} tiếp tục di chuyển với những bước đà nhanh và dứt khoát.
+Mỗi lần bật nhảy, độ cao nhích thêm một chút. Từng cú nện bóng lại tăng dần uy lực — đủ để tạo ra áp lực âm thầm lan khắp sân.
+
+Trận đấu đầu tiên kết thúc nhanh chóng với chiến thắng áp đảo dành cho Khai Giới. Những tiếng reo hò lại dâng lên khắp khán đài.
+
+
+---------------------------------------------------
 
 Sang trận thứ hai, cường độ tăng lên rõ rệt. {{nam9}} không còn chỉ là người chơi tốt nhất trên sân, mà trở thành điểm rơi của mọi pha bóng.
 

@@ -578,6 +578,104 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_4_30/7354.png",
       "name": "ChatGPT Image Apr 30, 2026, 04_47_19 PM",
       "category": "other"
+    },
+    "zwX5Xu5h1Nz_7ACevyqPi": {
+      "id": "zwX5Xu5h1Nz_7ACevyqPi",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7355.png",
+      "name": "ChatGPT Image May 1, 2026, 12_30_00 AM",
+      "category": "other"
+    },
+    "Lfo-IK18FpTAXRM99BIkt": {
+      "id": "Lfo-IK18FpTAXRM99BIkt",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7356.mp3",
+      "name": "Viva! - Bond",
+      "category": "other"
+    },
+    "kT91tf1d_gA4xXO9BVkjb": {
+      "id": "kT91tf1d_gA4xXO9BVkjb",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7357.mp3",
+      "name": "viva mix loud",
+      "category": "other"
+    },
+    "iB9dtM0zAqO7Gg9R1QE1R": {
+      "id": "iB9dtM0zAqO7Gg9R1QE1R",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7358.png",
+      "name": "ChatGPT Image May 1, 2026, 12_53_44 AM",
+      "category": "other"
+    },
+    "RUgpw05aePwvN92fQCUH0": {
+      "id": "RUgpw05aePwvN92fQCUH0",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7359.png",
+      "name": "ChatGPT Image May 1, 2026, 01_03_44 AM",
+      "category": "other"
+    },
+    "Vi_KKWFLEZfSWIN4nfYzP": {
+      "id": "Vi_KKWFLEZfSWIN4nfYzP",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7360.mp3",
+      "name": "referee",
+      "category": "other"
+    },
+    "HAY_4VSZW0TybtU1POdM0": {
+      "id": "HAY_4VSZW0TybtU1POdM0",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7361.png",
+      "name": "ChatGPT Image May 1, 2026, 01_22_15 AM",
+      "category": "other"
+    },
+    "xp0Fycw6earXYnatNTbDH": {
+      "id": "xp0Fycw6earXYnatNTbDH",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7362.mp3",
+      "name": "tieng hu ghi diem",
+      "category": "other"
+    },
+    "U8fz_Sjj8wbZ7PhwRcfaL": {
+      "id": "U8fz_Sjj8wbZ7PhwRcfaL",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7363.png",
+      "name": "ChatGPT Image May 1, 2026, 01_40_26 AM",
+      "category": "other"
+    },
+    "OM8H-0qGLWQmCgoSES-ZV": {
+      "id": "OM8H-0qGLWQmCgoSES-ZV",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7364.png",
+      "name": "ChatGPT Image May 1, 2026, 01_50_07 AM",
+      "category": "other"
+    },
+    "W3cxSAdqdffw3Eo7DR1gg": {
+      "id": "W3cxSAdqdffw3Eo7DR1gg",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7365.png",
+      "name": "ChatGPT Image May 1, 2026, 12_57_52 AM",
+      "category": "other"
+    },
+    "hNhI1eISFMICRo3SWpjvc": {
+      "id": "hNhI1eISFMICRo3SWpjvc",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7366.png",
+      "name": "ChatGPT Image May 1, 2026, 02_35_39 AM",
+      "category": "other"
+    },
+    "bErxReh5fHrwJ08gIW9xc": {
+      "id": "bErxReh5fHrwJ08gIW9xc",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7367.png",
+      "name": "ChatGPT Image May 1, 2026, 02_35_39 AM",
+      "category": "other"
+    },
+    "1DAhUWr8UQEgqk398cwBz": {
+      "id": "1DAhUWr8UQEgqk398cwBz",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_1/7368.mp3",
+      "name": "tieng_choi_bong_chuyen_o_phong_the_duc-www_tiengdong_com",
+      "category": "other"
     }
   },
   "characters": {
@@ -1655,6 +1753,15 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7166.png"
+          }
+        },
+        {
+          "id": "jpvzWHCFJmLenDGJTER51",
+          "name": "tracking volleyball",
+          "visual": {
+            "type": "image",
+            "assetId": "OM8H-0qGLWQmCgoSES-ZV",
+            "scale": 1
           }
         }
       ]
@@ -4869,12 +4976,6 @@
       {
         "id": "VksWCgxLx9ERm-F0wFzg6",
         "title": "C2 A8 Chuẩn bị cho giải Bóng Chuyền",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 6300
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -4991,10 +5092,10 @@
             "type": "character_show",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
             "position": "left",
+            "expressionId": "_oulvlwf6NLQDzqslIgXN",
             "duration": 300,
             "flipX": false,
-            "id": "FzTShhukBfnMATku_vjvW",
-            "expressionId": "_oulvlwf6NLQDzqslIgXN"
+            "id": "FzTShhukBfnMATku_vjvW"
           },
           {
             "type": "dialogue",
@@ -5024,8 +5125,19 @@
               "color": "#000000"
             },
             "id": "TZK2QDxha0Hut0HhcChUH"
+          },
+          {
+            "type": "goto",
+            "target": "lgty0R527Yh3MTv4LG2ez",
+            "id": "UJNQlSmGWikUqRXnkCBkq"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 6300
+          }
+        }
       },
       {
         "id": "637hvQCG8DDBWn3PBs_ZU",
@@ -5982,6 +6094,276 @@
             "y": 6300
           }
         }
+      },
+      {
+        "id": "lgty0R527Yh3MTv4LG2ez",
+        "title": "C2 A9 Giải Bóng Chuyền",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 6500
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "qHYeSKIBIKkHBYrSTs8B4"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "zwX5Xu5h1Nz_7ACevyqPi"
+            },
+            "id": "myjciZWCD_yJm_xCQxYpL"
+          },
+          {
+            "type": "play_bgm",
+            "assetId": "kT91tf1d_gA4xXO9BVkjb",
+            "loop": true,
+            "volume": 0.57,
+            "id": "e9iiX6zjuZulwEp7YeZ4v"
+          },
+          {
+            "type": "narration",
+            "text": "Ngày khai mạc giải bóng chuyền thường niên của công ty 2MorePixels.",
+            "id": "Bte305IF0pHwU0vUjKQi0"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Đội Khai Giới bước ra sân, trong tiếng hò reo cuồng nhiệt.",
+            "id": "vR6MlH5HurznoAA_v-dKR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "“Khai Giới! Khai Giới!” - những tiếng hô vang vọng khắp một góc khán đài, khiến cho bầu không khí trở nên nóng hơn bao giờ hết.",
+            "id": "iRG8UcaPfJgb5c86bzrav"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Dưới sân, bóng đã được chuyền qua lại. Những cú đập làm nóng tay xen lẫn tiếng giày lướt nhẹ trên mặt sàn.",
+            "id": "aWl85JQ6Iama8y6l71cTQ"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "iB9dtM0zAqO7Gg9R1QE1R"
+            },
+            "id": "f-bGdZB7mwSMVtnmkKVke"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Hai đội trưởng bước ra giữa sân. Trọng tài tung đồng xu để xác định quyền giao bóng.",
+            "id": "Dq7_3gjb2KJkZaKjT2Jl1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Đội Khai Giới giành được quyền phát bóng trước.",
+            "id": "TDozY-HdDBBJhGMtsoUn1"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "RUgpw05aePwvN92fQCUH0"
+            },
+            "id": "34jqI0Kuz2Gpp54jfmxri"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "Vi_KKWFLEZfSWIN4nfYzP",
+            "volume": 1,
+            "id": "erQC-2z8dMIDECVF2lSRg"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Tiếng còi khai cuộc vang lên.",
+            "id": "OZb2vPq5LuYnmM3D0oA71"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nam9}} tung bóng lên cao, lấy đà một nhịp rồi vung tay nện bóng thật dứt khoát.",
+            "id": "iUM1ONwuYgp4dOo1RlX5E"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "HAY_4VSZW0TybtU1POdM0"
+            },
+            "id": "punGQ-Fo7ywfmmdSnne8v"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Bóng lao thẳng về cuối sân đối thủ, xuyên qua hàng sau và cắm xuống sát vạch biên.",
+            "id": "N7KNFPvSZB_7B-PYkwEW4"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "Vi_KKWFLEZfSWIN4nfYzP",
+            "volume": 1,
+            "id": "1UFLySNv_yAUIP-fH5edY"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "xp0Fycw6earXYnatNTbDH",
+            "volume": 1,
+            "id": "fFYe9OdQyaGWk7LcOxULN"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Không thăm dò, không sai sót - {{nam9}} đã mở tỉ số cho đội Khai Giới.",
+            "id": "0Y3q99rRNAD5hQ-Vku-B-"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": false,
+            "id": "FfAN8VoGbhpckeQnPLfQa"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "U8fz_Sjj8wbZ7PhwRcfaL"
+            },
+            "id": "0ipBa1OSUQDrfvVeRbpjs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trên khán đài, {{nu9}} đặt điện thoại lên giá đỡ hướng thẳng xuống sân, góc quay vừa đủ để bắt trọn mọi chuyển động của {{nam9}}.",
+            "id": "PLGLdSOCOrQ_Gj983iS-o"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Xong xuôi, cô trở lại chỗ ngồi, hòa mình vào đám đông và cùng mọi người hô vang cổ vũ cho đội Khai Giới.",
+            "id": "jbZ09JKTvtiyNrKW19AB3"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Vài phút sau, {{nu9}} lấy ra thêm một chiếc điện thoại khác, cúi nhìn màn hình như một thói quen vô thức.",
+            "id": "fOtk619cNOtaUX4Ba41Id"
+          },
+          {
+            "type": "character_show",
+            "characterId": "64n5pqlMk1dMhcEawhuNg",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "XHXOY3CAttQoZeOENanNy",
+            "expressionId": "jpvzWHCFJmLenDGJTER51"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Xung quanh hình ảnh của {{nam9}}, những dòng số liệu hiện lên trong thoáng chốc.",
+            "id": "Y1s4Vwa9ltFm0A0WNTTz_"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ánh mắt cô dừng lại ở đường cong đang nhích lên.",
+            "id": "UHvJEyjJXQAnfvsYcfK50"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "…nhịp vận động… vẫn trong ngưỡng kiểm soát.",
+            "id": "7a-hqXBDf1A69VPTMevmj"
+          },
+          {
+            "type": "stage_reset",
+            "id": "FpBw3U70MR_iRaIO9j3vO"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Màn hình tắt đi rất nhanh. Cô ngẩng lên, tiếp tục hòa vào nhịp cổ vũ như chưa có gì xảy ra.",
+            "id": "isZHc_Z9-I857Pmi5xVI8"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "W3cxSAdqdffw3Eo7DR1gg"
+            },
+            "id": "KP0AbzNxr6fp1lzRN6zXk"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trên sân, {{nam9}} tiếp tục di chuyển với những bước đà nhanh và dứt khoát.",
+            "id": "RISY5h_KwoxU_iXV2kWQu"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Mỗi lần bật nhảy, độ cao nhích thêm một chút. Từng cú nện bóng lại tăng dần uy lực — đủ để tạo ra áp lực âm thầm lan khắp sân.",
+            "id": "FMS5ophsH9dVlp9c9AD-X"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "bErxReh5fHrwJ08gIW9xc"
+            },
+            "id": "nfUK9sXDhlvBQ_H9QgGPj"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "Vi_KKWFLEZfSWIN4nfYzP",
+            "volume": 1,
+            "id": "ISFni7_oxKPou8-P-f2tF"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "xp0Fycw6earXYnatNTbDH",
+            "volume": 1,
+            "id": "GXOYmIknpmARRsCiiQC9e"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trận đấu đầu tiên kết thúc nhanh chóng với chiến thắng áp đảo dành cho Khai Giới. Những tiếng reo hò lại dâng lên khắp khán đài.",
+            "id": "6s7uUjkHaTXFRXRR9kWe7"
+          },
+          {
+            "type": "stage_reset",
+            "id": "kyEHuGtdYP9vKJTkTXC1r"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "t9suWPN6RFjLPKVK0qOGc"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "vv2TThq0BrZywzJd5VcJo"
+          }
+        ]
       },
       {
         "id": "833a1auUJdtMMxtZi6Gno",
