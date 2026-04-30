@@ -557,6 +557,27 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_4_30/7351.png",
       "name": "ChatGPT Image 11_46_31 29 thg 4, 2026",
       "category": "other"
+    },
+    "BIBEGihnhN-zNxxlXR3rn": {
+      "id": "BIBEGihnhN-zNxxlXR3rn",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_30/7352.png",
+      "name": "ChatGPT Image Apr 30, 2026, 04_23_16 PM",
+      "category": "other"
+    },
+    "MiiNG16RPU5_FCLnSZDjd": {
+      "id": "MiiNG16RPU5_FCLnSZDjd",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_30/7353.png",
+      "name": "ChatGPT Image Apr 30, 2026, 04_23_16 PM",
+      "category": "other"
+    },
+    "piauWSiNh6QoJDUbVhkSu": {
+      "id": "piauWSiNh6QoJDUbVhkSu",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_30/7354.png",
+      "name": "ChatGPT Image Apr 30, 2026, 04_47_19 PM",
+      "category": "other"
     }
   },
   "characters": {
@@ -1318,6 +1339,15 @@
           "visual": {
             "type": "image",
             "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_28/7228.png",
+            "scale": 0.8
+          }
+        },
+        {
+          "id": "_oulvlwf6NLQDzqslIgXN",
+          "name": "think",
+          "visual": {
+            "type": "image",
+            "assetId": "piauWSiNh6QoJDUbVhkSu",
             "scale": 0.8
           }
         }
@@ -4837,6 +4867,167 @@
         }
       },
       {
+        "id": "VksWCgxLx9ERm-F0wFzg6",
+        "title": "C2 A8 Chuẩn bị cho giải Bóng Chuyền",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 6300
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "5u4D2lA8E0yh01QUuwAmg"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_27/7027.png"
+            },
+            "id": "g5t6kMVJuHVTaOhGGZOD0"
+          },
+          {
+            "type": "narration",
+            "text": "Hằng năm, 2MorePixels đều tổ chức giải bóng chuyền nội bộ. Thông báo khởi tranh vừa được gửi xuống, cả văn phòng lập tức sôi nổi hẳn lên.",
+            "id": "dHDPe27ZXArfIj0RGpd3a"
+          },
+          {
+            "type": "character_show",
+            "characterId": "yRI_1liAVIUGdmnXYv4I7",
+            "position": "center-right",
+            "expressionId": "0bvd0VjdqJEcXZu-88HVa",
+            "duration": 300,
+            "flipX": false,
+            "id": "DRicIM-RiR19baxnS3wa4"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "yRI_1liAVIUGdmnXYv4I7",
+            "text": "Lập team đi, năm nay nhất định phải có cúp.",
+            "id": "vbXkXzEZNJnjFdGiCVL8Q"
+          },
+          {
+            "type": "character_show",
+            "characterId": "C0YaEpvMqP1nyBmPyH-5E",
+            "position": "far-right",
+            "expressionId": "IgK_4zoy7EPvHulH44WWr",
+            "duration": 300,
+            "flipX": false,
+            "id": "_PJRpOHhS4Mlrrb223Y7r"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "C0YaEpvMqP1nyBmPyH-5E",
+            "text": "Đội hình cứ như mọi năm thôi nhỉ.",
+            "id": "7vp6sCmWzcObU-WoOS5UJ"
+          },
+          {
+            "type": "character_show",
+            "characterId": "9hyb1aeE3kNqjOcLsfunJ",
+            "position": {
+              "x": 14,
+              "y": 81
+            },
+            "expressionId": "xNX3ySvT8Eh2z4zX1MaMP",
+            "duration": 300,
+            "flipX": false,
+            "id": "iJGd7AH_i3vBTw32M7PxG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "9hyb1aeE3kNqjOcLsfunJ",
+            "text": "Anh Tuấn nghỉ rồi… ai thay vị trí chủ công đây?",
+            "id": "JAMes9Urd95LGHeah4hyN"
+          },
+          {
+            "type": "character_show",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "position": "center-left",
+            "expressionId": "TGLIdSCL6HKOl9x4TMqGD",
+            "duration": 300,
+            "flipX": false,
+            "id": "HrclnzKsAOoZG1T6gbt-K"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Để em đánh chủ công.",
+            "id": "MS2lVR1RpaF5mutwayBPW"
+          },
+          {
+            "type": "narration",
+            "text": "Cả nhóm khựng lại một nhịp.",
+            "id": "li-aZUM0lY7OT6crrjW25"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "yRI_1liAVIUGdmnXYv4I7",
+            "text": "Ơ... Mọi năm cậu chỉ đánh chuyền hai thôi mà?",
+            "id": "XT09YnZeTZ7YMr30sM25I"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Năm nay thì khác.",
+            "id": "AeieniWRfIJTU_mx95uxt"
+          },
+          {
+            "type": "stage_reset",
+            "id": "gPlOD3bv2NNc5MGk6OetB"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} vốn là người ít tham gia các hoạt động tập thể, nhưng lại có niềm đam mê rất lớn với bóng chuyền.",
+            "id": "n2ws3Bi3367f-fPuO0EsV"
+          },
+          {
+            "type": "narration",
+            "text": "Vì vậy nên khi nghe đến giải đấu, thái độ của anh lập tức thay đổi. Một nguồn năng lượng phấn khích được bật lên, trái ngược hoàn toàn với vẻ trầm tĩnh thường ngày.",
+            "id": "3Y_LPzft6fBfXo2WbL-eK"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "left",
+            "duration": 300,
+            "flipX": false,
+            "id": "FzTShhukBfnMATku_vjvW",
+            "expressionId": "_oulvlwf6NLQDzqslIgXN"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ở phía đối diện, ánh mắt {{nu9}} thoáng trầm xuống, mang theo một nét suy tư kín đáo, rồi lập tức trở về vẻ bình thản như chưa từng có gì xảy ra.",
+            "id": "vi7ivp4SDNZXAXr_7TdIn"
+          },
+          {
+            "type": "stage_reset",
+            "id": "Ytv5lPiO-2d-WQad1Qpde"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "6TMmRVwS2HuhddxDvAqTg"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "TZK2QDxha0Hut0HhcChUH"
+          }
+        ]
+      },
+      {
         "id": "637hvQCG8DDBWn3PBs_ZU",
         "title": "C1 A2 Sự xuất hiện của T2",
         "nodes": [
@@ -5747,7 +5938,7 @@
       },
       {
         "id": "TTng4SZ6_4VLsDlcm6P3W",
-        "title": "Scene Template (Copy)",
+        "title": "Scene Template",
         "nodes": [
           {
             "type": "stage_reset",
@@ -5787,8 +5978,8 @@
         ],
         "meta": {
           "mapPosition": {
-            "x": 1200,
-            "y": 5900
+            "x": 1400,
+            "y": 6300
           }
         }
       },
@@ -6106,6 +6297,11 @@
               "color": "#000000"
             },
             "id": "PHc0s2_9GQYjylBxmbBkS"
+          },
+          {
+            "type": "goto",
+            "target": "VksWCgxLx9ERm-F0wFzg6",
+            "id": "dO9O4F0kZY00UW4nrGd-B"
           }
         ],
         "meta": {
