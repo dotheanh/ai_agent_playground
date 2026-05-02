@@ -1068,6 +1068,13 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7459.png",
       "name": "ChatGPT Image 20_58_55 2 thg 5, 2026",
       "category": "other"
+    },
+    "XmypNiYU0mI-Fl1QGzTV8": {
+      "id": "XmypNiYU0mI-Fl1QGzTV8",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7460.png",
+      "name": "ChatGPT Image 21_29_39 2 thg 5, 2026 (1)",
+      "category": "other"
     }
   },
   "characters": {
@@ -5615,7 +5622,8 @@
           },
           {
             "type": "stop_bgm",
-            "id": "RB6WADPf0KOXLxB9RuhdE"
+            "id": "RB6WADPf0KOXLxB9RuhdE",
+            "fadeOut": 2000
           },
           {
             "type": "screen_effect",
@@ -6606,6 +6614,245 @@
         }
       },
       {
+        "id": "MxAjmZHJuPOS2g4laT4g4",
+        "title": "C2 A13 Phòng họp kín lần 2",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 7300
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "s5qlBcq7og0oCMK45gqRA"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "XmypNiYU0mI-Fl1QGzTV8"
+            },
+            "id": "tqwLnjnC5N6oUtgLSf3kR"
+          },
+          {
+            "type": "play_bgm",
+            "assetId": "LYTVfe4A_oPm7w1bGT_ai",
+            "loop": true,
+            "volume": 0.32,
+            "id": "fktFYqXi_0rc5xVEdrMsh",
+            "fadeIn": 1000
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trong phòng họp kín, hình ảnh từ camera được chiếu lại trên màn hình lớn.",
+            "id": "GVJJwajhg-Urz7Hu6q5Br"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Khung hình ổn định, góc quay bao quát. Từng chuyển động của {{nam9}} được tua chậm, dừng lại ở những thời điểm then chốt.",
+            "id": "e6mP3DSKdxru9sjPTuUGl"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Các thông số hiện lên: độ cao bật nhảy, thời gian tiếp đất, tốc độ bóng, nhịp biến thiên lực theo từng pha xử lý.",
+            "id": "9EORJFq2uiowpfMfX2w-C"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "position": "left",
+            "duration": 300,
+            "flipX": false,
+            "id": "FviqjkSNaRQ8MMB-xSwfJ",
+            "expressionId": "sep_thang_happy"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "text": "Góc đặt camera rất chính xác.",
+            "id": "SJT6QMGDJ4WoDPH-QqhFP"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TlVBkP3VfnHvfighf75Vi",
+            "text": "Đủ dữ liệu để tái dựng toàn bộ hành vi vận động.",
+            "id": "kW3zqRQXpAvPwtLPmb5e1"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TruongDon_CongAn",
+            "position": "right",
+            "duration": 300,
+            "flipX": false,
+            "id": "bqWXCiu715mAIS0y4tUng",
+            "expressionId": "GYPK_lMslGLgzNTUlvRcz"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "[b][color=#1560BD]T2[/color][/b] đã tiếp cận rất tự nhiên, không gây cảnh giác. Đối tượng không có dấu hiệu nhận biết.",
+            "id": "rmW0ATc6PgQmpaB1M4QQD"
+          },
+          {
+            "type": "stage_reset",
+            "id": "a-HTybXXZeTcytsaGjgs7"
+          },
+          {
+            "type": "narration",
+            "text": "Đoạn video ghi hình trận đấu thứ hai được phát lại.",
+            "id": "WYrOu32lZI7uXHQMrmL3v"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "right",
+            "duration": 300,
+            "flipX": false,
+            "id": "gDMEJmpSsBDJ8uxp6NxzC",
+            "expressionId": "neutral"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Chỉ số đã chạm mức Cảnh báo 1. Nếu vượt ngưỡng trong môi trường đông người như thế này… hậu quả sẽ rất khủng khiếp.",
+            "id": "fgjxS003tqoerD__rfvtd"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Nhưng [b][color=#1560BD]T2[/color][/b] đã can thiệp kịp thời, giữ mức bộc phát của đối tượng [b][color=#FF0000]A1[/color][/b] trong giới hạn cho phép.",
+            "id": "Ft9JUKwPAwRAPRfYxSNw1"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "duration": 300,
+            "id": "ACqr7Sbnj1o7tDTSUOBgG"
+          },
+          {
+            "type": "narration",
+            "text": "Một khoảng lặng ngắn.",
+            "id": "ywqkyorjkgkpBRXe4LPmP"
+          },
+          {
+            "type": "character_show",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "p8nwDKAmfNvgMWVZxFINv",
+            "expressionId": "_ig_au8bx7OldCNdc1OqM"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Xử lý rất tốt.",
+            "id": "XWXq2_DMqMOVzKMnVxflU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Trong điều kiện không kiểm soát, mức này đủ để dẫn tới rủi ro gây thương vong hàng loạt.",
+            "id": "Y6zFS1vaihpWBH0FcwAE6"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "duration": 300,
+            "id": "uJDuRgquPRrKPiVN7qd0K"
+          },
+          {
+            "type": "character_show",
+            "characterId": "TruongDon_CongAn",
+            "position": "left",
+            "expressionId": "GYPK_lMslGLgzNTUlvRcz",
+            "duration": 300,
+            "flipX": false,
+            "id": "ghCm-EtHE0j5gTrcMEKvi"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "TruongDon_CongAn",
+            "text": "Ngoài dấu hiệu biến đổi ở mắt đã được ghi nhận trước đó, [b][color=#1560BD]T2[/color][/b] còn phát hiện thêm hiện tượng cơ thể tỏa nhiệt bất thường khi đối tượng kích hoạt sức mạnh.",
+            "id": "evnWsNc3JDMlfjLeYAqRd"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "TruongDon_CongAn",
+            "duration": 300,
+            "id": "g88xdiBMrgfVo8_l3b88U"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "position": "right",
+            "expressionId": "neutral",
+            "duration": 300,
+            "flipX": false,
+            "id": "lShfBbcD6rbmndFkkd-_Y"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "text": "Tuy nhiên…\nViệc đặt cược tất cả vào [b][color=#1560BD]T2[/color][/b] vẫn là quá mạo hiểm.",
+            "id": "R7FEDbBdPhktr5nXtrZ4q"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "JkuHBljTR4th0RQdUeZMA",
+            "duration": 300,
+            "id": "SkzRG9g4Of39HLpZpGIbS"
+          },
+          {
+            "type": "narration",
+            "text": "Cả căn phòng im lặng.",
+            "id": "_D6wBqq2Aayf62fHuglao"
+          },
+          {
+            "type": "character_show",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "position": "center",
+            "expressionId": "_ig_au8bx7OldCNdc1OqM",
+            "duration": 300,
+            "flipX": false,
+            "id": "xQ2FKXG51iB6RgXYQ82Af"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "text": "Chuẩn bị phương án cho tình huống xấu nhất.",
+            "id": "pdZFlIxHZZQTV7PQILVLi"
+          },
+          {
+            "type": "stage_reset",
+            "id": "DmNapMUiDa5_Eh2DlqDj0"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "IuQYO_iPfzko66DofBGb_"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "GL-APNG8jmmMSBeD4IhR5"
+          }
+        ]
+      },
+      {
         "id": "JvEIPMqBm4Ydg9BRIGccL",
         "title": "C2 A12 Giải bóng chuyền (3)",
         "meta": {
@@ -6858,7 +7105,7 @@
           {
             "type": "dialogue",
             "characterId": "Y1iXGGLm7hXHWm9MD04A-",
-            "text": "Em dựng clip nhanh quá nhỉ?",
+            "text": "Em dựng video nhanh quá nhỉ?",
             "id": "NanpqnLAbqRAmo4-FYTiN"
           },
           {
@@ -6872,6 +7119,11 @@
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
             "text": "Tại... em quen làm thôi.",
             "id": "5fHYie2SI7aird9BsuFsS"
+          },
+          {
+            "type": "stop_bgm",
+            "id": "xTvERZ2Xe-m55oMkLhKwP",
+            "fadeOut": 2000
           },
           {
             "type": "stage_reset",
@@ -6895,6 +7147,11 @@
               "color": "#000000"
             },
             "id": "X7BegM6sL9CrV6WyHv-Lc"
+          },
+          {
+            "type": "goto",
+            "target": "MxAjmZHJuPOS2g4laT4g4",
+            "id": "IM1B03rmZg6F_lBk2w-lK"
           }
         ]
       },
@@ -7038,7 +7295,7 @@
           {
             "type": "dialogue",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Mắt anh đỏ quá… Anh có ổn không?",
+            "text": "Mắt anh đỏ quá… Anh có bị sao không?",
             "id": "gRwcI_8gAhYioF3IbWJOK"
           },
           {
@@ -10240,7 +10497,8 @@
           },
           {
             "type": "stop_bgm",
-            "id": "P8dP7LlQilS29slWug0kO"
+            "id": "P8dP7LlQilS29slWug0kO",
+            "fadeOut": 1000
           },
           {
             "type": "goto",
