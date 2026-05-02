@@ -942,6 +942,41 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7441.mp3",
       "name": "Volleyball Hit hardest",
       "category": "other"
+    },
+    "sb0MaosaB7yEaazFTp5is": {
+      "id": "sb0MaosaB7yEaazFTp5is",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7444.png",
+      "name": "ChatGPT Image 15_05_24 2 thg 5, 2026",
+      "category": "other"
+    },
+    "qU4cyYnXzzhKLIYRDPv2x": {
+      "id": "qU4cyYnXzzhKLIYRDPv2x",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_24/6908.mp3",
+      "name": "freesound_community-phone_buzz-36086",
+      "category": "other"
+    },
+    "rRxLa9RcEbgEt6cnYpSiH": {
+      "id": "rRxLa9RcEbgEt6cnYpSiH",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_24/6909.mp3",
+      "name": "tieng_Dien_thoai_rung-www_tiengdong_com",
+      "category": "other"
+    },
+    "RLhsBIFlm1BtgjPv0tlFr": {
+      "id": "RLhsBIFlm1BtgjPv0tlFr",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7445.mp3",
+      "name": "tieng_Dien_thoai_rung-www_tiengdong_com",
+      "category": "other"
+    },
+    "KQKBmViHtctwLatZc0cSO": {
+      "id": "KQKBmViHtctwLatZc0cSO",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7446.png",
+      "name": "ChatGPT Image 15_15_14 2 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -2070,7 +2105,7 @@
           "visual": {
             "type": "image",
             "assetId": "Flse_LmcIZ1Tbymg2tbiY",
-            "scale": 1.2
+            "scale": 1.1
           }
         },
         {
@@ -2079,7 +2114,7 @@
           "visual": {
             "type": "image",
             "assetId": "bHaKvaCgbfC0eg5Om07vL",
-            "scale": 1.2
+            "scale": 1.1
           }
         },
         {
@@ -2088,7 +2123,7 @@
           "visual": {
             "type": "image",
             "assetId": "k6EE3jqL1k-1icUvtRo66",
-            "scale": 1.2
+            "scale": 1.1
           }
         }
       ]
@@ -2131,6 +2166,19 @@
             "type": "image",
             "assetId": "Czoa-2AqsU9eLRZ_NsifO",
             "scale": 1.3
+          }
+        },
+        {
+          "id": "g7fKZSuicBTXG8WiU-5mY",
+          "name": "warning",
+          "visual": {
+            "type": "image",
+            "assetId": "KQKBmViHtctwLatZc0cSO",
+            "scale": 1.4,
+            "offset": {
+              "x": 0,
+              "y": 50
+            }
           }
         }
       ]
@@ -6407,23 +6455,6 @@
           {
             "type": "screen_effect",
             "effect": {
-              "type": "shake",
-              "intensity": 20,
-              "duration": 500,
-              "direction": "both",
-              "decay": true
-            },
-            "id": "zGmdtl-AV3hAMRe4s2SJF"
-          },
-          {
-            "type": "dialogue",
-            "characterId": "",
-            "text": "",
-            "id": "7GcZKP8Ap3zymuc4UzN9h"
-          },
-          {
-            "type": "screen_effect",
-            "effect": {
               "type": "tint",
               "color": "#000000",
               "opacity": 1,
@@ -6447,6 +6478,112 @@
             "y": 6300
           }
         }
+      },
+      {
+        "id": "DKgsgdLIDBFGiP-uC96ql",
+        "title": "C2 A11 Giải lao",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 6900
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "uHvDWOzAm1cosPWUKky2L"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "sb0MaosaB7yEaazFTp5is"
+            },
+            "id": "yen6pCuoAouoAdVaBItci"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "RLhsBIFlm1BtgjPv0tlFr",
+            "volume": 1,
+            "id": "6XuXZtAZdqP8JdckYQtVd"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "shake",
+              "intensity": 3,
+              "duration": 300,
+              "direction": "both",
+              "decay": true
+            },
+            "id": "SOV-8h74hU1aqle_KfMye"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trên khán đài, chiếc điện thoại của {{nu9}} rung lên liên hồi.",
+            "id": "832trEgG2gw2fi2DH0m9U"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Màn hình sáng lên trong lòng bàn tay cô, một dòng cảnh báo hiện ra ngắn gọn:",
+            "id": "Hd3Om5do8v63iekWa1LSx"
+          },
+          {
+            "type": "character_show",
+            "characterId": "1LOnkHz_VtGL5V11Tgc4a",
+            "position": {
+              "x": 50,
+              "y": 100
+            },
+            "duration": 300,
+            "flipX": false,
+            "id": "xbn9tIjS-xSl6C6ON0HM2",
+            "expressionId": "g7fKZSuicBTXG8WiU-5mY"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[Cảnh báo mức 1: Biến động vượt chuẩn.]",
+            "id": "fRanv6CIxfRtE3zahHOEM"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ánh mắt {{nu9}} chững lại trong thoáng chốc.",
+            "id": "YHIuNmTcToVNcC-8SRydJ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Cô tắt màn hình ngay lập tức, rồi bước thẳng về phía {{nam9}}.",
+            "id": "N6G1ouae8MKznL_vz70E5"
+          },
+          {
+            "type": "stage_reset",
+            "id": "qs-0vOkDkxOQUHLR3CzHZ"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "pXcXw3sAIE-NbesZvNKtC"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "Xk3HdRmNzXY_L6Avfw_nO"
+          }
+        ]
       },
       {
         "id": "_IxFNsCXc9X34VybvvlGl",
@@ -6845,10 +6982,10 @@
             "type": "character_show",
             "characterId": "64n5pqlMk1dMhcEawhuNg",
             "position": "center",
+            "expressionId": "MawYgN2pO1OysZxcMJi0k",
             "duration": 300,
             "flipX": false,
-            "id": "guAkGB9etmwCLwZDqtAAy",
-            "expressionId": "MawYgN2pO1OysZxcMJi0k"
+            "id": "guAkGB9etmwCLwZDqtAAy"
           },
           {
             "type": "screen_effect",
@@ -6944,10 +7081,10 @@
             "type": "character_show",
             "characterId": "64n5pqlMk1dMhcEawhuNg",
             "position": "center",
+            "expressionId": "1tZ1vp6eeU5eC9i5Dhz63",
             "duration": 300,
             "flipX": false,
-            "id": "D4IrZFSONpZgQoEpBylPo",
-            "expressionId": "1tZ1vp6eeU5eC9i5Dhz63"
+            "id": "D4IrZFSONpZgQoEpBylPo"
           },
           {
             "type": "background_change",
@@ -7033,10 +7170,10 @@
             "type": "character_show",
             "characterId": "64n5pqlMk1dMhcEawhuNg",
             "position": "center",
+            "expressionId": "ORHeI5ic8aRcgrmzHBPdJ",
             "duration": 300,
             "flipX": false,
-            "id": "pMuO8ZbRi72WLAp5jPSMW",
-            "expressionId": "ORHeI5ic8aRcgrmzHBPdJ"
+            "id": "pMuO8ZbRi72WLAp5jPSMW"
           },
           {
             "type": "dialogue",
@@ -7135,7 +7272,7 @@
           {
             "type": "dialogue",
             "characterId": "",
-            "text": "Tiếng đập rền vang như sấm, cú đập vô cùng uy lực khiến quả bóng bị ép dẹt trong tích tắc rồi xé gió lao vút đi.",
+            "text": "Âm thanh rền vang như sấm, cú đập uy lực khiến cả sân vận động rung chuyển. Quả bóng bị ép dẹt trong tích tắc rồi xé gió lao vút đi.",
             "id": "54eW4Qho5LeLySOTmSmX6"
           },
           {
@@ -7252,6 +7389,11 @@
               "color": "#000000"
             },
             "id": "RFo_8W2tolFO6kpUxZ9dm"
+          },
+          {
+            "type": "goto",
+            "target": "DKgsgdLIDBFGiP-uC96ql",
+            "id": "64elkhjiCwTpVWAieK9h9"
           }
         ],
         "meta": {

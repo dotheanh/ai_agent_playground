@@ -1096,7 +1096,6 @@ Mỗi lần bật nhảy, độ cao nhích thêm một chút. Từng cú nện b
 Trận đấu đầu tiên kết thúc nhanh chóng với chiến thắng áp đảo dành cho Khai Giới. Những tiếng reo hò lại dâng lên khắp khán đài.
 
 
----------------------------------------------------
 ================================================================================
                           C2 A10 Giải Bóng Chuyền (2)
 ================================================================================
@@ -1162,7 +1161,7 @@ Trong khoảnh khắc vung tay, mắt {{nam9}} bỗng đỏ rực lên, những 
 
 BAAAAMMMM!!!!!
 
-Tiếng đập rền vang như sấm, cú đập vô cùng uy lực khiến quả bóng bị ép dẹt trong tích tắc rồi xé gió lao vút đi.
+Âm thanh rền vang như sấm, cú đập uy lực khiến cả sân vận động rung chuyển. Quả bóng bị ép dẹt trong tích tắc rồi xé gió lao vút đi.
 Bên phần sân đối diện, cả hàng thủ chỉ kịp khựng lại, ánh mắt thất thần dõi theo đường bóng lao tới. Không còn một ai dám đưa tay ra đỡ.
 
 Bóng cắm thẳng xuống góc sân, nảy bật lên rồi lăn ra ngoài.
@@ -1171,16 +1170,20 @@ Cả khán đài bùng nổ. Đội của {{nam9}} giành chiến thắng chung 
 
 
 
-------------------------------
-------------------------------
-------------------------------
+================================================================================
+                          C2 A11 Giải lao
+================================================================================
 
 
-Trên khán đài, {{nu9}} không nhìn điện thoại. Chỉ một nhịp quan sát là đủ.
+Trên khán đài, chiếc điện thoại của {{nu9}} rung lên liên hồi.
 
-…đã chạm ngưỡng cảnh báo thấp.
+Màn hình sáng lên trong lòng bàn tay cô, một dòng cảnh báo hiện ra ngắn gọn:
 
-Màn hình sáng lên trong lòng bàn tay cô — một thông báo ngắn gọn xác nhận điều đó — rồi tắt ngay.
+"Cảnh báo mức 1: Biến động vượt chuẩn."
+
+Ánh mắt {{nu9}} chững lại trong thoáng chốc.
+
+Cô tắt màn hình ngay lập tức, rồi bước thẳng về phía {{nam9}}.
 
 
 ---
