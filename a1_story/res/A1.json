@@ -977,6 +977,41 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7446.png",
       "name": "ChatGPT Image 15_15_14 2 thg 5, 2026",
       "category": "other"
+    },
+    "2VOTbQ9P_UQvbtRy6MV2t": {
+      "id": "2VOTbQ9P_UQvbtRy6MV2t",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7447.png",
+      "name": "ChatGPT Image 16_05_43 2 thg 5, 2026",
+      "category": "other"
+    },
+    "08IqyQP5g1LGom7_YKcw8": {
+      "id": "08IqyQP5g1LGom7_YKcw8",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7448.png",
+      "name": "ChatGPT Image 16_08_44 2 thg 5, 2026",
+      "category": "other"
+    },
+    "fIE_UR8qMVZw1fZHjflxr": {
+      "id": "fIE_UR8qMVZw1fZHjflxr",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7449.png",
+      "name": "ChatGPT Image 16_17_07 2 thg 5, 2026",
+      "category": "other"
+    },
+    "F_m40Z6pa19dfLewP1WpO": {
+      "id": "F_m40Z6pa19dfLewP1WpO",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7450.png",
+      "name": "cheer",
+      "category": "other"
+    },
+    "Jv5XXGi8d14m5EHzfqkdr": {
+      "id": "Jv5XXGi8d14m5EHzfqkdr",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7451.png",
+      "name": "notice",
+      "category": "other"
     }
   },
   "characters": {
@@ -1749,6 +1784,15 @@
             "assetId": "piauWSiNh6QoJDUbVhkSu",
             "scale": 0.8
           }
+        },
+        {
+          "id": "3QNO9Q1BFJPmtXcLV5anm",
+          "name": "cheer",
+          "visual": {
+            "type": "image",
+            "assetId": "F_m40Z6pa19dfLewP1WpO",
+            "scale": 1
+          }
         }
       ]
     },
@@ -2178,6 +2222,19 @@
             "offset": {
               "x": 0,
               "y": 50
+            }
+          }
+        },
+        {
+          "id": "RHTMm7NeHkqV-nGxNPFqx",
+          "name": "notice",
+          "visual": {
+            "type": "image",
+            "assetId": "Jv5XXGi8d14m5EHzfqkdr",
+            "scale": 0.2,
+            "offset": {
+              "x": -1,
+              "y": 0
             }
           }
         }
@@ -6559,6 +6616,154 @@
             "characterId": "",
             "text": "Cô tắt màn hình ngay lập tức, rồi bước thẳng về phía {{nam9}}.",
             "id": "N6G1ouae8MKznL_vz70E5"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "gTo8ZYEhdY9-sNs5xpUIs"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "1LOnkHz_VtGL5V11Tgc4a",
+            "duration": 300,
+            "id": "fLTJz0mYU68BGvXi0zagg"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "2VOTbQ9P_UQvbtRy6MV2t"
+            },
+            "id": "TitE3JIyJN0xmYKR3j6Aw"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "out"
+            },
+            "id": "hegrHSMsV4lx66bRmiM4C"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Giờ nghỉ giải lao trước trận chung kết.",
+            "id": "buXp-OGgdzfXBXM5cqbfQ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nam9}} được kéo vào giữa vòng vây của đồng đội, tiếng cười nói và những lời chúc mừng dồn dập xung quanh.",
+            "id": "459IjsOrb7GvLuJkokP2f"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nu9}} bước tới, dừng lại bên cạnh anh.",
+            "id": "_QaM596b1VcOyVtD-34vM"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "08IqyQP5g1LGom7_YKcw8"
+            },
+            "id": "4fKJk0TpR2C9g-5mEl9QK"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Mắt anh đỏ quá… Anh có ổn không?",
+            "id": "gRwcI_8gAhYioF3IbWJOK"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nam9}} khựng lại trong thoáng chốc, rồi lắc đầu.",
+            "id": "15akpMnt3ifaEi9OEsp8V"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nu9}} nhìn anh lâu hơn, giọng hạ xuống, vừa lo lắng vừa có chút dè chừng:",
+            "id": "f0si0lMPcqfooc2Fd_Pzt"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Nhìn anh… hơi khác lúc nãy.",
+            "id": "wzx8DukCXJcTMeiBMwoL9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Không sao, anh ổn.",
+            "id": "x8GapspNXDumpClpBZFml"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "fIE_UR8qMVZw1fZHjflxr"
+            },
+            "id": "oosZlNlyZx6aj4_xlVHI_"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nu9}} tiến lại gần hơn, rút ra một chiếc khăn giấy rồi nhẹ nhàng lau đi lớp mồ hôi trên mặt anh.",
+            "id": "aQnPA_e6N2e-4XBBJ2ZtT"
+          },
+          {
+            "type": "character_show",
+            "characterId": "1LOnkHz_VtGL5V11Tgc4a",
+            "position": {
+              "x": 62,
+              "y": 32
+            },
+            "duration": 300,
+            "flipX": false,
+            "id": "vbU9grLyb37X_MbEFM0lv",
+            "expressionId": "RHTMm7NeHkqV-nGxNPFqx"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Nhưng ngay khi đầu ngón tay của cô khẽ chạm vào {{nam9}}, {{nu9}} thoáng giật mình, vội vàng rút tay lại.",
+            "id": "RH-hfT3u9rvDxq6-VY4jh"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Người anh nóng quá…",
+            "id": "Z1WT6xEMeGh2D4KCEBAkM"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "1LOnkHz_VtGL5V11Tgc4a",
+            "duration": 300,
+            "id": "ChNm3oBvKHT7gOdkoPg9_"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nam9}} cũng lùi lại một bước, ánh mắt thoáng né tránh.",
+            "id": "DB6jNv2NqKGLeBCZnpJLh"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Anh nói rồi, không sao đâu mà.",
+            "id": "SuEiwTGIbROFOZrCV46u0"
           },
           {
             "type": "stage_reset",

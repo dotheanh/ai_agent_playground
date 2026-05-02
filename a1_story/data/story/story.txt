@@ -1186,22 +1186,32 @@ Màn hình sáng lên trong lòng bàn tay cô, một dòng cảnh báo hiện r
 Cô tắt màn hình ngay lập tức, rồi bước thẳng về phía {{nam9}}.
 
 
----
+------------------------------------------------------
 
-Giờ nghỉ giải lao trước khi bước vào trận chung kết cuối cùng, {{nu9}} rời khán đài, bước xuống khu vực sân.
+Giờ nghỉ giải lao trước trận chung kết.
+{{nam9}} được kéo vào giữa vòng vây của đồng đội, tiếng cười nói và những lời chúc mừng dồn dập xung quanh.
 
-Ánh mắt cô dừng lại trên gương mặt {{nam9}} — sắc đỏ nơi khóe mắt chưa tan hết, nhiệt độ cơ thể vẫn cao hơn mức bình thường.
+{{nu9}} bước tới, dừng lại bên cạnh anh.
 
-“Anh ổn chứ?” cô hỏi khẽ, giọng tự nhiên như một câu quan tâm.
+“Mắt anh đỏ quá… Anh có ổn không?”
 
-{{nam9}} thoáng khựng lại, rồi lắc đầu nhẹ. “Không sao, anh ổn.”
-Nhưng ánh mắt anh thoáng lệch đi một nhịp — đủ để chính anh cũng nhận ra trạng thái của mình.
+{{nam9}} khựng lại trong thoáng chốc, rồi lắc đầu.
 
-Cô không nói thêm, chỉ đưa khăn, nhẹ nhàng lau đi lớp mồ hôi trên trán anh. Đầu ngón tay chạm vào làn da vẫn còn nóng.
+{{nu9}} nhìn anh lâu hơn, giọng hạ xuống, vừa lo lắng vừa có chút dè chừng:
 
-“Người anh nóng quá,” cô nói nhỏ.
+“Nhìn anh… hơi khác lúc nãy.”
 
-Anh hơi lùi lại một chút, như không quen với khoảng cách đó. “Anh nói rồi, không sao.”
+“Không sao, anh ổn.” - anh đáp.
+
+{{nu9}} tiến lại gần hơn, rút ra một chiếc khăn giấy rồi nhẹ nhàng lau đi lớp mồ hôi trên mặt anh.
+Nhưng ngay khi đầu ngón tay của cô khẽ chạm vào {{nam9}}, {{nu9}} thoáng giật mình, vội vàng rút tay lại.
+
+“Người anh nóng quá…”
+
+{{nam9}} cũng lùi lại một bước, ánh mắt thoáng né tránh.
+“Anh nói rồi, không sao đâu mà.”
+
+
 
 {{nu9}} không rút lui, chỉ giữ khoảng cách vừa đủ. Ánh mắt dịu xuống, giọng vẫn nhẹ như cũ:
 
@@ -1315,6 +1325,8 @@ Các thông số hiện lên: độ cao bật nhảy, thời gian tiếp đất,
 Một khoảng lặng ngắn.
 
 “Nhưng T2 đã kéo nhịp lại kịp thời. Mức bộc phát được giữ trong ngưỡng cho phép.”
+
+"Ngoài dấu hiệu chuyển đổi ở mắt đã được ghi nhận ở lần trước, hiện tại T2 đã ghi nhận thêm biểu hiện ở việc cơ thể tỏa ra nhiệt lượng cao khi đối tượng bắt đầu kích hoạt sức mạnh"
 
 “Xử lý tốt.”
 “Trong điều kiện không kiểm soát, mức này đủ để dẫn tới rủi ro gây thương vong hàng loạt.”
