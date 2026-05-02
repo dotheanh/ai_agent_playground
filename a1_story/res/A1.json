@@ -1012,6 +1012,62 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7451.png",
       "name": "notice",
       "category": "other"
+    },
+    "A57-eL1feqW7ZWNZxqvRA": {
+      "id": "A57-eL1feqW7ZWNZxqvRA",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7452.png",
+      "name": "ChatGPT Image 19_16_42 2 thg 5, 2026",
+      "category": "other"
+    },
+    "ciLwiv8K3S8hwmR7KnJXT": {
+      "id": "ciLwiv8K3S8hwmR7KnJXT",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7453.png",
+      "name": "ChatGPT Image 19_43_31 2 thg 5, 2026",
+      "category": "other"
+    },
+    "W9X6w0L8HIfUImwwc_opY": {
+      "id": "W9X6w0L8HIfUImwwc_opY",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7454.png",
+      "name": "ChatGPT Image 20_00_54 2 thg 5, 2026",
+      "category": "other"
+    },
+    "eLdtuadPhFzO87FROcmlH": {
+      "id": "eLdtuadPhFzO87FROcmlH",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7455.png",
+      "name": "ChatGPT Image 20_16_08 2 thg 5, 2026",
+      "category": "other"
+    },
+    "Akm3xnHhd-aj76Fpnkqwe": {
+      "id": "Akm3xnHhd-aj76Fpnkqwe",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7456.png",
+      "name": "ChatGPT Image 20_37_35 2 thg 5, 2026",
+      "category": "other"
+    },
+    "iMfPrraGKbtT4C3hgyoQA": {
+      "id": "iMfPrraGKbtT4C3hgyoQA",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7457.png",
+      "name": "ChatGPT Image 20_36_02 2 thg 5, 2026",
+      "category": "other"
+    },
+    "sQGC893-7Ti_Um6k6p5uh": {
+      "id": "sQGC893-7Ti_Um6k6p5uh",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7458.png",
+      "name": "ChatGPT Image 20_49_53 2 thg 5, 2026",
+      "category": "other"
+    },
+    "PptNMQbQ7Ubc69HAYaCd6": {
+      "id": "PptNMQbQ7Ubc69HAYaCd6",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7459.png",
+      "name": "ChatGPT Image 20_58_55 2 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -2218,7 +2274,7 @@
           "visual": {
             "type": "image",
             "assetId": "KQKBmViHtctwLatZc0cSO",
-            "scale": 1.4,
+            "scale": 1.6,
             "offset": {
               "x": 0,
               "y": 50
@@ -2235,6 +2291,19 @@
             "offset": {
               "x": -1,
               "y": 0
+            }
+          }
+        },
+        {
+          "id": "JQ9310IBJSv9vXu6Zaehn",
+          "name": "water",
+          "visual": {
+            "type": "image",
+            "assetId": "A57-eL1feqW7ZWNZxqvRA",
+            "scale": 1.6,
+            "offset": {
+              "x": 0,
+              "y": 73
             }
           }
         }
@@ -6531,20 +6600,307 @@
         ],
         "meta": {
           "mapPosition": {
-            "x": 1400,
-            "y": 6300
+            "x": 1200,
+            "y": 6900
           }
         }
       },
       {
-        "id": "DKgsgdLIDBFGiP-uC96ql",
-        "title": "C2 A11 Giải lao",
+        "id": "JvEIPMqBm4Ydg9BRIGccL",
+        "title": "C2 A12 Giải bóng chuyền (3)",
         "meta": {
           "mapPosition": {
             "x": 800,
-            "y": 6900
+            "y": 7100
           }
         },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "oi72ZqB1-52iKgQegDuaJ"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "ciLwiv8K3S8hwmR7KnJXT"
+            },
+            "id": "TN66ZIGvUTox988_baO9z"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "0xmjPS8maOyMCkxxTJhyQ",
+            "volume": 1,
+            "id": "a7ENMELqP310PytbeFgvB"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trận chung kết diễn ra với một nhịp độ khác hẳn.",
+            "id": "o-aLi5EsE8iy1bq8a_HZF"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nam9}} vẫn là người dẫn dắt thế trận, nhưng lực đánh được giữ ở mức vừa đủ.",
+            "id": "VJiyMM3RoZYQJbDSbQI0T"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Những pha xử lý chuyển dần sang kỹ thuật — góc đánh mở rộng, điểm rơi được kéo giãn, nhịp đập không còn dồn dập mà trở nên đều và chính xác.",
+            "id": "6dxO7HIhFUJV72FCimJgy"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "eNI9P2Djp9oNCIZ4N0Oet",
+            "volume": 1,
+            "id": "mRYMgBZvOgeG-UxeIhL7j"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "eLdtuadPhFzO87FROcmlH"
+            },
+            "id": "kj4VqiHACUR7hDjFIGe-A"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Những cú đập không còn giáng xuống như búa nện, mà lướt đi theo những quỹ đạo xoáy khó chịu.",
+            "id": "-eRELxNlX3adQ6MNocJMm"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Khi thì chéo sâu, lúc lại sát biên, hoặc khẽ lách qua tay chắn một cách hoàn hảo.",
+            "id": "DXQYqcXBxXyCRks49uueg"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Hàng thủ đối phương nhiều lần chạm được bóng, nhưng không giữ nổi nhịp, buộc phải trả về những đường bóng thiếu ổn định.",
+            "id": "5ZJ-d93X-SeU2CqyKN5bt"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "0xmjPS8maOyMCkxxTJhyQ",
+            "volume": 1,
+            "id": "zOReL-FNa-bgPX-QK8Src"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "W9X6w0L8HIfUImwwc_opY"
+            },
+            "id": "48LeoySi0CcqjA7y4lCSt"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Đội Khai Giới vẫn tiếp tục nới rộng khoảng cách, giữ thế áp đảo trước đối thủ.",
+            "id": "UYutUd_h2VtxUA45cv9dV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Khai Giới chỉ còn một điểm cuối cùng là chạm đến chức vô địch.",
+            "id": "nSYFQt6fEuyS4FFI203Ih"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "Akm3xnHhd-aj76Fpnkqwe"
+            },
+            "id": "z59nxzzzwb83aRBvbYUOV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Một đường chuyền hai hơi sát lưới.",
+            "id": "keYPZItSaDbei4gbiLzxh"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nam9}} vẫn nhẹ nhàng bật lên cao, thân người lướt đi trên không trung.",
+            "id": "RHr3fEK52jatE2ZiSd6jp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Đến khoảnh khắc chạm bóng, cổ tay anh khẽ xoay gập xuống, đẩy nhẹ trái bóng rơi sát lưới.",
+            "id": "7WUeCPZ1Y4I6XlavIVaMK"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "iMfPrraGKbtT4C3hgyoQA"
+            },
+            "id": "GbYL3afXnJ4XaqA6P349j"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Một pha bỏ nhỏ tinh tế, bóng rơi ngay bên cạnh hàng chắn, quá gần để lùi về, quá nhanh để kịp lao tới.",
+            "id": "yJTkNLt3-azYUp1SL19sQ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Cả đội đối thủ chỉ kịp sững lại trong tích tắc.",
+            "id": "1Ck-TVJMIOT19YHj8DUz1"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "v3lHH-fAkd0wNCMVd2cMu",
+            "volume": 1,
+            "id": "lrdQUEu8oKT1hD7xuWjtB"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Bóng chạm sân.",
+            "id": "jzHfv1_eAWCKDOOQIZrXF"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "0xmjPS8maOyMCkxxTJhyQ",
+            "volume": 1,
+            "id": "LqjB6Vsn5imhKtlNri2vH"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Điểm kết thúc. Khai Giới giành chiến thắng.",
+            "id": "u9FlP8Vi4vDExbOZZV3t4"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "dbbTbK_f36XgNKp1cMRzp",
+            "volume": 1,
+            "id": "T2o8zgT_VI502MOqgIRAB"
+          },
+          {
+            "type": "play_sfx",
+            "assetId": "xp0Fycw6earXYnatNTbDH",
+            "volume": 1,
+            "id": "JWXCbf299hMhTqdGf-oVU"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "sQGC893-7Ti_Um6k6p5uh"
+            },
+            "id": "nAK38GJ6vFKumobKJz9Js"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Cả khán đài lại bùng nổ.",
+            "id": "OEQ51_VJLAzJQl3Srk37t"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Tiếng reo hò dâng lên thành từng lớp, náo nhiệt khắp cả sân vận động. Đồng đội lao tới, đập tay, khoác vai, kéo {{nam9}} vào giữa vòng người.",
+            "id": "XtUdJRWqo0q1-SkhNa-ve"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ở rìa sân, {{nu9}} đã rời khán đài từ lúc nào.",
+            "id": "zWkezXu6QMgzru0TU5DU0"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "PptNMQbQ7Ubc69HAYaCd6"
+            },
+            "id": "qlFm4sNMF7rCCDCDJmjUU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Cô chen qua đám đông, giơ điện thoại lên trước mặt {{nam9}}, ánh mắt lộ rõ vẻ phấn khích.",
+            "id": "Ty5Zy5p1BUC9eUE0mK9gE"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Màn hình phát một clip CapCut ngắn, nhịp cắt nhanh, bắt trúng những khoảnh khắc bật nhảy, dứt điểm của anh.",
+            "id": "AJ7qvcyrgBIOPTvW2zVix"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Góc quay ổn định, chuyển cảnh gọn gàng, nhạc nền ghép vừa khớp với từng pha bóng.",
+            "id": "4H7q5N33oXOspOOzoedZK"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Nãy giờ em đặt camera để quay highlight cho anh đó!",
+            "id": "KYm7hJl6hJ6GaVpfHhgO9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nam9}} nhìn màn hình, hơi khựng lại một nhịp. Rồi khẽ nở nụ cười.",
+            "id": "1Lv2Mx6w4eea2_cNfo3aL"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Em dựng clip nhanh quá nhỉ?",
+            "id": "NanpqnLAbqRAmo4-FYTiN"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nu9}} thu điện thoại lại, giọng ngượng ngùng:",
+            "id": "GmVzFbqFr5KhRN2eb34lx"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Tại... em quen làm thôi.",
+            "id": "5fHYie2SI7aird9BsuFsS"
+          },
+          {
+            "type": "stage_reset",
+            "id": "3FxSQNr2eNMbjnQrRGFWc"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "K5xmpk4HzMB4iqgkI3bpG"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "X7BegM6sL9CrV6WyHv-Lc"
+          }
+        ]
+      },
+      {
+        "id": "DKgsgdLIDBFGiP-uC96ql",
+        "title": "C2 A11 Giải lao",
         "nodes": [
           {
             "type": "stage_reset",
@@ -6594,10 +6950,10 @@
               "x": 50,
               "y": 100
             },
+            "expressionId": "g7fKZSuicBTXG8WiU-5mY",
             "duration": 300,
             "flipX": false,
-            "id": "xbn9tIjS-xSl6C6ON0HM2",
-            "expressionId": "g7fKZSuicBTXG8WiU-5mY"
+            "id": "xbn9tIjS-xSl6C6ON0HM2"
           },
           {
             "type": "dialogue",
@@ -6700,7 +7056,7 @@
           {
             "type": "dialogue",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
-            "text": "Nhìn anh… hơi khác lúc nãy.",
+            "text": "Nhìn anh… sợ quá…",
             "id": "wzx8DukCXJcTMeiBMwoL9"
           },
           {
@@ -6730,10 +7086,10 @@
               "x": 62,
               "y": 32
             },
+            "expressionId": "RHTMm7NeHkqV-nGxNPFqx",
             "duration": 300,
             "flipX": false,
-            "id": "vbU9grLyb37X_MbEFM0lv",
-            "expressionId": "RHTMm7NeHkqV-nGxNPFqx"
+            "id": "vbU9grLyb37X_MbEFM0lv"
           },
           {
             "type": "dialogue",
@@ -6766,6 +7122,60 @@
             "id": "SuEiwTGIbROFOZrCV46u0"
           },
           {
+            "type": "character_show",
+            "characterId": "1LOnkHz_VtGL5V11Tgc4a",
+            "position": {
+              "x": 50,
+              "y": 100
+            },
+            "duration": 300,
+            "flipX": false,
+            "id": "U4wvTLnn3CO80t8y-Me5g",
+            "expressionId": "JQ9310IBJSv9vXu6Zaehn"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nu9}} không bỏ cuộc. Cô đưa cho {{nam9}} một chai nước suối.",
+            "id": "JCEX3WGzVREnsY5tO9l8a"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ánh mắt của {{nu9}} dịu xuống, giọng vẫn nhẹ nhàng:",
+            "id": "jrct_DuXlpw44_GAvq4qK"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Trận sau là chung kết rồi… anh đừng dồn lực quá sớm, dễ chấn thương lắm.",
+            "id": "j-ncwLrThfiEsp1X8KMj7"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Giữ nhịp thôi… không cần đánh hết sức như lúc nãy. Đội này anh thừa sức thắng mà.",
+            "id": "mYZNm9g7A6KTDe0ftSrbE"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "1LOnkHz_VtGL5V11Tgc4a",
+            "duration": 300,
+            "id": "CzlRuYIFchfgVQNH48-_J"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Một khoảng lặng ngắn. {{nam9}} không đáp, chỉ khẽ gật đầu.",
+            "id": "mxKG500vBnob9btOds6lL"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Anh uống hết chai nước {{nu9}} vừa đưa, ánh mắt dần ổn định trở lại.",
+            "id": "SOzFY4cFNBSpT6cMiB8fb"
+          },
+          {
             "type": "stage_reset",
             "id": "qs-0vOkDkxOQUHLR3CzHZ"
           },
@@ -6787,8 +7197,19 @@
               "color": "#000000"
             },
             "id": "Xk3HdRmNzXY_L6Avfw_nO"
+          },
+          {
+            "type": "goto",
+            "target": "JvEIPMqBm4Ydg9BRIGccL",
+            "id": "N4oty3OOQsROTr3dK9MTs"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 6900
+          }
+        }
       },
       {
         "id": "_IxFNsCXc9X34VybvvlGl",
