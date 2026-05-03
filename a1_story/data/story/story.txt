@@ -1307,9 +1307,51 @@ Cả căn phòng im lặng.
 
 
 =================================================================================================================
-                                              Chap 3: Đô Quốc
+                                              CHAP 3: Đô Quốc
                                               * ảnh bìa là hình Đô Thành
 =================================================================================================================
+
+
+================================================================================
+                              C3 A1 Ở sân golf
+================================================================================
+
+[SÂN GOLF NỘI KHU - TÂN ĐÔ THÀNH]
+
+Tân Đô Thành là thành phố lớn nhất của Tây Tân Quốc, nơi quyền lực tập trung và vận hành theo ý chí của Hoàng đế Đô Quốc.
+
+Sân golf của Hoàng đế trải rộng giữa lòng Tân Đô Thành, như một khoảng xanh tách biệt hoàn toàn khỏi những tòa cao ốc san sát xung quanh.
+
+Dưới ánh nắng nhạt, những triền cỏ uốn lượn được cắt tỉa hoàn hảo, kéo dài qua các dải đất thoai thoải và ôm lấy những hồ nước phẳng lặng phản chiếu bầu trời.
+
+Những hố cát trắng nằm rải rác, nổi bật trên nền cỏ xanh mịn, còn hàng cây thấp viền quanh tạo thành một ranh giới mềm nhưng tuyệt đối.
+
+Giữa không gian tĩnh lặng ấy, mọi thứ đều được sắp đặt chính xác, như thể cả khu vực này tồn tại bên ngoài nhịp sống ồn ào của thành phố.
+
+---------
+
+Hoàng đế đứng ở khu tee box, thong thả chọn gậy từ túi, ngón tay lướt qua từng cán graphite rồi dừng lại, rút một cây iron. Ông đặt bóng lên tee, chỉnh stance, mắt ngắm đường bóng.
+
+Một cận vệ cao lớn đứng phía sau, thân hình vượt hẳn người thường, giọng kính cẩn nói:
+“Thưa Đương kim Hoàng đế… có tin liên quan đến Thái tử.”
+
+Hoàng đế không quay đầu, chỉ khẽ gật.
+
+Cận vệ ra hiệu. Người đưa tin lập tức tiến lên, dừng lại phía sau lưng Hoàng đế, tay ôm chặt xấp hồ sơ. Dáng người anh ta nhỏ hẳn đi khi đứng cạnh hai thân hình cao lớn ấy.
+
+Hoàng đế đưa gậy ra sau, động tác lấy đà mượt mà rồi hạ gậy dứt khoát. Mặt gậy chạm bóng gọn, âm thanh đanh và chắc. Bóng vút lên, vẽ một đường cong cao rồi rơi xuống dải cỏ phía xa, lăn thêm vài nhịp trước khi dừng lại.
+
+Khi bóng đã nằm yên trên mặt cỏ, người đưa tin mới dám lên tiếng:
+
+“Thưa ngài, Nam Long Quốc đề xuất triển khai liều ức chế bổ sung cho Tân Hoàng đế…”
+
+Hoàng đế vẫn nhìn theo hướng bóng, ánh mắt không đổi.
+
+“Ngươi vừa gọi ai là Tân Hoàng đế?”
+
+Ông cúi xuống nhặt tee, phủi nhẹ đầu gậy rồi bước đi, không quay lại. Khoảng lặng phía sau kéo dài, nặng nề hơn bất kỳ mệnh lệnh nào.
+
+
 
 ================================================================================
                               ĐẤU TRƯỜNG BỊ LỘ
@@ -1520,21 +1562,33 @@ ko phải vì đạo đức, mà đơn giản là vì A* thích cảm giác cai 
                               A1 hồi tưởng về cha
 ================================================================================
 
-A1 nghỉ làm để tránh bị bàn tán
+A1 vẫn đi làm mặc cho bản thân bị bàn tán
 T2 vẫn ở bên cạnh A1
 Chỉ có T2 là tỏ ra tin tưởng A1
 (nhớ lại cảnh lúc cô tỉnh dậy và nói vs bố về A1 mà mình đã quan sát, bố cô quyết định kể lại về Đế Quốc Đô và các bản sao)
 
-Đang trò chuyện thì bố của T2 gọi điện hỏi thăm
+2 ng đang cùng nhau chạy bộ buổi tối
+
+Đang trò chuyện thì bố của T2 gọi điện hỏi thăm con gái
+Lúc call thì T2 còn khoe vs bố mình đang ngồi cùng anh {{nam9}} đồng nghiệp
+
+{{nu9}} hỏi thăm mắt của Bố
 Ở đầu dây bên kia, ông bố đang vệ sinh con mắt giả, miệng vẫn nói rằng mình rất ổn, rồi gắn mắt lại
 (ngầm thể hiện ông cũng thuộc giới tinh hoa và bị hoàng đế Đô lấy đi một bên mắt)
 
-A1 chạnh lòng, nói rằng có một ng bố chăm sóc cho mình thật tốt
-A1 hỏi thăm bố làm công việc gì, T2 nói là chính trị gia
-mẹ thì là Giáo sư, Tiến sĩ, Bác sĩ, nhưng bà ấy suốt ngày chỉ ở phòng thí nghiệm, đã rất lâu r chưa dc gặp lại mẹ
-Vừa nói, T2 vừa đưa cho A1 xem tấm ảnh gia đình chụp lúc T2 còn nhỏ
-A1 nhìn vào, chú ý gương mặt ng mẹ một chút
 
+*** tạo hình mẹ T2 là một ng đeo kính, tóc ngắn ngang vai
+Sau khi call, ông bố thở dài, nhìn tấm ảnh gia đình trên bàn (chụp lúc T2 còn nhỏ) với vẻ trầm ngâm rồi tự hỏi
+Ko biết con bé có lại giống như mẹ của nó ko
+
+Giữ nguyên tấm hình gia đình đó, nhưng chuyển cảnh qua màn hình điện thoại của T2 đang show cho nam9 xem
+T2 kể với nam9 rằng bố cô là một thương nhân, còn mẹ thì là Giáo sư, Tiến sĩ, Bác sĩ, nhưng bà ấy đang công tác trong phòng thí nghiệm ở nước ngoài, đã nhiều năm r cô chưa dc gặp lại mẹ
+
+* Ánh mắt hơi buồn buồn gượng gạo, hint là nu9 đang nói dối khi nhắc tới mẹ (vì mẹ cô đã ly hôn bố)
+
+A1 nhìn vào hình, chú ý gương mặt ng mẹ một chút
+
+A1 lại làm ra vẻ chạnh lòng, nói rằng ít nhất thì nu9 còn có một ng bố chăm sóc cho mình thật tốt
 A1 cảm thán, dù sao T2 vẫn còn may mắn hơn mình, vì từ khi cậu còn nhỏ đã ko còn cha mẹ ở bên cạnh
 
 
@@ -1870,7 +1924,6 @@ Những ng từng giảng dạy cho cô lúc xưa
 Tham gia điều chế thuốc ức chế cùng vs mẹ T2
 Ng đặt tay lên vai lúc họp lần đầu
 Tất cả đều chỉ là 1 ng
-Trớ trêu thay, trong khi loài ng nghĩ rằng mình đang kiểm soát A1, thì A1 đã âm thầm thao túng toàn bộ nhân loại
 T2 ngượng ngùng xấu hổ
 
 Flashback lại câu nói của A1
@@ -1886,7 +1939,13 @@ chính phủ khuyến khích ng dân sơ tán
 một phần thế giới ngầm được khai thông
 ng ta xuống đó và nhìn thấy cả một thành phố đã được A2 tới A7 xây dựng
 là sự hợp tác giữa Nam Long Quốc với Đô Quốc
-khi ng dân xuống đó, họ bất ngờ phát hiện ra những khối não khổng lồ
+
+
+Ng Đô dẫn giới lãnh đạo vào phòng não
+Nói là chính A1 yêu cầu khi nào các anh xuống được đây thì đưa mọi ng đi tham quan 1 vòng
+họ kinh ngạc phát hiện ra những khối não khổng lồ
+
+(T2 k có mặt ở đó, vẫn bên giường bệnh, nma xem mọi thứ qua camera ghi hình)
 
   "Model A1" mà A1 tạo ra thực chất không phải AI LLM nào cả - đó là output
   từ bộ não sinh học này.
@@ -1896,9 +1955,22 @@ nhân bản từ tế bào não của A1
   sinh học khổng lồ được nuôi cấy dưới lòng đất từ tế bào gốc của A*.
 
 kết nối não A1 với tất cả những bản sao còn lại
+
+Có cảnh các màn hình quan sát khắp nơi
+Có cả góc nhìn từ vũ trụ
+Ngta nhận ra đó là góc nhìn toàn cảnh thế giới từ vệ tinh
+Một vệ tinh truyền thông? Do chính Ax phát triển
+Có 7 màn hình A1 đến A7
+
+=> đó là cách nạp dữ liệu cho bộ não gốc
+
 => đây là sức mạnh tư duy của A1. nhờ bộ não khổng lồ này cùng với những ghi chép và phân tích hành vi mà A1 - A7 quan sát được, tất cả tổng hợp lại để dự đoán chính xác từng hành vi của loài ng, dự đoán được phản ứng của từng cá nhân trước 1 sự việc cụ thể để có thể thao túng loài ng
 đây chính là lý do A1 chấp nhận bị tiêm thuốc ức chế để dễ dàng hòa nhập và hiểu hơn về loài ng
 
+
+Trớ trêu thay, trong khi loài ng nghĩ rằng mình đang kiểm soát A1, thì A1 đã âm thầm thao túng toàn bộ nhân loại
+
+=> thể hiện sự suy sụp của giới lãnh đạo khi biết mọi nỗ lực vùng vẫy của nhân loại để kiểm soát A1 chỉ là vô nghĩa, là thú vui tiêu khiển của A*
 
 
 ================================================================================

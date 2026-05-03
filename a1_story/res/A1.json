@@ -1075,6 +1075,69 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_2/7460.png",
       "name": "ChatGPT Image 21_29_39 2 thg 5, 2026 (1)",
       "category": "other"
+    },
+    "zu9eVfMoURxKhjK_0yanK": {
+      "id": "zu9eVfMoURxKhjK_0yanK",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_3/7461.mp3",
+      "name": "Comfort - OST Beethoven Virus (Bản Giao Hưởng Định Mệnh)",
+      "category": "other"
+    },
+    "ycWIKgeQA38hNFKWwgW9h": {
+      "id": "ycWIKgeQA38hNFKWwgW9h",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_3/7462.mp3",
+      "name": "[compress] Comfort - OST Beethoven Virus (Bản Giao Hưởng Định Mệnh)",
+      "category": "other"
+    },
+    "apng9UI9EdUijoFgVAd13": {
+      "id": "apng9UI9EdUijoFgVAd13",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_28/7151.png",
+      "name": "ChatGPT Image 11_46_12 28 thg 4, 2026",
+      "category": "other"
+    },
+    "Aymz1CkJbfxhnLxjwMzIw": {
+      "id": "Aymz1CkJbfxhnLxjwMzIw",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_3/7463.png",
+      "name": "ChatGPT Image 12_23_58 3 thg 5, 2026",
+      "category": "other"
+    },
+    "uXLc7ygZzC6vlCpHoycZ7": {
+      "id": "uXLc7ygZzC6vlCpHoycZ7",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_3/7464.png",
+      "name": "ChatGPT Image 12_13_37 3 thg 5, 2026",
+      "category": "other"
+    },
+    "gJhVorP7-An7zdqv-3QeO": {
+      "id": "gJhVorP7-An7zdqv-3QeO",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_3/7465.png",
+      "name": "ChatGPT Image 13_14_27 3 thg 5, 2026",
+      "category": "other"
+    },
+    "p7_vrOrYvZqXdhugA1OSN": {
+      "id": "p7_vrOrYvZqXdhugA1OSN",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_3/7466.png",
+      "name": "ChatGPT Image 13_25_33 3 thg 5, 2026",
+      "category": "other"
+    },
+    "NrgTIA57nxvCeswiaFPAC": {
+      "id": "NrgTIA57nxvCeswiaFPAC",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_3/7467.png",
+      "name": "ChatGPT Image 14_00_48 3 thg 5, 2026",
+      "category": "other"
+    },
+    "smrg64hhFGkIYF9oSt7iO": {
+      "id": "smrg64hhFGkIYF9oSt7iO",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_3/7468.png",
+      "name": "ChatGPT Image 13_57_59 3 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -2390,6 +2453,38 @@
           "visual": {
             "type": "image",
             "assetId": "PeiAPfvthu9jmJsk2CARf",
+            "scale": 0.8
+          }
+        }
+      ]
+    },
+    "zKSrzvvU7G1y--oSJl_gU": {
+      "id": "zKSrzvvU7G1y--oSJl_gU",
+      "name": "Cận vệ",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "BOq3ST_G0wKeO_ZGFmYNi",
+          "name": "default",
+          "visual": {
+            "type": "image",
+            "assetId": "gJhVorP7-An7zdqv-3QeO",
+            "scale": 0.8
+          }
+        }
+      ]
+    },
+    "_9NhsJeQEA3hwVxFOOOSr": {
+      "id": "_9NhsJeQEA3hwVxFOOOSr",
+      "name": "Người đưa tin",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "Mw_oTKO3CNr_dB04XtpVj",
+          "name": "default",
+          "visual": {
+            "type": "image",
+            "assetId": "smrg64hhFGkIYF9oSt7iO",
             "scale": 0.8
           }
         }
@@ -5309,6 +5404,80 @@
         }
       },
       {
+        "id": "z2kpZdeHlqusX5_JXFaBW",
+        "title": "CHAP 3: Đô Quốc",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 7500
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "FrdzcGXD_U7t2f2l8cJAI"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "apng9UI9EdUijoFgVAd13"
+            },
+            "id": "9AzopMolfuE4RaYuzOJO0"
+          },
+          {
+            "type": "play_bgm",
+            "assetId": "ycWIKgeQA38hNFKWwgW9h",
+            "loop": true,
+            "volume": 0.53,
+            "id": "c5j_5EO5NemJTew7skNqK",
+            "fadeIn": 1000
+          },
+          {
+            "type": "wait",
+            "duration": 2000,
+            "fixed": true,
+            "id": "0jasV1l39HdbR-3BDSars"
+          },
+          {
+            "type": "show_text",
+            "text": "CHAP 3: Đô Quốc",
+            "position": "center",
+            "id": "Vr9mhpdwcw741qt28I4Zo"
+          },
+          {
+            "type": "wait",
+            "duration": 1000,
+            "fixed": false,
+            "id": "rwF-pdwkyiruXGme9FiWx"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "k7OFdouej4IAjKS6P8x2X"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "D5ynLpULEw6glQtOBx-P2"
+          },
+          {
+            "type": "goto",
+            "target": "X0H02SuEPzmCC3svFWm4s",
+            "id": "x3qoOlu32V_2rQd7geaeS"
+          }
+        ]
+      },
+      {
         "id": "juvy6zRP5P7apjnRLeiKx",
         "title": "C1 A1 Văn phòng 2morepixels",
         "nodes": [
@@ -5622,8 +5791,8 @@
           },
           {
             "type": "stop_bgm",
-            "id": "RB6WADPf0KOXLxB9RuhdE",
-            "fadeOut": 2000
+            "fadeOut": 2000,
+            "id": "RB6WADPf0KOXLxB9RuhdE"
           },
           {
             "type": "screen_effect",
@@ -6609,19 +6778,230 @@
         "meta": {
           "mapPosition": {
             "x": 1200,
-            "y": 6900
+            "y": 7700
           }
         }
       },
       {
-        "id": "MxAjmZHJuPOS2g4laT4g4",
-        "title": "C2 A13 Phòng họp kín lần 2",
+        "id": "X0H02SuEPzmCC3svFWm4s",
+        "title": "C3 A1 Ở sân golf",
         "meta": {
           "mapPosition": {
             "x": 800,
-            "y": 7300
+            "y": 7700
           }
         },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "aV2tYfzaFIRN5DNM9mNmo"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "Aymz1CkJbfxhnLxjwMzIw"
+            },
+            "id": "dBK__rrff4uZLPIYJdYtl"
+          },
+          {
+            "type": "narration",
+            "text": "[SÂN GOLF NỘI KHU - TÂN ĐÔ THÀNH]",
+            "id": "2nfvci6-5ASpn9C7M7Ro9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Tân Đô Thành là thành phố lớn nhất của Tây Tân Quốc, nơi quyền lực tập trung và vận hành theo ý chí của [b][color=#EFBF04]Hoàng đế Đô Quốc[/color][/b].",
+            "id": "B7W_jS41uuka5Xlf-i8hH"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Sân golf của [b][color=#EFBF04]Hoàng đế[/color][/b] trải rộng giữa lòng Tân Đô Thành, như một khoảng xanh tách biệt hoàn toàn khỏi những tòa cao ốc san sát xung quanh.",
+            "id": "yBYaNa0D1taV9CIj3D3fQ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Dưới ánh nắng nhạt, những triền cỏ uốn lượn được cắt tỉa hoàn hảo, kéo dài qua các dải đất thoai thoải và ôm lấy những hồ nước phẳng lặng phản chiếu bầu trời.",
+            "id": "SIi1l4d6D32JaRSi6DoCq"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Những hố cát trắng nằm rải rác, nổi bật trên nền cỏ xanh mịn, còn hàng cây thấp viền quanh tạo thành một ranh giới mềm nhưng tuyệt đối.",
+            "id": "D6itEZqcfo6TbasWzIY_q"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Giữa không gian tĩnh lặng ấy, mọi thứ đều được sắp đặt chính xác, như thể cả khu vực này tồn tại bên ngoài nhịp sống ồn ào của thành phố.",
+            "id": "TegvmdGq9p71Cn17mlvSW"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "uXLc7ygZzC6vlCpHoycZ7"
+            },
+            "id": "qFAzLHC25gqCPg8oIsxnH"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[b][color=#EFBF04]Hoàng đế[/color][/b] đứng ở khu tee box, thong thả chọn gậy từ túi, ngón tay lướt qua từng cán graphite rồi dừng lại, rút một cây iron. Ông đặt bóng lên tee, chỉnh stance, mắt ngắm đường bóng.",
+            "id": "M0XwfwUKz6h541ONKalRs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Một cận vệ cao lớn đứng phía sau, thân hình vượt hẳn người thường, giọng kính cẩn nói:",
+            "id": "ski_XRc2tc_76ml-BuAyK"
+          },
+          {
+            "type": "character_show",
+            "characterId": "zKSrzvvU7G1y--oSJl_gU",
+            "position": "left",
+            "duration": 300,
+            "flipX": false,
+            "id": "sdsv8WtPsIip2Sjc9dRvv",
+            "expressionId": "BOq3ST_G0wKeO_ZGFmYNi"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "zKSrzvvU7G1y--oSJl_gU",
+            "text": "Thưa [b][color=#EFBF04]Đương kim Hoàng đế[/color][/b]… có tin liên quan đến [b][color=#FF0000]Thái tử[/color][/b].",
+            "id": "woK7mdGq8fHhYOmhZzZkl"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "zKSrzvvU7G1y--oSJl_gU",
+            "duration": 300,
+            "id": "sj2KGOK0oOzbueM3AKuCm"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[b][color=#EFBF04]Hoàng đế[/color][/b] không quay đầu, chỉ khẽ gật.",
+            "id": "59sMEwc_vFt809bS2fBF6"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Cận vệ ra hiệu. Người đưa tin lập tức tiến lên, dừng lại phía sau lưng [b][color=#EFBF04]Hoàng đế[/color][/b], tay ôm chặt xấp hồ sơ. Dáng người anh ta nhỏ hẳn đi khi đứng cạnh hai thân hình cao lớn ấy.",
+            "id": "ubQ4PSC9YKw1JjTa6S-7x"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "p7_vrOrYvZqXdhugA1OSN"
+            },
+            "id": "EJ-cpzW173TnaYi3o-_T_"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[b][color=#EFBF04]Hoàng đế[/color][/b] đưa gậy ra sau, động tác lấy đà mượt mà rồi hạ gậy dứt khoát. Mặt gậy chạm bóng gọn, âm thanh đanh và chắc. Bóng vút lên, vẽ một đường cong cao rồi rơi xuống dải cỏ phía xa, lăn thêm vài nhịp trước khi dừng lại.",
+            "id": "XsUGldzCK6bzgPP7l2ZJm"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Khi bóng đã nằm yên trên mặt cỏ, người đưa tin mới dám lên tiếng:",
+            "id": "ajR2kDeBy_Mt3lmzIezyQ"
+          },
+          {
+            "type": "character_show",
+            "characterId": "_9NhsJeQEA3hwVxFOOOSr",
+            "position": "center-left",
+            "duration": 300,
+            "flipX": false,
+            "id": "6Fvg5wCitHu_v420XXahT",
+            "expressionId": "Mw_oTKO3CNr_dB04XtpVj"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "_9NhsJeQEA3hwVxFOOOSr",
+            "text": "Thưa ngài, Nam Long Quốc đề xuất triển khai liều ức chế bổ sung cho [b][color=#FF0000]Tân Hoàng đế[/color][/b]…",
+            "id": "oizbaEdbKvVoiZPGtVV9O"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "_9NhsJeQEA3hwVxFOOOSr",
+            "duration": 300,
+            "id": "JBpA-hndAWSsDr2ctaLqJ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[b][color=#EFBF04]Hoàng đế[/color][/b] vẫn nhìn theo hướng bóng, ánh mắt không đổi.",
+            "id": "FhExPQZvJcPujzUgDwsLt"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "NrgTIA57nxvCeswiaFPAC"
+            },
+            "id": "n2Ny4uo_CPcPAOyYNqypL"
+          },
+          {
+            "type": "character_show",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "ivq20NM4vjEibbmOY0X-c",
+            "expressionId": "WkylhAz3iCbipMuiGiEJg"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ngươi vừa gọi ai là [b][color=#FF0000]Tân Hoàng đế[/color][/b]?",
+            "id": "ZZ6hF8A-ZBmn0Xw0Zd_2B"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ông cúi xuống nhặt tee, phủi nhẹ đầu gậy rồi bước đi, không quay lại. Khoảng lặng phía sau kéo dài, nặng nề hơn bất kỳ mệnh lệnh nào.",
+            "id": "JpDD24iHtVAeaICS3XfVl"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "529yqNxmTedAHDuaaniwa",
+            "duration": 300,
+            "id": "pr3H0YQgU5k8j0dfFcPks"
+          },
+          {
+            "type": "stage_reset",
+            "id": "hC3HFJ10Gw_TtC3p_YGu0"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "SRQ142X-n60MHyOPAZ9CN"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "efkKPoizrcojScyx008of"
+          }
+        ]
+      },
+      {
+        "id": "MxAjmZHJuPOS2g4laT4g4",
+        "title": "C2 A13 Phòng họp kín lần 2",
         "nodes": [
           {
             "type": "stage_reset",
@@ -6640,8 +7020,8 @@
             "assetId": "LYTVfe4A_oPm7w1bGT_ai",
             "loop": true,
             "volume": 0.32,
-            "id": "fktFYqXi_0rc5xVEdrMsh",
-            "fadeIn": 1000
+            "fadeIn": 1000,
+            "id": "fktFYqXi_0rc5xVEdrMsh"
           },
           {
             "type": "dialogue",
@@ -6665,10 +7045,10 @@
             "type": "character_show",
             "characterId": "TlVBkP3VfnHvfighf75Vi",
             "position": "left",
+            "expressionId": "sep_thang_happy",
             "duration": 300,
             "flipX": false,
-            "id": "FviqjkSNaRQ8MMB-xSwfJ",
-            "expressionId": "sep_thang_happy"
+            "id": "FviqjkSNaRQ8MMB-xSwfJ"
           },
           {
             "type": "dialogue",
@@ -6686,10 +7066,10 @@
             "type": "character_show",
             "characterId": "TruongDon_CongAn",
             "position": "right",
+            "expressionId": "GYPK_lMslGLgzNTUlvRcz",
             "duration": 300,
             "flipX": false,
-            "id": "bqWXCiu715mAIS0y4tUng",
-            "expressionId": "GYPK_lMslGLgzNTUlvRcz"
+            "id": "bqWXCiu715mAIS0y4tUng"
           },
           {
             "type": "dialogue",
@@ -6710,10 +7090,10 @@
             "type": "character_show",
             "characterId": "JkuHBljTR4th0RQdUeZMA",
             "position": "right",
+            "expressionId": "neutral",
             "duration": 300,
             "flipX": false,
-            "id": "gDMEJmpSsBDJ8uxp6NxzC",
-            "expressionId": "neutral"
+            "id": "gDMEJmpSsBDJ8uxp6NxzC"
           },
           {
             "type": "dialogue",
@@ -6742,10 +7122,10 @@
             "type": "character_show",
             "characterId": "A3xlgscg_5MPcRVhdvKMm",
             "position": "center",
+            "expressionId": "_ig_au8bx7OldCNdc1OqM",
             "duration": 300,
             "flipX": false,
-            "id": "p8nwDKAmfNvgMWVZxFINv",
-            "expressionId": "_ig_au8bx7OldCNdc1OqM"
+            "id": "p8nwDKAmfNvgMWVZxFINv"
           },
           {
             "type": "dialogue",
@@ -6828,6 +7208,11 @@
             "id": "pdZFlIxHZZQTV7PQILVLi"
           },
           {
+            "type": "stop_bgm",
+            "id": "Im50FAFIAGA08PlY1MAD-",
+            "fadeOut": 1000
+          },
+          {
             "type": "stage_reset",
             "id": "DmNapMUiDa5_Eh2DlqDj0"
           },
@@ -6849,18 +7234,23 @@
               "color": "#000000"
             },
             "id": "GL-APNG8jmmMSBeD4IhR5"
+          },
+          {
+            "type": "goto",
+            "target": "z2kpZdeHlqusX5_JXFaBW",
+            "id": "GV46IKafi3P80clsi1RTW"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 7300
+          }
+        }
       },
       {
         "id": "JvEIPMqBm4Ydg9BRIGccL",
         "title": "C2 A12 Giải bóng chuyền (3)",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 7100
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -7122,8 +7512,8 @@
           },
           {
             "type": "stop_bgm",
-            "id": "xTvERZ2Xe-m55oMkLhKwP",
-            "fadeOut": 2000
+            "fadeOut": 2000,
+            "id": "xTvERZ2Xe-m55oMkLhKwP"
           },
           {
             "type": "stage_reset",
@@ -7153,7 +7543,13 @@
             "target": "MxAjmZHJuPOS2g4laT4g4",
             "id": "IM1B03rmZg6F_lBk2w-lK"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 7100
+          }
+        }
       },
       {
         "id": "DKgsgdLIDBFGiP-uC96ql",
@@ -7385,10 +7781,10 @@
               "x": 50,
               "y": 100
             },
+            "expressionId": "JQ9310IBJSv9vXu6Zaehn",
             "duration": 300,
             "flipX": false,
-            "id": "U4wvTLnn3CO80t8y-Me5g",
-            "expressionId": "JQ9310IBJSv9vXu6Zaehn"
+            "id": "U4wvTLnn3CO80t8y-Me5g"
           },
           {
             "type": "dialogue",
@@ -10497,8 +10893,8 @@
           },
           {
             "type": "stop_bgm",
-            "id": "P8dP7LlQilS29slWug0kO",
-            "fadeOut": 1000
+            "fadeOut": 1000,
+            "id": "P8dP7LlQilS29slWug0kO"
           },
           {
             "type": "goto",
