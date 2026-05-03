@@ -1,5 +1,19 @@
 
 
+================================================================================
+
+Notes
+
+{{nam9}} = A1 = A*. Ngày sinh: 03/12/1999, Nguyên quán: Đô Thành, Quốc tịch: Đô Quốc
+Đương kim Hoàng đế Nhiếp chính = Hoàng đế = K12
+
+{{nu9}} = T2. Ngày sinh: 01/01/2000, Nguyên quán: Thủ Đô, Quốc tịch: Nam Long Quốc
+Bố của {{nu9}} = Ủy viên Sơn
+Mẹ của {{nu9}} = bác sĩ Thủy
+
+================================================================================
+
+
 ⚠️ CẢNH BÁO NỘI DUNG
 
 Câu chuyện này hoàn toàn chỉ là tác phẩm giả tưởng.
@@ -1360,6 +1374,7 @@ Hoàng đế vẫn nhìn theo hướng bóng, ánh mắt không đổi.
 Cảnh đấu trường có cảnh báo trước, lựa chọn xem hay k xem
 
 
+Hôm đó {{nam9}} vẫn đến công ty để làm việc như bình thường. thế nhưng sau khi tan ca thì đồng nghiệp lại bàn tán về trang web lạ
 Ng đánh ở đấu trường là A2
 cảnh đấu trường của A2 bị leak
 Sau đó trên trang web lộ ra video nói về sàn đấu ngầm của giới lãnh đạo các nước
@@ -1367,6 +1382,10 @@ Sau đó trên trang web lộ ra video nói về sàn đấu ngầm của giới
 Tây Tân da trắng
 Bắc Thiên da vàng, mập
 Đông Đảo da đen
+có ng 4 tay
+Đấu sĩ của Nam Long năm ngoái đã bị Bắc Thiên đánh chết
+
+Thủ tướng nghĩ rằng thà đại diện đánh vậy còn đỡ hơn chiến tranh
 
 
 Cảnh đấu trường
@@ -2272,9 +2291,10 @@ Anh muốn kiểm soát được mọi thứ, kể cả em
 Vừa lạnh lùng thực dụng, nhưng T2 lại mỉm cười như biết đó chỉ là lời nói đùa
 
 
-tấm hình của Vy rơi ra từ trong ví nam9
-nu9 lập tức hỏi đó là ai
-nam9 trầm ngâm nhìn chằm chằm, nói rằng k thể nhớ ra là ai, hình như người này anh chưa từng gặp qua
+có cảnh nữ chính cố tình lấy tấm ảnh người yêu cũ Vy từ trong ví của nam9 ra rồi để lên bàn để test
+Nam9 hỏi hình ai v
+Nu9 nói là bạn học cũ của em, rồi nữ chính cất lại vào trong ngăn kéo của mình
+nam9 chỉ cảm thán "chắc là hồi xưa hai đứa chơi thân lắm nhỉ" chấp nhận câu trả lời đó, ko phản biện gì
 nu9 mỉm cười hạnh phúc
 => hint tiếp là nu9 đã xóa hết ký ức của nam9 về nyc
 hoặc là phần ký ức đó chỉ tồn tại với A1, và mãi mãi mất đi kể từ khi A1 ko còn
