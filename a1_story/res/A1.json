@@ -39,39 +39,59 @@
     "tokens": {},
     "components": {
       "dialogue": {
+        "position": "bottom",
+        "nameTag": {
+          "visible": true,
+          "position": "inside-box",
+          "fontSize": 32,
+          "fontWeight": 700,
+          "useCharacterColor": true,
+          "color": "#ffffff",
+          "strokeColor": "#808080",
+          "fontFamily": "Crimson Text, serif",
+          "offsetY": -3
+        },
         "bg": "#000000",
         "border": "rgba(0, 0, 0, 0)",
         "textColor": "#ffffff",
         "textFontSize": 26,
-        "textFontFamily": "Noto Sans, sans-serif",
-        "nameTag": {
-          "position": "inside-box",
-          "fontSize": 32,
-          "color": "#ffffff",
-          "fontFamily": "Crimson Text, serif",
-          "strokeColor": "#808080",
-          "offsetY": -3
-        }
+        "textFontFamily": "Noto Sans, sans-serif"
       },
       "narration": {
+        "position": "center",
+        "fontSize": 32,
+        "fontStyle": "italic",
+        "color": "#ffffff",
         "bg": "rgba(0, 0, 0, 0.5)",
         "border": "rgba(0, 0, 0, 0)",
-        "color": "#ffffff",
-        "fontSize": 16,
         "fontFamily": "Noto Sans, sans-serif"
       },
+      "showText": {
+        "color": "#ffffff",
+        "fontSize": 44,
+        "fontWeight": 400,
+        "textShadow": "0 2px 18px rgba(0, 0, 0, 0.75)"
+      },
       "choices": {
+        "layout": "vertical",
+        "maxVisible": 6,
+        "animation": "fade",
         "bg": "#000000",
         "border": "rgba(17,24,39,0.25)",
         "textColor": "#ffffff",
-        "textFontSize": 18,
+        "textFontSize": 32,
         "textFontFamily": "Noto Sans, sans-serif",
-        "promptBg": "rgba(0, 0, 0, 0.5)",
+        "promptBg": "#000000",
         "promptColor": "#ffffff",
-        "promptFontFamily": "Lora, serif"
+        "promptFontFamily": "Noto Sans, sans-serif"
       },
       "titleScreen": {
         "layout": "left-aligned",
+        "menuItems": [
+          "New Game",
+          "Continue",
+          "Settings"
+        ],
         "titleColor": "#ff0000",
         "titleStrokeColor": "rgba(0, 0, 0, 0.85)",
         "titleStrokeWidth": 8,
@@ -80,13 +100,12 @@
         "buttonBg": "rgba(0, 0, 0, 0.48)",
         "buttonColor": "#ffffff"
       },
-      "showText": {
-        "color": "#ffffff",
-        "fontSize": 44,
-        "fontWeight": 400,
-        "textShadow": "0 2px 18px rgba(0, 0, 0, 0.75)"
-      },
       "endingScreen": {
+        "layout": "centered",
+        "showEndType": true,
+        "showPlayTime": true,
+        "showStats": true,
+        "returnTo": "title",
         "titleFontFamily": "Noto Sans, sans-serif"
       }
     }
@@ -5825,7 +5844,7 @@
       },
       {
         "id": "z2kpZdeHlqusX5_JXFaBW",
-        "title": "CHAP 3: Đô Quốc",
+        "title": "CHAP 3: Sự Thật Về Trật Tự Thế Giới",
         "nodes": [
           {
             "type": "stage_reset",
@@ -5835,17 +5854,9 @@
             "type": "background_change",
             "visual": {
               "type": "image",
-              "assetId": "apng9UI9EdUijoFgVAd13"
+              "assetId": "jq44t6Ze8bTkOCYzratv1"
             },
             "id": "9AzopMolfuE4RaYuzOJO0"
-          },
-          {
-            "type": "play_bgm",
-            "assetId": "ycWIKgeQA38hNFKWwgW9h",
-            "loop": true,
-            "volume": 0.53,
-            "fadeIn": 1000,
-            "id": "c5j_5EO5NemJTew7skNqK"
           },
           {
             "type": "wait",
@@ -5855,7 +5866,7 @@
           },
           {
             "type": "show_text",
-            "text": "CHAP 3: Đô Quốc",
+            "text": "CHAP 3: Sự Thật Về Trật Tự Thế Giới",
             "position": "center",
             "id": "Vr9mhpdwcw741qt28I4Zo"
           },
@@ -7205,24 +7216,25 @@
       {
         "id": "Lj45OqJETlg2B80uQ2nJb",
         "title": "C3 A7 Các Clone bước ra ánh sáng",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 9100
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
             "id": "FfOxrnVyzqmWm_AR6t7hZ"
           },
           {
+            "type": "play_bgm",
+            "assetId": "EFxEM9IWEeXEDzifaYSdV",
+            "loop": true,
+            "volume": 0.35,
+            "id": "AUB4OEHO2bHGDJ4xKF1eU"
+          },
+          {
             "type": "background_change",
             "visual": {
               "type": "image",
-              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_20/6562.png"
+              "assetId": "LY43Ue_iSvlk1Y_4V9j-w"
             },
-            "id": "oIMiqtxWZk_EH_VglF6d2"
+            "id": "k5RBWoYasdipm-tASBQmm"
           },
           {
             "type": "stage_reset",
@@ -7247,17 +7259,17 @@
             },
             "id": "0Q_LgN7U3AX5g4g4PejTO"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 9100
+          }
+        }
       },
       {
         "id": "s-0SWIzJZkMwSh0XtLS-E",
         "title": "C3 A6 (A) Đấu Trường - Bắt Đầu",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 8900
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -7275,10 +7287,10 @@
             "type": "character_show",
             "characterId": "JGqjHALSWj7Qz6TrgWobP",
             "position": "center",
+            "expressionId": "WP9zFc79ZFpVdoSHJUPVr",
             "duration": 300,
             "flipX": false,
-            "id": "rKYhD5sPu_vnICPVkuJhJ",
-            "expressionId": "WP9zFc79ZFpVdoSHJUPVr"
+            "id": "rKYhD5sPu_vnICPVkuJhJ"
           },
           {
             "type": "narration",
@@ -7404,10 +7416,10 @@
             "type": "character_show",
             "characterId": "x--de8cZcPEcC132s_Oue",
             "position": "right",
+            "expressionId": "VsWPkXtBQXe6p5hia2eVO",
             "duration": 300,
             "flipX": false,
-            "id": "RGJ5MA4J0dh9OLD05oXCT",
-            "expressionId": "VsWPkXtBQXe6p5hia2eVO"
+            "id": "RGJ5MA4J0dh9OLD05oXCT"
           },
           {
             "type": "dialogue",
@@ -7480,10 +7492,10 @@
             "type": "character_show",
             "characterId": "x--de8cZcPEcC132s_Oue",
             "position": "center",
+            "expressionId": "VsWPkXtBQXe6p5hia2eVO",
             "duration": 300,
             "flipX": false,
-            "id": "2b7eWf6atpVqMl6_wvAoE",
-            "expressionId": "VsWPkXtBQXe6p5hia2eVO"
+            "id": "2b7eWf6atpVqMl6_wvAoE"
           },
           {
             "type": "dialogue",
@@ -7520,10 +7532,10 @@
             "type": "character_show",
             "characterId": "LzDtkbqKa0MAwFYtukhNX",
             "position": "left",
+            "expressionId": "bmmYNUSxG3t5sMyQWMBQG",
             "duration": 300,
             "flipX": false,
-            "id": "JcZoIIVIbNsPvaP8gTtog",
-            "expressionId": "bmmYNUSxG3t5sMyQWMBQG"
+            "id": "JcZoIIVIbNsPvaP8gTtog"
           },
           {
             "type": "dialogue",
@@ -7571,10 +7583,10 @@
             "type": "character_show",
             "characterId": "JGqjHALSWj7Qz6TrgWobP",
             "position": "center",
+            "expressionId": "WP9zFc79ZFpVdoSHJUPVr",
             "duration": 300,
             "flipX": false,
-            "id": "Hxti9xRa6k3tdntRL07_v",
-            "expressionId": "WP9zFc79ZFpVdoSHJUPVr"
+            "id": "Hxti9xRa6k3tdntRL07_v"
           },
           {
             "type": "narration",
@@ -7602,10 +7614,10 @@
             "type": "character_show",
             "characterId": "x--de8cZcPEcC132s_Oue",
             "position": "center",
+            "expressionId": "VsWPkXtBQXe6p5hia2eVO",
             "duration": 300,
             "flipX": false,
-            "id": "c0bST17SN8RuROAjfTu2Q",
-            "expressionId": "VsWPkXtBQXe6p5hia2eVO"
+            "id": "c0bST17SN8RuROAjfTu2Q"
           },
           {
             "type": "narration",
@@ -7656,6 +7668,11 @@
             "id": "fZuXn4TYW3O0aXZjhReG9"
           },
           {
+            "type": "stop_bgm",
+            "fadeOut": 1000,
+            "id": "WmEdgWA7ErxZUJoPtCb_J"
+          },
+          {
             "type": "stage_reset",
             "id": "5FE7eOKc02cxy1lrlEtSn"
           },
@@ -7688,17 +7705,17 @@
             "target": "Lj45OqJETlg2B80uQ2nJb",
             "id": "jKTjhd3nHzdWPLvo5v-XY"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 8900
+          }
+        }
       },
       {
         "id": "DrhCE9E-IVV-tdo8qdn98",
         "title": "C3 A5 (A) Đấu Trường - Tuyên thệ",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 8700
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -7734,10 +7751,10 @@
             "type": "character_show",
             "characterId": "JGqjHALSWj7Qz6TrgWobP",
             "position": "center",
+            "expressionId": "WP9zFc79ZFpVdoSHJUPVr",
             "duration": 300,
             "flipX": false,
-            "id": "77Sp3b9wSVThA9bS8V4_N",
-            "expressionId": "WP9zFc79ZFpVdoSHJUPVr"
+            "id": "77Sp3b9wSVThA9bS8V4_N"
           },
           {
             "type": "dialogue",
@@ -8054,10 +8071,10 @@
             "type": "character_show",
             "characterId": "E05MvcrauQimKtzxCJ17o",
             "position": "center",
+            "expressionId": "8orAczcqnF4Zz1GXCgNFw",
             "duration": 300,
             "flipX": false,
-            "id": "a2eWtUfcQelQsbkceo7Mz",
-            "expressionId": "8orAczcqnF4Zz1GXCgNFw"
+            "id": "a2eWtUfcQelQsbkceo7Mz"
           },
           {
             "type": "dialogue",
@@ -8093,10 +8110,10 @@
             "type": "character_show",
             "characterId": "-cj6V_KSwY1rNaw95VTPp",
             "position": "center",
+            "expressionId": "W2y-mlnXIBvCQZiyXya7I",
             "duration": 300,
             "flipX": false,
-            "id": "cFDiFmz4nnnW9mIivzMjg",
-            "expressionId": "W2y-mlnXIBvCQZiyXya7I"
+            "id": "cFDiFmz4nnnW9mIivzMjg"
           },
           {
             "type": "dialogue",
@@ -8187,10 +8204,10 @@
             "type": "character_show",
             "characterId": "x--de8cZcPEcC132s_Oue",
             "position": "center",
+            "expressionId": "cIrT88OggYbhM5B_xdBIA",
             "duration": 300,
             "flipX": false,
-            "id": "lRa9zr8s_9eh3PjDbnS53",
-            "expressionId": "cIrT88OggYbhM5B_xdBIA"
+            "id": "lRa9zr8s_9eh3PjDbnS53"
           },
           {
             "type": "dialogue",
@@ -8267,7 +8284,13 @@
             "target": "s-0SWIzJZkMwSh0XtLS-E",
             "id": "rYL-6X6J2DJlQ99lOjbzO"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 8700
+          }
+        }
       },
       {
         "id": "wTAJqlmV4EeXu9JYF6QVR",
@@ -8622,6 +8645,14 @@
             "id": "w5pAsfzvOeT7Em6tGacfG"
           },
           {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "LY43Ue_iSvlk1Y_4V9j-w"
+            },
+            "id": "rEtG5D01Ajf7VWwETUaAV"
+          },
+          {
             "type": "narration",
             "text": "Màn hình trở lại bình thường. Anh mở lại group chat.",
             "id": "gzVDKcDm8_h7bHjDpKsrS"
@@ -8715,7 +8746,7 @@
         "meta": {
           "mapPosition": {
             "x": 400,
-            "y": 8700
+            "y": 8800
           }
         }
       },
@@ -8954,6 +8985,14 @@
           {
             "type": "stage_reset",
             "id": "aV2tYfzaFIRN5DNM9mNmo"
+          },
+          {
+            "type": "play_bgm",
+            "assetId": "ycWIKgeQA38hNFKWwgW9h",
+            "loop": true,
+            "volume": 0.53,
+            "fadeIn": 1000,
+            "id": "st0Q4Glwvsm-S0Z2mnrQ6"
           },
           {
             "type": "background_change",
