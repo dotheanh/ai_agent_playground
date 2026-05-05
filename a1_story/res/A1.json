@@ -1384,6 +1384,55 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7692.png",
       "name": "ChatGPT Image 15_47_40 5 thg 5, 2026",
       "category": "other"
+    },
+    "adkt3Sm_yVbb1nxi3WR8b": {
+      "id": "adkt3Sm_yVbb1nxi3WR8b",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7703.png",
+      "name": "ChatGPT Image 20_33_41 5 thg 5, 2026",
+      "category": "other"
+    },
+    "vAYPE-OAYQgtdaM4wcWtr": {
+      "id": "vAYPE-OAYQgtdaM4wcWtr",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7704.png",
+      "name": "ChatGPT Image 18_36_53 5 thg 5, 2026",
+      "category": "other"
+    },
+    "ihxzcFwTClASDrVJhALYt": {
+      "id": "ihxzcFwTClASDrVJhALYt",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7705.png",
+      "name": "ChatGPT Image 18_44_04 5 thg 5, 2026",
+      "category": "other"
+    },
+    "LApxBTMFh_gpLM2SKEYmj": {
+      "id": "LApxBTMFh_gpLM2SKEYmj",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7706.png",
+      "name": "ChatGPT Image 18_57_08 5 thg 5, 2026",
+      "category": "other"
+    },
+    "tTTpYTifkdsn88CXP0Rn9": {
+      "id": "tTTpYTifkdsn88CXP0Rn9",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7707.png",
+      "name": "ChatGPT Image 19_02_52 5 thg 5, 2026",
+      "category": "other"
+    },
+    "5nmki170YnrXwLpQ9iKib": {
+      "id": "5nmki170YnrXwLpQ9iKib",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7708.png",
+      "name": "ChatGPT Image 18_31_20 5 thg 5, 2026",
+      "category": "other"
+    },
+    "yBuhW5EuOvBxz7S7EMZTJ": {
+      "id": "yBuhW5EuOvBxz7S7EMZTJ",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7709.png",
+      "name": "ChatGPT Image 18_26_29 5 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -7237,6 +7286,221 @@
             "id": "k5RBWoYasdipm-tASBQmm"
           },
           {
+            "type": "narration",
+            "text": "Chỉ một ngày sau khi đoạn video về Đấu Trường lan truyền trên mạng, toàn bộ hệ thống truyền thông của Nam Long đồng loạt phát sóng một chương trình đặc biệt.",
+            "id": "2qeBH6iGTz1KHnZ4eE345"
+          },
+          {
+            "type": "narration",
+            "text": "Không có bất kỳ lời nhắc nào về đoạn video trước đó. Không có phản hồi, không phủ nhận, cũng không giải thích.",
+            "id": "IZQzPMnmw3XLu23KCnVQq"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "adkt3Sm_yVbb1nxi3WR8b"
+            },
+            "id": "fDXZgNh7M5kMRDLh89D4c"
+          },
+          {
+            "type": "narration",
+            "text": "Thay vào đó, chương trình mở đầu bằng một tiêu đề ngắn gọn:\n[b][color=#FFA500]Những người thầm lặng định hình vận mệnh quốc gia[/color][/b]",
+            "id": "wenNcPMvnJf3jw5OI3kKV"
+          },
+          {
+            "type": "narration",
+            "text": "Giọng dẫn của chương trình vang lên, trầm, rõ và ổn định:",
+            "id": "8P5b8MZenVDvQnKb8z2FG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ Trong nhiều năm qua, sự phát triển vượt bậc của Nam Long Quốc không phải là kết quả của một cá nhân, mà là của một hệ thống được xây dựng trên nền tảng khoa học, kỷ luật và tầm nhìn dài hạn. ]",
+            "id": "PVNSlAK3tDD3_Pe_hO38F"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "vAYPE-OAYQgtdaM4wcWtr"
+            },
+            "id": "UR1Cgg_UGYaAAM-vFKkf9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Hình ảnh chuyển sang [b][color=#FFA500]A2[/color][/b]. Không còn là một chiến binh trên sàn đấu.",
+            "id": "qoK36O78Em8_bgK0iS5ea"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Anh ngồi trong một phòng họp cấp cao, ngay bên cạnh ngài Thủ tướng Nam Long, xung quanh là các quan chức đang lắng nghe. Ánh mắt anh bình tĩnh, gần như không dao động.",
+            "id": "4jDowgD2C1d37YlK2o2Z2"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ [b][color=#FFA500]A2[/color][/b], cố vấn chính trị tối cao của Thủ tướng Nam Long, trực tiếp tham gia hoạch định các quyết sách chiến lược cấp quốc gia. ]",
+            "id": "udW-HK1H4NlTpHFDHTPrs"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "ihxzcFwTClASDrVJhALYt"
+            },
+            "id": "-3BW6LFuHU7ZwHDaMeKir"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Hình ảnh tiếp nối sang [b][color=#FFA500]A3[/color][/b]. Một thao trường quân sự ngoài trời, phía sau là dãy mục tiêu bắn và các đơn vị vũ trang đang huấn luyện.",
+            "id": "rR1Y0IiUjBbT5cyRaGgWY"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Anh đứng cạnh một hệ thống vũ khí hạng nặng, chỉ đạo ngắn gọn, dứt khoát.",
+            "id": "s6A32MvvaPoFQzYiRj1GU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ [b][color=#FFA500]A3[/color][/b], phụ trách phát triển năng lực quân sự, cải tiến hệ thống vũ khí và chỉ huy các chiến dịch tác chiến trọng yếu của quốc gia. ]",
+            "id": "kfP8zcwG9c6jSJ10cKFWE"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "LApxBTMFh_gpLM2SKEYmj"
+            },
+            "id": "qcpawN781FCrSyqiLL6gJ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[b][color=#FFA500]A4[/color][/b] xuất hiện giữa khu phố tài chính trung tâm của Nam Long, phía sau là những tòa nhà kính cao tầng và dòng dữ liệu kinh tế vận hành không ngừng.",
+            "id": "TENx8-UA6dZ3k4kkSlTaR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trước mặt anh, các màn hình hiển thị biểu đồ và chỉ số biến động theo thời gian thực.",
+            "id": "YXRoH1-kJMWqz0sPkOYZL"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ [b][color=#FFA500]A4[/color][/b], kiến trúc sư của các chính sách kinh tế, người đứng sau những bước tăng trưởng ổn định của Nam Long. ]",
+            "id": "MhbgJ3IRm0Iui7u1rKf4d"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "tTTpYTifkdsn88CXP0Rn9"
+            },
+            "id": "ZPS3J5N1U1ITUpUyfoCjN"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Hình ảnh chuyển sang [b][color=#FFA500]A5[/color][/b]. Một phòng thí nghiệm khép kín, bảng công thức và mô hình phân tử trải rộng phía sau.",
+            "id": "ZpBgHDw5dtpsKsl4DfEql"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Anh đứng giữa không gian nghiên cứu, tay cầm bảng dữ liệu, ánh đèn trắng lạnh phản chiếu trên kính.",
+            "id": "Zrc9NoybAIyCBllqGyvcT"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ [b][color=#FFA500]A5[/color][/b], người đứng đầu các chương trình nghiên cứu khoa học trọng điểm, trực tiếp định hướng sự phát triển cốt lõi của nền khoa học quốc gia. ]",
+            "id": "OVOM_FQEROXBfVxFk9MVU"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "5nmki170YnrXwLpQ9iKib"
+            },
+            "id": "bRkXhOxva5QVKR72d89v6"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[b][color=#FFA500]A6[/color][/b] xuất hiện trong một trung tâm công nghệ, xung quanh là các màn hình mã lệnh, sơ đồ hệ thống và cánh tay robot đang vận hành.",
+            "id": "mY__GSi_iTwnKIvoE3VB9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Anh ngồi trước bàn làm việc, tay thao tác trên bảng mạch, mọi thứ vận hành chính xác đến từng chi tiết.",
+            "id": "Pe5sSYzQeyHUPEd-bNED9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ [b][color=#FFA500]A6[/color][/b], phụ trách phát triển các nền tảng công nghệ lõi và hệ thống tự động hóa, trực tiếp vận hành hạ tầng công nghệ của quốc gia. ]",
+            "id": "ZHrKMHhumcgx2ZFjPvdHU"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "yBuhW5EuOvBxz7S7EMZTJ"
+            },
+            "id": "5pPzNQJt32Ql8d9EOJ6kz"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Cuối cùng là [b][color=#FFA500]A7[/color][/b]. Một phòng y sinh hiện đại, thiết bị theo dõi sinh tồn và dữ liệu bệnh án hiển thị trên màn hình.",
+            "id": "1QC-Jihgl6O35v6Snok3y"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Anh đứng bên bàn phẫu thuật, cầm thiết bị phân tích, ánh sáng dịu nhưng sắc nét.",
+            "id": "Bg33nhhR-JOlN8bjCRHXA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ [b][color=#FFA500]A7[/color][/b], người phát triển các liệu pháp y học tiên tiến, bao gồm các loại huyết thanh đã được ứng dụng rộng rãi và trở thành nền tảng của hệ thống chăm sóc sức khỏe quốc gia. ]",
+            "id": "KOmc5PcqPHm1VqQyW2zQ6"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "adkt3Sm_yVbb1nxi3WR8b"
+            },
+            "id": "OwQSbwPf5vSF0AdrinVHx"
+          },
+          {
+            "type": "narration",
+            "text": "Giọng dẫn tiếp tục, không thay đổi nhịp:",
+            "id": "UCQh8xm5ZtpEWFC6KiIwN"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[ Họ không xuất hiện trước công chúng. Họ không nhận danh hiệu. Nhưng mọi bước tiến của quốc gia… đều mang dấu ấn của họ. ]",
+            "id": "2bDvSXupC9iVnuSvFjvHt"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Hình ảnh chuyển nhanh qua các khoảnh khắc: quyết định được ký, dự án được triển khai, hệ thống vận hành. Mọi thứ liền mạch, chính xác, không một sai lệch.",
+            "id": "J0i-vXh7nJrWoufvTYSuJ"
+          },
+          {
             "type": "stage_reset",
             "id": "yULf56Ov0ox1NkCviecQN"
           },
@@ -10912,6 +11176,11 @@
               "assetId": "zwX5Xu5h1Nz_7ACevyqPi"
             },
             "id": "myjciZWCD_yJm_xCQxYpL"
+          },
+          {
+            "type": "narration",
+            "text": "🔊 Bật âm thanh để có trải nghiệm tốt nhất cho phân cảnh này. 🎵",
+            "id": "_E4bJ5FnhH_-PHWpa3AbW"
           },
           {
             "type": "play_bgm",
