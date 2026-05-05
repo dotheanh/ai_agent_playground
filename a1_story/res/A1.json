@@ -39,39 +39,30 @@
     "tokens": {},
     "components": {
       "dialogue": {
-        "position": "bottom",
-        "nameTag": {
-          "visible": true,
-          "position": "above-box",
-          "fontSize": 32,
-          "fontWeight": 700,
-          "useCharacterColor": true,
-          "color": "#ffffff",
-          "strokeColor": "#808080",
-          "fontFamily": "Noto Sans, sans-serif",
-          "offsetY": 40
-        },
         "bg": "#000000",
         "border": "rgba(0, 0, 0, 0)",
         "textColor": "#ffffff",
         "textFontSize": 26,
-        "textFontFamily": "Open Sans, sans-serif"
+        "textFontFamily": "Noto Sans, sans-serif",
+        "nameTag": {
+          "position": "inside-box",
+          "fontSize": 32,
+          "color": "#ffffff",
+          "fontFamily": "Crimson Text, serif",
+          "strokeColor": "#808080",
+          "offsetY": -3
+        }
       },
       "narration": {
-        "position": "center",
-        "fontSize": 16,
-        "fontStyle": "italic",
+        "bg": "rgba(0, 0, 0, 0.5)",
+        "border": "rgba(0, 0, 0, 0)",
         "color": "#ffffff",
-        "bg": "rgba(0, 0, 0, 0.6)",
-        "border": "#000000",
-        "fontFamily": "Lora, serif"
+        "fontSize": 16,
+        "fontFamily": "Noto Sans, sans-serif"
       },
       "choices": {
-        "layout": "vertical",
-        "maxVisible": 6,
-        "animation": "fade",
         "bg": "#000000",
-        "border": "#111827",
+        "border": "rgba(17,24,39,0.25)",
         "textColor": "#ffffff",
         "textFontSize": 18,
         "textFontFamily": "Noto Sans, sans-serif",
@@ -81,17 +72,22 @@
       },
       "titleScreen": {
         "layout": "left-aligned",
-        "menuItems": [
-          "New Game",
-          "Continue",
-          "Settings"
-        ],
         "titleColor": "#ff0000",
         "titleStrokeColor": "rgba(0, 0, 0, 0.85)",
-        "titleStrokeWidth": 35,
+        "titleStrokeWidth": 8,
         "titleFontSize": 64,
-        "buttonBg": "#000000",
+        "titleFontFamily": "Crimson Text, serif",
+        "buttonBg": "rgba(0, 0, 0, 0.48)",
         "buttonColor": "#ffffff"
+      },
+      "showText": {
+        "color": "#ffffff",
+        "fontSize": 44,
+        "fontWeight": 400,
+        "textShadow": "0 2px 18px rgba(0, 0, 0, 0.75)"
+      },
+      "endingScreen": {
+        "titleFontFamily": "Noto Sans, sans-serif"
       }
     }
   },
@@ -1340,6 +1336,34 @@
       "type": "image",
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7688.png",
       "name": "ChatGPT Image 11_25_56 5 thg 5, 2026",
+      "category": "other"
+    },
+    "dxigbtN5t72fdXY7M15ai": {
+      "id": "dxigbtN5t72fdXY7M15ai",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7689.png",
+      "name": "file_00000000e71471f88837d8f0e21b6e14",
+      "category": "other"
+    },
+    "1Z0B9t4LRUmZ4cqnG2Dag": {
+      "id": "1Z0B9t4LRUmZ4cqnG2Dag",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7690.png",
+      "name": "file_0000000036d4720baaefe249faf1bfa2",
+      "category": "other"
+    },
+    "w-RJmkkYJeMubNPycXxS_": {
+      "id": "w-RJmkkYJeMubNPycXxS_",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7691.png",
+      "name": "file_00000000c8807208ae52755c6bd59f97",
+      "category": "other"
+    },
+    "jq44t6Ze8bTkOCYzratv1": {
+      "id": "jq44t6Ze8bTkOCYzratv1",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7692.png",
+      "name": "ChatGPT Image 15_47_40 5 thg 5, 2026",
       "category": "other"
     }
   },
@@ -5590,8 +5614,13 @@
           },
           {
             "type": "narration",
-            "text": "⚠️ CẢNH BÁO NỘI DUNG\n\nCâu chuyện này hoàn toàn chỉ là tác phẩm giả tưởng.\nMọi nhân vật, sự kiện, địa điểm và tổ chức đều hoàn toàn hư cấu. Nếu có sự trùng hợp ngẫu nhiên với thực tế, đó không phải là cố ý và không dựa trên bất kỳ nguyên mẫu có thật nào.\nTác phẩm có chứa các yếu tố rùng rợn, giật gân, cùng những tình tiết mang tính tâm lý nặng, có thể gây tranh cãi, khó chịu hoặc ám ảnh đối với một số người đọc.\nĐộc giả vui lòng cân nhắc trước khi tiếp tục theo dõi, đặc biệt nếu bạn nhạy cảm với các nội dung căng thẳng, u ám hoặc tiêu cực.",
+            "text": "⚠️ CẢNH BÁO NỘI DUNG\n\nCâu chuyện này hoàn toàn chỉ là tác phẩm giả tưởng.\nMọi nhân vật, sự kiện, địa điểm và tổ chức đều hoàn toàn hư cấu. Nếu có sự trùng hợp ngẫu nhiên với thực tế, đó không phải là cố ý và không dựa trên bất kỳ nguyên mẫu có thật nào.",
             "id": "8wVs0dXQRPD5L_vQQyTi5"
+          },
+          {
+            "type": "narration",
+            "text": "Tác phẩm có chứa các yếu tố rùng rợn, giật gân, cùng những tình tiết mang tính tâm lý nặng, có thể gây tranh cãi, khó chịu hoặc ám ảnh đối với một số người đọc.\nĐộc giả vui lòng cân nhắc trước khi tiếp tục theo dõi, đặc biệt nếu bạn nhạy cảm với các nội dung căng thẳng, u ám hoặc tiêu cực.",
+            "id": "mk0eU-dV3bqWnGTqOt6se"
           },
           {
             "type": "choice",
@@ -7168,10 +7197,57 @@
         ],
         "meta": {
           "mapPosition": {
-            "x": 1200,
-            "y": 8700
+            "x": 1400,
+            "y": 8900
           }
         }
+      },
+      {
+        "id": "Lj45OqJETlg2B80uQ2nJb",
+        "title": "C3 A7 Các Clone bước ra ánh sáng",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 9100
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "FfOxrnVyzqmWm_AR6t7hZ"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "https://story.zingplay.com/asset/1251238196/2026_4_20/6562.png"
+            },
+            "id": "oIMiqtxWZk_EH_VglF6d2"
+          },
+          {
+            "type": "stage_reset",
+            "id": "yULf56Ov0ox1NkCviecQN"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "ex45dG1tqlDOly45L1Z4K"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "0Q_LgN7U3AX5g4g4PejTO"
+          }
+        ]
       },
       {
         "id": "s-0SWIzJZkMwSh0XtLS-E",
@@ -7301,6 +7377,285 @@
             "id": "sInFwOF-LPhf3TBnPd5n3"
           },
           {
+            "type": "character_express",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "expressionId": "WP9zFc79ZFpVdoSHJUPVr",
+            "duration": 200,
+            "id": "a6uOgGRtSYv00jnL9-9Cp"
+          },
+          {
+            "type": "narration",
+            "text": "Ông nhìn xuống [b][color=#FFA500]A2[/color][/b].",
+            "id": "3Wqa3yA0WMsyfnk-DqWA8"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Chiến binh của Nam Long Quốc.",
+            "id": "yaIoBbgPO3tOfi9CCRQIR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Lựa chọn của anh?",
+            "id": "tlGVVoycwHPtIZUNxblZA"
+          },
+          {
+            "type": "character_show",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "position": "right",
+            "duration": 300,
+            "flipX": false,
+            "id": "RGJ5MA4J0dh9OLD05oXCT",
+            "expressionId": "VsWPkXtBQXe6p5hia2eVO"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "text": "Đông Đảo.",
+            "id": "tAX3N-qBsYCgi71J9bLmG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Trận đấu thứ nhất: [b]Nam Long Quốc[/b] đối đầu [b]Đông Đảo Liên Quốc[/b].[wait=200]\nBắt đầu.",
+            "id": "XOWaEhNzaGfos88GaFd3q"
+          },
+          {
+            "type": "stage_reset",
+            "id": "b0MdMt86tOOAU6f6Mu9bd"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "dxigbtN5t72fdXY7M15ai"
+            },
+            "id": "RafFxTXmgt5RnvFf-qfHo"
+          },
+          {
+            "type": "narration",
+            "text": "[b][color=#FF0000]Tác giả:[/color][/b] Những diễn biến trên sàn đấu xứng đáng được thuật lại đầy đủ. Nhưng có lẽ… những gì xảy ra sau đó mới là điều thực sự quan trọng. Khi có thời gian, tôi sẽ quay lại để hoàn thiện phân cảnh này.",
+            "id": "na1bt0KOxXV2v-fk5GU3U"
+          },
+          {
+            "type": "narration",
+            "text": "[PLACEHOLDER: Trận 1]\n[b]Nam Long Quốc[/b] VS [b]Đông Đảo Liên Quốc[/b]",
+            "id": "9xBiX-TKl0ygMT53EtOMQ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Chiến thắng — Nam Long Quốc.",
+            "id": "-XPdMa55gnM-iL36NVLJy"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "1Z0B9t4LRUmZ4cqnG2Dag"
+            },
+            "id": "16QjodyMpvRgqaZwu0NbX"
+          },
+          {
+            "type": "narration",
+            "text": "[PLACEHOLDER: Trận 2]\n[b]Nam Long Quốc[/b] VS [b]Tây Tân Quốc[/b]",
+            "id": "FyIQ2ovaYNX1_xg2sSI3Y"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Chiến thắng — Nam Long Quốc.",
+            "id": "Ih7j15WSg_Rh4wr1ey6DM"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "8QbqcXK3aPE0XUD2rqyKd"
+            },
+            "id": "OH00QWvn8fSF5Z0a-KI5i"
+          },
+          {
+            "type": "character_show",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "2b7eWf6atpVqMl6_wvAoE",
+            "expressionId": "VsWPkXtBQXe6p5hia2eVO"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Sau hai trận chiến liên tiếp, cơ thể [b][color=#FFA500]A2[/color][/b] đã bắt đầu xuống sức.",
+            "id": "77EwDRX-fhYc_GlkerN34"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Nhưng anh không dừng lại.",
+            "id": "YflIsWZ4k1bJjS3hsGkCj"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Năm ngoái… tại chính nơi này.\nMột chiến binh Nam Long đã không rời khỏi sàn đấu.",
+            "id": "YRxSLGcQYRXKIi2aNWDKI"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "text": "Ta thách đấu Bắc Thiên Quốc.",
+            "id": "GOM4LfkwqYHSKh0UU-Ov5"
+          },
+          {
+            "type": "character_move",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "position": "right",
+            "duration": 500,
+            "id": "y1_sQFVse9jv3gDHlEjSE"
+          },
+          {
+            "type": "character_show",
+            "characterId": "LzDtkbqKa0MAwFYtukhNX",
+            "position": "left",
+            "duration": 300,
+            "flipX": false,
+            "id": "JcZoIIVIbNsPvaP8gTtog",
+            "expressionId": "bmmYNUSxG3t5sMyQWMBQG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Chiến binh Bắc Thiên đứng dậy.\nBốn cánh tay siết chặt.",
+            "id": "_CsjSQHIATOaxgMl6IspR"
+          },
+          {
+            "type": "stage_reset",
+            "id": "PVnSzZyYLofYa56F-FAcL"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "w-RJmkkYJeMubNPycXxS_"
+            },
+            "id": "PJecLwC1yPOEGa6BFIz8u"
+          },
+          {
+            "type": "narration",
+            "text": "[PLACEHOLDER: Trận 3]\n[b]Nam Long Quốc[/b] VS [b]Bắc Thiên Quốc[/b]",
+            "id": "s8TYC9h8OfUy5yTsV5JNp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Chiến thắng cuối cùng… thuộc về Nam Long Quốc.",
+            "id": "f5OS_Wh5WKo5DFJsOFa84"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "8QbqcXK3aPE0XUD2rqyKd"
+            },
+            "id": "UIYgaedyu55oNiYOVI70G"
+          },
+          {
+            "type": "narration",
+            "text": "Không có tiếng vỗ tay, chỉ còn lại một khoảng im lặng kéo dài.",
+            "id": "IVTvcEi-TYU_mPuT40OiN"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "Hxti9xRa6k3tdntRL07_v",
+            "expressionId": "WP9zFc79ZFpVdoSHJUPVr"
+          },
+          {
+            "type": "narration",
+            "text": "Giọng xướng ngôn viên vang lên, đều và không cảm xúc:",
+            "id": "L_g_jGXCLdU8pXS3DBfny"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Thứ tự phân hạng của Đấu Trường 2026 đã được xác lập. Các nguyên thủ… mời di chuyển tới phòng đàm phán.",
+            "id": "mmXtW2pEV5Rg1gpfe9zHz"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "duration": 300,
+            "id": "0BBjd1Pgm69UWj7Bf9MZJ"
+          },
+          {
+            "type": "narration",
+            "text": "Những khoang kính lần lượt tắt sáng, từng bóng người lùi vào trong. Cánh cửa khép lại, ánh sáng biến mất.",
+            "id": "DW1OLETmQMkkHeOchGZFG"
+          },
+          {
+            "type": "character_show",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "c0bST17SN8RuROAjfTu2Q",
+            "expressionId": "VsWPkXtBQXe6p5hia2eVO"
+          },
+          {
+            "type": "narration",
+            "text": "Dưới sàn đấu, chỉ còn lại [b][color=#FFA500]A2[/color][/b] đứng một mình.",
+            "id": "6xdPJ95-u-YvUpsiiYRDw"
+          },
+          {
+            "type": "narration",
+            "text": "Anh không di chuyển, không biểu lộ gì. Một nhịp sau, anh ngẩng đầu lên, ánh mắt hướng về phía tầng cao nhất.",
+            "id": "2Zan8yDoRN1i7yjjZaHP_"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "duration": 300,
+            "id": "Y0Rsp8KO4CZzLv-SMaX7R"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "jq44t6Ze8bTkOCYzratv1"
+            },
+            "id": "ym8jD4eaJgw_4dm_E_dQO"
+          },
+          {
+            "type": "wait",
+            "duration": 2000,
+            "fixed": true,
+            "id": "7RhYZJVOXhi1Ri_-_qLSg"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Một khoang VIP tách biệt hoàn toàn, ánh đèn vàng hắt xuống giữa không gian tối.",
+            "id": "imbwCWt39NK5P-K2Fmajp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Bên trong, một bóng người cao lớn đứng lặng lẽ, từ trên cao nhìn xuống.",
+            "id": "v_Uq8EQbnfLOCLB0zY_we"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ánh mắt [b][color=#FFA500]A2[/color][/b] khẽ thay đổi.\nKhông còn là của một chiến binh.\nMà là… một sự khẳng định.",
+            "id": "fZuXn4TYW3O0aXZjhReG9"
+          },
+          {
             "type": "stage_reset",
             "id": "5FE7eOKc02cxy1lrlEtSn"
           },
@@ -7316,12 +7671,22 @@
             "id": "s4MWJb_lkb-u0XuGzS2Ph"
           },
           {
+            "type": "narration",
+            "text": "Màn hình trở về một màu đen.\nVideo kết thúc.",
+            "id": "MIVqNaovJGQaBxkLyvqNt"
+          },
+          {
             "type": "background_change",
             "visual": {
               "type": "color",
               "color": "#000000"
             },
             "id": "agYBqXatglsUhTTSevdRA"
+          },
+          {
+            "type": "goto",
+            "target": "Lj45OqJETlg2B80uQ2nJb",
+            "id": "jKTjhd3nHzdWPLvo5v-XY"
           }
         ]
       },
@@ -8340,12 +8705,17 @@
               "color": "#000000"
             },
             "id": "FZZhhJxUru7YfTm7-irdK"
+          },
+          {
+            "type": "goto",
+            "target": "Lj45OqJETlg2B80uQ2nJb",
+            "id": "-m-o-_CSCkoTcvE5D0cKv"
           }
         ],
         "meta": {
           "mapPosition": {
             "x": 400,
-            "y": 8400
+            "y": 8700
           }
         }
       },

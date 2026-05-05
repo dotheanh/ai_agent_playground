@@ -1658,27 +1658,26 @@ Chỉ có thắng… hoặc thua.”
 
 “Các chiến binh sẽ chiến đấu cho tới khi không còn có thể chiến đấu.”
 
----
-
 Ông nhìn xuống A2.
 
-“Chiến binh Nam Long.”
+“Chiến binh của Nam Long Quốc.”
 
 “Lựa chọn của anh?”
 
----
-
 “Đông Đảo.”
 
----
+“Trận đấu thứ nhất: Nam Long Quốc đối đầu Đông Đảo Liên Quốc.
+Bắt đầu.”
 
-“Trận đấu thứ nhất.”
+
+// TODO: Mô tả chi tiết cảnh chiến đấu
+Những diễn biến trên sàn đấu xứng đáng được thuật lại đầy đủ. Nhưng có lẽ… những gì xảy ra sau đó mới là điều thực sự quan trọng. Khi có thời gian, tôi sẽ quay lại để hoàn thiện phân cảnh này.
 
 ---
 
 [PLACEHOLDER: Trận 1]
 
-“Chiến thắng — Nam Long.”
+Chiến thắng — Nam Long Quốc.
 
 ---
 
@@ -1692,7 +1691,7 @@ Chỉ có thắng… hoặc thua.”
 
 [PLACEHOLDER: Trận 2]
 
-“Chiến thắng — Nam Long.”
+“Chiến thắng — Nam Long Quốc.”
 
 ---
 
@@ -1704,14 +1703,16 @@ Không khí siết lại.
 
 ---
 
-A2 không do dự.
+Sau hai trận chiến liên tiếp, cơ thể A2 đã bắt đầu xuống sức.
 
-“Bắc Thiên.”
+Nhưng anh không dừng lại.
 
----
+Năm ngoái… tại chính nơi này.
+Một chiến binh Nam Long đã không rời khỏi sàn đấu.
+
+“Ta thách đấu Bắc Thiên Quốc.”
 
 Chiến binh Bắc Thiên đứng dậy.
-
 Bốn cánh tay siết chặt.
 
 ---
@@ -1724,59 +1725,31 @@ Bốn cánh tay siết chặt.
 
 ---
 
-Một khoảng lặng dài.
+“Chiến thắng cuối cùng… thuộc về Nam Long Quốc.”
+
+Không có tiếng vỗ tay, chỉ còn lại một khoảng im lặng kéo dài.
+
+Giọng xướng ngôn viên vang lên, đều và không cảm xúc:
+
+“Thứ tự phân hạng của Đấu Trường 2026 đã được xác lập. Các nguyên thủ… mời di chuyển tới phòng đàm phán.”
+
+Những khoang kính lần lượt tắt sáng, từng bóng người lùi vào trong. Cánh cửa khép lại, ánh sáng biến mất.
+
+Dưới sàn đấu, chỉ còn lại A2 đứng một mình.
+
+Anh không di chuyển, không biểu lộ gì. Một nhịp sau, anh ngẩng đầu lên, ánh mắt hướng về phía tầng cao nhất.
+
+Một khoang VIP tách biệt hoàn toàn, ánh đèn vàng hắt xuống giữa không gian tối.
+
+Bên trong, một bóng người cao lớn đứng lặng lẽ, từ trên cao nhìn xuống.
+
+Ánh mắt A2 khẽ thay đổi.
+Không còn là của một chiến binh.
+Mà là… một sự khẳng định.
 
 ---
 
-“Chiến thắng cuối cùng…”
-
-“Nam Long Quốc.”
-
----
-
-Không tiếng vỗ tay.
-
----
-Xướng ngôn viên
-Thứ tự phân hạng của Đấu Trường đã rõ, mời các vị nguyên thủ di chuyển tới phòng đàm phán
-mọi người lần lược lùi vào trong.
-
----
-
-Dưới sàn.
-
-A2 đứng một mình.
-
----
-
-Rồi anh ngẩng đầu lên.
-
-Nhìn về phía tầng trên.
-
-Một khoang VIP cao nhất.
-
-Tách biệt hoàn toàn.
-
----
-
-Không thấy rõ người bên trong.
-
-Chỉ là một bóng người.
-
----
-
-Ánh mắt A2 thay đổi.
-
-Không còn là chiến binh.
-
-Mà là —
-
-một sự khẳng định.
-
----
-
-Màn hình đen.
-
+Màn hình trở về một màu đen.
 Video kết thúc.
 
 
@@ -1784,46 +1757,10 @@ Video kết thúc.
 
 
 
-
-
----------------------------------------------------------
-
-
-Cảnh đấu trường có cảnh báo trước, lựa chọn xem hay k xem
-
-
-Hôm đó {{nam9}} vẫn đến công ty để làm việc như bình thường. thế nhưng sau khi tan ca thì đồng nghiệp lại bàn tán về trang web lạ
-Ng đánh ở đấu trường là A2
-cảnh đấu trường của A2 bị leak
-Sau đó trên trang web lộ ra video nói về sàn đấu ngầm của giới lãnh đạo các nước
-
-Tây Tân da trắng
-Bắc Thiên da vàng, mập
-Đông Đảo da đen
-có ng 4 tay
-Đấu sĩ của Nam Long năm ngoái đã bị Bắc Thiên đánh chết
-
-Thủ tướng nghĩ rằng thà đại diện đánh vậy còn đỡ hơn chiến tranh
-
-
-Cảnh đấu trường
-Trước khi thi đấu phải tuyên bố mình k phải ng và chịu mọi hậu quả kể cả cái chết
-Đấu trường chiến đấu cực đoan vì danh dự quốc gia, vì sự thịnh vượng của dân tộc
-Thề chiến đấu vì danh dự quốc gia dân tộc vạn tuế muôn năm
-4 nguyên thủ 4 nước ngồi 4 hướng của sàn đấu hình tròn
-(thủ tướng của Nam Long Quốc ngồi cạnh A2)
-A2 chiến thắng vô địch
-Nhìn lên ghế vip sau cửa kính bên trên như nhìn ai đó, ánh mắt kiêu ngạo như muốn chứng minh bản thân
-
-Võ sĩ đại diện lên chiến đấu để giành quyền lực cho quốc gia
-Đối thủ là những sản phẩm thí nghiệm đột biến
-A2 đánh bại cả Tây Tân Quốc và Bắc Thiên Quốc giành quyền lực cho Nam Long Quốc
-A2 chấp ngta ra đòn trước, đánh trả gạ gục (nhưng ko giết hay tổn thương quá mạnh, chỉ gây bất tỉnh thôi)
-Yêu cầu Tây Tân Quốc và Bắc Thiên Quốc phải bồi thường chiến phí cho những cuộc chiến tranh xâm lược?? (hay gì đó)
-
 ================================================================================
-                              CÁC CLONE BƯỚC RA ÁNH SÁNG
+                              C3 A7 Các Clone bước ra ánh sáng
 ================================================================================
+
 
 *** nối nhánh C3 A4 (B) Bỏ qua Đấu Trường vào
 
