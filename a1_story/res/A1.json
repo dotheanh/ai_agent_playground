@@ -1271,6 +1271,76 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7671.png",
       "name": "ChatGPT Image 16_12_16 4 thg 5, 2026",
       "category": "other"
+    },
+    "dcpb0TFm-2ZABQJ8Wxbg8": {
+      "id": "dcpb0TFm-2ZABQJ8Wxbg8",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7679.png",
+      "name": "ChatGPT Image 11_03_31 5 thg 5, 2026",
+      "category": "other"
+    },
+    "reNzi_TOTw2MpazV62EDE": {
+      "id": "reNzi_TOTw2MpazV62EDE",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7680.png",
+      "name": "file_00000000cd0c71fab8b0572c744816e1",
+      "category": "other"
+    },
+    "VjWA523zMpyn8OpvCcZDy": {
+      "id": "VjWA523zMpyn8OpvCcZDy",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7681.png",
+      "name": "file_0000000086dc71fab4d70a24bbea751a",
+      "category": "other"
+    },
+    "ARPMGI2BpdQtFelAoZbLs": {
+      "id": "ARPMGI2BpdQtFelAoZbLs",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7682.png",
+      "name": "file_00000000e4187207996c5e0afc4a3e3e",
+      "category": "other"
+    },
+    "NW4-LQEWo8f_QLiHf9F1r": {
+      "id": "NW4-LQEWo8f_QLiHf9F1r",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7683.png",
+      "name": "file_0000000047c471fa91b0f2da1dd2bd50",
+      "category": "other"
+    },
+    "XfqEdsGBq4yKr2LiBv94_": {
+      "id": "XfqEdsGBq4yKr2LiBv94_",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7684.png",
+      "name": "file_000000006eb8720890663983e5586fc4",
+      "category": "other"
+    },
+    "v9Xue1veR_0SKpYfe9T7g": {
+      "id": "v9Xue1veR_0SKpYfe9T7g",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7685.png",
+      "name": "file_000000006eb8720890663983e5586fc4(2)",
+      "category": "other"
+    },
+    "e2wCBXslmZiUIGWzE4zLb": {
+      "id": "e2wCBXslmZiUIGWzE4zLb",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7686.png",
+      "name": "file_000000006eb8720890663983e5586fc4(3)",
+      "category": "other"
+    },
+    "TGxOHGyoGEFI17tcNabts": {
+      "id": "TGxOHGyoGEFI17tcNabts",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7687.png",
+      "name": "file_000000006eb8720890663983e5586fc4(1)",
+      "category": "other"
+    },
+    "8QbqcXK3aPE0XUD2rqyKd": {
+      "id": "8QbqcXK3aPE0XUD2rqyKd",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_5/7688.png",
+      "name": "ChatGPT Image 11_25_56 5 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -2729,7 +2799,15 @@
           "name": "default",
           "visual": {
             "type": "image",
-            "assetId": "6SxQW4cYpKK15W104knx6"
+            "assetId": "reNzi_TOTw2MpazV62EDE"
+          }
+        },
+        {
+          "id": "cIrT88OggYbhM5B_xdBIA",
+          "name": "oath",
+          "visual": {
+            "type": "image",
+            "assetId": "XfqEdsGBq4yKr2LiBv94_"
           }
         }
       ]
@@ -2744,7 +2822,15 @@
           "name": "default",
           "visual": {
             "type": "image",
-            "assetId": "3M79lWOX1LPwoEy6oLWgC"
+            "assetId": "VjWA523zMpyn8OpvCcZDy"
+          }
+        },
+        {
+          "id": "SItJhwuG6yBDPlI9XcurT",
+          "name": "oath",
+          "visual": {
+            "type": "image",
+            "assetId": "v9Xue1veR_0SKpYfe9T7g"
           }
         }
       ]
@@ -2759,7 +2845,15 @@
           "name": "default",
           "visual": {
             "type": "image",
-            "assetId": "2ZZS7F4b0oyUug_n6YZwT"
+            "assetId": "ARPMGI2BpdQtFelAoZbLs"
+          }
+        },
+        {
+          "id": "W2y-mlnXIBvCQZiyXya7I",
+          "name": "oath",
+          "visual": {
+            "type": "image",
+            "assetId": "e2wCBXslmZiUIGWzE4zLb"
           }
         }
       ]
@@ -2774,7 +2868,15 @@
           "name": "default",
           "visual": {
             "type": "image",
-            "assetId": "8jC5n011eS_Cm4Th-m5nn"
+            "assetId": "NW4-LQEWo8f_QLiHf9F1r"
+          }
+        },
+        {
+          "id": "8orAczcqnF4Zz1GXCgNFw",
+          "name": "oath",
+          "visual": {
+            "type": "image",
+            "assetId": "TGxOHGyoGEFI17tcNabts"
           }
         }
       ]
@@ -7067,13 +7169,744 @@
         "meta": {
           "mapPosition": {
             "x": 1200,
-            "y": 8100
+            "y": 8700
           }
         }
       },
       {
+        "id": "s-0SWIzJZkMwSh0XtLS-E",
+        "title": "C3 A6 (A) Đấu Trường - Bắt Đầu",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 8900
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "XZTFzJIeES-q_JiXITnY5"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "8QbqcXK3aPE0XUD2rqyKd"
+            },
+            "id": "vzQU8Him1KIZu4tUJ4tri"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "rKYhD5sPu_vnICPVkuJhJ",
+            "expressionId": "WP9zFc79ZFpVdoSHJUPVr"
+          },
+          {
+            "type": "narration",
+            "text": "Người xướng ngôn viên khẽ gật đầu, ánh mắt lần lượt dừng lại trên từng chiến binh rồi cất giọng trầm ổn:",
+            "id": "hQp1Tm3ZkefemjlwB7NBG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Rất tốt. Những chiến binh mạnh mẽ và quả cảm. Các anh đã hiểu đúng bản chất của hệ thống này.",
+            "id": "bAr1TKusjYs5WF49KzPBB"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Chiến đấu vì tự do, vì thịnh vượng, vì danh dự, vì hòa bình. Những lý tưởng khác nhau, nhưng đều dẫn đến cùng một kết quả.",
+            "id": "UDxJe60tZsuC5p4v5Zt9S"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Được hiện diện tại Đấu Trường này chính là niềm kiêu hãnh lớn nhất trong cuộc đời của mỗi chiến binh.",
+            "id": "_0BI-_BuYJNnGna8ZbnMF"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Các bạn đại diện cho sự văn minh, tiến bộ, và những giá trị nhân văn cao đẹp nhất mà loài người đã đạt được sau hàng ngàn năm sống trong hỗn loạn và xung đột.",
+            "id": "P2gGbBdeujdBgg5fsPwCF"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Ở đây, chiến đấu không còn là bạo lực, mà là hình thức cao nhất của trật tự và phát triển.",
+            "id": "x26Tskv1ZiDbBwoD7-aLS"
+          },
+          {
+            "type": "character_express",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "expressionId": "LGMHQFOO86SRii6Yqjtwi",
+            "duration": 200,
+            "id": "w8SBaG9RI9hMUuCVpKbol"
+          },
+          {
+            "type": "narration",
+            "text": "Bàn tay ông hướng xuống sàn đấu, giọng hạ thấp:",
+            "id": "_pgciE41bwoXzOGNWJyq8"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Một khi đã bước lên sàn đấu, chỉ còn một điều có ý nghĩa. Chiến thắng.",
+            "id": "uRdKFyZ9Sk9eQPmKPnhch"
+          },
+          {
+            "type": "character_express",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "expressionId": "fj_yvHIcELHzxt1v_Bo1e",
+            "duration": 200,
+            "id": "ov1BBKoL5W7eRyJP4AGMW"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Năm nay. Đến lượt Nam Long Quốc nắm quyền khởi xướng thách đấu.",
+            "id": "ZMEvPlkzpvmttKFkcb_hd"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Sau mỗi trận đấu, bên thắng có quyền chọn đối thủ tiếp theo… hoặc dừng lại.",
+            "id": "jEDwVTP2_ssHDLPifoRpS"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Mỗi chiến thắng cho phép quốc gia đó áp đặt điều kiện lên đối thủ, từ tài nguyên, lãnh thổ… cho đến quyền tiếp cận công nghệ.",
+            "id": "uTVYhQ7fPbGvggZhoGzo5"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Kết quả của mỗi trận đấu sẽ tái xác lập vị thế chiến lược giữa hai quốc gia, quyết định vận mệnh của cả hai dân tộc.",
+            "id": "46K8tRuN6CF1TsQPR12X9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Không có hòa. Không có can thiệp.\nChỉ có thắng… hoặc thua.",
+            "id": "oIC7qUVfuYDucm_eS8g4b"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Các chiến binh sẽ chiến đấu cho tới khi không còn có thể chiến đấu.",
+            "id": "sInFwOF-LPhf3TBnPd5n3"
+          },
+          {
+            "type": "stage_reset",
+            "id": "5FE7eOKc02cxy1lrlEtSn"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "s4MWJb_lkb-u0XuGzS2Ph"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "agYBqXatglsUhTTSevdRA"
+          }
+        ]
+      },
+      {
+        "id": "DrhCE9E-IVV-tdo8qdn98",
+        "title": "C3 A5 (A) Đấu Trường - Tuyên thệ",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 8700
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "T9v5SBnC409pb6NAIIkcn"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "seH_YGb03yyUmHEwYQMBf"
+            },
+            "id": "5Z4bmtKH6eQUmDr6bp8Sj"
+          },
+          {
+            "type": "narration",
+            "text": "Camera quay trở về trung tâm sàn đấu, nơi ánh sáng hội tụ thành một vòng tròn lạnh lẽo giữa nền kim loại tối màu.",
+            "id": "HNbD6I0o9skQjVhn3fHBl"
+          },
+          {
+            "type": "narration",
+            "text": "Từ khoảng tối phía ngoài, một bóng người bước thẳng vào vùng sáng, không vội vàng cũng không phô trương, như thể ông ta luôn ở đó và chỉ đến lúc này mới được nhìn thấy.",
+            "id": "LuJxv4UHYdXdvVkHqfX0X"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "8QbqcXK3aPE0XUD2rqyKd"
+            },
+            "id": "W-ykOSACIBP1XA-VBceid"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "77Sp3b9wSVThA9bS8V4_N",
+            "expressionId": "WP9zFc79ZFpVdoSHJUPVr"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Xướng ngôn viên của Đấu Trường là một người đàn ông cực kỳ cao lớn, gần chạm mốc 3 mét, cao hơn tất cả những người còn lại, nhưng không hề tạo cảm giác thô kệch hay dị dạng.",
+            "id": "PLvsm-y0HaXf4yU7fX4Ku"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Cơ thể ông giữ một tỷ lệ cân đối đến mức bất thường, như một phiên bản phóng lớn hoàn hảo của con người. Vai rộng, lưng thẳng, các tỷ lệ đều chuẩn xác đến mức chỉ khi đến gần thì kích thước khổng lồ ấy mới lộ ra, tạo cảm giác áp đảo hoàn toàn với những con người đứng xung quanh.",
+            "id": "LiMLaxMreXa-Y7mItPWq1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Khi ông đặt chân xuống sàn, một rung động trầm khẽ lan qua lớp kim loại, nhẹ đến mức gần như không nghe thấy nhưng vẫn đủ để cảm nhận được.",
+            "id": "AiKusuwPpTiqDGHnMBoHE"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ông không có bất kỳ cử động thừa nào, không biểu lộ cảm xúc, chỉ đơn giản là đứng đó, nhưng chính sự hiện diện đó khiến không gian xung quanh như bị siết lại, và chỉ cần ông ta tồn tại trong ánh sáng ấy cũng đã đủ tạo ra một áp lực vô hình bao trùm toàn bộ đấu trường.",
+            "id": "2fRH76xq6TV1Js9bxG5bd"
+          },
+          {
+            "type": "narration",
+            "text": "Ông cất tiếng, trầm và chậm, từng từ được thả xuống chính xác như một quy trình đã được thiết lập sẵn.",
+            "id": "OvYWhjzTa8JnvnYCWhOmX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Chào mừng đến với Đấu Trường 2026. Một cơ chế cân bằng quyền lực ngầm đã vận hành suốt hàng thập kỷ.",
+            "id": "IXhixLY8X965JElFCErNA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Trong ba mươi năm qua, không có một cuộc chiến tranh toàn diện nào giữa các quốc gia tham gia hệ thống này. Không phải vì không thể, mà là vì… không cần.",
+            "id": "ODyrg1kSjZbOlnLqtKwW0"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Chiến tranh toàn diện là một phương án kém hiệu quả, với thiệt hại vượt ngoài tầm kiểm soát và hậu quả có thể kéo dài qua nhiều thế hệ.",
+            "id": "Bet2oTUwfKrQuKY69vpad"
+          },
+          {
+            "type": "narration",
+            "text": "Ông bước chậm một bước.",
+            "id": "IcvN41vYfX-f2K8MiDmp6"
+          },
+          {
+            "type": "character_express",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "expressionId": "fj_yvHIcELHzxt1v_Bo1e",
+            "duration": 200,
+            "id": "XlnY2CQXu2nSLcSIzyeLZ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Nhưng xung đột là điều không thể tránh khỏi.\nVì vậy, chúng ta thay đổi cách thức giải quyết nó.",
+            "id": "EuV8hFlJ_VMNfzekf_t4x"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Thay vì đưa hàng triệu con người ra chiến trường, mỗi quốc gia… chỉ cần một đại diện. Một cá thể.",
+            "id": "Tr2nGIFWe2OemgrPpGoom"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Chịu trách nhiệm cho toàn bộ danh dự quốc gia. Và toàn bộ lợi ích chiến lược.\nĐặt lên… một trận đấu.",
+            "id": "Zxq3YCW7T4MD88PWwBuj2"
+          },
+          {
+            "type": "narration",
+            "text": "Một khoảng lặng rất ngắn.",
+            "id": "kkW0bgPQeCo6P9dxoOGY5"
+          },
+          {
+            "type": "character_express",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "expressionId": "LGMHQFOO86SRii6Yqjtwi",
+            "duration": 200,
+            "id": "CWxq4tQRWEdx9llQ4xgwq"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Giảm thiểu tổn thất.\nNhưng vẫn đảm bảo… phân định thắng thua một cách tuyệt đối.",
+            "id": "9HI-2Ow3I2l4daDX7jCzb"
+          },
+          {
+            "type": "narration",
+            "text": "Ánh mắt ông quét qua bốn phía.",
+            "id": "573s88mUp2UOtoQ4nlDMQ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Kẻ yếu không có quyền đòi hỏi công bằng.",
+            "id": "mU1EvBc2ChhFAqfeBcb7S"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Đấu trường… chỉ làm rõ điều đó nhanh hơn.",
+            "id": "ACnBRaom6qNGCMnmYyVte"
+          },
+          {
+            "type": "narration",
+            "text": "Ông đưa tay, chỉ xuống sàn đấu.",
+            "id": "9IcwCUdKZN_xow78VKlxy"
+          },
+          {
+            "type": "character_express",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "expressionId": "WP9zFc79ZFpVdoSHJUPVr",
+            "duration": 200,
+            "id": "QszbHYbpGVbaNL9oCWkqg"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Thay vì chiến tranh và đổ máu của người dân vô tội, chúng ta thu gọn xung đột… vào một không gian.",
+            "id": "yh_z85UMYGGRgR2eqIU49"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Một nghi thức. Một trận chiến.",
+            "id": "xODOJuDpwLufWxWwOJjaM"
+          },
+          {
+            "type": "narration",
+            "text": "Giọng ông thấp hơn.",
+            "id": "inRdo3En4eyPAQpqyFMsJ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Đây không phải giải đấu.",
+            "id": "ib05Z75GYl6-jKexWnK7-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Đây là… cơ chế vận hành của thế giới.",
+            "id": "y1Ix3YtUk5Ns6nVhavYF7"
+          },
+          {
+            "type": "narration",
+            "text": "Một khoảng lặng.",
+            "id": "6TjYw_mA0VJrk8KdP77uo"
+          },
+          {
+            "type": "character_express",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "expressionId": "fj_yvHIcELHzxt1v_Bo1e",
+            "duration": 200,
+            "id": "28LK5cu7x253yBfwQ_HET"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Những gì được quyết định tại đây sẽ ảnh hưởng trực tiếp đến: phân bổ tài nguyên chiến lược, quyền khai thác các vùng lãnh thổ đặc biệt, quyền tiếp cận công nghệ hạn chế… và mức độ ưu tiên trong các thỏa thuận với những thực thể quyền lực cao hơn.",
+            "id": "Y2ZClIZ1gGzSr4FqEkCIR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Thay vì tiếp tục chạy đua vũ trang…\nSuốt hàng thập kỷ qua, các quốc gia… chạy đua để tạo ra thực thể mạnh nhất.",
+            "id": "EzKjUEMzDtfM3l3CxLRrC"
+          },
+          {
+            "type": "narration",
+            "text": "Ông nhìn về phía bốn chiến binh.",
+            "id": "4nR1PBG-OjfKg_6mSWJmp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Siêu chiến binh.",
+            "id": "R830NOGa9oljpbs_EENMs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Can thiệp sinh học.\nBiến đổi gen.\nNhân bản vô tính.\nTái cấu trúc cơ thể.\nLoại bỏ giới hạn tiến hóa.",
+            "id": "_bmgDRto4o18qinBMNKk7"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Đây là những gì nhân loại trở thành… khi được tối ưu hóa cho chiến tranh.",
+            "id": "M9NY_2Av3O7h-NIvy62E1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Mỗi chiến binh trong Đấu Trường… là kết tinh của những thành tựu lớn nhất mà loài người từng đạt được.",
+            "id": "qHC1Xl0fG9cPSLhuwLUnh"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Khoa học. Y học. Công nghệ.",
+            "id": "noO3WHVYMdsuePmNi5irF"
+          },
+          {
+            "type": "narration",
+            "text": "Một nhịp dừng.",
+            "id": "XDhMzrXkK5_xi9fp-0QIn"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Và hôm nay… chúng ta tiếp tục nghi thức.",
+            "id": "b9gAla_BEjPfp8D8x9EHF"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Trước khi bắt đầu… mời các chiến binh xác lập điều kiện tham chiến.",
+            "id": "gl5GliB1m_J6332y2hTdT"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "duration": 300,
+            "id": "0kUpRO0zd2HDYv12521Ue"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "dcpb0TFm-2ZABQJ8Wxbg8"
+            },
+            "id": "ybNYhZkWclcctgBB7uRem"
+          },
+          {
+            "type": "narration",
+            "text": "Bốn chiến binh bước ra, dàn thành một hàng ngang, đứng sừng sững giữa đấu trường.",
+            "id": "17fYTtBNFPsOEvIl05Q04"
+          },
+          {
+            "type": "narration",
+            "text": "Họ đồng thanh. Giọng vang, dứt khoát, không do dự:",
+            "id": "8Jmdz864c6Kd6GthJxK-G"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Một khi bước lên sàn đấu này, sẽ không còn đường quay lại.",
+            "id": "9BvnT3pXDB3EWFAZP5VJj"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Chúng tôi từ bỏ thân phận con người.\nChúng tôi từ bỏ mọi quyền lợi pháp lý của một cá thể.\nChúng tôi từ bỏ danh tính cá nhân.",
+            "id": "d8lL1YUGhalLhZvVL5GNm"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Chúng tôi hiến dâng cơ thể này cho quốc gia.\nChúng tôi chấp nhận mọi hậu quả, kể cả cái chết.\nChúng tôi chiến đấu đến hơi thở cuối cùng.",
+            "id": "O1vG4BdWXXyBAc2ufS3M4"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Chúng tôi không đầu hàng. Không khoan nhượng. Không rút lui.\nCái chết không phải là kết thúc.\nĐó là vinh quang tối thượng khi phụng sự quốc gia.",
+            "id": "SzU6NT0qaUwGzaK-6cW2L"
+          },
+          {
+            "type": "narration",
+            "text": "Bầu không khí nặng xuống.",
+            "id": "ycos1o8oPc4mizEOzBt2u"
+          },
+          {
+            "type": "character_show",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "position": "center",
+            "expressionId": "WP9zFc79ZFpVdoSHJUPVr",
+            "duration": 300,
+            "flipX": false,
+            "id": "dznOSi7v2VN_hsoBeter7"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "text": "Tiếp theo… lời tuyên thệ.",
+            "id": "XdY3ttl3lZru-rclRv8UO"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "JGqjHALSWj7Qz6TrgWobP",
+            "duration": 300,
+            "id": "3OxaTUKoYVlJTuIu2fVzz"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "8QbqcXK3aPE0XUD2rqyKd"
+            },
+            "id": "GkqPtS4Muiw-7VrT3bnsu"
+          },
+          {
+            "type": "character_show",
+            "characterId": "E05MvcrauQimKtzxCJ17o",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "a2eWtUfcQelQsbkceo7Mz",
+            "expressionId": "8orAczcqnF4Zz1GXCgNFw"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "E05MvcrauQimKtzxCJ17o",
+            "text": "Vì sự tự do của giống loài, tôi chiến đấu.",
+            "id": "tZNV9-n306kqLWuAtGI1-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "E05MvcrauQimKtzxCJ17o",
+            "text": "Tôi là kẻ sống sót, là cá thể đã được tái cấu trúc để giết chóc hiệu quả hơn.",
+            "id": "2qS7tIwVRkSMTE98TvxFN"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "E05MvcrauQimKtzxCJ17o",
+            "text": "Tự do… không phải là quyền được ban phát.\nMà là thứ phải giành lấy bằng sức mạnh.\nChỉ kẻ sống sót mới xứng đáng với nó.",
+            "id": "IKd6BXHaQm8qfFfpQhLbJ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "E05MvcrauQimKtzxCJ17o",
+            "text": "Đông Đảo… không bao giờ khuất phục!",
+            "id": "0AobTe_R9FAS4Arxa6NMM"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "E05MvcrauQimKtzxCJ17o",
+            "duration": 300,
+            "id": "CA_Mmjq6-XSq2Wmb0Eci4"
+          },
+          {
+            "type": "character_show",
+            "characterId": "-cj6V_KSwY1rNaw95VTPp",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "cFDiFmz4nnnW9mIivzMjg",
+            "expressionId": "W2y-mlnXIBvCQZiyXya7I"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "-cj6V_KSwY1rNaw95VTPp",
+            "text": "Vì sự thịnh vượng của dân tộc, tôi tồn tại.",
+            "id": "1oc7HjVBq0-oRXcRppiys"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "-cj6V_KSwY1rNaw95VTPp",
+            "text": "Tôi là sản phẩm của tiến hóa có kiểm soát.",
+            "id": "knSD57cxFOjNFKNCl85RV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "-cj6V_KSwY1rNaw95VTPp",
+            "text": "Không cảm xúc. Không sai lệch. Chỉ có hiệu suất tối đa.",
+            "id": "1pxwQjmeGkWfr444uY-NZ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "-cj6V_KSwY1rNaw95VTPp",
+            "text": "Mọi quyết định đều hướng tới tối ưu hóa tương lai.",
+            "id": "qlbVRaHKDWF2N0V0sdxMM"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "-cj6V_KSwY1rNaw95VTPp",
+            "text": "Chiến thắng không phải là mục tiêu.\nMà là kết quả tất yếu.",
+            "id": "fkmr_hcMUuVQO8DoQ8hg0"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "-cj6V_KSwY1rNaw95VTPp",
+            "duration": 300,
+            "id": "tBt7qBz3u1U1fif0GkjtD"
+          },
+          {
+            "type": "character_show",
+            "characterId": "LzDtkbqKa0MAwFYtukhNX",
+            "position": "center",
+            "expressionId": "SItJhwuG6yBDPlI9XcurT",
+            "duration": 300,
+            "flipX": false,
+            "id": "xORjQaex6RFM2D0FHZ4sl"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "LzDtkbqKa0MAwFYtukhNX",
+            "text": "Vì danh dự của quốc gia, ta chiến đấu.",
+            "id": "IB2CL2QCdRXjDBusTA1oF"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "LzDtkbqKa0MAwFYtukhNX",
+            "text": "Ta không thương xót.\nDanh dự không được phép bị chà đạp.\nChỉ kẻ mạnh mới xứng đáng tồn tại.",
+            "id": "jJPHwlEHR38MiS9OJPqPV"
+          },
+          {
+            "type": "narration",
+            "text": "Ánh mắt hắn hướng về phía Nam Long.",
+            "id": "tdIRD4gn3myYM1PK9y8ou"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "LzDtkbqKa0MAwFYtukhNX",
+            "text": "Năm ngoái… ngay tại đây.\nMột kẻ đã nằm lại mãi mãi.\nChính ta đã làm điều đó.\nVà hôm nay… sẽ không khác.",
+            "id": "RlhjoXthX9Edpd5dK7gif"
+          },
+          {
+            "type": "narration",
+            "text": "Một nhịp dừng rất ngắn, rồi giọng hắn vang lên mạnh hơn, dứt khoát:",
+            "id": "3TY6WpVYeOwlZK417zXgn"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "LzDtkbqKa0MAwFYtukhNX",
+            "text": "Ngài Chủ tịch vạn tuế! Bắc Thiên Quốc muôn năm!!!",
+            "id": "dT3WFSaJ4IaK25sjS-F7n"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "LzDtkbqKa0MAwFYtukhNX",
+            "duration": 300,
+            "id": "h1up_q8XIQ_4VH9y59mqW"
+          },
+          {
+            "type": "character_show",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "lRa9zr8s_9eh3PjDbnS53",
+            "expressionId": "cIrT88OggYbhM5B_xdBIA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "text": "Vì hòa bình của nhân loại, ta chiến đấu.",
+            "id": "3qCLq_C3W7kSZNZvQSCnI"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "text": "Chiến tranh toàn diện chỉ mang lại sự hủy diệt.",
+            "id": "g-CS7DX0vrYcHbejo5ymK"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "text": "Nếu một cái chết có thể ngăn hàng triệu cái chết khác, thì đó là cái giá cần phải trả.",
+            "id": "OzV7sPrSZ_5mxMu7qxZRb"
+          },
+          {
+            "type": "narration",
+            "text": "Ánh mắt anh lạnh lại, khóa chặt vào chiến binh Bắc Thiên.",
+            "id": "WLDkAatItfFvmjVumg1s9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "text": "Danh dự… được giữ bằng máu.",
+            "id": "DVa3z3pMnk8hUb946aLMN"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "text": "Nam Long không quên. Và cũng không tha thứ.",
+            "id": "PCYam-GWk37JKq657VJt3"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "text": "Ngày hôm nay, Nam Long Quốc… tuyệt đối không khoan nhượng!",
+            "id": "tco3-yhs0JKJHIEZ98phw"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "x--de8cZcPEcC132s_Oue",
+            "duration": 300,
+            "id": "KuJZpBJc7Ew56R_IswMHP"
+          },
+          {
+            "type": "stage_reset",
+            "id": "2uCMEUK8hhRZu9t3-Y1Qe"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "QRI2UEq2O9sOMR1o_1hjV"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "p8MM8bvTIwMwskzIPuRYG"
+          },
+          {
+            "type": "goto",
+            "target": "s-0SWIzJZkMwSh0XtLS-E",
+            "id": "rYL-6X6J2DJlQ99lOjbzO"
+          }
+        ]
+      },
+      {
         "id": "wTAJqlmV4EeXu9JYF6QVR",
-        "title": "C3 A4 (A) Đấu Trường",
+        "title": "C3 A4 (A) Đấu Trường - Giới thiệu",
         "nodes": [
           {
             "type": "stage_reset",
@@ -7149,13 +7982,21 @@
             "id": "ovacJergVdH1l4aMSM7zp"
           },
           {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "8QbqcXK3aPE0XUD2rqyKd"
+            },
+            "id": "EQvyriC1D6JjtFsKKQEA1"
+          },
+          {
             "type": "character_show",
             "characterId": "sTUc7g01b2HS8LBvULgEQ",
             "position": "center",
+            "expressionId": "IE5JNwcaUg4B9CBXQVF2f",
             "duration": 300,
             "flipX": false,
-            "id": "VHbDVWdsHdAyv_-v18Vtk",
-            "expressionId": "IE5JNwcaUg4B9CBXQVF2f"
+            "id": "VHbDVWdsHdAyv_-v18Vtk"
           },
           {
             "type": "dialogue",
@@ -7173,10 +8014,10 @@
             "type": "character_show",
             "characterId": "LzDtkbqKa0MAwFYtukhNX",
             "position": "center",
+            "expressionId": "bmmYNUSxG3t5sMyQWMBQG",
             "duration": 300,
             "flipX": false,
-            "id": "rEkgSAf4ce4wChW31LN0n",
-            "expressionId": "bmmYNUSxG3t5sMyQWMBQG"
+            "id": "rEkgSAf4ce4wChW31LN0n"
           },
           {
             "type": "dialogue",
@@ -7380,6 +8221,11 @@
               "color": "#000000"
             },
             "id": "JAGzXzekmGHRFa6DWePWg"
+          },
+          {
+            "type": "goto",
+            "target": "DrhCE9E-IVV-tdo8qdn98",
+            "id": "vvs9E1RzcCh0aDqdnjhxy"
           }
         ],
         "meta": {
