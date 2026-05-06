@@ -1876,21 +1876,17 @@ Màn hình bắt đầu hiển thị các mô hình ADN, cấu trúc thần kinh
 ================================================================================
 
 
-“Vài năm sau, khi người con trai đầu lòng của ông được sinh ra…”
-
-“Mọi dữ liệu kiểm tra đều xác nhận một sự thật chưa từng có tiền lệ.”
-
 Chương trình chuyển sang hình ảnh một nữ bác sĩ trẻ với mái tóc ngắn đang dịu dàng bế đứa bé trên tay. Đứa trẻ có kích thước lớn hơn hẳn trẻ sơ sinh thông thường, đang ngủ rất ngoan trong vòng tay cô.
 
 Ánh đèn lạnh từ các màn hình nghiên cứu phản chiếu lên gương mặt người bác sĩ. Cô cúi đầu nhìn đứa bé bằng ánh mắt dịu dàng và đầy yêu thương, hoàn toàn đối lập với bầu không khí căng thẳng của phòng nghiên cứu xung quanh.
 
+“Vài năm sau, khi người con trai đầu lòng của ông được sinh ra…”
+
+“Mọi dữ liệu kiểm tra đều xác nhận một sự thật chưa từng có tiền lệ.”
+
 “Cá thể đó mang cấu trúc di truyền tương tự Thiên Long… nhưng hoàn thiện hơn.”
 
-“Mạnh hơn.”
-
-“Ổn định hơn.”
-
-“Mức độ đồng bộ sinh học vượt ngoài toàn bộ dự đoán trước đó.”
+“Mạnh hơn. Ổn định hơn. Mức độ đồng bộ sinh học vượt ngoài toàn bộ dự đoán trước đó.”
 
 Một khoảng dừng rất ngắn.
 
@@ -1898,11 +1894,13 @@ Một khoảng dừng rất ngắn.
 
 Ánh sáng màn hình tối xuống.
 
-“Ngay sau thời điểm A1 ra đời, Dự Án Long Mạch chính thức được kích hoạt.”
+“Ngay sau thời điểm A1 ra đời, đồng chí Thiên Long đã trực tiếp đề xuất khởi động Dự Án Long Mạch.”
+
+“Đề xuất đó nhanh chóng được phê duyệt ở cấp cao nhất.”
 
 “Đây không còn là một chương trình nghiên cứu thông thường.”
 
-“Mục tiêu của dự án chưa bao giờ chỉ dừng lại ở việc tạo ra một cá thể ưu tú.”
+“Mục tiêu của Dự Án Long Mạch chưa bao giờ chỉ dừng lại ở việc tạo ra một cá thể ưu tú.”
 
 “Mà là xây dựng một hệ thống nhân lực chiến lược có khả năng vận hành tương lai quốc gia trong nhiều thế hệ.”
 
@@ -1922,10 +1920,7 @@ Không có nhạc nền cao trào.
 Không có lời kêu gọi.
 
 Chỉ là thông tin.
-
-Được trình bày một cách chính xác, lạnh lẽo…
-
-và không để lại khoảng trống cho bất kỳ câu hỏi nào.
+Được trình bày một cách chính xác, lạnh lẽo… và không để lại khoảng trống cho bất kỳ câu hỏi nào.
 --------------------------------------------------------------------------------
 
 

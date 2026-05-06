@@ -1518,6 +1518,34 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7722.png",
       "name": "ChatGPT Image 10_37_35 6 thg 5, 2026",
       "category": "other"
+    },
+    "oTO9G1r_Nri5fZgObovLw": {
+      "id": "oTO9G1r_Nri5fZgObovLw",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7729.png",
+      "name": "ChatGPT Image 11_34_42 6 thg 5, 2026",
+      "category": "other"
+    },
+    "-3F1VSHWXxyEcylEH3jIY": {
+      "id": "-3F1VSHWXxyEcylEH3jIY",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7730.png",
+      "name": "ChatGPT Image 15_33_31 6 thg 5, 2026",
+      "category": "other"
+    },
+    "b1YTgLjyU1oz1lxdhECUv": {
+      "id": "b1YTgLjyU1oz1lxdhECUv",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7731.png",
+      "name": "ChatGPT Image 15_40_37 6 thg 5, 2026",
+      "category": "other"
+    },
+    "4mvTKcQxrcn1JU27MM7mm": {
+      "id": "4mvTKcQxrcn1JU27MM7mm",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7732.png",
+      "name": "ChatGPT Image 15_49_49 6 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -5884,22 +5912,10 @@
             "id": "H5Vp8wkYx2W5fMa7_yag7"
           },
           {
-            "type": "wait",
-            "duration": 2000,
-            "fixed": true,
-            "id": "C4gi2-T0r7xF6Luy5Xvkf"
-          },
-          {
             "type": "show_text",
             "text": "CHAP 1: Sự xuất hiện của {{nu9}}",
             "position": "center",
             "id": "Pwhd9eFyk9H6X2TQfna-j"
-          },
-          {
-            "type": "wait",
-            "duration": 1000,
-            "fixed": false,
-            "id": "52BtiZcGc7wSEx0zAoJ7d"
           },
           {
             "type": "screen_effect",
@@ -5957,22 +5973,10 @@
             "id": "CYuYJNJ1I0-dS-GXftFn7"
           },
           {
-            "type": "wait",
-            "duration": 2000,
-            "fixed": true,
-            "id": "AmtGg21DBTSwCa6N3Kf8t"
-          },
-          {
             "type": "show_text",
             "text": "CHAP 2: Những bí mật",
             "position": "center",
             "id": "C8ReLZ9LpDVQVPUbWBja0"
-          },
-          {
-            "type": "wait",
-            "duration": 1000,
-            "fixed": false,
-            "id": "dggBfFTwGhRXignr0opik"
           },
           {
             "type": "screen_effect",
@@ -6023,22 +6027,10 @@
             "id": "9AzopMolfuE4RaYuzOJO0"
           },
           {
-            "type": "wait",
-            "duration": 2000,
-            "fixed": true,
-            "id": "0jasV1l39HdbR-3BDSars"
-          },
-          {
             "type": "show_text",
             "text": "CHAP 3: Sự Thật Về Trật Tự Thế Giới",
             "position": "center",
             "id": "Vr9mhpdwcw741qt28I4Zo"
-          },
-          {
-            "type": "wait",
-            "duration": 1000,
-            "fixed": false,
-            "id": "rwF-pdwkyiruXGme9FiWx"
           },
           {
             "type": "screen_effect",
@@ -7372,10 +7364,253 @@
         ],
         "meta": {
           "mapPosition": {
-            "x": 1400,
-            "y": 8900
+            "x": 1200,
+            "y": 9300
           }
         }
+      },
+      {
+        "id": "ZK7udKscNMoGdjM-HT93H",
+        "title": "C3 A9 Dự án Long Mạch",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 9500
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "H_Xw597Wgea73gboF5PCe"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "oTO9G1r_Nri5fZgObovLw"
+            },
+            "id": "aKdkea0yJAxgbr8kGj2XU"
+          },
+          {
+            "type": "narration",
+            "text": "Chương trình chuyển sang hình ảnh một nữ bác sĩ trẻ với mái tóc ngắn đang dịu dàng bế đứa bé trên tay. Đứa trẻ có kích thước lớn hơn hẳn trẻ sơ sinh thông thường, đang ngủ rất ngoan trong vòng tay cô.",
+            "id": "2FIbt0RSyn-vQBcAD3aXO"
+          },
+          {
+            "type": "narration",
+            "text": "Ánh đèn lạnh từ các màn hình nghiên cứu phản chiếu lên gương mặt người bác sĩ. Cô cúi đầu nhìn đứa bé bằng ánh mắt dịu dàng và đầy yêu thương, hoàn toàn đối lập với bầu không khí căng thẳng của phòng nghiên cứu xung quanh.",
+            "id": "QSG89OWv3PjdxwLJGLpb6"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Vài năm sau, khi người con trai đầu lòng của ông được sinh ra… ]",
+            "id": "upe8lUH4Xi07qUB1pmVjs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Mọi dữ liệu kiểm tra đều xác nhận một sự thật chưa từng có tiền lệ. ]",
+            "id": "jSTXeziwVSjZPr2AHBjp1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Cá thể đó mang cấu trúc di truyền tương tự [b][color=#008000]Thiên Long[/color][/b]… nhưng hoàn thiện hơn. ]",
+            "id": "q_H7vEd4n0Ktuv1uDv2is"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Mạnh hơn. Ổn định hơn. Mức độ đồng bộ sinh học vượt ngoài toàn bộ dự đoán trước đó. ]",
+            "id": "voYmHlSaPfpPvo2MbJFEg"
+          },
+          {
+            "type": "narration",
+            "text": "Một khoảng dừng rất ngắn.",
+            "id": "vXHS-2suNFt3YRU9a0w3U"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Cá thể ấy được định danh: [b][color=#FF0000]A1[/color][/b]. ]",
+            "id": "sgMAN0Mqv92kFNGauY81H"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.5,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "6Vw1FkkRY1QMA8Cu_mq8K"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "-3F1VSHWXxyEcylEH3jIY"
+            },
+            "id": "xYDxoHztgVaAj8s_CUGFp"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "out"
+            },
+            "id": "3CnpOUjSMiDyAuJJ64gQG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Ngay sau thời điểm [b][color=#FF0000]A1[/color][/b] ra đời, đồng chí [b][color=#008000]Thiên Long[/color][/b] đã trực tiếp đề xuất khởi động [b]Dự Án Long Mạch[/b]. ]",
+            "id": "CfbZ3nbyyKLerM6IJ5dN7"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Đề xuất đó nhanh chóng được phê duyệt ở cấp cao nhất. ]",
+            "id": "QOY1Iyg48gntxDP9-UNCd"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Đây không còn là một chương trình nghiên cứu thông thường. ]",
+            "id": "UNgF1CKHvC7-suz0IEiLw"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Mục tiêu của [b]Dự Án Long Mạch[/b] chưa bao giờ chỉ dừng lại ở việc tạo ra một cá thể ưu tú. ]",
+            "id": "xCgtkh8v5cjSfcTWSadfF"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Mà là xây dựng một hệ thống nhân lực chiến lược có khả năng vận hành tương lai quốc gia trong nhiều thế hệ. ]",
+            "id": "AJI9ZS36GOxu6w7qOA3BR"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "b1YTgLjyU1oz1lxdhECUv"
+            },
+            "id": "YEMat7zm5S9NQIyKBORwL"
+          },
+          {
+            "type": "narration",
+            "text": "Hình ảnh chuyển nhanh.",
+            "id": "hST81C5NTNYEbI0Rbc2Td"
+          },
+          {
+            "type": "narration",
+            "text": "Phòng thí nghiệm. Buồng nuôi sinh học. Hồ sơ tuyệt mật. Những đứa trẻ lớn lên dưới ánh đèn trắng lạnh.",
+            "id": "oQ6UhVfTf8fx6Go8wmVzD"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ [b][color=#FF0000]A1[/color][/b] là bản gốc. ]",
+            "id": "kXHIFCwnDzx67o4vBfaZF"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Sáu cá thể nhân bản vô tính từ [b][color=#FF0000]A1[/color][/b] được tạo ra và chuyển giao trực tiếp cho chính phủ Nam Long Quốc. ]",
+            "id": "RiV9TC0OfV6No-34YeDHP"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "4mvTKcQxrcn1JU27MM7mm"
+            },
+            "id": "DcvqmHQ3sSc4ql_3MLLN1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Họ trải qua quá trình huấn luyện, giáo dục và phát triển chuyên biệt. ]",
+            "id": "XFG0bOew4xIMQtpWK5nz7"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Và trở thành những nhân tố cốt lõi trong bộ máy vận hành quốc gia. ]",
+            "id": "TZoa045kZJGu2z9QuP0z6"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "adkt3Sm_yVbb1nxi3WR8b"
+            },
+            "id": "_-WvA2JEY6IGOLPxv9d72"
+          },
+          {
+            "type": "narration",
+            "text": "Không có nhạc nền cao trào.\nKhông có lời kêu gọi.",
+            "id": "1vdiQKjl6zjBBqnI0xUEi"
+          },
+          {
+            "type": "narration",
+            "text": "Chỉ là thông tin.\nĐược trình bày một cách chính xác, lạnh lẽo… và không để lại khoảng trống cho bất kỳ câu hỏi nào.",
+            "id": "dW8cK4UoC2Q_ANTG8POEy"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.6,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "sZSR_IeFynq9p9ecQUnXa"
+          },
+          {
+            "type": "show_text",
+            "text": "[ [b]Dự Án Long Mạch[/b] ]",
+            "id": "-EFI5u-zqo5Ze2F1ZOwx_",
+            "position": "center"
+          },
+          {
+            "type": "wait",
+            "duration": 2000,
+            "fixed": true,
+            "id": "N3knzqbUwXRr9LvwxdhIr"
+          },
+          {
+            "type": "stage_reset",
+            "id": "2xdkMz96tpVKREUJUWVSD"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "9I2vvx3EhqLxvnay-SB5Y"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "HekUS-MFPnsmQj7QtSpBN"
+          }
+        ]
       },
       {
         "id": "6oufNYJULk38hsm1w-U6f",
@@ -7715,6 +7950,11 @@
               "color": "#000000"
             },
             "id": "F4DSyDsg84FGS7X6DUePZ"
+          },
+          {
+            "type": "goto",
+            "target": "ZK7udKscNMoGdjM-HT93H",
+            "id": "XXw9Zf2M7KqZxNtYrugxl"
           }
         ],
         "meta": {
