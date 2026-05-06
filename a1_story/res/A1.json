@@ -1553,6 +1553,83 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7737.png",
       "name": "ChatGPT Image 20_18_23 6 thg 5, 2026 (1)",
       "category": "other"
+    },
+    "Yk-DoBb737LU41wtzI5ls": {
+      "id": "Yk-DoBb737LU41wtzI5ls",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7738.png",
+      "name": "ChatGPT Image 18_33_06 6 thg 5, 2026",
+      "category": "other"
+    },
+    "sMpCsZszKYXJm21fc5FQ9": {
+      "id": "sMpCsZszKYXJm21fc5FQ9",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7739.png",
+      "name": "ChatGPT Image 18_43_30 6 thg 5, 2026",
+      "category": "other"
+    },
+    "Q9aFvkMUVFZFW9M857Rei": {
+      "id": "Q9aFvkMUVFZFW9M857Rei",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7740.png",
+      "name": "ChatGPT Image 18_47_25 6 thg 5, 2026",
+      "category": "other"
+    },
+    "MEmfIR7wl1XTbhZige1vz": {
+      "id": "MEmfIR7wl1XTbhZige1vz",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7741.png",
+      "name": "ChatGPT Image 19_06_16 6 thg 5, 2026",
+      "category": "other"
+    },
+    "_kdD2SOEYd_D4Zr7ex-__": {
+      "id": "_kdD2SOEYd_D4Zr7ex-__",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7742.png",
+      "name": "ChatGPT Image 19_08_56 6 thg 5, 2026",
+      "category": "other"
+    },
+    "cYP5CEtFW7ZT_21y8SKOr": {
+      "id": "cYP5CEtFW7ZT_21y8SKOr",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7743.png",
+      "name": "ChatGPT Image 20_15_52 6 thg 5, 2026",
+      "category": "other"
+    },
+    "U1j0nPezvs4CHv__uhqt2": {
+      "id": "U1j0nPezvs4CHv__uhqt2",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7744.png",
+      "name": "ChatGPT Image 21_05_41 6 thg 5, 2026",
+      "category": "other"
+    },
+    "zeuR6tKbJlcSA--9exl31": {
+      "id": "zeuR6tKbJlcSA--9exl31",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7745.png",
+      "name": "ChatGPT Image 21_05_41 6 thg 5, 2026",
+      "category": "other"
+    },
+    "eGV3afX47Q0_gAwggBGON": {
+      "id": "eGV3afX47Q0_gAwggBGON",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7746.png",
+      "name": "ChatGPT Image 21_01_30 6 thg 5, 2026",
+      "category": "other"
+    },
+    "AqqthtlXDhRfny8qfid8Y": {
+      "id": "AqqthtlXDhRfny8qfid8Y",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7747.png",
+      "name": "ChatGPT Image 21_15_17 6 thg 5, 2026",
+      "category": "other"
+    },
+    "0zR8flf5W0XJDSqEFNJ-D": {
+      "id": "0zR8flf5W0XJDSqEFNJ-D",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7748.png",
+      "name": "ChatGPT Image 22_12_44 6 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -7372,9 +7449,477 @@
         "meta": {
           "mapPosition": {
             "x": 1200,
-            "y": 9300
+            "y": 9800
           }
         }
+      },
+      {
+        "id": "41M0-XnHHHAQLSgmyYJz2",
+        "title": "C3 A11 Thuốc ức chế",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 9900
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "gm2qA8_4ah9UfM-XK8ZLe"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 100,
+              "direction": "in"
+            },
+            "id": "DA4_pS_D5OyWaDd21BWNq"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "3QNZswfMCCKMK7AvSPEkM"
+          },
+          {
+            "type": "narration",
+            "text": "Màn hình tối lại trong vài giây ngắn ngủi.",
+            "id": "5ymUjIP4lEZNmSOEoQ_p8"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "Yk-DoBb737LU41wtzI5ls"
+            },
+            "id": "0O__2MwuORoO1CEfZIjwW"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "out"
+            },
+            "id": "0vtah5bvF6LvDQ6sJ4c23"
+          },
+          {
+            "type": "narration",
+            "text": "Khi hình ảnh xuất hiện trở lại, giọng dẫn của chương trình chậm hơn trước một nhịp.",
+            "id": "pBYLdnI3DHt3wGAWD_BG8"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Tuy nhiên… trong quá trình phát triển dài hạn của [b]Dự Án Long Mạch[/b], một vấn đề nghiêm trọng cũng dần xuất hiện. ]",
+            "id": "iPB8myNJAqMoHCJAp4ciM"
+          },
+          {
+            "type": "narration",
+            "text": "Một căn phòng nghiên cứu trắng lạnh hiện ra trên màn hình.",
+            "id": "GpRuD0-SErjrIJOOGGhlx"
+          },
+          {
+            "type": "narration",
+            "text": "Giữa hàng loạt nhà nghiên cứu trưởng thành và các thiết bị giám sát sinh học, một đứa trẻ nhỏ tuổi đang đứng lặng giữa căn phòng.",
+            "id": "to_cSLClrEQmdzuCE7Yoc"
+          },
+          {
+            "type": "narration",
+            "text": "Cơ thể của cậu vẫn chưa phát triển hoàn toàn. Gương mặt còn mang những đường nét non trẻ của một đứa bé khoảng năm tuổi.",
+            "id": "mguETnYEvQunH0itazQ6O"
+          },
+          {
+            "type": "narration",
+            "text": "Nhưng ánh mắt ấy… lại hoàn toàn không thuộc về một đứa trẻ.",
+            "id": "D6cULAYH0tsazgY9rjkJB"
+          },
+          {
+            "type": "narration",
+            "text": "[b][color=#FF0000]A1[/color][/b] đứng im giữa phòng nghiên cứu, ánh mắt lạnh và gần như không dao động.",
+            "id": "LQZvM3ooTrK4FNh-RHZxU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Con người là giống loài không hoàn thiện.",
+            "id": "HzMw4kzn4gzti3lnJQTSo"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Trật tự chỉ tồn tại khi có kẻ đủ mạnh để áp đặt nó.",
+            "id": "bOG2m-UD4Hg5ucj7dK4xH"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "sMpCsZszKYXJm21fc5FQ9"
+            },
+            "id": "KkIp_t39WINWOxNXEeXsr"
+          },
+          {
+            "type": "narration",
+            "text": "Một đoạn video khác hiện lên.",
+            "id": "ERm7l6vWCsrb-s97E63l7"
+          },
+          {
+            "type": "narration",
+            "text": "[b][color=#FF0000]A1[/color][/b] đứng giữa hội trường hội nghị cấp cao của Nam Long, xung quanh là những chính trị gia và quan chức cấp cao đang im lặng lắng nghe. Dù chỉ mới là một đứa trẻ, ánh mắt anh vẫn bình tĩnh đến mức khiến cả không gian trở nên nặng nề.",
+            "id": "zneNJ4I4KVMLtw6DSigWJ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Nếu đa số không đủ khả năng tự quyết định tương lai của mình… vậy thì tự do có ý nghĩa gì?",
+            "id": "xNWw31f0GtV0rQYSiAYNd"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Nhân loại cần một cá thể vượt trội tuyệt đối để dẫn dắt vận mệnh của tất cả.",
+            "id": "wlBsbQqLT1hEtOFBRh7pa"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "Q9aFvkMUVFZFW9M857Rei"
+            },
+            "id": "Pydevnk5cKD87XbY76ZBu"
+          },
+          {
+            "type": "narration",
+            "text": "Màn hình tiếp tục chuyển cảnh. Lần này, [b][color=#FF0000]A1[/color][/b] đã khoảng bảy tuổi.",
+            "id": "f1QgDE9Wq17AiijfkWeDe"
+          },
+          {
+            "type": "narration",
+            "text": "Cậu bước giữa hàng người đang cúi đầu chào trong một khu nghiên cứu quân sự khép kín. Gương mặt vẫn không biểu lộ cảm xúc, nhưng chiều cao và hệ cơ thể đã vượt xa trẻ em cùng độ tuổi.",
+            "id": "BqsNCsgDblq3H2ia1EoKP"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Một xã hội lý tưởng không cần tự do lựa chọn. Nó chỉ cần một đáp án chính xác duy nhất.",
+            "id": "3BQciHM5DHasHOrr9GFVJ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Lựa chọn là nguồn gốc của hỗn loạn. Xã hội hoàn hảo chỉ cần sự phục tùng tuyệt đối.",
+            "id": "duwKUuI21UuY-FNfb-CVl"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Và chỉ cá thể ưu tú nhất… mới nên có quyền đưa ra quyết định.",
+            "id": "kNIETZFRmcGOnjniR1IcP"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "MEmfIR7wl1XTbhZige1vz"
+            },
+            "id": "8FNih8UVcg_raJVL_8WAb"
+          },
+          {
+            "type": "narration",
+            "text": "Hình ảnh chuyển nhanh qua những đoạn ghi hình giám sát nội bộ.",
+            "id": "dFR8EjNNjpX38HAg033as"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Một khu huấn luyện sinh tồn ngoài rừng sâu.",
+            "id": "SXq4UjJ4hGm5mwLCXuz0S"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[b][color=#FF0000]A1[/color][/b] đứng bên cái xác của một con thú lớn vừa bị hạ gục, đồng phục dính máu nhưng ánh mắt vẫn bình thản đến lạnh người.",
+            "id": "aO_Hq1G8gPl3dcbbI64wU"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "_kdD2SOEYd_D4Zr7ex-__"
+            },
+            "id": "yaUMmenFtLlSohaNivR-M"
+          },
+          {
+            "type": "narration",
+            "text": "Một đoạn khác.",
+            "id": "m3GAzFWs_NeE98L79n5ry"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trong phòng huấn luyện cận chiến, cậu dùng lực quá mức khiến đối thủ trưởng thành bị đánh văng vào tường.",
+            "id": "i7mDe41R5J75OjPpWMpK2"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Tiếng cảnh báo vang lên hỗn loạn giữa phòng nghiên cứu.",
+            "id": "zWkZ0Ml4lQ3CQO0funrKf"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "cYP5CEtFW7ZT_21y8SKOr"
+            },
+            "id": "lrlRgabLLXgzZL2eKm4ly"
+          },
+          {
+            "type": "narration",
+            "text": "Một đoạn video khác hiện lên ngay sau đó.",
+            "id": "JQCXgOYDI9oTCvZTMdBVm"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[b][color=#FF0000]A1[/color][/b] ngồi lặng im giữa căn phòng đầy máu sau một buổi huấn luyện bạo lực, hai tay chống trước mặt, ánh mắt không dao động dù xung quanh là tiếng la hét và nhân viên y tế đang lao tới.",
+            "id": "BRoO--yjFjMNvN008l7P1"
+          },
+          {
+            "type": "narration",
+            "text": "Giọng dẫn vẫn đều và ổn định:",
+            "id": "DxmAh2FAAaYTFLTeOOsZF"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "Trong quá trình theo dõi tâm lý và nhận thức dài hạn, các cơ quan chuyên môn xác định bản thể gốc [b][color=#FF0000]A1[/color][/b] bắt đầu xuất hiện xu hướng cực đoan hóa tư duy cùng mức độ bạo lực sinh học vượt ngoài ngưỡng kiểm soát an toàn.",
+            "id": "TH9ljVyz0eKVKgutvrN9a"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "eGV3afX47Q0_gAwggBGON"
+            },
+            "id": "gxCiVurLI1wkYNxCu4-ew"
+          },
+          {
+            "type": "narration",
+            "text": "Hình ảnh chuyển sang một phòng y sinh khép kín.",
+            "id": "K6d99YKZMOg133jfwl-x6"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "[b][color=#FF0000]A1[/color][/b] ngồi lặng trên chiếc ghế kim loại giữa căn phòng trắng lạnh. Ánh mắt không còn sự lạnh lẽo tuyệt đối như trước, mà chỉ còn lại vẻ thẫn thờ và im lặng nặng nề.",
+            "id": "QCq38mvFg8lJRKXfK0P39"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Bên cạnh anh, nữ bác sĩ tóc ngắn cúi người nói gì đó rất khẽ.",
+            "id": "Jnsh7ncbBC9XGllvppVo4"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Không ai nghe rõ cuộc trò chuyện ấy.",
+            "id": "yAuCfnudyuOd_rwZLXRvx"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Nhưng khi hình ảnh chuyển sang góc quay tiếp theo… [b][color=#FF0000]A1[/color][/b] chỉ còn ngồi lặng im, ánh mắt trống rỗng và nặng nề hơn trước.",
+            "id": "30k2BUqyeB_kXt0Mxqw7t"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Một số đánh giá nội bộ cho thấy [b][color=#FF0000]A1[/color][/b] dần hình thành nhận thức vượt trội cực đoan, xem bản thân như một cá thể đứng trên cấu trúc xã hội thông thường. ]",
+            "id": "6CkoipXgYa4GArwmAKCVP"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Các xu hướng độc tài và hành vi kiểm soát bạo lực bắt đầu xuất hiện với tần suất ngày càng cao. ]",
+            "id": "fKucKPtR0eFsVWJoYdd7j"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "zeuR6tKbJlcSA--9exl31"
+            },
+            "id": "cdgbQm7qQWTMjKDiy_DN1"
+          },
+          {
+            "type": "narration",
+            "text": "Nữ bác sĩ đứng lặng vài giây trước mặt anh, rồi chậm rãi cầm lấy ống tiêm chứa chất lỏng màu xanh nhạt.",
+            "id": "DMNfs6HX8UiF3SH_IGcSN"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Sau nhiều năm đánh giá và theo dõi, chính phủ Nam Long quyết định triển khai liệu pháp ức chế thần kinh nhận thức và ổn định sinh học đối với [b][color=#FF0000]A1[/color][/b]. ]",
+            "id": "IK6wg-Cxn5ZGC6nUhqjLM"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Mục tiêu của liệu pháp là hạn chế sự phát triển quá mức của hệ thần kinh trung ương, đồng thời làm suy giảm các phản ứng bạo lực và khả năng tăng trưởng sinh học ngoài kiểm soát. ]",
+            "id": "m3iDrimyKmgbYSc48C9DX"
+          },
+          {
+            "type": "narration",
+            "text": "Mũi tiêm chậm rãi đâm vào cánh tay [b][color=#FF0000]A1[/color][/b]. Anh không phản kháng, chỉ im lặng nhìn người bác sĩ trước mặt mình.",
+            "id": "JC6nT_Ui-Xu6c7YKD7iCY"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "AqqthtlXDhRfny8qfid8Y"
+            },
+            "id": "0JW1G1iCYULQhW_RIdAFM"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Một số tác động phụ không thể tránh khỏi đã xuất hiện trong quá trình điều trị, bao gồm suy giảm thể chất, hạn chế tăng trưởng cơ thể và ảnh hưởng đến khả năng vận động thần kinh. ]",
+            "id": "ERExG5Bn8I0Mq184lxFEz"
+          },
+          {
+            "type": "narration",
+            "text": "Ánh đèn trắng lạnh phủ xuống căn phòng bệnh yên tĩnh tuyệt đối. [b][color=#FF0000]A1[/color][/b] nằm lặng trên giường, cơ thể đã nhỏ hơn trước rất nhiều.",
+            "id": "2XHcRUXRLCGg5Md7cpMIA"
+          },
+          {
+            "type": "narration",
+            "text": "Anh khẽ nâng bàn tay lên trước mắt. Các ngón tay gầy và yếu đi thấy rõ, một cảm giác nặng nề xa lạ lan khắp cơ thể như thể thứ gì đó bên trong đang dần bị kéo xuống từng chút một.",
+            "id": "sOEAB4Kw28aU0B-5AVm45"
+          },
+          {
+            "type": "narration",
+            "text": "[b][color=#FF0000]A1[/color][/b] im lặng nhìn lên trần phòng rất lâu.",
+            "id": "y-0B6i43Pt9YtObsdjnZU"
+          },
+          {
+            "type": "narration",
+            "text": "Không còn ánh mắt lạnh lùng của kẻ đứng trên tất cả.",
+            "id": "GDnqLwnUTw65IF2w2nur4"
+          },
+          {
+            "type": "narration",
+            "text": "Chỉ còn lại một suy nghĩ không ngừng lặp lại trong đầu:",
+            "id": "9-ytm_0EtPW87biNg3d3X"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "…có lẽ họ nói đúng.",
+            "id": "RILKo71P5J6Veu7GmAqBD"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "0zR8flf5W0XJDSqEFNJ-D"
+            },
+            "id": "HEZPW9ndLtF-gLQSi5Fyx"
+          },
+          {
+            "type": "narration",
+            "text": "Màn hình hiện lên hình ảnh các bản sao của [b][color=#FF0000]A1[/color][/b] đứng cạnh nhau dưới quốc kỳ Nam Long.",
+            "id": "7SzIIU2y6930zEYkNscyr"
+          },
+          {
+            "type": "narration",
+            "text": "Giọng dẫn tiếp tục, không để lộ bất kỳ dao động cảm xúc nào:",
+            "id": "8uvqIXt0iDoFWd7jVKAl1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Các cá thể còn lại từ [b][color=#FFA500]A2[/color][/b] đến [b][color=#FFA500]A7[/color][/b] được tạo ra ngay từ thời điểm [b][color=#FF0000]A1[/color][/b] vừa chào đời, trải qua quá trình phát triển và huấn luyện độc lập dưới sự giám sát tuyệt đối của chính phủ Nam Long Quốc. ]",
+            "id": "Kus3_KAbzXGgRxjQFYb3Y"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Họ được xác nhận có mức độ ổn định tâm lý hoàn chỉnh, tuyệt đối trung thành với quốc gia và không tồn tại nguy cơ mất kiểm soát tương tự trường hợp của [b][color=#FF0000]A1[/color][/b]. ]",
+            "id": "dlTtsqXQGCG-4n__S2D01"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Mọi hoạt động của [b]Dự Án Long Mạch[/b] hiện vẫn nằm trong phạm vi kiểm soát tuyệt đối của chính phủ. ]",
+            "id": "FJcHYvqj8LdeFDxFXQQbu"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 1000,
+              "direction": "in"
+            },
+            "id": "nK2fgtnBZFD2ad5KuDsph"
+          },
+          {
+            "type": "narration",
+            "text": "Chương trình kết thúc. Không hề nhắc tới đoạn video về Đấu Trường bị rò rỉ.",
+            "id": "urmeK8rOMFwlbp6SIbvRH"
+          },
+          {
+            "type": "narration",
+            "text": "Nhưng vào thời điểm đó, toàn bộ Nam Long đều đã hiểu chính phủ đang muốn nhắm tới điều gì.",
+            "id": "lTJg_fy_Z0k4gXCeB0Iwq"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.6,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "_dgHnr4bOOU8PjnpF9pM1"
+          },
+          {
+            "type": "stage_reset",
+            "id": "o8PFjzQ0tPl2YxecafGgY"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "5CbVTnYaZs3BvxucfwLbF"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "dbUcrEIayZgWPavGj1uIC"
+          }
+        ]
       },
       {
         "id": "t2GLqpooBa_9n93V76HHE",
@@ -7750,6 +8295,11 @@
               "color": "#000000"
             },
             "id": "HekUS-MFPnsmQj7QtSpBN"
+          },
+          {
+            "type": "goto",
+            "target": "41M0-XnHHHAQLSgmyYJz2",
+            "id": "4Mhr7acTYhgsqC36yqFwf"
           }
         ],
         "meta": {
