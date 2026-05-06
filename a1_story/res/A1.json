@@ -21,7 +21,7 @@
         "height": 720
       },
       "orientation": "landscape",
-      "scaleMode": "fill",
+      "scaleMode": "letterbox",
       "rotationPolicy": "auto"
     },
     "playback": {
@@ -62,8 +62,9 @@
         "fontSize": 32,
         "fontStyle": "italic",
         "color": "#ffffff",
-        "bg": "rgba(0, 0, 0, 0.5)",
+        "bg": "rgba(0, 0, 0, 0.6)",
         "border": "rgba(0, 0, 0, 0)",
+        "radius": "2px",
         "fontFamily": "Noto Sans, sans-serif"
       },
       "showText": {
@@ -1432,6 +1433,90 @@
       "type": "image",
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7709.png",
       "name": "ChatGPT Image 18_26_29 5 thg 5, 2026",
+      "category": "other"
+    },
+    "R1e2lXgI6oSpLezQ-x5SG": {
+      "id": "R1e2lXgI6oSpLezQ-x5SG",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7711.png",
+      "name": "ChatGPT Image 09_28_29 6 thg 5, 2026",
+      "category": "other"
+    },
+    "QJ-3XZmb60LtdSBOf9hks": {
+      "id": "QJ-3XZmb60LtdSBOf9hks",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7712.png",
+      "name": "ChatGPT Image 09_28_29 6 thg 5, 2026",
+      "category": "other"
+    },
+    "ODOyknxlUbvGcFOk1YVE_": {
+      "id": "ODOyknxlUbvGcFOk1YVE_",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7713.png",
+      "name": "ChatGPT Image 09_54_41 6 thg 5, 2026",
+      "category": "other"
+    },
+    "SoJFsJL_kWe4_hniGOAxZ": {
+      "id": "SoJFsJL_kWe4_hniGOAxZ",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7714.png",
+      "name": "ChatGPT Image 09_54_46 6 thg 5, 2026",
+      "category": "other"
+    },
+    "B-80z4awpQfEZc-_LESoG": {
+      "id": "B-80z4awpQfEZc-_LESoG",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7715.png",
+      "name": "ChatGPT Image 10_11_55 6 thg 5, 2026",
+      "category": "other"
+    },
+    "zYcAywI54dDDYmozLYmDu": {
+      "id": "zYcAywI54dDDYmozLYmDu",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7716.png",
+      "name": "ChatGPT Image 10_04_41 6 thg 5, 2026",
+      "category": "other"
+    },
+    "EakdHctDYQCz2SGr9ahCv": {
+      "id": "EakdHctDYQCz2SGr9ahCv",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7717.png",
+      "name": "ChatGPT Image 10_12_41 6 thg 5, 2026",
+      "category": "other"
+    },
+    "gLis_XTL8v3q6Pj19enhJ": {
+      "id": "gLis_XTL8v3q6Pj19enhJ",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7718.png",
+      "name": "ChatGPT Image 10_24_50 6 thg 5, 2026",
+      "category": "other"
+    },
+    "eDYGpUiF-EZzzlVWnywyz": {
+      "id": "eDYGpUiF-EZzzlVWnywyz",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7719.png",
+      "name": "ChatGPT Image 10_23_46 6 thg 5, 2026",
+      "category": "other"
+    },
+    "Nx_GoozeDrhWFyJHfE7lH": {
+      "id": "Nx_GoozeDrhWFyJHfE7lH",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7720.png",
+      "name": "ChatGPT Image 10_51_00 6 thg 5, 2026",
+      "category": "other"
+    },
+    "0_unHof4frZGmEnUlYasy": {
+      "id": "0_unHof4frZGmEnUlYasy",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7721.png",
+      "name": "ChatGPT Image 11_21_54 6 thg 5, 2026",
+      "category": "other"
+    },
+    "98Pwg4ZZedUg6z12XI0gB": {
+      "id": "98Pwg4ZZedUg6z12XI0gB",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7722.png",
+      "name": "ChatGPT Image 10_37_35 6 thg 5, 2026",
       "category": "other"
     }
   },
@@ -2969,6 +3054,36 @@
           "visual": {
             "type": "image",
             "assetId": "TGxOHGyoGEFI17tcNabts"
+          }
+        }
+      ]
+    },
+    "gM-zG6EuZT_D-lVFeYPM_": {
+      "id": "gM-zG6EuZT_D-lVFeYPM_",
+      "name": "Giọng đọc",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "Uev0oAc1POIiO84NCJR_1",
+          "name": "default",
+          "visual": {
+            "type": "image",
+            "assetId": ""
+          }
+        }
+      ]
+    },
+    "J87k6yx7W5nfhtX7Ngcc3": {
+      "id": "J87k6yx7W5nfhtX7Ngcc3",
+      "name": "Đồng chí Thiên Long",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "UUJwnfP3-UfVGordQiN0_",
+          "name": "default",
+          "visual": {
+            "type": "image",
+            "assetId": "QJ-3XZmb60LtdSBOf9hks"
           }
         }
       ]
@@ -7263,6 +7378,353 @@
         }
       },
       {
+        "id": "6oufNYJULk38hsm1w-U6f",
+        "title": "C3 A8 Mật danh Long Ảnh",
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "1BgF35iUWYdGNaqdAiJuG"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "8mMZx7y4wpko4kMEkZNon"
+          },
+          {
+            "type": "narration",
+            "text": "Giọng dẫn chuyển sang một tông trang trọng hơn.",
+            "id": "QVTnfr1cJHdKhmENGK3cj"
+          },
+          {
+            "type": "character_show",
+            "characterId": "J87k6yx7W5nfhtX7Ngcc3",
+            "position": "center",
+            "expressionId": "UUJwnfP3-UfVGordQiN0_",
+            "duration": 300,
+            "flipX": false,
+            "id": "13ebvo7Yu_qOkgA_YXD7z"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Nguồn gốc của hệ thống này bắt đầu từ nhiều năm trước, trong giai đoạn Nam Long Quốc còn chìm trong chiến tranh và hỗn loạn. ]",
+            "id": "fgp1l6tL272XUPK7A0nYc"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Một trong những nhân vật quan trọng nhất của thời kỳ đó là đồng chí [b][color=#008000]Thiên Long[/color][/b]. ]",
+            "id": "tshFwNqBB6R791gEOnBS7"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "J87k6yx7W5nfhtX7Ngcc3",
+            "duration": 300,
+            "id": "as-dzvbf68fJIAhWssZxf"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "ODOyknxlUbvGcFOk1YVE_"
+            },
+            "id": "5Zd0AVCbDuyRrR8oWSCY7"
+          },
+          {
+            "type": "narration",
+            "text": "Màn hình chuyển sang những thước phim tư liệu cũ, nhiễu hạt và rung nhẹ theo thời gian.",
+            "id": "0sDVa6tq_WV3JgCEjV23C"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Ông từng tham gia lực lượng kháng chiến chống lại cuộc xâm lược của Tây Tân Quốc tại bán đảo Nam Long. ]",
+            "id": "xQjgCTQbX4ZjVPApuT8i5"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Về sau, ông trở thành chiến sĩ tình báo đặc biệt, từng hoạt động sâu bên trong vùng kiểm soát của Tây Tân Quốc. ]",
+            "id": "ADSg5mdCPGWnMBxWxFLmL"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "SoJFsJL_kWe4_hniGOAxZ"
+            },
+            "id": "UVSs_g6AAr4s_nApnL2wj"
+          },
+          {
+            "type": "narration",
+            "text": "Hình ảnh trắng đen hiện lên. Một người đàn ông với vết sẹo dài trên mặt, mặc quân phục tối màu bước xuống khỏi xe quân sự giữa hàng ngũ sĩ quan Tây Tân.",
+            "id": "3RZT1TtJek5bK823QztRm"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Trong suốt nhiều năm, ông đã sử dụng nhiều danh tính khác nhau để thâm nhập vào bộ máy chính quyền do Tây Tân dựng lên tại Nam Long. ]",
+            "id": "A0YBKNmQBJwLBhQEqYZBH"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "zYcAywI54dDDYmozLYmDu"
+            },
+            "id": "A32ZCuQ7vOy64W22ESgN2"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Từ một nhân viên hành chính cấp thấp… cho tới vị trí Cố vấn An ninh Tối cao của chính quyền đó. ]",
+            "id": "8pcSXIIn_YQNi_La_KMT0"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Những thông tin chiến lược mà ông chuyển về đã góp phần làm thay đổi cục diện chiến tranh. ]",
+            "id": "jF5lDtvEw-gni_DfBx6tQ"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "B-80z4awpQfEZc-_LESoG"
+            },
+            "id": "PoxsVF0L8UQs9c0JaBcVH"
+          },
+          {
+            "type": "narration",
+            "text": "Hình ảnh chuyển nhanh qua các hồ sơ mật, ảnh đen trắng và những dòng tài liệu bị đóng dấu tuyệt mật.",
+            "id": "ONhXDSu9FZXM98nAkoQjQ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Trong nhiều tài liệu mật thời chiến, ông được biết đến với mật danh: [b][color=#008000]Long Ảnh[/color][/b]. ]",
+            "id": "L5hiDmVae7frvUh_FGggm"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "SoJFsJL_kWe4_hniGOAxZ"
+            },
+            "id": "bM5smd14e6qwdl59g6qyV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Khi mức độ ảnh hưởng của [b][color=#008000]Thiên Long[/color][/b] trong bộ máy chính quyền do Tây Tân dựng lên ngày càng lớn… các cơ quan tình báo của Tây Tân bắt đầu xem ông như một mối đe dọa cần phải loại bỏ. ]",
+            "id": "_XLPRsGvdAQz6-RVdia9S"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "EakdHctDYQCz2SGr9ahCv"
+            },
+            "id": "15F6U3RVfeaFjkWE5C4XV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Một chiến dịch thanh trừng nội bộ được triển khai bí mật. ]",
+            "id": "191CbVdvi50MlqzzfAmte"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Đoàn xe chở [b][color=#008000]Thiên Long[/color][/b] bị phục kích trên đường di chuyển giữa khu trung tâm hành chính. ]",
+            "id": "bXG4lq7VeTyIF5FAlSI64"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Toàn bộ lực lượng hộ tống bị tiêu diệt. ]",
+            "id": "lHfduFxZo5oeulkuzkY6E"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Trên báo chí, [b][color=#008000]Thiên Long[/color][/b] được xác nhận đã tử vong ngay tại hiện trường. ]",
+            "id": "BnoZAK_RwPB4dMdbezlbS"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "gLis_XTL8v3q6Pj19enhJ"
+            },
+            "id": "FQPlF_XuHm9fqqZL1M5vH"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Hai tháng sau… một nhân vật hoàn toàn khác xuất hiện bên trong bộ máy an ninh của chính quyền Tây Tân. ]",
+            "id": "xtASEGasW32evn3ixfrxU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Không ai biết bằng cách nào ông còn sống. ]",
+            "id": "zylhEMWTOrEDoOUyzxTtJ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Nhưng mạng lưới tình báo của Nam Long đã hoạt động trở lại chỉ vài tuần sau đó. ]",
+            "id": "leMpuL41kW3gLq3dVEvcD"
+          },
+          {
+            "type": "narration",
+            "text": "Một khoảng lặng ngắn.",
+            "id": "-Xw8Y01C69Nx_LKmBizkG"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "eDYGpUiF-EZzzlVWnywyz"
+            },
+            "id": "LTkQ5QOVGrPChIK45BU12"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Trong quá trình truy lùng mạng lưới kháng chiến, ông từng bị Tây Tân bắt giữ và tra tấn suốt nhiều ngày. ]",
+            "id": "HIbNDy5RZDLJ6wYq_nbwk"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Nhưng cuối cùng vẫn tự mình trốn thoát khỏi khu giam giữ quân sự của Tây Tân Quốc… ]",
+            "id": "SlOq1iRZd1D58QOxDXHUD"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "98Pwg4ZZedUg6z12XI0gB"
+            },
+            "id": "2uWV4GlIcAzQTl66Dg4Dr"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Ngay sau đó, ông quay trở lại chiến khu và tiếp tục lãnh đạo mạng lưới kháng chiến. ]",
+            "id": "SsxutzSGC3xBiCpeirlQS"
+          },
+          {
+            "type": "narration",
+            "text": "Nhịp đọc vẫn không thay đổi.\nNhư thể tất cả chỉ là dữ kiện lịch sử.",
+            "id": "vQ8BqPGFvBk6-zHnaWRqY"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "Nx_GoozeDrhWFyJHfE7lH"
+            },
+            "id": "ufy68dihdG59x8mS7NzJX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Sau chiến tranh, đồng chí [b][color=#008000]Thiên Long[/color][/b] được phong quân hàm Đại tướng và trao tặng danh hiệu Anh hùng Giải phóng Dân tộc. ]",
+            "id": "vowH1LPG4QHr55tDaH7Rs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Ông trở thành cá nhân trẻ nhất trong lịch sử được chính phủ trao tặng danh hiệu tối cao này. ]",
+            "id": "d41NXT_6ctITx3uNHOMfg"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "0_unHof4frZGmEnUlYasy"
+            },
+            "id": "soITG2fsUc0j6aOhuFzID"
+          },
+          {
+            "type": "narration",
+            "text": "Màn hình bắt đầu hiển thị các mô hình ADN, cấu trúc thần kinh và dữ liệu sinh học.",
+            "id": "I3oc5ZYyJ4UARkphmaf5X"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Trong quá trình đánh giá y sinh hậu chiến, các cơ quan nghiên cứu phát hiện cơ thể ông sở hữu một cấu trúc di truyền đột biến chưa từng được ghi nhận trong lịch sử y học hiện đại. ]",
+            "id": "Yuxk7EjxpzPLziyEg1LDV"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Tốc độ phản xạ thần kinh, khả năng phục hồi tổn thương, hiệu suất xử lý nhận thức và mức độ thích nghi sinh học của ông đều vượt xa ngưỡng thông thường của con người. ]",
+            "id": "zjVyHC8gSE_IeUChRKN5h"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Một hiện tượng đặc biệt cũng được ghi nhận trong quá trình theo dõi dài hạn. ]",
+            "id": "BdF2tLWLI1wJSFcqjv9cS"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Dù đã vượt xa độ tuổi trưởng thành sinh học của con người, các mô cơ, mật độ xương và chiều dài hệ khung của ông vẫn tiếp tục phát triển theo thời gian. ]",
+            "id": "VJkxwZJzf023WrGfLiADn"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Hệ thống nội tiết và cơ chế tái tạo tế bào của cơ thể ông dường như duy trì trạng thái tăng trưởng kéo dài bất thường, trái ngược hoàn toàn với quy luật lão hóa đã được biết đến. ]",
+            "id": "3t4hw8_bFf-vwXjk7QYHc"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Các mô hình phân tích cho thấy cấu trúc cơ thể này có tiềm năng tiến hóa vượt ngoài mọi chuẩn đánh giá sinh học hiện hành. ]",
+            "id": "TpvNFaZPqzKDEansWtAe7"
+          },
+          {
+            "type": "stage_reset",
+            "id": "OdRHrzlB8BYIQNmWCZ9Jh"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "lf5GwI52uujlb2zJ6Iss6"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "F4DSyDsg84FGS7X6DUePZ"
+          }
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 9300
+          }
+        }
+      },
+      {
         "id": "Lj45OqJETlg2B80uQ2nJb",
         "title": "C3 A7 Các Clone bước ra ánh sáng",
         "nodes": [
@@ -7315,7 +7777,7 @@
           },
           {
             "type": "dialogue",
-            "characterId": "",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
             "text": "[ Trong nhiều năm qua, sự phát triển vượt bậc của Nam Long Quốc không phải là kết quả của một cá nhân, mà là của một hệ thống được xây dựng trên nền tảng khoa học, kỷ luật và tầm nhìn dài hạn. ]",
             "id": "PVNSlAK3tDD3_Pe_hO38F"
           },
@@ -7341,7 +7803,7 @@
           },
           {
             "type": "dialogue",
-            "characterId": "",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
             "text": "[ [b][color=#FFA500]A2[/color][/b], cố vấn chính trị tối cao của Thủ tướng Nam Long, trực tiếp tham gia hoạch định các quyết sách chiến lược cấp quốc gia. ]",
             "id": "udW-HK1H4NlTpHFDHTPrs"
           },
@@ -7367,7 +7829,7 @@
           },
           {
             "type": "dialogue",
-            "characterId": "",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
             "text": "[ [b][color=#FFA500]A3[/color][/b], phụ trách phát triển năng lực quân sự, cải tiến hệ thống vũ khí và chỉ huy các chiến dịch tác chiến trọng yếu của quốc gia. ]",
             "id": "kfP8zcwG9c6jSJ10cKFWE"
           },
@@ -7393,7 +7855,7 @@
           },
           {
             "type": "dialogue",
-            "characterId": "",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
             "text": "[ [b][color=#FFA500]A4[/color][/b], kiến trúc sư của các chính sách kinh tế, người đứng sau những bước tăng trưởng ổn định của Nam Long. ]",
             "id": "MhbgJ3IRm0Iui7u1rKf4d"
           },
@@ -7419,7 +7881,7 @@
           },
           {
             "type": "dialogue",
-            "characterId": "",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
             "text": "[ [b][color=#FFA500]A5[/color][/b], người đứng đầu các chương trình nghiên cứu khoa học trọng điểm, trực tiếp định hướng sự phát triển cốt lõi của nền khoa học quốc gia. ]",
             "id": "OVOM_FQEROXBfVxFk9MVU"
           },
@@ -7445,7 +7907,7 @@
           },
           {
             "type": "dialogue",
-            "characterId": "",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
             "text": "[ [b][color=#FFA500]A6[/color][/b], phụ trách phát triển các nền tảng công nghệ lõi và hệ thống tự động hóa, trực tiếp vận hành hạ tầng công nghệ của quốc gia. ]",
             "id": "ZHrKMHhumcgx2ZFjPvdHU"
           },
@@ -7471,7 +7933,7 @@
           },
           {
             "type": "dialogue",
-            "characterId": "",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
             "text": "[ [b][color=#FFA500]A7[/color][/b], người phát triển các liệu pháp y học tiên tiến, bao gồm các loại huyết thanh đã được ứng dụng rộng rãi và trở thành nền tảng của hệ thống chăm sóc sức khỏe quốc gia. ]",
             "id": "KOmc5PcqPHm1VqQyW2zQ6"
           },
@@ -7490,7 +7952,7 @@
           },
           {
             "type": "dialogue",
-            "characterId": "",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
             "text": "[ Họ không xuất hiện trước công chúng. Họ không nhận danh hiệu. Nhưng mọi bước tiến của quốc gia… đều mang dấu ấn của họ. ]",
             "id": "2bDvSXupC9iVnuSvFjvHt"
           },
@@ -7522,6 +7984,11 @@
               "color": "#000000"
             },
             "id": "0Q_LgN7U3AX5g4g4PejTO"
+          },
+          {
+            "type": "goto",
+            "target": "6oufNYJULk38hsm1w-U6f",
+            "id": "t2-j3tB7KpvxDirfOzRGs"
           }
         ],
         "meta": {
