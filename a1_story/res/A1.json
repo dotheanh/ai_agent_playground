@@ -1630,6 +1630,20 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7748.png",
       "name": "ChatGPT Image 22_12_44 6 thg 5, 2026",
       "category": "other"
+    },
+    "42vKWy33A0MgMGsDpOL_P": {
+      "id": "42vKWy33A0MgMGsDpOL_P",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7767.png",
+      "name": "ChatGPT Image 23_48_32 6 thg 5, 2026",
+      "category": "other"
+    },
+    "5FFuvrszo1TY9EFrIOZ2O": {
+      "id": "5FFuvrszo1TY9EFrIOZ2O",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7768.png",
+      "name": "ChatGPT Image 23_44_12 6 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -7456,12 +7470,6 @@
       {
         "id": "41M0-XnHHHAQLSgmyYJz2",
         "title": "C3 A11 Thuốc ức chế",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 9900
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -7832,7 +7840,7 @@
             "type": "background_change",
             "visual": {
               "type": "image",
-              "assetId": "0zR8flf5W0XJDSqEFNJ-D"
+              "assetId": "42vKWy33A0MgMGsDpOL_P"
             },
             "id": "HEZPW9ndLtF-gLQSi5Fyx"
           },
@@ -7890,6 +7898,31 @@
             "effect": {
               "type": "tint",
               "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "out"
+            },
+            "id": "npOhYdbd4KV6C3n8dOhTh"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "5FFuvrszo1TY9EFrIOZ2O"
+            },
+            "id": "ocZ8vl7Z5D2PGRzz-7DuV"
+          },
+          {
+            "type": "wait",
+            "duration": 4000,
+            "fixed": false,
+            "id": "rIa3ofOhqRIzzi2qwK1FC"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
               "opacity": 0.6,
               "duration": 500,
               "direction": "in"
@@ -7919,17 +7952,17 @@
             },
             "id": "dbUcrEIayZgWPavGj1uIC"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 9900
+          }
+        }
       },
       {
         "id": "t2GLqpooBa_9n93V76HHE",
         "title": "C3 A7 Sự hỗn loạn",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 9100
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -7972,10 +8005,10 @@
             "type": "character_show",
             "characterId": "A3xlgscg_5MPcRVhdvKMm",
             "position": "center",
+            "expressionId": "yBoBvlIdib3HSmqP85wBG",
             "duration": 300,
             "flipX": false,
-            "id": "MmTWDkH6fqXkOiBQQbqUw",
-            "expressionId": "yBoBvlIdib3HSmqP85wBG"
+            "id": "MmTWDkH6fqXkOiBQQbqUw"
           },
           {
             "type": "dialogue",
@@ -8059,7 +8092,13 @@
             "target": "Lj45OqJETlg2B80uQ2nJb",
             "id": "qT3Z6fdBW2_18iOez9Eqk"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 9100
+          }
+        }
       },
       {
         "id": "ZK7udKscNMoGdjM-HT93H",
