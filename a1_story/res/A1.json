@@ -1546,6 +1546,13 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7732.png",
       "name": "ChatGPT Image 15_49_49 6 thg 5, 2026",
       "category": "other"
+    },
+    "Ibk0LjaFNztEkbJfbx3MP": {
+      "id": "Ibk0LjaFNztEkbJfbx3MP",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7737.png",
+      "name": "ChatGPT Image 20_18_23 6 thg 5, 2026 (1)",
+      "category": "other"
     }
   },
   "characters": {
@@ -7370,14 +7377,148 @@
         }
       },
       {
-        "id": "ZK7udKscNMoGdjM-HT93H",
-        "title": "C3 A9 Dự án Long Mạch",
+        "id": "t2GLqpooBa_9n93V76HHE",
+        "title": "C3 A7 Sự hỗn loạn",
         "meta": {
           "mapPosition": {
             "x": 800,
-            "y": 9500
+            "y": 9100
           }
         },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "8nQ_Dgi_oDPUIsUpu2TA0"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "Ibk0LjaFNztEkbJfbx3MP"
+            },
+            "id": "ezdKlVV_DPzZP22UxblL0"
+          },
+          {
+            "type": "narration",
+            "text": "Sau khi đoạn video về Đấu Trường bị phát tán, toàn bộ mạng lưới truyền thông của Nam Long rơi vào trạng thái hỗn loạn chưa từng có.",
+            "id": "zQNjOKKhu668qGeEHxgjt"
+          },
+          {
+            "type": "narration",
+            "text": "Chính phủ lập tức ra lệnh phong tỏa, truy vết và xử phạt những tài khoản chia sẻ nội dung bạo lực, vi phạm tiêu chuẩn cộng đồng. Nhưng lần đầu tiên sau nhiều năm, hệ thống kiểm soát thông tin của Nam Long Quốc gần như mất tác dụng.",
+            "id": "3ruV4ZlDqG5LZ5MWTZGNc"
+          },
+          {
+            "type": "narration",
+            "text": "Video lan truyền với tốc độ vượt ngoài khả năng ngăn chặn. Từng đoạn cắt, từng hình ảnh máu me, tiếng la hét và cảnh các chiến binh bị ép giết lẫn nhau xuất hiện khắp nơi.",
+            "id": "zXzYJHbjVSIEqcQRbSYzI"
+          },
+          {
+            "type": "narration",
+            "text": "Đó không còn là tin đồn. Đó là một cú sốc làm rúng động cả quốc gia.",
+            "id": "7cvv26Fx-fVPNVHlXabJF"
+          },
+          {
+            "type": "narration",
+            "text": "Ban đầu, nhiều người cho rằng đoạn video chỉ là sản phẩm AI hoặc tuyên truyền giả mạo từ nước ngoài.",
+            "id": "dZtXGeuESimfVX-He9G7F"
+          },
+          {
+            "type": "character_show",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "MmTWDkH6fqXkOiBQQbqUw",
+            "expressionId": "yBoBvlIdib3HSmqP85wBG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Cho đến khi hình ảnh Thủ Tướng Nam Long xuất hiện trong đoạn ghi hình.",
+            "id": "b3oWv48OV1wliRLTr8-v0"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Chỉ vài giây ngắn ngủi ấy đã khiến toàn bộ dư luận bùng nổ.",
+            "id": "uHAus3PpB3ae6Nq6hzB9c"
+          },
+          {
+            "type": "character_hide",
+            "characterId": "A3xlgscg_5MPcRVhdvKMm",
+            "duration": 300,
+            "id": "6BYqdyNW6NH2IzNT6oIsI"
+          },
+          {
+            "type": "narration",
+            "text": "Người dân bắt đầu đặt dấu hỏi về tính chính nghĩa của chính quyền. Một số cho rằng đấu trường là bằng chứng cho thấy Nam Long đã đi quá xa trong tham vọng quân sự và kiểm soát con người.",
+            "id": "Npw162hEItDcaG6S4NzV5"
+          },
+          {
+            "type": "narration",
+            "text": "Những người khác lại tin đó là cái giá cần thiết để quốc gia tồn tại giữa thời đại chiến tranh và hỗn loạn.",
+            "id": "UdTjZD5_q_n_5MibQyoC5"
+          },
+          {
+            "type": "narration",
+            "text": "Có người gọi đó là tội ác vô nhân đạo. Có người gọi những chiến binh trong đấu trường là quái vật do chính phủ tạo ra. Nhưng cũng có người tin họ chỉ là những nạn nhân bị biến thành công cụ chiến tranh từ khi còn nhỏ.",
+            "id": "kC_qzEdvOi6BMM-D1-ZQH"
+          },
+          {
+            "type": "narration",
+            "text": "Nhiều cựu binh và người lớn tuổi bắt đầu nhắc lại những tin đồn cũ về các chương trình nghiên cứu bí mật sau chiến tranh. Những cái tên đã bị chôn vùi suốt hàng chục năm đột nhiên xuất hiện trở lại trên truyền thông.",
+            "id": "bUFG9O2UOv2qcn9uXFUuo"
+          },
+          {
+            "type": "narration",
+            "text": "Trong khi đó, tầng lớp ủng hộ chính quyền cho rằng đoạn video đang bị bóp méo khỏi bối cảnh thật sự. Họ tin Nam Long buộc phải tạo ra những con người như vậy để bảo vệ quốc gia trước các mối đe dọa bên ngoài.",
+            "id": "eIj9A8F752mUyEwFdI8J6"
+          },
+          {
+            "type": "narration",
+            "text": "Nhưng dù đứng về phía nào, toàn bộ đất nước đều đã bị cuốn vào cùng một câu hỏi:",
+            "id": "srTwTr_ScV7uVQxraRIzS"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Liệu đó có thật sự là cái giá cần thiết để ngăn chặn những cuộc chiến tranh toàn diện giữa các quốc gia… hay chỉ là một trò tiêu khiển bệnh hoạn của những kẻ đứng trên đỉnh quyền lực?",
+            "id": "FC41Nl8za-00nzWU3sI-m"
+          },
+          {
+            "type": "stage_reset",
+            "id": "Ft3w_zjs88eaSZFsPyzBO"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "kPxHcojmk0bmfFnzEMiC7"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "chDBAkE3bMboiDJHbSJ30"
+          },
+          {
+            "type": "goto",
+            "target": "Lj45OqJETlg2B80uQ2nJb",
+            "id": "qT3Z6fdBW2_18iOez9Eqk"
+          }
+        ]
+      },
+      {
+        "id": "ZK7udKscNMoGdjM-HT93H",
+        "title": "C3 A10 Dự án Long Mạch",
         "nodes": [
           {
             "type": "stage_reset",
@@ -7497,6 +7638,12 @@
             "id": "AJI9ZS36GOxu6w7qOA3BR"
           },
           {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ [b]Dự Án Long Mạch[/b] chính là niềm hi vọng để kiến thiết lại Nam Long sau chiến tranh… và xây dựng một nền móng đủ vững chắc để đưa quốc gia tiến tới một tương lai thịnh vượng và bền vững. ]",
+            "id": "ImtRnr88eAsd47Q1XxQiE"
+          },
+          {
             "type": "background_change",
             "visual": {
               "type": "image",
@@ -7578,14 +7725,8 @@
           {
             "type": "show_text",
             "text": "[ [b]Dự Án Long Mạch[/b] ]",
-            "id": "-EFI5u-zqo5Ze2F1ZOwx_",
-            "position": "center"
-          },
-          {
-            "type": "wait",
-            "duration": 2000,
-            "fixed": true,
-            "id": "N3knzqbUwXRr9LvwxdhIr"
+            "position": "center",
+            "id": "-EFI5u-zqo5Ze2F1ZOwx_"
           },
           {
             "type": "stage_reset",
@@ -7610,11 +7751,17 @@
             },
             "id": "HekUS-MFPnsmQj7QtSpBN"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 9700
+          }
+        }
       },
       {
         "id": "6oufNYJULk38hsm1w-U6f",
-        "title": "C3 A8 Mật danh Long Ảnh",
+        "title": "C3 A9 Mật danh Long Ảnh",
         "nodes": [
           {
             "type": "stage_reset",
@@ -7960,13 +8107,13 @@
         "meta": {
           "mapPosition": {
             "x": 800,
-            "y": 9300
+            "y": 9500
           }
         }
       },
       {
         "id": "Lj45OqJETlg2B80uQ2nJb",
-        "title": "C3 A7 Các Clone bước ra ánh sáng",
+        "title": "C3 A8 Các Clone bước ra ánh sáng",
         "nodes": [
           {
             "type": "stage_reset",
@@ -8234,7 +8381,7 @@
         "meta": {
           "mapPosition": {
             "x": 800,
-            "y": 9100
+            "y": 9300
           }
         }
       },
@@ -8673,7 +8820,7 @@
           },
           {
             "type": "goto",
-            "target": "Lj45OqJETlg2B80uQ2nJb",
+            "target": "t2GLqpooBa_9n93V76HHE",
             "id": "jKTjhd3nHzdWPLvo5v-XY"
           }
         ],
@@ -9710,7 +9857,7 @@
           },
           {
             "type": "goto",
-            "target": "Lj45OqJETlg2B80uQ2nJb",
+            "target": "t2GLqpooBa_9n93V76HHE",
             "id": "-m-o-_CSCkoTcvE5D0cKv"
           }
         ],
