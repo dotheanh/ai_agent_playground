@@ -1644,6 +1644,62 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_6/7768.png",
       "name": "ChatGPT Image 23_44_12 6 thg 5, 2026",
       "category": "other"
+    },
+    "NyLIqsWnl8YBwVk99iWpP": {
+      "id": "NyLIqsWnl8YBwVk99iWpP",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7793.mp3",
+      "name": "Masquerade Suite - Waltz",
+      "category": "other"
+    },
+    "-LMJFbbqsQPw1anqNIkbM": {
+      "id": "-LMJFbbqsQPw1anqNIkbM",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7794.png",
+      "name": "ChatGPT Image 09_37_28 7 thg 5, 2026",
+      "category": "other"
+    },
+    "r56-lLottoo-Rrts8yFq-": {
+      "id": "r56-lLottoo-Rrts8yFq-",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_27/7027.png",
+      "name": "ChatGPT Image 00_04_22 27 thg 4, 2026",
+      "category": "other"
+    },
+    "GSI6hg1b_iS-QZ_Zi2Le2": {
+      "id": "GSI6hg1b_iS-QZ_Zi2Le2",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_27/7026.png",
+      "name": "ChatGPT Image 00_04_22 27 thg 4, 2026",
+      "category": "other"
+    },
+    "K-Wc_EyBWv6X-TQNQvaSH": {
+      "id": "K-Wc_EyBWv6X-TQNQvaSH",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_27/7044.png",
+      "name": "ChatGPT Image 02_52_00 27 thg 4, 2026",
+      "category": "other"
+    },
+    "eY4bY50ioW3sZeuMFZvpk": {
+      "id": "eY4bY50ioW3sZeuMFZvpk",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_4_27/7048.png",
+      "name": "ChatGPT Image 03_29_56 27 thg 4, 2026",
+      "category": "other"
+    },
+    "MCBOE1EudZ1H10dGsUrE5": {
+      "id": "MCBOE1EudZ1H10dGsUrE5",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7829.png",
+      "name": "ChatGPT Image 11_45_35 7 thg 5, 2026",
+      "category": "other"
+    },
+    "ul-bziVdwi_fmcj4bVcrB": {
+      "id": "ul-bziVdwi_fmcj4bVcrB",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7830.png",
+      "name": "ChatGPT Image 12_09_14 7 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -2424,6 +2480,15 @@
             "type": "image",
             "assetId": "F_m40Z6pa19dfLewP1WpO",
             "scale": 1
+          }
+        },
+        {
+          "id": "tT2yXcZiStGQR4G5ZHGR0",
+          "name": "tired",
+          "visual": {
+            "type": "image",
+            "assetId": "MCBOE1EudZ1H10dGsUrE5",
+            "scale": 0.8
           }
         }
       ]
@@ -3210,6 +3275,21 @@
           "visual": {
             "type": "image",
             "assetId": "QJ-3XZmb60LtdSBOf9hks"
+          }
+        }
+      ]
+    },
+    "v5szpkQgKql26cjlp8_wN": {
+      "id": "v5szpkQgKql26cjlp8_wN",
+      "name": "Tiếng bàn tán",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "-7U11gKiwNOEXYGsHItQg",
+          "name": "default",
+          "visual": {
+            "type": "image",
+            "assetId": ""
           }
         }
       ]
@@ -6163,6 +6243,68 @@
         }
       },
       {
+        "id": "PmbFJV7AkzMx-A86cOKvL",
+        "title": "CHAP 4: Đô Quốc",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 10100
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "4G7J8Lboa2I7gTif2y7p1"
+          },
+          {
+            "type": "play_bgm",
+            "assetId": "NyLIqsWnl8YBwVk99iWpP",
+            "loop": true,
+            "volume": 0.5,
+            "id": "Rtd3W7Fn_d5hqq30x3jke",
+            "fadeIn": 1000
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "apng9UI9EdUijoFgVAd13"
+            },
+            "id": "_vxXBlQoWfTjoqYKDQcFo"
+          },
+          {
+            "type": "show_text",
+            "text": "CHAP 4: Đô Quốc",
+            "position": "center",
+            "id": "xFIRjzFjbffsFLdPktCpa"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "ZwpLyMaGd05HLDyXeIbZY"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "-AZCrJIuJHPv1d4FnEisK"
+          },
+          {
+            "type": "goto",
+            "target": "x5YjT3Ceg4VGdY7r3Xskd",
+            "id": "QkN8RuxmLLPydH9BCEoPJ"
+          }
+        ]
+      },
+      {
         "id": "juvy6zRP5P7apjnRLeiKx",
         "title": "C1 A1 Văn phòng 2morepixels",
         "nodes": [
@@ -7463,9 +7605,382 @@
         "meta": {
           "mapPosition": {
             "x": 1200,
-            "y": 9800
+            "y": 10100
           }
         }
+      },
+      {
+        "id": "x5YjT3Ceg4VGdY7r3Xskd",
+        "title": "C4 A1 Những lời bàn tán",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 10300
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "tW_F7BK_5E1NexsG710IX"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "-LMJFbbqsQPw1anqNIkbM"
+            },
+            "id": "zDRhUuPBZt-C34RTOnrwS"
+          },
+          {
+            "type": "narration",
+            "text": "Sau khi chương trình đặc biệt của chính phủ Nam Long được phát sóng, gần như mọi nền tảng truyền thông đều ngập trong những cuộc tranh luận.",
+            "id": "1RNEO4fdjCfeGKaO7sq8s"
+          },
+          {
+            "type": "narration",
+            "text": "Sáng hôm đó, {{nam9}} vẫn lái xe đi làm như bình thường. Nhưng khác với mọi ngày, ánh mắt của những người xung quanh thi thoảng lại dừng trên người anh lâu hơn một chút.",
+            "id": "MM2BrHjrNOZWxPDojlC_B"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "v5szpkQgKql26cjlp8_wN",
+            "text": "Ê… ông kia nhìn giống mấy người trong chương trình hôm qua quá ha?",
+            "id": "clGT0KqWq7sp9DsKNvqDd"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "v5szpkQgKql26cjlp8_wN",
+            "text": "Hình như là cái cậu đánh ba tên giang hồ hồi trước đó. Tôi nhớ có clip đăng trên mạng rồi bị xóa luôn mà.",
+            "id": "lj3VvPbblATLqBvahK4qM"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "v5szpkQgKql26cjlp8_wN",
+            "text": "Nếu thật sự là [b][color=#FF0000]A1[/color][/b] thì ghê thật… nhìn ngoài đời nhỏ con vậy mà mạnh dữ.",
+            "id": "7g-MIX5yWZrfIs5_ZiiFz"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "v5szpkQgKql26cjlp8_wN",
+            "text": "Chắc do thuốc ức chế đó. Chứ nhìn mấy người trên TV ai cũng cao lớn hơn hẳn.",
+            "id": "byRqI5Fy4_QVcQXX3nZQp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "v5szpkQgKql26cjlp8_wN",
+            "text": "Hôm trước tôi có xem giải bóng chuyền ở công ty 2MorePixels nè. Cậu này đập bóng mạnh kinh khủng, có pha đập thẳng vô mặt hàng chắn bên kia luôn, người ta nằm sân mấy phút mới dậy nổi.",
+            "id": "ke4zkXhxtUJA9jJfe2i-o"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "v5szpkQgKql26cjlp8_wN",
+            "text": "Mạnh kiểu đó mà chơi chung với người bình thường thì cũng hơi quá thật…",
+            "id": "IxN5mkJkXy7pqDUXZsRa2"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} không phản ứng. Anh chỉ lặng lẽ đeo khẩu trang vào rồi tiếp tục chạy xe giữa dòng người đông đúc.",
+            "id": "qgqowSoWEm2w6bBSr4a9n"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "r56-lLottoo-Rrts8yFq-"
+            },
+            "id": "ZUk0ufy2yHVnIDglkuc_I"
+          },
+          {
+            "type": "narration",
+            "text": "Khi đến công ty, bầu không khí bên trong cũng không khác là bao.",
+            "id": "Gl7Z-3sOC0TTaSUEHEXJo"
+          },
+          {
+            "type": "narration",
+            "text": "Ở khu pantry, các nhân viên tụ tập bàn tán sôi nổi về chương trình phát sóng tối hôm trước.",
+            "id": "TE9lDEEMt4NCVPCwFKREo"
+          },
+          {
+            "type": "character_show",
+            "characterId": "9hyb1aeE3kNqjOcLsfunJ",
+            "position": "far-left",
+            "duration": 300,
+            "flipX": false,
+            "id": "Vg-U_-6NIDBJbLmau2IwL",
+            "expressionId": "xNX3ySvT8Eh2z4zX1MaMP"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "9hyb1aeE3kNqjOcLsfunJ",
+            "text": "Hôm trước thấy video Đấu Trường còn tưởng là AI dựng. Giờ chính phủ lên hẳn chương trình như vậy coi như xác nhận ngầm luôn rồi.",
+            "id": "Zi3B0DL6mDq7Pu0IrIjiN"
+          },
+          {
+            "type": "character_show",
+            "characterId": "SVRylJ9m7761bRXdR0Xdk",
+            "position": "center-left",
+            "duration": 300,
+            "flipX": false,
+            "id": "Dooqqc3-re-Jf4RKQgk06",
+            "expressionId": "I179JWxJjJVtTySoHGMe8"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "SVRylJ9m7761bRXdR0Xdk",
+            "text": "Nhưng mà làm vậy có nhân đạo không? Kiểu… tạo ra con người rồi định hướng họ từ nhỏ ấy?",
+            "id": "5NYqI5s4xgwy9_eUl2x7R"
+          },
+          {
+            "type": "character_show",
+            "characterId": "yRI_1liAVIUGdmnXYv4I7",
+            "position": "far-right",
+            "duration": 300,
+            "flipX": false,
+            "id": "Sf6Xt2EeMDX5dZHbTiMcI",
+            "expressionId": "0bvd0VjdqJEcXZu-88HVa"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "yRI_1liAVIUGdmnXYv4I7",
+            "text": "Tôi cũng thấy hơi rợn. Không biết mấy người [b][color=#FFA500]A2[/color][/b] tới [b][color=#FFA500]A7[/color][/b] thật sự tự nguyện hay bị ép buộc nữa.",
+            "id": "-Pw2X_QYaWILM4YvKXN9u"
+          },
+          {
+            "type": "character_show",
+            "characterId": "C0YaEpvMqP1nyBmPyH-5E",
+            "position": "center-right",
+            "duration": 300,
+            "flipX": false,
+            "id": "K4NhaIazeX2KBmGpm8L-d",
+            "expressionId": "IgK_4zoy7EPvHulH44WWr"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "C0YaEpvMqP1nyBmPyH-5E",
+            "text": "Dù sao thì Dự Án Long Mạch cũng giúp Nam Long phát triển thật mà. Giờ nhìn công nghệ với y học của mình vượt hẳn mấy nước khác luôn.",
+            "id": "j81jaXnxOXjkhjO6DGha-"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "9hyb1aeE3kNqjOcLsfunJ",
+            "text": "Ông Thiên Long hồi đó cũng ghê thật. Thâm nhập tới tận bộ máy của Tây Tân rồi leo lên làm cố vấn an ninh cấp cao luôn. Sau chương trình hôm qua mới hiểu vì sao hồ sơ của ông ấy bị giữ kín suốt mấy chục năm.",
+            "id": "NJJsHuiXHnVDNTMeOBbgq"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "SVRylJ9m7761bRXdR0Xdk",
+            "text": "Nhưng nghĩ kỹ vẫn thấy hơi đáng sợ. Kiểu… đem chính con ruột mình vào Dự Án Long Mạch từ lúc mới sinh ấy. Dù mục đích là vì đất nước đi nữa thì chuyện đó vẫn quá tàn nhẫn.",
+            "id": "K9GhTqEzSiqtPad8D7iaG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "C0YaEpvMqP1nyBmPyH-5E",
+            "text": "Ông ấy là anh hùng chiến tranh của Nam Long mà. Sau chiến tranh, Dự Án Long Mạch có lẽ chính là niềm hi vọng lớn nhất để phục hưng đất nước trong mắt ông ấy.",
+            "id": "pj8GsAZkAIR9f0Yw8rOLs"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "yRI_1liAVIUGdmnXYv4I7",
+            "text": "Ừ, nhưng cũng vì vậy mới đáng sợ đó. Lỡ sau này xuất hiện thêm một [b][color=#FF0000]A1[/color][/b] nữa thì sao?",
+            "id": "_hX4tdhBaPQ_z8jcGODnE"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "SVRylJ9m7761bRXdR0Xdk",
+            "text": "Còn vụ tiêm thuốc ức chế [b][color=#FF0000]A1[/color][/b] nữa… nghe cứ như đang hợp pháp hóa việc kiểm soát một con người vậy.",
+            "id": "RXdEBj-JKs5vYieUNDrPW"
+          },
+          {
+            "type": "stage_reset",
+            "id": "dEChVqWcpQ-_S3-XZdUfC"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "K-Wc_EyBWv6X-TQNQvaSH"
+            },
+            "id": "amcQFN2-7PWp8QYXfN_X3"
+          },
+          {
+            "type": "narration",
+            "text": "Cuộc trò chuyện chợt chững lại khi một người quay sang nhìn {{nam9}} đang bước vào văn phòng.",
+            "id": "jXPM1QYjAVCuOHffW_Ffg"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "yRI_1liAVIUGdmnXYv4I7",
+            "text": "Mấy ông có để ý không… nếu không tính chiều cao thì mấy bản clone trên TV nhìn giống {{nam9}} thật đấy.",
+            "id": "iCN2up_QALy6aRcy_qs_3"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "SVRylJ9m7761bRXdR0Xdk",
+            "text": "Anh nói em mới để ý… công nhận giống dữ.",
+            "id": "WFDfObdBcEgIumD9PHSBT"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "C0YaEpvMqP1nyBmPyH-5E",
+            "text": "Người ta còn nói [b][color=#FF0000]A1[/color][/b] bị tiêm thuốc ức chế nên cơ thể mới teo nhỏ lại mà…",
+            "id": "ZUCRfWAygEluhrrXfgqct"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "9hyb1aeE3kNqjOcLsfunJ",
+            "text": "Khoan… giờ nghĩ lại mới thấy, từ đầu tới cuối chương trình chính phủ cũng đâu có nói rõ bây giờ [b][color=#FF0000]A1[/color][/b] đang ở đâu.",
+            "id": "-pl50Q6nucA047ScdmhlE"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "9hyb1aeE3kNqjOcLsfunJ",
+            "text": "…có lẽ nào…",
+            "id": "-XpUxM6ChjnCNGb74KR37"
+          },
+          {
+            "type": "narration",
+            "text": "Không ai nói hết câu. Nhưng những ánh mắt dò xét trong văn phòng vẫn vô thức dõi theo {{nam9}} suốt phần còn lại của buổi sáng.",
+            "id": "xphwaKZNhX7LSB_wP7fee"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "eY4bY50ioW3sZeuMFZvpk"
+            },
+            "id": "bsYTMoBPN5CawOA-iwZNB"
+          },
+          {
+            "type": "character_show",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "position": "center",
+            "duration": 300,
+            "flipX": false,
+            "id": "fVtvdoSVAfz0PqlvAeV5i",
+            "expressionId": "tT2yXcZiStGQR4G5ZHGR0"
+          },
+          {
+            "type": "narration",
+            "text": "Giờ nghỉ trưa, {{nu9}} vẫn đi ăn cùng nhóm đồng nghiệp nữ như mọi ngày.",
+            "id": "ren1nXfpUnhqJo-3Ix_JZ"
+          },
+          {
+            "type": "narration",
+            "text": "Vừa ngồi xuống bàn, một người đã nhìn cô đầy ngạc nhiên.",
+            "id": "2c0ie1eTYFhP9N4ISerSZ"
+          },
+          {
+            "type": "character_show",
+            "characterId": "nSHBTtIpCBAs2DxuTbSFw",
+            "position": "left",
+            "duration": 300,
+            "flipX": false,
+            "id": "z0OXykOge19fnO6-NDjoL",
+            "expressionId": "aCEGrNz3kcfauM5CaSR6T"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "nSHBTtIpCBAs2DxuTbSFw",
+            "text": "Trời… sao mới nghỉ phép có hai ngày mà mắt em thâm quầng dữ vậy?",
+            "id": "CckKQfgQVeETYiEGu84LH"
+          },
+          {
+            "type": "character_show",
+            "characterId": "_LsndQZ8MpxAeBdeDs3rv",
+            "position": "right",
+            "duration": 300,
+            "flipX": false,
+            "id": "gCdNs9rslfDL_AD2mEtRB",
+            "expressionId": "cnkncZ_SaGjh10JVqfwqP"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "_LsndQZ8MpxAeBdeDs3rv",
+            "text": "Em thiếu ngủ hả? Nhìn như thức trắng mấy đêm luôn ấy.",
+            "id": "sJfQXx5nDjj7b7hU9aucD"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} khẽ cười rồi cúi xuống mở hộp đũa.",
+            "id": "_1FuMiYpN7GjHZVSQcKt0"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Dạ… hai hôm nay em phải bay về Thủ Đô chăm bố bị ốm nên hơi mệt chút thôi ạ.",
+            "id": "34zGLwXZLECMmhMWtP6pX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "nSHBTtIpCBAs2DxuTbSFw",
+            "text": "Ủa vậy hả? Bố em bệnh nặng không?",
+            "id": "7kYbYYFmGxOnObjtDiPl2"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
+            "text": "Cũng không nghiêm trọng lắm. Chỉ là phải ở bệnh viện theo dõi mấy hôm thôi ạ.",
+            "id": "wHF0D9it-sFNPdBT3d0vp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "_LsndQZ8MpxAeBdeDs3rv",
+            "text": "Bảo sao nhìn em xuống sắc hẳn luôn. Mà công nhận em cũng giỏi thật, thức kiểu đó mà sáng nay vẫn đi làm bình thường được.",
+            "id": "Zg7fsbKOpyaSdrrGojvR2"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} chỉ cười nhẹ, không giải thích thêm.",
+            "id": "Csb2bw8PGijb8Fa7KdjfD"
+          },
+          {
+            "type": "stage_reset",
+            "id": "9rmR0BYnR-poT1QWjfVvU"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "ul-bziVdwi_fmcj4bVcrB"
+            },
+            "id": "jikvSJE8MYbkebo8CZAUA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Không ai biết rằng trong suốt hai ngày vừa qua, gần như toàn bộ thời gian của cô đều bị vùi trong những cuộc họp nội bộ, báo cáo phân tích dư luận và các phương án xử lý khủng hoảng liên quan đến [b][color=#FF0000]A1[/color][/b].",
+            "id": "rpW4QrvYzjL4d2tp7edX7"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Và cũng không ai nhận ra rằng, ngay khoảnh khắc cúi đầu xuống khay cơm, ánh mắt của cô đã vô thức nhìn về phía {{nam9}} ở cuối căn tin trong im lặng.",
+            "id": "FRaR4r6oAVGSxU5UXyZkC"
+          },
+          {
+            "type": "stage_reset",
+            "id": "JF3ah-nJsZp58zAVi5ebr"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "T17av34uH_U86MQoG9jUP"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "37419yw9LjTA8sKfeDrsf"
+          }
+        ]
       },
       {
         "id": "41M0-XnHHHAQLSgmyYJz2",
@@ -7867,6 +8382,14 @@
             "id": "dlTtsqXQGCG-4n__S2D01"
           },
           {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "5FFuvrszo1TY9EFrIOZ2O"
+            },
+            "id": "ocZ8vl7Z5D2PGRzz-7DuV"
+          },
+          {
             "type": "dialogue",
             "characterId": "gM-zG6EuZT_D-lVFeYPM_",
             "text": "[ Mọi hoạt động của [b]Dự Án Long Mạch[/b] hiện vẫn nằm trong phạm vi kiểm soát tuyệt đối của chính phủ. ]",
@@ -7894,29 +8417,15 @@
             "id": "lTJg_fy_Z0k4gXCeB0Iwq"
           },
           {
-            "type": "screen_effect",
-            "effect": {
-              "type": "tint",
-              "color": "#000000",
-              "opacity": 0.3,
-              "duration": 500,
-              "direction": "out"
-            },
-            "id": "npOhYdbd4KV6C3n8dOhTh"
-          },
-          {
-            "type": "background_change",
-            "visual": {
-              "type": "image",
-              "assetId": "5FFuvrszo1TY9EFrIOZ2O"
-            },
-            "id": "ocZ8vl7Z5D2PGRzz-7DuV"
-          },
-          {
             "type": "wait",
             "duration": 4000,
             "fixed": false,
             "id": "rIa3ofOhqRIzzi2qwK1FC"
+          },
+          {
+            "type": "stop_bgm",
+            "id": "8uxecpqdV5Ad3nCLeMCJW",
+            "fadeOut": 1000
           },
           {
             "type": "screen_effect",
@@ -7951,6 +8460,11 @@
               "color": "#000000"
             },
             "id": "dbUcrEIayZgWPavGj1uIC"
+          },
+          {
+            "type": "goto",
+            "target": "PmbFJV7AkzMx-A86cOKvL",
+            "id": "H_MWRTvTn_Qa1R8xPBlsE"
           }
         ],
         "meta": {
