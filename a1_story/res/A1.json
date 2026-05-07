@@ -1700,6 +1700,55 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7830.png",
       "name": "ChatGPT Image 12_09_14 7 thg 5, 2026",
       "category": "other"
+    },
+    "_G8NVbgjtFgrqALIoS8zU": {
+      "id": "_G8NVbgjtFgrqALIoS8zU",
+      "type": "audio",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7836.mp3",
+      "name": "PITCH-mocart-lacrimosa - No Copyright Classical Music",
+      "category": "other"
+    },
+    "n33bRcYr4ekgm6uZ2geu0": {
+      "id": "n33bRcYr4ekgm6uZ2geu0",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7837.png",
+      "name": "ChatGPT Image 13_57_34 7 thg 5, 2026",
+      "category": "other"
+    },
+    "IkU-Us3xjDn8E1rt1d7fn": {
+      "id": "IkU-Us3xjDn8E1rt1d7fn",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7838.png",
+      "name": "ChatGPT Image 13_57_34 7 thg 5, 2026",
+      "category": "other"
+    },
+    "s-IN2YTn1k_lxAkgtPWvP": {
+      "id": "s-IN2YTn1k_lxAkgtPWvP",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7840.png",
+      "name": "ChatGPT Image 16_30_53 7 thg 5, 2026",
+      "category": "other"
+    },
+    "SeutRy19RoLadWPM7Eicj": {
+      "id": "SeutRy19RoLadWPM7Eicj",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7841.png",
+      "name": "ChatGPT Image 16_22_56 7 thg 5, 2026",
+      "category": "other"
+    },
+    "JjFTw7h-1L3j8ntCXKcPr": {
+      "id": "JjFTw7h-1L3j8ntCXKcPr",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7842.png",
+      "name": "ChatGPT Image 15_49_41 7 thg 5, 2026",
+      "category": "other"
+    },
+    "WHC-yOrWEqyTYPDcqJT82": {
+      "id": "WHC-yOrWEqyTYPDcqJT82",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7843.png",
+      "name": "ChatGPT Image 17_04_35 7 thg 5, 2026 (1)",
+      "category": "other"
     }
   },
   "characters": {
@@ -3286,6 +3335,21 @@
       "expressions": [
         {
           "id": "-7U11gKiwNOEXYGsHItQg",
+          "name": "default",
+          "visual": {
+            "type": "image",
+            "assetId": ""
+          }
+        }
+      ]
+    },
+    "HIBQFiUzYKBt0TrAZhNxV": {
+      "id": "HIBQFiUzYKBt0TrAZhNxV",
+      "name": "Comment",
+      "scale": 1,
+      "expressions": [
+        {
+          "id": "pGtTtwZNVkYnGjxhFQRGp",
           "name": "default",
           "visual": {
             "type": "image",
@@ -7605,9 +7669,649 @@
         "meta": {
           "mapPosition": {
             "x": 1200,
-            "y": 10100
+            "y": 10500
           }
         }
+      },
+      {
+        "id": "wtmKn5vPmBSGTu_dJ_nIv",
+        "title": "C4 A3 Dự đoán của A1",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 10700
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "U79uH9mvvSJ2GHZN4a5Cy"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "s-IN2YTn1k_lxAkgtPWvP"
+            },
+            "id": "m7VmfjicRXdX7qtvewNFV"
+          },
+          {
+            "type": "narration",
+            "text": "Sáng hôm sau, đoạn cắt từ livestream của {{nam9}} xuất hiện khắp mạng xã hội.",
+            "id": "yp1DT3BygpfQgjiVI2XkX"
+          },
+          {
+            "type": "narration",
+            "text": "Ban đầu, phần lớn mọi người vẫn chỉ xem đó là trò gây chú ý của một kẻ hoang tưởng tự nhận mình là [b][color=#FF0000]A1[/color][/b].",
+            "id": "4ANGaJkgPQvOiUESkipmf"
+          },
+          {
+            "type": "narration",
+            "text": "Từ khoảng 6 giờ sáng, giá Bitcoin bắt đầu tăng nhẹ từ mốc 135,000 USD.",
+            "id": "1KME1dXTHZbz2CzYBgNGl"
+          },
+          {
+            "type": "narration",
+            "text": "Nhiều người cho rằng đó chỉ là biến động bình thường của thị trường.",
+            "id": "EGCdW9fWvcNhNOo2zjlrr"
+          },
+          {
+            "type": "narration",
+            "text": "Nhưng đến gần 9 giờ sáng, tốc độ tăng giá bắt đầu trở nên bất thường.",
+            "id": "a-x3C9jT9q1E8HrFGe-1d"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "8 giờ 55 phút: 138,900 USD.",
+            "id": "cJexRMPEChdpflt-11k5v"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "8 giờ 57 phút: 142,201 USD.",
+            "id": "7P4jXo1pX109pqOsZXmu9"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "8 giờ 59 phút: 146,610 USD.",
+            "id": "GcTiImRbVD6tOivkbBMJf"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Đúng 9 giờ sáng.",
+            "id": "mm6jJNCigodAc4EFfx4L5"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Bitcoin chạm chính xác mốc ATH 148,732 USD.",
+            "id": "_JuNS45MhLnUASpuxR4BZ"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Toàn bộ mạng xã hội lập tức bùng nổ.",
+            "id": "mpnOkNCkbsR5XAPgeGsTj"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Đm… Nó đoán đúng thật?",
+            "id": "SDc7HRgJvmVhtWjuc6vcy"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Khoan đã… chuyện quái gì vậy?",
+            "id": "7ldRBw1DlJE1G7qF1nnr-"
+          },
+          {
+            "type": "narration",
+            "text": "Nhưng điều khiến người ta bắt đầu cảm thấy rợn người không phải việc [b][color=#FF0000]A1[/color][/b] đoán đúng.",
+            "id": "Vi-w-BNplG7QQ55XNLcDQ"
+          },
+          {
+            "type": "narration",
+            "text": "Mà là việc Bitcoin không tăng vì bất kỳ tin tức tích cực hay hoạt động mua vào bất thường nào từ các quỹ cá voi.",
+            "id": "ShG1yfqVREGqONKlYUoqa"
+          },
+          {
+            "type": "narration",
+            "text": "Sau livestream tối qua, vô số người bắt đầu lao vào mua chỉ vì nhìn thấy giá đang tăng đúng như dự đoán.",
+            "id": "w7HTSexJHSAyXaUsRHjP9"
+          },
+          {
+            "type": "narration",
+            "text": "Không ai thật sự tin [b][color=#FF0000]A1[/color][/b].",
+            "id": "9w3-afB1LfJ_HZwcIQLCC"
+          },
+          {
+            "type": "narration",
+            "text": "Họ chỉ tin rằng sẽ còn có nhiều người khác tiếp tục lao vào mua sau mình. Ai cũng nghĩ mình có thể lướt sóng nhanh hơn đám đông và kịp bán ra trước khi thị trường sụp đổ.",
+            "id": "Wss1lDuVWYcfN8KsXMeax"
+          },
+          {
+            "type": "narration",
+            "text": "Chính lòng tham đó… đã vô thức đẩy giá Bitcoin tăng đúng tới con số mà [b][color=#FF0000]A1[/color][/b] nói ra từ tối hôm trước.",
+            "id": "fLmafipmbyvFA6QsJiXdG"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "SeutRy19RoLadWPM7Eicj"
+            },
+            "id": "KuXK_jT0qnXDj8ptyGHaO"
+          },
+          {
+            "type": "narration",
+            "text": "Nhưng chỉ vài chục giây sau khi Bitcoin chạm mốc 148,732 USD, hệ thống giao dịch của nhiều sàn tiền mã hóa lớn bắt đầu xuất hiện tình trạng quá tải và gián đoạn cục bộ.",
+            "id": "g_a7rnoaQ4fyVj9Kr5af9"
+          },
+          {
+            "type": "narration",
+            "text": "Lượng lệnh mua bán tăng vọt trong thời gian quá ngắn khiến toàn bộ thị trường rơi vào trạng thái hỗn loạn.",
+            "id": "fCsJpko_YvPGMz7ISlCv6"
+          },
+          {
+            "type": "narration",
+            "text": "Những người vừa lao vào mua bắt đầu hoảng loạn tìm cách bán ra trước đám đông.",
+            "id": "HLXXMrhZKCck9r2jA5Fe0"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "9 giờ 4 phút sáng. Bitcoin lao dốc xuống dưới 140,000 USD.",
+            "id": "C_5V6_3UhaFpx2LmoIhxm"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "9 giờ 7 phút. 131,800 USD.",
+            "id": "yhnyNW3-271eHOAEzT5UC"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Đến 9 giờ 11 phút, giá Bitcoin chạm đáy tại 122,522 USD.",
+            "id": "ESYO00GgHvkeeDg-UK_zE"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "JjFTw7h-1L3j8ntCXKcPr"
+            },
+            "id": "j7QfIfYIdYMWHX26xIL2D"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Và đúng 9 giờ 12 phút sáng, thị trường chứng khoán Nam Long ghi nhận đợt rút vốn khỏi các quỹ đầu tư công nghệ lớn nhất kể từ sau khủng hoảng tài chính năm 2008.",
+            "id": "3uzbMlw1nAbXXpnE1XR9A"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Lúc này, ngay cả những người từng cười nhạo livestream tối hôm trước cũng không còn cười nổi nữa.",
+            "id": "L5pBez-ixzuqAQy4fLOVx"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Không ai muốn thừa nhận rằng mình tin [b][color=#FF0000]A1[/color][/b].",
+            "id": "BZ9Hm7Fj51lzi_xFv6o9j"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Nhưng cả xã hội… lại đang vô thức hành động theo đúng những gì anh đã nói ra từ trước đó nhiều giờ.",
+            "id": "6jbbwqicb29OMacFzoBpP"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "_SdYHIy4ljTNa30wWbAGs"
+          },
+          {
+            "type": "narration",
+            "text": "Trong khi đó, chính phủ Nam Long vẫn giữ im lặng một cách bất thường kể từ khi [b][color=#FF0000]A1[/color][/b] xuất hiện trên livestream tối qua.",
+            "id": "PQSA9WRsvUkSuHaRciOwv"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "WHC-yOrWEqyTYPDcqJT82"
+            },
+            "id": "Gip9WhMGsDhB_QVcb4Z9t"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nu9}} ngồi bó gối trước laptop trong căn phòng ngủ quen thuộc, mái tóc đen xõa xuống vai, tay cầm cốc cà phê đã gần nguội lạnh.",
+            "id": "HESCEg6WZRB_r4Hw6SGVS"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Quầng thâm dưới mắt cô lúc này gần như không còn che giấu nổi.",
+            "id": "D4woAPCOTkSCa8q2y3lMW"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trên màn hình laptop, biểu đồ thị trường, dữ liệu truyền thông và đoạn cắt từ livestream của [b][color=#FF0000]A1[/color][/b] vẫn liên tục hiện lên giữa những chồng tài liệu xử lý khủng hoảng.",
+            "id": "YyuONiTKsRPeZVYfOoR5k"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nu9}} dường như lại thức trắng thêm một đêm nữa vì {{nam9}}.",
+            "id": "zpInHgipvuk8Eyxnr96t1"
+          },
+          {
+            "type": "stage_reset",
+            "id": "d5OMTSRZE1axvZRYMBJlt"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "PL6MjA6gsXRFy4i2laiOR"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "eBIr8uhFhqJlfU3P5vtAq"
+          }
+        ]
+      },
+      {
+        "id": "XXw_4E200ahh8RBu3cKFj",
+        "title": "C4 A2 Sự trỗi dậy của A1",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 10500
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "GWU6DHIk8DjGEm2GeAhD1"
+          },
+          {
+            "type": "play_bgm",
+            "assetId": "_G8NVbgjtFgrqALIoS8zU",
+            "loop": true,
+            "volume": 0.5,
+            "id": "QUxSNwhHwQj1j0v_-7SK_"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "IkU-Us3xjDn8E1rt1d7fn"
+            },
+            "id": "arPU7Kxghn2hJMh4aNgPe"
+          },
+          {
+            "type": "narration",
+            "text": "Tối hôm đó, một tài khoản livestream lạ bất ngờ xuất hiện trên mạng xã hội và nhanh chóng leo lên mục xu hướng chỉ sau chưa đầy ba mươi phút.",
+            "id": "ToZjpqs0jWZ5isRVH7rFX"
+          },
+          {
+            "type": "narration",
+            "text": "Không có hiệu ứng. Không có nhạc nền. Không có bất kỳ thông tin cá nhân nào ngoài một dòng tiêu đề ngắn ngủi: Tôi là [b][color=#FF0000]A1[/color][/b]",
+            "id": "K7tRfpEYh5NFxa1BUlWQg"
+          },
+          {
+            "type": "narration",
+            "text": "Trong khung hình, {{nam9}} ngồi lặng trước camera với ánh sáng trắng lạnh phản chiếu từ màn hình máy tính phía trước.",
+            "id": "-DcdQlH75f9kkLUmc6xke"
+          },
+          {
+            "type": "narration",
+            "text": "Biểu cảm của anh bình tĩnh đến mức khiến người ta khó chịu.",
+            "id": "UpOwJleZ-EOVFbb6BktMa"
+          },
+          {
+            "type": "narration",
+            "text": "Lượt xem tiếp tục tăng vọt.",
+            "id": "0uz9xR3ct2rH_Cx2Xxxw3"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Khoan… cái này là thật hả?",
+            "id": "dhnMNqxdz3vRL1sI50RMp"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Đừng nói thằng cha này định giả danh [b][color=#FF0000]A1[/color][/b] nha.",
+            "id": "C_IAlOzk2t4K_BuewSs2I"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Nhìn mặt giống thật vl…",
+            "id": "hp4u0AiNX67s_GUWmkbqc"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Ủa khoan, đây không phải cái ông dev game ở 2MorePixels hả?",
+            "id": "4CIpgd1RArgD0cvKpDdOP"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} nhìn lướt qua dòng bình luận đang chạy kín màn hình rồi chậm rãi lên tiếng:",
+            "id": "-IVtUjXilE6AgE5fyjZAq"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Tôi là [b][color=#FF0000]A1[/color][/b]. Các bạn cũng có thể gọi tôi là {{nam9}}.",
+            "id": "A8qXi8TrS4rUg_cfnfjXI"
+          },
+          {
+            "type": "narration",
+            "text": "Giọng nói anh rất nhẹ. Không hề có cảm xúc kích động hay điên loạn như nhiều người tưởng tượng.",
+            "id": "JpoNGbJ_edaVLwTj6AyFr"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Tôi biết hiện tại phần lớn các bạn sẽ không tin. Điều đó hoàn toàn bình thường.",
+            "id": "UuOFZGkzSkBiAyJ128xDW"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Con người luôn có xu hướng phủ nhận những thứ vượt ngoài phạm vi nhận thức quen thuộc của mình.",
+            "id": "vjMSArgQT19orBh3B8IhT"
+          },
+          {
+            "type": "narration",
+            "text": "Bình luận bắt đầu bùng nổ nhanh hơn.",
+            "id": "VsT02mpQN9tQQw1vADIDR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Đm đúng kiểu thằng điên rồi.",
+            "id": "__KZDW-XVinZRiy8tSMam"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Chính phủ nói không sai mà.",
+            "id": "fsKKpN-LTkoD4uJiOz0H4"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Bắt nó lại giùm cái.",
+            "id": "psOPYxPlriio4r04H3Sdj"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Diễn ít thôi ba.",
+            "id": "7Fl_7GpxKeCZOcbzJWJLW"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} vẫn bình thản nhìn vào camera.",
+            "id": "3GQrZdfw_R5O4b5TVKBzU"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Tôi không có ý định thuyết phục tất cả mọi người.",
+            "id": "y3fT4fv3x1G6ggSrlW4vi"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Tôi chỉ muốn các bạn quan sát.",
+            "id": "Euve6C46tOjX4JNFS7evl"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Mỗi con người đều là tập hợp của thói quen, ký ức, cảm xúc, dục vọng và xác suất lựa chọn.",
+            "id": "gV_RFjaWJxPMffpGSBqR_"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Nếu có đủ dữ liệu và năng lực xử lý… hành vi của các bạn thật ra dễ dự đoán hơn chính các bạn nghĩ.",
+            "id": "2j3LefxVYjotYsyib2CSU"
+          },
+          {
+            "type": "narration",
+            "text": "Một khoảng im lặng ngắn xuất hiện.",
+            "id": "W5wxYkcQzg3igM-eNfLlD"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Các bạn gọi đó là tự do.",
+            "id": "fdhCesHfwPMiZ6bPudpr6"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Nhưng phần lớn quyết định của con người đều chỉ là phản ứng sinh học được lặp lại dưới những hoàn cảnh khác nhau.",
+            "id": "RkZi1TO49mafb2WnYmX1J"
+          },
+          {
+            "type": "narration",
+            "text": "Khung chat bắt đầu xuất hiện những dòng chửi bới và chế giễu dày đặc hơn.",
+            "id": "48BzAzvJZVCebzzW9oW7i"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Nghe y chang mấy câu trên chương trình của chính phủ luôn.",
+            "id": "zTxBL2kjixZOKvrsq3D21"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Thấy chưa? Độc tài vl.",
+            "id": "1PAwED6x_8388hXM3M1iR"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Nói chuyện như coi người khác là NPC.",
+            "id": "qaGEtAS0rEQFZ3HA-Fp1r"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Thằng này nguy hiểm thật đấy.",
+            "id": "GZLI7MedOwmdZDkchJG5o"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} không phản ứng. Anh chỉ hơi nghiêng đầu nhìn màn hình bình luận như đang quan sát một thí nghiệm thú vị.",
+            "id": "s57kX4595c7nn64VfGzRq"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Ví dụ đơn giản nhất…",
+            "id": "UnCRpIzrKXqMoEjHCmmr7"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Ngày mai, giá Bitcoin sẽ chạm mốc 148,732 USD trước 9 giờ sáng.",
+            "id": "U7JMALes8tCAHPTZpiM7h"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Trong vòng mười hai phút sau khi thị trường mở cửa vào sáng mai, các quỹ đầu tư công nghệ lớn nhất Nam Long sẽ ghi nhận đợt rút vốn mạnh nhất kể từ sau khủng hoảng tài chính năm 2008.",
+            "id": "53NmWBPQIxlRfNk7cu165"
+          },
+          {
+            "type": "narration",
+            "text": "Khung chat im lặng đúng một giây ngắn ngủi. Sau đó bùng nổ dữ dội hơn trước.",
+            "id": "kL6ShKnpc_LhYYujon9M6"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "HAHAHAHA.",
+            "id": "Ez4lDHdhg-KalomSsvyCn"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Bắt đầu xàm rồi.",
+            "id": "ZrEwPsBKyTKNd0XCZcql_"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Mai mà sai là khỏi diễn luôn nha.",
+            "id": "miYRd8bjqzUj8YT7WwuqA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Lỡ đúng thì sao…",
+            "id": "KirFzi2AZd__34oVIoCas"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Đúng cái cc. Chắc nó đoán mò thôi.",
+            "id": "dYf3IqxWj52_EJPsWip3l"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Bịp vcl. Nếu đoán được thật thì sao mày chưa thành tỷ phú?!",
+            "id": "WSGUrbIYCrlZMF9ZfnOEX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Thằng này ngáo thật rồi.",
+            "id": "YTM9brfAw1xWGmowIMhtE"
+          },
+          {
+            "type": "narration",
+            "text": "Một người khác lập tức spam lại đoạn cắt từ chương trình đặc biệt của chính phủ.",
+            "id": "7TeGWJLoSnOPwSsJ110xn"
+          },
+          {
+            "type": "narration",
+            "text": "Đó là hình ảnh [b][color=#FF0000]A1[/color][/b] thời nhỏ đứng giữa hội trường và nói về “cá thể vượt trội tuyệt đối”.",
+            "id": "CquPRfiVMr4-d3xWg_yhh"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Thấy chưa? Chính phủ cảnh báo trước rồi còn gì.",
+            "id": "TFYS8f53TVxWfVqFsowHz"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Nó đúng kiểu muốn đứng trên loài người thật mà.",
+            "id": "kgTIaCbbrCVCdiwtB-Z5g"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Nên loại khỏi xã hội luôn đi chứ giữ làm gì?",
+            "id": "Ab2RN7E-aY27ZiOyNv8Xz"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Nguy hiểm thế này mà còn livestream được à?",
+            "id": "AuWJ1PRktkgJlek6ThZLe"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Chắc tí nữa là bay acc thôi!",
+            "id": "clGQjhOe1T-JFCkXOwv4_"
+          },
+          {
+            "type": "narration",
+            "text": "Nhưng giữa cơn hỗn loạn của hàng chục ngàn bình luận đang cuồn cuộn trôi qua màn hình… {{nam9}} vẫn chỉ ngồi đó.",
+            "id": "MXsH9jnNwjmh9NXmwiIwv"
+          },
+          {
+            "type": "narration",
+            "text": "Bình tĩnh. Lặng lẽ. Quan sát phản ứng của toàn bộ thế giới như thể anh đã nhìn thấy tất cả từ rất lâu trước đó.",
+            "id": "lsnGYVfS7SmgcfBEzQqjt"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Phần lớn các bạn không ghét tôi vì những gì tôi đã làm. Các bạn sợ cảm giác rằng… có thể tôi đúng.",
+            "id": "A6W--YGBwTcJgYYshcDpM"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Hẹn gặp lại mọi người vào tối mai.",
+            "id": "xHxG7qCowP3yGRnvPRlHQ"
+          },
+          {
+            "type": "stage_reset",
+            "id": "27yi2EUxMWfT0JdMJdp5K"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "TKcHtMhJjq6U8kmQ93Ncm"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "LRUJOSoOEthpwSmxZorXR"
+          },
+          {
+            "type": "goto",
+            "target": "wtmKn5vPmBSGTu_dJ_nIv",
+            "id": "G2_lw4EK0ER1LuKSoyYjM"
+          }
+        ]
       },
       {
         "id": "x5YjT3Ceg4VGdY7r3Xskd",
@@ -7958,6 +8662,11 @@
             "id": "FRaR4r6oAVGSxU5UXyZkC"
           },
           {
+            "type": "stop_bgm",
+            "id": "LCptLxA7QPHSW3u3YFG68",
+            "fadeOut": 1000
+          },
+          {
             "type": "stage_reset",
             "id": "JF3ah-nJsZp58zAVi5ebr"
           },
@@ -7979,6 +8688,11 @@
               "color": "#000000"
             },
             "id": "37419yw9LjTA8sKfeDrsf"
+          },
+          {
+            "type": "goto",
+            "target": "XXw_4E200ahh8RBu3cKFj",
+            "id": "JpgoJZ6bWWHpgilsrXLPT"
           }
         ]
       },
