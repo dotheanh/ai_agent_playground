@@ -2575,23 +2575,69 @@ Vài giây sau, livestream kết thúc. Toàn bộ endpoint của [b][color=#FF0
 
 Ảnh chụp màn hình. Đoạn chat. Những sản phẩm được tạo ra. Những cuộc tranh cãi. Những vụ lừa đảo. Và cả cảm giác rùng mình mà rất nhiều người vẫn chưa thể quên được sau khi trò chuyện với nó.
 
+
+
+
+================================================================================
+                              C4 A7 Một Ngày Bình Thường
+================================================================================
+
+
+Sáng hôm sau, bầu không khí bên trong 2MorePixels vẫn mang theo cảm giác căng thẳng kỳ lạ kéo dài suốt nhiều ngày qua.
+
+Kể từ khi [b][color=#FF0000]A1[/color][/b] bắt đầu livestream, gần như toàn bộ công ty đều đã hình thành một thói quen khó nói thành lời: âm thầm theo dõi {{nam9}}.
+
+Có người lén nhìn màn hình máy tính của anh khi đi ngang qua. Có người giả vờ đi lấy nước chỉ để nhìn về phía bàn làm việc quen thuộc ở cuối văn phòng.
+
+Thậm chí vài nhóm nhỏ còn thì thầm bàn tán mỗi khi {{nam9}} đứng dậy pha cà phê.
+
+Trong khi đó, {{nam9}} vẫn giữ nguyên dáng vẻ bình thản như mọi ngày.
+
+Anh vẫn ngồi code. Vẫn tham gia họp nhóm. Vẫn cầm cốc cà phê đứng cạnh cửa kính nhìn xuống thành phố như chưa từng có chuyện gì xảy ra.
+
+Ở phía bên kia văn phòng, {{nu9}} lại mang dáng vẻ gần như hoàn toàn trái ngược.
+
+Quầng thâm dưới mắt cô lúc này đã rõ tới mức khó che giấu. Bàn tay cầm chuột đôi lúc còn run nhẹ vì thiếu ngủ.
+
+Thi thoảng, sếp Thắng lại gọi cô vào phòng họp riêng với lý do “trao đổi công việc thực tập”.
+
+Nhưng trên thực tế, phần lớn thời gian bên trong căn phòng đó đều là các báo cáo khẩn cấp từ chính phủ.
+
+Ánh sáng trắng từ màn hình laptop hắt lên gương mặt mệt mỏi của {{nu9}} trong căn phòng họp tối.
+
+Cô chống cằm ngồi phía sau màn hình, cố mở to mắt nghe báo cáo từ tai nghe liên lạc.
+
+“Ủy viên Thắng, phía truyền thông đã bắt đầu kiểm soát được tốc độ lan truyền của các vụ lừa đảo liên quan tới [b][color=#FF0000]A1 Model[/color][/b].”
+
+Giọng nói lạnh lùng từ đầu dây bên kia vang lên giữa căn phòng yên tĩnh.
+
+“Nhưng nếu [b][color=#FF0000]A1[/color][/b] tiếp tục livestream trong vài ngày tới, chúng tôi không chắc tình hình còn giữ ổn định được nữa.”
+
+Sếp Thắng khẽ day trán rồi ngẩng đầu nhìn sang đối diện.
+
+{{nu9}} vẫn giữ nguyên tư thế ngồi ngay ngắn như đang chăm chú nhìn màn hình.
+
+Nhưng thực tế cô đã ngủ gật từ lúc nào.
+
+Ông im lặng vài giây rồi nhẹ nhàng gập màn hình laptop xuống, để cô yên lặng nghỉ ngơi thêm một lúc.
+
+Đến lúc {{nu9}} bước ra ngoài lần nữa, mái tóc cô đã hơi rối, ánh mắt cũng mệt mỏi hơn hẳn lúc trước.
+
+Đúng lúc đó, {{nam9}} vừa đi ngang qua hành lang. Anh dừng lại vài giây rồi mỉm cười nhìn cô.
+
+“Dạo này em vất vả lắm nhỉ.”
+
+{{nu9}} khẽ khựng lại.
+
+Không ai biết câu nói đó chỉ đơn giản là một lời quan tâm bình thường… hay [b][color=#FF0000]A1[/color][/b] thật sự đã biết điều gì đó từ lâu rồi.
+
 ================================================================================
                               Hé lộ về Đế quốc Đô
 ================================================================================
 
-Mình nghĩ sau arc A1 Model nên có:
 
-vài ngày dư chấn xã hội
-truyền thông
-chính phủ phản ứng
-T2 điều tra
-người dân tranh cãi về A1.
 
-Rồi mới tới:
 
-livestream “Đô Quốc”.
-
-Như vậy weight sẽ lớn hơn rất nhiều.
 
 
 A1 đã build uy tín đủ nhiều qua 3 buổi livestream rồi, tẩy trắng bản thân sau mấy video cảnh báo của chính phủ
@@ -3105,7 +3151,13 @@ Những ng từng giảng dạy cho cô lúc xưa
 Tham gia điều chế thuốc ức chế cùng vs mẹ T2
 Ng đặt tay lên vai lúc họp lần đầu
 Tất cả đều chỉ là 1 ng
-T2 ngượng ngùng xấu hổ
+
+Nếu những người đứng sau Long Mạch là thiên tài tuyệt đối, vượt xa T2, là những người đã đào tạo cô, xây dựng tư duy của cô, dạy cô cách nhìn thế giới
+…rồi cuối cùng T2 phát hiện:
+tất cả bọn họ đều chỉ là “A1”.
+
+Tức là: tư duy, phương pháp, logic, worldview… mà cô tự hào nhất, có thể đều đã mang dấu vết của A1 từ rất lâu rồi.
+T2 ngượng ngùng xấu hổ và suy sụp
 
 Flashback lại câu nói của A1
 Tất cả những gì các bạn biết được từ tôi
@@ -3534,6 +3586,10 @@ Mẹ T2 gặp lại con gái
 
 Mẹ T2 đã chán ghét bố T2 rồi
 Bà nói tưởng bố T2 là tinh anh, hóa ra tính cách lại quá cẩn trọng và nhu nhược, k tham vọng như bà ta
+
+Mẹ T2 coi thường bố T2
+Trong khi ông là một trong những lãnh đạo cao nhất Nam Long
+=> bà là con ng, nhưng thượng đẳng còn hơn cả kẻ thượng đẳng
 
   Mẹ của T2 chính là người đã CHE GIẤU cơ thể gốc A* với cả chính phủ lẫn
   đế quốc Đô. Cơ thể A* vẫn còn trong buồng nuôi suốt nhiều năm qua.

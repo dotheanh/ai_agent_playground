@@ -1812,6 +1812,41 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7890.png",
       "name": "ChatGPT Image 21_11_44 7 thg 5, 2026",
       "category": "other"
+    },
+    "2khzmxWNKej-hduc8rBrb": {
+      "id": "2khzmxWNKej-hduc8rBrb",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_8/7953.png",
+      "name": "ChatGPT Image 00_05_59 8 thg 5, 2026",
+      "category": "other"
+    },
+    "JYcyNWq4-qJ-fBoeEtTB8": {
+      "id": "JYcyNWq4-qJ-fBoeEtTB8",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_8/7954.png",
+      "name": "ChatGPT Image 00_13_11 8 thg 5, 2026",
+      "category": "other"
+    },
+    "FyK4GoOUmpl86ELi2Ano7": {
+      "id": "FyK4GoOUmpl86ELi2Ano7",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_8/7955.png",
+      "name": "ChatGPT Image 00_29_28 8 thg 5, 2026",
+      "category": "other"
+    },
+    "8eDpBkLVDpM88hV6qnkQy": {
+      "id": "8eDpBkLVDpM88hV6qnkQy",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_8/7957.png",
+      "name": "ChatGPT Image 00_36_58 8 thg 5, 2026",
+      "category": "other"
+    },
+    "w3hQrYflTUoiX2g7LDOIn": {
+      "id": "w3hQrYflTUoiX2g7LDOIn",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_8/7958.png",
+      "name": "ChatGPT Image 01_09_38 8 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -6372,12 +6407,6 @@
       {
         "id": "PmbFJV7AkzMx-A86cOKvL",
         "title": "CHAP 4: Khi Nhân Loại Cảm Nhận Nó",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 10100
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -6388,8 +6417,8 @@
             "assetId": "NyLIqsWnl8YBwVk99iWpP",
             "loop": true,
             "volume": 0.5,
-            "id": "Rtd3W7Fn_d5hqq30x3jke",
-            "fadeIn": 1000
+            "fadeIn": 1000,
+            "id": "Rtd3W7Fn_d5hqq30x3jke"
           },
           {
             "type": "background_change",
@@ -6429,7 +6458,13 @@
             "target": "x5YjT3Ceg4VGdY7r3Xskd",
             "id": "QkN8RuxmLLPydH9BCEoPJ"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 10100
+          }
+        }
       },
       {
         "id": "juvy6zRP5P7apjnRLeiKx",
@@ -7737,14 +7772,230 @@
         }
       },
       {
-        "id": "P99sChuzICF3bSozkDi5X",
-        "title": "C4 A6 Buổi livestream tiếp theo",
+        "id": "Votj3Z5gVD0NCE61tHOCj",
+        "title": "C4 A7 Một Ngày Bình Thường",
         "meta": {
           "mapPosition": {
             "x": 800,
-            "y": 11300
+            "y": 11500
           }
         },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "S9d205HCspPk044-tT04d"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "K-Wc_EyBWv6X-TQNQvaSH"
+            },
+            "id": "aWmQNxEgzbgtq0wBaSrhZ"
+          },
+          {
+            "type": "narration",
+            "text": "Sáng hôm sau, bầu không khí bên trong 2MorePixels vẫn mang theo cảm giác căng thẳng kỳ lạ kéo dài suốt nhiều ngày qua.",
+            "id": "fAcNwoVW7_4mAUUFqxqP2"
+          },
+          {
+            "type": "narration",
+            "text": "Kể từ khi [b][color=#FF0000]A1[/color][/b] bắt đầu livestream, gần như toàn bộ công ty đều đã hình thành một thói quen khó nói thành lời: âm thầm theo dõi {{nam9}}.",
+            "id": "ekLpoHxBxpLE45AfIPdrQ"
+          },
+          {
+            "type": "narration",
+            "text": "Có người lén nhìn màn hình máy tính của anh khi đi ngang qua. Có người giả vờ đi lấy nước chỉ để nhìn về phía bàn làm việc quen thuộc ở cuối văn phòng.",
+            "id": "l1cY8Ehbi7TybuiVo8J3y"
+          },
+          {
+            "type": "narration",
+            "text": "Thậm chí vài nhóm nhỏ còn thì thầm bàn tán mỗi khi {{nam9}} đứng dậy pha cà phê.",
+            "id": "FYxo6JAlusGGKzucgJbKy"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Trong khi đó, {{nam9}} vẫn giữ nguyên dáng vẻ bình thản như mọi ngày.",
+            "id": "WrN6I-lRPmVeerU0q0vG8"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Anh vẫn ngồi code. Vẫn tham gia họp nhóm. Vẫn cầm cốc cà phê đứng cạnh cửa kính nhìn xuống thành phố như chưa từng có chuyện gì xảy ra.",
+            "id": "-CY-EnkOIbzzh3uuu1eP-"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "2khzmxWNKej-hduc8rBrb"
+            },
+            "id": "sSXkxmt_h4m5kQLamzuvT"
+          },
+          {
+            "type": "narration",
+            "text": "Ở phía bên kia văn phòng, {{nu9}} lại mang dáng vẻ gần như hoàn toàn trái ngược.",
+            "id": "yVWkTRYLqYQK32uYwMha7"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Quầng thâm dưới mắt cô lúc này đã rõ tới mức khó che giấu. Bàn tay cầm chuột đôi lúc còn run nhẹ vì thiếu ngủ.",
+            "id": "0gtavgorVaN3CtMJAkUr7"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "JYcyNWq4-qJ-fBoeEtTB8"
+            },
+            "id": "NfEVma0z8CcZpFYi13rMD"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Thi thoảng, sếp Thắng lại gọi cô vào phòng họp riêng với lý do “trao đổi công việc thực tập”.",
+            "id": "xHLVS1Pc6LjNILhMTg8lP"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "FyK4GoOUmpl86ELi2Ano7"
+            },
+            "id": "MnqHdlsj2zz4hTUo3CPGK"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Nhưng trên thực tế, phần lớn thời gian bên trong căn phòng đó đều là các báo cáo khẩn cấp từ chính phủ.",
+            "id": "KklDiXW24ubJ0JtImVDPP"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ánh sáng trắng từ màn hình laptop hắt lên gương mặt mệt mỏi của {{nu9}} trong căn phòng họp tối.",
+            "id": "S3mnYQWQaC6tyQMogk_Bx"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Cô chống cằm ngồi phía sau màn hình, cố mở to mắt nghe báo cáo từ tai nghe liên lạc.",
+            "id": "jk9aFgyLWnuBMzFCgn2iw"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Ủy viên Thắng, phía truyền thông đã bắt đầu kiểm soát được tốc độ lan truyền của các vụ lừa đảo liên quan tới [b][color=#FF0000]A1 Model[/color][/b]. ]",
+            "id": "ceX2key7Ldq4YdXsL0WLB"
+          },
+          {
+            "type": "narration",
+            "text": "Giọng nói lạnh lùng từ đầu dây bên kia vang lên giữa căn phòng yên tĩnh.",
+            "id": "7EKO2DmUtJn1OHHNYdJKX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "gM-zG6EuZT_D-lVFeYPM_",
+            "text": "[ Nhưng nếu [b][color=#FF0000]A1[/color][/b] tiếp tục livestream trong vài ngày tới, chúng tôi không chắc tình hình còn giữ ổn định được nữa. ]",
+            "id": "02kmRZjvM-Q6-wR3n_Wzm"
+          },
+          {
+            "type": "narration",
+            "text": "Sếp Thắng khẽ day trán rồi ngẩng đầu nhìn sang đối diện.",
+            "id": "JfvYHUI1f_BWP7pd_j3M0"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "{{nu9}} vẫn giữ nguyên tư thế ngồi ngay ngắn như đang chăm chú nhìn màn hình.",
+            "id": "lwxPZKDXatXDOut9EmAVj"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "8eDpBkLVDpM88hV6qnkQy"
+            },
+            "id": "z_YjtoWg3RlRXPtMDt_29"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Nhưng thực tế cô đã ngủ gật từ lúc nào.",
+            "id": "bzNbTkYppq_VpK1advTy1"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Ông im lặng vài giây rồi nhẹ nhàng gập màn hình laptop xuống, để cô yên lặng nghỉ ngơi thêm một lúc.",
+            "id": "q6B5fQ96sOaZJtaSXnv0F"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "w3hQrYflTUoiX2g7LDOIn"
+            },
+            "id": "sp6rjBQ0iha3sxHo1SESt"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Đến lúc {{nu9}} bước ra ngoài lần nữa, mái tóc cô đã hơi rối, ánh mắt cũng mệt mỏi hơn hẳn lúc trước.",
+            "id": "JPTHaP1hPr5aCSMbzrD1i"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "",
+            "text": "Đúng lúc đó, {{nam9}} vừa đi ngang qua hành lang. Anh dừng lại vài giây rồi mỉm cười nhìn cô.",
+            "id": "DGeatLy3-TMBSm34mwnyG"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Dạo này em vất vả lắm nhỉ.",
+            "id": "Cj0b0b2FbTjyAwwA9ivyY"
+          },
+          {
+            "type": "narration",
+            "text": "{{nu9}} khẽ khựng lại.",
+            "id": "FdKM6fwFnj7h3pob5dqtb"
+          },
+          {
+            "type": "narration",
+            "text": "Không ai biết câu nói đó chỉ đơn giản là một lời quan tâm bình thường… hay [b][color=#FF0000]A1[/color][/b] thật sự đã biết điều gì đó từ lâu rồi.",
+            "id": "hqTqtz-jYA79CRYld_YoC"
+          },
+          {
+            "type": "stage_reset",
+            "id": "CBxX9rvPue1rgD0JmR7XZ"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "1Ca5cYqKirodf37JOyJZZ"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "cIaQBjnfSUB4JP0JA7JTy"
+          }
+        ]
+      },
+      {
+        "id": "P99sChuzICF3bSozkDi5X",
+        "title": "C4 A6 Buổi livestream tiếp theo",
         "nodes": [
           {
             "type": "stage_reset",
@@ -7757,6 +8008,17 @@
               "assetId": "ya7cgv6wYqnwPIOr_xdxy"
             },
             "id": "J7ud_tGCZLHQ_8JT8nLmv"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "pna7wgLzgt5akb-FEa5QR"
           },
           {
             "type": "narration",
@@ -7782,6 +8044,17 @@
             "type": "narration",
             "text": "{{nam9}} vẫn ngồi đó với vẻ mặt bình thản quen thuộc.",
             "id": "m3nj9Oj7lLjdWlMgwi8Pf"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "out"
+            },
+            "id": "e3WNof1g2DkHp2FXuQ3n5"
           },
           {
             "type": "dialogue",
@@ -7868,6 +8141,17 @@
             "id": "EjTtaVlL4tUuLvdj7XYOo"
           },
           {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 0.3,
+              "duration": 500,
+              "direction": "in"
+            },
+            "id": "5IIVWVJvA0WfzJV_dCSf2"
+          },
+          {
             "type": "narration",
             "text": "Không ai biết câu nói đó đang nhắm tới [b][color=#FF0000]A1 Model[/color][/b]… hay chính nền văn minh của con người.",
             "id": "NRGzakdzDSxHO7rTJx6p1"
@@ -7904,18 +8188,23 @@
               "color": "#000000"
             },
             "id": "wSQ1FC1wfzRF18qq-nrgH"
+          },
+          {
+            "type": "goto",
+            "target": "Votj3Z5gVD0NCE61tHOCj",
+            "id": "TT0xFIFveDLc6Va2VSEbB"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 11300
+          }
+        }
       },
       {
         "id": "7KFK2W9kLZq3DuaL-V8-l",
         "title": "C4 A5 Kết quả của Model A1",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 11100
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -8155,17 +8444,17 @@
             "target": "P99sChuzICF3bSozkDi5X",
             "id": "uWoXtAUMGFM1Z-Rynr0_x"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 11100
+          }
+        }
       },
       {
         "id": "78GjBdh_SX68Eyepvhvta",
         "title": "C4 A4 Giới thiệu Model A1",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 10900
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -8450,17 +8739,17 @@
             "target": "7KFK2W9kLZq3DuaL-V8-l",
             "id": "CH1TvSUJMs7U0uFcJUm8G"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 10900
+          }
+        }
       },
       {
         "id": "wtmKn5vPmBSGTu_dJ_nIv",
         "title": "C4 A3 Dự đoán của A1",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 10700
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -8778,17 +9067,17 @@
             "target": "78GjBdh_SX68Eyepvhvta",
             "id": "P2oSLnegHlNvAkOWmGHyk"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 10700
+          }
+        }
       },
       {
         "id": "XXw_4E200ahh8RBu3cKFj",
         "title": "C4 A2 Sự trỗi dậy của A1",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 10500
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -9150,17 +9439,17 @@
             "target": "wtmKn5vPmBSGTu_dJ_nIv",
             "id": "G2_lw4EK0ER1LuKSoyYjM"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 10500
+          }
+        }
       },
       {
         "id": "x5YjT3Ceg4VGdY7r3Xskd",
         "title": "C4 A1 Những lời bàn tán",
-        "meta": {
-          "mapPosition": {
-            "x": 800,
-            "y": 10300
-          }
-        },
         "nodes": [
           {
             "type": "stage_reset",
@@ -9247,10 +9536,10 @@
             "type": "character_show",
             "characterId": "9hyb1aeE3kNqjOcLsfunJ",
             "position": "far-left",
+            "expressionId": "xNX3ySvT8Eh2z4zX1MaMP",
             "duration": 300,
             "flipX": false,
-            "id": "Vg-U_-6NIDBJbLmau2IwL",
-            "expressionId": "xNX3ySvT8Eh2z4zX1MaMP"
+            "id": "Vg-U_-6NIDBJbLmau2IwL"
           },
           {
             "type": "dialogue",
@@ -9262,10 +9551,10 @@
             "type": "character_show",
             "characterId": "SVRylJ9m7761bRXdR0Xdk",
             "position": "center-left",
+            "expressionId": "I179JWxJjJVtTySoHGMe8",
             "duration": 300,
             "flipX": false,
-            "id": "Dooqqc3-re-Jf4RKQgk06",
-            "expressionId": "I179JWxJjJVtTySoHGMe8"
+            "id": "Dooqqc3-re-Jf4RKQgk06"
           },
           {
             "type": "dialogue",
@@ -9277,10 +9566,10 @@
             "type": "character_show",
             "characterId": "yRI_1liAVIUGdmnXYv4I7",
             "position": "far-right",
+            "expressionId": "0bvd0VjdqJEcXZu-88HVa",
             "duration": 300,
             "flipX": false,
-            "id": "Sf6Xt2EeMDX5dZHbTiMcI",
-            "expressionId": "0bvd0VjdqJEcXZu-88HVa"
+            "id": "Sf6Xt2EeMDX5dZHbTiMcI"
           },
           {
             "type": "dialogue",
@@ -9292,10 +9581,10 @@
             "type": "character_show",
             "characterId": "C0YaEpvMqP1nyBmPyH-5E",
             "position": "center-right",
+            "expressionId": "IgK_4zoy7EPvHulH44WWr",
             "duration": 300,
             "flipX": false,
-            "id": "K4NhaIazeX2KBmGpm8L-d",
-            "expressionId": "IgK_4zoy7EPvHulH44WWr"
+            "id": "K4NhaIazeX2KBmGpm8L-d"
           },
           {
             "type": "dialogue",
@@ -9397,10 +9686,10 @@
             "type": "character_show",
             "characterId": "c_-gdV9YZ6QqLB3PCuJ6F",
             "position": "center",
+            "expressionId": "tT2yXcZiStGQR4G5ZHGR0",
             "duration": 300,
             "flipX": false,
-            "id": "fVtvdoSVAfz0PqlvAeV5i",
-            "expressionId": "tT2yXcZiStGQR4G5ZHGR0"
+            "id": "fVtvdoSVAfz0PqlvAeV5i"
           },
           {
             "type": "narration",
@@ -9416,10 +9705,10 @@
             "type": "character_show",
             "characterId": "nSHBTtIpCBAs2DxuTbSFw",
             "position": "left",
+            "expressionId": "aCEGrNz3kcfauM5CaSR6T",
             "duration": 300,
             "flipX": false,
-            "id": "z0OXykOge19fnO6-NDjoL",
-            "expressionId": "aCEGrNz3kcfauM5CaSR6T"
+            "id": "z0OXykOge19fnO6-NDjoL"
           },
           {
             "type": "dialogue",
@@ -9431,10 +9720,10 @@
             "type": "character_show",
             "characterId": "_LsndQZ8MpxAeBdeDs3rv",
             "position": "right",
+            "expressionId": "cnkncZ_SaGjh10JVqfwqP",
             "duration": 300,
             "flipX": false,
-            "id": "gCdNs9rslfDL_AD2mEtRB",
-            "expressionId": "cnkncZ_SaGjh10JVqfwqP"
+            "id": "gCdNs9rslfDL_AD2mEtRB"
           },
           {
             "type": "dialogue",
@@ -9502,8 +9791,8 @@
           },
           {
             "type": "stop_bgm",
-            "id": "LCptLxA7QPHSW3u3YFG68",
-            "fadeOut": 1000
+            "fadeOut": 1000,
+            "id": "LCptLxA7QPHSW3u3YFG68"
           },
           {
             "type": "stage_reset",
@@ -9533,7 +9822,13 @@
             "target": "XXw_4E200ahh8RBu3cKFj",
             "id": "JpgoJZ6bWWHpgilsrXLPT"
           }
-        ]
+        ],
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 10300
+          }
+        }
       },
       {
         "id": "41M0-XnHHHAQLSgmyYJz2",
@@ -9977,8 +10272,8 @@
           },
           {
             "type": "stop_bgm",
-            "id": "8uxecpqdV5Ad3nCLeMCJW",
-            "fadeOut": 1000
+            "fadeOut": 1000,
+            "id": "8uxecpqdV5Ad3nCLeMCJW"
           },
           {
             "type": "screen_effect",
