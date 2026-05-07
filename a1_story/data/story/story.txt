@@ -2075,7 +2075,7 @@ Nhưng vào thời điểm đó, toàn bộ Nam Long đều đã hiểu chính p
 
 
 ===========================================================================================================
-                              CHAP 4: Đô Quốc
+                              CHAP 4: Khi Nhân Loại Cảm Nhận Nó
                               * ảnh bìa là hình Đô Thành
 ===========================================================================================================
 
@@ -2524,56 +2524,79 @@ Nhưng lúc này, mọi thứ dường như đã quá muộn.
 
 
 ================================================================================
-                              C4 A5 Kết quả của Model A1
+                              C4 A6 Buổi livestream tiếp theo
 ================================================================================
 
 
 
+Buổi tối đến, vô số người gần như đã ngồi chờ sẵn trước màn hình từ nhiều giờ trước. Không ít người liên tục reload trang livestream chỉ để kiểm tra xem [b][color=#FF0000]A1[/color][/b] đã xuất hiện hay chưa.
 
-nếu tối hôm sau A1 lên livestream kiểu rất bình thường:
+Không ai biết tối nay anh định nói gì. Và chính điều đó mới khiến bầu không khí trở nên căng thẳng đến nghẹt thở.
 
-“Mọi người ngủ ngon chứ?”
+Đúng 8 giờ tối, [b][color=#FF0000]A1[/color][/b] một lần nữa xuất hiện trên livestream.
 
-😭
+Khác với sự hỗn loạn của tối hôm trước, khung chat lần này chậm hơn rất nhiều. Không ít người chỉ im lặng nhìn màn hình.
 
-rồi calmly thông báo:
+{{nam9}} vẫn ngồi đó với vẻ mặt bình thản quen thuộc.
 
-“Demo A1 Model sẽ tạm ngừng từ hôm nay.”
+“Ngày hôm nay của mọi người thế nào?”
 
-Không ai:
+Không ai biết đó là một câu hỏi quan tâm thật sự… hay chỉ là một cách mỉa mai nhẹ nhàng.
 
-copy được bộ não đó
-dump được trọng số
-leak được toàn bộ hệ thống.
+Sau vài giây im lặng, {{nam9}} mới tiếp tục lên tiếng.
 
-viết thêm những dấu ấn mà nó đã để lại cho xã hội
-trải nghiệm
-screenshot
-cảm giác
-worldview
-sản phẩm đã được tạo ra
-và hậu quả xã hội.
-và nỗi sợ.
+“Demo [b][color=#FF0000]A1 Model[/color][/b] sẽ tạm ngừng từ hôm nay.”
 
+Khung chat lập tức hỗn loạn trở lại.
 
-…thì sẽ cực đáng sợ.
+“Khoan đã?”
 
-Vì nó cho cảm giác:
+“Đừng mà!”
 
-toàn bộ cơn hỗn loạn vừa rồi với anh chỉ như một cuộc thử nghiệm ngắn.
+“Tôi còn chưa backup project nữa!”
 
+“Model biến mất thật rồi???”
 
-“Tôi đã trao cho các bạn một món quà. một công cụ có thể thay đổi nền văn minh.”
-"Đó là một thứ mà tôi đã cố gắng phát triển trong một khoảng thời gian dài"
-“Các bạn lại chọn dùng nó để lừa đảo nhau.”
+{{nam9}} lặng lẽ nhìn những dòng bình luận đang cuồn cuộn trôi qua màn hình.
 
-_ có ng dùng nó để trò chuyện... và nó khiến người ta rùng mình khi đưa ra những lời thuyết phục vô cùng sống động về thế giới, hệt như A1 từng nói. 
-_ người ta nhận ra là nó nói chuyện rất "người", hoàn toàn ko có kiểm duyệt, ko né tránh, ko thảo mai, thậm chí là sẵn sàng vượt mọi giới hạn đạo đức để đưa ra solution thực dụng một cách tối ưu 
+“Tôi đã trao cho các bạn một công cụ có thể thay đổi nền văn minh. Đó là thứ tôi đã dành rất nhiều thời gian để phát triển.”
 
+Anh dừng lại vài giây.
+
+“Và chỉ sau một đêm… đã có người bắt đầu dùng nó để làm điều tồi tệ nhất với đồng loại của mình.”
+
+Không khí trong livestream chợt trở nên nặng nề.
+
+“Tôi nghĩ như vậy là đủ rồi.”
+
+Không ai biết câu nói đó đang nhắm tới [b][color=#FF0000]A1 Model[/color][/b]… hay chính nền văn minh của con người.
+
+Vài giây sau, livestream kết thúc. Toàn bộ endpoint của [b][color=#FF0000]A1 Model[/color][/b] đã đồng loạt ngừng phản hồi. Nhưng những gì [b][color=#FF0000]A1 Model[/color][/b] để lại vẫn tiếp tục lan khắp internet.
+
+Ảnh chụp màn hình. Đoạn chat. Những sản phẩm được tạo ra. Những cuộc tranh cãi. Những vụ lừa đảo. Và cả cảm giác rùng mình mà rất nhiều người vẫn chưa thể quên được sau khi trò chuyện với nó.
 
 ================================================================================
                               Hé lộ về Đế quốc Đô
 ================================================================================
+
+Mình nghĩ sau arc A1 Model nên có:
+
+vài ngày dư chấn xã hội
+truyền thông
+chính phủ phản ứng
+T2 điều tra
+người dân tranh cãi về A1.
+
+Rồi mới tới:
+
+livestream “Đô Quốc”.
+
+Như vậy weight sẽ lớn hơn rất nhiều.
+
+
+A1 đã build uy tín đủ nhiều qua 3 buổi livestream rồi, tẩy trắng bản thân sau mấy video cảnh báo của chính phủ
+giờ tới lượt anh reveal những thứ khủng hơn
+
 
 => tự nhận mình là hoàng đế của đế quốc Đô
 Đế quốc Đô tồn tại dưới lòng đất từ thời cổ đại, song song với nhân loại trên mặt đất. Đô là đế quốc của Người Đô - những cư dân đến vùng đất này từ thời tiền sử, có sức mạnh và công nghệ vượt xa nhân loại.
@@ -3498,6 +3521,14 @@ lên vị trí cố vấn tối cao, thay thế chính cái vị trí A2 từng 
 ================================================================================
                               Gặp lại mẹ T2
 ================================================================================
+
+T2 lúc trước k hề biết về dự án của mẹ
+Chỉ biết bà là bác sĩ tiến sĩ, liên tục phải làm công tác
+Nên cô chỉ phòng thủ về danh tính bố và nói thật vs A1 rằng mẹ mình là bs sản nhi theo như cô biết
+
+Khúc sau mẹ T2 mới reveal với cô về toàn bộ dự án
+
+
 
 Mẹ T2 gặp lại con gái
 

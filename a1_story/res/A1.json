@@ -1805,6 +1805,13 @@
       "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7851.png",
       "name": "ChatGPT Image 20_29_09 7 thg 5, 2026",
       "category": "other"
+    },
+    "ya7cgv6wYqnwPIOr_xdxy": {
+      "id": "ya7cgv6wYqnwPIOr_xdxy",
+      "type": "image",
+      "url": "https://story.zingplay.com/asset/1251238196/2026_5_7/7890.png",
+      "name": "ChatGPT Image 21_11_44 7 thg 5, 2026",
+      "category": "other"
     }
   },
   "characters": {
@@ -6364,7 +6371,7 @@
       },
       {
         "id": "PmbFJV7AkzMx-A86cOKvL",
-        "title": "CHAP 4: Đô Quốc",
+        "title": "CHAP 4: Khi Nhân Loại Cảm Nhận Nó",
         "meta": {
           "mapPosition": {
             "x": 800,
@@ -7725,9 +7732,180 @@
         "meta": {
           "mapPosition": {
             "x": 1200,
-            "y": 10800
+            "y": 11300
           }
         }
+      },
+      {
+        "id": "P99sChuzICF3bSozkDi5X",
+        "title": "C4 A6 Buổi livestream tiếp theo",
+        "meta": {
+          "mapPosition": {
+            "x": 800,
+            "y": 11300
+          }
+        },
+        "nodes": [
+          {
+            "type": "stage_reset",
+            "id": "xkkYO1qI7P02KC-sLPIQp"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "image",
+              "assetId": "ya7cgv6wYqnwPIOr_xdxy"
+            },
+            "id": "J7ud_tGCZLHQ_8JT8nLmv"
+          },
+          {
+            "type": "narration",
+            "text": "Buổi tối đến, vô số người gần như đã ngồi chờ sẵn trước màn hình từ nhiều giờ trước. Không ít người liên tục reload trang livestream chỉ để kiểm tra xem [b][color=#FF0000]A1[/color][/b] đã xuất hiện hay chưa.",
+            "id": "V7-6Rs6_1NHmkjGo-poIm"
+          },
+          {
+            "type": "narration",
+            "text": "Không ai biết tối nay anh định nói gì. Và chính điều đó mới khiến bầu không khí trở nên căng thẳng đến nghẹt thở.",
+            "id": "zgX5xAeAZhm70UuoYq7kV"
+          },
+          {
+            "type": "narration",
+            "text": "Đúng 8 giờ tối, [b][color=#FF0000]A1[/color][/b] một lần nữa xuất hiện trên livestream.",
+            "id": "kBfnPxs4n1Uojy7GbKIvU"
+          },
+          {
+            "type": "narration",
+            "text": "Khác với sự hỗn loạn của tối hôm trước, khung chat lần này chậm hơn rất nhiều. Không ít người chỉ im lặng nhìn màn hình.",
+            "id": "KU2y3rds9TppPlDv7OcmU"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} vẫn ngồi đó với vẻ mặt bình thản quen thuộc.",
+            "id": "m3nj9Oj7lLjdWlMgwi8Pf"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Ngày hôm nay của mọi người thế nào?",
+            "id": "xx_hm-1RJLKDrPSb8KuP-"
+          },
+          {
+            "type": "narration",
+            "text": "Không ai biết đó là một câu hỏi quan tâm thật sự… hay chỉ là một cách mỉa mai nhẹ nhàng.",
+            "id": "ftiycQTqvvXthXpeBG9z2"
+          },
+          {
+            "type": "narration",
+            "text": "Sau vài giây im lặng, {{nam9}} mới tiếp tục lên tiếng.",
+            "id": "LZh8hhZzS1PPqGTHo5GaX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Demo [b][color=#FF0000]A1 Model[/color][/b] sẽ tạm ngừng từ hôm nay.",
+            "id": "knZZX0-uaYcRbGV8KmbcV"
+          },
+          {
+            "type": "narration",
+            "text": "Khung chat lập tức hỗn loạn trở lại.",
+            "id": "DOPQB7oiaorzkaO5eQYs_"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Khoan đã?",
+            "id": "m11mCwF_QMj5mikqwQ169"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Đừng mà!",
+            "id": "DN2pPeZyMTqFMlKAjd4BC"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Tôi còn chưa backup project nữa!",
+            "id": "0RoqtMq7BtOqOD8qbDJOX"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "HIBQFiUzYKBt0TrAZhNxV",
+            "text": "Model biến mất thật rồi???",
+            "id": "7tAV2DJwDhsi3zInII2Db"
+          },
+          {
+            "type": "narration",
+            "text": "{{nam9}} lặng lẽ nhìn những dòng bình luận đang cuồn cuộn trôi qua màn hình.",
+            "id": "5aDt3OHOEgjQvGA96TZGA"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Tôi đã trao cho các bạn một công cụ có thể thay đổi nền văn minh. Đó là thứ tôi đã dành rất nhiều thời gian để phát triển.",
+            "id": "Hn7g5v52IkVgqQQfZIMDd"
+          },
+          {
+            "type": "narration",
+            "text": "Anh dừng lại vài giây.",
+            "id": "Btvn7_gxdo4A91fpdwbZY"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Và chỉ sau một đêm… đã có người bắt đầu dùng nó để làm điều tồi tệ nhất với đồng loại của mình.",
+            "id": "JbR1j9DCe2mtgbsRr7kjO"
+          },
+          {
+            "type": "narration",
+            "text": "Không khí trong livestream chợt trở nên nặng nề.",
+            "id": "ZsvPalrCUU2DfwKVB8GnH"
+          },
+          {
+            "type": "dialogue",
+            "characterId": "Y1iXGGLm7hXHWm9MD04A-",
+            "text": "Tôi nghĩ như vậy là đủ rồi.",
+            "id": "EjTtaVlL4tUuLvdj7XYOo"
+          },
+          {
+            "type": "narration",
+            "text": "Không ai biết câu nói đó đang nhắm tới [b][color=#FF0000]A1 Model[/color][/b]… hay chính nền văn minh của con người.",
+            "id": "NRGzakdzDSxHO7rTJx6p1"
+          },
+          {
+            "type": "narration",
+            "text": "Vài giây sau, livestream kết thúc. Toàn bộ endpoint của [b][color=#FF0000]A1 Model[/color][/b] đã đồng loạt ngừng phản hồi. Nhưng những gì [b][color=#FF0000]A1 Model[/color][/b] để lại vẫn tiếp tục lan khắp internet.",
+            "id": "I2ZQxfeDk4aaSTJk43MvP"
+          },
+          {
+            "type": "narration",
+            "text": "Ảnh chụp màn hình. Đoạn chat. Những sản phẩm được tạo ra. Những cuộc tranh cãi. Những vụ lừa đảo. Và cả cảm giác rùng mình mà rất nhiều người vẫn chưa thể quên được sau khi trò chuyện với nó.",
+            "id": "_V-Gm7PPQJ5kdJoE6kuEL"
+          },
+          {
+            "type": "stage_reset",
+            "id": "GZ2CkYnH-kPtS9MrQo0m8"
+          },
+          {
+            "type": "screen_effect",
+            "effect": {
+              "type": "tint",
+              "color": "#000000",
+              "opacity": 1,
+              "duration": 300,
+              "direction": "in"
+            },
+            "id": "Z04OlJ-cLo2IYmKSHGINI"
+          },
+          {
+            "type": "background_change",
+            "visual": {
+              "type": "color",
+              "color": "#000000"
+            },
+            "id": "wSQ1FC1wfzRF18qq-nrgH"
+          }
+        ]
       },
       {
         "id": "7KFK2W9kLZq3DuaL-V8-l",
@@ -7971,6 +8149,11 @@
               "color": "#000000"
             },
             "id": "ogi1rst3JIQAo30Eh4izL"
+          },
+          {
+            "type": "goto",
+            "target": "P99sChuzICF3bSozkDi5X",
+            "id": "uWoXtAUMGFM1Z-Rynr0_x"
           }
         ]
       },
